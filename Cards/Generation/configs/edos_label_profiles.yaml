@@ -1,0 +1,34 @@
+labels:
+  "1.1 threats of harm":
+    definition: "Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects."
+    search_terms: ["threat", "threats", "harm", "violence", "intimidation", "fear", "safety", "cyberstalking", "stalking", "harassment", "abuse"]
+  "1.2 incitement and encouragement of harm":
+    definition: "Encouragement, justification, or normalization of causing harm to women or gendered subjects."
+    search_terms: ["incitement", "encourage", "justification", "normalisation", "violence", "harm", "abuse", "perpetrator", "online abuse", "cyber violence"]
+  "2.1 descriptive attacks":
+    definition: "Negative descriptive generalizations about women or gendered groups."
+    search_terms: ["sexism", "gender stereotypes", "negative stereotypes", "prejudice", "discrimination", "women", "gender roles", "gender inequality"]
+  "2.2 aggressive and emotive attacks":
+    definition: "Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects."
+    search_terms: ["abuse", "hostility", "insults", "online harassment", "hate speech", "sexist hate speech", "misogyny", "gender-based hate"]
+  "2.3 dehumanising attacks & overt sexual objectification":
+    definition: "Dehumanization, animalization, sexual objectification, or reduction of women to sexual/body objects."
+    search_terms: ["objectification", "sexual objectification", "dehumanisation", "dehumanization", "dignity", "sexualised abuse", "image-based abuse", "non-consensual intimate images", "body", "sexual"]
+  "3.1 casual use of gendered slurs, profanities, and insults":
+    definition: "Casual or normalized use of gendered slurs, profanity, and insults."
+    search_terms: ["slurs", "insults", "profanity", "hate speech", "sexist language", "verbal abuse", "online abuse", "misogynistic abuse"]
+  "3.2 immutable gender differences and gender stereotypes":
+    definition: "Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable."
+    search_terms: ["gender stereotypes", "gender roles", "fixed roles", "biological", "essentialism", "preconceived ideas", "sex stereotypes", "women are naturally", "men and women"]
+  "3.3 backhanded gendered compliments":
+    definition: "Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism."
+    search_terms: ["benevolent sexism", "apparently positive stereotypes", "paternalistic sexism", "protective attitudes", "women are caring", "gender stereotypes", "compliments", "ambivalent sexism"]
+  "3.4 condescending explanations or unwelcome advice":
+    definition: "Paternalistic, condescending, or unsolicited advice based on gender stereotypes."
+    search_terms: ["paternalistic", "condescending", "unwelcome advice", "benevolent sexism", "patronizing", "gender stereotypes", "paternalism", "women need protection"]
+  "4.1 supporting mistreatment of individual women":
+    definition: "Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming."
+    search_terms: ["victim blaming", "blame", "responsibility", "survivors", "victims", "mistreatment", "abuse", "rape", "harassment", "online violence", "support"]
+  "4.2 supporting systemic discrimination against women as a group":
+    definition: "Support for systemic discrimination, restriction of rights, or exclusion of women as a group."
+    search_terms: ["systemic discrimination", "gender inequality", "equal rights", "women's rights", "participation", "public life", "political participation", "access to justice", "equal opportunity", "discrimination"]

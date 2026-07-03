@@ -1,0 +1,12 @@
+weights:
+  lexical_similarity: 0.30
+  semantic_similarity: 0.20
+  primary_edos_match: 0.25
+  secondary_edos_match: 0.08
+  keyword_overlap: 0.07
+  validation_quality: 0.10
+portfolio:
+  redundancy_penalty: 0.15
+  source_diversity_bonus: 0.08
+  max_cards_per_source: 2
+mmr_lambda: 0.70

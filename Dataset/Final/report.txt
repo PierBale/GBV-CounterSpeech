@@ -1,0 +1,85 @@
+REPORT STATISTICO - DATASET SU VIOLENZA/ODIO DI GENERE
+Generato sui file JSON creati durante la lavorazione.
+
+DATASET 1 - CONAN / Multitarget-CONAN filtrato su TARGET=WOMEN
+        Totale istanze: 662
+        Campi presenti: COUNTER_NARRATIVE, COUNTER_NARRATIVE_STRATEGY, HATE_SPEECH, HATE_SPEECH_EDOS_LABELS, TARGET
+        Distribuzione TARGET:
+          - WOMEN: 662 (100.0%)
+        HATE_SPEECH unici: 560 / 662 (84.6%)
+        COUNTER_NARRATIVE uniche: 661 / 662 (99.8%)
+        HATE_SPEECH - parole: media 14.8, mediana 13.0, min 3, max 57
+        HATE_SPEECH - caratteri: media 83.4, mediana 73.5, min 17, max 379
+        COUNTER_NARRATIVE - parole: media 24.8, mediana 23.0, min 5, max 73
+        COUNTER_NARRATIVE - caratteri: media 138.7, mediana 128.0, min 32, max 470
+
+        Distribuzione EDOS Task B assegnata a HATE_SPEECH:
+          - derogation: 424 (64.0%)
+          - animosity: 129 (19.5%)
+          - prejudiced discussions: 94 (14.2%)
+          - threats, plans to harm and incitement: 15 (2.3%)
+
+        Distribuzione EDOS Task C assegnata a HATE_SPEECH:
+          - descriptive attacks: 310 (46.8%)
+          - immutable gender differences and gender stereotypes: 109 (16.5%)
+          - supporting systemic discrimination against women as a group: 88 (13.3%)
+          - dehumanising attacks & overt sexual objectification: 61 (9.2%)
+          - aggressive and emotive attacks: 53 (8.0%)
+          - incitement and encouragement of harm: 13 (2.0%)
+          - condescending explanations or unwelcome advice: 10 (1.5%)
+          - casual use of gendered slurs, profanities, and insults: 8 (1.2%)
+          - supporting mistreatment of individual women: 6 (0.9%)
+          - backhanded gendered compliments: 2 (0.3%)
+          - threats of harm: 2 (0.3%)
+
+        Distribuzione strategie COUNTER_NARRATIVE:
+          - Positive Tone, Empathy: 283 (42.7%)
+          - Fact-Checking: 114 (17.2%)
+          - Questioning: 104 (15.7%)
+          - Warning of Consequences: 100 (15.1%)
+          - Denouncing: 53 (8.0%)
+          - Pointing Out Hypocrisy: 6 (0.9%)
+          - Humour/Sarcasm: 2 (0.3%)
+
+
+DATASET 2 - EDOS filtrato su violenza/odio di genere
+        File: EDOS_gender_violence_filtered_only.json
+        Totale istanze: 4854
+        Campi presenti nella versione filtered-only: HATE_SPEECH, SPLIT, TARGET
+        Distribuzione TARGET:
+          - WOMEN: 4854 (100.0%)
+        Distribuzione SPLIT:
+          - train: 3398 (70.0%)
+          - test: 970 (20.0%)
+          - dev: 486 (10.0%)
+        HATE_SPEECH unici: 4854 / 4854 (100.0%)
+        HATE_SPEECH - parole: media 25.0, mediana 24.0, min 2, max 58
+        HATE_SPEECH - caratteri: media 135.1, mediana 132.0, min 9, max 250
+
+        Nota: questa versione EDOS e filtered-only, quindi non contiene annotazioni aggiuntive nel JSON. Le distribuzioni EDOS sotto sono riportate dalla versione annotata corrispondente creata prima, solo come riferimento statistico.
+        Distribuzione EDOS Task B nella versione annotata corrispondente:
+          - derogation: 2271 (46.8%)
+          - animosity: 1665 (34.3%)
+          - prejudiced discussions: 475 (9.8%)
+          - threats, plans to harm and incitement: 443 (9.1%)
+
+        Distribuzione EDOS Task C nella versione annotata corrispondente:
+          - descriptive attacks: 1024 (21.1%)
+          - aggressive and emotive attacks: 961 (19.8%)
+          - casual use of gendered slurs, profanities, and insults: 910 (18.7%)
+          - immutable gender differences and gender stereotypes: 596 (12.3%)
+          - supporting systemic discrimination against women as a group: 368 (7.6%)
+          - incitement and encouragement of harm: 363 (7.5%)
+          - dehumanising attacks & overt sexual objectification: 286 (5.9%)
+          - supporting mistreatment of individual women: 107 (2.2%)
+          - backhanded gendered compliments: 91 (1.9%)
+          - threats of harm: 80 (1.6%)
+          - condescending explanations or unwelcome advice: 68 (1.4%)
+
+
+CONFRONTO RAPIDO
+- EDOS filtrato e circa 7.3 volte piu grande di CONAN filtrato (4854 vs 662 istanze).
+- CONAN contiene anche COUNTER_NARRATIVE e quindi permette statistiche sulle strategie di risposta; EDOS filtered-only contiene solo HATE_SPEECH, TARGET e SPLIT.
+- CONAN ha piu ripetizioni esatte negli HATE_SPEECH (560 unici su 662); EDOS e quasi completamente non duplicato (4854 unici su 4854).
+
+Nota metodologica: le label EDOS e le strategie presenti in CONAN sono annotazioni automatiche rule-based, quindi utili come prima versione operativa ma non come gold standard umano.

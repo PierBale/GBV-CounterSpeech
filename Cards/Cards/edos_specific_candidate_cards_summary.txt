@@ -1,0 +1,53 @@
+EDOS-specific candidate cards pack
+
+Schema version: simplified EDOS-specific evidence cards
+
+Total cards: 55
+
+Coverage rule: exactly 5 candidate cards for each EDOS fine-grained label.
+
+
+Fields kept:
+
+- card_id
+- status
+- source
+- source_quote
+- claim
+- primary_edos_label
+- secondary_edos_labels
+- edos_alignment
+- retrieval_keywords
+- validation
+
+
+Fields intentionally removed:
+
+- card_type
+- source_checksum
+- evidence_type
+- mapped_speaker_positions
+- risk_notes
+- risk_level
+- source_reliability
+- countering_use
+- compatible_strategies
+
+
+Coverage by label:
+
+- 1.1 threats of harm: 5 cards
+- 1.2 incitement and encouragement of harm: 5 cards
+- 2.1 descriptive attacks: 5 cards
+- 2.2 aggressive and emotive attacks: 5 cards
+- 2.3 dehumanising attacks & overt sexual objectification: 5 cards
+- 3.1 casual use of gendered slurs, profanities, and insults: 5 cards
+- 3.2 immutable gender differences and gender stereotypes: 5 cards
+- 3.3 backhanded gendered compliments: 5 cards
+- 3.4 condescending explanations or unwelcome advice: 5 cards
+- 4.1 supporting mistreatment of individual women: 5 cards
+- 4.2 supporting systemic discrimination against women as a group: 5 cards
+
+Important caveat:
+
+source_quote contains short original fragments, not full source excerpts. Experts should verify each card's faithfulness against the cited source before validation.

@@ -1,0 +1,12 @@
+primary_edos_label,num_cards,num_sources,card_ids
+1.1 threats of harm,1,1,MOCK_1_1_threats_of_harm_001
+1.2 incitement and encouragement of harm,1,1,MOCK_1_2_incitement_and_encouragement_of_harm_001
+2.1 descriptive attacks,1,1,MOCK_2_1_descriptive_attacks_001
+2.2 aggressive and emotive attacks,1,1,MOCK_2_2_aggressive_and_emotive_attacks_001
+2.3 dehumanising attacks & overt sexual objectification,1,1,MOCK_2_3_dehumanising_attacks_and_overt_sexual_objectification_001
+"3.1 casual use of gendered slurs, profanities, and insults",1,1,"MOCK_3_1_casual_use_of_gendered_slurs,_profanities,_and_insults_001"
+3.2 immutable gender differences and gender stereotypes,1,1,MOCK_3_2_immutable_gender_differences_and_gender_stereotypes_001
+3.3 backhanded gendered compliments,1,1,MOCK_3_3_backhanded_gendered_compliments_001
+3.4 condescending explanations or unwelcome advice,1,1,MOCK_3_4_condescending_explanations_or_unwelcome_advice_001
+4.1 supporting mistreatment of individual women,1,1,MOCK_4_1_supporting_mistreatment_of_individual_women_001
+4.2 supporting systemic discrimination against women as a group,1,1,MOCK_4_2_supporting_systemic_discrimination_against_women_as_a_group_001

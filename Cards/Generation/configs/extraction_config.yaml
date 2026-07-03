@@ -1,0 +1,9 @@
+cards_per_label: 5
+max_candidate_passages_per_label: 40
+chunk_size_words: 350
+chunk_overlap_words: 80
+ollama_model: "llama3.1:8b"
+temperature: 0
+min_quote_chars: 20
+max_quote_chars: 280
+enforce_quote_match: true
