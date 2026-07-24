@@ -1,3 +1,10 @@
+embedding_model: "Qwen/Qwen3-Embedding-0.6B"
+embedding_batch_size: 8
+top_k: 10
+candidate_pool_size: 100
+# Equal weighting of relevance and diversity in the MMR objective.
+mmr_lambda: 0.50
+
 weights:
   lexical_similarity: 0.30
   semantic_similarity: 0.20
@@ -9,4 +16,3 @@ portfolio:
   redundancy_penalty: 0.15
   source_diversity_bonus: 0.08
   max_cards_per_source: 2
-mmr_lambda: 0.70
