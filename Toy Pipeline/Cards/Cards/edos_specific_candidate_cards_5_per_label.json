@@ -1,0 +1,1853 @@
+[
+  {
+    "card_id": "EDOS_CARD_001",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "rape threats",
+    "claim": "Rape threats can be treated as a form of gender-based cyberviolence, not as ordinary hostile disagreement.",
+    "primary_edos_label": "1.1 threats of harm",
+    "secondary_edos_labels": [
+      "1.2 incitement and encouragement of harm"
+    ],
+    "edos_alignment": "Useful for threats framed as jokes, fantasies, or intimidation because it anchors them as violence-related speech.",
+    "retrieval_keywords": [
+      "rape threats",
+      "threat",
+      "intimidation",
+      "cyberviolence",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_002",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "direct threats",
+    "claim": "Direct threats against women are explicitly part of the cyberviolence landscape identified by the European Parliament.",
+    "primary_edos_label": "1.1 threats of harm",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful when the hate speech contains explicit intimidation, punishment, or promises of harm.",
+    "retrieval_keywords": [
+      "direct threats",
+      "harm",
+      "violence",
+      "intimidation",
+      "safety"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_003",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "cyberstalking",
+    "claim": "Cyberstalking is a threat-related form of online abuse because it can create fear, control, and ongoing intimidation.",
+    "primary_edos_label": "1.1 threats of harm",
+    "secondary_edos_labels": [],
+    "edos_alignment": "Useful for hate speech that implies surveillance, pursuit, tracking, or repeated threatening attention.",
+    "retrieval_keywords": [
+      "cyberstalking",
+      "surveillance",
+      "fear",
+      "control",
+      "threat"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_004",
+    "status": "candidate",
+    "source": {
+      "source_id": "GREVIO_2021_DIGITAL_DIMENSION",
+      "title": "GREVIO General Recommendation No. 1 on the digital dimension of violence against women",
+      "publisher": "Council of Europe / GREVIO",
+      "year": 2021,
+      "page": null,
+      "section": "Digital dimension of violence",
+      "url": "https://edoc.coe.int/en/violence-against-women/10643-grevio-general-recommendation-no-1-on-the-digital-dimension-of-violence-against-women.html"
+    },
+    "source_quote": "online or with the help of technology",
+    "claim": "Technology can be used to extend violence against women beyond physical spaces and into digital environments.",
+    "primary_edos_label": "1.1 threats of harm",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful when the threat is dismissed because it happens online rather than face-to-face.",
+    "retrieval_keywords": [
+      "online violence",
+      "technology",
+      "threat",
+      "digital dimension",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_005",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_DIRECTIVE_2024_1385",
+      "title": "Directive (EU) 2024/1385 on combating violence against women and domestic violence",
+      "publisher": "European Union / EUR-Lex",
+      "year": 2024,
+      "page": null,
+      "section": "Cyber offences",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/1385/oj/eng"
+    },
+    "source_quote": "cyber stalking",
+    "claim": "Cyber stalking is recognized in the EU legal framework on violence against women and domestic violence.",
+    "primary_edos_label": "1.1 threats of harm",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for institutional or safety-oriented rebuttals to stalking-like threats.",
+    "retrieval_keywords": [
+      "cyber stalking",
+      "law",
+      "EU",
+      "violence against women",
+      "safety"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_006",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "calls to violence",
+    "claim": "Calls to violence against women belong to the same cyberviolence typology as direct threats.",
+    "primary_edos_label": "1.2 incitement and encouragement of harm",
+    "secondary_edos_labels": [
+      "1.1 threats of harm"
+    ],
+    "edos_alignment": "Useful for content that encourages others to harm women, even when the speaker does not personally threaten to act.",
+    "retrieval_keywords": [
+      "calls to violence",
+      "incitement",
+      "harm",
+      "women",
+      "hate"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_007",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "sexist hate speech",
+    "claim": "Sexist hate speech can include content that incites hatred or violence against women and gender-diverse people.",
+    "primary_edos_label": "1.2 incitement and encouragement of harm",
+    "secondary_edos_labels": [
+      "3.1 casual use of gendered slurs, profanities, and insults"
+    ],
+    "edos_alignment": "Useful for distinguishing incitement from generic offensiveness: the issue is encouragement of hatred or violence.",
+    "retrieval_keywords": [
+      "sexist hate speech",
+      "incitement",
+      "hatred",
+      "violence",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_008",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "inducements to inflict violence",
+    "claim": "Online content can encourage self-directed violence and psychological injury, which is relevant to harm-inciting hate.",
+    "primary_edos_label": "1.2 incitement and encouragement of harm",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for misogynistic content that pushes women toward self-harm or celebrates self-directed harm.",
+    "retrieval_keywords": [
+      "self harm",
+      "psychic injury",
+      "incitement",
+      "violence",
+      "harm"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_009",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_DIRECTIVE_2024_1385",
+      "title": "Directive (EU) 2024/1385 on combating violence against women and domestic violence",
+      "publisher": "European Union / EUR-Lex",
+      "year": 2024,
+      "page": null,
+      "section": "Cyber offences",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/1385/oj/eng"
+    },
+    "source_quote": "cyber incitement",
+    "claim": "The EU framework treats cyber incitement as a legally relevant form of violence-related online conduct.",
+    "primary_edos_label": "1.2 incitement and encouragement of harm",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful when a counter-narrative needs to mark incitement as socially and legally serious.",
+    "retrieval_keywords": [
+      "cyber incitement",
+      "EU directive",
+      "violence",
+      "hatred",
+      "law"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_010",
+    "status": "candidate",
+    "source": {
+      "source_id": "UNFPA_2021_TFGBV",
+      "title": "Technology-facilitated Gender-based Violence: Making All Spaces Safe",
+      "publisher": "UNFPA",
+      "year": 2021,
+      "page": null,
+      "section": "Global action framing",
+      "url": "https://www.unfpa.org/publications/technology-facilitated-gender-based-violence-making-all-spaces-safe"
+    },
+    "source_quote": "rising scourge",
+    "claim": "Technology-facilitated gender-based violence is framed as a growing collective problem requiring coordinated action.",
+    "primary_edos_label": "1.2 incitement and encouragement of harm",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for incitement that contributes to a broader hostile climate rather than only to a single insult.",
+    "retrieval_keywords": [
+      "technology-facilitated violence",
+      "coordinated action",
+      "incitement",
+      "hostile climate"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_011",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Hostile sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "hostile sexism",
+    "claim": "Descriptive claims that women are incompetent or inferior align with hostile sexism rather than neutral opinion.",
+    "primary_edos_label": "2.1 descriptive attacks",
+    "secondary_edos_labels": [
+      "3.2 immutable gender differences and gender stereotypes"
+    ],
+    "edos_alignment": "Useful for attacks that assign negative traits to women as a group.",
+    "retrieval_keywords": [
+      "hostile sexism",
+      "incompetent",
+      "inferior",
+      "descriptive attack",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_012",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Hostile sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "negative evaluations",
+    "claim": "Hostile sexism includes negative evaluations and stereotypes about women.",
+    "primary_edos_label": "2.1 descriptive attacks",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful when a hate speech describes women with global negative traits but without explicit threats.",
+    "retrieval_keywords": [
+      "negative evaluations",
+      "stereotypes",
+      "women",
+      "derogation",
+      "attack"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_013",
+    "status": "candidate",
+    "source": {
+      "source_id": "UN_WOMEN_2023_TFVAW",
+      "title": "Technology-facilitated violence against women: taking stock of evidence and data collection",
+      "publisher": "UN Women",
+      "year": 2023,
+      "page": null,
+      "section": "Landscape scan",
+      "url": "https://www.unwomen.org/en/digital-library/publications/2023/04/technology-facilitated-violence-against-women-taking-stock-of-evidence-and-data-collection"
+    },
+    "source_quote": "technology-facilitated violence against women",
+    "claim": "Technology-facilitated abuse can include repeated negative portrayals that make misogynistic hostility appear normal.",
+    "primary_edos_label": "2.1 descriptive attacks",
+    "secondary_edos_labels": [
+      "3.1 casual use of gendered slurs, profanities, and insults"
+    ],
+    "edos_alignment": "Useful for descriptive attacks embedded in digital abuse or harassment patterns.",
+    "retrieval_keywords": [
+      "TFVAW",
+      "descriptive attack",
+      "misogyny",
+      "normalization",
+      "online abuse"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_014",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Prevention framing",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "gender equality norms",
+    "claim": "Challenging negative group descriptions of women supports broader gender equality norms.",
+    "primary_edos_label": "2.1 descriptive attacks",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for countering attacks that frame women as unfit for equality or participation.",
+    "retrieval_keywords": [
+      "gender equality norms",
+      "negative stereotypes",
+      "women",
+      "participation"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_015",
+    "status": "candidate",
+    "source": {
+      "source_id": "GLICK_FISKE_1996_ASI",
+      "title": "The Ambivalent Sexism Inventory: Differentiating Hostile and Benevolent Sexism",
+      "publisher": "Journal of Personality and Social Psychology",
+      "year": 1996,
+      "page": null,
+      "section": "Ambivalent sexism theory",
+      "url": "https://www.researchgate.net/publication/232548173_The_Ambivalent_Sexism_Inventory_Differentiating_Hostile_and_Benevolent_Sexism"
+    },
+    "source_quote": "ambivalence toward women",
+    "claim": "Sexist discourse can combine hostility and apparently reasonable description, making group attacks seem acceptable.",
+    "primary_edos_label": "2.1 descriptive attacks",
+    "secondary_edos_labels": [
+      "3.3 backhanded gendered compliments"
+    ],
+    "edos_alignment": "Useful for descriptive attacks that are framed as social observation rather than hatred.",
+    "retrieval_keywords": [
+      "ambivalence",
+      "women",
+      "hostile description",
+      "sexism",
+      "group attack"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_016",
+    "status": "candidate",
+    "source": {
+      "source_id": "WOMEN_HARM_JUSTICE_2023",
+      "title": "Women's Perspectives on Harm and Justice after Online Harassment",
+      "publisher": "arXiv / CSCW paper",
+      "year": 2023,
+      "page": null,
+      "section": "Online harassment harms",
+      "url": "https://arxiv.org/abs/2301.11733"
+    },
+    "source_quote": "insults",
+    "claim": "Insults are a recognized component of women's experiences of online harassment.",
+    "primary_edos_label": "2.2 aggressive and emotive attacks",
+    "secondary_edos_labels": [
+      "3.1 casual use of gendered slurs, profanities, and insults"
+    ],
+    "edos_alignment": "Useful for aggressive and emotionally charged attacks that are abusive even without a factual claim.",
+    "retrieval_keywords": [
+      "insults",
+      "online harassment",
+      "aggression",
+      "women",
+      "abuse"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_017",
+    "status": "candidate",
+    "source": {
+      "source_id": "WOMEN_HARM_JUSTICE_2023",
+      "title": "Women's Perspectives on Harm and Justice after Online Harassment",
+      "publisher": "arXiv / CSCW paper",
+      "year": 2023,
+      "page": null,
+      "section": "Online harassment harms",
+      "url": "https://arxiv.org/abs/2301.11733"
+    },
+    "source_quote": "aggression",
+    "claim": "Aggressive online harassment is experienced as harmful and can require platform response.",
+    "primary_edos_label": "2.2 aggressive and emotive attacks",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for counterspeech that rejects framing aggressive abuse as harmless venting.",
+    "retrieval_keywords": [
+      "aggression",
+      "harassment",
+      "platform response",
+      "harm",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_018",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Impact of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "severe and life-long consequences",
+    "claim": "Aggressive gender-based cyberviolence can have severe and long-lasting consequences for victims.",
+    "primary_edos_label": "2.2 aggressive and emotive attacks",
+    "secondary_edos_labels": [
+      "1.1 threats of harm"
+    ],
+    "edos_alignment": "Useful for aggressive attacks that are minimized as only words.",
+    "retrieval_keywords": [
+      "aggressive attack",
+      "consequences",
+      "harm",
+      "victims",
+      "cyberviolence"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_019",
+    "status": "candidate",
+    "source": {
+      "source_id": "GREVIO_2021_DIGITAL_DIMENSION",
+      "title": "GREVIO General Recommendation No. 1 on the digital dimension of violence against women",
+      "publisher": "Council of Europe / GREVIO",
+      "year": 2021,
+      "page": null,
+      "section": "Digital dimension",
+      "url": "https://edoc.coe.int/en/violence-against-women/10643-grevio-general-recommendation-no-1-on-the-digital-dimension-of-violence-against-women.html"
+    },
+    "source_quote": "continuity",
+    "claim": "Digital abuse should be understood in continuity with other forms of violence against women.",
+    "primary_edos_label": "2.2 aggressive and emotive attacks",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for aggressive attacks that are dismissed because they occur online.",
+    "retrieval_keywords": [
+      "continuity",
+      "digital abuse",
+      "violence against women",
+      "aggression"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_020",
+    "status": "candidate",
+    "source": {
+      "source_id": "UNFPA_2021_TFGBV",
+      "title": "Technology-facilitated Gender-based Violence: Making All Spaces Safe",
+      "publisher": "UNFPA",
+      "year": 2021,
+      "page": null,
+      "section": "Global action framing",
+      "url": "https://www.unfpa.org/publications/technology-facilitated-gender-based-violence-making-all-spaces-safe"
+    },
+    "source_quote": "act in unison",
+    "claim": "Technology-facilitated abuse calls for collective responses rather than normalization of aggressive misogyny.",
+    "primary_edos_label": "2.2 aggressive and emotive attacks",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for aggressive attacks that contribute to a hostile public environment.",
+    "retrieval_keywords": [
+      "collective response",
+      "aggressive misogyny",
+      "technology-facilitated",
+      "abuse"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_021",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Heterosexual hostility",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "sexual objects",
+    "claim": "Sexist discourse can reduce women to sexual objects for men's pleasure.",
+    "primary_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+    "secondary_edos_labels": [
+      "3.1 casual use of gendered slurs, profanities, and insults"
+    ],
+    "edos_alignment": "Useful for explicit objectification and language that treats women as bodies or commodities.",
+    "retrieval_keywords": [
+      "sexual objects",
+      "objectification",
+      "women",
+      "dehumanization",
+      "sexism"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_022",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "image-based sexual abuse",
+    "claim": "Non-consensual sexual image abuse is a form of gender-based cyberviolence.",
+    "primary_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for hate speech that sexualizes, humiliates, or reduces women to intimate images.",
+    "retrieval_keywords": [
+      "image-based sexual abuse",
+      "objectification",
+      "non-consensual",
+      "sexual humiliation"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_023",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "sexually exploiting women",
+    "claim": "Technology can be used in contexts of sexual exploitation of women and girls.",
+    "primary_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for objectifying speech that normalizes women as available for exploitation.",
+    "retrieval_keywords": [
+      "sexual exploitation",
+      "women and girls",
+      "technology",
+      "objectification"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_024",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_DIRECTIVE_2024_1385",
+      "title": "Directive (EU) 2024/1385 on combating violence against women and domestic violence",
+      "publisher": "European Union / EUR-Lex",
+      "year": 2024,
+      "page": null,
+      "section": "Cyber offences",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/1385/oj/eng"
+    },
+    "source_quote": "intimate material",
+    "claim": "EU policy identifies non-consensual intimate material as a relevant online abuse form.",
+    "primary_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+    "secondary_edos_labels": [
+      "1.2 incitement and encouragement of harm"
+    ],
+    "edos_alignment": "Useful for counterspeech around sexualized humiliation or threats involving intimate content.",
+    "retrieval_keywords": [
+      "intimate material",
+      "non-consensual",
+      "sexual objectification",
+      "cyberviolence"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_025",
+    "status": "candidate",
+    "source": {
+      "source_id": "UN_WOMEN_2023_TFVAW",
+      "title": "Technology-facilitated violence against women: taking stock of evidence and data collection",
+      "publisher": "UN Women",
+      "year": 2023,
+      "page": null,
+      "section": "Landscape scan",
+      "url": "https://www.unwomen.org/en/digital-library/publications/2023/04/technology-facilitated-violence-against-women-taking-stock-of-evidence-and-data-collection"
+    },
+    "source_quote": "women and girls",
+    "claim": "Technology-facilitated abuse often targets women and girls through sexualized and gendered forms of harm.",
+    "primary_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful for dehumanising or overtly sexual attacks that are tied to gendered vulnerability.",
+    "retrieval_keywords": [
+      "women and girls",
+      "sexualized harm",
+      "technology-facilitated violence",
+      "dehumanization"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_026",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "sexist hate speech",
+    "claim": "Gendered slurs can function as sexist hate speech when they normalize contempt toward women.",
+    "primary_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful for casual misogynistic insults that are minimized as ordinary profanity.",
+    "retrieval_keywords": [
+      "gendered slurs",
+      "sexist hate speech",
+      "profanity",
+      "misogyny"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_027",
+    "status": "candidate",
+    "source": {
+      "source_id": "WOMEN_HARM_JUSTICE_2023",
+      "title": "Women's Perspectives on Harm and Justice after Online Harassment",
+      "publisher": "arXiv / CSCW paper",
+      "year": 2023,
+      "page": null,
+      "section": "Online harassment harms",
+      "url": "https://arxiv.org/abs/2301.11733"
+    },
+    "source_quote": "online harassment",
+    "claim": "Women report online harassment that includes insults and threatening forms of abuse.",
+    "primary_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful for slurs embedded in online harassment rather than isolated disagreement.",
+    "retrieval_keywords": [
+      "online harassment",
+      "insults",
+      "slurs",
+      "women",
+      "abuse"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_028",
+    "status": "candidate",
+    "source": {
+      "source_id": "UN_WOMEN_2023_TFVAW",
+      "title": "Technology-facilitated violence against women: taking stock of evidence and data collection",
+      "publisher": "UN Women",
+      "year": 2023,
+      "page": null,
+      "section": "Evidence and data collection",
+      "url": "https://www.unwomen.org/en/digital-library/publications/2023/04/technology-facilitated-violence-against-women-taking-stock-of-evidence-and-data-collection"
+    },
+    "source_quote": "normalizes existing cultures",
+    "claim": "Technology-facilitated violence can amplify cultures of misogyny, including casual verbal abuse.",
+    "primary_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for explaining why repeated gendered slurs matter as cultural normalization.",
+    "retrieval_keywords": [
+      "misogyny",
+      "normalization",
+      "slurs",
+      "culture",
+      "technology-facilitated"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_029",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "WHO response",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "unacceptable",
+    "claim": "Public-health prevention includes making violence against women unacceptable, including verbal normalization of contempt.",
+    "primary_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "secondary_edos_labels": [
+      "2.1 descriptive attacks"
+    ],
+    "edos_alignment": "Useful when casual insults contribute to a broader tolerance of misogynistic abuse.",
+    "retrieval_keywords": [
+      "unacceptable",
+      "violence against women",
+      "slurs",
+      "prevention",
+      "norms"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_030",
+    "status": "candidate",
+    "source": {
+      "source_id": "GREVIO_2021_DIGITAL_DIMENSION",
+      "title": "GREVIO General Recommendation No. 1 on the digital dimension of violence against women",
+      "publisher": "Council of Europe / GREVIO",
+      "year": 2021,
+      "page": null,
+      "section": "Digital dimension",
+      "url": "https://edoc.coe.int/en/violence-against-women/10643-grevio-general-recommendation-no-1-on-the-digital-dimension-of-violence-against-women.html"
+    },
+    "source_quote": "gender-based violence against women",
+    "claim": "Digital verbal abuse should be considered within the broader framework of gender-based violence against women.",
+    "primary_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful when sexist slurs are dismissed because they are online or informal.",
+    "retrieval_keywords": [
+      "gender-based violence",
+      "digital abuse",
+      "slurs",
+      "women",
+      "online"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_031",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Ambivalent sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "gender differentiation",
+    "claim": "Sexist ideology often turns gender differences into fixed explanations for unequal roles.",
+    "primary_edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for claims that women are naturally less rational, capable, or suited for public roles.",
+    "retrieval_keywords": [
+      "gender differentiation",
+      "stereotypes",
+      "natural differences",
+      "roles",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_032",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Ambivalent sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "biological differences",
+    "claim": "Gender stereotypes can present social roles as if they followed inevitably from biology.",
+    "primary_edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "secondary_edos_labels": [
+      "2.1 descriptive attacks"
+    ],
+    "edos_alignment": "Useful for biological-essentialist hate speech about women's abilities or duties.",
+    "retrieval_keywords": [
+      "biological differences",
+      "gender roles",
+      "essentialism",
+      "stereotype",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_033",
+    "status": "candidate",
+    "source": {
+      "source_id": "GLICK_FISKE_1996_ASI",
+      "title": "The Ambivalent Sexism Inventory: Differentiating Hostile and Benevolent Sexism",
+      "publisher": "Journal of Personality and Social Psychology",
+      "year": 1996,
+      "page": null,
+      "section": "Ambivalent sexism theory",
+      "url": "https://www.researchgate.net/publication/232548173_The_Ambivalent_Sexism_Inventory_Differentiating_Hostile_and_Benevolent_Sexism"
+    },
+    "source_quote": "men’s structural control",
+    "claim": "Gender stereotypes can support structural control by making hierarchy seem natural.",
+    "primary_edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for stereotypes used to justify male authority or women's exclusion.",
+    "retrieval_keywords": [
+      "structural control",
+      "hierarchy",
+      "gender stereotype",
+      "male authority"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_034",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Problem framing",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "gender inequality",
+    "claim": "Violence against women is rooted in gender inequality, which stereotypes help reproduce.",
+    "primary_edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for linking apparently descriptive stereotypes to unequal social conditions.",
+    "retrieval_keywords": [
+      "gender inequality",
+      "stereotypes",
+      "violence against women",
+      "social norms"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_035",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Benevolent sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "traditional gender roles",
+    "claim": "Traditional gender-role assumptions can restrict women even when stated as neutral difference.",
+    "primary_edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "secondary_edos_labels": [
+      "3.3 backhanded gendered compliments"
+    ],
+    "edos_alignment": "Useful for stereotypes about women as naturally caring, emotional, passive, or domestic.",
+    "retrieval_keywords": [
+      "traditional gender roles",
+      "women",
+      "emotional",
+      "domestic",
+      "stereotype"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_036",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Benevolent sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "seemingly positive views",
+    "claim": "Apparently positive statements about women can still reinforce gender inequality.",
+    "primary_edos_label": "3.3 backhanded gendered compliments",
+    "secondary_edos_labels": [
+      "3.2 immutable gender differences and gender stereotypes"
+    ],
+    "edos_alignment": "Useful for compliments that praise women only by tying them to restrictive gender roles.",
+    "retrieval_keywords": [
+      "seemingly positive",
+      "benevolent sexism",
+      "backhanded compliment",
+      "gender roles"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_037",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Benevolent sexism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "benevolent sexism",
+    "claim": "Benevolent sexism is useful for identifying praise that sounds respectful but preserves inequality.",
+    "primary_edos_label": "3.3 backhanded gendered compliments",
+    "secondary_edos_labels": [
+      "3.4 condescending explanations or unwelcome advice"
+    ],
+    "edos_alignment": "Useful for statements such as women are pure, delicate, naturally caring, or needing protection.",
+    "retrieval_keywords": [
+      "benevolent sexism",
+      "praise",
+      "protection",
+      "delicate",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_038",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Protective paternalism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "protected and provided for",
+    "claim": "Compliments that present women as needing male provision can reinforce dependence.",
+    "primary_edos_label": "3.3 backhanded gendered compliments",
+    "secondary_edos_labels": [
+      "3.4 condescending explanations or unwelcome advice"
+    ],
+    "edos_alignment": "Useful for backhanded compliments that imply women are valuable because they are dependent or fragile.",
+    "retrieval_keywords": [
+      "protected",
+      "provided for",
+      "dependence",
+      "compliment",
+      "paternalism"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_039",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Complementary gender differentiation",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "warm, caring, and maternal",
+    "claim": "Praise of women as naturally caring or maternal can be restrictive when treated as destiny.",
+    "primary_edos_label": "3.3 backhanded gendered compliments",
+    "secondary_edos_labels": [
+      "3.2 immutable gender differences and gender stereotypes"
+    ],
+    "edos_alignment": "Useful for positive-sounding comments that reduce women to nurturing roles.",
+    "retrieval_keywords": [
+      "warm",
+      "caring",
+      "maternal",
+      "backhanded compliment",
+      "gender roles"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_040",
+    "status": "candidate",
+    "source": {
+      "source_id": "GLICK_FISKE_1996_ASI",
+      "title": "The Ambivalent Sexism Inventory: Differentiating Hostile and Benevolent Sexism",
+      "publisher": "Journal of Personality and Social Psychology",
+      "year": 1996,
+      "page": null,
+      "section": "Ambivalent sexism theory",
+      "url": "https://www.researchgate.net/publication/232548173_The_Ambivalent_Sexism_Inventory_Differentiating_Hostile_and_Benevolent_Sexism"
+    },
+    "source_quote": "Benevolent Sexism",
+    "claim": "Benevolent sexism helps distinguish genuinely respectful praise from praise that sustains subordination.",
+    "primary_edos_label": "3.3 backhanded gendered compliments",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for compliments that appear polite but imply women should remain in lower-status roles.",
+    "retrieval_keywords": [
+      "benevolent sexism",
+      "subordination",
+      "praise",
+      "women",
+      "inequality"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_041",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Protective paternalism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "protective paternalism",
+    "claim": "Protective paternalism can justify men making decisions on women's behalf.",
+    "primary_edos_label": "3.4 condescending explanations or unwelcome advice",
+    "secondary_edos_labels": [
+      "3.3 backhanded gendered compliments"
+    ],
+    "edos_alignment": "Useful for patronizing advice that frames control as care or protection.",
+    "retrieval_keywords": [
+      "protective paternalism",
+      "condescending advice",
+      "control",
+      "protection",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_042",
+    "status": "candidate",
+    "source": {
+      "source_id": "SAGE_2017_AMBIVALENT_SEXISM",
+      "title": "Ambivalent Sexism",
+      "publisher": "SAGE Encyclopedia of Psychology and Gender",
+      "year": 2017,
+      "page": null,
+      "section": "Paternalism",
+      "url": "https://pages.nyu.edu/jackson/sex.and.gender/Readings/AmbivalentSexism-Sage17.pdf"
+    },
+    "source_quote": "make decisions",
+    "claim": "Paternalistic sexism treats women as people whose choices should be monitored or managed.",
+    "primary_edos_label": "3.4 condescending explanations or unwelcome advice",
+    "secondary_edos_labels": [
+      "4.2 supporting systemic discrimination against women as a group"
+    ],
+    "edos_alignment": "Useful for unsolicited instructions about how women should behave, dress, speak, or decide.",
+    "retrieval_keywords": [
+      "make decisions",
+      "paternalism",
+      "unwelcome advice",
+      "monitoring",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_043",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Health-sector response",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "survivor-centred services",
+    "claim": "Support for women affected by violence should be survivor-centred rather than paternalistic.",
+    "primary_edos_label": "3.4 condescending explanations or unwelcome advice",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for correcting responses that lecture women victims instead of respecting agency.",
+    "retrieval_keywords": [
+      "survivor-centred",
+      "agency",
+      "paternalism",
+      "advice",
+      "victim"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_044",
+    "status": "candidate",
+    "source": {
+      "source_id": "BELL0TTI_2021_DOMESTIC_VIOLENCE_NETWORKS",
+      "title": "Ambivalent and Consistent Relationships: The Role of Personal Networks in Cases of Domestic Violence",
+      "publisher": "arXiv",
+      "year": 2021,
+      "page": null,
+      "section": "Personal networks and domestic violence",
+      "url": "https://arxiv.org/abs/2111.13104"
+    },
+    "source_quote": "burdening them",
+    "claim": "Social responses can burden women with further responsibilities instead of supporting their choices.",
+    "primary_edos_label": "3.4 condescending explanations or unwelcome advice",
+    "secondary_edos_labels": [
+      "4.1 supporting mistreatment of individual women"
+    ],
+    "edos_alignment": "Useful for condescending advice that shifts responsibility onto women to avoid abuse.",
+    "retrieval_keywords": [
+      "burdening",
+      "responsibility",
+      "women",
+      "advice",
+      "victim"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_045",
+    "status": "candidate",
+    "source": {
+      "source_id": "GLICK_FISKE_1996_ASI",
+      "title": "The Ambivalent Sexism Inventory: Differentiating Hostile and Benevolent Sexism",
+      "publisher": "Journal of Personality and Social Psychology",
+      "year": 1996,
+      "page": null,
+      "section": "Ambivalent sexism theory",
+      "url": "https://www.researchgate.net/publication/232548173_The_Ambivalent_Sexism_Inventory_Differentiating_Hostile_and_Benevolent_Sexism"
+    },
+    "source_quote": "paternalism",
+    "claim": "Paternalism is a core mechanism through which sexism can appear helpful while maintaining control.",
+    "primary_edos_label": "3.4 condescending explanations or unwelcome advice",
+    "secondary_edos_labels": [
+      "3.3 backhanded gendered compliments"
+    ],
+    "edos_alignment": "Useful for advice that sounds protective but denies women's autonomy.",
+    "retrieval_keywords": [
+      "paternalism",
+      "autonomy",
+      "condescension",
+      "control",
+      "sexism"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_046",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Health-sector response",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "survivor-centred services",
+    "claim": "Responses to violence against women should centre survivors rather than blame or discipline them.",
+    "primary_edos_label": "4.1 supporting mistreatment of individual women",
+    "secondary_edos_labels": [
+      "3.4 condescending explanations or unwelcome advice"
+    ],
+    "edos_alignment": "Useful for victim-blaming statements that focus on what the woman should have done.",
+    "retrieval_keywords": [
+      "survivor-centred",
+      "victim blaming",
+      "support",
+      "violence",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_047",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Consequences",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "health consequences",
+    "claim": "Violence against women has health consequences, so mistreatment should not be minimized as personal drama.",
+    "primary_edos_label": "4.1 supporting mistreatment of individual women",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful for hate speech that trivializes individual women's suffering or abuse.",
+    "retrieval_keywords": [
+      "health consequences",
+      "mistreatment",
+      "victim",
+      "harm",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_048",
+    "status": "candidate",
+    "source": {
+      "source_id": "WOMEN_HARM_JUSTICE_2023",
+      "title": "Women's Perspectives on Harm and Justice after Online Harassment",
+      "publisher": "arXiv / CSCW paper",
+      "year": 2023,
+      "page": null,
+      "section": "Online harassment harms",
+      "url": "https://arxiv.org/abs/2301.11733"
+    },
+    "source_quote": "non-consensual sharing",
+    "claim": "Non-consensual sharing of sexual images is perceived as especially harmful by women.",
+    "primary_edos_label": "4.1 supporting mistreatment of individual women",
+    "secondary_edos_labels": [
+      "2.3 dehumanising attacks & overt sexual objectification"
+    ],
+    "edos_alignment": "Useful for victim-blaming around intimate images or sexualized online harassment.",
+    "retrieval_keywords": [
+      "non-consensual sharing",
+      "victim blaming",
+      "sexual images",
+      "harm"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_049",
+    "status": "candidate",
+    "source": {
+      "source_id": "BELL0TTI_2021_DOMESTIC_VIOLENCE_NETWORKS",
+      "title": "Ambivalent and Consistent Relationships: The Role of Personal Networks in Cases of Domestic Violence",
+      "publisher": "arXiv",
+      "year": 2021,
+      "page": null,
+      "section": "Personal networks and domestic violence",
+      "url": "https://arxiv.org/abs/2111.13104"
+    },
+    "source_quote": "dismissing perpetrators responsibilities",
+    "claim": "Victim-blaming can dismiss perpetrators' responsibilities and burden women with blame.",
+    "primary_edos_label": "4.1 supporting mistreatment of individual women",
+    "secondary_edos_labels": [
+      "3.4 condescending explanations or unwelcome advice"
+    ],
+    "edos_alignment": "Useful for statements that excuse abuse by focusing on the woman's behavior.",
+    "retrieval_keywords": [
+      "perpetrator responsibility",
+      "victim blaming",
+      "abuse",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_050",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_PARL_2021_RESOLUTION_CYBERVIOLENCE",
+      "title": "Combating gender-based violence: cyberviolence",
+      "publisher": "European Parliament",
+      "year": 2021,
+      "page": null,
+      "section": "Typology of cyberviolence",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2021-0489_EN.html"
+    },
+    "source_quote": "recording and sharing",
+    "claim": "Recording or sharing sexual assault material is part of gender-based cyberviolence, not entertainment.",
+    "primary_edos_label": "4.1 supporting mistreatment of individual women",
+    "secondary_edos_labels": [
+      "2.3 dehumanising attacks & overt sexual objectification"
+    ],
+    "edos_alignment": "Useful for hate speech that mocks or circulates abuse of an individual woman.",
+    "retrieval_keywords": [
+      "recording",
+      "sharing",
+      "sexual assault",
+      "victim",
+      "cyberviolence"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_051",
+    "status": "candidate",
+    "source": {
+      "source_id": "WHO_VAW_FACT_SHEET",
+      "title": "Violence against women",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "page": null,
+      "section": "Prevention",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/violence-against-women"
+    },
+    "source_quote": "gender equality norms",
+    "claim": "Preventing violence against women requires gender equality norms, not restrictions on women's participation.",
+    "primary_edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "secondary_edos_labels": [
+      "3.2 immutable gender differences and gender stereotypes"
+    ],
+    "edos_alignment": "Useful for hate speech that supports limiting women's roles, rights, or opportunities.",
+    "retrieval_keywords": [
+      "gender equality norms",
+      "systemic discrimination",
+      "rights",
+      "participation",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_052",
+    "status": "candidate",
+    "source": {
+      "source_id": "UN_WOMEN_2023_TFVAW",
+      "title": "Technology-facilitated violence against women: taking stock of evidence and data collection",
+      "publisher": "UN Women",
+      "year": 2023,
+      "page": null,
+      "section": "Evidence and data collection",
+      "url": "https://www.unwomen.org/en/digital-library/publications/2023/04/technology-facilitated-violence-against-women-taking-stock-of-evidence-and-data-collection"
+    },
+    "source_quote": "gender digital divide",
+    "claim": "Technology-facilitated violence can worsen women's exclusion from digital spaces and public participation.",
+    "primary_edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "secondary_edos_labels": [
+      "3.1 casual use of gendered slurs, profanities, and insults"
+    ],
+    "edos_alignment": "Useful for connecting online misogyny to systemic exclusion rather than isolated offense.",
+    "retrieval_keywords": [
+      "gender digital divide",
+      "public life",
+      "exclusion",
+      "online misogyny"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_053",
+    "status": "candidate",
+    "source": {
+      "source_id": "EU_DIRECTIVE_2024_1385",
+      "title": "Directive (EU) 2024/1385 on combating violence against women and domestic violence",
+      "publisher": "European Union / EUR-Lex",
+      "year": 2024,
+      "page": null,
+      "section": "Legal framework",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/1385/oj/eng"
+    },
+    "source_quote": "minimum level of protection",
+    "claim": "A common legal framework can help protect women against violence across jurisdictions.",
+    "primary_edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "secondary_edos_labels": [
+      "1.2 incitement and encouragement of harm"
+    ],
+    "edos_alignment": "Useful for countering claims that systemic protection for women is unnecessary or excessive.",
+    "retrieval_keywords": [
+      "minimum protection",
+      "law",
+      "systemic discrimination",
+      "EU",
+      "women"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_054",
+    "status": "candidate",
+    "source": {
+      "source_id": "UNFPA_2021_TFGBV",
+      "title": "Technology-facilitated Gender-based Violence: Making All Spaces Safe",
+      "publisher": "UNFPA",
+      "year": 2021,
+      "page": null,
+      "section": "Global action framing",
+      "url": "https://www.unfpa.org/publications/technology-facilitated-gender-based-violence-making-all-spaces-safe"
+    },
+    "source_quote": "digital and feminist movements",
+    "claim": "Addressing technology-facilitated gender-based violence requires cooperation with feminist and digital-rights movements.",
+    "primary_edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "secondary_edos_labels": [
+      "1.2 incitement and encouragement of harm"
+    ],
+    "edos_alignment": "Useful for hate speech portraying feminist responses as illegitimate or socially harmful.",
+    "retrieval_keywords": [
+      "feminist movements",
+      "digital rights",
+      "systemic response",
+      "TFGBV"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  },
+  {
+    "card_id": "EDOS_CARD_055",
+    "status": "candidate",
+    "source": {
+      "source_id": "GREVIO_2021_DIGITAL_DIMENSION",
+      "title": "GREVIO General Recommendation No. 1 on the digital dimension of violence against women",
+      "publisher": "Council of Europe / GREVIO",
+      "year": 2021,
+      "page": null,
+      "section": "Digital dimension",
+      "url": "https://edoc.coe.int/en/violence-against-women/10643-grevio-general-recommendation-no-1-on-the-digital-dimension-of-violence-against-women.html"
+    },
+    "source_quote": "women and girls’ experiences",
+    "claim": "Online violence exacerbates women and girls' experiences of gender-based violence, showing a systemic pattern.",
+    "primary_edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "secondary_edos_labels": [
+      "2.2 aggressive and emotive attacks"
+    ],
+    "edos_alignment": "Useful for speech that denies systemic discrimination or frames abuse as isolated incidents.",
+    "retrieval_keywords": [
+      "women and girls",
+      "systemic pattern",
+      "gender-based violence",
+      "online violence"
+    ],
+    "validation": {
+      "status": "not_validated",
+      "faithfulness": null,
+      "edos_alignment": null,
+      "usefulness": null,
+      "notes": null
+    }
+  }
+]

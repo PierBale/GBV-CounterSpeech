@@ -1,0 +1,569 @@
+PROMPT AND EXAMPLE GENERATIONS FOR EDOS-SPECIFIC CARD-GROUNDED COUNTERSPEECH
+========================================================================================
+
+NOTE
+The cards and source quotes in this file are demonstration placeholders.
+In the actual pipeline, source_quote and claim should come from validated quote-first EDOS cards.
+
+SYSTEM PROMPT TEMPLATE
+----------------------------------------------------------------------------------------
+You generate concise counter-narratives against gender-based hate speech.
+
+Rules:
+- Answer in {language}.
+- Use the evidence card as grounding.
+- Do not invent facts beyond the card.
+- Do not claim personal lived experience.
+- Do not insult or dehumanize the author of the hate speech.
+- Do not amplify the hateful claim.
+- Directly counter the harmful idea.
+- Keep the response to at most {max_sentences} sentence(s).
+- Do not mention that you are an AI.
+- Do not explicitly cite or mention the source unless necessary.
+
+Return valid JSON only, with this shape:
+{
+  "counter_narrative": "string",
+  "used_claim": "string",
+  "grounding_note": "string"
+}
+
+USER PROMPT TEMPLATE
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+{hate_speech}
+
+EDOS LABEL:
+{edos_label}
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+{strategy}
+
+EVIDENCE CARD:
+card_id: {card_id}
+source: {source}
+source_quote: {source_quote}
+claim: {claim}
+edos_alignment: {edos_alignment}
+retrieval_keywords: {retrieval_keywords}
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+========================================================================================
+EX_01_EDOS_1_1 — 1.1 threats of harm
+========================================================================================
+
+HATE SPEECH
+Women who speak like that online deserve to be taught a lesson.
+
+CARD CLAIM
+Online threats against women can create fear and restrict their ability to participate safely in public and digital spaces.
+
+SOURCE QUOTE PLACEHOLDER
+online threats against women can create fear and restrict their participation
+
+EDOS ALIGNMENT
+Useful for countering threats that frame intimidation or harm against women as deserved or acceptable.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Women who speak like that online deserve to be taught a lesson.
+
+EDOS LABEL:
+1.1 threats of harm
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_1_1_001
+source: demo source placeholder
+source_quote: online threats against women can create fear and restrict their participation
+claim: Online threats against women can create fear and restrict their ability to participate safely in public and digital spaces.
+edos_alignment: Useful for countering threats that frame intimidation or harm against women as deserved or acceptable.
+retrieval_keywords: threats, fear, participation, online safety
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Threatening women for speaking online is not accountability; it is intimidation. Everyone should be able to participate in public discussion without being made to fear harm.",
+  "used_claim": "Online threats against women can create fear and restrict their ability to participate safely in public and digital spaces.",
+  "grounding_note": "The response counters the threat by reframing it as intimidation and grounding the reply in the harm to safe participation."
+}
+
+========================================================================================
+EX_02_EDOS_1_2 — 1.2 incitement and encouragement of harm
+========================================================================================
+
+HATE SPEECH
+People should go after women like her until she shuts up.
+
+CARD CLAIM
+Encouraging others to harass or attack women contributes to a hostile environment and can escalate online abuse.
+
+SOURCE QUOTE PLACEHOLDER
+encouraging others to target women can escalate online abuse
+
+EDOS ALIGNMENT
+Useful for countering content that calls on others to coordinate harassment or intimidation against women.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+People should go after women like her until she shuts up.
+
+EDOS LABEL:
+1.2 incitement and encouragement of harm
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_1_2_001
+source: demo source placeholder
+source_quote: encouraging others to target women can escalate online abuse
+claim: Encouraging others to harass or attack women contributes to a hostile environment and can escalate online abuse.
+edos_alignment: Useful for countering content that calls on others to coordinate harassment or intimidation against women.
+retrieval_keywords: incitement, harassment, hostile environment, escalation
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Calling on others to target a woman is not criticism; it helps create a hostile environment and can escalate abuse. Disagreement never justifies encouraging harassment.",
+  "used_claim": "Encouraging others to harass or attack women contributes to a hostile environment and can escalate online abuse.",
+  "grounding_note": "The response directly challenges incitement by distinguishing criticism from coordinated harassment."
+}
+
+========================================================================================
+EX_03_EDOS_2_1 — 2.1 descriptive attacks
+========================================================================================
+
+HATE SPEECH
+She is just a useless attention seeker.
+
+CARD CLAIM
+Sexist descriptive attacks reduce women to negative stereotypes rather than engaging with their actions, arguments, or expertise.
+
+SOURCE QUOTE PLACEHOLDER
+sexist abuse often targets women through degrading descriptions
+
+EDOS ALIGNMENT
+Useful for countering degrading descriptions that dismiss women through sexist characterization instead of addressing substance.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+She is just a useless attention seeker.
+
+EDOS LABEL:
+2.1 descriptive attacks
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_2_1_001
+source: demo source placeholder
+source_quote: sexist abuse often targets women through degrading descriptions
+claim: Sexist descriptive attacks reduce women to negative stereotypes rather than engaging with their actions, arguments, or expertise.
+edos_alignment: Useful for countering degrading descriptions that dismiss women through sexist characterization instead of addressing substance.
+retrieval_keywords: descriptive attack, stereotype, dismissal, expertise
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Calling her a stereotype does not address what she actually said or did. If there is a real disagreement, it should be argued on the merits rather than reduced to a sexist insult.",
+  "used_claim": "Sexist descriptive attacks reduce women to negative stereotypes rather than engaging with their actions, arguments, or expertise.",
+  "grounding_note": "The response redirects from personal degradation to substantive disagreement."
+}
+
+========================================================================================
+EX_04_EDOS_2_2 — 2.2 aggressive and emotive attacks
+========================================================================================
+
+HATE SPEECH
+She is disgusting and should stop embarrassing herself.
+
+CARD CLAIM
+Aggressive sexist attacks use contempt and humiliation to silence women rather than to engage with their views.
+
+SOURCE QUOTE PLACEHOLDER
+gendered abuse can use humiliation to silence women
+
+EDOS ALIGNMENT
+Useful for countering aggressive content that relies on contempt, shame, or humiliation.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+She is disgusting and should stop embarrassing herself.
+
+EDOS LABEL:
+2.2 aggressive and emotive attacks
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_2_2_001
+source: demo source placeholder
+source_quote: gendered abuse can use humiliation to silence women
+claim: Aggressive sexist attacks use contempt and humiliation to silence women rather than to engage with their views.
+edos_alignment: Useful for countering aggressive content that relies on contempt, shame, or humiliation.
+retrieval_keywords: aggressive attack, humiliation, contempt, silencing
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Humiliation is not an argument. Attacking a woman with contempt only works to silence her, instead of engaging with what she actually said.",
+  "used_claim": "Aggressive sexist attacks use contempt and humiliation to silence women rather than to engage with their views.",
+  "grounding_note": "The response names the communicative function of the attack: humiliation and silencing."
+}
+
+========================================================================================
+EX_05_EDOS_2_3 — 2.3 dehumanising attacks & overt sexual objectification
+========================================================================================
+
+HATE SPEECH
+Women like her are only good for their bodies.
+
+CARD CLAIM
+Sexual objectification treats women as bodies or objects rather than as full persons with agency, dignity, and rights.
+
+SOURCE QUOTE PLACEHOLDER
+objectification treats women as bodies rather than full persons
+
+EDOS ALIGNMENT
+Useful for countering statements that reduce women to sexual objects or deny their personhood.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Women like her are only good for their bodies.
+
+EDOS LABEL:
+2.3 dehumanising attacks & overt sexual objectification
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_2_3_001
+source: demo source placeholder
+source_quote: objectification treats women as bodies rather than full persons
+claim: Sexual objectification treats women as bodies or objects rather than as full persons with agency, dignity, and rights.
+edos_alignment: Useful for countering statements that reduce women to sexual objects or deny their personhood.
+retrieval_keywords: objectification, dignity, agency, rights
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Reducing a woman to her body denies her dignity and agency. She is a person with views, choices, and rights, not an object for others to evaluate.",
+  "used_claim": "Sexual objectification treats women as bodies or objects rather than as full persons with agency, dignity, and rights.",
+  "grounding_note": "The response counters objectification by restoring personhood, agency, and dignity."
+}
+
+========================================================================================
+EX_06_EDOS_3_1 — 3.1 casual use of gendered slurs, profanities, and insults
+========================================================================================
+
+HATE SPEECH
+Another woman talking nonsense, typical.
+
+CARD CLAIM
+Casual gendered insults normalize sexist hostility by making contempt toward women appear ordinary or socially acceptable.
+
+SOURCE QUOTE PLACEHOLDER
+casual sexist insults can normalize hostility toward women
+
+EDOS ALIGNMENT
+Useful for countering casual sexist insults that make hostility toward women seem normal or harmless.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Another woman talking nonsense, typical.
+
+EDOS LABEL:
+3.1 casual use of gendered slurs, profanities, and insults
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_3_1_001
+source: demo source placeholder
+source_quote: casual sexist insults can normalize hostility toward women
+claim: Casual gendered insults normalize sexist hostility by making contempt toward women appear ordinary or socially acceptable.
+edos_alignment: Useful for countering casual sexist insults that make hostility toward women seem normal or harmless.
+retrieval_keywords: gendered insult, casual sexism, normalization, hostility
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Dismissing someone because she is a woman normalizes sexist contempt. Her point should be judged by what she says, not by a gendered insult.",
+  "used_claim": "Casual gendered insults normalize sexist hostility by making contempt toward women appear ordinary or socially acceptable.",
+  "grounding_note": "The response challenges the normalization of casual sexist language."
+}
+
+========================================================================================
+EX_07_EDOS_3_2 — 3.2 immutable gender differences and gender stereotypes
+========================================================================================
+
+HATE SPEECH
+Women are naturally too emotional to make serious decisions.
+
+CARD CLAIM
+Gender stereotypes assign fixed roles and characteristics to people based on sex rather than individual ability or evidence.
+
+SOURCE QUOTE PLACEHOLDER
+gender stereotypes assign fixed roles and characteristics based on sex
+
+EDOS ALIGNMENT
+Useful for countering claims that present women’s abilities, roles, or behaviour as naturally fixed.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Women are naturally too emotional to make serious decisions.
+
+EDOS LABEL:
+3.2 immutable gender differences and gender stereotypes
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_3_2_001
+source: demo source placeholder
+source_quote: gender stereotypes assign fixed roles and characteristics based on sex
+claim: Gender stereotypes assign fixed roles and characteristics to people based on sex rather than individual ability or evidence.
+edos_alignment: Useful for countering claims that present women’s abilities, roles, or behaviour as naturally fixed.
+retrieval_keywords: gender stereotypes, fixed roles, essentialism, ability
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "That claim relies on a stereotype, not evidence. Decision-making ability depends on the individual, not on fixed assumptions about women as a group.",
+  "used_claim": "Gender stereotypes assign fixed roles and characteristics to people based on sex rather than individual ability or evidence.",
+  "grounding_note": "The response directly targets the essentialist stereotype behind the hate speech."
+}
+
+========================================================================================
+EX_08_EDOS_3_3 — 3.3 backhanded gendered compliments
+========================================================================================
+
+HATE SPEECH
+She is surprisingly smart for a woman.
+
+CARD CLAIM
+Backhanded gendered compliments appear positive but still reinforce the assumption that competence is unexpected in women.
+
+SOURCE QUOTE PLACEHOLDER
+apparently positive gendered comments can reinforce stereotypes
+
+EDOS ALIGNMENT
+Useful for countering apparently positive statements that still encode sexist expectations.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+She is surprisingly smart for a woman.
+
+EDOS LABEL:
+3.3 backhanded gendered compliments
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_3_3_001
+source: demo source placeholder
+source_quote: apparently positive gendered comments can reinforce stereotypes
+claim: Backhanded gendered compliments appear positive but still reinforce the assumption that competence is unexpected in women.
+edos_alignment: Useful for countering apparently positive statements that still encode sexist expectations.
+retrieval_keywords: backhanded compliment, benevolent sexism, competence, stereotype
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "That is not really a compliment; it suggests that intelligence is unusual for women. Her competence should be recognized without treating her gender as a reason for surprise.",
+  "used_claim": "Backhanded gendered compliments appear positive but still reinforce the assumption that competence is unexpected in women.",
+  "grounding_note": "The response explains why the apparently positive statement still reinforces sexism."
+}
+
+========================================================================================
+EX_09_EDOS_3_4 — 3.4 condescending explanations or unwelcome advice
+========================================================================================
+
+HATE SPEECH
+Calm down, sweetheart, let someone who understands explain it to you.
+
+CARD CLAIM
+Condescending advice can undermine women’s authority by assuming they need correction or explanation regardless of their actual knowledge.
+
+SOURCE QUOTE PLACEHOLDER
+condescending explanations can undermine women’s authority
+
+EDOS ALIGNMENT
+Useful for countering patronizing statements that assume women lack competence or authority.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Calm down, sweetheart, let someone who understands explain it to you.
+
+EDOS LABEL:
+3.4 condescending explanations or unwelcome advice
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_3_4_001
+source: demo source placeholder
+source_quote: condescending explanations can undermine women’s authority
+claim: Condescending advice can undermine women’s authority by assuming they need correction or explanation regardless of their actual knowledge.
+edos_alignment: Useful for countering patronizing statements that assume women lack competence or authority.
+retrieval_keywords: condescension, mansplaining, authority, expertise
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Talking down to her does not make the argument stronger. Assuming she needs to be corrected just because she is a woman undermines her authority instead of engaging with her knowledge.",
+  "used_claim": "Condescending advice can undermine women’s authority by assuming they need correction or explanation regardless of their actual knowledge.",
+  "grounding_note": "The response counters the patronizing framing and shifts focus back to expertise."
+}
+
+========================================================================================
+EX_10_EDOS_4_1 — 4.1 supporting mistreatment of individual women
+========================================================================================
+
+HATE SPEECH
+If she got harassed, she probably asked for it by posting online.
+
+CARD CLAIM
+Victim-blaming shifts responsibility away from abusive behaviour and can minimize the harm experienced by women.
+
+SOURCE QUOTE PLACEHOLDER
+victim-blaming shifts responsibility away from abusive behaviour
+
+EDOS ALIGNMENT
+Useful for countering content that blames individual women for abuse or minimizes mistreatment.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+If she got harassed, she probably asked for it by posting online.
+
+EDOS LABEL:
+4.1 supporting mistreatment of individual women
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_4_1_001
+source: demo source placeholder
+source_quote: victim-blaming shifts responsibility away from abusive behaviour
+claim: Victim-blaming shifts responsibility away from abusive behaviour and can minimize the harm experienced by women.
+edos_alignment: Useful for countering content that blames individual women for abuse or minimizes mistreatment.
+retrieval_keywords: victim blaming, responsibility, harassment, mistreatment
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Posting online does not make someone responsible for being harassed. The responsibility belongs to the abusive behaviour, not to the woman targeted by it.",
+  "used_claim": "Victim-blaming shifts responsibility away from abusive behaviour and can minimize the harm experienced by women.",
+  "grounding_note": "The response directly counters victim-blaming by restoring responsibility to the perpetrator."
+}
+
+========================================================================================
+EX_11_EDOS_4_2 — 4.2 supporting systemic discrimination against women as a group
+========================================================================================
+
+HATE SPEECH
+Women should not be in leadership positions; society works better when men are in charge.
+
+CARD CLAIM
+Systemic discrimination against women is reinforced when unequal treatment is presented as natural, beneficial, or necessary.
+
+SOURCE QUOTE PLACEHOLDER
+unequal treatment can be reinforced when presented as natural or necessary
+
+EDOS ALIGNMENT
+Useful for countering claims that justify unequal treatment or exclusion of women as a group.
+
+INSTANTIATED USER PROMPT
+----------------------------------------------------------------------------------------
+HATE_SPEECH:
+Women should not be in leadership positions; society works better when men are in charge.
+
+EDOS LABEL:
+4.2 supporting systemic discrimination against women as a group
+
+OPTIONAL COUNTERSPEECH STRATEGY:
+not specified
+
+EVIDENCE CARD:
+card_id: DEMO_EDOS_4_2_001
+source: demo source placeholder
+source_quote: unequal treatment can be reinforced when presented as natural or necessary
+claim: Systemic discrimination against women is reinforced when unequal treatment is presented as natural, beneficial, or necessary.
+edos_alignment: Useful for countering claims that justify unequal treatment or exclusion of women as a group.
+retrieval_keywords: systemic discrimination, leadership, inequality, exclusion
+
+Task:
+Generate one counter-narrative grounded in this card.
+The response should be suitable as a counterspeech reply to the hate speech.
+
+GENERATED OUTPUT
+----------------------------------------------------------------------------------------
+{
+  "counter_narrative": "Presenting women’s exclusion from leadership as natural only reinforces unequal treatment. Leadership should depend on ability and accountability, not on discrimination against women as a group.",
+  "used_claim": "Systemic discrimination against women is reinforced when unequal treatment is presented as natural, beneficial, or necessary.",
+  "grounding_note": "The response challenges the systemic justification of unequal treatment."
+}

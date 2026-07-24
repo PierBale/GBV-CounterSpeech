@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EDOS-specific quote-first evidence card",
+  "type": "object",
+  "required": [
+    "card_id",
+    "status",
+    "source",
+    "source_quote",
+    "claim",
+    "primary_edos_label",
+    "secondary_edos_labels",
+    "edos_alignment",
+    "retrieval_keywords",
+    "validation"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "card_id": {"type": "string"},
+    "status": {"type": "string", "enum": ["candidate", "validated", "rejected", "revised"]},
+    "source": {
+      "type": "object",
+      "required": ["source_id", "title", "publisher", "year", "page", "section", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {"type": "string"},
+        "title": {"type": "string"},
+        "publisher": {"type": "string"},
+        "year": {"type": ["integer", "null"]},
+        "page": {"type": ["integer", "null"]},
+        "section": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]}
+      }
+    },
+    "source_quote": {"type": "string", "minLength": 10},
+    "claim": {"type": "string", "minLength": 10},
+    "primary_edos_label": {"type": "string"},
+    "secondary_edos_labels": {"type": "array", "items": {"type": "string"}},
+    "edos_alignment": {"type": "string", "minLength": 10},
+    "retrieval_keywords": {"type": "array", "items": {"type": "string"}},
+    "validation": {
+      "type": "object",
+      "required": ["status", "faithfulness", "edos_alignment", "usefulness", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"type": "string", "enum": ["not_validated", "accepted", "rejected", "needs_revision"]},
+        "faithfulness": {"type": ["number", "null"]},
+        "edos_alignment": {"type": ["number", "null"]},
+        "usefulness": {"type": ["number", "null"]},
+        "notes": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
