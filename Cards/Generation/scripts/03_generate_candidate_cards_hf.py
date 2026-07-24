@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -18,26 +19,14 @@ from card_routed_rag.hf_generation import (
 )
 from card_routed_rag.io_utils import read_jsonl, read_yaml, write_json
 from card_routed_rag.ollama_client import extract_json_object
-from card_routed_rag.text_utils import quote_in_passage
 
 
 SYSTEM_PROMPT = (
-    "You extract quote-grounded JSON evidence cards. "
+    "You develop evidence-grounded counter-arguments to gender-based hate speech. "
     "Return exactly one JSON object and no prose or Markdown."
 )
 
-CARD_FIELDS = {
-    "card_id",
-    "status",
-    "source",
-    "source_quote",
-    "claim",
-    "primary_edos_label",
-    "secondary_edos_labels",
-    "edos_alignment",
-    "retrieval_keywords",
-    "validation",
-}
+GENERATED_FIELDS = {"reasoning", "argument"}
 
 
 def read_json(path: str | Path) -> dict[str, Any]:
@@ -49,6 +38,26 @@ def append_jsonl(path: Path, item: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(item, ensure_ascii=False) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def checkpoint_model(
+    run_summary: dict[str, Any],
+    *,
+    spec: HuggingFaceModelSpec,
+    cards_path: Path,
+    attempts_path: Path,
+    model_stats: dict[str, int],
+    output_dir: Path,
+) -> None:
+    run_summary["models"][spec.alias] = {
+        "model_id": spec.repo_id,
+        "cards_file": str(cards_path),
+        "attempts_file": str(attempts_path),
+        **model_stats,
+    }
+    write_json(run_summary, output_dir / "generation_summary.json")
 
 
 def slug(value: str) -> str:
@@ -77,9 +86,6 @@ def make_prompt(
     passage: dict[str, Any],
     edos_label: str,
     definition: str,
-    schema: dict[str, Any],
-    min_quote: int,
-    max_quote: int,
 ) -> str:
     return f"""
 You are extracting one quote-grounded candidate evidence card for a
@@ -91,23 +97,27 @@ Target EDOS Task C label:
 EDOS label definition:
 {definition}
 
+Task:
+1. Write a concise reasoning that connects evidence in the source passage to
+   the harmful idea represented by the target EDOS label. Explain why that
+   evidence supports a response to this specific type of hate speech.
+2. Based on that reasoning, write one self-contained argument against the
+   indicated type of hate speech. The argument must challenge the harmful idea,
+   remain factual, and avoid insulting or dehumanizing anyone.
 Rules:
-- Extract exactly ONE candidate card from the source passage.
-- Do NOT generate counterspeech.
-- Do NOT invent information not present in the passage.
-- The source_quote MUST be copied verbatim from the source passage.
-- Prefer a source_quote between {min_quote} and {max_quote} characters.
-- The claim must be atomic and directly supported by source_quote.
-- The card must be specific to the target EDOS label.
-- edos_alignment must explain that label-specific relevance.
-- retrieval_keywords must contain concise strings useful for retrieval.
-- Use status="candidate".
-- Use validation.status="not_validated" and null for every other
-  validation value.
-- Return only the JSON object, without a code fence.
-
-Required JSON schema:
-{json.dumps(schema, ensure_ascii=False)}
+- Use only information present in the source passage.
+- Do not invent facts, statistics, laws, or citations.
+- Keep reasoning concise (2-4 sentences); do not include hidden deliberation,
+  alternative drafts, or meta-commentary.
+- The argument must be specific to the target EDOS label, not generic advice.
+- Return only this intermediate JSON object, in this field order:
+{{
+  "reasoning": "concise evidence-based reasoning",
+  "argument": "standalone counter-argument"
+}}
+- Do not quote or copy the source passage into a separate field.
+- Do not return card metadata, the source chunk, labels, validation fields, or
+  a code fence; those fields are filled automatically by the application.
 
 Source metadata:
 {json.dumps(passage.get("source", {}), ensure_ascii=False, indent=2)}
@@ -121,29 +131,47 @@ Source passage:
 
 
 def normalize_generated_card(
-    raw_card: dict[str, Any],
+    generated: dict[str, Any],
     *,
     model_alias: str,
     label: str,
+    definition: str,
     passage: dict[str, Any],
 ) -> dict[str, Any]:
-    card = {key: raw_card.get(key) for key in CARD_FIELDS}
-    card["card_id"] = make_card_id(model_alias, label, passage)
-    card["status"] = "candidate"
-    card["source"] = passage.get("source", {})
-    card["primary_edos_label"] = label
-    secondary = card.get("secondary_edos_labels")
-    card["secondary_edos_labels"] = secondary if isinstance(secondary, list) else []
-    keywords = card.get("retrieval_keywords")
-    card["retrieval_keywords"] = keywords if isinstance(keywords, list) else []
-    card["validation"] = {
-        "status": "not_validated",
-        "faithfulness": None,
-        "edos_alignment": None,
-        "usefulness": None,
-        "notes": None,
+    missing = GENERATED_FIELDS - generated.keys()
+    if missing:
+        raise ValueError(f"generated output is missing fields: {sorted(missing)}")
+    values = {key: generated.get(key) for key in GENERATED_FIELDS}
+    invalid = [key for key, value in values.items() if not isinstance(value, str) or not value.strip()]
+    if invalid:
+        raise ValueError(f"generated fields must be non-empty strings: {invalid}")
+
+    argument = values["argument"].strip()
+    label_terms = re.findall(r"[A-Za-z][A-Za-z'-]{2,}", label.lower())
+    argument_terms = re.findall(r"[A-Za-z][A-Za-z'-]{4,}", argument.lower())
+    keywords = list(dict.fromkeys([label, *label_terms, *argument_terms]))[:10]
+
+    return {
+        "card_id": make_card_id(model_alias, label, passage),
+        "status": "candidate",
+        "source": passage.get("source", {}),
+        "chunk": str(passage.get("text", "")),
+        "reasoning": values["reasoning"].strip(),
+        "argument": argument,
+        "primary_edos_label": label,
+        "secondary_edos_labels": [],
+        "edos_alignment": (
+            f"This argument addresses {label}. EDOS definition: {definition}"
+        ),
+        "retrieval_keywords": keywords,
+        "validation": {
+            "status": "not_validated",
+            "faithfulness": None,
+            "edos_alignment": None,
+            "usefulness": None,
+            "notes": None,
+        },
     }
-    return card
 
 
 def load_attempted_chunks(path: Path) -> set[str]:
@@ -249,9 +277,6 @@ def main() -> None:
         if args.temperature is not None
         else float(generation_cfg.get("temperature", 0.0))
     )
-    min_quote = int(generation_cfg.get("min_quote_chars", 20))
-    max_quote = int(generation_cfg.get("max_quote_chars", 280))
-    enforce_quote = bool(generation_cfg.get("enforce_quote_match", True))
     quantization = generation_cfg.get("quantization", {}) or {}
     max_memory = generation_cfg.get("max_memory", {}) or {}
     selected_labels = args.labels or list(retrieved_labels)
@@ -281,6 +306,14 @@ def main() -> None:
             )
         attempted = load_attempted_chunks(attempts_path) if args.resume else set()
         model_stats = {"accepted": 0, "rejected": 0, "errors": 0, "skipped": 0}
+        checkpoint_model(
+            run_summary,
+            spec=spec,
+            cards_path=cards_path,
+            attempts_path=attempts_path,
+            model_stats=model_stats,
+            output_dir=output_dir,
+        )
         print(f"[model] loading {spec.alias}: {spec.repo_id}")
 
         with HuggingFaceChatGenerator(
@@ -297,6 +330,14 @@ def main() -> None:
                     attempt_key = f"{label}\0{chunk_id}"
                     if attempt_key in attempted:
                         model_stats["skipped"] += 1
+                        checkpoint_model(
+                            run_summary,
+                            spec=spec,
+                            cards_path=cards_path,
+                            attempts_path=attempts_path,
+                            model_stats=model_stats,
+                            output_dir=output_dir,
+                        )
                         continue
                     raw_output: str | None = None
                     try:
@@ -304,9 +345,6 @@ def main() -> None:
                             passage,
                             label,
                             definition,
-                            schema,
-                            min_quote,
-                            max_quote,
                         )
                         raw_output = generator.generate(
                             prompt,
@@ -319,13 +357,9 @@ def main() -> None:
                             raw_card,
                             model_alias=spec.alias,
                             label=label,
+                            definition=definition,
                             passage=passage,
                         )
-                        if enforce_quote and not quote_in_passage(
-                            str(card.get("source_quote", "")),
-                            str(passage.get("text", "")),
-                        ):
-                            raise ValueError("source_quote not found in source passage")
                         errors = schema_errors(card, schema)
                         if errors:
                             raise ValueError(f"schema errors: {errors[:3]}")
@@ -373,14 +407,16 @@ def main() -> None:
                         )
                         model_stats["errors"] += 1
                         print(f"  [error] {chunk_id}: {exc}")
+                    finally:
+                        checkpoint_model(
+                            run_summary,
+                            spec=spec,
+                            cards_path=cards_path,
+                            attempts_path=attempts_path,
+                            model_stats=model_stats,
+                            output_dir=output_dir,
+                        )
 
-        run_summary["models"][spec.alias] = {
-            "model_id": spec.repo_id,
-            "cards_file": str(cards_path),
-            "attempts_file": str(attempts_path),
-            **model_stats,
-        }
-        write_json(run_summary, output_dir / "generation_summary.json")
         print(f"[unload] {spec.alias}")
 
     print(json.dumps(run_summary, ensure_ascii=False, indent=2))
@@ -388,4 +424,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

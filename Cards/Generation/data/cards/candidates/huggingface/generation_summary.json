@@ -1,0 +1,14 @@
+{
+  "input": "data/retrieval_outputs/edos_label_chunks.json",
+  "models": {
+    "qwen35_9b": {
+      "model_id": "Qwen/Qwen3.5-9B",
+      "cards_file": "data/cards/candidates/huggingface/qwen35_9b_candidate_cards.jsonl",
+      "attempts_file": "data/cards/candidates/huggingface/qwen35_9b_attempts.jsonl",
+      "accepted": 40,
+      "rejected": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}

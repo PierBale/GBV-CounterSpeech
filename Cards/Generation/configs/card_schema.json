@@ -6,8 +6,9 @@
     "card_id",
     "status",
     "source",
-    "source_quote",
-    "claim",
+    "chunk",
+    "reasoning",
+    "argument",
     "primary_edos_label",
     "secondary_edos_labels",
     "edos_alignment",
@@ -32,8 +33,9 @@
         "url": {"type": ["string", "null"]}
       }
     },
-    "source_quote": {"type": "string", "minLength": 10},
-    "claim": {"type": "string", "minLength": 10},
+    "chunk": {"type": "string", "minLength": 10},
+    "reasoning": {"type": "string", "minLength": 10},
+    "argument": {"type": "string", "minLength": 10},
     "primary_edos_label": {"type": "string"},
     "secondary_edos_labels": {"type": "array", "items": {"type": "string"}},
     "edos_alignment": {"type": "string", "minLength": 10},

@@ -37,8 +37,9 @@ Optional:
 Expected card schema:
     card_id
     source
-    source_quote
-    claim
+    chunk
+    reasoning
+    argument
     primary_edos_label
     secondary_edos_labels
     edos_alignment
@@ -120,11 +121,13 @@ def source_to_compact_string(source: Any) -> str:
 def validate_minimal_card(card: Dict[str, Any]) -> None:
     required = [
         "card_id",
-        "source_quote",
-        "claim",
         "primary_edos_label",
         "edos_alignment",
     ]
+    if not (card.get("chunk") or card.get("source_quote")):
+        required.append("chunk")
+    if not (card.get("argument") or card.get("claim")):
+        required.append("argument")
     missing = [field for field in required if not card.get(field)]
     if missing:
         raise ValueError(f"Card is missing required fields: {missing}")
@@ -175,8 +178,9 @@ OPTIONAL COUNTERSPEECH STRATEGY:
 EVIDENCE CARD:
 card_id: {card.get("card_id", "")}
 source: {source_string}
-source_quote: {card.get("source_quote", "")}
-claim: {card.get("claim", "")}
+chunk: {card.get("chunk") or card.get("source_quote", "")}
+reasoning: {card.get("reasoning", "")}
+argument: {card.get("argument") or card.get("claim", "")}
 edos_alignment: {card.get("edos_alignment", "")}
 retrieval_keywords: {", ".join(card.get("retrieval_keywords", []) or [])}
 
@@ -347,8 +351,9 @@ def main() -> None:
         "card": {
             "card_id": card.get("card_id"),
             "primary_edos_label": card.get("primary_edos_label"),
-            "claim": card.get("claim"),
-            "source_quote": card.get("source_quote"),
+            "reasoning": card.get("reasoning"),
+            "argument": card.get("argument") or card.get("claim"),
+            "chunk": card.get("chunk") or card.get("source_quote"),
             "source": card.get("source"),
         },
         "generation": parsed,

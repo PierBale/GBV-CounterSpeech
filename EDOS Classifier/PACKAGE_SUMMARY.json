@@ -1,12 +1,9 @@
 {
-  "included_data": {
-    "edos_labelled_aggregated.csv": 3846925,
-    "variations_augmentation_gpt4o_five_classes.csv": 480272,
-    "WOMAN-Multitarget-CONAN.json": 222420
-  },
+  "fix": "added missing src/edos_khan/common.py and src/edos_khan/labels.py",
   "compile_check": "ok",
-  "top_level_readmes": [
-    "README.md",
-    "DATA_NOTES.md"
+  "src_files": [
+    "src/edos_khan/__init__.py",
+    "src/edos_khan/common.py",
+    "src/edos_khan/labels.py"
   ]
 }

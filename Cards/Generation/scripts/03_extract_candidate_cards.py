@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from card_routed_rag.io_utils import read_jsonl, write_jsonl, read_yaml
 from card_routed_rag.card_validation import load_schema, schema_errors
 from card_routed_rag.ollama_client import ollama_json
-from card_routed_rag.text_utils import keyword_overlap_score, quote_in_passage, normalize_space
+from card_routed_rag.text_utils import keyword_overlap_score, normalize_space
 
 
 def select_passages_for_label(chunks: list[dict[str, Any]], terms: list[str], max_passages: int) -> list[dict[str, Any]]:
@@ -29,7 +29,7 @@ def select_passages_for_label(chunks: list[dict[str, Any]], terms: list[str], ma
     return [c for _, c in scored[:max_passages]]
 
 
-def make_prompt(passage: dict[str, Any], edos_label: str, definition: str, min_quote: int, max_quote: int) -> str:
+def make_prompt(passage: dict[str, Any], edos_label: str, definition: str) -> str:
     source = passage["source"]
     return f"""
 You are extracting quote-grounded candidate evidence cards for a card-routed RAG system for counterspeech against gender-based hate.
@@ -41,15 +41,15 @@ EDOS label definition:
 {definition}
 
 Task:
-Extract exactly ONE candidate card from the source passage, only if the passage contains a short ORIGINAL quote that directly supports a useful claim for this EDOS label.
+Extract exactly ONE candidate card containing reasoning and a useful argument against the hate-speech type represented by this EDOS label.
 
 Rules:
 - Do NOT generate counterspeech.
 - Do NOT make a generic card that could fit every EDOS label.
-- The source_quote MUST be copied verbatim from the passage.
-- The source_quote should be between {min_quote} and {max_quote} characters when possible.
-- The claim must be atomic: one reusable idea only.
-- The claim must be directly supported by the source_quote.
+- First provide concise evidence-based reasoning specific to the EDOS label.
+- Then provide one atomic, reusable argument against that hate-speech type.
+- The reasoning and argument must be directly supported by the source passage.
+- Do not generate the chunk field; the application copies it automatically.
 - The edos_alignment must explain why the card is useful for this specific EDOS label.
 - secondary_edos_labels can be empty.
 - Use status="candidate" and validation.status="not_validated" with null scores.
@@ -64,15 +64,15 @@ Source passage:
 
 def make_mock_card(passage: dict[str, Any], edos_label: str, idx: int, definition: str) -> dict[str, Any]:
     text = normalize_space(passage.get("text", ""))
-    quote = " ".join(text.split()[:28])
     source = passage["source"]
     safe_label = edos_label.replace(" ", "_").replace("/", "_").replace("&", "and").replace(".", "_")
     return {
         "card_id": f"MOCK_{safe_label}_{idx:03d}",
         "status": "candidate",
         "source": source,
-        "source_quote": quote,
-        "claim": f"This source passage provides a quote-grounded candidate claim relevant to {edos_label}.",
+        "chunk": text,
+        "reasoning": f"This source passage provides evidence relevant to {edos_label}: {definition}",
+        "argument": f"The evidence in this source challenges the harmful idea represented by {edos_label}.",
         "primary_edos_label": edos_label,
         "secondary_edos_labels": [],
         "edos_alignment": f"This mock card is aligned to {edos_label}: {definition}",
@@ -105,7 +105,6 @@ def main() -> None:
     ap.add_argument("--model", default=None)
     ap.add_argument("--cards-per-label", type=int, default=None)
     ap.add_argument("--mock", action="store_true")
-    ap.add_argument("--no-enforce-quote-match", action="store_true")
     args = ap.parse_args()
 
     chunks = read_jsonl(args.chunks)
@@ -119,9 +118,6 @@ def main() -> None:
     max_passages = int(cfg.get("max_candidate_passages_per_label", 40))
     model = args.model or cfg.get("ollama_model", "llama3.1:8b")
     temperature = float(cfg.get("temperature", 0))
-    enforce_quote = bool(cfg.get("enforce_quote_match", True)) and not args.no_enforce_quote_match
-    min_quote = int(cfg.get("min_quote_chars", 20))
-    max_quote = int(cfg.get("max_quote_chars", 280))
 
     all_cards: list[dict[str, Any]] = []
     for edos_label, profile in profiles.items():
@@ -135,17 +131,16 @@ def main() -> None:
                 if args.mock:
                     card = make_mock_card(passage, edos_label, len(label_cards) + 1, profile.get("definition", ""))
                 else:
-                    prompt = make_prompt(passage, edos_label, profile.get("definition", ""), min_quote, max_quote)
+                    prompt = make_prompt(passage, edos_label, profile.get("definition", ""))
                     card = ollama_json(prompt, schema=schema, model=model, temperature=temperature)
                     # Force source and target label from the pipeline, not from model hallucination.
                     card["source"] = passage["source"]
+                    card["chunk"] = str(passage.get("text", ""))
+                    card.pop("source_quote", None)
                     card["primary_edos_label"] = edos_label
                     card.setdefault("secondary_edos_labels", [])
                     card = ensure_card_id(card, edos_label, len(label_cards) + 1)
 
-                if enforce_quote and not quote_in_passage(card.get("source_quote", ""), passage.get("text", "")):
-                    print(f"  [skip] quote not found in passage for {card.get('card_id')}")
-                    continue
                 errors = schema_errors(card, schema)
                 if errors:
                     print(f"  [skip] schema errors for {card.get('card_id')}: {errors[:2]}")

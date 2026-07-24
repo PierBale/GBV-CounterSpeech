@@ -58,9 +58,10 @@ def keyword_overlap_score(text: str, terms: Iterable[str]) -> float:
 def card_text(card: dict) -> str:
     source = card.get("source", {}) or {}
     parts = [
-        card.get("claim", ""),
+        card.get("argument") or card.get("claim", ""),
+        card.get("reasoning", ""),
         card.get("edos_alignment", ""),
-        card.get("source_quote", ""),
+        card.get("chunk") or card.get("source_quote", ""),
         card.get("primary_edos_label", ""),
         " ".join(card.get("secondary_edos_labels", []) or []),
         " ".join(card.get("retrieval_keywords", []) or []),

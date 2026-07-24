@@ -37,8 +37,9 @@ import streamlit as st
 
 FIELD_ORDER = [
     "source",
-    "source_quote",
-    "claim",
+    "chunk",
+    "reasoning",
+    "argument",
     "primary_edos_label",
     "secondary_edos_labels",
     "edos_alignment",
@@ -145,12 +146,15 @@ def save_annotation(path: Path, annotation: Dict[str, Any]) -> None:
         "field_source_status",
         "field_source_comment",
         "field_source_revised",
-        "field_source_quote_status",
-        "field_source_quote_comment",
-        "field_source_quote_revised",
-        "field_claim_status",
-        "field_claim_comment",
-        "field_claim_revised",
+        "field_chunk_status",
+        "field_chunk_comment",
+        "field_chunk_revised",
+        "field_reasoning_status",
+        "field_reasoning_comment",
+        "field_reasoning_revised",
+        "field_argument_status",
+        "field_argument_comment",
+        "field_argument_revised",
         "field_primary_edos_label_status",
         "field_primary_edos_label_comment",
         "field_primary_edos_label_revised",
@@ -346,11 +350,17 @@ def render_card(card: Dict[str, Any]) -> None:
     for lab in secondary:
         st.markdown(f'<span class="label-pill">secondary: {lab}</span>', unsafe_allow_html=True)
 
-    st.markdown("#### Claim")
-    st.markdown(card.get("claim", ""))
+    st.markdown("#### Reasoning")
+    st.markdown(card.get("reasoning", ""))
 
-    st.markdown("#### Original source quote")
-    st.markdown(f'<div class="quote-box">“{card.get("source_quote", "")}”</div>', unsafe_allow_html=True)
+    st.markdown("#### Argument")
+    st.markdown(card.get("argument") or card.get("claim", ""))
+
+    st.markdown("#### Source chunk")
+    st.markdown(
+        f'<div class="quote-box">{card.get("chunk") or card.get("source_quote", "")}</div>',
+        unsafe_allow_html=True,
+    )
 
     st.markdown("#### EDOS alignment")
     st.markdown(card.get("edos_alignment", ""))

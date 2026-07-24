@@ -1,7 +1,9 @@
 models:
   qwen35_9b:
     repo_id: "Qwen/Qwen3.5-9B"
-    backend: "multimodal_auto"
+    # This pipeline sends text only. Avoid AutoProcessor and its torchvision
+    # dependency by loading Qwen through the causal-LM text interface.
+    backend: "causal_lm"
     enabled: true
     disable_thinking: true
     load_in_4bit: true
@@ -26,16 +28,7 @@ generation:
   max_new_tokens: 900
   temperature: 0.0
   cards_per_label: 10
-  min_quote_chars: 20
-  max_quote_chars: 280
-  enforce_quote_match: true
   quantization:
     bnb_4bit_quant_type: "nf4"
     bnb_4bit_use_double_quant: true
     bnb_4bit_compute_dtype: "bfloat16"
-  # Conservative limits for the detected RTX 4050 Laptop GPU (6 GiB).
-  # Increase the CPU value if the machine has more available RAM.
-  max_memory:
-    0: "5GiB"
-    cpu: "32GiB"
-

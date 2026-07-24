@@ -23,7 +23,13 @@ def main():
     set_seed(args.seed); dev=device(); data=Path(args.data_dir); out=Path(args.output_dir); out.mkdir(parents=True,exist_ok=True)
     tr=pd.read_csv(data/'train.csv'); ev=pd.read_csv(data/f'{args.selection_split}.csv'); te=pd.read_csv(data/'test.csv'); _,i2l=load_label_map(data/'label_map.json'); labels=[i2l[i] for i in range(len(i2l))]
     tok=AutoTokenizer.from_pretrained(args.model_name); src=args.pretrained_checkpoint or args.model_name
-    model=AutoModelForSequenceClassification.from_pretrained(src,num_labels=len(labels),id2label={i:l for i,l in enumerate(labels)},label2id={l:i for i,l in enumerate(labels)},ignore_mismatched_sizes=True).to(dev)
+    model = AutoModelForSequenceClassification.from_pretrained(
+        src,
+        num_labels=len(labels),
+        id2label={i: label for i, label in enumerate(labels)},
+        label2id={label: i for i, label in enumerate(labels)},
+        ignore_mismatched_sizes=True,
+    ).float().to(dev)
     tr_loader=DataLoader(TextDS(tr.text,tr.label_id,tok,args.max_length),batch_size=args.batch_size,shuffle=True); ev_loader=DataLoader(TextDS(ev.text,ev.label_id,tok,args.max_length),batch_size=args.batch_size); te_loader=DataLoader(TextDS(te.text,te.label_id,tok,args.max_length),batch_size=args.batch_size)
     loss_fn=nn.CrossEntropyLoss(weight=class_weights(tr.label_id.tolist(),len(labels),dev)); opt=AdamW(model.parameters(),lr=args.lr,betas=(.9,.98),eps=1e-6,weight_decay=args.weight_decay); sched=get_linear_schedule_with_warmup(opt,0,args.epochs*len(tr_loader))
     best=-1; hist=[]
@@ -34,5 +40,8 @@ def main():
         y,p,_=eval_model(model,ev_loader,dev); m=metrics(y,p,labels); hist.append({'epoch':ep,'selection_macro_f1':m['macro_f1'],'loss':total}); print(ep,m['macro_f1'])
         if m['macro_f1']>best:
             best=m['macro_f1']; model.save_pretrained(out/'best_model'); tok.save_pretrained(out/'best_model')
-    best_model=AutoModelForSequenceClassification.from_pretrained(out/'best_model').to(dev); y,p,prob=eval_model(best_model,te_loader,dev); m=metrics(y,p,labels); (out/'test_metrics.json').write_text(json.dumps(m,indent=2)); save_preds(out/'test_predictions.csv',te.text.tolist(),y,p,i2l,prob); (out/'training_history.json').write_text(json.dumps(hist,indent=2)); print(json.dumps({'test_macro_f1':m['macro_f1'],'best_selection_f1':best},indent=2))
+    best_model = AutoModelForSequenceClassification.from_pretrained(
+        out / 'best_model'
+    ).float().to(dev)
+    y,p,prob=eval_model(best_model,te_loader,dev); m=metrics(y,p,labels); (out/'test_metrics.json').write_text(json.dumps(m,indent=2)); save_preds(out/'test_predictions.csv',te.text.tolist(),y,p,i2l,prob); (out/'training_history.json').write_text(json.dumps(hist,indent=2)); print(json.dumps({'test_macro_f1':m['macro_f1'],'best_selection_f1':best},indent=2))
 if __name__=='__main__': main()

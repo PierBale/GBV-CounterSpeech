@@ -228,3 +228,52 @@ task_c_used_fallback
 - `MODE=ensemble` is the heavier paper-style setup.
 - The Mistral step requires a suitable CUDA GPU.
 - Exact paper scores may still differ if the original authors used local pretraining checkpoints that are not included in their public repository.
+
+
+---
+
+## SLURM / cluster note
+
+The runner scripts set safe defaults internally, so they work better with `set -u`.
+
+Direct run from repository root:
+
+```bash
+MODE=deberta bash scripts/run_all.sh
+```
+
+or:
+
+```bash
+MODE=ensemble bash scripts/run_all.sh
+```
+
+If your cluster script uses `set -u`, you can also explicitly export the paths:
+
+```bash
+export EDOS_CSV=data/edos/raw/edos_labelled_aggregated.csv
+export AUG_CSV=data/edos/raw/variations_augmentation_gpt4o_five_classes.csv
+export CONAN_JSON=data/conan/WOMAN-Multitarget-CONAN.json
+
+MODE=ensemble bash scripts/run_all.sh
+```
+
+A SLURM template is available in:
+
+```text
+scripts/slurm_example_full_pipeline.sh
+```
+
+
+---
+
+## Fix notes
+
+This version includes the missing internal package files:
+
+```text
+src/edos_khan/common.py
+src/edos_khan/labels.py
+```
+
+These are required by the training scripts.

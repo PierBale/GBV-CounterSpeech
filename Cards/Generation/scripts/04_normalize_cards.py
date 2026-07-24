@@ -18,8 +18,11 @@ from card_routed_rag.text_utils import normalize_space
 def normalize_card(card: dict) -> dict:
     card = dict(card)
     card["status"] = card.get("status") or "candidate"
-    card["source_quote"] = normalize_space(card.get("source_quote", ""))
-    card["claim"] = normalize_space(card.get("claim", ""))
+    card["chunk"] = normalize_space(card.get("chunk") or card.get("source_quote", ""))
+    card.pop("source_quote", None)
+    card["reasoning"] = normalize_space(card.get("reasoning", ""))
+    card["argument"] = normalize_space(card.get("argument") or card.get("claim", ""))
+    card.pop("claim", None)
     card["edos_alignment"] = normalize_space(card.get("edos_alignment", ""))
     card["secondary_edos_labels"] = card.get("secondary_edos_labels") or []
     card["retrieval_keywords"] = sorted(set(k.strip().lower() for k in (card.get("retrieval_keywords") or []) if str(k).strip()))
@@ -58,7 +61,7 @@ def main() -> None:
     out = []
     seen = set()
     for card in cards:
-        key = (card.get("primary_edos_label"), card.get("source", {}).get("source_id"), card.get("source_quote", "").lower())
+        key = (card.get("primary_edos_label"), card.get("source", {}).get("source_id"), card.get("chunk", "").lower())
         if args.dedupe and key in seen:
             continue
         seen.add(key)

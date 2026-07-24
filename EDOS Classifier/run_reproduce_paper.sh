@@ -1,7 +1,45 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#SBATCH -o Snakefile-ces-ukr2.out
+#SBATCH -e Snakefile-ces-ukr2.out
+#SBATCH --gres=gpu:1
+#SBATCH -p gracehopper
+
+
+# mettere SBATCH -p epito se si vuole usare epito oppure gracehopper se si vuole usare gracehopper
+
+# mettere sbatch --reservation mike quando prenoto
+
+source ~/mambaforge/etc/profile.d/conda.sh
+
+# Attiva l'ambiente
+# conda activate llm
+conda activate llm_new_env
+
+python -m pip install peft
+
+# Esporta il PYTHONPATH di PyTorch
+export HPCX_HOME=/opt/hpcx
+export PYTHONPATH=/opt/pytorch/lib/python3.12/site-packages
+
 set -euo pipefail
 
-source config/defaults.env
+# Load defaults if available, then set safe fallbacks.
+if [[ -f config/defaults.env ]]; then
+  set -a
+  source config/defaults.env
+  set +a
+fi
+
+EDOS_CSV="${EDOS_CSV:-data/edos/raw/edos_labelled_aggregated.csv}"
+AUG_CSV="${AUG_CSV:-data/edos/raw/variations_augmentation_gpt4o_five_classes.csv}"
+CONAN_JSON="${CONAN_JSON:-data/conan/WOMAN-Multitarget-CONAN.json}"
+
+DEBERTA_MODEL="${DEBERTA_MODEL:-microsoft/deberta-v3-large}"
+ROBERTA_MODEL="${ROBERTA_MODEL:-roberta-large}"
+MISTRAL_MODEL="${MISTRAL_MODEL:-mistralai/Mistral-7B-v0.1}"
+
+MAX_LENGTH="${MAX_LENGTH:-150}"
+SELECTION_SPLIT="${SELECTION_SPLIT:-test}"
 
 TASKS="${TASKS:-b c}"
 MODE="${MODE:-full}"  # full | deberta

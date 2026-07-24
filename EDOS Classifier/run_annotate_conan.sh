@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source config/defaults.env
+# Load defaults if available, then set safe fallbacks.
+if [[ -f config/defaults.env ]]; then
+  set -a
+  source config/defaults.env
+  set +a
+fi
+
+EDOS_CSV="${EDOS_CSV:-data/edos/raw/edos_labelled_aggregated.csv}"
+AUG_CSV="${AUG_CSV:-data/edos/raw/variations_augmentation_gpt4o_five_classes.csv}"
+CONAN_JSON="${CONAN_JSON:-data/conan/WOMAN-Multitarget-CONAN.json}"
+
+DEBERTA_MODEL="${DEBERTA_MODEL:-microsoft/deberta-v3-large}"
+ROBERTA_MODEL="${ROBERTA_MODEL:-roberta-large}"
+MISTRAL_MODEL="${MISTRAL_MODEL:-mistralai/Mistral-7B-v0.1}"
+
+MAX_LENGTH="${MAX_LENGTH:-150}"
+SELECTION_SPLIT="${SELECTION_SPLIT:-test}"
 
 MODE="${MODE:-deberta}"  # deberta | ensemble
 INPUT_JSON="${INPUT_JSON:-$CONAN_JSON}"
