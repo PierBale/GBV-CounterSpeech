@@ -1,0 +1,12 @@
+{
+  "included_data": {
+    "edos_labelled_aggregated.csv": 3846925,
+    "variations_augmentation_gpt4o_five_classes.csv": 480272,
+    "WOMAN-Multitarget-CONAN.json": 222420
+  },
+  "compile_check": "ok",
+  "top_level_readmes": [
+    "README.md",
+    "DATA_NOTES.md"
+  ]
+}

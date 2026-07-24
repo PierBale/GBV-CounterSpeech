@@ -1,0 +1,13 @@
+torch
+transformers>=4.40.0
+accelerate
+datasets
+scikit-learn
+pandas
+numpy
+pyyaml
+tqdm
+sentencepiece
+protobuf
+peft
+bitsandbytes
