@@ -9,7 +9,10 @@ from huggingface_hub import hf_hub_download
 
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
-from edos_khan.official_task_c import OFFICIAL_TASK_C_MODELS
+from edos_khan.official_task_c import (
+    DEFAULT_CHECKPOINT_ROOT,
+    OFFICIAL_TASK_C_MODELS,
+)
 
 PINNED_REVISIONS = {
     "deberta9": "e278903e8cc36bc03235df6f16a5293ce9f01e4e",
@@ -26,7 +29,7 @@ def parse_args():
     )
     parser.add_argument(
         "--output-dir",
-        default="models/official_task_c",
+        default=str(DEFAULT_CHECKPOINT_ROOT),
         help="Destination root. Each Hugging Face repository gets one subdirectory.",
     )
     parser.add_argument(
@@ -56,6 +59,10 @@ def main():
             revision=args.revision or PINNED_REVISIONS[model_key],
             local_dir=destination,
         )
+        if not Path(downloaded).is_file():
+            raise FileNotFoundError(
+                f"Hugging Face reported a download, but no file exists at {downloaded}"
+            )
         print(f"{model_key}: {downloaded}")
 
 

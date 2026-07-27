@@ -19,6 +19,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
 from edos_khan.labels import TASK_C_LABELS
 from edos_khan.official_task_c import (
+    DEFAULT_CHECKPOINT_ROOT,
     OFFICIAL_TASK_C_MODELS,
     load_official_model,
     predict_probabilities,
@@ -44,7 +45,7 @@ def parse_args():
     parser.add_argument("--input", required=True)
     parser.add_argument(
         "--checkpoint-root",
-        default="models/official_task_c",
+        default=str(DEFAULT_CHECKPOINT_ROOT),
     )
     parser.add_argument("--output-csv", required=True)
     parser.add_argument("--metrics-json")

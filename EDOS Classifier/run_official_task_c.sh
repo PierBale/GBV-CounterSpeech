@@ -1,7 +1,29 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#SBATCH -o Snakefile-ces-ukr2.out
+#SBATCH -e Snakefile-ces-ukr2.out
+#SBATCH --gres=gpu:1
+#SBATCH -p gracehopper
+
+
+# mettere SBATCH -p epito se si vuole usare epito oppure gracehopper se si vuole usare gracehopper
+
+# mettere sbatch --reservation mike quando prenoto
+
+source ~/mambaforge/etc/profile.d/conda.sh
+
+# Attiva l'ambiente
+# conda activate llm
+conda activate llm_new_env
+
+# Esporta il PYTHONPATH di PyTorch
+export HPCX_HOME=/opt/hpcx
+export PYTHONPATH=/opt/pytorch/lib/python3.12/site-packages
+
 set -euo pipefail
 
-# Run this file from the EDOS Classifier directory.
+# Slurm keeps the submission directory as cwd; always enter this script directory.
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 EDOS_CSV="${EDOS_CSV:-data/edos/raw/edos_labelled_aggregated.csv}"
 CONAN_JSON="${CONAN_JSON:-data/conan/WOMAN-Multitarget-CONAN.json}"

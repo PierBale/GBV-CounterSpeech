@@ -2,7 +2,7 @@
 #SBATCH -o Snakefile-ces-ukr2.out
 #SBATCH -e Snakefile-ces-ukr2.out
 #SBATCH --gres=gpu:1
-#SBATCH -p gracehopper
+#SBATCH -p epito
 
 
 # mettere SBATCH -p epito se si vuole usare epito oppure gracehopper se si vuole usare gracehopper
@@ -15,7 +15,6 @@ source ~/mambaforge/etc/profile.d/conda.sh
 # conda activate llm
 conda activate llm_new_env
 
-python -m pip install peft
 
 # Esporta il PYTHONPATH di PyTorch
 export HPCX_HOME=/opt/hpcx

@@ -67,6 +67,8 @@ DEBERTA_BASE = "microsoft/deberta-v3-large"
 ROBERTA_BASE = "FacebookAI/roberta-large"
 MISTRAL_BASE = "mistralai/Mistral-7B-v0.1"
 NUM_TASK_C_LABELS = len(TASK_C_LABELS)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_CHECKPOINT_ROOT = PROJECT_ROOT / "models" / "official_task_c"
 
 
 class SingleTokenizerDataset(Dataset):
@@ -226,6 +228,7 @@ def read_conan_hate_speech(path: Path) -> pd.DataFrame:
 
 def resolve_checkpoint(checkpoint_root: Path, model_key: str) -> Path:
     spec = OFFICIAL_TASK_C_MODELS[model_key]
+    checkpoint_root = checkpoint_root.expanduser().resolve()
     candidates = [
         checkpoint_root / spec.repo_id.split("/")[-1] / spec.filename,
         checkpoint_root / spec.filename,
@@ -235,7 +238,10 @@ def resolve_checkpoint(checkpoint_root: Path, model_key: str) -> Path:
             return candidate
     rendered = "\n".join(f"  - {candidate}" for candidate in candidates)
     raise FileNotFoundError(
-        f"Checkpoint for {model_key!r} not found. Tried:\n{rendered}"
+        f"Checkpoint for {model_key!r} not found. Tried:\n{rendered}\n"
+        "Download it with:\n"
+        "  python scripts/11_download_official_task_c.py "
+        f'--output-dir "{checkpoint_root}" --models {model_key}'
     )
 
 
