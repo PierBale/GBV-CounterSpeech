@@ -150,6 +150,13 @@ Full setup:
 MODE=full bash scripts/run_reproduce_paper.sh
 ```
 
+Models whose checkpoint and final evaluation artifacts are already present are
+automatically skipped. To train every model again, even if it is complete:
+
+```bash
+FORCE_RETRAIN=1 MODE=full bash scripts/run_reproduce_paper.sh
+```
+
 Only Task C:
 
 ```bash

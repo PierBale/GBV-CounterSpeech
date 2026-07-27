@@ -43,6 +43,44 @@ SELECTION_SPLIT="${SELECTION_SPLIT:-test}"
 
 TASKS="${TASKS:-b c}"
 MODE="${MODE:-full}"  # full | deberta
+FORCE_RETRAIN="${FORCE_RETRAIN:-0}"
+
+# A model is considered trained only when both its checkpoint and all the
+# evaluation artifacts written at the end of training are present. This avoids
+# treating an interrupted run (which may have already created the directory or
+# a checkpoint) as complete.
+training_is_complete() {
+  local model_type="$1"
+  local model_dir="$2"
+
+  if [[ "$FORCE_RETRAIN" == "1" ]]; then
+    return 1
+  fi
+
+  [[ -s "$model_dir/test_metrics.json" ]] || return 1
+  [[ -s "$model_dir/test_predictions.csv" ]] || return 1
+  [[ -s "$model_dir/training_history.json" ]] || return 1
+
+  case "$model_type" in
+    deberta)
+      [[ -s "$model_dir/best_model/config.json" ]] || return 1
+      [[ -s "$model_dir/best_model/model.safetensors" || \
+         -s "$model_dir/best_model/pytorch_model.bin" ]] || return 1
+      ;;
+    dtfn)
+      [[ -s "$model_dir/best_dtfn.pt" ]] || return 1
+      ;;
+    mistral)
+      [[ -s "$model_dir/best_adapter/adapter_config.json" ]] || return 1
+      [[ -s "$model_dir/best_adapter/adapter_model.safetensors" || \
+         -s "$model_dir/best_adapter/adapter_model.bin" ]] || return 1
+      ;;
+    *)
+      echo "Unknown model type: $model_type" >&2
+      return 1
+      ;;
+  esac
+}
 
 if [[ "$MODE" == "deberta" ]]; then
   RUN_DEBERTA=1
@@ -60,6 +98,7 @@ echo "=== EDOS Khan-style reproduction ==="
 echo "MODE=$MODE"
 echo "TASKS=$TASKS"
 echo "SELECTION_SPLIT=$SELECTION_SPLIT"
+echo "FORCE_RETRAIN=$FORCE_RETRAIN"
 
 python scripts/01_check_data.py
 
@@ -88,49 +127,64 @@ for TASK in $TASKS; do
     --output-dir "$DATA_DIR"
 
   if [[ "$RUN_DEBERTA" == "1" ]]; then
-    echo ""
-    echo "=== Task ${TASK^^}: train DeBERTa ==="
-    python scripts/03_train_deberta.py \
-      --task "$TASK" \
-      --data-dir "$DATA_DIR" \
-      --output-dir "$MODEL_DIR/deberta" \
-      --model-name "$DEBERTA_MODEL" \
-      --epochs 30 \
-      --lr 6e-6 \
-      --batch-size 10 \
-      --max-length "$MAX_LENGTH" \
-      --selection-split "$SELECTION_SPLIT"
+    if training_is_complete deberta "$MODEL_DIR/deberta"; then
+      echo ""
+      echo "=== Task ${TASK^^}: DeBERTa already trained, skipping ==="
+    else
+      echo ""
+      echo "=== Task ${TASK^^}: train DeBERTa ==="
+      python scripts/03_train_deberta.py \
+        --task "$TASK" \
+        --data-dir "$DATA_DIR" \
+        --output-dir "$MODEL_DIR/deberta" \
+        --model-name "$DEBERTA_MODEL" \
+        --epochs 30 \
+        --lr 6e-6 \
+        --batch-size 10 \
+        --max-length "$MAX_LENGTH" \
+        --selection-split "$SELECTION_SPLIT"
+    fi
   fi
 
   if [[ "$RUN_DTFN" == "1" ]]; then
-    echo ""
-    echo "=== Task ${TASK^^}: train DTFN ==="
-    python scripts/04_train_dtfn.py \
-      --task "$TASK" \
-      --data-dir "$DATA_DIR" \
-      --output-dir "$MODEL_DIR/dtfn" \
-      --deberta-model "$DEBERTA_MODEL" \
-      --roberta-model "$ROBERTA_MODEL" \
-      --epochs 30 \
-      --lr 6e-6 \
-      --batch-size 4 \
-      --max-length "$MAX_LENGTH" \
-      --selection-split "$SELECTION_SPLIT"
+    if training_is_complete dtfn "$MODEL_DIR/dtfn"; then
+      echo ""
+      echo "=== Task ${TASK^^}: DTFN already trained, skipping ==="
+    else
+      echo ""
+      echo "=== Task ${TASK^^}: train DTFN ==="
+      python scripts/04_train_dtfn.py \
+        --task "$TASK" \
+        --data-dir "$DATA_DIR" \
+        --output-dir "$MODEL_DIR/dtfn" \
+        --deberta-model "$DEBERTA_MODEL" \
+        --roberta-model "$ROBERTA_MODEL" \
+        --epochs 30 \
+        --lr 6e-6 \
+        --batch-size 4 \
+        --max-length "$MAX_LENGTH" \
+        --selection-split "$SELECTION_SPLIT"
+    fi
   fi
 
   if [[ "$RUN_MISTRAL" == "1" ]]; then
-    echo ""
-    echo "=== Task ${TASK^^}: train Mistral-7B LoRA ==="
-    python scripts/05_train_mistral.py \
-      --task "$TASK" \
-      --data-dir "$DATA_DIR" \
-      --output-dir "$MODEL_DIR/mistral" \
-      --model-name "$MISTRAL_MODEL" \
-      --epochs 10 \
-      --lr 1e-4 \
-      --batch-size 4 \
-      --max-length "$MAX_LENGTH" \
-      --selection-split "$SELECTION_SPLIT"
+    if training_is_complete mistral "$MODEL_DIR/mistral"; then
+      echo ""
+      echo "=== Task ${TASK^^}: Mistral-7B LoRA already trained, skipping ==="
+    else
+      echo ""
+      echo "=== Task ${TASK^^}: train Mistral-7B LoRA ==="
+      python scripts/05_train_mistral.py \
+        --task "$TASK" \
+        --data-dir "$DATA_DIR" \
+        --output-dir "$MODEL_DIR/mistral" \
+        --model-name "$MISTRAL_MODEL" \
+        --epochs 10 \
+        --lr 1e-4 \
+        --batch-size 4 \
+        --max-length "$MAX_LENGTH" \
+        --selection-split "$SELECTION_SPLIT"
+    fi
   fi
 
   if [[ "$RUN_ENSEMBLE" == "1" ]]; then
