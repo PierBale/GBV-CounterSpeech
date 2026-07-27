@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Mapping, Sequence, Tuple
@@ -235,9 +236,31 @@ def resolve_checkpoint(checkpoint_root: Path, model_key: str) -> Path:
     for candidate in candidates:
         if candidate.is_file():
             return candidate
+
+    search_roots = [checkpoint_root]
+    hf_home = Path(
+        os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface")
+    ).expanduser()
+    cache_repo = "models--" + spec.repo_id.replace("/", "--")
+    search_roots.append(hf_home / "hub" / cache_repo / "snapshots")
+
+    for search_root in search_roots:
+        if not search_root.is_dir():
+            continue
+        matches = sorted(search_root.rglob(spec.filename))
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1:
+            rendered_matches = "\n".join(f"  - {path}" for path in matches)
+            raise FileNotFoundError(
+                f"Multiple checkpoints found for {model_key!r}:\n"
+                f"{rendered_matches}\nPass an unambiguous --checkpoint-root."
+            )
+
     rendered = "\n".join(f"  - {candidate}" for candidate in candidates)
     raise FileNotFoundError(
         f"Checkpoint for {model_key!r} not found. Tried:\n{rendered}\n"
+        f"Also searched recursively in: {search_roots}\n"
         "Download it with:\n"
         "  python scripts/11_download_official_task_c.py "
         f'--output-dir "{checkpoint_root}" --models {model_key}'

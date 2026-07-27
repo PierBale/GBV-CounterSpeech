@@ -45,12 +45,44 @@ DEVICE="${DEVICE:-cuda:0}"
 MAX_LENGTH="${MAX_LENGTH:-150}"
 BASE_BATCH_SIZE="${BASE_BATCH_SIZE:-8}"
 MISTRAL_BATCH_SIZE="${MISTRAL_BATCH_SIZE:-2}"
-DOWNLOAD_MODELS="${DOWNLOAD_MODELS:-0}"
+DOWNLOAD_MODELS="${DOWNLOAD_MODELS:-auto}"
 ALLOW_UNSAFE_CHECKPOINT_LOAD="${ALLOW_UNSAFE_CHECKPOINT_LOAD:-0}"
 
-if [[ "$DOWNLOAD_MODELS" == "1" ]]; then
-  "$PYTHON_BIN" scripts/11_download_official_task_c.py \
-    --output-dir "$CHECKPOINT_ROOT"
+model_keys=(deberta9 dtfn3 dtfn7 dtfn8 mistral)
+model_repos=(
+  edos-deberta-9-c-model
+  edos-roberta-deberta-3-c-model
+  edos-roberta-deberta-7-c-model
+  edos-roberta-deberta-8-c-model
+  edos-mistral-c-model
+)
+model_files=(
+  edos-deberta-9-c-model.pth
+  edos-roberta-deberta-3-c-model.pth
+  edos-roberta-deberta-7-c-model.pth
+  edos-roberta-deberta-8-c-model.pth
+  edos-mistral-c-model.pth
+)
+missing_models=()
+for index in "${!model_keys[@]}"; do
+  nested="$CHECKPOINT_ROOT/${model_repos[$index]}/${model_files[$index]}"
+  flat="$CHECKPOINT_ROOT/${model_files[$index]}"
+  if [[ ! -f "$nested" && ! -f "$flat" ]]; then
+    missing_models+=("${model_keys[$index]}")
+  fi
+done
+
+if (( ${#missing_models[@]} > 0 )); then
+  if [[ "$DOWNLOAD_MODELS" == "auto" || "$DOWNLOAD_MODELS" == "1" ]]; then
+    echo "Downloading missing checkpoints: ${missing_models[*]}"
+    "$PYTHON_BIN" scripts/11_download_official_task_c.py \
+      --output-dir "$CHECKPOINT_ROOT" \
+      --models "${missing_models[@]}"
+  else
+    echo "Missing checkpoints: ${missing_models[*]}" >&2
+    echo "Set DOWNLOAD_MODELS=auto or DOWNLOAD_MODELS=1." >&2
+    exit 2
+  fi
 fi
 
 checkpoint_load_args=()
