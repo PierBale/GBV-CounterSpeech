@@ -22,5 +22,5 @@ export PYTHONPATH=/opt/pytorch/lib/python3.12/site-packages
 # Verifica PyTorch e CUDA
 python -c "import torch; print('Torch Version:', torch.__version__); print('CUDA available:', torch.cuda.is_available()); print('Compiled with CUDA:', torch.version.cuda)"
 
-# Lancia il tuo script
-python scripts/03_generate_candidate_cards_hf.py
+# Riprende gli output incrementali esistenti e genera solo quelli mancanti.
+python scripts/03_generate_candidate_cards_hf.py --resume

@@ -9,7 +9,7 @@ models:
     load_in_4bit: true
 
   ministral3_8b:
-    # Use the BF16 repository as the source for bitsandbytes NF4 quantization.
+    # Start from unquantized BF16 weights so BitsAndBytes can apply NF4.
     repo_id: "mistralai/Ministral-3-8B-Instruct-2512-BF16"
     backend: "mistral3"
     enabled: true

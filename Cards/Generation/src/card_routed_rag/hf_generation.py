@@ -93,12 +93,12 @@ class HuggingFaceChatGenerator:
         )
 
     def _load_mistral3(self, model_kwargs: dict[str, Any]) -> None:
-        from transformers import (
-            Mistral3ForConditionalGeneration,
-            MistralCommonBackend,
-        )
+        from transformers import AutoTokenizer, Mistral3ForConditionalGeneration
 
-        self.tokenizer = MistralCommonBackend.from_pretrained(self.spec.repo_id)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.spec.repo_id,
+            fix_mistral_regex=True,
+        )
         self.model = Mistral3ForConditionalGeneration.from_pretrained(
             self.spec.repo_id,
             **model_kwargs,
@@ -112,7 +112,7 @@ class HuggingFaceChatGenerator:
             return self.torch.device("cuda:0")
 
     def _messages(self, system_prompt: str, user_prompt: str) -> list[dict[str, Any]]:
-        if self.backend in {"multimodal_auto", "mistral3"}:
+        if self.backend == "multimodal_auto":
             return [
                 {
                     "role": "system",
@@ -178,4 +178,3 @@ class HuggingFaceChatGenerator:
 
     def __exit__(self, exc_type: Any, exc: Any, traceback: Any) -> None:
         self.close()
-

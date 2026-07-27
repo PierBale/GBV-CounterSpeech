@@ -306,6 +306,26 @@ def main() -> None:
             )
         attempted = load_attempted_chunks(attempts_path) if args.resume else set()
         model_stats = {"accepted": 0, "rejected": 0, "errors": 0, "skipped": 0}
+        expected_attempts = {
+            f"{label}\0{passage.get('chunk_id', '')}"
+            for label in selected_labels
+            for passage in retrieved_labels[label].get("chunks", [])[:cards_per_label]
+        }
+        if args.resume and expected_attempts and expected_attempts <= attempted:
+            model_stats["skipped"] = len(expected_attempts)
+            checkpoint_model(
+                run_summary,
+                spec=spec,
+                cards_path=cards_path,
+                attempts_path=attempts_path,
+                model_stats=model_stats,
+                output_dir=output_dir,
+            )
+            print(
+                f"[skip] {spec.alias}: all {len(expected_attempts)} "
+                "label/chunk attempts already exist"
+            )
+            continue
         checkpoint_model(
             run_summary,
             spec=spec,
