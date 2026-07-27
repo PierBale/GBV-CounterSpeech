@@ -1,5 +1,10 @@
 # EDOS Task B/C reproduction and CONAN-WOMEN annotation
 
+> **Pipeline consigliata con i checkpoint ufficiali (solo Task C):**
+> consultare [README_OFFICIAL_TASK_C.md](README_OFFICIAL_TASK_C.md) ed eseguire
+> `run_official_task_c.sh`. La pipeline descritta sotto riaddestra invece i
+> modelli da zero e rimane disponibile solo come riproduzione precedente.
+
 Clean plug-and-play repository for:
 
 1. reproducing/testing EDOS Task B and Task C classifiers inspired by Khan et al. ACL 2025;
