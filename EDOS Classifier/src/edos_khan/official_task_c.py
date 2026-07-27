@@ -67,8 +67,7 @@ DEBERTA_BASE = "microsoft/deberta-v3-large"
 ROBERTA_BASE = "FacebookAI/roberta-large"
 MISTRAL_BASE = "mistralai/Mistral-7B-v0.1"
 NUM_TASK_C_LABELS = len(TASK_C_LABELS)
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CHECKPOINT_ROOT = PROJECT_ROOT / "models" / "official_task_c"
+DEFAULT_CHECKPOINT_ROOT = Path.home() / "edos_task_c_checkpoints"
 
 
 class SingleTokenizerDataset(Dataset):

@@ -21,14 +21,26 @@ export PYTHONPATH=/opt/pytorch/lib/python3.12/site-packages
 
 set -euo pipefail
 
-# Slurm keeps the submission directory as cwd; always enter this script directory.
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
+# Under sbatch, BASH_SOURCE points to /var/spool/slurmd rather than this repo.
+# Resolve the project from an explicit override or from SLURM_SUBMIT_DIR.
+if [[ -n "${EDOS_CLASSIFIER_ROOT:-}" ]]; then
+  PROJECT_DIR="$EDOS_CLASSIFIER_ROOT"
+elif [[ -f "${SLURM_SUBMIT_DIR:-}/scripts/12_infer_official_task_c.py" ]]; then
+  PROJECT_DIR="$SLURM_SUBMIT_DIR"
+elif [[ -f "${SLURM_SUBMIT_DIR:-}/EDOS Classifier/scripts/12_infer_official_task_c.py" ]]; then
+  PROJECT_DIR="$SLURM_SUBMIT_DIR/EDOS Classifier"
+else
+  echo "Cannot locate EDOS Classifier." >&2
+  echo "Submit from its directory or export EDOS_CLASSIFIER_ROOT=/absolute/path/to/EDOS Classifier." >&2
+  exit 2
+fi
+cd "$PROJECT_DIR"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 EDOS_CSV="${EDOS_CSV:-data/edos/raw/edos_labelled_aggregated.csv}"
 CONAN_JSON="${CONAN_JSON:-data/conan/WOMAN-Multitarget-CONAN.json}"
-CHECKPOINT_ROOT="${CHECKPOINT_ROOT:-models/official_task_c}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-outputs/official_task_c}"
+CHECKPOINT_ROOT="${CHECKPOINT_ROOT:-$HOME/edos_task_c_checkpoints}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-$HOME/edos_task_c_outputs}"
+ANNOTATED_JSON="${ANNOTATED_JSON:-$OUTPUT_ROOT/conan/WOMAN-Multitarget-CONAN_EDOS_TASK_C_M7FE.json}"
 DEVICE="${DEVICE:-cuda:0}"
 MAX_LENGTH="${MAX_LENGTH:-150}"
 BASE_BATCH_SIZE="${BASE_BATCH_SIZE:-8}"
@@ -95,8 +107,7 @@ done
   --mistral "$OUTPUT_ROOT/conan/mistral.csv" \
   --output-csv "$OUTPUT_ROOT/conan/m7fe.csv" \
   --conan-json "$CONAN_JSON" \
-  --annotated-json \
-    "data/conan/WOMAN-Multitarget-CONAN_EDOS_TASK_C_M7FE.json"
+  --annotated-json "$ANNOTATED_JSON"
 
 echo "EDOS metrics: $OUTPUT_ROOT/edos/m7fe_metrics.json"
-echo "Annotated CONAN: data/conan/WOMAN-Multitarget-CONAN_EDOS_TASK_C_M7FE.json"
+echo "Annotated CONAN: $ANNOTATED_JSON"
