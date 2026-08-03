@@ -1,0 +1,77 @@
+{
+  "accuracy": 0.7082474226804124,
+  "macro_f1": 0.699642701254964,
+  "weighted_f1": 0.7063626754734937,
+  "fallback_used_count": 227,
+  "fallback_used_rate": 0.23402061855670103,
+  "confusion_matrix": [
+    [
+      73,
+      10,
+      5,
+      1
+    ],
+    [
+      12,
+      346,
+      84,
+      12
+    ],
+    [
+      8,
+      97,
+      216,
+      12
+    ],
+    [
+      4,
+      22,
+      16,
+      52
+    ]
+  ],
+  "classification_report": {
+    "1. threats, plans to harm and incitement": {
+      "precision": 0.7525773195876289,
+      "recall": 0.8202247191011236,
+      "f1-score": 0.7849462365591398,
+      "support": 89.0
+    },
+    "2. derogation": {
+      "precision": 0.728421052631579,
+      "recall": 0.762114537444934,
+      "f1-score": 0.7448869752421959,
+      "support": 454.0
+    },
+    "3. animosity": {
+      "precision": 0.6728971962616822,
+      "recall": 0.6486486486486487,
+      "f1-score": 0.6605504587155964,
+      "support": 333.0
+    },
+    "4. prejudiced discussions": {
+      "precision": 0.6753246753246753,
+      "recall": 0.5531914893617021,
+      "f1-score": 0.6081871345029239,
+      "support": 94.0
+    },
+    "accuracy": 0.7082474226804124,
+    "macro avg": {
+      "precision": 0.7073050609513913,
+      "recall": 0.6960448486391021,
+      "f1-score": 0.699642701254964,
+      "support": 970.0
+    },
+    "weighted avg": {
+      "precision": 0.7064307476017478,
+      "recall": 0.7082474226804124,
+      "f1-score": 0.7063626754734937,
+      "support": 970.0
+    }
+  },
+  "base_prediction_files": [
+    "models/task_b/deberta/test_predictions.csv",
+    "models/task_b/dtfn/test_predictions.csv"
+  ],
+  "fallback_prediction_file": "models/task_b/mistral/test_predictions.csv"
+}

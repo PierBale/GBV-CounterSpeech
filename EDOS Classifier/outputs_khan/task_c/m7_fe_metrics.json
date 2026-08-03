@@ -1,0 +1,238 @@
+{
+  "accuracy": 0.6,
+  "macro_f1": 0.5413706383283265,
+  "weighted_f1": 0.5968118791151259,
+  "fallback_used_count": 341,
+  "fallback_used_rate": 0.3515463917525773,
+  "confusion_matrix": [
+    [
+      10,
+      5,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      57,
+      0,
+      7,
+      2,
+      3,
+      0,
+      0,
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      0,
+      113,
+      20,
+      10,
+      2,
+      37,
+      4,
+      0,
+      3,
+      16
+    ],
+    [
+      2,
+      6,
+      15,
+      116,
+      6,
+      39,
+      2,
+      0,
+      0,
+      1,
+      5
+    ],
+    [
+      0,
+      1,
+      8,
+      4,
+      28,
+      6,
+      7,
+      3,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      4,
+      5,
+      43,
+      4,
+      123,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      32,
+      3,
+      2,
+      2,
+      68,
+      1,
+      3,
+      1,
+      6
+    ],
+    [
+      0,
+      0,
+      3,
+      0,
+      3,
+      2,
+      4,
+      6,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      4,
+      0,
+      1,
+      0,
+      4,
+      0,
+      1,
+      0,
+      4
+    ],
+    [
+      0,
+      3,
+      3,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      11,
+      1
+    ],
+    [
+      0,
+      2,
+      10,
+      3,
+      0,
+      2,
+      7,
+      0,
+      0,
+      0,
+      49
+    ]
+  ],
+  "classification_report": {
+    "1.1 threats of harm": {
+      "precision": 0.625,
+      "recall": 0.625,
+      "f1-score": 0.625,
+      "support": 16.0
+    },
+    "1.2 incitement and encouragement of harm": {
+      "precision": 0.7307692307692307,
+      "recall": 0.7808219178082192,
+      "f1-score": 0.7549668874172185,
+      "support": 73.0
+    },
+    "2.1 descriptive attacks": {
+      "precision": 0.5854922279792746,
+      "recall": 0.551219512195122,
+      "f1-score": 0.5678391959798995,
+      "support": 205.0
+    },
+    "2.2 aggressive and emotive attacks": {
+      "precision": 0.5858585858585859,
+      "recall": 0.6041666666666666,
+      "f1-score": 0.5948717948717949,
+      "support": 192.0
+    },
+    "2.3 dehumanising attacks & overt sexual objectification": {
+      "precision": 0.49122807017543857,
+      "recall": 0.49122807017543857,
+      "f1-score": 0.49122807017543857,
+      "support": 57.0
+    },
+    "3.1 casual use of gendered slurs, profanities, and insults": {
+      "precision": 0.6871508379888268,
+      "recall": 0.6758241758241759,
+      "f1-score": 0.6814404432132964,
+      "support": 182.0
+    },
+    "3.2 immutable gender differences and gender stereotypes": {
+      "precision": 0.5230769230769231,
+      "recall": 0.5714285714285714,
+      "f1-score": 0.5461847389558233,
+      "support": 119.0
+    },
+    "3.3 backhanded gendered compliments": {
+      "precision": 0.4,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.36363636363636365,
+      "support": 18.0
+    },
+    "3.4 condescending explanations or unwelcome advice": {
+      "precision": 0.25,
+      "recall": 0.07142857142857142,
+      "f1-score": 0.1111111111111111,
+      "support": 14.0
+    },
+    "4.1 supporting mistreatment of individual women": {
+      "precision": 0.6875,
+      "recall": 0.5238095238095238,
+      "f1-score": 0.5945945945945946,
+      "support": 21.0
+    },
+    "4.2 supporting systemic discrimination against women as a group": {
+      "precision": 0.5833333333333334,
+      "recall": 0.6712328767123288,
+      "f1-score": 0.6242038216560509,
+      "support": 73.0
+    },
+    "accuracy": 0.6,
+    "macro avg": {
+      "precision": 0.5590372008346921,
+      "recall": 0.5363175653983592,
+      "f1-score": 0.5413706383283265,
+      "support": 970.0
+    },
+    "weighted avg": {
+      "precision": 0.59678901934042,
+      "recall": 0.6,
+      "f1-score": 0.5968118791151259,
+      "support": 970.0
+    }
+  },
+  "base_prediction_files": [
+    "models/task_c/deberta/test_predictions.csv",
+    "models/task_c/dtfn/test_predictions.csv"
+  ],
+  "fallback_prediction_file": "models/task_c/mistral/test_predictions.csv"
+}
