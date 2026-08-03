@@ -101,6 +101,7 @@ def source_to_compact_string(source: Any) -> str:
     page = source.get("page")
     section = source.get("section") or ""
     url = source.get("url") or ""
+    file_name = source.get("file_name") or ""
 
     parts = []
     if title:
@@ -115,6 +116,8 @@ def source_to_compact_string(source: Any) -> str:
         parts.append(f"section: {section}")
     if url:
         parts.append(url)
+    elif file_name:
+        parts.append(f"local PDF: {file_name}")
     return " | ".join(parts)
 
 

@@ -2,7 +2,14 @@ from __future__ import annotations
 
 import gc
 from dataclasses import dataclass
+import os
 from typing import Any
+
+
+# All configured generators use PyTorch. Keep Transformers from importing an
+# unrelated optional TensorFlow installation.
+os.environ.setdefault("USE_TF", "0")
+os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
 
 
 @dataclass(frozen=True)

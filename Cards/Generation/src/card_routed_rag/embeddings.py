@@ -1,10 +1,17 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 from pathlib import Path
 from typing import Sequence
 
 import numpy as np
+
+
+# This pipeline is PyTorch-only. Avoid importing an optional/broken TensorFlow
+# installation through Transformers.
+os.environ.setdefault("USE_TF", "0")
+os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
 
 
 DEFAULT_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-0.6B"

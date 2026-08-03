@@ -33,6 +33,7 @@ def main() -> None:
             "source_year": s.get("year"),
             "source_page": s.get("page"),
             "source_url": s.get("url"),
+            "source_file_name": s.get("file_name"),
             "chunk": c.get("chunk") or c.get("source_quote"),
             "reasoning": c.get("reasoning"),
             "argument": c.get("argument") or c.get("claim"),

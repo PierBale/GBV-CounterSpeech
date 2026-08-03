@@ -53,6 +53,15 @@ be substantially slower than on a larger GPU.
 
 ## Run
 
+After adding or changing PDFs, rebuild both the embeddings and the
+EDOS-specific retrieval output before generating cards:
+
+```powershell
+python scripts/02_parse_sources.py
+python scripts/03_encode_chunks.py
+python scripts/08_retrieve_edos_chunks.py
+```
+
 Run all three models:
 
 ```powershell
@@ -81,16 +90,20 @@ Resume after interruption:
 python scripts/03_generate_candidate_cards_hf.py --resume
 ```
 
+Resume is accepted only when the SHA-256 fingerprint of the retrieved chunks
+matches the run being resumed. This prevents cards from different PDF sets
+from being mixed. Legacy outputs remain under `huggingface`; new PDF-based
+outputs use `huggingface_pdf` by default.
+
 ## Outputs
 
 For every model the script writes:
 
 ```text
-data/cards/candidates/huggingface/<model>_candidate_cards.jsonl
-data/cards/candidates/huggingface/<model>_attempts.jsonl
+data/cards/candidates/huggingface_pdf/<model>_candidate_cards.jsonl
+data/cards/candidates/huggingface_pdf/<model>_attempts.jsonl
 ```
 
 The candidate-card file contains only schema-valid cards. The attempt log
 records accepted, rejected, skipped and failed chunks. A cumulative
 `generation_summary.json` reports the result for each model.
-

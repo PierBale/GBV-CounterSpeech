@@ -1,3 +1,4 @@
 Cards/Generation/.venv/*
 Cards/Generation/data/processed/*.npz
-Cards/Generation/src/card_routed_rag/__pycache__/*
+**/__pycache__/
+*.py[cod]

@@ -196,6 +196,7 @@ def source_to_string(source: Any) -> str:
         page = source.get("page", "")
         section = source.get("section", "")
         url = source.get("url", "")
+        file_name = source.get("file_name", "")
         if title:
             parts.append(f"Title: {title}")
         if publisher:
@@ -208,6 +209,8 @@ def source_to_string(source: Any) -> str:
             parts.append(f"Section: {section}")
         if url:
             parts.append(f"URL: {url}")
+        if file_name:
+            parts.append(f"PDF file: {file_name}")
         return "\n".join(parts)
     return str(source)
 
@@ -335,6 +338,7 @@ def render_card(card: Dict[str, Any]) -> None:
     page = source.get("page", "") if isinstance(source, dict) else ""
     section = source.get("section", "") if isinstance(source, dict) else ""
     url = source.get("url", "") if isinstance(source, dict) else ""
+    file_name = source.get("file_name", "") if isinstance(source, dict) else ""
 
     primary = card.get("primary_edos_label", "")
     secondary = card.get("secondary_edos_labels", []) or []
@@ -382,6 +386,8 @@ def render_card(card: Dict[str, Any]) -> None:
         source_lines.append(f"Section: {section}")
     if url:
         source_lines.append(f"[Open source]({url})")
+    if file_name:
+        source_lines.append(f"PDF file: `{file_name}`")
     st.markdown('<div class="source-box">' + "<br>".join(source_lines) + "</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)

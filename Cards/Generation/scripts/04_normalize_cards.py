@@ -35,6 +35,7 @@ def normalize_card(card: dict) -> dict:
         "page": source.get("page"),
         "section": source.get("section"),
         "url": source.get("url"),
+        "file_name": source.get("file_name"),
     }
     validation = card.get("validation") or {}
     card["validation"] = {

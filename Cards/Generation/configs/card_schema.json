@@ -26,11 +26,12 @@
       "properties": {
         "source_id": {"type": "string"},
         "title": {"type": "string"},
-        "publisher": {"type": "string"},
+        "publisher": {"type": ["string", "null"]},
         "year": {"type": ["integer", "null"]},
         "page": {"type": ["integer", "null"]},
         "section": {"type": ["string", "null"]},
-        "url": {"type": ["string", "null"]}
+        "url": {"type": ["string", "null"]},
+        "file_name": {"type": ["string", "null"]}
       }
     },
     "chunk": {"type": "string", "minLength": 10},

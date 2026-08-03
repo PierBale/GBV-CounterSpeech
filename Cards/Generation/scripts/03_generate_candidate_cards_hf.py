@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -32,6 +33,37 @@ GENERATED_FIELDS = {"reasoning", "argument"}
 def read_json(path: str | Path) -> dict[str, Any]:
     with Path(path).open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def file_sha256(path: str | Path) -> str:
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def normalize_source_metadata(source: Any) -> dict[str, Any]:
+    raw = source if isinstance(source, dict) else {}
+    file_name = str(raw.get("file_name") or "").strip() or None
+    title = str(raw.get("title") or "").strip()
+    if not title and file_name:
+        title = Path(file_name).stem.replace("_", " ").replace("-", " ")
+
+    def optional_text(field: str) -> str | None:
+        value = str(raw.get(field) or "").strip()
+        return value or None
+
+    return {
+        "source_id": str(raw.get("source_id") or "UNKNOWN").strip() or "UNKNOWN",
+        "title": title,
+        "publisher": optional_text("publisher"),
+        "year": raw.get("year") if isinstance(raw.get("year"), int) else None,
+        "page": raw.get("page") if isinstance(raw.get("page"), int) else None,
+        "section": optional_text("section"),
+        "url": optional_text("url"),
+        "file_name": file_name,
+    }
 
 
 def append_jsonl(path: Path, item: dict[str, Any]) -> None:
@@ -120,7 +152,7 @@ Rules:
   a code fence; those fields are filled automatically by the application.
 
 Source metadata:
-{json.dumps(passage.get("source", {}), ensure_ascii=False, indent=2)}
+{json.dumps(normalize_source_metadata(passage.get("source")), ensure_ascii=False, indent=2)}
 
 Source chunk ID:
 {passage.get("chunk_id")}
@@ -154,7 +186,7 @@ def normalize_generated_card(
     return {
         "card_id": make_card_id(model_alias, label, passage),
         "status": "candidate",
-        "source": passage.get("source", {}),
+        "source": normalize_source_metadata(passage.get("source")),
         "chunk": str(passage.get("text", "")),
         "reasoning": values["reasoning"].strip(),
         "argument": argument,
@@ -232,7 +264,7 @@ def main() -> None:
     )
     ap.add_argument(
         "--output-dir",
-        default="data/cards/candidates/huggingface",
+        default="data/cards/candidates/huggingface_pdf",
     )
     ap.add_argument(
         "--models",
@@ -251,7 +283,9 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    retrieved = read_json(args.retrieved_chunks)
+    retrieved_path = Path(args.retrieved_chunks)
+    retrieved = read_json(retrieved_path)
+    retrieved_sha256 = file_sha256(retrieved_path)
     retrieved_labels = retrieved.get("labels", {}) or {}
     if not retrieved_labels:
         raise SystemExit(f"No retrieved EDOS chunks found at {args.retrieved_chunks}.")
@@ -291,8 +325,26 @@ def main() -> None:
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = output_dir / "generation_summary.json"
+    existing_outputs = list(output_dir.glob("*_candidate_cards.jsonl")) + list(
+        output_dir.glob("*_attempts.jsonl")
+    )
+    if args.resume and (summary_path.exists() or existing_outputs):
+        if not summary_path.exists():
+            raise SystemExit(
+                "Cannot safely resume: generation_summary.json is missing. "
+                "Use a new --output-dir."
+            )
+        previous_summary = read_json(summary_path)
+        if previous_summary.get("input_sha256") != retrieved_sha256:
+            raise SystemExit(
+                "Cannot resume because the retrieved chunks changed. Use a new "
+                "--output-dir to avoid mixing cards from different source sets."
+            )
     run_summary: dict[str, Any] = {
-        "input": args.retrieved_chunks,
+        "input": str(retrieved_path),
+        "input_sha256": retrieved_sha256,
+        "retrieval": retrieved.get("retrieval", {}),
         "models": {},
     }
 

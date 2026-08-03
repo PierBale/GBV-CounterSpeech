@@ -6,7 +6,7 @@ Run from ``Cards/Generation``:
     python -m streamlit run scripts/12_candidate_card_annotation_app.py
 
 The app reads the three ``*_candidate_cards.jsonl`` files from
-``data/cards/candidates/huggingface`` and upserts annotations into a local
+``data/cards/candidates/huggingface_pdf`` and upserts annotations into a local
 Excel workbook.
 """
 
@@ -25,7 +25,7 @@ from openpyxl.styles import Alignment, Font, PatternFill
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT_DIR = PROJECT_DIR / "data" / "cards" / "candidates" / "huggingface"
+DEFAULT_INPUT_DIR = PROJECT_DIR / "data" / "cards" / "candidates" / "huggingface_pdf"
 DEFAULT_OUTPUT_PATH = PROJECT_DIR / "data" / "validation" / "candidate_card_annotations.xlsx"
 
 INPUT_FILES = (
@@ -103,6 +103,7 @@ EXCEL_COLUMNS = (
     "source_page",
     "source_section",
     "source_url",
+    "source_pdf_file",
     "chunk",
     "reasoning",
     "argument",
@@ -166,6 +167,8 @@ def load_cards(input_dir_text: str, file_signature: tuple[tuple[str, int], ...])
                 enriched["_edos_description"] = extract_edos_description(card)
                 cards.append(enriched)
 
+    for card in cards:
+        card["_total_cards"] = len(cards)
     return cards
 
 
@@ -251,6 +254,7 @@ def build_annotation_row(
         "source_page": source.get("page", ""),
         "source_section": source.get("section", ""),
         "source_url": source.get("url", ""),
+        "source_pdf_file": source.get("file_name", ""),
         "chunk": card.get("chunk", ""),
         "reasoning": card.get("reasoning", ""),
         "argument": card.get("argument", ""),
@@ -407,7 +411,10 @@ def render_metadata(card: dict[str, Any]) -> None:
     st.markdown('<div class="eyebrow">Metadati della card</div>', unsafe_allow_html=True)
     first_row = st.columns(4)
     first_row[0].metric("Modello", card["_model"])
-    first_row[1].metric("Card globale", f'{card["_card_order"]} / 321')
+    first_row[1].metric(
+        "Card globale",
+        f'{card["_card_order"]} / {card["_total_cards"]}',
+    )
     first_row[2].metric("Stato", str(card.get("status") or "—"))
     first_row[3].metric("Pagina fonte", str(source.get("page") or "—"))
 
@@ -420,6 +427,7 @@ def render_metadata(card: dict[str, Any]) -> None:
           <strong>Editore / anno:</strong> {html_escape(source.get("publisher") or "—")}
           · {html_escape(source.get("year") or "—")}<br>
           <strong>Source ID:</strong> {html_escape(source.get("source_id") or "—")}<br>
+          <strong>PDF locale:</strong> {html_escape(source.get("file_name") or "—")}<br>
           <strong>Label primaria:</strong> {html_escape(card.get("primary_edos_label") or "—")}<br>
           <strong>Label secondarie:</strong>
           {html_escape(list_to_text(card.get("secondary_edos_labels")) or "—")}<br>

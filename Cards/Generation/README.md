@@ -4,7 +4,7 @@ This repository builds and reviews **quote-first, EDOS-specific evidence cards**
 
 The current pipeline is intentionally split into four parts:
 
-1. **Card construction**: download sources, parse them, extract 5 candidate cards per EDOS label.
+1. **Card construction**: parse local PDFs and extract 5 candidate cards per EDOS label.
 2. **Card validation**: normalize cards, inspect them in a visual interface, and adjudicate expert reviews.
 3. **Card retrieval**: compare basic retrieval, literature-style dense retrieval, and our card-aware retrieval.
 4. **Generation from one card**: prompt Ollama to generate one counter-narrative grounded in one selected card.
@@ -18,11 +18,10 @@ The repository is local-first and can run with **Ollama**. No OpenAI API key is 
 ```text
 card_routed_rag_quote_first/
 ├── configs/
-│   ├── sources.yaml
 │   ├── extraction_config.yaml
 │   └── retrieval_config.yaml
 ├── data/
-│   ├── sources/
+│   ├── sources/pdf/
 │   ├── processed/
 │   ├── cards/
 │   │   ├── candidates/
@@ -31,7 +30,6 @@ card_routed_rag_quote_first/
 │   ├── retrieval_outputs/
 │   └── generated/
 ├── scripts/
-│   ├── 01_download_sources.py
 │   ├── 02_parse_sources.py
 │   ├── 03_extract_candidate_cards.py
 │   ├── 04_normalize_cards.py
@@ -205,8 +203,8 @@ Place the local PDF documents under:
 data/sources/pdf/
 ```
 
-The parsing step discovers the files directly and does not require
-`configs/sources.yaml`.
+The parsing step discovers the files directly and does not require a source
+manifest.
 
 ---
 
