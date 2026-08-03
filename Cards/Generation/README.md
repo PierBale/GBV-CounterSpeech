@@ -197,18 +197,16 @@ The 11 EDOS labels are:
 
 ---
 
-## 5. Download source documents
+## 5. Add source documents
 
-```bash
-python scripts/01_download_sources.py \
-  --config configs/sources.yaml
-```
-
-Source documents are saved under:
+Place the local PDF documents under:
 
 ```text
-data/sources/
+data/sources/pdf/
 ```
+
+The parsing step discovers the files directly and does not require
+`configs/sources.yaml`.
 
 ---
 
@@ -216,7 +214,7 @@ data/sources/
 
 ```bash
 python scripts/02_parse_sources.py \
-  --sources configs/sources.yaml \
+  --source-dir data/sources/pdf \
   --config configs/extraction_config.yaml \
   --output data/processed/document_chunks.jsonl
 ```
@@ -228,6 +226,10 @@ data/processed/document_chunks.jsonl
 ```
 
 Each row contains a source passage plus source metadata.
+
+The source ID and year are derived from the filename. The title uses the PDF
+metadata when available and otherwise falls back to the filename. Publisher
+and URL are left empty because they cannot be recovered reliably from a PDF.
 
 ---
 
@@ -729,10 +731,10 @@ The script writes JSON:
 ## Candidate cards
 
 ```bash
-python scripts/01_download_sources.py --config configs/sources.yaml
+# First place the PDF files in data/sources/pdf.
 
 python scripts/02_parse_sources.py \
-  --sources configs/sources.yaml \
+  --source-dir data/sources/pdf \
   --config configs/extraction_config.yaml \
   --output data/processed/document_chunks.jsonl
 

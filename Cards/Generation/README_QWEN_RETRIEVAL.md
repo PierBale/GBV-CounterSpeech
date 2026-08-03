@@ -11,8 +11,9 @@ python scripts/08_retrieve_chunks.py \
   --query "Women are too emotional to make rational decisions."
 ```
 
-`02_parse_sources.py` parses every source listed in `configs/sources.yaml` and
-creates overlapping chunks in `data/processed/document_chunks.jsonl`.
+`02_parse_sources.py` scans every PDF in `data/sources/pdf` directly, without a
+source YAML manifest, and creates overlapping chunks in
+`data/processed/document_chunks.jsonl`.
 
 `03_encode_chunks.py` encodes every chunk with
 `Qwen/Qwen3-Embedding-0.6B`. The model is loaded through
