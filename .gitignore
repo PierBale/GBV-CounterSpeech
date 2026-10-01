@@ -5,3 +5,4 @@ Cards/Generation/data/processed/*.npz
 .env
 src/old/*
 src/2_paragraph_chunks/*
+src/2_paragraph_chunking_llamaparse.ipynb
