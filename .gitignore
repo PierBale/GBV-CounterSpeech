@@ -2,3 +2,6 @@ Cards/Generation/.venv/*
 Cards/Generation/data/processed/*.npz
 **/__pycache__/
 *.py[cod]
+.env
+src/old/*
+src/2_paragraph_chunks/*
