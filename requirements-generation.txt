@@ -1,0 +1,8 @@
+accelerate>=1.0
+numpy>=1.26
+pandas>=2.0
+pydantic>=2.10
+python-dotenv>=1.0
+sentence-transformers>=2.7
+torch>=2.4
+transformers>=5.0
