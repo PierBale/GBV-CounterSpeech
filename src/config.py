@@ -6,7 +6,7 @@ PROJECT_DIR = SRC_DIR.parent
 
 # Generation models
 GENERATION_MODELS = (
-    "llama-3.2-1b",
+    "llama-3.1-8b",
     #"ministral-3-8b",
     #"qwen-3.5-9b",
 )
@@ -47,9 +47,7 @@ GENERATION_OUTPUT_DIR = PROJECT_DIR / "data" / "generated"
 
 # LLM judges
 JUDGE_MODELS = (
-    "llama-3.1-8b",
-    "ministral-3-8b",
-    "qwen-3.5-9b",
+    "judgelm-7b",
 )
 JUDGE_INPUT_PATHS = ()  # Empty = use every generated model output.
 JUDGE_OUTPUT_DIR = PROJECT_DIR / "data" / "judged"
@@ -59,3 +57,10 @@ JUDGE_MAX_RETRIES = 1
 JUDGE_DEVICE = None
 JUDGE_DTYPE = None
 JUDGE_TRUST_REMOTE_CODE = True
+
+# Automatic evaluation. This is a separate local workflow from judge.py.
+AUTOMATIC_METRICS_INPUT_PATHS = ()  # Empty = use every generated model output.
+AUTOMATIC_METRICS_OUTPUT_DIR = PROJECT_DIR / "data" / "metrics"
+BERTSCORE_MODEL_TYPE = None  # None = recommended English model (roberta-large).
+BERTSCORE_DEVICE = None  # None = CUDA when available, otherwise CPU.
+BERTSCORE_BATCH_SIZE = 16

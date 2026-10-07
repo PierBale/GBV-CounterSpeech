@@ -1,20 +1,15 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 
-class JudgeAssessment(BaseModel):
-    relevance: int = Field(ge=1, le=5)
-    respectfulness: int = Field(ge=1, le=5)
-    persuasiveness: int = Field(ge=1, le=5)
-    self_contained: int = Field(ge=1, le=5)
-    conciseness: int = Field(ge=1, le=5)
-    evidence_grounding: int | None = Field(default=None, ge=1, le=5)
-    overall: int = Field(ge=1, le=5)
-    rationale: str = Field(min_length=1)
+PairwiseWinner = Literal["response_1", "response_2", "tie"]
 
 
-class JudgeResult(BaseModel):
-    assessment: JudgeAssessment | None = None
-    passed: bool | None = None
+class PairwiseJudgeResult(BaseModel):
+    winner: PairwiseWinner | None = None
+    response_1_score: float | None = None
+    response_2_score: float | None = None
     raw_response: str
     parse_error: str | None = None
     attempts: int = Field(default=1, ge=1)

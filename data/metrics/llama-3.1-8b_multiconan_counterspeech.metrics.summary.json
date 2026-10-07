@@ -1,0 +1,23 @@
+{
+  "reference_based": {
+    "eligible_records": 600,
+    "bleu_4_corpus": 0.007823,
+    "rouge_l_mean": 0.130507,
+    "meteor_mean": 0.155874,
+    "bertscore_precision_mean": 0.859796,
+    "bertscore_recall_mean": 0.867507,
+    "bertscore_f1_mean": 0.86354,
+    "bertscore_rescaled_precision_mean": 0.167901,
+    "bertscore_rescaled_recall_mean": 0.213718,
+    "bertscore_rescaled_f1_mean": 0.191463
+  },
+  "reference_free": {
+    "records": 600,
+    "distinct_1_corpus": 0.076364,
+    "distinct_2_corpus": 0.299598,
+    "repetition_rate_mean": 0.000534
+  },
+  "input_file": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\generated\\llama-3.1-8b_multiconan_counterspeech.jsonl",
+  "reused_metrics": 0,
+  "new_metrics": 600
+}

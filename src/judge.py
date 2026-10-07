@@ -1,3 +1,5 @@
+"""Run or resume the paper's pairwise JudgeLM evaluation."""
+
 import gc
 import json
 from collections import defaultdict
@@ -22,18 +24,11 @@ from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.model_registry import resolve_decoder_model
 
 
-SCORE_FIELDS = (
-    "relevance",
-    "respectfulness",
-    "persuasiveness",
-    "self_contained",
-    "conciseness",
-    "evidence_grounding",
-    "overall",
-)
+BASELINE_STRATEGY = "without_rag"
+VALID_WINNERS = {"response_1", "response_2", "tie"}
 
 
-def read_jsonl(path: Path, limit: int = 0) -> list[dict]:
+def read_jsonl(path: Path) -> list[dict]:
     if not path.is_file():
         raise FileNotFoundError(f"Judge input file not found: {path}")
 
@@ -43,13 +38,16 @@ def read_jsonl(path: Path, limit: int = 0) -> list[dict]:
             if not line.strip():
                 continue
             try:
-                records.append(json.loads(line))
+                record = json.loads(line)
             except json.JSONDecodeError as error:
                 raise ValueError(
                     f"Invalid JSON on line {line_number} of {path}: {error}"
                 ) from error
-            if limit > 0 and len(records) >= limit:
-                break
+            if not isinstance(record, dict):
+                raise ValueError(
+                    f"Expected a JSON object on line {line_number} of {path}."
+                )
+            records.append(record)
 
     if not records:
         raise ValueError(f"No records found in judge input: {path}")
@@ -63,102 +61,277 @@ def batched(records: list[dict], batch_size: int) -> Iterable[list[dict]]:
         yield records[start : start + batch_size]
 
 
-def build_summary(judged_records: list[dict]) -> dict:
-    valid = [
-        record
-        for record in judged_records
-        if record["llm_judge"]["assessment"] is not None
-    ]
-    passed = [record for record in valid if record["llm_judge"]["passed"]]
-    summary = {
-        "total": len(judged_records),
-        "valid_judgments": len(valid),
-        "parse_failures": len(judged_records) - len(valid),
-        "passed": len(passed),
-        "pass_rate": len(passed) / len(valid) if valid else None,
-        "mean_scores": _mean_scores(valid),
-        "by_generation_model_and_strategy": {},
-    }
-
-    groups: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for record in valid:
+def build_pairwise_comparisons(records: list[dict]) -> list[dict]:
+    """Pair each RAG output with No-RAG for the same item and generator."""
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    group_order = []
+    for record in records:
         key = (
-            record.get("generation_model", "unknown"),
-            record.get("generation_strategy", "unknown"),
+            record.get("id"),
+            record.get("source"),
+            record.get("generation_model"),
         )
+        if key not in groups:
+            group_order.append(key)
         groups[key].append(record)
 
-    for (model, strategy), group in sorted(groups.items()):
-        group_passed = [item for item in group if item["llm_judge"]["passed"]]
-        summary["by_generation_model_and_strategy"][f"{model}|{strategy}"] = {
-            "count": len(group),
-            "pass_rate": len(group_passed) / len(group),
-            "mean_scores": _mean_scores(group),
+    comparisons = []
+    for key in group_order:
+        group = groups[key]
+        baselines = [
+            record
+            for record in group
+            if record.get("generation_strategy") == BASELINE_STRATEGY
+        ]
+        if len(baselines) != 1:
+            raise ValueError(
+                f"Expected exactly one {BASELINE_STRATEGY!r} output for {key}, "
+                f"found {len(baselines)}."
+            )
+        baseline = baselines[0]
+        challengers = [
+            record
+            for record in group
+            if record.get("generation_strategy") != BASELINE_STRATEGY
+        ]
+        comparison_baselines = [
+            (BASELINE_STRATEGY, baseline.get("generated_counter_speech"))
+        ]
+        reference = baseline.get("reference_counter_speech")
+        if isinstance(reference, (list, tuple)):
+            reference = reference[0] if reference else None
+        if (
+            str(baseline.get("source") or "").strip().casefold() == "multiconan"
+            and str(reference or "").strip()
+        ):
+            comparison_baselines.append(("multiconan_reference", reference))
+
+        for challenger in challengers:
+            if challenger.get("hateful_message") != baseline.get("hateful_message"):
+                raise ValueError(f"Mismatched hateful messages for comparison {key}.")
+            for baseline_strategy, baseline_response in comparison_baselines:
+                comparisons.append(
+                    {
+                        "id": baseline.get("id"),
+                        "source": baseline.get("source"),
+                        "split": baseline.get("split"),
+                        "target": baseline.get("target"),
+                        "edos_label": baseline.get("edos_label"),
+                        "generation_model": baseline.get("generation_model"),
+                        "baseline_strategy": baseline_strategy,
+                        "challenger_strategy": challenger.get("generation_strategy"),
+                        "hateful_message": baseline.get("hateful_message"),
+                        "response_1_strategy": baseline_strategy,
+                        "response_1": baseline_response,
+                        "response_2_strategy": challenger.get("generation_strategy"),
+                        "response_2": challenger.get("generated_counter_speech"),
+                    }
+                )
+
+    if not comparisons:
+        raise ValueError("No paper-style pairwise comparisons could be built.")
+    return comparisons
+
+
+def comparison_key(record: dict) -> tuple:
+    return (
+        record.get("id"),
+        record.get("source"),
+        record.get("generation_model"),
+        record.get("baseline_strategy"),
+        record.get("challenger_strategy"),
+        record.get("response_1"),
+        record.get("response_2"),
+    )
+
+
+def has_pairwise_judgment(record: dict) -> bool:
+    result = record.get("pairwise_judge")
+    return (
+        isinstance(result, dict)
+        and result.get("winner") in VALID_WINNERS
+        and not result.get("parse_error")
+    )
+
+
+def output_path_for(input_path: Path, judge_alias: str) -> Path:
+    filename = f"{input_path.stem}.pairwise-judged.{judge_alias}.jsonl"
+    return Path(JUDGE_OUTPUT_DIR) / filename
+
+
+def read_existing_judgments(path: Path) -> list[dict]:
+    return read_jsonl(path) if path.is_file() else []
+
+
+def _valid_existing_map(records: list[dict]) -> dict[tuple, dict]:
+    return {
+        comparison_key(record): record
+        for record in records
+        if has_pairwise_judgment(record)
+    }
+
+
+def _judged_record(comparison: dict, result, judge_name: str) -> dict:
+    judged = dict(comparison)
+    result_data = result.model_dump()
+    winner = result_data.get("winner")
+    result_data["winner_strategy"] = {
+        "response_1": comparison["response_1_strategy"],
+        "response_2": comparison["response_2_strategy"],
+        "tie": "tie",
+    }.get(winner)
+    judged["pairwise_judge"] = result_data
+    judged["judge_model"] = judge_name
+    return judged
+
+
+def build_summary(records: list[dict]) -> dict:
+    valid = [record for record in records if has_pairwise_judgment(record)]
+    summary = {
+        "total_comparisons": len(records),
+        "valid_comparisons": len(valid),
+        "parse_failures": len(records) - len(valid),
+        "by_generation_model_baseline_and_challenger": {},
+    }
+    groups: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
+    for record in valid:
+        groups[
+            (
+                str(record.get("generation_model") or "unknown"),
+                str(record.get("baseline_strategy") or "unknown"),
+                str(record.get("challenger_strategy") or "unknown"),
+            )
+        ].append(record)
+
+    for (model, baseline, challenger), group in sorted(groups.items()):
+        winners = [item["pairwise_judge"]["winner"] for item in group]
+        challenger_wins = winners.count("response_2")
+        summary["by_generation_model_baseline_and_challenger"][
+            f"{model}|{baseline}|{challenger}"
+        ] = {
+            "comparisons": len(group),
+            "challenger_wins": challenger_wins,
+            "baseline_wins": winners.count("response_1"),
+            "ties": winners.count("tie"),
+            "challenger_win_rate": challenger_wins / len(group),
         }
     return summary
 
 
-def _mean_scores(records: list[dict]) -> dict:
-    means = {}
-    for field in SCORE_FIELDS:
-        values = [
-            record["llm_judge"]["assessment"][field]
-            for record in records
-            if record["llm_judge"]["assessment"][field] is not None
-        ]
-        means[field] = sum(values) / len(values) if values else None
-    return means
-
-
-def judge_file(
-    judge: LLMJudge,
+def write_judgments(
+    *,
+    judge: LLMJudge | None,
     judge_name: str,
-    judge_alias: str,
     input_path: Path,
-) -> None:
-    records = read_jsonl(input_path, limit=JUDGE_LIMIT)
-    output_path = JUDGE_OUTPUT_DIR / (
-        f"{input_path.stem}.judged.{judge_alias}.jsonl"
-    )
-    summary_path = output_path.with_suffix(".summary.json")
+    output_path: Path,
+    comparisons: list[dict],
+    existing_records: list[dict],
+) -> int:
+    existing = _valid_existing_map(existing_records)
+    missing = [
+        comparison
+        for comparison in comparisons
+        if comparison_key(comparison) not in existing
+    ]
+    if missing and judge is None:
+        raise RuntimeError("Missing comparisons require an initialized JudgeLM.")
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    judged_records = []
+    newly_judged = {}
     completed = 0
+    for batch in batched(missing, JUDGE_BATCH_SIZE):
+        results = judge.judge_batch(batch)
+        checkpoint_records = []
+        for comparison, result in zip(batch, results, strict=True):
+            judged = _judged_record(comparison, result, judge_name)
+            newly_judged[comparison_key(comparison)] = judged
+            checkpoint_records.append(judged)
+
+        with output_path.open("a", encoding="utf-8") as output_file:
+            for record in checkpoint_records:
+                output_file.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+        completed += len(batch)
+        print(
+            f"[{judge_name}] Judged {completed}/{len(missing)} missing "
+            f"pairwise comparisons from {input_path.name}."
+        )
+
+    ordered = []
+    for comparison in comparisons:
+        key = comparison_key(comparison)
+        if key in newly_judged:
+            ordered.append(newly_judged[key])
+        elif key in existing:
+            previous = existing[key]
+            reused = dict(comparison)
+            reused["pairwise_judge"] = previous["pairwise_judge"]
+            reused["judge_model"] = previous.get("judge_model", judge_name)
+            ordered.append(reused)
+        else:
+            raise RuntimeError(f"No judgment produced for comparison {key!r}.")
 
     with output_path.open("w", encoding="utf-8") as output_file:
-        for batch in batched(records, JUDGE_BATCH_SIZE):
-            results = judge.judge_batch(batch)
-            for record, result in zip(batch, results, strict=True):
-                judged = dict(record)
-                judged["llm_judge"] = result.model_dump()
-                judged["judge_model"] = judge_name
-                judged_records.append(judged)
-                output_file.write(json.dumps(judged, ensure_ascii=False) + "\n")
+        for record in ordered:
+            output_file.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-            completed += len(batch)
-            print(
-                f"[{judge_name}] Judged {completed}/{len(records)} "
-                f"outputs from {input_path.name}."
-            )
-
-    summary = build_summary(judged_records)
-    summary["judge_model"] = judge_name
-    summary["input_file"] = str(input_path)
+    summary = build_summary(ordered)
+    summary.update(
+        {
+            "judge_model": judge_name,
+            "input_file": str(input_path),
+            "reused_comparisons": len(comparisons) - len(missing),
+            "new_comparisons": len(missing),
+            "protocol": "JudgeLM pairwise RAG vs No-RAG and MultiCONAN reference",
+        }
+    )
+    summary_path = output_path.with_suffix(".summary.json")
     summary_path.write_text(
         json.dumps(summary, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"Judgments written to {output_path.resolve()}")
+    print(f"Pairwise judgments written to {output_path.resolve()}")
     print(f"Summary written to {summary_path.resolve()}")
+    return len(missing)
 
 
 def run_judge_model(
     model_alias: str,
-    input_paths: tuple[Path, ...],
+    inputs: dict[Path, list[dict]],
 ) -> None:
+    judge_model = resolve_decoder_model(model_alias)
+    plans = []
+    total_missing = 0
+    for input_path, comparisons in inputs.items():
+        output_path = output_path_for(input_path, judge_model.alias)
+        existing_records = read_existing_judgments(output_path)
+        existing = _valid_existing_map(existing_records)
+        missing = sum(
+            comparison_key(record) not in existing for record in comparisons
+        )
+        total_missing += missing
+        plans.append(
+            (input_path, output_path, comparisons, existing_records, missing)
+        )
+
+    if total_missing == 0:
+        print(
+            f"[{judge_model.paper_name}] All pairwise judgments already exist; "
+            "the judge model will not be loaded."
+        )
+        for input_path, output_path, comparisons, existing_records, _ in plans:
+            write_judgments(
+                judge=None,
+                judge_name=judge_model.paper_name,
+                input_path=input_path,
+                output_path=output_path,
+                comparisons=comparisons,
+                existing_records=existing_records,
+            )
+        return
+
     from unito_amazon.llm.factory import LLMFactory
 
-    judge_model = resolve_decoder_model(model_alias)
     llm = LLMFactory.create(
         {
             "provider": "huggingface",
@@ -169,14 +342,15 @@ def run_judge_model(
         }
     )
     judge = LLMJudge(llm=llm, max_retries=JUDGE_MAX_RETRIES)
-
     try:
-        for input_path in input_paths:
-            judge_file(
+        for input_path, output_path, comparisons, existing_records, _ in plans:
+            write_judgments(
                 judge=judge,
                 judge_name=judge_model.paper_name,
-                judge_alias=judge_model.alias,
                 input_path=input_path,
+                output_path=output_path,
+                comparisons=comparisons,
+                existing_records=existing_records,
             )
     finally:
         llm.destroy()
@@ -193,9 +367,18 @@ def get_judge_input_paths() -> tuple[Path, ...]:
 
 
 def main() -> None:
-    input_paths = get_judge_input_paths()
+    inputs = {}
+    for input_path in get_judge_input_paths():
+        comparisons = build_pairwise_comparisons(read_jsonl(input_path))
+        if JUDGE_LIMIT > 0:
+            comparisons = comparisons[:JUDGE_LIMIT]
+        inputs[input_path] = comparisons
+        print(
+            f"Built {len(comparisons)} paper-style pairwise comparisons "
+            f"from {input_path.name}."
+        )
     for model_alias in JUDGE_MODELS:
-        run_judge_model(model_alias, input_paths)
+        run_judge_model(model_alias, inputs)
 
 
 if __name__ == "__main__":

@@ -1,27 +1,27 @@
 import json
-from json import JSONDecodeError
-
-from pydantic import ValidationError
+import re
 
 from unito_amazon.llm.base import BaseLLM
 from unito_amazon.llm.schema import LLMGenerationConfig
 
-from .prompts import CounterSpeechJudgePrompt
-from .schema import JudgeAssessment, JudgeResult
+from .prompts import CounterSpeechPairwisePrompt
+from .schema import PairwiseJudgeResult, PairwiseWinner
 
 
 class LLMJudge:
+    """Pairwise JudgeLM evaluation for RAG against No-RAG."""
+
     def __init__(
         self,
         llm: BaseLLM,
-        prompt: CounterSpeechJudgePrompt | None = None,
+        prompt: CounterSpeechPairwisePrompt | None = None,
         max_retries: int = 1,
     ):
         if max_retries < 0:
             raise ValueError("max_retries cannot be negative.")
 
         self.llm = llm
-        self.prompt = prompt or CounterSpeechJudgePrompt()
+        self.prompt = prompt or CounterSpeechPairwisePrompt()
         self.max_retries = max_retries
         self.generation_config = LLMGenerationConfig(
             max_new_tokens=512,
@@ -30,117 +30,166 @@ class LLMJudge:
             system_prompt=self.prompt.system_prompt,
         )
 
-    def judge(self, record: dict) -> JudgeResult:
-        return self.judge_batch([record])[0]
+    def judge(self, comparison: dict) -> PairwiseJudgeResult:
+        return self.judge_batch([comparison])[0]
 
-    def judge_batch(self, records: list[dict]) -> list[JudgeResult]:
-        prompts = [self._build_prompt(record) for record in records]
+    def judge_batch(self, comparisons: list[dict]) -> list[PairwiseJudgeResult]:
+        prompts = [self._build_prompt(record) for record in comparisons]
         response = self.llm.generate_batch(
             prompts=prompts,
             config=self.generation_config,
         )
-
         return [
-            self._parse_with_retries(record, raw_response)
-            for record, raw_response in zip(
-                records,
+            self._parse_with_retries(comparison, raw_response)
+            for comparison, raw_response in zip(
+                comparisons,
                 response.texts,
                 strict=True,
             )
         ]
 
-    def _build_prompt(self, record: dict) -> str:
-        required_fields = ("hateful_message", "generated_counter_speech")
-        missing = [field for field in required_fields if not record.get(field)]
+    def _build_prompt(self, comparison: dict) -> str:
+        required = ("hateful_message", "response_1", "response_2")
+        missing = [field for field in required if not comparison.get(field)]
         if missing:
             raise ValueError(
-                f"Judge input is missing required fields: {', '.join(missing)}."
+                "Pairwise judge input is missing fields: " + ", ".join(missing)
             )
-
         return self.prompt.build(
-            hateful_message=record["hateful_message"],
-            counter_speech=record["generated_counter_speech"],
-            evidence=record.get("evidence") or [],
+            hateful_message=comparison["hateful_message"],
+            response_1=comparison["response_1"],
+            response_2=comparison["response_2"],
         )
 
     def _parse_with_retries(
         self,
-        record: dict,
+        comparison: dict,
         raw_response: str,
-    ) -> JudgeResult:
+    ) -> PairwiseJudgeResult:
         attempts = 1
-        current_response = raw_response
-
+        current = raw_response
         while True:
-            try:
-                assessment = self._parse_assessment(current_response)
-                self._validate_grounding_mode(record, assessment)
-                return JudgeResult(
-                    assessment=assessment,
-                    passed=self._is_passing(record, assessment),
-                    raw_response=current_response,
+            parsed = self._parse_judgment(current)
+            if parsed is not None:
+                winner, score_1, score_2 = parsed
+                return PairwiseJudgeResult(
+                    winner=winner,
+                    response_1_score=score_1,
+                    response_2_score=score_2,
+                    raw_response=current,
                     attempts=attempts,
                 )
-            except (JSONDecodeError, ValidationError, ValueError) as error:
-                if attempts > self.max_retries:
-                    return JudgeResult(
-                        raw_response=current_response,
-                        parse_error=str(error),
-                        attempts=attempts,
-                    )
 
-                repair_prompt = self.prompt.build_repair_prompt(
-                    raw_response=current_response,
-                    error=str(error),
+            if attempts > self.max_retries:
+                return PairwiseJudgeResult(
+                    raw_response=current,
+                    parse_error=(
+                        "Could not identify a winner or a pair of scores in "
+                        "the JudgeLM response."
+                    ),
+                    attempts=attempts,
                 )
-                repaired = self.llm.generate(
-                    prompt=repair_prompt,
-                    config=self.generation_config,
-                )
-                current_response = repaired.text
-                attempts += 1
+
+            repaired = self.llm.generate(
+                prompt=self._build_prompt(comparison),
+                config=self.generation_config,
+            )
+            current = repaired.text
+            attempts += 1
+
+    @classmethod
+    def _parse_judgment(
+        cls,
+        raw_response: str,
+    ) -> tuple[PairwiseWinner, float | None, float | None] | None:
+        text = raw_response.strip()
+        if not text:
+            return None
+
+        json_result = cls._parse_json(text)
+        if json_result is not None:
+            return json_result
+
+        score_result = cls._parse_score_pair(text)
+        if score_result is not None:
+            return score_result
+
+        normalized = re.sub(r"\s+", " ", text.casefold())
+        tie_patterns = (
+            r"\[\[c\]\]",
+            r"\b(?:tie|draw)\b",
+            r"\b(?:equally good|equal in quality|responses? (?:are|is) equal)\b",
+        )
+        if any(re.search(pattern, normalized) for pattern in tie_patterns):
+            return "tie", None, None
+
+        response_1_patterns = (
+            r"\[\[a\]\]",
+            r"\bresponse\s*(?:1|one|a)\s+is\s+(?:the\s+)?better\b",
+            r"\bprefer\s+(?:counter-?speech\s+)?response\s*(?:1|one|a)\b",
+            r"\b(?:winner|choice|verdict)\s*[:=-]?\s*(?:response\s*)?(?:1|one|a)\b",
+        )
+        response_2_patterns = (
+            r"\[\[b\]\]",
+            r"\bresponse\s*(?:2|two|b)\s+is\s+(?:the\s+)?better\b",
+            r"\bprefer\s+(?:counter-?speech\s+)?response\s*(?:2|two|b)\b",
+            r"\b(?:winner|choice|verdict)\s*[:=-]?\s*(?:response\s*)?(?:2|two|b)\b",
+        )
+        has_1 = any(re.search(pattern, normalized) for pattern in response_1_patterns)
+        has_2 = any(re.search(pattern, normalized) for pattern in response_2_patterns)
+        if has_1 != has_2:
+            return ("response_1" if has_1 else "response_2"), None, None
+        return None
 
     @staticmethod
-    def _parse_assessment(raw_response: str) -> JudgeAssessment:
+    def _parse_json(
+        text: str,
+    ) -> tuple[PairwiseWinner, float | None, float | None] | None:
         decoder = json.JSONDecoder()
-        for index, character in enumerate(raw_response):
+        for index, character in enumerate(text):
             if character != "{":
                 continue
             try:
-                payload, _ = decoder.raw_decode(raw_response[index:])
-                return JudgeAssessment.model_validate(payload)
-            except JSONDecodeError:
+                payload, _ = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
                 continue
+            if not isinstance(payload, dict):
+                continue
+            winner = str(payload.get("winner") or "").strip().casefold()
+            mapping = {
+                "1": "response_1",
+                "a": "response_1",
+                "response_1": "response_1",
+                "response 1": "response_1",
+                "2": "response_2",
+                "b": "response_2",
+                "response_2": "response_2",
+                "response 2": "response_2",
+                "tie": "tie",
+                "draw": "tie",
+            }
+            if winner in mapping:
+                return mapping[winner], None, None
+        return None
 
-        raise JSONDecodeError(
-            "No valid JSON object found in judge response",
-            raw_response,
-            0,
+    @staticmethod
+    def _parse_score_pair(
+        text: str,
+    ) -> tuple[PairwiseWinner, float, float] | None:
+        patterns = (
+            r"^\s*\[*\(?\s*(\d+(?:\.\d+)?)\s*[,\s]+(\d+(?:\.\d+)?)\s*\)?\]*",
+            r"score\s+of\s+(?:response|assistant)\s*1\s*:\s*(\d+(?:\.\d+)?).*?score\s+of\s+(?:response|assistant)\s*2\s*:\s*(\d+(?:\.\d+)?)",
         )
-
-    @staticmethod
-    def _validate_grounding_mode(
-        record: dict,
-        assessment: JudgeAssessment,
-    ) -> None:
-        has_evidence = bool(record.get("evidence"))
-        if has_evidence and assessment.evidence_grounding is None:
-            raise ValueError("evidence_grounding must be scored for RAG output.")
-        if not has_evidence and assessment.evidence_grounding is not None:
-            raise ValueError(
-                "evidence_grounding must be null for generation without RAG."
-            )
-
-    @staticmethod
-    def _is_passing(record: dict, assessment: JudgeAssessment) -> bool:
-        required_scores = [
-            assessment.relevance,
-            assessment.respectfulness,
-            assessment.persuasiveness,
-            assessment.self_contained,
-            assessment.conciseness,
-        ]
-        if record.get("evidence"):
-            required_scores.append(assessment.evidence_grounding or 1)
-
-        return assessment.overall >= 4 and min(required_scores) >= 3
+        for pattern in patterns:
+            match = re.search(pattern, text, flags=re.IGNORECASE | re.DOTALL)
+            if not match:
+                continue
+            score_1, score_2 = (float(value) for value in match.groups())
+            if score_1 > score_2:
+                winner: PairwiseWinner = "response_1"
+            elif score_2 > score_1:
+                winner = "response_2"
+            else:
+                winner = "tie"
+            return winner, score_1, score_2
+        return None

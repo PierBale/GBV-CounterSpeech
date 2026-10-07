@@ -23,6 +23,10 @@ def _is_qwen35(model_name: str) -> bool:
     return "qwen3.5" in n or "qwen-3.5" in n or "qwen3_5" in n
 
 
+def _is_judgelm(model_name: str) -> bool:
+    return "judgelm" in model_name.lower()
+
+
 def _uses_multimodal_processor(model_name: str) -> bool:
     return _is_qwen35(model_name) or _is_mistral3(model_name) or _is_gemma4(model_name)
 
@@ -291,10 +295,15 @@ class HuggingFaceLLM(BaseLLM):
                     enable_thinking=False,
                 )
             except TypeError:
-                return self.tokenizer.apply_chat_template(
-                    messages,
-                    **kwargs,
-                )
+                try:
+                    return self.tokenizer.apply_chat_template(
+                        messages,
+                        **kwargs,
+                    )
+                except (AttributeError, ValueError):
+                    pass
+            except (AttributeError, ValueError):
+                pass
 
         return self._fallback_prompt_template(
             prompt=prompt,
@@ -313,6 +322,10 @@ class HuggingFaceLLM(BaseLLM):
         system_prompt: str = "",
         assistant_prefix: str = "",
     ) -> str:
+        if _is_judgelm(self.model_name):
+            prefix = f"SYSTEM: {system_prompt}\n" if system_prompt else ""
+            return f"{prefix}USER: {prompt}\nASSISTANT: {assistant_prefix}"
+
         parts = []
 
         if system_prompt:

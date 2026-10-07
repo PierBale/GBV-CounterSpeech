@@ -33,6 +33,12 @@ MODEL_SPECS = (
         paper_name="Gemma-Emb-0.3B",
     ),
     ModelSpec(
+        alias="judgelm-7b",
+        huggingface_id="BAAI/JudgeLM-7B-v1.0",
+        role="decoder",
+        paper_name="JudgeLM-7B",
+    ),
+    ModelSpec(
         alias="llama-3.2-1b",
         huggingface_id="meta-llama/Llama-3.2-1B-Instruct",
         role="decoder",
