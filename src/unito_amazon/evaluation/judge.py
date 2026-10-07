@@ -69,7 +69,7 @@ class LLMJudge:
         attempts = 1
         current = raw_response
         while True:
-            parsed = self._parse_judgment(current)
+            parsed = self.parse_judgment(current)
             if parsed is not None:
                 winner, score_1, score_2 = parsed
                 return PairwiseJudgeResult(
@@ -98,7 +98,7 @@ class LLMJudge:
             attempts += 1
 
     @classmethod
-    def _parse_judgment(
+    def parse_judgment(
         cls,
         raw_response: str,
     ) -> tuple[PairwiseWinner, float | None, float | None] | None:
@@ -123,23 +123,42 @@ class LLMJudge:
         if any(re.search(pattern, normalized) for pattern in tie_patterns):
             return "tie", None, None
 
-        response_1_patterns = (
-            r"\[\[a\]\]",
-            r"\bresponse\s*(?:1|one|a)\s+is\s+(?:the\s+)?better\b",
-            r"\bprefer\s+(?:counter-?speech\s+)?response\s*(?:1|one|a)\b",
-            r"\b(?:winner|choice|verdict)\s*[:=-]?\s*(?:response\s*)?(?:1|one|a)\b",
-        )
-        response_2_patterns = (
-            r"\[\[b\]\]",
-            r"\bresponse\s*(?:2|two|b)\s+is\s+(?:the\s+)?better\b",
-            r"\bprefer\s+(?:counter-?speech\s+)?response\s*(?:2|two|b)\b",
-            r"\b(?:winner|choice|verdict)\s*[:=-]?\s*(?:response\s*)?(?:2|two|b)\b",
-        )
+        response_1_patterns = cls._winner_patterns("1|one|a", "a")
+        response_2_patterns = cls._winner_patterns("2|two|b", "b")
         has_1 = any(re.search(pattern, normalized) for pattern in response_1_patterns)
         has_2 = any(re.search(pattern, normalized) for pattern in response_2_patterns)
         if has_1 != has_2:
             return ("response_1" if has_1 else "response_2"), None, None
         return None
+
+    @staticmethod
+    def _winner_patterns(number_variants: str, letter: str) -> tuple[str, ...]:
+        subject = (
+            rf"(?:response|assistant)\s*(?:{number_variants})"
+            rf"(?:['’]s\s+response)?"
+        )
+        positive_quality = (
+            r"(?:factual|accurate|relevant|specific|comprehensive|"
+            r"effective|appropriate|convincing|informative)"
+        )
+        return (
+            rf"\[\[{letter}\]\]",
+            rf"\b{subject}\s+(?:is|was)\s+(?:the\s+)?"
+            rf"(?:better|superior|preferred)\b",
+            rf"\b{subject}\s+(?:is|was)\s+(?:clearly\s+)?more\s+"
+            rf"{positive_quality}\b",
+            rf"\b{subject}[^.?!]{{0,160}}\bscores?\s+higher\b",
+            rf"\bprefer(?:red)?\s+(?:counter-?speech\s+)?{subject}\b",
+            rf"\b(?:winner|choice|verdict)\s*[:=-]?\s*{subject}\b",
+        )
+
+    @classmethod
+    def _parse_judgment(
+        cls,
+        raw_response: str,
+    ) -> tuple[PairwiseWinner, float | None, float | None] | None:
+        """Backward-compatible alias for callers using the old private API."""
+        return cls.parse_judgment(raw_response)
 
     @staticmethod
     def _parse_json(

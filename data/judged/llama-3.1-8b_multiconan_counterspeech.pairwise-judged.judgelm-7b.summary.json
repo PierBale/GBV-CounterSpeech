@@ -1,0 +1,40 @@
+{
+  "total_comparisons": 800,
+  "valid_comparisons": 37,
+  "parse_failures": 763,
+  "by_generation_model_baseline_and_challenger": {
+    "Llama-3.1-8B|multiconan_reference|rag_bm25": {
+      "comparisons": 6,
+      "challenger_wins": 0,
+      "baseline_wins": 0,
+      "ties": 6,
+      "challenger_win_rate": 0.0
+    },
+    "Llama-3.1-8B|multiconan_reference|rag_qwen3_emb_0.6b": {
+      "comparisons": 6,
+      "challenger_wins": 0,
+      "baseline_wins": 0,
+      "ties": 6,
+      "challenger_win_rate": 0.0
+    },
+    "Llama-3.1-8B|without_rag|rag_bm25": {
+      "comparisons": 12,
+      "challenger_wins": 0,
+      "baseline_wins": 0,
+      "ties": 12,
+      "challenger_win_rate": 0.0
+    },
+    "Llama-3.1-8B|without_rag|rag_qwen3_emb_0.6b": {
+      "comparisons": 13,
+      "challenger_wins": 0,
+      "baseline_wins": 0,
+      "ties": 13,
+      "challenger_win_rate": 0.0
+    }
+  },
+  "judge_model": "JudgeLM-7B",
+  "input_file": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/generated/llama-3.1-8b_multiconan_counterspeech.jsonl",
+  "reused_comparisons": 0,
+  "new_comparisons": 800,
+  "protocol": "JudgeLM pairwise RAG vs No-RAG and MultiCONAN reference"
+}

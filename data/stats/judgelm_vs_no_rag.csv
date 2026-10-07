@@ -1,0 +1,2 @@
+﻿Model,BM25,Qwen3-Emb-0.6B
+Llama-3.1-8B,123 - RAG 69.89%; baseline 23.30%; tie 6.82%,131 - RAG 74.43%; baseline 18.18%; tie 7.39%

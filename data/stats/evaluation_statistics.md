@@ -1,47 +1,56 @@
 # Evaluation statistics
 
-The variance reported below is the sample variance (denominator `n - 1`).
+JudgeLM protocol: pairwise RAG vs No-RAG and MultiCONAN reference, following the paper prompt.
+Response 1 is the No-RAG or MultiCONAN baseline; Response 2 is the RAG challenger.
+Automatic-metric variance is the sample variance (denominator `n - 1`).
 
 ## Overview
 
-- Judge files: 1
+- Pairwise judge files: 1
 - Automatic-metric files: 1
-- Valid judgments: 600 / 600
+- Valid pairwise comparisons: 738 / 800
+- Pairwise parse failures: 62
+- Recovered from saved raw responses: 701
 - Unique generations with metrics: 600
 
-## Overall LLM-as-a-judge dimensions
+## Automatic metrics comparison
 
-| Dimension | n | Mean | Variance | Std. dev. |
-| --- | --- | --- | --- | --- |
-| relevance | 600 | 4.518333 | 0.904505 | 0.951055 |
-| respectfulness | 600 | 4.968333 | 0.034054 | 0.184537 |
-| persuasiveness | 600 | 3.708333 | 0.587577 | 0.766535 |
-| self_contained | 600 | 4.788333 | 0.377493 | 0.614405 |
-| conciseness | 600 | 4.550000 | 1.429883 | 1.195777 |
-| evidence_grounding | 400 | 1.760000 | 1.335739 | 1.155742 |
-| overall | 600 | 3.476667 | 0.673912 | 0.820921 |
+Reference-based metrics are populated only for records sourced from MultiCONAN; reference-free metrics are reported for every system. Each metric has separate mean and sample-variance columns.
 
-## Systems
+| Model | System | BLEU-4 mean | BLEU-4 variance | METEOR mean | METEOR variance | ROUGE-L mean | ROUGE-L variance | BERTScore-F1 mean | BERTScore-F1 variance | BERTScore-F1-rescaled mean | BERTScore-F1-rescaled variance | Distinct-1 mean | Distinct-1 variance | Distinct-2 mean | Distinct-2 variance | Repetition Rate mean | Repetition Rate variance |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Llama-3.1-8B | BM25 | 0.043540 | 0.000180 | 0.153907 | 0.002929 | 0.125933 | 0.002450 | 0.862076 | 0.000214 | 0.182788 | 0.007503 | 0.855123 | 0.003124 | 0.995852 | 0.000126 | 0.000000 | 0.000000 |
+| Llama-3.1-8B | Qwen3-Emb-0.6B | 0.043121 | 0.000223 | 0.159598 | 0.004113 | 0.130114 | 0.002456 | 0.862742 | 0.000215 | 0.186736 | 0.007558 | 0.842068 | 0.002995 | 0.993205 | 0.000308 | 0.000849 | 0.000144 |
+| Llama-3.1-8B | No-RAG | 0.049275 | 0.000359 | 0.154116 | 0.006127 | 0.135476 | 0.003212 | 0.865802 | 0.000281 | 0.204864 | 0.009862 | 0.874581 | 0.002838 | 0.995811 | 0.000168 | 0.000754 | 0.000058 |
+
+## JudgeLM wins: RAG vs No-RAG
+
+Cells report RAG wins out of 176 valid comparisons per cell, followed by RAG, baseline and tie percentages over valid judgments. `(lost)` means the baseline won more comparisons; `(equal wins)` means equal RAG and baseline wins.
+
+| Model | BM25 | Qwen3-Emb-0.6B |
+| --- | --- | --- |
+| Llama-3.1-8B | 123 - RAG 69.89%; baseline 23.30%; tie 6.82% | 131 - RAG 74.43%; baseline 18.18%; tie 7.39% |
+
+## JudgeLM wins: RAG vs MultiCONAN reference
+
+Cells report RAG wins over the valid comparisons in each cell, followed by RAG, baseline and tie percentages over valid judgments. `(lost)` means the baseline won more comparisons; `(equal wins)` means equal RAG and baseline wins.
+
+| Model | BM25 | Qwen3-Emb-0.6B |
+| --- | --- | --- |
+| Llama-3.1-8B | 180 - RAG 94.24%; baseline 2.62%; tie 3.14% | 183 - RAG 93.85%; baseline 3.08%; tie 3.08% |
+
+## JudgeLM pairwise results
+
+| Generator | Baseline | RAG challenger | Judge | Valid / total | Reparsed | RAG wins | RAG win % | Baseline wins | Baseline win % | Ties | Tie % |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Llama-3.1-8B | multiconan_reference | rag_bm25 | JudgeLM-7B | 191 / 200 | 185 | 180 | 94.24% | 5 | 2.62% | 6 | 3.14% |
+| Llama-3.1-8B | multiconan_reference | rag_qwen3_emb_0.6b | JudgeLM-7B | 195 / 200 | 189 | 183 | 93.85% | 6 | 3.08% | 6 | 3.08% |
+| Llama-3.1-8B | without_rag | rag_bm25 | JudgeLM-7B | 176 / 200 | 164 | 123 | 69.89% | 41 | 23.30% | 12 | 6.82% |
+| Llama-3.1-8B | without_rag | rag_qwen3_emb_0.6b | JudgeLM-7B | 176 / 200 | 163 | 131 | 74.43% | 32 | 18.18% | 13 | 7.39% |
+
+## Automatic metrics by system
 
 ### Llama-3.1-8B - rag_bm25
-
-| Valid judgments | Total judgments | Parse failures |
-| --- | --- | --- |
-| 200 | 200 | 0 |
-
-#### LLM-as-a-judge dimensions
-
-| Dimension | n | Mean | Variance | Std. dev. |
-| --- | --- | --- | --- | --- |
-| relevance | 200 | 4.150000 | 1.575377 | 1.255140 |
-| respectfulness | 200 | 4.950000 | 0.057789 | 0.240393 |
-| persuasiveness | 200 | 3.420000 | 0.817688 | 0.904261 |
-| self_contained | 200 | 4.720000 | 0.473970 | 0.688455 |
-| conciseness | 200 | 4.355000 | 1.888417 | 1.374197 |
-| evidence_grounding | 200 | 1.640000 | 1.186332 | 1.089189 |
-| overall | 200 | 3.055000 | 0.625101 | 0.790633 |
-
-#### Automatic metrics
 
 | Metric | n | Mean | Variance | Std. dev. |
 | --- | --- | --- | --- | --- |
@@ -60,24 +69,6 @@ The variance reported below is the sample variance (denominator `n - 1`).
 
 ### Llama-3.1-8B - rag_qwen3_emb_0.6b
 
-| Valid judgments | Total judgments | Parse failures |
-| --- | --- | --- |
-| 200 | 200 | 0 |
-
-#### LLM-as-a-judge dimensions
-
-| Dimension | n | Mean | Variance | Std. dev. |
-| --- | --- | --- | --- | --- |
-| relevance | 200 | 4.465000 | 0.712337 | 0.844000 |
-| respectfulness | 200 | 4.955000 | 0.043191 | 0.207824 |
-| persuasiveness | 200 | 3.650000 | 0.540201 | 0.734984 |
-| self_contained | 200 | 4.645000 | 0.591935 | 0.769373 |
-| conciseness | 200 | 4.295000 | 2.108518 | 1.452074 |
-| evidence_grounding | 200 | 1.880000 | 1.462915 | 1.209510 |
-| overall | 200 | 3.320000 | 0.660905 | 0.812960 |
-
-#### Automatic metrics
-
 | Metric | n | Mean | Variance | Std. dev. |
 | --- | --- | --- | --- | --- |
 | bleu_4 | 200 | 0.043121 | 0.000223 | 0.014919 |
@@ -94,24 +85,6 @@ The variance reported below is the sample variance (denominator `n - 1`).
 | repetition_rate | 200 | 0.000849 | 0.000144 | 0.012001 |
 
 ### Llama-3.1-8B - without_rag
-
-| Valid judgments | Total judgments | Parse failures |
-| --- | --- | --- |
-| 200 | 200 | 0 |
-
-#### LLM-as-a-judge dimensions
-
-| Dimension | n | Mean | Variance | Std. dev. |
-| --- | --- | --- | --- | --- |
-| relevance | 200 | 4.940000 | 0.116985 | 0.342031 |
-| respectfulness | 200 | 5.000000 | 0.000000 | 0.000000 |
-| persuasiveness | 200 | 4.055000 | 0.202990 | 0.450544 |
-| self_contained | 200 | 5.000000 | 0.000000 | 0.000000 |
-| conciseness | 200 | 5.000000 | 0.000000 | 0.000000 |
-| evidence_grounding | 0 | n/a | n/a | n/a |
-| overall | 200 | 4.055000 | 0.202990 | 0.450544 |
-
-#### Automatic metrics
 
 | Metric | n | Mean | Variance | Std. dev. |
 | --- | --- | --- | --- | --- |

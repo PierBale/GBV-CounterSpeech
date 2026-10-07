@@ -16,6 +16,7 @@ from config import (
     JUDGE_OUTPUT_DIR,
     PROJECT_DIR,
 )
+from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.evaluation.metrics import (
     AUTOMATIC_METRIC_FIELDS,
     summarize_automatic_metrics,
@@ -74,7 +75,27 @@ def read_jsonl_files(paths: Sequence[Path]) -> list[dict]:
 
 def _pairwise_result(record: dict) -> dict:
     result = record.get("pairwise_judge")
-    return result if isinstance(result, dict) else {}
+    if not isinstance(result, dict):
+        return {}
+    if result.get("winner") in VALID_WINNERS and not result.get("parse_error"):
+        return result
+
+    raw_response = result.get("raw_response")
+    if not isinstance(raw_response, str) or not raw_response.strip():
+        return result
+    parsed = LLMJudge.parse_judgment(raw_response)
+    if parsed is None:
+        return result
+
+    winner, score_1, score_2 = parsed
+    return {
+        **result,
+        "winner": winner,
+        "response_1_score": score_1,
+        "response_2_score": score_2,
+        "parse_error": None,
+        "reparsed_from_raw_response": True,
+    }
 
 
 def has_valid_pairwise_judgment(record: dict) -> bool:
@@ -83,15 +104,30 @@ def has_valid_pairwise_judgment(record: dict) -> bool:
 
 
 def summarize_pairwise(records: Sequence[dict]) -> dict:
-    valid = [record for record in records if has_valid_pairwise_judgment(record)]
-    winners = [_pairwise_result(record)["winner"] for record in valid]
+    results = [_pairwise_result(record) for record in records]
+    valid = [
+        result
+        for result in results
+        if result.get("winner") in VALID_WINNERS and not result.get("parse_error")
+    ]
+    winners = [result["winner"] for result in valid]
+    valid_count = len(valid)
+    challenger_wins = winners.count("response_2")
+    baseline_wins = winners.count("response_1")
+    ties = winners.count("tie")
     return {
         "total_comparisons": len(records),
-        "valid_comparisons": len(valid),
-        "parse_failures": len(records) - len(valid),
-        "challenger_wins": winners.count("response_2"),
-        "baseline_wins": winners.count("response_1"),
-        "ties": winners.count("tie"),
+        "valid_comparisons": valid_count,
+        "parse_failures": len(records) - valid_count,
+        "reparsed_from_raw_response": sum(
+            bool(result.get("reparsed_from_raw_response")) for result in valid
+        ),
+        "challenger_wins": challenger_wins,
+        "baseline_wins": baseline_wins,
+        "ties": ties,
+        "rag_win_percentage": _percentage(challenger_wins, valid_count),
+        "baseline_win_percentage": _percentage(baseline_wins, valid_count),
+        "tie_percentage": _percentage(ties, valid_count),
     }
 
 
@@ -148,6 +184,10 @@ def _descriptive_statistics(values: Iterable[int | float]) -> dict:
 
 def _round(value: float, digits: int = 6) -> float:
     return round(float(value), digits)
+
+
+def _percentage(count: int, total: int) -> float | None:
+    return round(100 * count / total, 2) if total else None
 
 
 def _group_records(
@@ -308,20 +348,37 @@ def _pairwise_matrix(rows: Sequence[dict], baseline: str) -> dict:
 def _pairwise_cell(summary: dict) -> dict:
     challenger_wins = summary["challenger_wins"]
     baseline_wins = summary["baseline_wins"]
-    if challenger_wins < baseline_wins:
-        display = f"{challenger_wins} (lost)"
+    valid = summary["valid_comparisons"]
+    if not valid:
+        result = "n/a"
+    elif challenger_wins < baseline_wins:
+        result = f"{challenger_wins} (lost)"
     elif challenger_wins == baseline_wins:
-        display = f"{challenger_wins} (tie)"
+        result = f"{challenger_wins} (equal wins)"
     else:
-        display = str(challenger_wins)
+        result = str(challenger_wins)
+
+    percentages = (
+        f"RAG { _format_percentage(summary['rag_win_percentage'])}; "
+        f"baseline { _format_percentage(summary['baseline_win_percentage'])}; "
+        f"tie { _format_percentage(summary['tie_percentage'])}"
+    )
     return {
-        "display": display,
+        "display": f"{result} - {percentages}" if valid else result,
         "rag_wins": challenger_wins,
         "baseline_wins": baseline_wins,
         "ties": summary["ties"],
-        "valid_comparisons": summary["valid_comparisons"],
+        "rag_win_percentage": summary["rag_win_percentage"],
+        "baseline_win_percentage": summary["baseline_win_percentage"],
+        "tie_percentage": summary["tie_percentage"],
+        "valid_comparisons": valid,
+        "reparsed_from_raw_response": summary["reparsed_from_raw_response"],
         "total_comparisons": summary["total_comparisons"],
     }
+
+
+def _format_percentage(value: float | None) -> str:
+    return "n/a" if value is None else f"{value:.2f}%"
 
 
 def _strategy_label(strategy: str) -> str:
@@ -418,9 +475,13 @@ def _pairwise_csv_row(summary: dict) -> dict:
             "total_comparisons",
             "valid_comparisons",
             "parse_failures",
+            "reparsed_from_raw_response",
             "challenger_wins",
+            "rag_win_percentage",
             "baseline_wins",
+            "baseline_win_percentage",
             "ties",
+            "tie_percentage",
         )
     }
 
@@ -453,9 +514,13 @@ def _system_csv_row(system: dict) -> dict:
             "total_comparisons",
             "valid_comparisons",
             "parse_failures",
+            "reparsed_from_raw_response",
             "challenger_wins",
+            "rag_win_percentage",
             "baseline_wins",
+            "baseline_win_percentage",
             "ties",
+            "tie_percentage",
         ):
             row[f"judgelm_vs_{baseline}_{field}"] = (
                 comparison.get(field) if comparison else None
@@ -522,8 +587,9 @@ def _pairwise_matrix_note(matrix: dict) -> str:
     else:
         comparison_scope = "over the valid comparisons in each cell"
     return (
-        f"Cells report RAG wins {comparison_scope}. `(lost)` means the "
-        "baseline won more comparisons; `(tie)` means equal win counts."
+        f"Cells report RAG wins {comparison_scope}, followed by RAG, baseline "
+        "and tie percentages over valid judgments. `(lost)` means the baseline "
+        "won more comparisons; `(equal wins)` means equal RAG and baseline wins."
     )
 
 
@@ -546,6 +612,10 @@ def _markdown_report(report: dict) -> str:
         f"- Automatic-metric files: {len(report['input_files']['automatic_metrics'])}",
         f"- Valid pairwise comparisons: {pairwise['valid_comparisons']} / {pairwise['total_comparisons']}",
         f"- Pairwise parse failures: {pairwise['parse_failures']}",
+        (
+            "- Recovered from saved raw responses: "
+            f"{pairwise['reparsed_from_raw_response']}"
+        ),
         f"- Unique generations with metrics: {metrics['unique_generations']}",
         "",
         "## Automatic metrics comparison",
@@ -585,13 +655,17 @@ def _markdown_report(report: dict) -> str:
         _markdown_table(
             (
                 "Generator",
-                "No-RAG baseline",
+                "Baseline",
                 "RAG challenger",
                 "Judge",
                 "Valid / total",
+                "Reparsed",
                 "RAG wins",
-                "No-RAG wins",
+                "RAG win %",
+                "Baseline wins",
+                "Baseline win %",
                 "Ties",
+                "Tie %",
             ),
             [
                 (
@@ -600,9 +674,13 @@ def _markdown_report(report: dict) -> str:
                     row["challenger_strategy"],
                     row["judge_model"],
                     f"{row['valid_comparisons']} / {row['total_comparisons']}",
+                    row["reparsed_from_raw_response"],
                     row["challenger_wins"],
+                    _format_percentage(row["rag_win_percentage"]),
                     row["baseline_wins"],
+                    _format_percentage(row["baseline_win_percentage"]),
                     row["ties"],
+                    _format_percentage(row["tie_percentage"]),
                 )
                 for row in report["pairwise_judge"]["detailed"]
             ],
@@ -673,7 +751,8 @@ def print_report(report: dict) -> None:
     print(
         f"Valid pairwise comparisons: {pairwise['valid_comparisons']}/"
         f"{pairwise['total_comparisons']} | "
-        f"parse failures: {pairwise['parse_failures']}"
+        f"parse failures: {pairwise['parse_failures']} | "
+        f"reparsed: {pairwise['reparsed_from_raw_response']}"
     )
     print(f"Unique metric generations: {metrics['unique_generations']}")
 
@@ -681,24 +760,32 @@ def print_report(report: dict) -> None:
     pairwise_rows = [
         (
             row["generation_model"],
+            row["baseline_strategy"],
             row["challenger_strategy"],
             row["judge_model"],
             f"{row['valid_comparisons']}/{row['total_comparisons']}",
             str(row["challenger_wins"]),
+            _format_percentage(row["rag_win_percentage"]),
             str(row["baseline_wins"]),
+            _format_percentage(row["baseline_win_percentage"]),
             str(row["ties"]),
+            _format_percentage(row["tie_percentage"]),
         )
         for row in report["pairwise_judge"]["detailed"]
     ]
     _print_table(
         (
             "generation_model",
+            "baseline",
             "RAG_challenger",
             "judge_model",
             "valid/total",
             "RAG_wins",
-            "No-RAG_wins",
+            "RAG_win_%",
+            "baseline_wins",
+            "baseline_win_%",
             "ties",
+            "tie_%",
         ),
         pairwise_rows,
     )

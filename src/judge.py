@@ -163,12 +163,51 @@ def read_existing_judgments(path: Path) -> list[dict]:
     return read_jsonl(path) if path.is_file() else []
 
 
+def _reparse_existing_judgment(record: dict) -> dict:
+    """Recover a clear winner from a previously saved raw JudgeLM response."""
+    if has_pairwise_judgment(record):
+        return record
+
+    result = record.get("pairwise_judge")
+    if not isinstance(result, dict):
+        return record
+    raw_response = result.get("raw_response")
+    if not isinstance(raw_response, str) or not raw_response.strip():
+        return record
+
+    parsed = LLMJudge.parse_judgment(raw_response)
+    if parsed is None:
+        return record
+    winner, score_1, score_2 = parsed
+
+    repaired = dict(record)
+    repaired_result = dict(result)
+    repaired_result.update(
+        {
+            "winner": winner,
+            "response_1_score": score_1,
+            "response_2_score": score_2,
+            "parse_error": None,
+            "winner_strategy": {
+                "response_1": record.get("response_1_strategy")
+                or record.get("baseline_strategy"),
+                "response_2": record.get("response_2_strategy")
+                or record.get("challenger_strategy"),
+                "tie": "tie",
+            }[winner],
+        }
+    )
+    repaired["pairwise_judge"] = repaired_result
+    return repaired
+
+
 def _valid_existing_map(records: list[dict]) -> dict[tuple, dict]:
-    return {
-        comparison_key(record): record
-        for record in records
-        if has_pairwise_judgment(record)
-    }
+    valid = {}
+    for record in records:
+        reparsed = _reparse_existing_judgment(record)
+        if has_pairwise_judgment(reparsed):
+            valid[comparison_key(reparsed)] = reparsed
+    return valid
 
 
 def _judged_record(comparison: dict, result, judge_name: str) -> dict:
