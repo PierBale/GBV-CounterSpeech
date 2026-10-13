@@ -17,9 +17,10 @@ from config import (
     PROJECT_DIR,
 )
 from unito_amazon.evaluation.judge import LLMJudge
-from unito_amazon.evaluation.latex import pairwise_latex_tables
+from unito_amazon.evaluation.latex import automatic_latex_tables, pairwise_latex_tables
 from unito_amazon.evaluation.metrics import (
     AUTOMATIC_METRIC_FIELDS,
+    eligible_for_automatic_evaluation,
     summarize_automatic_metrics,
 )
 
@@ -232,6 +233,39 @@ def build_report(
     judge_paths: Sequence[Path],
     metric_paths: Sequence[Path],
 ) -> dict:
+    """Keep each dataset's denominators, metrics and system comparisons separate."""
+    def normalized(record: dict) -> dict:
+        return {**record, "source": str(record.get("source") or "unknown").strip().casefold()}
+
+    judgments = [normalized(record) for record in judge_records]
+    metrics = [normalized(record) for record in metric_records if eligible_for_automatic_evaluation(record)]
+    datasets = sorted({record["source"] for record in [*judgments, *metrics]})
+    return {
+        "protocol": "Pairwise system comparisons, reported separately by dataset",
+        "input_files": {
+            "pairwise_judge": [str(path) for path in judge_paths],
+            "automatic_metrics": [str(path) for path in metric_paths],
+        },
+        "automatic_metrics_scope": "MultiCONAN with a nonempty reference only",
+        "excluded_metric_records": len(metric_records) - len(metrics),
+        "by_dataset": {
+            dataset: _build_dataset_report(
+                [record for record in judgments if record["source"] == dataset],
+                [record for record in metrics if record["source"] == dataset],
+                judge_paths,
+                metric_paths,
+            )
+            for dataset in datasets
+        },
+    }
+
+
+def _build_dataset_report(
+    judge_records: Sequence[dict],
+    metric_records: Sequence[dict],
+    judge_paths: Sequence[Path],
+    metric_paths: Sequence[Path],
+) -> dict:
     if judge_records and not any(
         isinstance(record.get("pairwise_judge"), dict) for record in judge_records
     ):
@@ -243,6 +277,7 @@ def build_report(
     pairwise_detailed = grouped_pairwise(
         judge_records,
         (
+            "source",
             "generation_model",
             "baseline_strategy",
             "challenger_strategy",
@@ -251,7 +286,7 @@ def build_report(
     )
     metric_systems = grouped_metrics(
         metric_records,
-        ("generation_model", "generation_strategy"),
+        ("source", "generation_model", "generation_strategy"),
     )
     report = {
         "protocol": "Pairwise system comparisons on the same messages and decoder",
@@ -289,10 +324,6 @@ def build_report(
             report["pairwise_judge"]["by_generation_model_and_challenger"],
             "without_rag",
         ),
-        "judgelm_vs_multiconan_reference": _pairwise_matrix(
-            report["pairwise_judge"]["by_generation_model_and_challenger"],
-            "multiconan_reference",
-        ),
     }
     return report
 
@@ -312,6 +343,7 @@ def _automatic_comparison_rows(metric_systems: Sequence[dict]) -> list[dict]:
     for system in metric_systems:
         metric_stats = system["metric_statistics"]
         row = {
+            "Dataset": system["source"],
             "Model": system["generation_model"],
             "System": _strategy_label(system["generation_strategy"]),
         }
@@ -432,46 +464,35 @@ def _combine_systems(report: dict) -> list[dict]:
 
 
 def write_report(report: dict, output_dir: Path) -> tuple[Path, Path, list[Path]]:
+    """Write separate dataset reports plus combined exports with explicit source."""
     output_dir.mkdir(parents=True, exist_ok=True)
     json_path = output_dir / "evaluation_statistics.json"
-    json_path.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     markdown_path = output_dir / "evaluation_statistics.md"
-    markdown_path.write_text(_markdown_report(report), encoding="utf-8")
-    latex_path = output_dir / "judgelm_pairwise.tex"
-    latex_path.write_text(
-        pairwise_latex_tables(
-            report["pairwise_judge"]["by_dataset_model_pair_and_judge"],
-            report["pairwise_judge"]["detailed"],
-        ),
-        encoding="utf-8",
-    )
-
-    pairwise_rows = [
-        _pairwise_csv_row(row) for row in report["pairwise_judge"]["detailed"]
-    ]
-    metric_rows = [
-        _metric_csv_row(row) for row in report["automatic_metrics"]["by_system"]
-    ]
-    system_rows = [_system_csv_row(row) for row in report["systems"]]
-    comparison_tables = report["comparison_tables"]
+    sections = ["# Evaluation statistics by dataset", "",
+                "Automatic metrics: MultiCONAN with reference only.", ""]
+    pairwise_rows, metric_systems, systems, automatic_rows, no_rag_rows = [], [], [], [], []
+    for dataset, dataset_report in report["by_dataset"].items():
+        sections.extend([f"# Dataset: {dataset}", "", _markdown_report(dataset_report)])
+        pairwise_rows.extend(dataset_report["pairwise_judge"]["detailed"])
+        metric_systems.extend(dataset_report["automatic_metrics"]["by_system"])
+        systems.extend(dataset_report["systems"])
+        automatic_rows.extend(dataset_report["comparison_tables"]["automatic_metrics"])
+        no_rag_rows.extend(
+            {"Dataset": dataset, **row}
+            for row in _pairwise_matrix_csv_rows(dataset_report["comparison_tables"]["judgelm_vs_no_rag"])
+        )
+    markdown_path.write_text("\n".join(sections), encoding="utf-8")
+    (output_dir / "judgelm_pairwise.tex").write_text(pairwise_latex_tables(pairwise_rows), encoding="utf-8")
+    (output_dir / "automatic_metrics.tex").write_text(automatic_latex_tables(metric_systems), encoding="utf-8")
     tables = {
-        "judgelm_pairwise.csv": pairwise_rows,
-        "llm_judge_detailed.csv": pairwise_rows,
-        "automatic_metrics_detailed.csv": metric_rows,
-        "system_statistics.csv": system_rows,
-        "combined_detailed.csv": system_rows,
-        "automatic_metrics_comparison.csv": comparison_tables[
-            "automatic_metrics"
-        ],
-        "judgelm_vs_no_rag.csv": _pairwise_matrix_csv_rows(
-            comparison_tables["judgelm_vs_no_rag"]
-        ),
-        "judgelm_vs_multiconan_reference.csv": _pairwise_matrix_csv_rows(
-            comparison_tables["judgelm_vs_multiconan_reference"]
-        ),
+        "judgelm_pairwise.csv": [_pairwise_csv_row(row) for row in pairwise_rows],
+        "llm_judge_detailed.csv": [_pairwise_csv_row(row) for row in pairwise_rows],
+        "automatic_metrics_detailed.csv": [_metric_csv_row(row) for row in metric_systems],
+        "automatic_metrics_comparison.csv": automatic_rows,
+        "system_statistics.csv": [_system_csv_row(row) for row in systems],
+        "combined_detailed.csv": [_system_csv_row(row) for row in systems],
+        "judgelm_vs_no_rag.csv": no_rag_rows,
     }
     outputs = []
     for filename, rows in tables.items():
@@ -485,6 +506,7 @@ def _pairwise_csv_row(summary: dict) -> dict:
     return {
         field: summary.get(field)
         for field in (
+            "source",
             "generation_model",
             "baseline_strategy",
             "challenger_strategy",
@@ -505,6 +527,7 @@ def _pairwise_csv_row(summary: dict) -> dict:
 
 def _metric_csv_row(summary: dict) -> dict:
     row = {
+        "source": summary.get("source"),
         "generation_model": summary.get("generation_model"),
         "generation_strategy": summary.get("generation_strategy"),
         "unique_generations": summary["unique_generations"],
@@ -525,7 +548,7 @@ def _system_csv_row(system: dict) -> dict:
         item["baseline_strategy"]: item
         for item in system.get("pairwise_comparisons", [])
     }
-    for baseline in ("without_rag", "multiconan_reference"):
+    for baseline in ("without_rag", "rag_qwen3_emb_4b"):
         comparison = comparisons.get(baseline)
         for field in (
             "total_comparisons",
@@ -550,7 +573,8 @@ def _write_csv(path: Path, rows: Sequence[dict]) -> None:
         path.write_text("", encoding="utf-8")
         return
     with path.open("w", encoding="utf-8-sig", newline="") as output_file:
-        writer = csv.DictWriter(output_file, fieldnames=list(rows[0]))
+        fieldnames = list(dict.fromkeys(field for row in rows for field in row))
+        writer = csv.DictWriter(output_file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -619,8 +643,8 @@ def _markdown_report(report: dict) -> str:
     lines = [
         "# Evaluation statistics",
         "",
-        "JudgeLM protocol: pairwise RAG vs No-RAG and MultiCONAN reference, following the paper prompt.",
-        "Response 1 is the No-RAG or MultiCONAN baseline; Response 2 is the RAG challenger.",
+        "JudgeLM protocol: pairwise comparisons between generation systems on this dataset only.",
+        "Response 1 is the indicated baseline; Response 2 is the challenger. No gold-reference comparisons are added.",
         "Automatic-metric variance is the sample variance (denominator `n - 1`).",
         "",
         "## Overview",
@@ -638,9 +662,9 @@ def _markdown_report(report: dict) -> str:
         "## Automatic metrics comparison",
         "",
         (
-            "Reference-based metrics are populated only for records sourced "
-            "from MultiCONAN; reference-free metrics are reported for every "
-            "system. Each metric has separate mean and sample-variance columns."
+            "Automatic metrics are reported only for MultiCONAN records with "
+            "a reference; no automatic metrics are reported for EDOS. "
+            "Each metric has separate mean and sample-variance columns."
         ),
         "",
         _markdown_table(
@@ -656,16 +680,6 @@ def _markdown_report(report: dict) -> str:
         _pairwise_matrix_note(comparisons["judgelm_vs_no_rag"]),
         "",
         _markdown_pairwise_matrix(comparisons["judgelm_vs_no_rag"]),
-        "",
-        "## JudgeLM wins: RAG vs MultiCONAN reference",
-        "",
-        _pairwise_matrix_note(
-            comparisons["judgelm_vs_multiconan_reference"]
-        ),
-        "",
-        _markdown_pairwise_matrix(
-            comparisons["judgelm_vs_multiconan_reference"]
-        ),
         "",
         "## JudgeLM pairwise results",
         "",
@@ -759,6 +773,16 @@ def _markdown_value(value: object) -> str:
 
 
 def print_report(report: dict) -> None:
+    print("Statistics are separated by dataset; no pooled dataset results.")
+    print(f"Excluded metric records (not MultiCONAN with reference): {report['excluded_metric_records']}")
+    for dataset, dataset_report in report["by_dataset"].items():
+        print(f"\nDataset: {dataset}")
+        _print_dataset_report(dataset_report)
+    if not report["by_dataset"]:
+        print("No eligible records available.")
+
+
+def _print_dataset_report(report: dict) -> None:
     pairwise = report["overall"]["pairwise_judge"]
     metrics = report["overall"]["automatic_metrics"]
     print(
@@ -921,6 +945,7 @@ def main() -> None:
         print(f"\nJSON report: {json_path.resolve()}")
         print(f"Markdown report: {markdown_path.resolve()}")
         print(f"LaTeX pairwise tables: {(args.output_dir / 'judgelm_pairwise.tex').resolve()}")
+        print(f"LaTeX automatic metrics (MultiCONAN): {(args.output_dir / 'automatic_metrics.tex').resolve()}")
         print(f"CSV reports: {len(csv_paths)} files in {args.output_dir.resolve()}")
 
 

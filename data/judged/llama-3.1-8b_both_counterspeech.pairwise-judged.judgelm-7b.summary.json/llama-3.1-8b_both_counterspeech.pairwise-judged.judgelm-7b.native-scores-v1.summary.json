@@ -1,0 +1,105 @@
+{
+  "total_comparisons": 900,
+  "valid_comparisons": 900,
+  "parse_failures": 0,
+  "by_generation_model_baseline_and_challenger": {
+    "Llama-3.1-8B|rag_qwen3_emb_4b|rag_cards": {
+      "comparisons": 300,
+      "challenger_wins": 129,
+      "baseline_wins": 141,
+      "ties": 30,
+      "challenger_win_rate": 0.43,
+      "challenger_tie_adjusted_rate": 0.48
+    },
+    "Llama-3.1-8B|without_rag|rag_cards": {
+      "comparisons": 300,
+      "challenger_wins": 169,
+      "baseline_wins": 111,
+      "ties": 20,
+      "challenger_win_rate": 0.5633333333333334,
+      "challenger_tie_adjusted_rate": 0.5966666666666667
+    },
+    "Llama-3.1-8B|without_rag|rag_qwen3_emb_4b": {
+      "comparisons": 300,
+      "challenger_wins": 172,
+      "baseline_wins": 116,
+      "ties": 12,
+      "challenger_win_rate": 0.5733333333333334,
+      "challenger_tie_adjusted_rate": 0.5933333333333334
+    }
+  },
+  "by_dataset_generation_model_and_pair": {
+    "edos|Llama-3.1-8B|rag_qwen3_emb_4b|rag_cards": {
+      "comparisons": 150,
+      "response_1_strategy": "rag_qwen3_emb_4b",
+      "response_2_strategy": "rag_cards",
+      "response_1_wins": 95,
+      "response_2_wins": 55,
+      "ties": 0,
+      "response_2_win_rate": 0.36666666666666664,
+      "response_2_tie_adjusted_rate": 0.36666666666666664,
+      "primary_comparison": true
+    },
+    "multiconan|Llama-3.1-8B|rag_qwen3_emb_4b|rag_cards": {
+      "comparisons": 150,
+      "response_1_strategy": "rag_qwen3_emb_4b",
+      "response_2_strategy": "rag_cards",
+      "response_1_wins": 46,
+      "response_2_wins": 74,
+      "ties": 30,
+      "response_2_win_rate": 0.49333333333333335,
+      "response_2_tie_adjusted_rate": 0.5933333333333334,
+      "primary_comparison": true
+    },
+    "edos|Llama-3.1-8B|without_rag|rag_cards": {
+      "comparisons": 150,
+      "response_1_strategy": "without_rag",
+      "response_2_strategy": "rag_cards",
+      "response_1_wins": 82,
+      "response_2_wins": 67,
+      "ties": 1,
+      "response_2_win_rate": 0.44666666666666666,
+      "response_2_tie_adjusted_rate": 0.45,
+      "primary_comparison": false
+    },
+    "multiconan|Llama-3.1-8B|without_rag|rag_cards": {
+      "comparisons": 150,
+      "response_1_strategy": "without_rag",
+      "response_2_strategy": "rag_cards",
+      "response_1_wins": 29,
+      "response_2_wins": 102,
+      "ties": 19,
+      "response_2_win_rate": 0.68,
+      "response_2_tie_adjusted_rate": 0.7433333333333333,
+      "primary_comparison": false
+    },
+    "edos|Llama-3.1-8B|without_rag|rag_qwen3_emb_4b": {
+      "comparisons": 150,
+      "response_1_strategy": "without_rag",
+      "response_2_strategy": "rag_qwen3_emb_4b",
+      "response_1_wins": 84,
+      "response_2_wins": 65,
+      "ties": 1,
+      "response_2_win_rate": 0.43333333333333335,
+      "response_2_tie_adjusted_rate": 0.43666666666666665,
+      "primary_comparison": false
+    },
+    "multiconan|Llama-3.1-8B|without_rag|rag_qwen3_emb_4b": {
+      "comparisons": 150,
+      "response_1_strategy": "without_rag",
+      "response_2_strategy": "rag_qwen3_emb_4b",
+      "response_1_wins": 32,
+      "response_2_wins": 107,
+      "ties": 11,
+      "response_2_win_rate": 0.7133333333333334,
+      "response_2_tie_adjusted_rate": 0.75,
+      "primary_comparison": false
+    }
+  },
+  "judge_model": "JudgeLM-7B",
+  "input_file": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/generated/llama-3.1-8b_both_counterspeech.jsonl",
+  "reused_comparisons": 0,
+  "new_comparisons": 900,
+  "protocol": "JudgeLM all system pairs, within message and decoder; no gold reference",
+  "judge_protocol_version": "native-scores-v1"
+}

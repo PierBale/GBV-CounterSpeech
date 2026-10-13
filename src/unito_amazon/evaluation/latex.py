@@ -1,4 +1,4 @@
-"""LaTeX pairwise outcome tables, using only already aggregated statistics."""
+"""LaTeX evaluation tables, using only already aggregated statistics."""
 
 import re
 from collections import defaultdict
@@ -62,12 +62,8 @@ def _section(title: str, rows: Sequence[dict]) -> list[str]:
     return lines
 
 
-def pairwise_latex_tables(dataset_rows: Sequence[dict], aggregate_rows: Sequence[dict]) -> str:
-    """One table per decoder/judge, with dataset blocks and an overall block.
-
-    Rows must be grouped by source/model/judge/pair for dataset_rows and
-    model/judge/pair for aggregate_rows. No unobserved comparisons are invented.
-    """
+def pairwise_latex_tables(dataset_rows: Sequence[dict]) -> str:
+    """One table per decoder/judge, with separate dataset sections; no pooling."""
     groups = defaultdict(list)
     for row in dataset_rows:
         groups[(row["generation_model"], row["judge_model"])].append(row)
@@ -76,11 +72,11 @@ def pairwise_latex_tables(dataset_rows: Sequence[dict], aggregate_rows: Sequence
         label = re.sub(r"[^a-zA-Z0-9]+", "-", f"{model}-{judge}").strip("-").lower()
         lines = [
             r"\begin{table*}[t]", r"\centering", r"\small",
-            r"\caption{" + latex_escape(f"{judge} pairwise evaluation for {model}. ")
+            r"\caption{" + latex_escape(f"{judge} pairwise evaluation for {model}, separated by dataset. ")
             + "Each row compares the system against the indicated baseline on the same messages. "
             + "Outcomes are counts and percentages over valid comparisons. "
             + "Bold marks the highest system win percentage among systems sharing a baseline "
-            + "within a dataset block (including the overall block); it does not indicate statistical significance.}",
+            + "within each dataset; it does not indicate statistical significance.}",
             rf"\label{{tab:pairwise-{label}}}", r"\resizebox{\textwidth}{!}{%",
             r"\begin{tabular}{llrrrr}", r"\toprule",
             r"\textbf{Baseline} & \textbf{System} & \textbf{Valid / Total} & \textbf{System Wins} & \textbf{Baseline Wins} & \textbf{Ties} \\",
@@ -89,17 +85,57 @@ def pairwise_latex_tables(dataset_rows: Sequence[dict], aggregate_rows: Sequence
         by_dataset = defaultdict(list)
         for row in rows:
             by_dataset[row["source"]].append(row)
-        for position, (dataset, items) in enumerate(sorted(by_dataset.items())):
+        for position, (dataset, dataset_items) in enumerate(sorted(by_dataset.items())):
             if position:
                 lines.append(r"\midrule")
             title = {"edos": "EDOS", "multiconan": "MultiCONAN"}.get(dataset, dataset)
-            lines.extend(_section(title, items))
-        overall = [row for row in aggregate_rows if row["generation_model"] == model and row["judge_model"] == judge]
-        if len(by_dataset) > 1 and overall:
-            lines.append(r"\midrule")
-            lines.extend(_section("All datasets", overall))
+            lines.extend(_section(title, dataset_items))
         lines.extend([r"\bottomrule", r"\end{tabular}%", "}", r"\end{table*}"])
         tables.append("\n".join(lines))
     if not groups:
         tables.append("% No pairwise comparisons available; no table generated.")
+    return "\n\n".join(tables) + "\n"
+
+
+def automatic_latex_tables(system_rows: Sequence[dict]) -> str:
+    """MultiCONAN only: per-response mean, sample SD and valid n per metric."""
+    metrics = (
+        ("BLEU-4", "bleu_4"), ("METEOR", "meteor"), ("ROUGE-L", "rouge_l"),
+        ("BERTScore-F1", "bertscore_f1"),
+        ("BERTScore-F1 rescaled", "bertscore_rescaled_f1"),
+    )
+    groups = defaultdict(list)
+    for row in system_rows:
+        if row.get("source") == "multiconan":
+            groups[row["generation_model"]].append(row)
+    tables = [r"% Generated automatically. Requires \usepackage{booktabs,graphicx}."]
+    for model, rows in sorted(groups.items()):
+        label = re.sub(r"[^a-zA-Z0-9]+", "-", model).strip("-").lower()
+        lines = [
+            r"\begin{table*}[t]", r"\centering", r"\small",
+            r"\caption{" + latex_escape(f"Automatic evaluation for {model} on MultiCONAN. ")
+            + r"Cells report per-response mean $\pm$ sample standard deviation, with valid $n$ in parentheses. "
+            + "Only generations with a reference are included. BLEU-4 is the mean of smoothed sentence scores, "
+            + "not corpus BLEU. "
+            + "Scores are not multiplied by 100. Missing values or undefined standard deviations are n/a.}",
+            rf"\label{{tab:automatic-multiconan-{label}}}",
+            r"\resizebox{\textwidth}{!}{%", r"\begin{tabular}{l" + "r" * len(metrics) + "}", r"\toprule",
+            " & ".join(r"\textbf{" + latex_escape(name) + "}" for name in ("System", *(name for name, _ in metrics))) + r" \\",
+            r"\midrule",
+        ]
+        order = {"without_rag": 0, "rag_qwen3_emb_4b": 1, "rag_cards": 2}
+        for row in sorted(rows, key=lambda item: (order.get(item["generation_strategy"], 100), item["generation_strategy"])):
+            cells = [latex_escape(_strategy_label(row["generation_strategy"]))]
+            for _, field in metrics:
+                stats = row["metric_statistics"][field]
+                if not stats["count"] or stats["mean"] is None:
+                    cells.append("n/a (0)")
+                else:
+                    deviation = f"{stats['std']:.4f}" if stats["std"] is not None else r"\mathrm{n/a}"
+                    cells.append(rf"${stats['mean']:.4f} \pm {deviation}$ ({stats['count']})")
+            lines.append(" & ".join(cells) + r" \\")
+        lines.extend([r"\bottomrule", r"\end{tabular}%", "}", r"\end{table*}"])
+        tables.append("\n".join(lines))
+    if not groups:
+        tables.append("% No eligible MultiCONAN metric records available. Run metrics.py first; no table generated.")
     return "\n\n".join(tables) + "\n"

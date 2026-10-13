@@ -137,18 +137,23 @@ inversione dell'ordine A/B, verifiche fattuali sulle fonti o valutazione umana:
 non erano parte delle modifiche richieste. Il giudizio pairwise non certifica
 automaticamente la factuality delle risposte.
 
-## Tabella LaTeX delle statistiche
+## Statistiche per dataset e tabelle LaTeX
 
-Dalla cartella `src`, dopo il judge:
+Dalla cartella `src`, dopo il judge, calcolare le metriche automatiche (se non
+sono ancora disponibili) e poi esportare le statistiche:
 
 ```bash
+python metrics.py
 python stats.py --judge-paths ../data/judged/llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.native-scores-v1.jsonl
 ```
 
 Oltre ai report JSON/CSV/Markdown, viene creato automaticamente
 `data/stats/judgelm_pairwise.tex` (oppure nella directory di `--output-dir`).
-Il file contiene una tabella `table*` per ogni coppia decoder/judge, con blocchi
-separati EDOS, MultiCONAN e totale dei dataset quando sono entrambi presenti.
+Il file contiene una sola tabella `table*` per ogni coppia decoder/judge, con
+sezioni EDOS e MultiCONAN separate da `\midrule`, senza un totale aggregato.
+EDOS e MultiCONAN non vengono sommati. Anche console e Markdown hanno sezioni
+separate; il JSON contiene `by_dataset.edos` e `by_dataset.multiconan`, mentre
+i CSV hanno la colonna `source` (o `Dataset` nelle tabelle di confronto).
 Le righe corrispondono alle coppie osservate, incluso chunk-RAG vs card-RAG:
 non vengono aggiunte baseline gold o sistemi disattivati.
 
@@ -163,12 +168,34 @@ file nel documento usare, adattando il percorso:
 
 ```latex
 \input{judgelm_pairwise.tex}
+\input{automatic_metrics.tex}
 ```
 
 `stats.py` aggrega giudizi già salvati e non avvia LLM o calcoli BERTScore.
+Genera anche `data/stats/automatic_metrics.tex`: una tabella per decoder, solo
+per MultiCONAN con reference disponibile. Le colonne sono BLEU-4, METEOR,
+ROUGE-L, BERTScore-F1 e BERTScore-F1 rescaled. Distinct-1, Distinct-2 e repetition
+rate restano nei dati salvati, ma non vengono mostrate nella tabella LaTeX.
+Ogni cella riporta media, deviazione standard campionaria e numero di
+valori validi. BLEU-4 è una media per risposta, non un punteggio corpus;
+i valori non vengono moltiplicati per 100. I dati mancanti sono `n/a`, non zero.
+Il CSV dettagliato conserva anche varianza e BERTScore precision/recall.
+
+`metrics.py` esclude EDOS e i record MultiCONAN privi di reference prima del
+calcolo e riutilizza le metriche già presenti. BERTScore carica un modello:
+eseguire questo comando sul cluster. Distinct-n e repetition rate non richiedono
+reference, ma in questo esperimento vengono riportati anch'essi solo sul
+sottoinsieme MultiCONAN con reference. `stats.py` applica lo stesso filtro anche
+ai vecchi file di metriche misti. Se non ci sono metriche MultiCONAN, il `.tex`
+contiene un commento esplicativo e nessuna tabella con valori inventati.
+
 `--no-save` stampa soltanto le statistiche e non scrive nemmeno il file LaTeX.
 Se nella cartella sono presenti più esperimenti, selezionare quelli desiderati
 con `--judge-paths` per non aggregarli involontariamente.
+Analogamente, `--metric-paths` seleziona i file `.metrics.jsonl` desiderati.
+I vecchi report non più prodotti (ad esempio il confronto col gold) non vengono
+cancellati: per avere una cartella priva di report precedenti usare un nuovo
+`--output-dir`.
 
 ## Test locali leggeri
 

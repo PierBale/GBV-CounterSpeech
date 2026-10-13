@@ -19,6 +19,7 @@ from unito_amazon.evaluation.metrics import (
     REFERENCE_FREE_METRIC_FIELDS,
     REFERENCE_METRIC_FIELDS,
     compute_automatic_metrics,
+    eligible_for_automatic_evaluation,
     summarize_automatic_metrics,
 )
 
@@ -103,7 +104,16 @@ def _metric_record(record: dict) -> dict:
 
 
 def evaluate_file(input_path: Path) -> None:
-    input_records = read_jsonl(input_path)
+    records = read_jsonl(input_path)
+    input_records = [record for record in records if eligible_for_automatic_evaluation(record)]
+    print(
+        f"[metrics] {input_path.name}: {len(input_records)}/{len(records)} "
+        "outputs eligible (MultiCONAN with reference); "
+        f"{len(records) - len(input_records)} skipped."
+    )
+    if not input_records:
+        print("[metrics] Nothing to calculate; no metric model will be loaded.")
+        return
     output_path = metric_output_path(input_path)
     existing_records = read_jsonl(output_path) if output_path.is_file() else []
     existing = {

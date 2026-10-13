@@ -41,6 +41,13 @@ _WORD_PATTERN = re.compile(r"\b\w+(?:['’]\w+)?\b", flags=re.UNICODE)
 _LIGHTWEIGHT_METRICS: dict[str, object] = {}
 
 
+def eligible_for_automatic_evaluation(record: dict) -> bool:
+    """The experiment reports automatic metrics only for MultiCONAN with gold."""
+    return _is_multiconan(record) and bool(
+        _normalize_text(record.get("reference_counter_speech"))
+    )
+
+
 def compute_automatic_metrics(
     records: Sequence[dict],
     *,

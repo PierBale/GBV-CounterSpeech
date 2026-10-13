@@ -1,0 +1,19 @@
+% Generated automatically. Requires \usepackage{booktabs,graphicx}.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Automatic evaluation for Llama-3.1-8B on MultiCONAN. Cells report per-response mean $\pm$ sample standard deviation, with valid $n$ in parentheses. Only generations with a reference are included. BLEU-4 is the mean of smoothed sentence scores, not corpus BLEU. Scores are not multiplied by 100. Missing values or undefined standard deviations are n/a.}
+\label{tab:automatic-multiconan-llama-3-1-8b}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{System} & \textbf{BLEU-4} & \textbf{METEOR} & \textbf{ROUGE-L} & \textbf{BERTScore-F1} & \textbf{BERTScore-F1 rescaled} \\
+\midrule
+No RAG & $0.0549 \pm 0.0254$ (150) & $0.1572 \pm 0.0798$ (150) & $0.1326 \pm 0.0627$ (150) & $0.8699 \pm 0.0161$ (150) & $0.2292 \pm 0.0954$ (150) \\
+Chunk-RAG (Qwen3-Emb-4B) & $0.0472 \pm 0.0197$ (150) & $0.1712 \pm 0.0793$ (150) & $0.1386 \pm 0.0618$ (150) & $0.8672 \pm 0.0165$ (150) & $0.2133 \pm 0.0976$ (150) \\
+Card-RAG (Qwen3-Emb-4B) & $0.0548 \pm 0.0245$ (150) & $0.1655 \pm 0.0894$ (150) & $0.1446 \pm 0.0687$ (150) & $0.8705 \pm 0.0167$ (150) & $0.2329 \pm 0.0988$ (150) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

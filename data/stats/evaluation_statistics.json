@@ -1,0 +1,1575 @@
+{
+  "protocol": "Pairwise system comparisons, reported separately by dataset",
+  "input_files": {
+    "pairwise_judge": [
+      "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\judged\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.summary.json\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.native-scores-v1.jsonl"
+    ],
+    "automatic_metrics": [
+      "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\metrics\\llama-3.1-8b_both_counterspeech.metrics.jsonl"
+    ]
+  },
+  "automatic_metrics_scope": "MultiCONAN with a nonempty reference only",
+  "excluded_metric_records": 0,
+  "by_dataset": {
+    "edos": {
+      "protocol": "Pairwise system comparisons on the same messages and decoder",
+      "input_files": {
+        "pairwise_judge": [
+          "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\judged\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.summary.json\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.native-scores-v1.jsonl"
+        ],
+        "automatic_metrics": [
+          "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\metrics\\llama-3.1-8b_both_counterspeech.metrics.jsonl"
+        ]
+      },
+      "overall": {
+        "pairwise_judge": {
+          "total_comparisons": 450,
+          "valid_comparisons": 450,
+          "parse_failures": 0,
+          "reparsed_from_raw_response": 0,
+          "challenger_wins": 187,
+          "baseline_wins": 261,
+          "ties": 2,
+          "rag_win_percentage": 41.56,
+          "baseline_win_percentage": 58.0,
+          "tie_percentage": 0.44
+        },
+        "automatic_metrics": {
+          "reference_based": {
+            "eligible_records": 0,
+            "bleu_4_corpus": null,
+            "rouge_l_mean": null,
+            "meteor_mean": null,
+            "bertscore_precision_mean": null,
+            "bertscore_recall_mean": null,
+            "bertscore_f1_mean": null,
+            "bertscore_rescaled_precision_mean": null,
+            "bertscore_rescaled_recall_mean": null,
+            "bertscore_rescaled_f1_mean": null
+          },
+          "reference_free": {
+            "records": 0,
+            "distinct_1_corpus": null,
+            "distinct_2_corpus": null,
+            "repetition_rate_mean": null
+          },
+          "unique_generations": 0,
+          "metric_statistics": {
+            "bleu_4": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "rouge_l": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "meteor": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_precision": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_recall": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_f1": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_rescaled_precision": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_rescaled_recall": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "bertscore_rescaled_f1": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "distinct_1": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "distinct_2": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            },
+            "repetition_rate": {
+              "count": 0,
+              "mean": null,
+              "variance": null,
+              "std": null,
+              "min": null,
+              "max": null
+            }
+          }
+        }
+      },
+      "pairwise_judge": {
+        "detailed": [
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 55,
+            "baseline_wins": 95,
+            "ties": 0,
+            "rag_win_percentage": 36.67,
+            "baseline_win_percentage": 63.33,
+            "tie_percentage": 0.0
+          },
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 67,
+            "baseline_wins": 82,
+            "ties": 1,
+            "rag_win_percentage": 44.67,
+            "baseline_win_percentage": 54.67,
+            "tie_percentage": 0.67
+          },
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 65,
+            "baseline_wins": 84,
+            "ties": 1,
+            "rag_win_percentage": 43.33,
+            "baseline_win_percentage": 56.0,
+            "tie_percentage": 0.67
+          }
+        ],
+        "by_dataset_model_pair_and_judge": [
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 55,
+            "baseline_wins": 95,
+            "ties": 0,
+            "rag_win_percentage": 36.67,
+            "baseline_win_percentage": 63.33,
+            "tie_percentage": 0.0
+          },
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 67,
+            "baseline_wins": 82,
+            "ties": 1,
+            "rag_win_percentage": 44.67,
+            "baseline_win_percentage": 54.67,
+            "tie_percentage": 0.67
+          },
+          {
+            "source": "edos",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 65,
+            "baseline_wins": 84,
+            "ties": 1,
+            "rag_win_percentage": 43.33,
+            "baseline_win_percentage": 56.0,
+            "tie_percentage": 0.67
+          }
+        ],
+        "by_generation_model_and_challenger": [
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 55,
+            "baseline_wins": 95,
+            "ties": 0,
+            "rag_win_percentage": 36.67,
+            "baseline_win_percentage": 63.33,
+            "tie_percentage": 0.0
+          },
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 67,
+            "baseline_wins": 82,
+            "ties": 1,
+            "rag_win_percentage": 44.67,
+            "baseline_win_percentage": 54.67,
+            "tie_percentage": 0.67
+          },
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 65,
+            "baseline_wins": 84,
+            "ties": 1,
+            "rag_win_percentage": 43.33,
+            "baseline_win_percentage": 56.0,
+            "tie_percentage": 0.67
+          }
+        ]
+      },
+      "automatic_metrics": {
+        "by_system": []
+      },
+      "systems": [],
+      "comparison_tables": {
+        "automatic_metrics": [],
+        "judgelm_vs_no_rag": {
+          "baseline_strategy": "without_rag",
+          "columns": [
+            {
+              "strategy": "rag_qwen3_emb_4b",
+              "label": "Chunk-RAG (Qwen3-Emb-4B)"
+            },
+            {
+              "strategy": "rag_cards",
+              "label": "Card-RAG (Qwen3-Emb-4B)"
+            }
+          ],
+          "rows": [
+            {
+              "Model": "Llama-3.1-8B",
+              "cells": {
+                "rag_qwen3_emb_4b": {
+                  "display": "65 (lost) - RAG 43.33%; baseline 56.00%; tie 0.67%",
+                  "rag_wins": 65,
+                  "baseline_wins": 84,
+                  "ties": 1,
+                  "rag_win_percentage": 43.33,
+                  "baseline_win_percentage": 56.0,
+                  "tie_percentage": 0.67,
+                  "valid_comparisons": 150,
+                  "reparsed_from_raw_response": 0,
+                  "total_comparisons": 150
+                },
+                "rag_cards": {
+                  "display": "67 (lost) - RAG 44.67%; baseline 54.67%; tie 0.67%",
+                  "rag_wins": 67,
+                  "baseline_wins": 82,
+                  "ties": 1,
+                  "rag_win_percentage": 44.67,
+                  "baseline_win_percentage": 54.67,
+                  "tie_percentage": 0.67,
+                  "valid_comparisons": 150,
+                  "reparsed_from_raw_response": 0,
+                  "total_comparisons": 150
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "multiconan": {
+      "protocol": "Pairwise system comparisons on the same messages and decoder",
+      "input_files": {
+        "pairwise_judge": [
+          "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\judged\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.summary.json\\llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.native-scores-v1.jsonl"
+        ],
+        "automatic_metrics": [
+          "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\metrics\\llama-3.1-8b_both_counterspeech.metrics.jsonl"
+        ]
+      },
+      "overall": {
+        "pairwise_judge": {
+          "total_comparisons": 450,
+          "valid_comparisons": 450,
+          "parse_failures": 0,
+          "reparsed_from_raw_response": 0,
+          "challenger_wins": 283,
+          "baseline_wins": 107,
+          "ties": 60,
+          "rag_win_percentage": 62.89,
+          "baseline_win_percentage": 23.78,
+          "tie_percentage": 13.33
+        },
+        "automatic_metrics": {
+          "reference_based": {
+            "eligible_records": 450,
+            "bleu_4_corpus": null,
+            "rouge_l_mean": 0.138601,
+            "meteor_mean": 0.164625,
+            "bertscore_precision_mean": 0.864476,
+            "bertscore_recall_mean": 0.874184,
+            "bertscore_f1_mean": 0.869221,
+            "bertscore_rescaled_precision_mean": 0.195675,
+            "bertscore_rescaled_recall_mean": 0.253347,
+            "bertscore_rescaled_f1_mean": 0.225127
+          },
+          "reference_free": {
+            "records": 450,
+            "distinct_1_corpus": 0.085863,
+            "distinct_2_corpus": 0.34012,
+            "repetition_rate_mean": 0.000433
+          },
+          "unique_generations": 450,
+          "metric_statistics": {
+            "bleu_4": {
+              "count": 450,
+              "mean": 0.052287,
+              "variance": 0.000556,
+              "std": 0.023583,
+              "min": 0.020276,
+              "max": 0.198274
+            },
+            "rouge_l": {
+              "count": 450,
+              "mean": 0.138601,
+              "variance": 0.004161,
+              "std": 0.064504,
+              "min": 0.0,
+              "max": 0.470588
+            },
+            "meteor": {
+              "count": 450,
+              "mean": 0.164625,
+              "variance": 0.006879,
+              "std": 0.082942,
+              "min": 0.0,
+              "max": 0.616965
+            },
+            "bertscore_precision": {
+              "count": 450,
+              "mean": 0.864476,
+              "variance": 0.000229,
+              "std": 0.015121,
+              "min": 0.827428,
+              "max": 0.911248
+            },
+            "bertscore_recall": {
+              "count": 450,
+              "mean": 0.874184,
+              "variance": 0.000458,
+              "std": 0.021407,
+              "min": 0.793918,
+              "max": 0.956124
+            },
+            "bertscore_f1": {
+              "count": 450,
+              "mean": 0.869221,
+              "variance": 0.00027,
+              "std": 0.016444,
+              "min": 0.818409,
+              "max": 0.933129
+            },
+            "bertscore_rescaled_precision": {
+              "count": 450,
+              "mean": 0.195675,
+              "variance": 0.008054,
+              "std": 0.089744,
+              "min": -0.024204,
+              "max": 0.473263
+            },
+            "bertscore_rescaled_recall": {
+              "count": 450,
+              "mean": 0.253347,
+              "variance": 0.016139,
+              "std": 0.127038,
+              "min": -0.222998,
+              "max": 0.739619
+            },
+            "bertscore_rescaled_f1": {
+              "count": 450,
+              "mean": 0.225127,
+              "variance": 0.009494,
+              "std": 0.097435,
+              "min": -0.075939,
+              "max": 0.603784
+            },
+            "distinct_1": {
+              "count": 450,
+              "mean": 0.868707,
+              "variance": 0.002609,
+              "std": 0.051075,
+              "min": 0.685185,
+              "max": 1.0
+            },
+            "distinct_2": {
+              "count": 450,
+              "mean": 0.997409,
+              "variance": 9.5e-05,
+              "std": 0.009749,
+              "min": 0.90566,
+              "max": 1.0
+            },
+            "repetition_rate": {
+              "count": 450,
+              "mean": 0.000433,
+              "variance": 4.3e-05,
+              "std": 0.00657,
+              "min": 0.0,
+              "max": 0.112695
+            }
+          }
+        }
+      },
+      "pairwise_judge": {
+        "detailed": [
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 74,
+            "baseline_wins": 46,
+            "ties": 30,
+            "rag_win_percentage": 49.33,
+            "baseline_win_percentage": 30.67,
+            "tie_percentage": 20.0
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 102,
+            "baseline_wins": 29,
+            "ties": 19,
+            "rag_win_percentage": 68.0,
+            "baseline_win_percentage": 19.33,
+            "tie_percentage": 12.67
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 107,
+            "baseline_wins": 32,
+            "ties": 11,
+            "rag_win_percentage": 71.33,
+            "baseline_win_percentage": 21.33,
+            "tie_percentage": 7.33
+          }
+        ],
+        "by_dataset_model_pair_and_judge": [
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 74,
+            "baseline_wins": 46,
+            "ties": 30,
+            "rag_win_percentage": 49.33,
+            "baseline_win_percentage": 30.67,
+            "tie_percentage": 20.0
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 102,
+            "baseline_wins": 29,
+            "ties": 19,
+            "rag_win_percentage": 68.0,
+            "baseline_win_percentage": 19.33,
+            "tie_percentage": 12.67
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "judge_model": "JudgeLM-7B",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 107,
+            "baseline_wins": 32,
+            "ties": 11,
+            "rag_win_percentage": 71.33,
+            "baseline_win_percentage": 21.33,
+            "tie_percentage": 7.33
+          }
+        ],
+        "by_generation_model_and_challenger": [
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "rag_qwen3_emb_4b",
+            "challenger_strategy": "rag_cards",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 74,
+            "baseline_wins": 46,
+            "ties": 30,
+            "rag_win_percentage": 49.33,
+            "baseline_win_percentage": 30.67,
+            "tie_percentage": 20.0
+          },
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_cards",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 102,
+            "baseline_wins": 29,
+            "ties": 19,
+            "rag_win_percentage": 68.0,
+            "baseline_win_percentage": 19.33,
+            "tie_percentage": 12.67
+          },
+          {
+            "generation_model": "Llama-3.1-8B",
+            "baseline_strategy": "without_rag",
+            "challenger_strategy": "rag_qwen3_emb_4b",
+            "total_comparisons": 150,
+            "valid_comparisons": 150,
+            "parse_failures": 0,
+            "reparsed_from_raw_response": 0,
+            "challenger_wins": 107,
+            "baseline_wins": 32,
+            "ties": 11,
+            "rag_win_percentage": 71.33,
+            "baseline_win_percentage": 21.33,
+            "tie_percentage": 7.33
+          }
+        ]
+      },
+      "automatic_metrics": {
+        "by_system": [
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "rag_cards",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.144604,
+              "meteor_mean": 0.165491,
+              "bertscore_precision_mean": 0.866014,
+              "bertscore_recall_mean": 0.875241,
+              "bertscore_f1_mean": 0.870527,
+              "bertscore_rescaled_precision_mean": 0.204803,
+              "bertscore_rescaled_recall_mean": 0.259615,
+              "bertscore_rescaled_f1_mean": 0.232865
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.153798,
+              "distinct_2_corpus": 0.459517,
+              "repetition_rate_mean": 0.0
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.05481,
+                "variance": 0.000602,
+                "std": 0.024537,
+                "min": 0.022478,
+                "max": 0.168961
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.144604,
+                "variance": 0.004721,
+                "std": 0.068712,
+                "min": 0.0,
+                "max": 0.470588
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.165491,
+                "variance": 0.007987,
+                "std": 0.08937,
+                "min": 0.0,
+                "max": 0.616965
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.866014,
+                "variance": 0.000219,
+                "std": 0.014797,
+                "min": 0.832191,
+                "max": 0.911248
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.875241,
+                "variance": 0.000474,
+                "std": 0.02178,
+                "min": 0.793918,
+                "max": 0.956124
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.870527,
+                "variance": 0.000278,
+                "std": 0.016673,
+                "min": 0.818409,
+                "max": 0.933129
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.204803,
+                "variance": 0.007712,
+                "std": 0.087817,
+                "min": 0.004068,
+                "max": 0.473263
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.259615,
+                "variance": 0.016706,
+                "std": 0.129252,
+                "min": -0.222998,
+                "max": 0.739619
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.232865,
+                "variance": 0.00976,
+                "std": 0.098791,
+                "min": -0.075939,
+                "max": 0.603784
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.871314,
+                "variance": 0.001823,
+                "std": 0.042697,
+                "min": 0.769231,
+                "max": 0.961538
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.998294,
+                "variance": 4.3e-05,
+                "std": 0.006549,
+                "min": 0.96,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0,
+                "variance": 0.0,
+                "std": 0.0,
+                "min": 0.0,
+                "max": 0.0
+              }
+            }
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "rag_qwen3_emb_4b",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.138588,
+              "meteor_mean": 0.171203,
+              "bertscore_precision_mean": 0.860402,
+              "bertscore_recall_mean": 0.874333,
+              "bertscore_f1_mean": 0.867231,
+              "bertscore_rescaled_precision_mean": 0.171495,
+              "bertscore_rescaled_recall_mean": 0.254228,
+              "bertscore_rescaled_f1_mean": 0.213335
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.157313,
+              "distinct_2_corpus": 0.487644,
+              "repetition_rate_mean": 0.0013
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.047157,
+                "variance": 0.00039,
+                "std": 0.019744,
+                "min": 0.020276,
+                "max": 0.153261
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.138588,
+                "variance": 0.003814,
+                "std": 0.061756,
+                "min": 0.0,
+                "max": 0.347826
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.171203,
+                "variance": 0.006282,
+                "std": 0.07926,
+                "min": 0.042194,
+                "max": 0.563616
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.860402,
+                "variance": 0.000232,
+                "std": 0.015241,
+                "min": 0.828969,
+                "max": 0.910754
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.874333,
+                "variance": 0.000456,
+                "std": 0.021349,
+                "min": 0.800471,
+                "max": 0.93849
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.867231,
+                "variance": 0.000272,
+                "std": 0.01648,
+                "min": 0.82794,
+                "max": 0.917042
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.171495,
+                "variance": 0.008181,
+                "std": 0.090451,
+                "min": -0.015056,
+                "max": 0.470333
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.254228,
+                "variance": 0.016052,
+                "std": 0.126697,
+                "min": -0.184108,
+                "max": 0.634969
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.213335,
+                "variance": 0.009535,
+                "std": 0.097645,
+                "min": -0.01947,
+                "max": 0.508468
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.851915,
+                "variance": 0.002673,
+                "std": 0.051706,
+                "min": 0.685185,
+                "max": 0.972222
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.99538,
+                "variance": 0.000193,
+                "std": 0.013887,
+                "min": 0.90566,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0013,
+                "variance": 0.000129,
+                "std": 0.011355,
+                "min": 0.0,
+                "max": 0.112695
+              }
+            }
+          },
+          {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "without_rag",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.132609,
+              "meteor_mean": 0.15718,
+              "bertscore_precision_mean": 0.867012,
+              "bertscore_recall_mean": 0.87298,
+              "bertscore_f1_mean": 0.869906,
+              "bertscore_rescaled_precision_mean": 0.210727,
+              "bertscore_rescaled_recall_mean": 0.246197,
+              "bertscore_rescaled_f1_mean": 0.229182
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.167437,
+              "distinct_2_corpus": 0.490102,
+              "repetition_rate_mean": 0.0
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.054895,
+                "variance": 0.000644,
+                "std": 0.025382,
+                "min": 0.020714,
+                "max": 0.198274
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.132609,
+                "variance": 0.003931,
+                "std": 0.062694,
+                "min": 0.0,
+                "max": 0.372093
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.15718,
+                "variance": 0.006361,
+                "std": 0.079757,
+                "min": 0.0,
+                "max": 0.526042
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.867012,
+                "variance": 0.000212,
+                "std": 0.014569,
+                "min": 0.827428,
+                "max": 0.911147
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.87298,
+                "variance": 0.000448,
+                "std": 0.021169,
+                "min": 0.796105,
+                "max": 0.943851
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.869906,
+                "variance": 0.000259,
+                "std": 0.016097,
+                "min": 0.825682,
+                "max": 0.917119
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.210727,
+                "variance": 0.007476,
+                "std": 0.086464,
+                "min": -0.024204,
+                "max": 0.472664
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.246197,
+                "variance": 0.015782,
+                "std": 0.125627,
+                "min": -0.210019,
+                "max": 0.666786
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.229182,
+                "variance": 0.009097,
+                "std": 0.095378,
+                "min": -0.032845,
+                "max": 0.508922
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.882892,
+                "variance": 0.002871,
+                "std": 0.053582,
+                "min": 0.742857,
+                "max": 1.0
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.998555,
+                "variance": 4.4e-05,
+                "std": 0.006664,
+                "min": 0.958333,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0,
+                "variance": 0.0,
+                "std": 0.0,
+                "min": 0.0,
+                "max": 0.0
+              }
+            }
+          }
+        ]
+      },
+      "systems": [
+        {
+          "generation_model": "Llama-3.1-8B",
+          "generation_strategy": "rag_cards",
+          "pairwise_comparisons": [
+            {
+              "generation_model": "Llama-3.1-8B",
+              "baseline_strategy": "rag_qwen3_emb_4b",
+              "challenger_strategy": "rag_cards",
+              "total_comparisons": 150,
+              "valid_comparisons": 150,
+              "parse_failures": 0,
+              "reparsed_from_raw_response": 0,
+              "challenger_wins": 74,
+              "baseline_wins": 46,
+              "ties": 30,
+              "rag_win_percentage": 49.33,
+              "baseline_win_percentage": 30.67,
+              "tie_percentage": 20.0
+            },
+            {
+              "generation_model": "Llama-3.1-8B",
+              "baseline_strategy": "without_rag",
+              "challenger_strategy": "rag_cards",
+              "total_comparisons": 150,
+              "valid_comparisons": 150,
+              "parse_failures": 0,
+              "reparsed_from_raw_response": 0,
+              "challenger_wins": 102,
+              "baseline_wins": 29,
+              "ties": 19,
+              "rag_win_percentage": 68.0,
+              "baseline_win_percentage": 19.33,
+              "tie_percentage": 12.67
+            }
+          ],
+          "automatic_metrics": {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "rag_cards",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.144604,
+              "meteor_mean": 0.165491,
+              "bertscore_precision_mean": 0.866014,
+              "bertscore_recall_mean": 0.875241,
+              "bertscore_f1_mean": 0.870527,
+              "bertscore_rescaled_precision_mean": 0.204803,
+              "bertscore_rescaled_recall_mean": 0.259615,
+              "bertscore_rescaled_f1_mean": 0.232865
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.153798,
+              "distinct_2_corpus": 0.459517,
+              "repetition_rate_mean": 0.0
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.05481,
+                "variance": 0.000602,
+                "std": 0.024537,
+                "min": 0.022478,
+                "max": 0.168961
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.144604,
+                "variance": 0.004721,
+                "std": 0.068712,
+                "min": 0.0,
+                "max": 0.470588
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.165491,
+                "variance": 0.007987,
+                "std": 0.08937,
+                "min": 0.0,
+                "max": 0.616965
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.866014,
+                "variance": 0.000219,
+                "std": 0.014797,
+                "min": 0.832191,
+                "max": 0.911248
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.875241,
+                "variance": 0.000474,
+                "std": 0.02178,
+                "min": 0.793918,
+                "max": 0.956124
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.870527,
+                "variance": 0.000278,
+                "std": 0.016673,
+                "min": 0.818409,
+                "max": 0.933129
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.204803,
+                "variance": 0.007712,
+                "std": 0.087817,
+                "min": 0.004068,
+                "max": 0.473263
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.259615,
+                "variance": 0.016706,
+                "std": 0.129252,
+                "min": -0.222998,
+                "max": 0.739619
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.232865,
+                "variance": 0.00976,
+                "std": 0.098791,
+                "min": -0.075939,
+                "max": 0.603784
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.871314,
+                "variance": 0.001823,
+                "std": 0.042697,
+                "min": 0.769231,
+                "max": 0.961538
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.998294,
+                "variance": 4.3e-05,
+                "std": 0.006549,
+                "min": 0.96,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0,
+                "variance": 0.0,
+                "std": 0.0,
+                "min": 0.0,
+                "max": 0.0
+              }
+            }
+          }
+        },
+        {
+          "generation_model": "Llama-3.1-8B",
+          "generation_strategy": "rag_qwen3_emb_4b",
+          "pairwise_comparisons": [
+            {
+              "generation_model": "Llama-3.1-8B",
+              "baseline_strategy": "without_rag",
+              "challenger_strategy": "rag_qwen3_emb_4b",
+              "total_comparisons": 150,
+              "valid_comparisons": 150,
+              "parse_failures": 0,
+              "reparsed_from_raw_response": 0,
+              "challenger_wins": 107,
+              "baseline_wins": 32,
+              "ties": 11,
+              "rag_win_percentage": 71.33,
+              "baseline_win_percentage": 21.33,
+              "tie_percentage": 7.33
+            }
+          ],
+          "automatic_metrics": {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "rag_qwen3_emb_4b",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.138588,
+              "meteor_mean": 0.171203,
+              "bertscore_precision_mean": 0.860402,
+              "bertscore_recall_mean": 0.874333,
+              "bertscore_f1_mean": 0.867231,
+              "bertscore_rescaled_precision_mean": 0.171495,
+              "bertscore_rescaled_recall_mean": 0.254228,
+              "bertscore_rescaled_f1_mean": 0.213335
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.157313,
+              "distinct_2_corpus": 0.487644,
+              "repetition_rate_mean": 0.0013
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.047157,
+                "variance": 0.00039,
+                "std": 0.019744,
+                "min": 0.020276,
+                "max": 0.153261
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.138588,
+                "variance": 0.003814,
+                "std": 0.061756,
+                "min": 0.0,
+                "max": 0.347826
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.171203,
+                "variance": 0.006282,
+                "std": 0.07926,
+                "min": 0.042194,
+                "max": 0.563616
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.860402,
+                "variance": 0.000232,
+                "std": 0.015241,
+                "min": 0.828969,
+                "max": 0.910754
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.874333,
+                "variance": 0.000456,
+                "std": 0.021349,
+                "min": 0.800471,
+                "max": 0.93849
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.867231,
+                "variance": 0.000272,
+                "std": 0.01648,
+                "min": 0.82794,
+                "max": 0.917042
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.171495,
+                "variance": 0.008181,
+                "std": 0.090451,
+                "min": -0.015056,
+                "max": 0.470333
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.254228,
+                "variance": 0.016052,
+                "std": 0.126697,
+                "min": -0.184108,
+                "max": 0.634969
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.213335,
+                "variance": 0.009535,
+                "std": 0.097645,
+                "min": -0.01947,
+                "max": 0.508468
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.851915,
+                "variance": 0.002673,
+                "std": 0.051706,
+                "min": 0.685185,
+                "max": 0.972222
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.99538,
+                "variance": 0.000193,
+                "std": 0.013887,
+                "min": 0.90566,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0013,
+                "variance": 0.000129,
+                "std": 0.011355,
+                "min": 0.0,
+                "max": 0.112695
+              }
+            }
+          }
+        },
+        {
+          "generation_model": "Llama-3.1-8B",
+          "generation_strategy": "without_rag",
+          "pairwise_comparisons": [],
+          "automatic_metrics": {
+            "source": "multiconan",
+            "generation_model": "Llama-3.1-8B",
+            "generation_strategy": "without_rag",
+            "reference_based": {
+              "eligible_records": 150,
+              "bleu_4_corpus": null,
+              "rouge_l_mean": 0.132609,
+              "meteor_mean": 0.15718,
+              "bertscore_precision_mean": 0.867012,
+              "bertscore_recall_mean": 0.87298,
+              "bertscore_f1_mean": 0.869906,
+              "bertscore_rescaled_precision_mean": 0.210727,
+              "bertscore_rescaled_recall_mean": 0.246197,
+              "bertscore_rescaled_f1_mean": 0.229182
+            },
+            "reference_free": {
+              "records": 150,
+              "distinct_1_corpus": 0.167437,
+              "distinct_2_corpus": 0.490102,
+              "repetition_rate_mean": 0.0
+            },
+            "unique_generations": 150,
+            "metric_statistics": {
+              "bleu_4": {
+                "count": 150,
+                "mean": 0.054895,
+                "variance": 0.000644,
+                "std": 0.025382,
+                "min": 0.020714,
+                "max": 0.198274
+              },
+              "rouge_l": {
+                "count": 150,
+                "mean": 0.132609,
+                "variance": 0.003931,
+                "std": 0.062694,
+                "min": 0.0,
+                "max": 0.372093
+              },
+              "meteor": {
+                "count": 150,
+                "mean": 0.15718,
+                "variance": 0.006361,
+                "std": 0.079757,
+                "min": 0.0,
+                "max": 0.526042
+              },
+              "bertscore_precision": {
+                "count": 150,
+                "mean": 0.867012,
+                "variance": 0.000212,
+                "std": 0.014569,
+                "min": 0.827428,
+                "max": 0.911147
+              },
+              "bertscore_recall": {
+                "count": 150,
+                "mean": 0.87298,
+                "variance": 0.000448,
+                "std": 0.021169,
+                "min": 0.796105,
+                "max": 0.943851
+              },
+              "bertscore_f1": {
+                "count": 150,
+                "mean": 0.869906,
+                "variance": 0.000259,
+                "std": 0.016097,
+                "min": 0.825682,
+                "max": 0.917119
+              },
+              "bertscore_rescaled_precision": {
+                "count": 150,
+                "mean": 0.210727,
+                "variance": 0.007476,
+                "std": 0.086464,
+                "min": -0.024204,
+                "max": 0.472664
+              },
+              "bertscore_rescaled_recall": {
+                "count": 150,
+                "mean": 0.246197,
+                "variance": 0.015782,
+                "std": 0.125627,
+                "min": -0.210019,
+                "max": 0.666786
+              },
+              "bertscore_rescaled_f1": {
+                "count": 150,
+                "mean": 0.229182,
+                "variance": 0.009097,
+                "std": 0.095378,
+                "min": -0.032845,
+                "max": 0.508922
+              },
+              "distinct_1": {
+                "count": 150,
+                "mean": 0.882892,
+                "variance": 0.002871,
+                "std": 0.053582,
+                "min": 0.742857,
+                "max": 1.0
+              },
+              "distinct_2": {
+                "count": 150,
+                "mean": 0.998555,
+                "variance": 4.4e-05,
+                "std": 0.006664,
+                "min": 0.958333,
+                "max": 1.0
+              },
+              "repetition_rate": {
+                "count": 150,
+                "mean": 0.0,
+                "variance": 0.0,
+                "std": 0.0,
+                "min": 0.0,
+                "max": 0.0
+              }
+            }
+          }
+        }
+      ],
+      "comparison_tables": {
+        "automatic_metrics": [
+          {
+            "Dataset": "multiconan",
+            "Model": "Llama-3.1-8B",
+            "System": "Card-RAG (Qwen3-Emb-4B)",
+            "BLEU-4 mean": 0.05481,
+            "BLEU-4 variance": 0.000602,
+            "METEOR mean": 0.165491,
+            "METEOR variance": 0.007987,
+            "ROUGE-L mean": 0.144604,
+            "ROUGE-L variance": 0.004721,
+            "BERTScore-F1 mean": 0.870527,
+            "BERTScore-F1 variance": 0.000278,
+            "BERTScore-F1-rescaled mean": 0.232865,
+            "BERTScore-F1-rescaled variance": 0.00976,
+            "Distinct-1 mean": 0.871314,
+            "Distinct-1 variance": 0.001823,
+            "Distinct-2 mean": 0.998294,
+            "Distinct-2 variance": 4.3e-05,
+            "Repetition Rate mean": 0.0,
+            "Repetition Rate variance": 0.0
+          },
+          {
+            "Dataset": "multiconan",
+            "Model": "Llama-3.1-8B",
+            "System": "Chunk-RAG (Qwen3-Emb-4B)",
+            "BLEU-4 mean": 0.047157,
+            "BLEU-4 variance": 0.00039,
+            "METEOR mean": 0.171203,
+            "METEOR variance": 0.006282,
+            "ROUGE-L mean": 0.138588,
+            "ROUGE-L variance": 0.003814,
+            "BERTScore-F1 mean": 0.867231,
+            "BERTScore-F1 variance": 0.000272,
+            "BERTScore-F1-rescaled mean": 0.213335,
+            "BERTScore-F1-rescaled variance": 0.009535,
+            "Distinct-1 mean": 0.851915,
+            "Distinct-1 variance": 0.002673,
+            "Distinct-2 mean": 0.99538,
+            "Distinct-2 variance": 0.000193,
+            "Repetition Rate mean": 0.0013,
+            "Repetition Rate variance": 0.000129
+          },
+          {
+            "Dataset": "multiconan",
+            "Model": "Llama-3.1-8B",
+            "System": "No-RAG",
+            "BLEU-4 mean": 0.054895,
+            "BLEU-4 variance": 0.000644,
+            "METEOR mean": 0.15718,
+            "METEOR variance": 0.006361,
+            "ROUGE-L mean": 0.132609,
+            "ROUGE-L variance": 0.003931,
+            "BERTScore-F1 mean": 0.869906,
+            "BERTScore-F1 variance": 0.000259,
+            "BERTScore-F1-rescaled mean": 0.229182,
+            "BERTScore-F1-rescaled variance": 0.009097,
+            "Distinct-1 mean": 0.882892,
+            "Distinct-1 variance": 0.002871,
+            "Distinct-2 mean": 0.998555,
+            "Distinct-2 variance": 4.4e-05,
+            "Repetition Rate mean": 0.0,
+            "Repetition Rate variance": 0.0
+          }
+        ],
+        "judgelm_vs_no_rag": {
+          "baseline_strategy": "without_rag",
+          "columns": [
+            {
+              "strategy": "rag_qwen3_emb_4b",
+              "label": "Chunk-RAG (Qwen3-Emb-4B)"
+            },
+            {
+              "strategy": "rag_cards",
+              "label": "Card-RAG (Qwen3-Emb-4B)"
+            }
+          ],
+          "rows": [
+            {
+              "Model": "Llama-3.1-8B",
+              "cells": {
+                "rag_qwen3_emb_4b": {
+                  "display": "107 - RAG 71.33%; baseline 21.33%; tie 7.33%",
+                  "rag_wins": 107,
+                  "baseline_wins": 32,
+                  "ties": 11,
+                  "rag_win_percentage": 71.33,
+                  "baseline_win_percentage": 21.33,
+                  "tie_percentage": 7.33,
+                  "valid_comparisons": 150,
+                  "reparsed_from_raw_response": 0,
+                  "total_comparisons": 150
+                },
+                "rag_cards": {
+                  "display": "102 - RAG 68.00%; baseline 19.33%; tie 12.67%",
+                  "rag_wins": 102,
+                  "baseline_wins": 29,
+                  "ties": 19,
+                  "rag_win_percentage": 68.0,
+                  "baseline_win_percentage": 19.33,
+                  "tie_percentage": 12.67,
+                  "valid_comparisons": 150,
+                  "reparsed_from_raw_response": 0,
+                  "total_comparisons": 150
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

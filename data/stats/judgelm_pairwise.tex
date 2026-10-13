@@ -1,0 +1,27 @@
+% Generated automatically. Requires \usepackage{booktabs,graphicx}.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{JudgeLM-7B pairwise evaluation for Llama-3.1-8B, separated by dataset. Each row compares the system against the indicated baseline on the same messages. Outcomes are counts and percentages over valid comparisons. Bold marks the highest system win percentage among systems sharing a baseline within each dataset; it does not indicate statistical significance.}
+\label{tab:pairwise-llama-3-1-8b-judgelm-7b}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Baseline} & \textbf{System} & \textbf{Valid / Total} & \textbf{System Wins} & \textbf{Baseline Wins} & \textbf{Ties} \\
+\midrule
+\multicolumn{6}{l}{\textit{EDOS}} \\
+No RAG & Chunk-RAG (Qwen3-Emb-4B) & 150 / 150 & 65 (43.33\%) & 84 (56.00\%) & 1 (0.67\%) \\
+No RAG & Card-RAG (Qwen3-Emb-4B) & 150 / 150 & \textbf{67 (44.67\%)} & 82 (54.67\%) & 1 (0.67\%) \\
+\midrule
+Chunk-RAG (Qwen3-Emb-4B) & Card-RAG (Qwen3-Emb-4B) & 150 / 150 & 55 (36.67\%) & 95 (63.33\%) & 0 (0.00\%) \\
+\midrule
+\multicolumn{6}{l}{\textit{MultiCONAN}} \\
+No RAG & Chunk-RAG (Qwen3-Emb-4B) & 150 / 150 & \textbf{107 (71.33\%)} & 32 (21.33\%) & 11 (7.33\%) \\
+No RAG & Card-RAG (Qwen3-Emb-4B) & 150 / 150 & 102 (68.00\%) & 29 (19.33\%) & 19 (12.67\%) \\
+\midrule
+Chunk-RAG (Qwen3-Emb-4B) & Card-RAG (Qwen3-Emb-4B) & 150 / 150 & 74 (49.33\%) & 46 (30.67\%) & 30 (20.00\%) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
