@@ -17,6 +17,8 @@
   "reranker_batch_size": 4,
   "reranker_max_tokens": 32768,
   "rerank_top_k": 10,
+  "deduplication_enabled": true,
+  "deduplication_similarity_threshold": 0.97,
   "generator_model": "google/gemma-4-12B-it",
   "generation_max_new_tokens": 900,
   "generation_retries": 2,

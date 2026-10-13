@@ -113,6 +113,24 @@ class FaissEvidenceRetriever(BaseRetriever):
             if position >= 0
         ]
 
+    def document_embeddings(self, document_ids: list[str]):
+        """Recover stored document vectors without loading the embedding model."""
+        import numpy as np
+
+        if self.faiss_index is None:
+            raise RuntimeError("Load or build the FAISS index before reconstructing vectors.")
+        positions = {document.id: position for position, document in enumerate(self.documents)}
+        missing = [document_id for document_id in document_ids if document_id not in positions]
+        if missing:
+            raise ValueError(f"Document IDs not found in the FAISS index: {missing[:5]}")
+        report("faiss", f"Recupero di {len(document_ids)} embedding gia salvati, senza inferenza")
+        if not document_ids:
+            return np.empty((0, self.faiss_index.d), dtype="float32")
+        return np.asarray([
+            self.faiss_index.reconstruct(positions[document_id])
+            for document_id in document_ids
+        ], dtype="float32")
+
     def _manifest(self, documents: list[Document]) -> dict:
         records = [document.model_dump(mode="json") for document in documents]
         return {

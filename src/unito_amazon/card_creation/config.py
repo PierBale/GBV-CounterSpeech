@@ -31,6 +31,10 @@ class CardCreationConfig(BaseModel):
     reranker_batch_size: int = Field(default=4, ge=1)
     reranker_max_tokens: int = Field(default=32768, ge=1)
     rerank_top_k: int = Field(default=10, ge=1)
+    deduplication_enabled: bool = True
+    deduplication_similarity_threshold: float = Field(
+        default=0.97, gt=0, le=1, allow_inf_nan=False,
+    )
     generator_model: str = "google/gemma-4-12B-it"
     generation_max_new_tokens: int = Field(default=900, ge=1)
     generation_retries: int = Field(default=2, ge=0)
@@ -53,6 +57,14 @@ class CardCreationConfig(BaseModel):
     @property
     def retrieved_path(self) -> Path:
         return self.output_dir / "edos_passages.jsonl"
+
+    @property
+    def ranked_path(self) -> Path:
+        return self.output_dir / "edos_passages_ranked.jsonl"
+
+    @property
+    def deduplication_log_path(self) -> Path:
+        return self.output_dir / "deduplication_decisions.jsonl"
 
     @property
     def cards_path(self) -> Path:

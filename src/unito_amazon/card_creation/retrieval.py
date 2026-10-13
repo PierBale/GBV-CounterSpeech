@@ -1,8 +1,12 @@
 import json
+from collections import Counter
 
 from unito_amazon.retrieval.schema import Document
 
 from .config import CardCreationConfig
+from .deduplication import (
+    DEDUPLICATION_METHOD, SEMDEDUP_REFERENCE, normalized_text_hash, select_nonredundant,
+)
 from .io import read_jsonl, write_jsonl
 from .progress import report
 from .schema import Chunk, RankedPassage
@@ -49,6 +53,8 @@ def index_chunks(config: CardCreationConfig, force: bool = False) -> None:
 
 
 def retrieve_passages(config: CardCreationConfig) -> None:
+    import numpy as np
+
     from .reranking import QwenReranker
 
     report("retrieve", f"Caricamento tipi di sessismo e descrizioni: {config.labels_path}")
@@ -63,10 +69,15 @@ def retrieve_passages(config: CardCreationConfig) -> None:
         "retrieve", f"Categorie: {len(labels)}; top J={config.dense_top_j} nel retrieval, "
         f"top K={config.rerank_top_k} dopo reranking",
     )
+    report(
+        "dedup", f"Filtro attivo={config.deduplication_enabled}; "
+        f"soglia coseno={config.deduplication_similarity_threshold}; confronto per categoria",
+    )
     chunks = load_chunks(config)
     lookup = {chunk.chunk_id: chunk for chunk in chunks}
     retriever = chunk_retriever(config)
     dense_results = {}
+    candidate_embeddings = {}
     try:
         retriever.load(config.chunk_index_path, chunks_to_documents(chunks))
         for position, (label, definition) in enumerate(labels.items(), start=1):
@@ -74,6 +85,15 @@ def retrieve_passages(config: CardCreationConfig) -> None:
             query = f"Sexism type: {label}\nDescription: {definition}"
             dense_results[label] = (query, retriever.retrieve(query, config.dense_top_j))
             report("retrieve", f"Categoria {position}/{len(labels)}: recuperati {len(dense_results[label][1])} candidati")
+        if config.deduplication_enabled:
+            candidate_ids = list(dict.fromkeys(
+                item.document.id
+                for _, candidates in dense_results.values()
+                for item in candidates
+            ))
+            vectors = retriever.document_embeddings(candidate_ids)
+            candidate_embeddings = dict(zip(candidate_ids, vectors, strict=True))
+            report("dedup", f"Riutilizzati {len(candidate_embeddings)} embedding dei chunk; nessun nuovo modello")
     finally:
         # The embedding model is released before loading the reranker.
         retriever.close()
@@ -84,6 +104,8 @@ def retrieve_passages(config: CardCreationConfig) -> None:
         config.reranker_max_tokens, config.device,
     )
     output = []
+    all_ranked = []
+    deduplication_log = []
     try:
         for position, (label, (query, candidates)) in enumerate(dense_results.items(), start=1):
             report("retrieve", f"Reranking categoria {position}/{len(labels)}: {label}; {len(candidates)} candidati")
@@ -91,19 +113,85 @@ def retrieve_passages(config: CardCreationConfig) -> None:
             ordered = sorted(
                 zip(candidates, scores, strict=True),
                 key=lambda pair: (-pair[1], pair[0].rank),
-            )[:config.rerank_top_k]
-            for rank, (candidate, score) in enumerate(ordered, start=1):
-                output.append(RankedPassage(
+            )
+            # Preserve the original reranker rank, including gaps after filtering.
+            ranked = [
+                RankedPassage(
                     label=label, definition=labels[label],
                     embedding_model=config.embedding_model,
                     reranker_model=config.reranker_model,
                     chunk=lookup[candidate.document.id],
                     dense_rank=candidate.rank, dense_score=candidate.score,
                     reranker_rank=rank, reranker_score=score,
-                ).model_dump(mode="json"))
-            report("retrieve", f"Categoria {position}/{len(labels)} completata: {len(candidates)} candidati -> {len(ordered)} selezionati")
+                )
+                for rank, (candidate, score) in enumerate(ordered, start=1)
+            ]
+            all_ranked.extend(passage.model_dump(mode="json") for passage in ranked)
+            report("dedup", f"Categoria {position}/{len(labels)}: filtro prima della selezione dei top K")
+            embeddings = (
+                np.stack([candidate_embeddings[passage.chunk.chunk_id] for passage in ranked])
+                if config.deduplication_enabled else None
+            )
+            result = select_nonredundant(
+                [passage.chunk.text for passage in ranked], embeddings,
+                top_k=config.rerank_top_k,
+                similarity_threshold=config.deduplication_similarity_threshold,
+                enabled=config.deduplication_enabled,
+            )
+            output.extend(ranked[index].model_dump(mode="json") for index in result.selected_indices)
+            for decision in result.decisions:
+                passage = ranked[decision.index]
+                reference = (
+                    ranked[decision.reference_index]
+                    if decision.reference_index is not None else None
+                )
+                is_duplicate = decision.reason in {"exact_duplicate", "near_duplicate"}
+                deduplication_log.append({
+                    "label": label, "chunk_id": passage.chunk.chunk_id,
+                    "source": passage.chunk.source.model_dump(mode="json"),
+                    "dense_rank": passage.dense_rank,
+                    "reranker_rank": passage.reranker_rank,
+                    "reranker_score": passage.reranker_score,
+                    "decision": decision.reason,
+                    "compared_to": reference.chunk.chunk_id if reference else None,
+                    "duplicate_of": reference.chunk.chunk_id if is_duplicate and reference else None,
+                    "kept_source": (
+                        reference.chunk.source.model_dump(mode="json")
+                        if is_duplicate and reference else None
+                    ),
+                    "cosine_similarity": decision.cosine_similarity,
+                    "similarity_threshold": (
+                        config.deduplication_similarity_threshold
+                        if config.deduplication_enabled else None
+                    ),
+                    "deduplication_enabled": config.deduplication_enabled,
+                    "method": DEDUPLICATION_METHOD if config.deduplication_enabled else "disabled",
+                    "embedding_model": config.embedding_model,
+                    "normalized_text_sha256": (
+                        normalized_text_hash(passage.chunk.text)
+                        if config.deduplication_enabled else None
+                    ),
+                    "scientific_reference": SEMDEDUP_REFERENCE,
+                })
+                if is_duplicate:
+                    report(
+                        "dedup", f"{decision.reason}: {passage.chunk.chunk_id} -> "
+                        f"{reference.chunk.chunk_id}; coseno={decision.cosine_similarity:.4f}",
+                    )
+            counts = Counter(decision.reason for decision in result.decisions)
+            report(
+                "dedup", f"Categoria {position}/{len(labels)} completata: "
+                f"{len(result.selected_indices)} selezionati, {counts['exact_duplicate']} duplicati esatti, "
+                f"{counts['near_duplicate']} quasi-duplicati, {counts['top_k_limit']} oltre il limite K",
+            )
+            if len(result.selected_indices) < config.rerank_top_k:
+                report("dedup", f"Solo {len(result.selected_indices)} passaggi non ridondanti disponibili per {label}")
     finally:
         reranker.close()
+    report("retrieve", f"Salvataggio ranking completo ({len(all_ranked)} passaggi): {config.ranked_path}")
+    write_jsonl(config.ranked_path, all_ranked)
+    report("dedup", f"Salvataggio audit ({len(deduplication_log)} decisioni): {config.deduplication_log_path}")
+    write_jsonl(config.deduplication_log_path, deduplication_log)
     report("retrieve", f"Salvataggio di {len(output)} coppie categoria/passaggio: {config.retrieved_path}")
     write_jsonl(config.retrieved_path, output)
     report("retrieve", "Passaggi rerankati salvati")

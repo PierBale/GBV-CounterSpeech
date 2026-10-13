@@ -7,13 +7,15 @@ Non dipende dal prototipo `Cards/Generation`.
 2. Chunking per paragrafi con minimo desiderato di **100 token**.
 3. Embedding **Qwen/Qwen3-Embedding-4B** e indice FAISS esatto.
 4. Query composta da **label EDOS + descrizione**, top **J=100** passaggi.
-5. Reranking **Qwen/Qwen3-Reranker-4B**, selezione dei primi **K=10**.
-6. Generazione di una card per passaggio con **google/gemma-4-12B**.
-7. Creazione di un indice FAISS separato sulle card per il counter-speech RAG.
+5. Reranking **Qwen/Qwen3-Reranker-4B** di tutti i J candidati.
+6. Rimozione di duplicati esatti e quasi-duplicati tramite similarità coseno,
+   poi selezione di al massimo **K=10** passaggi per categoria.
+7. Generazione di una card per passaggio con **google/gemma-4-12B-it**.
+8. Creazione di un indice FAISS separato sulle card per il counter-speech RAG.
 
-J e K sono configurabili. Non vengono applicati MMR, diversificazione,
-soglie di similarità o esclusioni semantiche. Un passaggio può essere selezionato
-per più label. Le label e le descrizioni iniziali sono in `edos_labels.json`;
+J, K e la soglia di deduplicazione sono configurabili. Non vengono applicati MMR
+o quote di diversificazione. La deduplicazione opera separatamente per categoria:
+un passaggio può essere selezionato per più label. Le label e le descrizioni iniziali sono in `edos_labels.json`;
 le descrizioni sono quelle già utilizzate nel progetto e possono essere riviste.
 
 ## Installazione e configurazione
@@ -61,7 +63,9 @@ Percorsi predefiniti:
 | Markdown LlamaParse | `src/1_parsed_results/` |
 | Chunk | `data/card_creation/chunks.jsonl` |
 | Indice paragrafi | `data/card_creation/indexes/chunks.faiss` |
-| Passaggi rerankati | `data/card_creation/edos_passages.jsonl` |
+| Ranking completo prima del filtro | `data/card_creation/edos_passages_ranked.jsonl` |
+| Decisioni di deduplicazione | `data/card_creation/deduplication_decisions.jsonl` |
+| Passaggi selezionati per la generazione | `data/card_creation/edos_passages.jsonl` |
 | Card | `data/card_creation/cards.jsonl` |
 | Tentativi/scarti | `data/card_creation/generation_attempts.jsonl` |
 | Indice card | `data/card_creation/indexes/cards.faiss` |
@@ -112,6 +116,81 @@ della generazione precedente; su `all` rigenera anche i Markdown.
 Altrimenti riutilizzano l'indice compatibile e ricostruiscono quello obsoleto.
 Se si cambiano i chunk, eseguire nuovamente `index` prima di `retrieve`.
 
+## Deduplicazione dopo il reranking
+
+Il riferimento scientifico è **Abbas, A., Tirumala, K., Simig, D., Ganguli, S.,
+e Morcos, A. S. (2023), [SemDeDup: Data-efficient learning at web-scale through
+semantic deduplication](https://arxiv.org/abs/2303.09540)**, in particolare la
+[Sezione 3](https://arxiv.org/html/2303.09540v2#S3). Il paper individua duplicati
+semantici confrontando gli embedding con una soglia di similarità coseno.
+
+Questa implementazione è un **adattamento**, non una replica di SemDeDup:
+non usa il clustering k-means del paper, perché lavora su piccoli pool di
+candidati, e sceglie il rappresentante in base al ranking del reranker, non
+alla distanza dal centroide. Non è stato validato un miglioramento della
+qualità delle card su questo corpus.
+
+Per ciascun tipo di sessismo, `retrieve`:
+
+1. Ordina tutti i J candidati per punteggio del reranker (a parità di punteggio,
+   conserva l'ordine del dense retrieval).
+2. Scorre la lista e confronta ogni candidato con i passaggi già selezionati.
+   Un hash SHA-256 del testo normalizzato identifica i duplicati esatti:
+   si uniformano composizione Unicode NFC, spazi e a capo, senza rimuovere
+   numeri, negazioni o cambiare maiuscole/minuscole.
+3. Per i quasi-duplicati riutilizza gli embedding dei documenti già presenti
+   nell'indice FAISS, senza nuove inferenze. Scarta il candidato se la massima
+   similarità coseno con un passaggio selezionato è **maggiore o uguale** alla
+   soglia. Sopravvive quindi il passaggio meglio classificato dal reranker.
+4. Riempie fino a K posti, considerando anche i candidati più in basso nella
+   lista. Un passaggio scartato non può causare ulteriori rimozioni a catena.
+   Se restano meno di K passaggi, li conserva senza abbassare la soglia.
+
+Il confronto semantico usa soltanto il coseno, senza un secondo filtro lessicale
+o un LLM aggiuntivo. Non vengono cancellati chunk dal corpus né dall'indice.
+Lo stesso chunk può essere selezionato per categorie diverse, poiché la
+generazione dipende anche dal tipo di sessismo e dalla sua descrizione.
+
+Configurazione (già attiva per default):
+
+```json
+{
+  "deduplication_enabled": true,
+  "deduplication_similarity_threshold": 0.97
+}
+```
+
+`0.97` è un valore iniziale da calibrare su coppie del proprio corpus, **non**
+una soglia proposta o validata da SemDeDup per Qwen. Una soglia più alta rende
+il filtro meno aggressivo. Anche il paper calibra la soglia per dataset
+([Sezione 6.5](https://arxiv.org/html/2303.09540v2#S6.SS5)). La similarità elevata
+non garantisce identità fattuale: passaggi con numeri, anni o popolazioni diversi
+possono essere vicini nello spazio degli embedding. Controllare gli scarti
+prima di usare il filtro per gli esperimenti definitivi.
+
+`deduplication_decisions.jsonl` registra una decisione per ciascun candidato:
+`selected`, `exact_duplicate`, `near_duplicate` oppure `top_k_limit`.
+Include categoria, fonti, rank originale, punteggio reranker, soglia, similarità
+e riferimento al passaggio mantenuto per ogni duplicato. `top_k_limit` indica
+un candidato non selezionato per il limite K, **non** un duplicato. Per i record
+non duplicati, `compared_to` e `cosine_similarity` indicano il passaggio
+selezionato più simile al momento del confronto, se presente.
+
+Il ranking completo resta in `edos_passages_ranked.jsonl`. Solo la selezione
+finale in `edos_passages.jsonl` viene letta da `generate`. `reranker_rank`
+mantiene la posizione nel ranking originale, quindi può avere salti.
+Impostando `deduplication_enabled: false` si ripristina la selezione dei primi K
+senza alcuna deduplicazione, utile come baseline.
+
+Non cambia il comando: rieseguire `retrieve` e poi `generate` con la stessa
+configurazione. Se cambiano i passaggi selezionati e sono già presenti card,
+la protezione della generazione richiederà un nuovo `output_dir` oppure
+`generate --overwrite` (che sostituisce card e log precedenti).
+
+I test sintetici sono in `tests/test_deduplication.py` e non richiedono modelli
+o GPU. Possono essere eseguiti dalla cartella `src` con
+`python -m unittest unito_amazon.card_creation.tests.test_deduplication`.
+
 ## Avanzamento in console
 
 Ogni stadio stampa messaggi con orario, nome dello stadio, avvio, completamento
@@ -125,6 +204,7 @@ Durante l'elaborazione vengono mostrati:
 - paragrafi rilevati e chunk prodotti per ciascun Markdown;
 - caricamento e rilascio dei modelli, encoding degli embedding e stato degli indici;
 - categorie elaborate, candidati recuperati e batch di reranking completati;
+- duplicati scartati, passaggio mantenuto, similarità coseno e conteggi per categoria;
 - passaggi gia elaborati alla ripresa, tentativi di generazione, carte salvate,
   scarti e output non validi;
 - conteggi finali e percorsi degli artefatti salvati.
@@ -173,8 +253,9 @@ due tentativi aggiuntivi di correzione degli output non validi, configurabili.
 La validazione automatica garantisce struttura e corrispondenza della citazione,
 **non** l'implicazione semantica dell'argomento né la pertinenza alla label.
 Le card sono quindi `status: "candidate"`; la revisione può promuoverle a
-`"validated"`. Non sono garantite esattamente 10 card per label: 10 sono i passaggi
-selezionati, e il generatore può rifiutare quelli privi di evidenza utile.
+`"validated"`. Non sono garantite esattamente 10 card per label: si selezionano
+al massimo 10 passaggi dopo la deduplicazione, e il generatore può rifiutare
+quelli privi di evidenza utile.
 
 ## Counter-speech con retrieval sulle card
 
