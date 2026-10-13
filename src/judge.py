@@ -18,6 +18,7 @@ from config import (
     JUDGE_MAX_RETRIES,
     JUDGE_MODELS,
     JUDGE_OUTPUT_DIR,
+    JUDGE_RETRY_TEMPERATURE,
     JUDGE_TRUST_REMOTE_CODE,
 )
 from unito_amazon.evaluation.judge import LLMJudge
@@ -84,7 +85,9 @@ def has_pairwise_judgment(record: dict) -> bool:
 
 
 def output_path_for(input_path: Path, judge_alias: str) -> Path:
-    filename = f"{input_path.stem}.pairwise-judged.{judge_alias}.jsonl"
+    filename = (
+        f"{input_path.stem}.pairwise-judged.{judge_alias}.structured-json-v1.jsonl"
+    )
     return Path(JUDGE_OUTPUT_DIR) / filename
 
 
@@ -322,7 +325,11 @@ def run_judge_model(
             "trust_remote_code": JUDGE_TRUST_REMOTE_CODE,
         }
     )
-    judge = LLMJudge(llm=llm, max_retries=JUDGE_MAX_RETRIES)
+    judge = LLMJudge(
+        llm=llm,
+        max_retries=JUDGE_MAX_RETRIES,
+        retry_temperature=JUDGE_RETRY_TEMPERATURE,
+    )
     try:
         for input_path, output_path, comparisons, existing_records, _ in plans:
             write_judgments(

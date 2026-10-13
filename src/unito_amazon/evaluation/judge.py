@@ -1,5 +1,4 @@
 import json
-import re
 
 from unito_amazon.llm.base import BaseLLM
 from unito_amazon.llm.schema import LLMGenerationConfig
@@ -15,10 +14,13 @@ class LLMJudge:
         self,
         llm: BaseLLM,
         prompt: CounterSpeechPairwisePrompt | None = None,
-        max_retries: int = 1,
+        max_retries: int = 5,
+        retry_temperature: float = 0.7,
     ):
         if max_retries < 0:
             raise ValueError("max_retries cannot be negative.")
+        if retry_temperature <= 0:
+            raise ValueError("retry_temperature must be positive.")
 
         self.llm = llm
         self.prompt = prompt or CounterSpeechPairwisePrompt()
@@ -28,6 +30,9 @@ class LLMJudge:
             do_sample=False,
             repetition_penalty=1.0,
             system_prompt=self.prompt.system_prompt,
+        )
+        self.retry_generation_config = self.generation_config.model_copy(
+            update={"do_sample": True, "temperature": retry_temperature}
         )
 
     def judge(self, comparison: dict) -> PairwiseJudgeResult:
@@ -84,17 +89,17 @@ class LLMJudge:
                 return PairwiseJudgeResult(
                     raw_response=current,
                     parse_error=(
-                        "Could not identify a winner or a pair of scores in "
-                        "the JudgeLM response."
+                        "Expected exactly one JSON object with valid scores, "
+                        "winner, and reasoning; winner must agree with scores."
                     ),
                     attempts=attempts,
                 )
 
-            repaired = self.llm.generate(
+            retry_response = self.llm.generate(
                 prompt=self._build_prompt(comparison),
-                config=self.generation_config,
+                config=self.retry_generation_config,
             )
-            current = repaired.text
+            current = retry_response.text
             attempts += 1
 
     @classmethod
@@ -105,52 +110,7 @@ class LLMJudge:
         text = raw_response.strip()
         if not text:
             return None
-
-        json_result = cls._parse_json(text)
-        if json_result is not None:
-            return json_result
-
-        score_result = cls._parse_score_pair(text)
-        if score_result is not None:
-            return score_result
-
-        normalized = re.sub(r"\s+", " ", text.casefold())
-        tie_patterns = (
-            r"\[\[c\]\]",
-            r"\b(?:tie|draw)\b",
-            r"\b(?:equally good|equal in quality|responses? (?:are|is) equal)\b",
-        )
-        if any(re.search(pattern, normalized) for pattern in tie_patterns):
-            return "tie", None, None
-
-        response_1_patterns = cls._winner_patterns("1|one|a", "a")
-        response_2_patterns = cls._winner_patterns("2|two|b", "b")
-        has_1 = any(re.search(pattern, normalized) for pattern in response_1_patterns)
-        has_2 = any(re.search(pattern, normalized) for pattern in response_2_patterns)
-        if has_1 != has_2:
-            return ("response_1" if has_1 else "response_2"), None, None
-        return None
-
-    @staticmethod
-    def _winner_patterns(number_variants: str, letter: str) -> tuple[str, ...]:
-        subject = (
-            rf"(?:response|assistant)\s*(?:{number_variants})"
-            rf"(?:['’]s\s+response)?"
-        )
-        positive_quality = (
-            r"(?:factual|accurate|relevant|specific|comprehensive|"
-            r"effective|appropriate|convincing|informative)"
-        )
-        return (
-            rf"\[\[{letter}\]\]",
-            rf"\b{subject}\s+(?:is|was)\s+(?:the\s+)?"
-            rf"(?:better|superior|preferred)\b",
-            rf"\b{subject}\s+(?:is|was)\s+(?:clearly\s+)?more\s+"
-            rf"{positive_quality}\b",
-            rf"\b{subject}[^.?!]{{0,160}}\bscores?\s+higher\b",
-            rf"\bprefer(?:red)?\s+(?:counter-?speech\s+)?{subject}\b",
-            rf"\b(?:winner|choice|verdict)\s*[:=-]?\s*{subject}\b",
-        )
+        return cls._parse_json(text)
 
     @classmethod
     def _parse_judgment(
@@ -164,51 +124,45 @@ class LLMJudge:
     def _parse_json(
         text: str,
     ) -> tuple[PairwiseWinner, float | None, float | None] | None:
-        decoder = json.JSONDecoder()
-        for index, character in enumerate(text):
-            if character != "{":
-                continue
-            try:
-                payload, _ = decoder.raw_decode(text[index:])
-            except json.JSONDecodeError:
-                continue
-            if not isinstance(payload, dict):
-                continue
-            winner = str(payload.get("winner") or "").strip().casefold()
-            mapping = {
-                "1": "response_1",
-                "a": "response_1",
-                "response_1": "response_1",
-                "response 1": "response_1",
-                "2": "response_2",
-                "b": "response_2",
-                "response_2": "response_2",
-                "response 2": "response_2",
-                "tie": "tie",
-                "draw": "tie",
-            }
-            if winner in mapping:
-                return mapping[winner], None, None
-        return None
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(payload, dict):
+            return None
 
-    @staticmethod
-    def _parse_score_pair(
-        text: str,
-    ) -> tuple[PairwiseWinner, float, float] | None:
-        patterns = (
-            r"^\s*\[*\(?\s*(\d+(?:\.\d+)?)\s*[,\s]+(\d+(?:\.\d+)?)\s*\)?\]*",
-            r"score\s+of\s+(?:response|assistant)\s*1\s*:\s*(\d+(?:\.\d+)?).*?score\s+of\s+(?:response|assistant)\s*2\s*:\s*(\d+(?:\.\d+)?)",
-        )
-        for pattern in patterns:
-            match = re.search(pattern, text, flags=re.IGNORECASE | re.DOTALL)
-            if not match:
-                continue
-            score_1, score_2 = (float(value) for value in match.groups())
-            if score_1 > score_2:
-                winner: PairwiseWinner = "response_1"
-            elif score_2 > score_1:
-                winner = "response_2"
-            else:
-                winner = "tie"
-            return winner, score_1, score_2
-        return None
+        required = {
+            "score_response_1",
+            "score_response_2",
+            "winner",
+            "reasoning",
+        }
+        if payload.keys() != required:
+            return None
+
+        score_1 = payload["score_response_1"]
+        score_2 = payload["score_response_2"]
+        winner = payload["winner"]
+        reasoning = payload["reasoning"]
+        if (
+            isinstance(score_1, bool)
+            or not isinstance(score_1, int)
+            or not 1 <= score_1 <= 10
+            or isinstance(score_2, bool)
+            or not isinstance(score_2, int)
+            or not 1 <= score_2 <= 10
+            or not isinstance(reasoning, str)
+            or not reasoning.strip()
+        ):
+            return None
+
+        if score_1 > score_2:
+            expected_winner: PairwiseWinner = "response_1"
+        elif score_2 > score_1:
+            expected_winner = "response_2"
+        else:
+            expected_winner = "tie"
+        if winner != expected_winner:
+            return None
+
+        return expected_winner, float(score_1), float(score_2)

@@ -65,7 +65,8 @@ JUDGE_INPUT_PATHS = ()  # Empty = use every generated model output.
 JUDGE_OUTPUT_DIR = PROJECT_DIR / "data" / "judged"
 JUDGE_LIMIT = 0
 JUDGE_BATCH_SIZE = 16
-JUDGE_MAX_RETRIES = 3
+JUDGE_MAX_RETRIES = 5  # Additional attempts after an invalid initial response.
+JUDGE_RETRY_TEMPERATURE = 0.7
 JUDGE_DEVICE = None
 JUDGE_DTYPE = None
 JUDGE_TRUST_REMOTE_CODE = True
