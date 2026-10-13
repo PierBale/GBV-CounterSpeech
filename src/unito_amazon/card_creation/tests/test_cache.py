@@ -10,7 +10,8 @@ from unito_amazon.card_creation.cache import DEPENDENCIES, StageCache
 from unito_amazon.card_creation.config import CardCreationConfig
 from unito_amazon.card_creation.generation import generate_cards
 from unito_amazon.card_creation.io import read_jsonl, write_json, write_jsonl
-from unito_amazon.card_creation.schema import Chunk, EvidenceCard, RankedPassage, Source
+from unito_amazon.card_creation.card_schema import EvidenceCard
+from unito_amazon.card_creation.schema import Chunk, RankedPassage, Source
 
 
 class CacheTests(unittest.TestCase):
@@ -141,7 +142,7 @@ class CacheTests(unittest.TestCase):
         card = EvidenceCard(
             card_id="card", primary_edos_label="type", edos_definition="description", source=source,
             source_chunk_id="chunk", source_passage="Evidence", source_quote="Evidence", section_path=[],
-            reasoning="Reason", argument="Argument", retrieval_keywords=[], retrieval={},
+            reasoning="Reason", evidence="Qualitative evidence", retrieval_keywords=[], retrieval={},
             generator_model=self.config.generator_model, generation_key="key",
         )
         write_jsonl(self.config.cards_path, [card.model_dump(mode="json")])
@@ -176,8 +177,7 @@ class GenerationResumeTests(unittest.TestCase):
 
             def response(number):
                 return json.dumps({
-                    "card": {"source_quote": f"Evidence {number}", "reasoning": "Reason", "argument": "Argument"},
-                    "rejection_reason": None,
+                    "reasoning": "Reason", "evidence": f"Qualitative evidence {number}",
                 })
 
             failed = Mock()
@@ -192,6 +192,11 @@ class GenerationResumeTests(unittest.TestCase):
                 generate_cards(config)
             self.assertEqual(resumed.generate.call_count, 1)
             self.assertEqual(len(read_jsonl(config.cards_path)), 2)
+            cards = read_jsonl(config.cards_path)
+            self.assertEqual(cards[0]["source_quote"], records[0]["chunk"]["text"])
+            self.assertEqual(cards[0]["evidence"], "Qualitative evidence 1")
+            self.assertEqual(cards[0]["schema_version"], "2.0")
+            self.assertNotIn("argument", cards[0])
             with patch("unito_amazon.card_creation.generation.GemmaCardGenerator", side_effect=AssertionError("No model load")):
                 generate_cards(config)
 

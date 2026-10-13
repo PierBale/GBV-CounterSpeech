@@ -6,7 +6,7 @@ from .config import CardCreationConfig
 from .cache import StageCache
 from .io import read_jsonl
 from .progress import report
-from .schema import EvidenceCard
+from .card_schema import EvidenceCard
 from .vector_store import CARD_INSTRUCTION, FaissEvidenceRetriever
 
 
@@ -27,8 +27,7 @@ def load_card_documents(
             raise ValueError(f"Invalid supporting quote in {card.card_id}")
         # Do not index the full source passage: this is retrieval over cards.
         text = (
-            f"Argument: {card.argument}\n"
-            f"Supporting evidence: {card.source_quote}\n"
+            f"Evidence: {card.evidence}\n"
             f"Evidence connection: {card.reasoning}\n"
             f"EDOS category: {card.primary_edos_label}\n"
             f"Keywords: {', '.join(card.retrieval_keywords)}\n"
@@ -43,7 +42,7 @@ def load_card_documents(
                 "source_chunk_id": card.source_chunk_id,
                 "section_path": card.section_path,
                 "primary_edos_label": card.primary_edos_label,
-                "source_quote": card.source_quote, "argument": card.argument,
+                "source_quote": card.source_quote, "evidence": card.evidence,
                 "validation": card.validation, "status": card.status,
             },
         ))

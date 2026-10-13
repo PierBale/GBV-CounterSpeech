@@ -34,8 +34,8 @@ CODE_FILES = {
     "index": ("vector_store.py",), "dense": ("retrieval.py", "vector_store.py"),
     "rerank": ("retrieval.py", "reranking.py"),
     "dedup": ("retrieval.py", "deduplication.py"),
-    "generate": ("generation.py", "prompts.py", "schema.py"),
-    "index-cards": ("card_retrieval.py", "vector_store.py", "schema.py"),
+    "generate": ("generation.py", "prompts.py", "schema.py", "card_schema.py"),
+    "index-cards": ("card_retrieval.py", "vector_store.py", "schema.py", "card_schema.py"),
 }
 
 
@@ -184,7 +184,7 @@ class StageCache:
                         if item != prior
                     }
                     if parent == "generate" and changed == {str(self.config.cards_path.resolve())}:
-                        from .schema import EvidenceCard
+                        from .card_schema import EvidenceCard
 
                         cards = [EvidenceCard.model_validate(row) for row in read_jsonl(self.config.cards_path)]
                         keys = {card.generation_key for card in cards}

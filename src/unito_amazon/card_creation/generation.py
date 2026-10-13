@@ -6,7 +6,8 @@ from .cache import StageCache
 from .io import append_jsonl, fingerprint, read_jsonl, write_json, write_jsonl
 from .progress import report
 from .prompts import SYSTEM_PROMPT, build_card_prompt
-from .schema import EvidenceCard, GenerationEnvelope, RankedPassage
+from .card_schema import EvidenceCard, GeneratedContent
+from .schema import RankedPassage
 
 
 class GemmaCardGenerator:
@@ -78,28 +79,19 @@ class GemmaCardGenerator:
 
 
 def normalize_card(
-    envelope: GenerationEnvelope, passage: RankedPassage,
+    content: GeneratedContent, passage: RankedPassage,
     config: CardCreationConfig, generation_key: str,
-) -> EvidenceCard | None:
-    if envelope.card is None:
-        if not envelope.rejection_reason or not envelope.rejection_reason.strip():
-            raise ValueError("A rejected passage must include a rejection_reason.")
-        return None
-    if envelope.rejection_reason is not None:
-        raise ValueError("A valid card must have rejection_reason=null.")
-    content = envelope.card
-    if content.source_quote not in passage.chunk.text:
-        raise ValueError("source_quote is not an exact contiguous substring of the passage.")
+) -> EvidenceCard:
     keywords = list(dict.fromkeys(
-        re.findall(r"[A-Za-z][A-Za-z'-]{3,}", content.argument.lower())
+        re.findall(r"[A-Za-z][A-Za-z'-]{3,}", content.evidence.lower())
     ))[:12]
     return EvidenceCard(
         card_id="card_" + generation_key[:24],
         primary_edos_label=passage.label, edos_definition=passage.definition,
         source=passage.chunk.source, source_chunk_id=passage.chunk.chunk_id,
         source_passage=passage.chunk.text, section_path=passage.chunk.section_path,
-        source_quote=content.source_quote, reasoning=content.reasoning,
-        argument=content.argument, retrieval_keywords=keywords,
+        source_quote=passage.chunk.text, reasoning=content.reasoning,
+        evidence=content.evidence, retrieval_keywords=keywords,
         retrieval={
             "embedding_model": passage.embedding_model,
             "reranker_model": passage.reranker_model,
@@ -109,7 +101,7 @@ def normalize_card(
         },
         generator_model=config.generator_model, generation_key=generation_key,
         validation={
-            "quote_exact_match": True,
+            "source_quote_origin": "full_source_passage",
             "semantic_faithfulness": "not_reviewed",
             "edos_alignment": "not_reviewed",
         },
@@ -171,14 +163,12 @@ def generate_cards(
     if len(completed) != len(existing_cards):
         raise ValueError("Duplicate generation keys in the card library.")
     for attempt in read_jsonl(config.attempts_path):
-        if attempt.get("status") == "rejected":
-            completed.add(attempt["generation_key"])
         if attempt.get("status") == "accepted" and attempt["generation_key"] not in completed:
             raise ValueError("Accepted attempt has no corresponding card; output files are inconsistent.")
     remaining = [job for job in jobs if job[0] not in completed]
     report(
         "generate", f"Ripresa: {len(jobs) - len(remaining)}/{len(jobs)} passaggi gia elaborati "
-        f"(carte o scarti); {len(remaining)} da elaborare",
+        f"(carte salvate); {len(remaining)} da elaborare",
     )
     report("generate", f"Carte: {config.cards_path}; log tentativi: {config.attempts_path}")
     if not remaining:
@@ -189,7 +179,6 @@ def generate_cards(
     generator = GemmaCardGenerator(config)
     failed = 0
     accepted = 0
-    rejected = 0
     try:
         for position, (key, passage, prompt) in enumerate(remaining, start=1):
             report(
@@ -211,10 +200,10 @@ def generate_cards(
                     cache.checkpoint(ticket)
                     report("generate", f"ERRORE durante l'inferenza; dettagli salvati in {config.attempts_path}")
                     raise
-                report("generate", "Risposta ricevuta: validazione JSON e corrispondenza esatta della citazione")
+                report("generate", "Risposta ricevuta: validazione JSON reasoning/evidence; fonte aggiunta dal codice")
                 try:
-                    envelope = GenerationEnvelope.model_validate_json(raw)
-                    card = normalize_card(envelope, passage, config, key)
+                    content = GeneratedContent.model_validate_json(raw)
+                    card = normalize_card(content, passage, config, key)
                 except ValueError as error:
                     append_jsonl(config.attempts_path, {
                         **attempt_record, "status": "invalid", "retry": retry,
@@ -229,29 +218,23 @@ def generate_cards(
                         report("generate", "Preparazione di un nuovo tentativo con istruzione di correzione")
                         prompt = build_card_prompt(passage) + (
                             "\nYour previous output was invalid: " + str(error)
-                            + "\nReturn the required JSON with an exact quote, or reject the passage."
+                            + '\nReturn only the required JSON object with non-empty "reasoning" and "evidence" strings.'
                         )
                     continue
-                if card is not None:
-                    append_jsonl(config.cards_path, card.model_dump(mode="json"))
+                append_jsonl(config.cards_path, card.model_dump(mode="json"))
                 append_jsonl(config.attempts_path, {
                     **attempt_record,
-                    "status": "accepted" if card else "rejected",
-                    "retry": retry, "rejection_reason": envelope.rejection_reason,
+                    "status": "accepted", "retry": retry,
                     "raw_response": raw,
                 })
                 cache.checkpoint(ticket)
-                if card is not None:
-                    accepted += 1
-                    report("generate", f"Passaggio {position}/{len(remaining)}: carta {card.card_id} salvata")
-                else:
-                    rejected += 1
-                    report("generate", f"Passaggio {position}/{len(remaining)} rifiutato: {envelope.rejection_reason}")
-                report("generate", f"Sessione: {accepted} carte create, {rejected} scarti, {failed} falliti")
+                accepted += 1
+                report("generate", f"Passaggio {position}/{len(remaining)}: carta {card.card_id} salvata")
+                report("generate", f"Sessione: {accepted} carte create, {failed} falliti")
                 break
     finally:
         generator.close()
-    report("generate", f"Riepilogo sessione: {accepted} carte create, {rejected} scarti, {failed} falliti")
+    report("generate", f"Riepilogo sessione: {accepted} carte create, {failed} falliti")
     if failed:
         raise RuntimeError(
             f"{failed} passages produced invalid cards. Inspect {config.attempts_path}; "

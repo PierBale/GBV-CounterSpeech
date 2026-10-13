@@ -311,24 +311,33 @@ anno, editore, URL e pagina non vengono inventati.
 
 ## Prompt e schema delle card
 
-Il prompt è in `prompts.py`: mantiene la struttura di ragionamento conciso e
-argomento del generatore già presente nel progetto, aggiungendo una citazione
-testuale verificabile. Il modello restituisce solo `source_quote`, `reasoning`
-e `argument` dentro un oggetto `card`, oppure `card: null` con un motivo se il
-passaggio non supporta una card utile. I metadati vengono aggiunti dal codice.
+Il prompt è in `prompts.py`: richiede una spiegazione della pertinenza alla label
+e una sintesi qualitativa autonoma, non un counter-argument già formulato.
+Il modello restituisce soltanto l'oggetto intermedio
+`{"reasoning": "...", "evidence": "..."}`, senza envelope `card`, citazioni
+o metadati. Il codice aggiunge automaticamente i metadati e salva il passaggio
+sorgente completo, senza modifiche, in `source_quote` e `source_passage`.
+`source_quote` è quindi un riferimento testuale alla fonte, non una citazione
+selezionata dal modello né una verifica del supporto semantico della sintesi.
 
 Ogni riga di `cards.jsonl` è un oggetto JSON validato tramite lo schema Pydantic
-in `schema.py`. Contiene fonte, sezione, passaggio completo, citazione, label,
+in `card_schema.py` (versione `2.0`). Contiene `reasoning`, `evidence`, fonte,
+sezione, passaggio completo, riferimento testuale, label,
 descrizione, ranking dense/reranker, modello e identificativi stabili.
-La citazione deve essere una sottostringa esatta del passaggio. Sono consentiti
-due tentativi aggiuntivi di correzione degli output non validi, configurabili.
+Sono consentiti due tentativi aggiuntivi di correzione degli output JSON non
+validi, configurabili. I due campi devono essere stringhe non vuote; campi extra
+non sono ammessi. Il nuovo contratto non prevede una risposta di rifiuto.
 
-La validazione automatica garantisce struttura e corrispondenza della citazione,
-**non** l'implicazione semantica dell'argomento né la pertinenza alla label.
+La validazione automatica garantisce struttura e provenienza del testo sorgente,
+**non** la fedeltà semantica della sintesi né la pertinenza alla label.
 Le card sono quindi `status: "candidate"`; la revisione può promuoverle a
 `"validated"`. Non sono garantite esattamente 10 card per label: si selezionano
-al massimo 10 passaggi dopo la deduplicazione, e il generatore può rifiutare
-quelli privi di evidenza utile.
+al massimo 10 passaggi dopo la deduplicazione; gli output non validi vengono
+registrati e ritentati. Il cambio di prompt/schema rigenera le carte e il loro
+indice, mantenendo chunk, embedding, retrieval, reranking e deduplicazione.
+Gli schemi delle vecchie carte `1.0` rimangono in `schema.py` per riferimento:
+non vengono più usati dal generatore o dal card-RAG. Non viene effettuata una
+conversione automatica da `argument` a `evidence`, perché hanno scopi diversi.
 
 ## Counter-speech con retrieval sulle card
 
@@ -344,7 +353,7 @@ Per il confronto tra zero-shot, chunk-RAG e card-RAG, mantenere gli altri
 retriever e `RUN_WITHOUT_RAG = True`. I risultati delle card hanno strategia
 `rag_cards`; ogni evidence item include i metadati della card e la sua fonte.
 
-Il retrieval confronta l'hate speech con **argomento, citazione, reasoning,
+Il retrieval confronta l'hate speech con **sintesi `evidence`, reasoning,
 label e keyword della card**, usando Qwen3-Embedding-4B e FAISS. Il passaggio
 completo resta nella libreria per verifica ma non viene indicizzato né inserito
 nel contesto del counter-speech. Non viene usata la label gold del messaggio.
