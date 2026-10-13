@@ -23,6 +23,7 @@ RUN_WITHOUT_RAG = True
 RAG_RETRIEVERS = (
     "bm25",
     "qwen3-emb-0.6b",
+    # "cards",  # Enable after the card_creation pipeline has produced cards.
 )
 
 # Counter-speech prompt
@@ -35,6 +36,13 @@ DOCUMENTS_DIR = SRC_DIR / "1_parsed_results"
 INDEX_DIR = PROJECT_DIR / "data" / "indexes"
 FORCE_REINDEX = False
 EMBEDDING_BATCH_SIZE = 16
+
+# Evidence-card RAG (the same evidence prompt as paragraph RAG).
+CARD_LIBRARY_PATH = PROJECT_DIR / "data" / "card_creation" / "cards.jsonl"
+CARD_INDEX_PATH = PROJECT_DIR / "data" / "card_creation" / "indexes" / "cards.faiss"
+CARD_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-4B"
+CARD_EMBEDDING_BATCH_SIZE = 4
+CARD_VALIDATED_ONLY = False  # True = include only manually approved cards.
 
 # Inference
 GENERATION_BATCH_SIZE = 1

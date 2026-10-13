@@ -1,0 +1,6 @@
+-r requirements-generation.txt
+# LlamaParse through the current LlamaCloud SDK (same API as the parsing notebook).
+llama-cloud>=2.8,<3
+faiss-cpu>=1.8
+# Gemma 4 requires a Transformers release exposing AutoModelForMultimodalLM
+# and the gemma4_unified architecture (see the module README).

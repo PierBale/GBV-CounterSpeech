@@ -6,3 +6,4 @@ Cards/Generation/data/processed/*.npz
 src/old/*
 src/2_paragraph_chunks/*
 src/2_paragraph_chunking_llamaparse.ipynb
+data/card_creation/

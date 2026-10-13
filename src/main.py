@@ -6,6 +6,11 @@ from typing import Iterable
 import pandas as pd
 
 from config import (
+    CARD_EMBEDDING_BATCH_SIZE,
+    CARD_EMBEDDING_MODEL,
+    CARD_INDEX_PATH,
+    CARD_LIBRARY_PATH,
+    CARD_VALIDATED_ONLY,
     COUNTERSPEECH_CITE_SOURCE,
     COUNTERSPEECH_LANGUAGE,
     COUNTERSPEECH_MAX_SENTENCES,
@@ -47,7 +52,7 @@ def validate_config() -> None:
     if not RUN_WITHOUT_RAG and not RAG_RETRIEVERS:
         raise ValueError("Enable without-RAG generation or at least one retriever.")
 
-    supported_retrievers = {"bm25", "qwen3-emb-0.6b"}
+    supported_retrievers = {"bm25", "qwen3-emb-0.6b", "cards"}
     unknown_retrievers = set(RAG_RETRIEVERS) - supported_retrievers
     if unknown_retrievers:
         raise ValueError(
@@ -55,14 +60,23 @@ def validate_config() -> None:
         )
 
     if (
-        "qwen3-emb-0.6b" in RAG_RETRIEVERS
+        ({"qwen3-emb-0.6b", "cards"} & set(RAG_RETRIEVERS))
         and importlib.util.find_spec("sentence_transformers") is None
     ):
         raise RuntimeError(
-            "qwen3-emb-0.6b requires sentence-transformers. Install "
+            "Dense retrieval requires sentence-transformers. Install "
             "requirements-generation.txt or remove it from RAG_RETRIEVERS "
             "in config.py."
         )
+
+    if "cards" in RAG_RETRIEVERS:
+        if importlib.util.find_spec("faiss") is None:
+            raise RuntimeError("Card RAG requires requirements-card-creation.txt.")
+        from unito_amazon.card_creation.card_retrieval import load_card_documents
+
+        cards = load_card_documents(CARD_LIBRARY_PATH, validated_only=CARD_VALIDATED_ONLY)
+        if len(cards) < 3:
+            raise ValueError("Card RAG requires at least three usable cards.")
 
 
 def load_generation_data() -> pd.DataFrame:
@@ -116,8 +130,10 @@ def build_generators(llm) -> dict:
     if not RAG_RETRIEVERS:
         return generators
 
-    print(f"Loading RAG documents from {DOCUMENTS_DIR}...")
-    documents = markdown_directory_to_documents(DOCUMENTS_DIR)
+    documents = []
+    if any(name != "cards" for name in RAG_RETRIEVERS):
+        print(f"Loading RAG documents from {DOCUMENTS_DIR}...")
+        documents = markdown_directory_to_documents(DOCUMENTS_DIR)
 
     for retriever_name in RAG_RETRIEVERS:
         if retriever_name == "bm25":
@@ -146,10 +162,25 @@ def build_generators(llm) -> dict:
                 force_reindex=FORCE_REINDEX,
                 save=True,
             )
+        elif retriever_name == "cards":
+            from unito_amazon.card_creation.card_retrieval import load_card_documents
+            from unito_amazon.card_creation.vector_store import FaissEvidenceRetriever
+
+            card_documents = load_card_documents(
+                CARD_LIBRARY_PATH, validated_only=CARD_VALIDATED_ONLY,
+            )
+            retriever = FaissEvidenceRetriever(
+                model_name=CARD_EMBEDDING_MODEL,
+                batch_size=CARD_EMBEDDING_BATCH_SIZE,
+                device=DEVICE,
+            )
+            retriever.load_or_index(
+                card_documents, CARD_INDEX_PATH, force_reindex=FORCE_REINDEX,
+            )
         else:
             raise ValueError(
                 f"Unsupported RAG retriever: {retriever_name!r}. "
-                "Available: 'bm25', 'qwen3-emb-0.6b'."
+                "Available: 'bm25', 'qwen3-emb-0.6b', 'cards'."
             )
 
         strategy_name = f"rag_{retriever_name.replace('-', '_')}"
@@ -189,6 +220,7 @@ def serialize_result(
                 "source_file": retrieval.document.metadata.get("source_file"),
                 "score": retrieval.score,
                 "rank": retrieval.rank,
+                "metadata": retrieval.document.metadata,
             }
             for retrieval in result.retrieval_results
         ],
@@ -217,13 +249,12 @@ def run_model(data: pd.DataFrame, model_alias: str) -> None:
             "trust_remote_code": TRUST_REMOTE_CODE,
         }
     )
-    generators = build_generators(llm)
-    if not generators:
-        llm.destroy()
-        raise ValueError("No generation strategy is enabled in config.py.")
-
+    generators = {}
     completed = 0
     try:
+        generators = build_generators(llm)
+        if not generators:
+            raise ValueError("No generation strategy is enabled in config.py.")
         with output_path.open("w", encoding="utf-8") as output_file:
             for batch in batched(data, GENERATION_BATCH_SIZE):
                 messages = batch["hate_speech"].tolist()
@@ -249,6 +280,10 @@ def run_model(data: pd.DataFrame, model_alias: str) -> None:
                     f"[{model.paper_name}] Generated {completed}/{len(data)} records."
                 )
     finally:
+        for generator in generators.values():
+            retriever = getattr(generator, "retriever", None)
+            if hasattr(retriever, "close"):
+                retriever.close()
         generators.clear()
         llm.destroy()
         gc.collect()
