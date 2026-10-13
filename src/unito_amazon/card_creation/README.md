@@ -152,7 +152,7 @@ L'invalidazione segue le dipendenze, come concordato:
 | Categorie/descrizioni o J | Dense retrieval |
 | Modello o istruzione del reranker | Reranking |
 | K, attivazione o soglia di deduplicazione | Deduplicazione |
-| Modello Gemma, prompt o budget di output | Generazione delle card |
+| Modello Gemma, prompt, temperatura o budget di output | Generazione delle card |
 
 Quindi cambiare la soglia del coseno non ricarica Qwen e cambiare Gemma non
 rifà chunking, embedding o reranking. Aggiornare una libreria per correggere un
@@ -329,8 +329,10 @@ Il campo `prompt` conserva `system` e `user` completi, inclusi label, definizion
 e passaggio sorgente. In caso di retry, `user` contiene il prompt corretto
 effettivamente usato per ottenere la carta. Il prompt è salvato per tracciabilità
 e non entra nel testo indicizzato o nel contesto del card-RAG.
-Sono consentiti due tentativi aggiuntivi di correzione degli output JSON non
-validi, configurabili. I due campi devono essere stringhe non vuote; campi extra
+Il sampling è attivo con `generation_temperature: 0.7`. Il valore `0` disattiva
+il sampling (greedy). Sono consentiti `generation_retries: 5` retry di correzione
+degli output JSON non validi: al massimo 6 tentativi per carta, incluso il primo.
+I due campi devono essere stringhe non vuote; campi extra
 non sono ammessi. Il nuovo contratto non prevede una risposta di rifiuto.
 
 La validazione automatica garantisce struttura e provenienza del testo sorgente,

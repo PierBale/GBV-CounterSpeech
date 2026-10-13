@@ -53,14 +53,18 @@ class GemmaCardGenerator:
                 "the passage has not been split or truncated."
             )
         inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
+        sampling = {"do_sample": self.config.generation_temperature > 0, "num_beams": 1}
+        if sampling["do_sample"]:
+            sampling["temperature"] = self.config.generation_temperature
         report(
             "gemma", f"Inferenza in corso: {input_length} token di input, "
-            f"massimo {self.config.generation_max_new_tokens} nuovi token",
+            f"massimo {self.config.generation_max_new_tokens} nuovi token; "
+            f"temperature={self.config.generation_temperature}, do_sample={sampling['do_sample']}",
         )
         with self.torch.inference_mode():
             outputs = self.model.generate(
                 **inputs, max_new_tokens=self.config.generation_max_new_tokens,
-                do_sample=False,
+                **sampling,
             )
         tokenizer = getattr(self.processor, "tokenizer", self.processor)
         response = tokenizer.decode(outputs[0, input_length:], skip_special_tokens=True).strip()
@@ -126,6 +130,7 @@ def generate_cards(
         key = fingerprint({
             "model": config.generator_model, "system": SYSTEM_PROMPT,
             "prompt": prompt, "max_new_tokens": config.generation_max_new_tokens,
+            "temperature": config.generation_temperature,
             "retrieval": passage.model_dump(mode="json"),
             "card_schema": EvidenceCard.model_json_schema(),
         })
@@ -148,7 +153,10 @@ def generate_cards(
         write_jsonl(config.cards_path, [])
     if overwrite or not config.attempts_path.exists():
         write_jsonl(config.attempts_path, [])
-    write_json(manifest_path, {"signature": signature, "model": config.generator_model})
+    write_json(manifest_path, {
+        "signature": signature, "model": config.generator_model,
+        "temperature": config.generation_temperature,
+    })
     existing_cards = [EvidenceCard.model_validate(item) for item in read_jsonl(config.cards_path)]
     report("generate", f"Carte presenti in libreria: {len(existing_cards)}; verifica tentativi precedenti")
     completed = {card.card_id for card in existing_cards}
@@ -184,6 +192,7 @@ def generate_cards(
                 "generation_key": key, "label": passage.label,
                 "card_id": "card_" + key[:24],
                 "chunk_id": passage.chunk.chunk_id, "generator_model": config.generator_model,
+                "temperature": config.generation_temperature,
             }
             for retry in range(config.generation_retries + 1):
                 report("generate", f"Passaggio {position}/{len(remaining)}: tentativo {retry + 1}/{config.generation_retries + 1}")

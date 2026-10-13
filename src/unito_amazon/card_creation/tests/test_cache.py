@@ -85,6 +85,14 @@ class CacheTests(unittest.TestCase):
         self.assertFalse(self.config.retrieved_path.exists())
         self.assertFalse(self.config.cards_path.exists())
 
+    def test_temperature_change_keeps_retrieval_but_invalidates_cards(self):
+        cache = self.populate()
+        StageCache(self.config.model_copy(update={"generation_temperature": 0.5}))
+        for stage in ("chunk", "index", "dense", "rerank", "dedup"):
+            self.assertTrue(all(path.exists() for path in cache.outputs[stage]))
+        self.assertFalse(self.config.cards_path.exists())
+        self.assertFalse(self.config.card_index_path.exists())
+
     def test_top_j_change_keeps_chunking_and_index(self):
         self.populate()
         StageCache(self.config.model_copy(update={"dense_top_j": 50}))

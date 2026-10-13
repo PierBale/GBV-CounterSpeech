@@ -37,7 +37,8 @@ class CardCreationConfig(BaseModel):
     )
     generator_model: str = "google/gemma-4-12B-it"
     generation_max_new_tokens: int = Field(default=900, ge=1)
-    generation_retries: int = Field(default=2, ge=0)
+    generation_temperature: float = Field(default=0.7, ge=0, allow_inf_nan=False)
+    generation_retries: int = Field(default=5, ge=0)
     device: str | None = None
 
     @model_validator(mode="after")

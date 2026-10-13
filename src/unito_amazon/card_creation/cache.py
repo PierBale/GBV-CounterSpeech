@@ -26,7 +26,7 @@ CONFIG_FIELDS = {
     "dense": ("labels_path", "dense_top_j", "embedding_model", "embedding_max_tokens"),
     "rerank": ("reranker_model", "reranker_max_tokens"),
     "dedup": ("rerank_top_k", "deduplication_enabled", "deduplication_similarity_threshold"),
-    "generate": ("generator_model", "generation_max_new_tokens"),
+    "generate": ("generator_model", "generation_max_new_tokens", "generation_temperature"),
     "index-cards": ("embedding_model", "embedding_max_tokens"),
 }
 CODE_FILES = {
