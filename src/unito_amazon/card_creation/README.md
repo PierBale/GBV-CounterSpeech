@@ -362,8 +362,11 @@ Per il confronto tra zero-shot, chunk-RAG e card-RAG, mantenere gli altri
 retriever e `RUN_WITHOUT_RAG = True`. I risultati delle card hanno strategia
 `rag_cards`; ogni evidence item include i metadati della card e la sua fonte.
 
-Il retrieval confronta l'hate speech con **sintesi `evidence`, reasoning,
-label e titolo della fonte**, usando Qwen3-Embedding-4B e FAISS. Il passaggio
+Il retrieval confronta l'hate speech soltanto con **tipo di sessismo e sintesi
+`evidence`**, usando Qwen3-Embedding-4B e FAISS. Il testo è composto dai campi
+`Sexism type` ed `Evidence`; `reasoning` resta nella carta, ma non viene
+indicizzato né inserito nel contesto del generatore. I metadati della fonte
+restano nella carta, ma non nel testo indicizzato né nel contesto del generatore. Il passaggio
 completo resta nella libreria per verifica ma non viene indicizzato né inserito
 nel contesto del counter-speech. Non viene usata la label gold del messaggio.
 

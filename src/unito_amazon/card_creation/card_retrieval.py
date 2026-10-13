@@ -21,10 +21,8 @@ def load_card_documents(path: str | Path) -> list[Document]:
         seen.add(card.card_id)
         # Do not index the full source passage: this is retrieval over cards.
         text = (
-            f"Evidence: {card.evidence}\n"
-            f"Evidence connection: {card.reasoning}\n"
-            f"EDOS category: {card.primary_edos_label}\n"
-            f"Source: {card.source.title}"
+            f"Sexism type: {card.primary_edos_label}\n"
+            f"Evidence: {card.evidence}"
         )
         documents.append(Document(
             id=card.card_id, text=text,

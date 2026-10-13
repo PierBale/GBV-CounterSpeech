@@ -62,6 +62,15 @@ class CardContentTests(unittest.TestCase):
         self.assertNotIn(self.passage.chunk.text, document.text)
         self.assertEqual(document.metadata["chunk"]["text"], self.passage.chunk.text)
         self.assertNotIn("Keywords:", document.text)
+        self.assertNotIn("Source:", document.text)
+        self.assertIn(f"Sexism type: {card.primary_edos_label}", document.text)
+        self.assertNotIn("EDOS category:", document.text)
+        self.assertNotIn("Evidence connection:", document.text)
+        self.assertEqual(
+            document.text,
+            f"Sexism type: {card.primary_edos_label}\nEvidence: {card.evidence}",
+        )
+        self.assertEqual(document.metadata["source"], card.source.model_dump(mode="json"))
         self.assertNotIn(card.prompt.user, document.text)
 
     def test_saved_prompt_preserves_retry_correction(self):
