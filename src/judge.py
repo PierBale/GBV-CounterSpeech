@@ -1,4 +1,4 @@
-"""Run or resume the paper's pairwise JudgeLM evaluation."""
+"""Run or resume all system-vs-system pairwise JudgeLM comparisons."""
 
 import gc
 import json
@@ -21,10 +21,10 @@ from config import (
     JUDGE_TRUST_REMOTE_CODE,
 )
 from unito_amazon.evaluation.judge import LLMJudge
+from unito_amazon.evaluation.pairwise import build_pairwise_comparisons
 from unito_amazon.model_registry import resolve_decoder_model
 
 
-BASELINE_STRATEGY = "without_rag"
 VALID_WINNERS = {"response_1", "response_2", "tie"}
 
 
@@ -61,82 +61,11 @@ def batched(records: list[dict], batch_size: int) -> Iterable[list[dict]]:
         yield records[start : start + batch_size]
 
 
-def build_pairwise_comparisons(records: list[dict]) -> list[dict]:
-    """Pair each RAG output with No-RAG for the same item and generator."""
-    groups: dict[tuple, list[dict]] = defaultdict(list)
-    group_order = []
-    for record in records:
-        key = (
-            record.get("id"),
-            record.get("source"),
-            record.get("generation_model"),
-        )
-        if key not in groups:
-            group_order.append(key)
-        groups[key].append(record)
-
-    comparisons = []
-    for key in group_order:
-        group = groups[key]
-        baselines = [
-            record
-            for record in group
-            if record.get("generation_strategy") == BASELINE_STRATEGY
-        ]
-        if len(baselines) != 1:
-            raise ValueError(
-                f"Expected exactly one {BASELINE_STRATEGY!r} output for {key}, "
-                f"found {len(baselines)}."
-            )
-        baseline = baselines[0]
-        challengers = [
-            record
-            for record in group
-            if record.get("generation_strategy") != BASELINE_STRATEGY
-        ]
-        comparison_baselines = [
-            (BASELINE_STRATEGY, baseline.get("generated_counter_speech"))
-        ]
-        reference = baseline.get("reference_counter_speech")
-        if isinstance(reference, (list, tuple)):
-            reference = reference[0] if reference else None
-        if (
-            str(baseline.get("source") or "").strip().casefold() == "multiconan"
-            and str(reference or "").strip()
-        ):
-            comparison_baselines.append(("multiconan_reference", reference))
-
-        for challenger in challengers:
-            if challenger.get("hateful_message") != baseline.get("hateful_message"):
-                raise ValueError(f"Mismatched hateful messages for comparison {key}.")
-            for baseline_strategy, baseline_response in comparison_baselines:
-                comparisons.append(
-                    {
-                        "id": baseline.get("id"),
-                        "source": baseline.get("source"),
-                        "split": baseline.get("split"),
-                        "target": baseline.get("target"),
-                        "edos_label": baseline.get("edos_label"),
-                        "generation_model": baseline.get("generation_model"),
-                        "baseline_strategy": baseline_strategy,
-                        "challenger_strategy": challenger.get("generation_strategy"),
-                        "hateful_message": baseline.get("hateful_message"),
-                        "response_1_strategy": baseline_strategy,
-                        "response_1": baseline_response,
-                        "response_2_strategy": challenger.get("generation_strategy"),
-                        "response_2": challenger.get("generated_counter_speech"),
-                    }
-                )
-
-    if not comparisons:
-        raise ValueError("No paper-style pairwise comparisons could be built.")
-    return comparisons
-
-
 def comparison_key(record: dict) -> tuple:
     return (
         record.get("id"),
         record.get("source"),
+        record.get("split"),
         record.get("generation_model"),
         record.get("baseline_strategy"),
         record.get("challenger_strategy"),
@@ -231,6 +160,7 @@ def build_summary(records: list[dict]) -> dict:
         "valid_comparisons": len(valid),
         "parse_failures": len(records) - len(valid),
         "by_generation_model_baseline_and_challenger": {},
+        "by_dataset_generation_model_and_pair": {},
     }
     groups: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
     for record in valid:
@@ -253,7 +183,19 @@ def build_summary(records: list[dict]) -> dict:
             "baseline_wins": winners.count("response_1"),
             "ties": winners.count("tie"),
             "challenger_win_rate": challenger_wins / len(group),
+            "challenger_tie_adjusted_rate": (challenger_wins + 0.5 * winners.count("tie")) / len(group),
         }
+        for dataset in sorted({str(item.get("source") or "unknown") for item in group}):
+            subset = [item for item in group if str(item.get("source") or "unknown") == dataset]
+            outcomes = [item["pairwise_judge"]["winner"] for item in subset]
+            summary["by_dataset_generation_model_and_pair"][f"{dataset}|{model}|{baseline}|{challenger}"] = {
+                "comparisons": len(subset), "response_1_strategy": baseline, "response_2_strategy": challenger,
+                "response_1_wins": outcomes.count("response_1"),
+                "response_2_wins": outcomes.count("response_2"), "ties": outcomes.count("tie"),
+                "response_2_win_rate": outcomes.count("response_2") / len(subset),
+                "response_2_tie_adjusted_rate": (outcomes.count("response_2") + 0.5 * outcomes.count("tie")) / len(subset),
+                "primary_comparison": subset[0].get("primary_comparison", False),
+            }
     return summary
 
 
@@ -321,7 +263,7 @@ def write_judgments(
             "input_file": str(input_path),
             "reused_comparisons": len(comparisons) - len(missing),
             "new_comparisons": len(missing),
-            "protocol": "JudgeLM pairwise RAG vs No-RAG and MultiCONAN reference",
+            "protocol": "JudgeLM all system pairs, within message and decoder; no gold reference",
         }
     )
     summary_path = output_path.with_suffix(".summary.json")
@@ -413,7 +355,7 @@ def main() -> None:
             comparisons = comparisons[:JUDGE_LIMIT]
         inputs[input_path] = comparisons
         print(
-            f"Built {len(comparisons)} paper-style pairwise comparisons "
+            f"Built {len(comparisons)} system-vs-system pairwise comparisons "
             f"from {input_path.name}."
         )
     for model_alias in JUDGE_MODELS:

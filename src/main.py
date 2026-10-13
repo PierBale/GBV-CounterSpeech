@@ -10,12 +10,15 @@ from config import (
     CARD_EMBEDDING_MODEL,
     CARD_INDEX_PATH,
     CARD_LIBRARY_PATH,
+    CHUNK_LIBRARY_PATH,
+    CHUNK_RAG_INDEX_PATH,
+    CHUNK_RAG_EMBEDDING_BATCH_SIZE,
     COUNTERSPEECH_CITE_SOURCE,
     COUNTERSPEECH_LANGUAGE,
     COUNTERSPEECH_MAX_SENTENCES,
     DATASET,
+    DATASET_SAMPLE_SEED,
     DEVICE,
-    DOCUMENTS_DIR,
     DTYPE,
     EDOS_SPLIT,
     EMBEDDING_BATCH_SIZE,
@@ -32,6 +35,9 @@ from config import (
     TRUST_REMOTE_CODE,
 )
 from unito_amazon.dataset_manager.loader import DatasetLoader
+from unito_amazon.dataset_manager.sampling import sample_messages
+from unito_amazon.card_creation.io import file_sha256, write_json
+from unito_amazon.generation.context_stats import measure_context
 from unito_amazon.generation.counter_speech_generator import CounterSpeechGenerator
 from unito_amazon.generation.rag_generator import RAGGenerator
 from unito_amazon.generation.prompts import (
@@ -40,7 +46,7 @@ from unito_amazon.generation.prompts import (
 )
 from unito_amazon.model_registry import resolve_decoder_model, resolve_encoder_model
 from unito_amazon.retrieval.bm25 import BM25Retriever
-from unito_amazon.retrieval.documents import markdown_directory_to_documents
+from unito_amazon.retrieval.experiment import load_chunk_documents, validate_card_sources
 
 
 def validate_config() -> None:
@@ -51,7 +57,7 @@ def validate_config() -> None:
     if not RUN_WITHOUT_RAG and not RAG_RETRIEVERS:
         raise ValueError("Enable without-RAG generation or at least one retriever.")
 
-    supported_retrievers = {"bm25", "qwen3-emb-0.6b", "cards"}
+    supported_retrievers = {"bm25", "qwen3-emb-0.6b", "qwen3-emb-4b", "cards"}
     unknown_retrievers = set(RAG_RETRIEVERS) - supported_retrievers
     if unknown_retrievers:
         raise ValueError(
@@ -59,7 +65,7 @@ def validate_config() -> None:
         )
 
     if (
-        ({"qwen3-emb-0.6b", "cards"} & set(RAG_RETRIEVERS))
+        ({"qwen3-emb-0.6b", "qwen3-emb-4b", "cards"} & set(RAG_RETRIEVERS))
         and importlib.util.find_spec("sentence_transformers") is None
     ):
         raise RuntimeError(
@@ -68,14 +74,25 @@ def validate_config() -> None:
             "in config.py."
         )
 
-    if "cards" in RAG_RETRIEVERS:
+    if {"cards", "qwen3-emb-4b"} & set(RAG_RETRIEVERS):
         if importlib.util.find_spec("faiss") is None:
-            raise RuntimeError("Card RAG requires requirements-card-creation.txt.")
+            raise RuntimeError("FAISS RAG requires requirements-card-creation.txt.")
+    if RAG_RETRIEVERS:
+        chunks = load_chunk_documents(CHUNK_LIBRARY_PATH)
+    if "cards" in RAG_RETRIEVERS:
         from unito_amazon.card_creation.card_retrieval import load_card_documents
 
         cards = load_card_documents(CARD_LIBRARY_PATH)
         if len(cards) < 3:
             raise ValueError("Card RAG requires at least three usable cards.")
+        validate_card_sources(cards, chunks)
+    if {"qwen3-emb-4b", "cards"}.issubset(RAG_RETRIEVERS):
+        if CARD_EMBEDDING_MODEL != resolve_encoder_model("qwen3-emb-4b").huggingface_id:
+            raise ValueError("Controlled chunk/card comparison requires the same Qwen3-Embedding-4B model.")
+        if CHUNK_RAG_INDEX_PATH.resolve() == CARD_INDEX_PATH.resolve():
+            raise ValueError("Chunk RAG and card RAG require distinct FAISS index paths.")
+    if len(set(RAG_RETRIEVERS)) != len(RAG_RETRIEVERS):
+        raise ValueError("RAG_RETRIEVERS contains duplicate strategies.")
 
 
 def load_generation_data() -> pd.DataFrame:
@@ -95,10 +112,11 @@ def load_generation_data() -> pd.DataFrame:
         )
         if name == "edos" and not INCLUDE_NON_SEXIST:
             frame = frame[frame["label_sexist"] == "sexist"]
-        if LIMIT > 0:
-            frame = frame.head(LIMIT)
+        frame = sample_messages(frame, LIMIT, DATASET_SAMPLE_SEED)
+        if frame.empty:
+            raise ValueError(f"No eligible unique messages found for {name}.")
         frames.append(frame)
-        print(f"Loaded {len(frame)} records from {name}.")
+        print(f"Sampled {len(frame)} unique messages from {name}; seed={DATASET_SAMPLE_SEED}.")
 
     return pd.concat(frames, ignore_index=True)
 
@@ -129,10 +147,10 @@ def build_generators(llm) -> dict:
     if not RAG_RETRIEVERS:
         return generators
 
-    documents = []
-    if any(name != "cards" for name in RAG_RETRIEVERS):
-        print(f"Loading RAG documents from {DOCUMENTS_DIR}...")
-        documents = markdown_directory_to_documents(DOCUMENTS_DIR)
+    print(f"Loading the shared source chunk corpus from {CHUNK_LIBRARY_PATH}...")
+    documents = load_chunk_documents(CHUNK_LIBRARY_PATH)
+    corpus_sha256 = file_sha256(CHUNK_LIBRARY_PATH)
+    shared_encoders = {}
 
     for retriever_name in RAG_RETRIEVERS:
         if retriever_name == "bm25":
@@ -150,7 +168,7 @@ def build_generators(llm) -> dict:
             retriever = DenseRetriever(
                 model_name=encoder.huggingface_id,
                 index_folder=INDEX_DIR,
-                index_name="parsed_results",
+                index_name="shared_card_creation_chunks",
                 retriever_name=encoder.paper_name,
                 query_prompt_name="query",
                 device=DEVICE,
@@ -161,25 +179,38 @@ def build_generators(llm) -> dict:
                 force_reindex=FORCE_REINDEX,
                 save=True,
             )
-        elif retriever_name == "cards":
+        elif retriever_name in {"qwen3-emb-4b", "cards"}:
             from unito_amazon.card_creation.card_retrieval import load_card_documents
-            from unito_amazon.card_creation.vector_store import FaissEvidenceRetriever
+            from unito_amazon.card_creation.vector_store import CARD_INSTRUCTION, FaissEvidenceRetriever
 
-            card_documents = load_card_documents(
-                CARD_LIBRARY_PATH,
-            )
+            if retriever_name == "cards":
+                retrieval_documents = load_card_documents(CARD_LIBRARY_PATH)
+                validate_card_sources(retrieval_documents, documents)
+                model_name = CARD_EMBEDDING_MODEL
+                index_path = CARD_INDEX_PATH
+                batch_size = CARD_EMBEDDING_BATCH_SIZE
+            else:
+                retrieval_documents = documents
+                model_name = resolve_encoder_model(retriever_name).huggingface_id
+                index_path = CHUNK_RAG_INDEX_PATH
+                batch_size = CHUNK_RAG_EMBEDDING_BATCH_SIZE
             retriever = FaissEvidenceRetriever(
-                model_name=CARD_EMBEDDING_MODEL,
-                batch_size=CARD_EMBEDDING_BATCH_SIZE,
+                model_name=model_name,
+                batch_size=batch_size,
                 device=DEVICE,
+                retriever_name=f"{retriever_name}_faiss:{model_name}",
+                instruction=CARD_INSTRUCTION,
             )
+            # One shared 4B encoder for both indices; do not load its weights twice.
+            retriever.encoder = shared_encoders.get(model_name)
             retriever.load_or_index(
-                card_documents, CARD_INDEX_PATH, force_reindex=FORCE_REINDEX,
+                retrieval_documents, index_path, force_reindex=FORCE_REINDEX,
             )
+            shared_encoders[model_name] = retriever._encoder()
         else:
             raise ValueError(
                 f"Unsupported RAG retriever: {retriever_name!r}. "
-                "Available: 'bm25', 'qwen3-emb-0.6b', 'cards'."
+                "Available: 'bm25', 'qwen3-emb-0.6b', 'qwen3-emb-4b', 'cards'."
             )
 
         strategy_name = f"rag_{retriever_name.replace('-', '_')}"
@@ -188,6 +219,16 @@ def build_generators(llm) -> dict:
             retriever=retriever,
             prompt=RAGCounterSpeechPrompt(**prompt_options),
             top_k=3,
+            experiment_metadata={
+                "source_corpus_path": str(CHUNK_LIBRARY_PATH),
+                "source_corpus_sha256": corpus_sha256,
+                "source_chunk_count": len(documents),
+                "retrieval_unit": "card" if retriever_name == "cards" else "chunk",
+                "embedding_model": getattr(retriever, "model_name", None),
+                "query_instruction": getattr(retriever, "instruction", None),
+                "reranking": False,
+                "retrieval_top_k": 3,
+            },
         )
 
     return generators
@@ -198,6 +239,8 @@ def serialize_result(
     strategy: str,
     result,
     model_alias: str,
+    tokenizer=None,
+    tokenizer_name: str | None = None,
 ) -> dict:
     return {
         "id": row["id"],
@@ -212,6 +255,9 @@ def serialize_result(
         "generated_counter_speech": result.counter_speech,
         "system_prompt": result.system_prompt,
         "prompt": result.prompt,
+        "context_length": measure_context(
+            result.prompt, len(result.retrieval_results), tokenizer, tokenizer_name,
+        ),
         "evidence": [
             {
                 "id": retrieval.document.id,
@@ -251,6 +297,8 @@ def run_model(data: pd.DataFrame, model_alias: str) -> None:
     generators = {}
     completed = 0
     try:
+        processor_or_tokenizer = getattr(llm, "tokenizer", None)
+        text_tokenizer = getattr(processor_or_tokenizer, "tokenizer", processor_or_tokenizer)
         generators = build_generators(llm)
         if not generators:
             raise ValueError("No generation strategy is enabled in config.py.")
@@ -269,6 +317,8 @@ def run_model(data: pd.DataFrame, model_alias: str) -> None:
                             strategy,
                             result,
                             model_alias=model.paper_name,
+                            tokenizer=text_tokenizer,
+                            tokenizer_name=model.huggingface_id,
                         )
                         output_file.write(
                             json.dumps(record, ensure_ascii=False) + "\n"
@@ -295,6 +345,16 @@ def main() -> None:
     data = load_generation_data()
     if data.empty:
         raise ValueError("No dataset records match the configuration.")
+    subset_path = GENERATION_OUTPUT_DIR / f"subset_{DATASET}.json"
+    write_json(subset_path, {
+        "dataset": DATASET, "limit_per_dataset": LIMIT, "seed": DATASET_SAMPLE_SEED,
+        "items": [
+            {"id": row["id"], "source": row["source"],
+             "split": _optional_value(row["split"]), "hateful_message": row["hate_speech"]}
+            for _, row in data.iterrows()
+        ],
+    })
+    print(f"Dataset subset saved to {subset_path}.")
 
     for model_alias in GENERATION_MODELS:
         run_model(data, model_alias)

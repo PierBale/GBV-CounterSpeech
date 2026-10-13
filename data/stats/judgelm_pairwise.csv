@@ -1,5 +1,0 @@
-﻿generation_model,baseline_strategy,challenger_strategy,judge_model,total_comparisons,valid_comparisons,parse_failures,reparsed_from_raw_response,challenger_wins,rag_win_percentage,baseline_wins,baseline_win_percentage,ties,tie_percentage
-Llama-3.1-8B,multiconan_reference,rag_bm25,JudgeLM-7B,200,191,9,185,180,94.24,5,2.62,6,3.14
-Llama-3.1-8B,multiconan_reference,rag_qwen3_emb_0.6b,JudgeLM-7B,200,195,5,189,183,93.85,6,3.08,6,3.08
-Llama-3.1-8B,without_rag,rag_bm25,JudgeLM-7B,200,176,24,164,123,69.89,41,23.3,12,6.82
-Llama-3.1-8B,without_rag,rag_qwen3_emb_0.6b,JudgeLM-7B,200,176,24,163,131,74.43,32,18.18,13,7.39

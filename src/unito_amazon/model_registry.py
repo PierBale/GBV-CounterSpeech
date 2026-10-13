@@ -15,6 +15,12 @@ class ModelSpec:
 
 MODEL_SPECS = (
     ModelSpec(
+        alias="qwen3-emb-4b",
+        huggingface_id="Qwen/Qwen3-Embedding-4B",
+        role="encoder",
+        paper_name="Qwen3-Emb-4B",
+    ),
+    ModelSpec(
         alias="qwen3-emb-0.6b",
         huggingface_id="Qwen/Qwen3-Embedding-0.6B",
         role="encoder",

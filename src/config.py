@@ -12,18 +12,19 @@ GENERATION_MODELS = (
 )
 
 # Dataset
-DATASET = "multiconan"  # edos | multiconan | both
+DATASET = "both"  # edos | multiconan | both
 TARGETS = ("WOMEN",)
 EDOS_SPLIT = "test"
 INCLUDE_NON_SEXIST = False
-LIMIT = 10  # 0 = all records
+LIMIT = 150  # Maximum unique hateful messages PER dataset; 0 = all.
+DATASET_SAMPLE_SEED = 42
 
 # Generation strategies
 RUN_WITHOUT_RAG = True
 RAG_RETRIEVERS = (
-    "bm25",
-    "qwen3-emb-0.6b",
-    # "cards",  # Enable after the card_creation pipeline has produced cards.
+    "qwen3-emb-4b",
+    "cards",
+    # "bm25",  # Optional additional baseline.
 )
 
 # Counter-speech prompt
@@ -36,15 +37,19 @@ DOCUMENTS_DIR = SRC_DIR / "1_parsed_results"
 INDEX_DIR = PROJECT_DIR / "data" / "indexes"
 FORCE_REINDEX = False
 EMBEDDING_BATCH_SIZE = 16
+CHUNK_LIBRARY_PATH = PROJECT_DIR / "data" / "card_creation" / "chunks.jsonl"
+# Separate from the category-retrieval index used to create cards.
+CHUNK_RAG_INDEX_PATH = INDEX_DIR / "chunk_rag_qwen3_4b.faiss"
+CHUNK_RAG_EMBEDDING_BATCH_SIZE = 16
 
 # Evidence-card RAG (the same evidence prompt as paragraph RAG).
 CARD_LIBRARY_PATH = PROJECT_DIR / "data" / "card_creation" / "cards.jsonl"
 CARD_INDEX_PATH = PROJECT_DIR / "data" / "card_creation" / "indexes" / "cards.faiss"
 CARD_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-4B"
-CARD_EMBEDDING_BATCH_SIZE = 4
+CARD_EMBEDDING_BATCH_SIZE = 16
 
 # Inference
-GENERATION_BATCH_SIZE = 1
+GENERATION_BATCH_SIZE = 16
 DEVICE = None
 DTYPE = None  # None | float32 | float16 | bfloat16
 TRUST_REMOTE_CODE = True

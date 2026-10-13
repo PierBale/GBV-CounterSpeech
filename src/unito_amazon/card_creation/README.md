@@ -358,8 +358,11 @@ RUN_WITHOUT_RAG = False
 RAG_RETRIEVERS = ("cards",)
 ```
 
-Per il confronto tra zero-shot, chunk-RAG e card-RAG, mantenere gli altri
-retriever e `RUN_WITHOUT_RAG = True`. I risultati delle card hanno strategia
+Per il confronto controllato tra zero-shot, chunk-RAG 4B e card-RAG 4B, usare
+`RUN_WITHOUT_RAG = True` e `RAG_RETRIEVERS = ("qwen3-emb-4b", "cards")`.
+Questa è ora la configurazione predefinita; vedere `src/README_EXPERIMENT.md`
+per i subset da 100 messaggi di EDOS e MultiCONAN e i confronti pairwise.
+I risultati delle card hanno strategia
 `rag_cards`; ogni evidence item include i metadati della card e la sua fonte.
 
 Il retrieval confronta l'hate speech soltanto con **tipo di sessismo e sintesi

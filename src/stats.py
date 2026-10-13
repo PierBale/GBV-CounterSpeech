@@ -17,6 +17,7 @@ from config import (
     PROJECT_DIR,
 )
 from unito_amazon.evaluation.judge import LLMJudge
+from unito_amazon.evaluation.latex import pairwise_latex_tables
 from unito_amazon.evaluation.metrics import (
     AUTOMATIC_METRIC_FIELDS,
     summarize_automatic_metrics,
@@ -253,7 +254,7 @@ def build_report(
         ("generation_model", "generation_strategy"),
     )
     report = {
-        "protocol": "JudgeLM pairwise RAG vs No-RAG and MultiCONAN reference",
+        "protocol": "Pairwise system comparisons on the same messages and decoder",
         "input_files": {
             "pairwise_judge": [str(path) for path in judge_paths],
             "automatic_metrics": [str(path) for path in metric_paths],
@@ -264,6 +265,10 @@ def build_report(
         },
         "pairwise_judge": {
             "detailed": pairwise_detailed,
+            "by_dataset_model_pair_and_judge": grouped_pairwise(
+                judge_records,
+                ("source", "generation_model", "baseline_strategy", "challenger_strategy", "judge_model"),
+            ),
             "by_generation_model_and_challenger": grouped_pairwise(
                 judge_records,
                 (
@@ -387,6 +392,8 @@ def _strategy_label(strategy: str) -> str:
         "multiconan_reference": "MultiCONAN",
         "rag_bm25": "BM25",
         "rag_qwen3_emb_0.6b": "Qwen3-Emb-0.6B",
+        "rag_qwen3_emb_4b": "Chunk-RAG (Qwen3-Emb-4B)",
+        "rag_cards": "Card-RAG (Qwen3-Emb-4B)",
         "rag_sbert": "SentBERT",
         "rag_bge_m3": "BGE-M3",
     }
@@ -399,6 +406,8 @@ def _strategy_sort_key(strategy: str) -> tuple[int, str]:
         "rag_sbert": 1,
         "rag_qwen3_emb_0.6b": 2,
         "rag_bge_m3": 3,
+        "rag_qwen3_emb_4b": 4,
+        "rag_cards": 5,
     }
     return order.get(strategy, 100), strategy
 
@@ -431,6 +440,14 @@ def write_report(report: dict, output_dir: Path) -> tuple[Path, Path, list[Path]
     )
     markdown_path = output_dir / "evaluation_statistics.md"
     markdown_path.write_text(_markdown_report(report), encoding="utf-8")
+    latex_path = output_dir / "judgelm_pairwise.tex"
+    latex_path.write_text(
+        pairwise_latex_tables(
+            report["pairwise_judge"]["by_dataset_model_pair_and_judge"],
+            report["pairwise_judge"]["detailed"],
+        ),
+        encoding="utf-8",
+    )
 
     pairwise_rows = [
         _pairwise_csv_row(row) for row in report["pairwise_judge"]["detailed"]
@@ -867,7 +884,7 @@ def parse_args() -> argparse.Namespace:
         "--output-dir",
         type=Path,
         default=Path(PROJECT_DIR) / "data" / "stats",
-        help="Directory for JSON, CSV and Markdown reports (default: data/stats).",
+        help="Directory for JSON, CSV, Markdown and LaTeX reports (default: data/stats).",
     )
     parser.add_argument(
         "--no-save",
@@ -903,6 +920,7 @@ def main() -> None:
         json_path, markdown_path, csv_paths = write_report(report, args.output_dir)
         print(f"\nJSON report: {json_path.resolve()}")
         print(f"Markdown report: {markdown_path.resolve()}")
+        print(f"LaTeX pairwise tables: {(args.output_dir / 'judgelm_pairwise.tex').resolve()}")
         print(f"CSV reports: {len(csv_paths)} files in {args.output_dir.resolve()}")
 
 

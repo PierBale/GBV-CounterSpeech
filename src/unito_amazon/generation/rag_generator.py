@@ -15,6 +15,7 @@ class RAGGenerator:
         prompt: RAGCounterSpeechPrompt | None = None,
         generation_config: LLMGenerationConfig | None = None,
         top_k: int = 3,
+        experiment_metadata: dict | None = None,
     ):
         if top_k != RAGCounterSpeechPrompt.required_evidence_count:
             raise ValueError("The RAG prompt requires top_k=3.")
@@ -31,6 +32,7 @@ class RAGGenerator:
             update={"system_prompt": self.prompt.system_prompt}
         )
         self.top_k = top_k
+        self.experiment_metadata = dict(experiment_metadata or {})
 
     def generate(self, hateful_message: str) -> GenerationResult:
         return self.generate_batch([hateful_message])[0]
@@ -101,6 +103,7 @@ class RAGGenerator:
             context=[result.document.text for result in retrieval_results],
             retrieval_results=retrieval_results,
             metadata={
+                **self.experiment_metadata,
                 "llm_model_name": model_name,
                 "llm_provider": provider,
                 "generation_strategy": "rag",

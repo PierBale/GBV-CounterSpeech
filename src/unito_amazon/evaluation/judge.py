@@ -9,7 +9,7 @@ from .schema import PairwiseJudgeResult, PairwiseWinner
 
 
 class LLMJudge:
-    """Pairwise JudgeLM evaluation for RAG against No-RAG."""
+    """Pairwise JudgeLM evaluation of two anonymous system responses."""
 
     def __init__(
         self,
