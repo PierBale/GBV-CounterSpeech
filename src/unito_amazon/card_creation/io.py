@@ -31,9 +31,25 @@ def write_jsonl(path: str | Path, records: Iterable[dict]) -> None:
 
 
 def append_jsonl(path: Path, record: dict) -> None:
+    # Card libraries are small. Atomic replacement avoids a truncated last row
+    # when Slurm interrupts a job during an append.
+    records = read_jsonl(path) if path.exists() else []
+    write_jsonl(path, [*records, record])
+
+
+def write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as stream:
-        stream.write(json.dumps(record, ensure_ascii=False) + "\n")
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def fingerprint(value) -> str:

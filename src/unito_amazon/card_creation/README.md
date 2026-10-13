@@ -63,12 +63,14 @@ Percorsi predefiniti:
 | Markdown LlamaParse | `src/1_parsed_results/` |
 | Chunk | `data/card_creation/chunks.jsonl` |
 | Indice paragrafi | `data/card_creation/indexes/chunks.faiss` |
+| Candidati dense per categoria | `data/card_creation/edos_passages_dense.jsonl` |
 | Ranking completo prima del filtro | `data/card_creation/edos_passages_ranked.jsonl` |
 | Decisioni di deduplicazione | `data/card_creation/deduplication_decisions.jsonl` |
 | Passaggi selezionati per la generazione | `data/card_creation/edos_passages.jsonl` |
 | Card | `data/card_creation/cards.jsonl` |
 | Tentativi/scarti | `data/card_creation/generation_attempts.jsonl` |
 | Indice card | `data/card_creation/indexes/cards.faiss` |
+| Checkpoint e configurazione effettiva | `data/card_creation/checkpoints/` |
 
 Gli indici hanno un file `.faiss.json` associato con documenti, modello,
 istruzione, fingerprint e checksum. Non separare i due file. Il controllo dei
@@ -104,17 +106,89 @@ python -m unito_amazon.card_creation all --config unito_amazon/card_creation/con
 già presenti, compresi quelli prodotti dal notebook; per questi ultimi, se manca
 il manifest, segnala che la provenienza non può essere verificata automaticamente.
 I nuovi Markdown hanno un manifest `.parse.json` con checksum del PDF e parametri.
-Se il PDF o i parametri cambiano, richiede `parse --overwrite`.
+Se il PDF o i parametri cambiano rispetto al manifest, il Markdown viene
+rigenerato automaticamente. I Markdown legacy senza manifest vengono conservati.
 
 `generate` riprende automaticamente: salta card completate e passaggi rifiutati,
 mentre ritenta gli output non validi. Registra ogni tentativo con risposta originale
-e motivo dell'errore/scarto. Se cambiano input, prompt o modello, utilizzare un
-nuovo `output_dir` o `generate --overwrite`. Questa opzione sostituisce card e log
+e motivo dell'errore/scarto. Se cambiano input, prompt o modello, le card e i log
+obsoleti vengono invalidati automaticamente. `generate --overwrite` sostituisce card e log
 della generazione precedente; su `all` rigenera anche i Markdown.
 
 `index --force-reindex` e `index-cards --force-reindex` forzano la ricostruzione.
 Altrimenti riutilizzano l'indice compatibile e ricostruiscono quello obsoleto.
 Se si cambiano i chunk, eseguire nuovamente `index` prima di `retrieve`.
+
+## Checkpoint e ripresa automatica
+
+Si può rilanciare lo stesso comando `all`: gli stadi completati con input e
+configurazione compatibili vengono saltati **prima di caricare tokenizer o
+modelli**. Il parsing mantiene il controllo per PDF e riutilizza i Markdown
+esistenti, senza chiamate al servizio quando non servono nuove conversioni.
+
+La cache verifica SHA-256 dei file di input e output, configurazione effettiva
+e codice dei componenti. I manifest in `checkpoints/` distinguono `running`
+da `complete`: un fallimento non viene registrato come lavoro completato.
+Non sono i manifest `.parse.json` di LlamaParse, che restano separati.
+
+Il comando pubblico `retrieve` comprende tre checkpoint indipendenti:
+
+1. Dense retrieval: salva `edos_passages_dense.jsonl` dopo ogni categoria.
+2. Reranking: salva il ranking completo in `edos_passages_ranked.jsonl` dopo
+   ogni categoria. Una categoria interrotta viene ricalcolata; quelle completate
+   vengono riutilizzate.
+3. Deduplicazione: riutilizza il ranking completo e i vettori FAISS salvati.
+
+La generazione conserva ogni carta e ogni tentativo con sostituzioni atomiche
+dei file JSONL. Alla ripresa verifica i record e completa soltanto i passaggi
+mancanti o con output non valido, senza duplicare le card già salvate.
+
+L'invalidazione segue le dipendenze, come concordato:
+
+| Modifica | Da ricostruire, oltre agli stadi successivi |
+| --- | --- |
+| Markdown, metadati bibliografici, minimo token o tokenizer | Chunk e indice paragrafi |
+| Modello embedding | Chunk/tokenizer, indici e retrieval |
+| Categorie/descrizioni o J | Dense retrieval |
+| Modello o istruzione del reranker | Reranking |
+| K, attivazione o soglia di deduplicazione | Deduplicazione |
+| Modello Gemma, prompt o budget di output | Generazione delle card |
+
+Quindi cambiare la soglia del coseno non ricarica Qwen e cambiare Gemma non
+rifà chunking, embedding o reranking. Aggiornare una libreria per correggere un
+errore di caricamento non invalida da solo gli artefatti già completati.
+Batch size, device, numero di retry e soglia degli avvisi sui chunk sono opzioni
+operative: modificarle non elimina risultati già completati e validi.
+Le modifiche al codice possono invalidare conservativamente più fasi dello
+stesso componente.
+
+Gli output invalidati vengono eliminati e ricreati, **solo tra i file registrati
+della pipeline dentro `output_dir`**, senza cancellazioni ricorsive. PDF e
+Markdown di input non vengono eliminati; i Markdown con manifest obsoleto
+possono essere aggiornati dallo stadio di parsing. Le approvazioni manuali
+delle card sono conservate se input e configurazione restano compatibili.
+Per conservare risultati di esperimenti con configurazioni differenti, usare
+un `output_dir` distinto per ciascun esperimento.
+
+Alla prima esecuzione di questa versione, gli artefatti senza checkpoint
+compatibile richiedono una verifica o ricostruzione iniziale: non è possibile
+dedurre in modo affidabile tutti i vecchi parametri dalla sola presenza dei
+file. Gli indici FAISS e le card legacy possono essere riutilizzati quando
+i loro manifest precedenti superano le verifiche esistenti. Le esecuzioni
+successive usano i nuovi checkpoint.
+
+Con `all`, le dipendenze vengono ricostruite nell'ordine corretto. Un singolo
+stadio non usa prerequisiti con checkpoint incompleto o diventato obsoleto:
+in quel caso richiede di rilanciare `all` o il comando che produce i prerequisiti.
+Non eseguire due job contemporaneamente nello stesso `output_dir` e non
+modificare input/configurazione durante un job.
+
+I test sintetici della cache e della ripresa non caricano modelli e sono in
+`tests/test_cache.py`. Dalla cartella `src`:
+
+```bash
+python -m unittest discover -s unito_amazon/card_creation/tests
+```
 
 ## Deduplicazione dopo il reranking
 
@@ -183,9 +257,8 @@ Impostando `deduplication_enabled: false` si ripristina la selezione dei primi K
 senza alcuna deduplicazione, utile come baseline.
 
 Non cambia il comando: rieseguire `retrieve` e poi `generate` con la stessa
-configurazione. Se cambiano i passaggi selezionati e sono già presenti card,
-la protezione della generazione richiederà un nuovo `output_dir` oppure
-`generate --overwrite` (che sostituisce card e log precedenti).
+configurazione, oppure direttamente `all`. Se cambiano i passaggi selezionati,
+le card e gli indici successivi vengono invalidati e rigenerati automaticamente.
 
 I test sintetici sono in `tests/test_deduplication.py` e non richiedono modelli
 o GPU. Possono essere eseguiti dalla cartella `src` con

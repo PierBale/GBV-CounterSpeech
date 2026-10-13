@@ -3,6 +3,7 @@ from pathlib import Path
 from unito_amazon.retrieval.schema import Document
 
 from .config import CardCreationConfig
+from .cache import StageCache
 from .io import read_jsonl
 from .progress import report
 from .schema import EvidenceCard
@@ -52,7 +53,11 @@ def load_card_documents(
     return documents
 
 
-def index_cards(config: CardCreationConfig, force: bool = False) -> None:
+def index_cards(config: CardCreationConfig, force: bool = False, cache: StageCache | None = None) -> None:
+    cache = cache or StageCache(config)
+    ticket = cache.prepare("index-cards", files=[config.cards_path], force=force, preserve_existing=True)
+    if ticket.mode == "cached":
+        return
     report("index-cards", f"Preparazione indice delle carte: {config.card_index_path}")
     retriever = FaissEvidenceRetriever(
         model_name=config.embedding_model, instruction=CARD_INSTRUCTION,
@@ -66,3 +71,4 @@ def index_cards(config: CardCreationConfig, force: bool = False) -> None:
         )
     finally:
         retriever.close()
+    cache.checkpoint(ticket, complete=True)

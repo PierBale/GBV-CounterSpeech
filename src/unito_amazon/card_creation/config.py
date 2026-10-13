@@ -59,6 +59,14 @@ class CardCreationConfig(BaseModel):
         return self.output_dir / "edos_passages.jsonl"
 
     @property
+    def dense_path(self) -> Path:
+        return self.output_dir / "edos_passages_dense.jsonl"
+
+    @property
+    def cache_dir(self) -> Path:
+        return self.output_dir / "checkpoints"
+
+    @property
     def ranked_path(self) -> Path:
         return self.output_dir / "edos_passages_ranked.jsonl"
 

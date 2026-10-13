@@ -5,6 +5,7 @@ import json
 import os
 
 from .config import PROJECT_ROOT, CardCreationConfig
+from .io import write_json
 from .progress import report
 
 
@@ -42,17 +43,18 @@ def parse_pdfs(config: CardCreationConfig, overwrite: bool = False) -> None:
                 "base_url": config.llama_base_url,
             }
             if output.exists() and output.stat().st_size and not overwrite:
+                compatible = True
                 if sidecar.exists():
                     cached = json.loads(sidecar.read_text(encoding="utf-8"))
                     if any(cached.get(key) != value for key, value in signature.items()):
-                        raise ValueError(
-                            f"Stale Markdown cache for {pdf}; use parse --overwrite."
-                        )
+                        compatible = False
+                        report("parse", f"PDF o parametri cambiati: rigenerazione automatica di {relative}")
                 else:
                     report("parse", "Manifest assente: provenienza del Markdown non verificabile")
-                reused += 1
-                report("parse", f"Markdown riutilizzato, nessuna chiamata LlamaParse: {output}")
-                continue
+                if compatible:
+                    reused += 1
+                    report("parse", f"Markdown riutilizzato, nessuna chiamata LlamaParse: {output}")
+                    continue
 
             if client is None:
                 from llama_cloud import LlamaCloud
@@ -85,14 +87,9 @@ def parse_pdfs(config: CardCreationConfig, overwrite: bool = False) -> None:
                 temporary = output.with_suffix(".md.tmp")
                 temporary.write_text(markdown, encoding="utf-8")
                 temporary.replace(output)
-                sidecar.write_text(
-                    json.dumps(
-                        {**signature, "pdf_file": relative.as_posix(),
-                         "parse_job_id": result.job.id},
-                        ensure_ascii=False, indent=2,
-                    ) + "\n",
-                    encoding="utf-8",
-                )
+                write_json(sidecar, {
+                    **signature, "pdf_file": relative.as_posix(), "parse_job_id": result.job.id,
+                })
                 parsed += 1
                 report("parse", f"PDF {position}/{len(paths)} completato; Markdown salvato: {output}")
             except Exception as error:

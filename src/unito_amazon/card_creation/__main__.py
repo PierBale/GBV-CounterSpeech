@@ -5,6 +5,7 @@ from pathlib import Path
 from time import perf_counter
 
 from .config import PROJECT_ROOT, load_config
+from .cache import StageCache
 from .progress import report, stage_progress
 
 
@@ -26,6 +27,7 @@ def main() -> None:
     report("pipeline", f"Caricamento configurazione: {args.config or 'default'}")
     load_dotenv(PROJECT_ROOT / ".env")
     config = load_config(args.config)
+    cache = StageCache(config)
     all_stages = ("parse", "chunk", "index", "retrieve", "generate", "index-cards")
     stages = all_stages if args.stage == "all" else (args.stage,)
     report("pipeline", f"Stadi da eseguire: {', '.join(stages)}")
@@ -41,23 +43,23 @@ def main() -> None:
             elif stage == "chunk":
                 from .chunking import create_chunks
 
-                create_chunks(config)
+                create_chunks(config, cache=cache)
             elif stage == "index":
                 from .retrieval import index_chunks
 
-                index_chunks(config, force=args.force_reindex)
+                index_chunks(config, force=args.force_reindex, cache=cache)
             elif stage == "retrieve":
                 from .retrieval import retrieve_passages
 
-                retrieve_passages(config)
+                retrieve_passages(config, cache=cache)
             elif stage == "generate":
                 from .generation import generate_cards
 
-                generate_cards(config, overwrite=args.overwrite)
+                generate_cards(config, overwrite=args.overwrite, cache=cache)
             elif stage == "index-cards":
                 from .card_retrieval import index_cards
 
-                index_cards(config, force=args.force_reindex)
+                index_cards(config, force=args.force_reindex, cache=cache)
 
     report("pipeline", f"Elaborazione completata in {perf_counter() - started:.1f}s")
 

@@ -5,6 +5,7 @@ from collections.abc import Callable
 from itertools import groupby
 
 from .config import CardCreationConfig
+from .cache import StageCache
 from .io import fingerprint, write_jsonl
 from .progress import report
 from .schema import Chunk, Source
@@ -91,9 +92,15 @@ def aggregate_paragraphs(
     return chunks
 
 
-def create_chunks(config: CardCreationConfig) -> None:
+def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -> None:
+    cache = cache or StageCache(config)
+    ticket = cache.prepare(
+        "chunk", files=[config.source_metadata_path] if config.source_metadata_path else [],
+        directories=[(config.markdown_dir, ("*.md", "*.parse.json"))],
+    )
+    if ticket.mode == "cached":
+        return
     from transformers import AutoTokenizer
-
     report("chunk", f"Ricerca Markdown in {config.markdown_dir}")
     paths = sorted(config.markdown_dir.rglob("*.md"))
     if not paths:
@@ -149,4 +156,5 @@ def create_chunks(config: CardCreationConfig) -> None:
         raise ValueError("Markdown files contain no non-empty paragraphs.")
     report("chunk", f"Salvataggio di {len(chunks)} chunk da {total_paragraphs} paragrafi")
     write_jsonl(config.chunks_path, chunks)
+    cache.checkpoint(ticket, complete=True)
     report("chunk", f"Chunk salvati: {config.chunks_path}")

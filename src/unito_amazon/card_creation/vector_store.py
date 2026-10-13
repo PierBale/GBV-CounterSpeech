@@ -205,14 +205,13 @@ class FaissEvidenceRetriever(BaseRetriever):
         self.save(path)
 
     def close(self) -> None:
-        had_encoder = self.encoder is not None
-        if had_encoder:
-            report("embedding", f"Rilascio modello {self.model_name}")
+        if self.encoder is None:
+            return
+        report("embedding", f"Rilascio modello {self.model_name}")
         self.encoder = None
         gc.collect()
         import torch
 
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
-        if had_encoder:
-            report("embedding", "Modello rilasciato")
+        report("embedding", "Modello rilasciato")

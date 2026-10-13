@@ -11,6 +11,7 @@ from unittest.mock import Mock, patch
 import numpy as np
 
 from unito_amazon.card_creation.config import CardCreationConfig
+from unito_amazon.card_creation.cache import StageCache
 from unito_amazon.card_creation.deduplication import normalized_text_hash, select_nonredundant
 from unito_amazon.card_creation.io import read_jsonl
 from unito_amazon.card_creation.retrieval import retrieve_passages
@@ -187,8 +188,63 @@ class RetrievalIntegrationTests(unittest.TestCase):
                 else:
                     retriever.document_embeddings.assert_not_called()
                     self.assertTrue(all(item["method"] == "disabled" for item in audit))
-                retriever.close.assert_called_once()
+                self.assertEqual(retriever.close.call_count, 2 if enabled else 1)
                 reranker.close.assert_called_once()
+                # A second run must not reload Qwen or query FAISS again.
+                retriever.reset_mock()
+                reranker.reset_mock()
+                with (
+                    patch("unito_amazon.card_creation.retrieval.chunk_retriever", side_effect=AssertionError("No model/index reload")),
+                    patch("unito_amazon.card_creation.reranking.QwenReranker", side_effect=AssertionError("No reranker reload")),
+                    patch("unito_amazon.card_creation.retrieval.report"),
+                ):
+                    retrieve_passages(config)
+                if enabled:
+                    # Changing only the threshold must reuse dense retrieval and reranking.
+                    updated = config.model_copy(update={"deduplication_similarity_threshold": 0.99999})
+                    retriever.retrieve.side_effect = AssertionError("No new dense retrieval")
+                    with (
+                        patch("unito_amazon.card_creation.retrieval.load_chunks", return_value=chunks),
+                        patch("unito_amazon.card_creation.retrieval.chunk_retriever", return_value=retriever),
+                        patch("unito_amazon.card_creation.reranking.QwenReranker", side_effect=AssertionError("No new reranking")),
+                        patch("unito_amazon.card_creation.retrieval.report"),
+                    ):
+                        retrieve_passages(updated)
+                    selected = read_jsonl(config.retrieved_path)
+                    self.assertEqual([item["chunk"]["chunk_id"] for item in selected], ["a", "b"] * 2)
+                    # An interrupted dense pass resumes at the remaining category.
+                    StageCache(config).invalidate("dense")
+                    retriever.retrieve.side_effect = [candidates, RuntimeError("Interrupted category")]
+                    with (
+                        patch("unito_amazon.card_creation.retrieval.load_chunks", return_value=chunks),
+                        patch("unito_amazon.card_creation.retrieval.chunk_retriever", return_value=retriever),
+                        patch("unito_amazon.card_creation.reranking.QwenReranker", return_value=reranker),
+                        patch("unito_amazon.card_creation.retrieval.report"),
+                    ):
+                        with self.assertRaises(RuntimeError):
+                            retrieve_passages(config)
+                        self.assertEqual(len(read_jsonl(config.dense_path)), 3)
+                        retriever.reset_mock()
+                        retriever.retrieve.side_effect = None
+                        retriever.retrieve.return_value = candidates
+                        retrieve_passages(config)
+                    retriever.retrieve.assert_called_once()
+                    # A partially scored pool must retain completed categories too.
+                    StageCache(config).invalidate("rerank")
+                    reranker.score.side_effect = [[0.99, 0.80, 0.95], RuntimeError("Interrupted reranking")]
+                    with (
+                        patch("unito_amazon.card_creation.retrieval.load_chunks", return_value=chunks),
+                        patch("unito_amazon.card_creation.retrieval.chunk_retriever", return_value=retriever),
+                        patch("unito_amazon.card_creation.reranking.QwenReranker", return_value=reranker),
+                        patch("unito_amazon.card_creation.retrieval.report"),
+                    ):
+                        with self.assertRaises(RuntimeError):
+                            retrieve_passages(config)
+                        self.assertEqual(len(read_jsonl(config.ranked_path)), 3)
+                        reranker.reset_mock()
+                        reranker.score.side_effect = None
+                        retrieve_passages(config)
+                    reranker.score.assert_called_once()
 
 
 if __name__ == "__main__":

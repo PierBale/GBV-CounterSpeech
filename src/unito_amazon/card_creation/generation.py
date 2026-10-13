@@ -1,9 +1,9 @@
 import gc
-import json
 import re
 
 from .config import CardCreationConfig
-from .io import append_jsonl, fingerprint, read_jsonl, write_jsonl
+from .cache import StageCache
+from .io import append_jsonl, fingerprint, read_jsonl, write_json, write_jsonl
 from .progress import report
 from .prompts import SYSTEM_PROMPT, build_card_prompt
 from .schema import EvidenceCard, GenerationEnvelope, RankedPassage
@@ -116,7 +116,16 @@ def normalize_card(
     )
 
 
-def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
+def generate_cards(
+    config: CardCreationConfig, overwrite: bool = False, cache: StageCache | None = None,
+) -> None:
+    cache = cache or StageCache(config)
+    ticket = cache.prepare(
+        "generate", files=[config.retrieved_path], force=overwrite,
+        allow_partial=True, preserve_existing=True,
+    )
+    if ticket.mode == "cached":
+        return
     report("generate", f"Caricamento e validazione passaggi rerankati: {config.retrieved_path}")
     passages = [
         RankedPassage.model_validate(record)
@@ -141,11 +150,12 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
     signature = fingerprint([key for key, _, _ in jobs])
     if not overwrite and (config.cards_path.exists() or config.attempts_path.exists()):
         report("generate", "Output esistenti: verifica manifest per la ripresa")
-        if not manifest_path.exists():
-            raise ValueError("Existing card output has no manifest; use generate --overwrite.")
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if manifest.get("signature") != signature:
-            raise ValueError("Inputs/model/prompt changed; use generate --overwrite or a new output_dir.")
+        manifest = cache.read_manifest(manifest_path)
+        if manifest is None or manifest.get("signature") != signature:
+            report("generate", "Input/modello/prompt cambiati o manifest non valido: rigenerazione automatica")
+            cache.invalidate("generate")
+            cache.checkpoint(ticket)
+            overwrite = True
 
     config.output_dir.mkdir(parents=True, exist_ok=True)
     if overwrite:
@@ -154,10 +164,7 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
         write_jsonl(config.cards_path, [])
     if overwrite or not config.attempts_path.exists():
         write_jsonl(config.attempts_path, [])
-    manifest_path.write_text(
-        json.dumps({"signature": signature, "model": config.generator_model}, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    write_json(manifest_path, {"signature": signature, "model": config.generator_model})
     existing_cards = [EvidenceCard.model_validate(item) for item in read_jsonl(config.cards_path)]
     report("generate", f"Carte presenti in libreria: {len(existing_cards)}; verifica tentativi precedenti")
     completed = {card.generation_key for card in existing_cards}
@@ -176,6 +183,7 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
     report("generate", f"Carte: {config.cards_path}; log tentativi: {config.attempts_path}")
     if not remaining:
         report("generate", "Nessun passaggio restante: modello non caricato")
+        cache.checkpoint(ticket, complete=True)
         return
 
     generator = GemmaCardGenerator(config)
@@ -200,6 +208,7 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
                     append_jsonl(config.attempts_path, {
                         **attempt_record, "status": "runtime_error", "error": str(error),
                     })
+                    cache.checkpoint(ticket)
                     report("generate", f"ERRORE durante l'inferenza; dettagli salvati in {config.attempts_path}")
                     raise
                 report("generate", "Risposta ricevuta: validazione JSON e corrispondenza esatta della citazione")
@@ -211,6 +220,7 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
                         **attempt_record, "status": "invalid", "retry": retry,
                         "error": str(error), "raw_response": raw,
                     })
+                    cache.checkpoint(ticket)
                     report("generate", f"Output non valido ({type(error).__name__}); dettagli in {config.attempts_path}")
                     if retry == config.generation_retries:
                         failed += 1
@@ -230,6 +240,7 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
                     "retry": retry, "rejection_reason": envelope.rejection_reason,
                     "raw_response": raw,
                 })
+                cache.checkpoint(ticket)
                 if card is not None:
                     accepted += 1
                     report("generate", f"Passaggio {position}/{len(remaining)}: carta {card.card_id} salvata")
@@ -246,4 +257,5 @@ def generate_cards(config: CardCreationConfig, overwrite: bool = False) -> None:
             f"{failed} passages produced invalid cards. Inspect {config.attempts_path}; "
             "rerun generate to retry these passages while retaining completed work."
         )
+    cache.checkpoint(ticket, complete=True)
     report("generate", f"Libreria carte salvata: {config.cards_path}")

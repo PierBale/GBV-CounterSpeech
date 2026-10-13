@@ -26,6 +26,15 @@ class Chunk(StrictModel):
     source: Source
 
 
+class DensePassage(StrictModel):
+    label: str
+    definition: str
+    embedding_model: str
+    chunk: Chunk
+    dense_rank: int
+    dense_score: float
+
+
 class RankedPassage(StrictModel):
     label: str
     definition: str
