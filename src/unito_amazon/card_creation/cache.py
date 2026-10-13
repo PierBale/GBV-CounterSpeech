@@ -176,8 +176,7 @@ class StageCache:
                     raise ValueError(f"Input/output dello stadio {parent} cambiati; rieseguire all.")
                 outputs = self._output_states(parent)
                 if outputs != state.get("outputs"):
-                    # A manually reviewed card library is an editable output.
-                    # Validate it, but never discard user approvals as corruption.
+                    # A card library is editable: validate and preserve manual edits.
                     old = state.get("outputs", [])
                     changed = {
                         item["path"] for item, prior in zip(outputs, old, strict=True)
@@ -187,13 +186,12 @@ class StageCache:
                         from .card_schema import EvidenceCard
 
                         cards = [EvidenceCard.model_validate(row) for row in read_jsonl(self.config.cards_path)]
-                        keys = {card.generation_key for card in cards}
+                        keys = {card.card_id for card in cards}
                         accepted = {
-                            row["generation_key"] for row in read_jsonl(self.config.attempts_path)
+                            row["card_id"] for row in read_jsonl(self.config.attempts_path)
                             if row.get("status") == "accepted"
                         }
-                        if (len(keys) != len(cards) or not accepted.issubset(keys)
-                                or any(card.source_quote not in card.source_passage for card in cards)):
+                        if len(keys) != len(cards) or not accepted.issubset(keys):
                             raise ValueError("Edited card library is inconsistent; original files preserved.")
                         self.invalidate(parent, include_self=False)
                         state["outputs"] = outputs

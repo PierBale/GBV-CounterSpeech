@@ -165,8 +165,8 @@ stesso componente.
 Gli output invalidati vengono eliminati e ricreati, **solo tra i file registrati
 della pipeline dentro `output_dir`**, senza cancellazioni ricorsive. PDF e
 Markdown di input non vengono eliminati; i Markdown con manifest obsoleto
-possono essere aggiornati dallo stadio di parsing. Le approvazioni manuali
-delle card sono conservate se input e configurazione restano compatibili.
+possono essere aggiornati dallo stadio di parsing. Le correzioni manuali
+delle card sono conservate se schema, input e configurazione restano compatibili.
 Per conservare risultati di esperimenti con configurazioni differenti, usare
 un `output_dir` distinto per ciascun esperimento.
 
@@ -316,22 +316,29 @@ e una sintesi qualitativa autonoma, non un counter-argument già formulato.
 Il modello restituisce soltanto l'oggetto intermedio
 `{"reasoning": "...", "evidence": "..."}`, senza envelope `card`, citazioni
 o metadati. Il codice aggiunge automaticamente i metadati e salva il passaggio
-sorgente completo, senza modifiche, in `source_quote` e `source_passage`.
-`source_quote` è quindi un riferimento testuale alla fonte, non una citazione
-selezionata dal modello né una verifica del supporto semantico della sintesi.
+sorgente completo, senza modifiche, in `chunk.text`. Lo stesso oggetto `chunk`
+contiene `chunk_id`, `section_path` (sezione/sottosezione/... in ordine),
+`paragraph_ids` e `token_count`. I paragrafi aggregati appartengono allo stesso
+percorso di intestazioni Markdown; non si aggregano sezioni diverse. I separatori
+tra paragrafi restano nel testo. Il testo sorgente compare una sola volta.
 
 Ogni riga di `cards.jsonl` è un oggetto JSON validato tramite lo schema Pydantic
-in `card_schema.py` (versione `2.0`). Contiene `reasoning`, `evidence`, fonte,
-sezione, passaggio completo, riferimento testuale, label,
+in `card_schema.py` (versione `3.0`). Contiene `reasoning`, `evidence`, fonte, chunk, label,
 descrizione, ranking dense/reranker, modello e identificativi stabili.
+Il campo `prompt` conserva `system` e `user` completi, inclusi label, definizione
+e passaggio sorgente. In caso di retry, `user` contiene il prompt corretto
+effettivamente usato per ottenere la carta. Il prompt è salvato per tracciabilità
+e non entra nel testo indicizzato o nel contesto del card-RAG.
 Sono consentiti due tentativi aggiuntivi di correzione degli output JSON non
 validi, configurabili. I due campi devono essere stringhe non vuote; campi extra
 non sono ammessi. Il nuovo contratto non prevede una risposta di rifiuto.
 
 La validazione automatica garantisce struttura e provenienza del testo sorgente,
 **non** la fedeltà semantica della sintesi né la pertinenza alla label.
-Le card sono quindi `status: "candidate"`; la revisione può promuoverle a
-`"validated"`. Non sono garantite esattamente 10 card per label: si selezionano
+Non vengono salvati `status`, `validation` o `retrieval_keywords` nelle carte.
+La chiave `generation_key` resta solo nel log tecnico dei tentativi; la ripresa
+associa i lavori alle carte tramite `card_id`. Non sono garantite esattamente
+10 card per label: si selezionano
 al massimo 10 passaggi dopo la deduplicazione; gli output non validi vengono
 registrati e ritentati. Il cambio di prompt/schema rigenera le carte e il loro
 indice, mantenendo chunk, embedding, retrieval, reranking e deduplicazione.
@@ -354,7 +361,7 @@ retriever e `RUN_WITHOUT_RAG = True`. I risultati delle card hanno strategia
 `rag_cards`; ogni evidence item include i metadati della card e la sua fonte.
 
 Il retrieval confronta l'hate speech con **sintesi `evidence`, reasoning,
-label e keyword della card**, usando Qwen3-Embedding-4B e FAISS. Il passaggio
+label e titolo della fonte**, usando Qwen3-Embedding-4B e FAISS. Il passaggio
 completo resta nella libreria per verifica ma non viene indicizzato né inserito
 nel contesto del counter-speech. Non viene usata la label gold del messaggio.
 
@@ -364,9 +371,8 @@ Servono almeno tre card utilizzabili, controllate prima di caricare il decoder.
 
 `CARD_LIBRARY_PATH`, `CARD_INDEX_PATH`, `CARD_EMBEDDING_MODEL` e
 `CARD_EMBEDDING_BATCH_SIZE` sono configurabili in `src/config.py`. Se si cambia
-`output_dir` nella creazione, aggiornare questi percorsi. Per usare soltanto card
-approvate, impostare `CARD_VALIDATED_ONLY = True`: il filtro ammette solo
-`status: "validated"` e ricostruisce l'indice se la selezione cambia.
+`output_dir` nella creazione, aggiornare questi percorsi. Non è più previsto
+un filtro sullo stato di approvazione delle carte.
 
 La pipeline genera le card e il loro indice; l'esecuzione del counter-speech
 rimane un passaggio esplicito attraverso `main.py`.

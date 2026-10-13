@@ -10,7 +10,7 @@ from unito_amazon.card_creation.cache import DEPENDENCIES, StageCache
 from unito_amazon.card_creation.config import CardCreationConfig
 from unito_amazon.card_creation.generation import generate_cards
 from unito_amazon.card_creation.io import read_jsonl, write_json, write_jsonl
-from unito_amazon.card_creation.card_schema import EvidenceCard
+from unito_amazon.card_creation.card_schema import CardChunk, EvidenceCard
 from unito_amazon.card_creation.schema import Chunk, RankedPassage, Source
 
 
@@ -136,25 +136,26 @@ class CacheTests(unittest.TestCase):
         self.assertTrue(self.source_path.exists())
         self.assertTrue(self.config.chunk_index_path.exists())
 
-    def test_manually_approved_cards_are_preserved_when_indexing(self):
+    def test_manually_edited_cards_are_preserved_when_indexing(self):
         cache = self.populate()
         source = Source(source_id="s", markdown_file="source.md", title="Source")
         card = EvidenceCard(
             card_id="card", primary_edos_label="type", edos_definition="description", source=source,
-            source_chunk_id="chunk", source_passage="Evidence", source_quote="Evidence", section_path=[],
-            reasoning="Reason", evidence="Qualitative evidence", retrieval_keywords=[], retrieval={},
-            generator_model=self.config.generator_model, generation_key="key",
+            chunk=CardChunk(chunk_id="chunk", text="Evidence", section_path=[], paragraph_ids=[1], token_count=100),
+            reasoning="Reason", evidence="Qualitative evidence", retrieval={},
+            generator_model=self.config.generator_model,
+            prompt={"system": "System instructions", "user": "Full source prompt"},
         )
         write_jsonl(self.config.cards_path, [card.model_dump(mode="json")])
-        write_jsonl(self.config.attempts_path, [{"status": "accepted", "generation_key": "key"}])
+        write_jsonl(self.config.attempts_path, [{"status": "accepted", "generation_key": "key", "card_id": "card"}])
         write_json(self.config.output_dir / "generation_manifest.json", {"signature": "legacy"})
         ticket = cache.prepare("generate", files=[self.config.retrieved_path], preserve_existing=True)
         cache.checkpoint(ticket, complete=True)
-        reviewed = card.model_copy(update={"status": "validated"})
+        reviewed = card.model_copy(update={"evidence": "Manually corrected summary"})
         write_jsonl(self.config.cards_path, [reviewed.model_dump(mode="json")])
         ticket = StageCache(self.config).prepare("index-cards", files=[self.config.cards_path])
         self.assertEqual(ticket.mode, "run")
-        self.assertEqual(read_jsonl(self.config.cards_path)[0]["status"], "validated")
+        self.assertEqual(read_jsonl(self.config.cards_path)[0]["evidence"], "Manually corrected summary")
 
 
 class GenerationResumeTests(unittest.TestCase):
@@ -193,9 +194,11 @@ class GenerationResumeTests(unittest.TestCase):
             self.assertEqual(resumed.generate.call_count, 1)
             self.assertEqual(len(read_jsonl(config.cards_path)), 2)
             cards = read_jsonl(config.cards_path)
-            self.assertEqual(cards[0]["source_quote"], records[0]["chunk"]["text"])
+            self.assertEqual(cards[0]["chunk"]["text"], records[0]["chunk"]["text"])
             self.assertEqual(cards[0]["evidence"], "Qualitative evidence 1")
-            self.assertEqual(cards[0]["schema_version"], "2.0")
+            self.assertEqual(cards[0]["schema_version"], EvidenceCard.model_fields["schema_version"].default)
+            self.assertEqual(cards[0]["prompt"]["user"], failed.generate.call_args_list[0].args[0])
+            self.assertNotIn("generation_key", cards[0])
             self.assertNotIn("argument", cards[0])
             with patch("unito_amazon.card_creation.generation.GemmaCardGenerator", side_effect=AssertionError("No model load")):
                 generate_cards(config)

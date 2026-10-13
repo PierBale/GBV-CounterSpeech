@@ -10,7 +10,6 @@ from config import (
     CARD_EMBEDDING_MODEL,
     CARD_INDEX_PATH,
     CARD_LIBRARY_PATH,
-    CARD_VALIDATED_ONLY,
     COUNTERSPEECH_CITE_SOURCE,
     COUNTERSPEECH_LANGUAGE,
     COUNTERSPEECH_MAX_SENTENCES,
@@ -74,7 +73,7 @@ def validate_config() -> None:
             raise RuntimeError("Card RAG requires requirements-card-creation.txt.")
         from unito_amazon.card_creation.card_retrieval import load_card_documents
 
-        cards = load_card_documents(CARD_LIBRARY_PATH, validated_only=CARD_VALIDATED_ONLY)
+        cards = load_card_documents(CARD_LIBRARY_PATH)
         if len(cards) < 3:
             raise ValueError("Card RAG requires at least three usable cards.")
 
@@ -167,7 +166,7 @@ def build_generators(llm) -> dict:
             from unito_amazon.card_creation.vector_store import FaissEvidenceRetriever
 
             card_documents = load_card_documents(
-                CARD_LIBRARY_PATH, validated_only=CARD_VALIDATED_ONLY,
+                CARD_LIBRARY_PATH,
             )
             retriever = FaissEvidenceRetriever(
                 model_name=CARD_EMBEDDING_MODEL,

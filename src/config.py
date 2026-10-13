@@ -42,7 +42,6 @@ CARD_LIBRARY_PATH = PROJECT_DIR / "data" / "card_creation" / "cards.jsonl"
 CARD_INDEX_PATH = PROJECT_DIR / "data" / "card_creation" / "indexes" / "cards.faiss"
 CARD_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-4B"
 CARD_EMBEDDING_BATCH_SIZE = 4
-CARD_VALIDATED_ONLY = False  # True = include only manually approved cards.
 
 # Inference
 GENERATION_BATCH_SIZE = 1

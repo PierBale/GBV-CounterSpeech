@@ -11,7 +11,7 @@ from unito_amazon.card_creation.card_schema import GeneratedContent
 from unito_amazon.card_creation.config import CardCreationConfig
 from unito_amazon.card_creation.generation import normalize_card
 from unito_amazon.card_creation.io import write_jsonl
-from unito_amazon.card_creation.prompts import build_card_prompt
+from unito_amazon.card_creation.prompts import SYSTEM_PROMPT, build_card_prompt
 from unito_amazon.card_creation.schema import Chunk, RankedPassage, Source
 
 
@@ -44,18 +44,33 @@ class CardContentTests(unittest.TestCase):
     def test_source_is_saved_by_code_but_not_indexed_as_card_content(self):
         card = normalize_card(
             GeneratedContent(reasoning="Why relevant", evidence="Qualitative summary"),
-            self.passage, self.config, "key",
+            self.passage, self.config, "key", build_card_prompt(self.passage),
         )
-        self.assertEqual(card.source_quote, self.passage.chunk.text)
-        self.assertEqual(card.source_passage, self.passage.chunk.text)
-        self.assertNotIn("quote_exact_match", card.validation)
+        self.assertEqual(card.chunk.text, self.passage.chunk.text)
+        self.assertEqual(card.chunk.section_path, self.passage.chunk.section_path)
+        self.assertEqual(card.chunk.paragraph_ids, self.passage.chunk.paragraph_ids)
+        self.assertEqual(card.prompt.system, SYSTEM_PROMPT)
+        self.assertEqual(card.prompt.user, build_card_prompt(self.passage))
+        for field in ("source_quote", "source_passage", "section_path", "retrieval_keywords",
+                      "status", "generation_key", "validation"):
+            self.assertNotIn(field, card.model_dump())
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "cards.jsonl"
             write_jsonl(path, [card.model_dump(mode="json")])
             document = load_card_documents(path)[0]
         self.assertIn("Qualitative summary", document.text)
         self.assertNotIn(self.passage.chunk.text, document.text)
-        self.assertEqual(document.metadata["source_quote"], self.passage.chunk.text)
+        self.assertEqual(document.metadata["chunk"]["text"], self.passage.chunk.text)
+        self.assertNotIn("Keywords:", document.text)
+        self.assertNotIn(card.prompt.user, document.text)
+
+    def test_saved_prompt_preserves_retry_correction(self):
+        corrected_prompt = build_card_prompt(self.passage) + "\nReturn only valid JSON."
+        card = normalize_card(
+            GeneratedContent(reasoning="Why relevant", evidence="Summary"),
+            self.passage, self.config, "key", corrected_prompt,
+        )
+        self.assertEqual(card.prompt.user, corrected_prompt)
 
     def test_prompt_includes_full_source_label_and_definition(self):
         prompt = build_card_prompt(self.passage)

@@ -1,12 +1,11 @@
 import gc
-import re
 
 from .config import CardCreationConfig
 from .cache import StageCache
 from .io import append_jsonl, fingerprint, read_jsonl, write_json, write_jsonl
 from .progress import report
 from .prompts import SYSTEM_PROMPT, build_card_prompt
-from .card_schema import EvidenceCard, GeneratedContent
+from .card_schema import CardChunk, CardPrompt, EvidenceCard, GeneratedContent
 from .schema import RankedPassage
 
 
@@ -80,18 +79,14 @@ class GemmaCardGenerator:
 
 def normalize_card(
     content: GeneratedContent, passage: RankedPassage,
-    config: CardCreationConfig, generation_key: str,
+    config: CardCreationConfig, generation_key: str, prompt: str,
 ) -> EvidenceCard:
-    keywords = list(dict.fromkeys(
-        re.findall(r"[A-Za-z][A-Za-z'-]{3,}", content.evidence.lower())
-    ))[:12]
     return EvidenceCard(
         card_id="card_" + generation_key[:24],
         primary_edos_label=passage.label, edos_definition=passage.definition,
-        source=passage.chunk.source, source_chunk_id=passage.chunk.chunk_id,
-        source_passage=passage.chunk.text, section_path=passage.chunk.section_path,
-        source_quote=passage.chunk.text, reasoning=content.reasoning,
-        evidence=content.evidence, retrieval_keywords=keywords,
+        source=passage.chunk.source,
+        chunk=CardChunk.model_validate(passage.chunk.model_dump(exclude={"source"})),
+        reasoning=content.reasoning, evidence=content.evidence,
         retrieval={
             "embedding_model": passage.embedding_model,
             "reranker_model": passage.reranker_model,
@@ -99,12 +94,8 @@ def normalize_card(
             "reranker_rank": passage.reranker_rank,
             "reranker_score": passage.reranker_score,
         },
-        generator_model=config.generator_model, generation_key=generation_key,
-        validation={
-            "source_quote_origin": "full_source_passage",
-            "semantic_faithfulness": "not_reviewed",
-            "edos_alignment": "not_reviewed",
-        },
+        generator_model=config.generator_model,
+        prompt=CardPrompt(system=SYSTEM_PROMPT, user=prompt),
     )
 
 
@@ -136,6 +127,7 @@ def generate_cards(
             "model": config.generator_model, "system": SYSTEM_PROMPT,
             "prompt": prompt, "max_new_tokens": config.generation_max_new_tokens,
             "retrieval": passage.model_dump(mode="json"),
+            "card_schema": EvidenceCard.model_json_schema(),
         })
         jobs.append((key, passage, prompt))
     manifest_path = config.output_dir / "generation_manifest.json"
@@ -159,13 +151,16 @@ def generate_cards(
     write_json(manifest_path, {"signature": signature, "model": config.generator_model})
     existing_cards = [EvidenceCard.model_validate(item) for item in read_jsonl(config.cards_path)]
     report("generate", f"Carte presenti in libreria: {len(existing_cards)}; verifica tentativi precedenti")
-    completed = {card.generation_key for card in existing_cards}
-    if len(completed) != len(existing_cards):
-        raise ValueError("Duplicate generation keys in the card library.")
+    completed = {card.card_id for card in existing_cards}
+    expected_ids = {"card_" + key[:24] for key, _, _ in jobs}
+    if len(expected_ids) != len(jobs):
+        raise ValueError("Duplicate card IDs in the generation jobs.")
+    if len(completed) != len(existing_cards) or not completed.issubset(expected_ids):
+        raise ValueError("Duplicate or unexpected card IDs in the card library.")
     for attempt in read_jsonl(config.attempts_path):
-        if attempt.get("status") == "accepted" and attempt["generation_key"] not in completed:
+        if attempt.get("status") == "accepted" and attempt["card_id"] not in completed:
             raise ValueError("Accepted attempt has no corresponding card; output files are inconsistent.")
-    remaining = [job for job in jobs if job[0] not in completed]
+    remaining = [job for job in jobs if "card_" + job[0][:24] not in completed]
     report(
         "generate", f"Ripresa: {len(jobs) - len(remaining)}/{len(jobs)} passaggi gia elaborati "
         f"(carte salvate); {len(remaining)} da elaborare",
@@ -187,6 +182,7 @@ def generate_cards(
             )
             attempt_record = {
                 "generation_key": key, "label": passage.label,
+                "card_id": "card_" + key[:24],
                 "chunk_id": passage.chunk.chunk_id, "generator_model": config.generator_model,
             }
             for retry in range(config.generation_retries + 1):
@@ -203,7 +199,7 @@ def generate_cards(
                 report("generate", "Risposta ricevuta: validazione JSON reasoning/evidence; fonte aggiunta dal codice")
                 try:
                     content = GeneratedContent.model_validate_json(raw)
-                    card = normalize_card(content, passage, config, key)
+                    card = normalize_card(content, passage, config, key, prompt)
                 except ValueError as error:
                     append_jsonl(config.attempts_path, {
                         **attempt_record, "status": "invalid", "retry": retry,

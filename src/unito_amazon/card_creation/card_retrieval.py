@@ -10,10 +10,8 @@ from .card_schema import EvidenceCard
 from .vector_store import CARD_INSTRUCTION, FaissEvidenceRetriever
 
 
-def load_card_documents(
-    path: str | Path, validated_only: bool = False,
-) -> list[Document]:
-    report("cards", f"Caricamento e validazione libreria: {path}; validated_only={validated_only}")
+def load_card_documents(path: str | Path) -> list[Document]:
+    report("cards", f"Caricamento e validazione libreria: {path}")
     documents = []
     seen = set()
     for record in read_jsonl(path):
@@ -21,16 +19,11 @@ def load_card_documents(
         if card.card_id in seen:
             raise ValueError(f"Duplicate card ID: {card.card_id}")
         seen.add(card.card_id)
-        if validated_only and card.status != "validated":
-            continue
-        if not card.source_quote.strip() or card.source_quote not in card.source_passage:
-            raise ValueError(f"Invalid supporting quote in {card.card_id}")
         # Do not index the full source passage: this is retrieval over cards.
         text = (
             f"Evidence: {card.evidence}\n"
             f"Evidence connection: {card.reasoning}\n"
             f"EDOS category: {card.primary_edos_label}\n"
-            f"Keywords: {', '.join(card.retrieval_keywords)}\n"
             f"Source: {card.source.title}"
         )
         documents.append(Document(
@@ -39,11 +32,9 @@ def load_card_documents(
                 "evidence_type": "card", "card_id": card.card_id,
                 "source_file": card.source.markdown_file,
                 "source": card.source.model_dump(mode="json"),
-                "source_chunk_id": card.source_chunk_id,
-                "section_path": card.section_path,
+                "chunk": card.chunk.model_dump(mode="json"),
                 "primary_edos_label": card.primary_edos_label,
-                "source_quote": card.source_quote, "evidence": card.evidence,
-                "validation": card.validation, "status": card.status,
+                "evidence": card.evidence,
             },
         ))
     if not documents:
