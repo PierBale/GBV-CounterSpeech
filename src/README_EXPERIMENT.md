@@ -101,7 +101,38 @@ sconfitte e tassi di vittoria, sia aggregati sia separati per dataset e coppia.
 Le lunghezze del contesto di entrambi i sistemi vengono conservate nei record
 dei confronti, ma non mostrate al judge.
 
-Il prompt/criterio del judge non cambia. Questa implementazione non aggiunge
+Il judge usa i marcatori ufficiali di JudgeLM (`[Question]`, le due risposte
+Assistant, `[System]`, `### Response:`), con i criteri factuality, number of facts,
+relevance e specificity in quest'ordine. Il modello restituisce il formato
+nativo previsto da JudgeLM: esattamente due punteggi sulla prima riga, separati
+da uno spazio, e una spiegazione nelle righe successive. Non gli viene richiesto
+un JSON e non occorrono librerie aggiuntive per vincolare il formato.
+
+Il parser legge soltanto i due punteggi della prima riga, accettando anche
+decimali, spazi multipli e la virgola come separatore, come `parse_score` nel
+codice ufficiale. Entrambi devono essere finiti e compresi fra 1 e 10. Il
+vincitore viene calcolato dal codice: vince il punteggio più alto; è `tie` solo
+se i due punteggi validi sono identici (soglia zero). La parola "tie" nella
+spiegazione non determina l'esito. Una riga con tre o più punteggi è invalida:
+non si prendono arbitrariamente i primi due valori. A differenza del fallback
+`[-1, -1]` nel codice ufficiale, un errore di parsing non diventa un pareggio.
+
+Punteggi, `winner` (`response_1`, `response_2` o `tie`) e spiegazione (`reasoning`)
+vengono comunque salvati come campi JSON in `pairwise_judge`, insieme al testo
+originale in `raw_response`. Il primo tentativo usa decoding deterministico;
+se il parsing fallisce, si eseguono al massimo `JUDGE_MAX_RETRIES = 5` nuovi
+tentativi con lo stesso prompt, sampling attivo e `JUDGE_RETRY_TEMPERATURE = 0.7`.
+Se ancora invalido, l'esito resta `null` con `parse_error` ed è escluso dai validi.
+
+Gli output nuovi hanno il suffisso `.native-scores-v1.jsonl`: i giudizi precedenti
+vengono conservati, senza essere riutilizzati da questo protocollo. Non occorre
+rigenerare i counter-speech. Per rieseguire solo il judge, da `src`:
+
+```bash
+python judge.py
+```
+
+Questa implementazione non aggiunge
 inversione dell'ordine A/B, verifiche fattuali sulle fonti o valutazione umana:
 non erano parte delle modifiche richieste. Il giudizio pairwise non certifica
 automaticamente la factuality delle risposte.
@@ -111,7 +142,7 @@ automaticamente la factuality delle risposte.
 Dalla cartella `src`, dopo il judge:
 
 ```bash
-python stats.py
+python stats.py --judge-paths ../data/judged/llama-3.1-8b_both_counterspeech.pairwise-judged.judgelm-7b.native-scores-v1.jsonl
 ```
 
 Oltre ai report JSON/CSV/Markdown, viene creato automaticamente

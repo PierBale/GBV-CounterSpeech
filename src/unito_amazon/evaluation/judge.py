@@ -1,4 +1,4 @@
-import json
+import math
 
 from unito_amazon.llm.base import BaseLLM
 from unito_amazon.llm.schema import LLMGenerationConfig
@@ -81,6 +81,7 @@ class LLMJudge:
                     winner=winner,
                     response_1_score=score_1,
                     response_2_score=score_2,
+                    reasoning=current.strip().partition("\n")[2].strip() or None,
                     raw_response=current,
                     attempts=attempts,
                 )
@@ -89,8 +90,8 @@ class LLMJudge:
                 return PairwiseJudgeResult(
                     raw_response=current,
                     parse_error=(
-                        "Expected exactly one JSON object with valid scores, "
-                        "winner, and reasoning; winner must agree with scores."
+                        "Expected exactly two numeric scores between 1 and 10 "
+                        "on the first line of the JudgeLM response."
                     ),
                     attempts=attempts,
                 )
@@ -110,7 +111,7 @@ class LLMJudge:
         text = raw_response.strip()
         if not text:
             return None
-        return cls._parse_json(text)
+        return cls._parse_score_pair(text)
 
     @classmethod
     def _parse_judgment(
@@ -121,38 +122,23 @@ class LLMJudge:
         return cls.parse_judgment(raw_response)
 
     @staticmethod
-    def _parse_json(
+    def _parse_score_pair(
         text: str,
     ) -> tuple[PairwiseWinner, float | None, float | None] | None:
+        """Follow JudgeLM parse_score: only the first line defines the scores."""
+        first_line = text.split("\n", 1)[0].strip()
+        values = first_line.replace(",", " ").split()
+        if len(values) != 2:
+            return None
         try:
-            payload = json.loads(text)
-        except json.JSONDecodeError:
+            score_1, score_2 = (float(value) for value in values)
+        except ValueError:
             return None
-        if not isinstance(payload, dict):
-            return None
-
-        required = {
-            "score_response_1",
-            "score_response_2",
-            "winner",
-            "reasoning",
-        }
-        if payload.keys() != required:
-            return None
-
-        score_1 = payload["score_response_1"]
-        score_2 = payload["score_response_2"]
-        winner = payload["winner"]
-        reasoning = payload["reasoning"]
         if (
-            isinstance(score_1, bool)
-            or not isinstance(score_1, int)
+            not math.isfinite(score_1)
+            or not math.isfinite(score_2)
             or not 1 <= score_1 <= 10
-            or isinstance(score_2, bool)
-            or not isinstance(score_2, int)
             or not 1 <= score_2 <= 10
-            or not isinstance(reasoning, str)
-            or not reasoning.strip()
         ):
             return None
 
@@ -162,7 +148,4 @@ class LLMJudge:
             expected_winner = "response_2"
         else:
             expected_winner = "tie"
-        if winner != expected_winner:
-            return None
-
-        return expected_winner, float(score_1), float(score_2)
+        return expected_winner, score_1, score_2

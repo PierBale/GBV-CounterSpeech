@@ -23,6 +23,7 @@ from config import (
 )
 from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.evaluation.pairwise import build_pairwise_comparisons
+from unito_amazon.evaluation.schema import JUDGE_PROTOCOL_VERSION
 from unito_amazon.model_registry import resolve_decoder_model
 
 
@@ -86,7 +87,7 @@ def has_pairwise_judgment(record: dict) -> bool:
 
 def output_path_for(input_path: Path, judge_alias: str) -> Path:
     filename = (
-        f"{input_path.stem}.pairwise-judged.{judge_alias}.structured-json-v1.jsonl"
+        f"{input_path.stem}.pairwise-judged.{judge_alias}.{JUDGE_PROTOCOL_VERSION}.jsonl"
     )
     return Path(JUDGE_OUTPUT_DIR) / filename
 
@@ -267,6 +268,7 @@ def write_judgments(
             "reused_comparisons": len(comparisons) - len(missing),
             "new_comparisons": len(missing),
             "protocol": "JudgeLM all system pairs, within message and decoder; no gold reference",
+            "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
         }
     )
     summary_path = output_path.with_suffix(".summary.json")

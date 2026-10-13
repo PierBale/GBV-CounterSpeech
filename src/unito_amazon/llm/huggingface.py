@@ -262,6 +262,15 @@ class HuggingFaceLLM(BaseLLM):
         assistant_prefix: str = "",
         system_prompt: str = "",
     ) -> str:
+        # JudgeLM uses its own evaluation template, not a Vicuna chat turn.
+        # See the official llm_judge/gen_model_judgement.py data_sample.
+        if _is_judgelm(self.model_name):
+            return self._fallback_prompt_template(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                assistant_prefix=assistant_prefix,
+            )
+
         messages = []
 
         if system_prompt:
@@ -323,8 +332,15 @@ class HuggingFaceLLM(BaseLLM):
         assistant_prefix: str = "",
     ) -> str:
         if _is_judgelm(self.model_name):
-            prefix = f"SYSTEM: {system_prompt}\n" if system_prompt else ""
-            return f"{prefix}USER: {prompt}\nASSISTANT: {assistant_prefix}"
+            judge_system = system_prompt or (
+                "You are a helpful and precise assistant for checking the "
+                "quality of the answer."
+            )
+            bos = self._text_tokenizer().bos_token or ""
+            return (
+                f"{bos}{judge_system}\n{prompt.rstrip()}"
+                f"\n\n### Response:{assistant_prefix}"
+            )
 
         parts = []
 
