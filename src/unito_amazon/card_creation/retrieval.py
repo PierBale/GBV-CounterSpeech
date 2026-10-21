@@ -1,5 +1,5 @@
-import json
 from collections import Counter
+import math
 
 import numpy as np
 
@@ -12,7 +12,8 @@ from .deduplication import (
 )
 from .io import read_jsonl, write_jsonl
 from .progress import report
-from .schema import Chunk, DensePassage, RankedPassage
+from .queries import load_queries
+from .schema import Chunk, DensePassage, RankedPassage, RetrievalQuery
 from .vector_store import CHUNK_INSTRUCTION, FaissEvidenceRetriever
 
 
@@ -21,6 +22,8 @@ def load_chunks(config: CardCreationConfig) -> list[Chunk]:
     chunks = [Chunk.model_validate(record) for record in read_jsonl(config.chunks_path)]
     if not chunks:
         raise ValueError("Chunk library is empty; run the chunk stage first.")
+    if len({chunk.chunk_id for chunk in chunks}) != len(chunks):
+        raise ValueError("Chunk IDs must be unique; duplicate texts with different IDs are retained.")
     report("retrieval", f"Caricati {len(chunks)} chunk")
     return chunks
 
@@ -62,27 +65,36 @@ def index_chunks(
     cache.checkpoint(ticket, complete=True)
 
 
-def _group_passages(passages, labels: dict[str, str], config: CardCreationConfig) -> dict:
+def _group_passages(passages, queries: dict[str, RetrievalQuery], config: CardCreationConfig) -> dict:
     groups = {}
     seen = set()
     for passage in passages:
-        key = (passage.label, passage.chunk.chunk_id)
+        key = (passage.query_id, passage.chunk.chunk_id)
         if key in seen:
-            raise ValueError(f"Duplicate label/chunk pair in checkpoint: {key}")
+            raise ValueError(f"Duplicate query/chunk pair in checkpoint: {key}")
         seen.add(key)
-        if labels.get(passage.label) != passage.definition or passage.embedding_model != config.embedding_model:
+        query = queries.get(passage.query_id)
+        if (query is None or query.edos_label != passage.label
+                or query.definition != passage.definition or query.query_text != passage.query_text
+                or query.metadata != passage.query_metadata
+                or passage.embedding_model != config.embedding_model):
             raise ValueError("Checkpoint passages do not match current categories/embedding model.")
         if isinstance(passage, RankedPassage) and passage.reranker_model != config.reranker_model:
             raise ValueError("Checkpoint passages do not match the current reranker model.")
-        groups.setdefault(passage.label, []).append(passage)
+        if not math.isfinite(passage.dense_score) or (
+            isinstance(passage, RankedPassage) and not math.isfinite(passage.reranker_score)
+        ):
+            raise ValueError("Non-finite model score in checkpoint.")
+        groups.setdefault(passage.query_id, []).append(passage)
     return groups
 
 
-def _dense_retrieval(config: CardCreationConfig, cache: StageCache, labels: dict[str, str]):
+def _dense_retrieval(config: CardCreationConfig, cache: StageCache, queries: dict[str, RetrievalQuery], artifacts=None):
     ticket = cache.prepare(
         "dense",
         files=[config.chunks_path, config.chunk_index_path,
-               config.chunk_index_path.with_suffix(".faiss.json"), config.labels_path],
+               config.chunk_index_path.with_suffix(".faiss.json"), config.labels_path,
+               *([config.queries_path] if config.queries_path else [])],
         allow_partial=True,
     )
     if ticket.mode == "cached":
@@ -91,7 +103,7 @@ def _dense_retrieval(config: CardCreationConfig, cache: StageCache, labels: dict
         [DensePassage.model_validate(item) for item in read_jsonl(config.dense_path)]
         if ticket.mode == "resume" and config.dense_path.exists() else []
     )
-    groups = _group_passages(passages, labels, config)
+    groups = _group_passages(passages, queries, config)
     chunks = load_chunks(config)
     lookup = {chunk.chunk_id: chunk for chunk in chunks}
     expected_count = min(config.dense_top_j, len(chunks))
@@ -100,36 +112,44 @@ def _dense_retrieval(config: CardCreationConfig, cache: StageCache, labels: dict
                 or sorted(item.dense_rank for item in group) != list(range(1, expected_count + 1))
                 or any(lookup.get(item.chunk.chunk_id) != item.chunk for item in group)):
             raise ValueError("Invalid partial dense-retrieval checkpoint.")
-    remaining = [label for label in labels if label not in groups]
-    report("retrieve", f"Checkpoint dense: {len(groups)}/{len(labels)} categorie completate")
+    remaining = [key for key in queries if key not in groups]
+    report("retrieve", f"Checkpoint dense: {len(groups)}/{len(queries)} query completate")
     if remaining:
         retriever = chunk_retriever(config)
         try:
             retriever.load(config.chunk_index_path, chunks_to_documents(chunks))
-            for label in remaining:
-                position = list(labels).index(label) + 1
-                report("retrieve", f"Retrieval categoria {position}/{len(labels)}: {label}")
-                query = f"Sexism type: {label}\nDescription: {labels[label]}"
-                results = retriever.retrieve(query, config.dense_top_j)
-                if len(results) != expected_count:
-                    raise ValueError(f"Unexpected number of dense candidates for {label}.")
+            for key in remaining:
+                query = queries[key]
+                report("retrieve", f"Retrieval query {key}: {query.edos_label}")
+                try:
+                    results = retriever.retrieve(query.query_text, config.retrieval_top_k)
+                    if (len(results) != expected_count
+                            or [item.rank for item in results] != list(range(1, expected_count + 1))
+                            or len({item.document.id for item in results}) != expected_count
+                            or any(item.document.id not in lookup or not math.isfinite(item.score) for item in results)):
+                        raise ValueError(f"Invalid dense candidates for query {key}.")
+                except (Exception, KeyboardInterrupt) as error:
+                    if artifacts:
+                        artifacts.error("retrieval", config, error, query)
+                    raise
                 passages.extend(
                     DensePassage(
-                        label=label, definition=labels[label], embedding_model=config.embedding_model,
+                        label=query.edos_label, definition=query.definition, embedding_model=config.embedding_model,
+                        query_id=key, query_text=query.query_text, query_metadata=query.metadata,
                         chunk=lookup[item.document.id], dense_rank=item.rank, dense_score=item.score,
                     )
                     for item in results
                 )
                 write_jsonl(config.dense_path, (item.model_dump(mode="json") for item in passages))
                 cache.checkpoint(ticket)
-                report("retrieve", f"{label}: {len(results)} candidati salvati in {config.dense_path}")
+                report("retrieve", f"{key}: {len(results)} candidati salvati in {config.dense_path}")
         finally:
             retriever.close()
     cache.checkpoint(ticket, complete=True)
     return passages
 
 
-def _rerank_passages(config: CardCreationConfig, cache: StageCache, labels: dict[str, str], dense):
+def _rerank_passages(config: CardCreationConfig, cache: StageCache, queries: dict[str, RetrievalQuery], dense, artifacts=None):
     ticket = cache.prepare("rerank", files=[config.dense_path], allow_partial=True)
     if ticket.mode == "cached":
         return [RankedPassage.model_validate(item) for item in read_jsonl(config.ranked_path)]
@@ -137,10 +157,10 @@ def _rerank_passages(config: CardCreationConfig, cache: StageCache, labels: dict
         [RankedPassage.model_validate(item) for item in read_jsonl(config.ranked_path)]
         if ticket.mode == "resume" and config.ranked_path.exists() else []
     )
-    dense_groups = _group_passages(dense, labels, config)
-    ranked_groups = _group_passages(ranked, labels, config)
-    for label, group in ranked_groups.items():
-        expected = {item.chunk.chunk_id: item for item in dense_groups[label]}
+    dense_groups = _group_passages(dense, queries, config)
+    ranked_groups = _group_passages(ranked, queries, config)
+    for key, group in ranked_groups.items():
+        expected = {item.chunk.chunk_id: item for item in dense_groups[key]}
         if (len(group) != len(expected)
                 or sorted(item.reranker_rank for item in group) != list(range(1, len(expected) + 1))):
             raise ValueError("Invalid partial reranking checkpoint.")
@@ -149,22 +169,25 @@ def _rerank_passages(config: CardCreationConfig, cache: StageCache, labels: dict
             if (original is None or original.chunk != item.chunk
                     or original.dense_rank != item.dense_rank or original.dense_score != item.dense_score):
                 raise ValueError("Reranking checkpoint differs from dense retrieval.")
-    remaining = [label for label in labels if label not in ranked_groups]
-    report("retrieve", f"Checkpoint reranking: {len(ranked_groups)}/{len(labels)} categorie completate")
+    remaining = [key for key in queries if key not in ranked_groups]
+    report("retrieve", f"Checkpoint reranking: {len(ranked_groups)}/{len(queries)} query completate")
     if remaining:
-        from .reranking import QwenReranker
+        from .reranking import create_reranker
 
-        reranker = QwenReranker(
-            config.reranker_model, config.reranker_batch_size,
-            config.reranker_max_tokens, config.device,
-        )
+        reranker = create_reranker(config)
         try:
-            for label in remaining:
-                position = list(labels).index(label) + 1
-                candidates = sorted(dense_groups[label], key=lambda item: item.dense_rank)
-                query = f"Sexism type: {label}\nDescription: {labels[label]}"
-                report("retrieve", f"Reranking categoria {position}/{len(labels)}: {label}")
-                scores = reranker.score(query, [item.chunk.text for item in candidates])
+            for key in remaining:
+                query = queries[key]
+                candidates = sorted(dense_groups[key], key=lambda item: item.dense_rank)
+                report("retrieve", f"Reranking query {key}: {query.edos_label}")
+                try:
+                    scores = reranker.score(query.query_text, [item.chunk.text for item in candidates])
+                    if len(scores) != len(candidates) or any(not math.isfinite(score) for score in scores):
+                        raise ValueError(f"Invalid reranker scores for query {key}.")
+                except (Exception, KeyboardInterrupt) as error:
+                    if artifacts:
+                        artifacts.error("reranking", config, error, query)
+                    raise
                 ordered = sorted(zip(candidates, scores, strict=True), key=lambda pair: (-pair[1], pair[0].dense_rank))
                 ranked.extend(
                     RankedPassage(
@@ -175,21 +198,21 @@ def _rerank_passages(config: CardCreationConfig, cache: StageCache, labels: dict
                 )
                 write_jsonl(config.ranked_path, (item.model_dump(mode="json") for item in ranked))
                 cache.checkpoint(ticket)
-                report("retrieve", f"{label}: ranking completo salvato in {config.ranked_path}")
+                report("retrieve", f"{key}: ranking completo salvato in {config.ranked_path}")
         finally:
             reranker.close()
     cache.checkpoint(ticket, complete=True)
     return ranked
 
 
-def _deduplicate(config: CardCreationConfig, cache: StageCache, labels: dict[str, str], ranked) -> None:
+def _deduplicate(config: CardCreationConfig, cache: StageCache, queries: dict[str, RetrievalQuery], ranked) -> None:
     index_inputs = [config.chunk_index_path, config.chunk_index_path.with_suffix(".faiss.json")]
     ticket = cache.prepare(
         "dedup", files=[config.ranked_path, *(index_inputs if config.deduplication_enabled else [])],
     )
     if ticket.mode == "cached":
         return
-    groups = _group_passages(ranked, labels, config)
+    groups = _group_passages(ranked, queries, config)
     candidate_embeddings = {}
     if config.deduplication_enabled:
         retriever = chunk_retriever(config)
@@ -203,8 +226,9 @@ def _deduplicate(config: CardCreationConfig, cache: StageCache, labels: dict[str
             retriever.close()
     output = []
     audit = []
-    for position, label in enumerate(labels, start=1):
-        passages = sorted(groups[label], key=lambda item: item.reranker_rank)
+    for position, key in enumerate(queries, start=1):
+        label = queries[key].edos_label
+        passages = sorted(groups[key], key=lambda item: item.reranker_rank)
         embeddings = (
             np.stack([candidate_embeddings[item.chunk.chunk_id] for item in passages])
             if config.deduplication_enabled else None
@@ -220,6 +244,7 @@ def _deduplicate(config: CardCreationConfig, cache: StageCache, labels: dict[str
             reference = passages[decision.reference_index] if decision.reference_index is not None else None
             is_duplicate = decision.reason in {"exact_duplicate", "near_duplicate"}
             audit.append({
+                "query_id": key, "query_text": queries[key].query_text,
                 "label": label, "chunk_id": passage.chunk.chunk_id,
                 "source": passage.chunk.source.model_dump(mode="json"),
                 "dense_rank": passage.dense_rank, "reranker_rank": passage.reranker_rank,
@@ -242,7 +267,7 @@ def _deduplicate(config: CardCreationConfig, cache: StageCache, labels: dict[str
                 )
         counts = Counter(item.reason for item in result.decisions)
         report(
-            "dedup", f"Categoria {position}/{len(labels)}: {len(result.selected_indices)} selezionati, "
+            "dedup", f"Query {position}/{len(queries)}: {len(result.selected_indices)} selezionati, "
             f"{counts['exact_duplicate']} duplicati esatti, {counts['near_duplicate']} quasi-duplicati, "
             f"{counts['top_k_limit']} oltre il limite K",
         )
@@ -255,20 +280,25 @@ def _deduplicate(config: CardCreationConfig, cache: StageCache, labels: dict[str
     report("retrieve", f"{len(output)} passaggi selezionati salvati: {config.retrieved_path}")
 
 
-def retrieve_passages(config: CardCreationConfig, cache: StageCache | None = None) -> None:
+def retrieve_passages(config: CardCreationConfig, cache: StageCache | None = None, artifacts=None) -> None:
     cache = cache or StageCache(config)
-    report("retrieve", f"Caricamento tipi di sessismo e descrizioni: {config.labels_path}")
-    labels = json.loads(config.labels_path.read_text(encoding="utf-8"))
-    if not isinstance(labels, dict) or not labels or any(
-        not isinstance(label, str) or not isinstance(definition, str)
-        or not label.strip() or not definition.strip() for label, definition in labels.items()
-    ):
-        raise ValueError("Labels JSON must map each category to a non-empty definition.")
-    report("retrieve", f"Categorie={len(labels)}; top J={config.dense_top_j}; top K={config.rerank_top_k}")
-    report(
-        "dedup", f"Filtro attivo={config.deduplication_enabled}; "
-        f"soglia coseno={config.deduplication_similarity_threshold}",
-    )
-    dense = _dense_retrieval(config, cache, labels)
-    ranked = _rerank_passages(config, cache, labels, dense)
-    _deduplicate(config, cache, labels, ranked)
+    queries = {query.query_id: query for query in load_queries(config)}
+    owns_artifacts = artifacts is None
+    if owns_artifacts:
+        from .artifacts import RunArtifacts
+
+        artifacts = RunArtifacts(config, list(queries.values()), [(config.embedding_model, config.reranker_model)])
+    stage = "retrieval"
+    try:
+        dense = _dense_retrieval(config, cache, queries, artifacts)
+        artifacts.retrieval(config, dense)
+        stage = "reranking"
+        ranked = _rerank_passages(config, cache, queries, dense, artifacts)
+        artifacts.reranking(config, ranked)
+        stage = "selection"
+        _deduplicate(config, cache, queries, ranked)
+        if owns_artifacts:
+            artifacts.finish()
+    except (Exception, KeyboardInterrupt) as error:
+        artifacts.fail(stage, config, error)
+        raise

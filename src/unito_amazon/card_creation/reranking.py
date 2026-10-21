@@ -12,6 +12,22 @@ RERANK_INSTRUCTION = (
 )
 
 
+def create_reranker(config):
+    if config.reranker_model == "BAAI/bge-reranker-v2-m3":
+        from unito_amazon.retrieval.reranker import SequenceClassificationReranker
+
+        return SequenceClassificationReranker(
+            config.reranker_model, max_length=config.reranker_max_tokens,
+            batch_size=config.reranker_batch_size, device=config.device, truncate=False,
+        )
+    if config.reranker_model.startswith("Qwen/Qwen3-Reranker-"):
+        return QwenReranker(
+            config.reranker_model, config.reranker_batch_size,
+            config.reranker_max_tokens, config.device,
+        )
+    raise ValueError(f"Unsupported card reranker: {config.reranker_model}")
+
+
 class QwenReranker:
     def __init__(
         self, model_name: str = "Qwen/Qwen3-Reranker-4B",

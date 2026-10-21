@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class StrictModel(BaseModel):
@@ -26,6 +26,14 @@ class Chunk(StrictModel):
     source: Source
 
 
+class RetrievalQuery(StrictModel):
+    query_id: str = Field(min_length=1)
+    query_text: str = Field(min_length=1)
+    edos_label: str = Field(min_length=1)
+    definition: str = Field(min_length=1)
+    metadata: dict = Field(default_factory=dict)
+
+
 class DensePassage(StrictModel):
     label: str
     definition: str
@@ -33,16 +41,23 @@ class DensePassage(StrictModel):
     chunk: Chunk
     dense_rank: int
     dense_score: float
+    query_id: str = ""
+    query_text: str = ""
+    query_metadata: dict = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def legacy_query(self):
+        from .io import fingerprint
+
+        if not self.query_text:
+            self.query_text = f"Sexism type: {self.label}\nDescription: {self.definition}"
+        if not self.query_id:
+            self.query_id = "query_" + fingerprint([self.label, self.query_text])[:24]
+        return self
 
 
-class RankedPassage(StrictModel):
-    label: str
-    definition: str
-    embedding_model: str
+class RankedPassage(DensePassage):
     reranker_model: str
-    chunk: Chunk
-    dense_rank: int
-    dense_score: float
     reranker_rank: int
     reranker_score: float
 

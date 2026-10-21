@@ -18,6 +18,189 @@ o quote di diversificazione. La deduplicazione opera separatamente per categoria
 un passaggio può essere selezionato per più label. Le label e le descrizioni iniziali sono in `edos_labels.json`;
 le descrizioni sono quelle già utilizzate nel progetto e possono essere riviste.
 
+## Esperimenti di retrieval e reranking
+
+Il comando `experiment` orchestra gli stessi stadi di chunking, indicizzazione,
+retrieval, reranking e generazione descritti sopra. Non introduce valutazione
+umana, annotazioni o metriche. I comandi precedenti e i default 4B restano
+disponibili.
+
+L'analisi del codice ha individuato `retrieval.py` come coordinatore delle tre
+fasi dense/reranking/selezione, `vector_store.py` come backend SentenceTransformers
+e FAISS e `generation.py` come generatore delle carte. Il reranker BGE riutilizza
+`SequenceClassificationReranker` del package `unito_amazon.retrieval`, aggiungendo
+scoring senza troncamento. Le label sono la mappa label/definizione in
+`edos_labels.json`; `schema.py` descrive chunk e passaggi e `card_schema.py`
+descrive le carte correnti. I vecchi schemi delle carte restano disponibili.
+Le dipendenze esistenti (Pydantic, NumPy, SentenceTransformers, Transformers,
+PyTorch, FAISS) sono sufficienti; non serve FlagEmbedding.
+
+Dalla directory `src`, per le quattro combinazioni A–D senza LLM:
+
+```bash
+python -m unito_amazon.card_creation experiment --config unito_amazon/card_creation/config.experiment.example.json --run-id confronto-01
+```
+
+La configurazione di esempio usa `all_combinations: true`, `retrieval_top_k: 100`,
+`rerank_top_k: 10`, `generate_evidence: false` e budget input di 8192 token per
+entrambi gli stadi. I limiti effettivi rispettano anche il contesto del modello;
+non si tronca il testo per adattarlo a un limite. Un superamento causa errore.
+`experiment` parte dai Markdown e crea/riutilizza i chunk: non chiama LlamaParse.
+`all --all-combinations` esegue anche il parsing prima dell'esperimento.
+`retrieve --all-combinations` equivale a `experiment --all-combinations`.
+Questi comandi seguono `generate_evidence`, quindi aggiungere
+`--no-generate-evidence` quando non si vuole caricare il generatore.
+
+Per una singola combinazione, tutti i parametri principali sono anche CLI:
+
+```bash
+python -m unito_amazon.card_creation experiment --embedding-model BAAI/bge-m3 --reranking-model Qwen/Qwen3-Reranker-8B --retrieval-top-k 100 --rerank-top-k 10 --no-generate-evidence --run-id singola-01
+```
+
+`--all-combinations` abilita la matrice fissa:
+
+| Pipeline | Embedding | Reranker |
+| --- | --- | --- |
+| A | Qwen/Qwen3-Embedding-8B | BAAI/bge-reranker-v2-m3 |
+| B | Qwen/Qwen3-Embedding-8B | Qwen/Qwen3-Reranker-8B |
+| C | BAAI/bge-m3 | BAAI/bge-reranker-v2-m3 |
+| D | BAAI/bge-m3 | Qwen/Qwen3-Reranker-8B |
+
+Il JSON usa `embedding_model`, `reranker_model`, `retrieval_top_k`,
+`rerank_top_k`, `generate_evidence`, `generator_model`, `all_combinations` e
+`run_id`. `dense_top_j` resta un alias compatibile di `retrieval_top_k`:
+specificare un solo nome. `--no-all-combinations` permette di disabilitare
+la matrice quando è abilitata nel JSON. `--evidence-model` e
+`--generator-model` sono alias CLI di `generator_model`.
+
+Il chunking legacy usa il tokenizer dell'embedding quando
+`chunk_tokenizer_model` non è specificato. In `experiment`, il tokenizer viene
+fissato **prima** di cambiare embedding: si usa `chunk_tokenizer_model` oppure
+il modello embedding della configurazione iniziale. La configurazione di
+esempio lo fissa esplicitamente a Qwen3-Embedding-8B. Questo tokenizer è solo
+il contatore per aggregare i paragrafi, non viene usato per fare encoding con
+BGE. Corpus, ordine dei chunk, ID e testo rimangono identici tra le pipeline.
+La modalità esperimento disabilita la deduplicazione nella selezione per
+l'evidence: prende i primi K del reranker, conservando anche testi uguali con
+ID distinti. Il flusso legacy conserva la sua deduplicazione configurabile.
+Gli archivi di reranking contengono sempre i primi K prima della deduplicazione.
+
+### Query riproducibili e più query per label
+
+Senza `queries_path`, ogni label genera la query storica
+`Sexism type: <label>\nDescription: <definition>`. Il suo `query_id` deriva da
+SHA-256 di label e testo, non dalla sola label. Non c'è campionamento casuale.
+
+Per più query della stessa label, impostare `queries_path` a un JSONL:
+
+```jsonl
+{"query_id":"q-001","edos_label":"1.1 threats of harm","query_text":"Evidence on threats against women","metadata":{"group":"first"}}
+{"query_id":"q-002","edos_label":"1.1 threats of harm","query_text":"Consequences of gendered intimidation"}
+```
+
+Le label devono esistere in `labels_path`; la definizione viene presa da quel
+file. Gli ID devono essere distinti e le query non vuote. `query_id` omesso
+viene calcolato da label e testo. Query identiche con la stessa label richiedono
+ID espliciti distinti. L'ordine del file viene conservato e tutte le
+combinazioni processano lo stesso elenco completo. Anche le carte e i tentativi
+di generazione conservano `query_id`, `query_text` e `pipeline_id`.
+
+### Archivi JSONL e cache
+
+Ogni run è archiviato in `<output_dir>/runs/<run_id>/`. Senza un ID esplicito
+viene generato un ID UTC con suffisso casuale. La configurazione di esempio
+scrive in `data/card_creation_comparison/`. All'interno del run:
+
+```text
+manifest.json
+retrieval/qwen3-embedding-8b.jsonl
+retrieval/bge-m3.jsonl
+reranking/qwen3-embedding-8b__bge-reranker-v2-m3.jsonl
+reranking/qwen3-embedding-8b__qwen3-reranker-8b.jsonl
+reranking/bge-m3__bge-reranker-v2-m3.jsonl
+reranking/bge-m3__qwen3-reranker-8b.jsonl
+reranking_full/<embedding>__<reranker>.jsonl
+evidence/<embedding>__<reranker>.jsonl
+evidence/<embedding>__<reranker>__attempts.jsonl
+errors.jsonl
+```
+
+`evidence/` esiste solo se richiesta e completata; `errors.jsonl` esiste se
+sono stati registrati errori. Ogni riga retrieval rappresenta una coppia
+query/chunk e contiene `run_id`, `query_id`, `query_text`, `edos_label`,
+`embedding_model`, `chunk_id`, `chunk_text`, `document_id`, `document_source`,
+`retrieval_rank`, `retrieval_score`, `retrieval_top_k`, `metadata`.
+Conserva anche il record nested originario: `chunk`, `label`, `definition`,
+`dense_rank`, `dense_score` e metadati della query. In `metadata` restano fonte,
+percorso delle sezioni, ID dei paragrafi e conteggio token. Non vengono inventati
+pagine o offset assenti nel corpus.
+
+Le righe reranking preservano tutti questi campi e aggiungono
+`reranking_model`, `rerank_rank`, `rerank_score`, `rerank_top_k`, `pipeline_id`,
+oltre ai nomi legacy `reranker_*`. `reranking/` conserva i primi K per query;
+`reranking_full/` conserva tutti i J candidati con entrambi gli ordinamenti.
+Se il corpus ha meno di J o K chunk, si salvano i chunk effettivamente
+disponibili; i valori richiesti restano nei record. A parità di score reranker
+si conserva l'ordine del retrieval. Nessun record viene fuso tra query o pipeline.
+
+Il retrieval è scritto prima di caricare il reranker; il reranking prima
+di caricare il generatore. L'esperimento completa retrieval e reranking di
+tutte le combinazioni prima di iniziare la generazione opzionale: un errore
+del LLM lascia disponibili tutti questi risultati. Il manifest contiene configurazioni effettive,
+query complete, hash del corpus, checksum e conteggi dei file, istruzioni,
+versioni delle librerie e hash del codice degli stadi. Gli stati sono
+`running`, `complete`, `failed`, `interrupted`. Per un confronto completo
+controllare `status: complete` e le combinazioni registrate nel manifest.
+Un errore salva fase, modelli, pipeline, tipo/messaggio e, quando disponibile,
+query ID, testo e label. Il comando termina con errore senza dichiarare completo
+il run. I checkpoint di lavoro rimangono incompleti e riprendibili.
+
+I file di lavoro sono separati in `work/retrieval/<embedding>/` e
+`work/reranking/<embedding>__<reranker>/`, con checkpoint indipendenti.
+L'indice e il retrieval sono eseguiti una volta per embedding; i due reranker
+ricevono esattamente lo stesso pool ordinato. Una seconda esecuzione compatibile
+riusa anche i ranking e le carte completate senza caricare modelli. Gli stessi
+risultati di lavoro possono alimentare un nuovo archivio con diverso `run_id`.
+Cambiare input o impostazioni sperimentali mantenendo lo stesso `run_id`
+genera un errore: usare un nuovo ID. Per riprendere un run interrotto,
+rilanciare lo stesso comando con lo stesso ID. Non eseguire job concorrenti
+sullo stesso `output_dir` e non modificare corpus o query durante un run.
+
+### Encoding, score ed evidence opzionale
+
+Le implementazioni seguono le model card ufficiali:
+[Qwen embedding](https://huggingface.co/Qwen/Qwen3-Embedding-8B),
+[BGE-M3](https://huggingface.co/BAAI/bge-m3),
+[Qwen reranker](https://huggingface.co/Qwen/Qwen3-Reranker-8B),
+[BGE reranker](https://huggingface.co/BAAI/bge-reranker-v2-m3).
+Qwen embedding usa l'istruzione di retrieval solo sulle query, nel formato
+`Instruct: ...\nQuery: ...`; BGE-M3 usa query e documenti senza prefissi,
+soltanto dense retrieval. SentenceTransformers fornisce pooling e tokenizer
+del modello; entrambi gli embedding sono normalizzati a norma unitaria per
+il coseno FAISS. Non vengono attivati sparse retrieval o ColBERT.
+Qwen reranker conserva il protocollo instruction/query/document e lo score
+ufficiale `P(yes)` tra i token `no`/`yes`; BGE restituisce il logit grezzo
+del classificatore, senza sigmoid. Non si applicano normalizzazioni ulteriori
+agli score e non sono direttamente confrontabili tra modelli diversi.
+
+Con `generate_evidence: false` oppure `--no-generate-evidence` non viene
+costruito né invocato alcun generatore LLM. Anche `all` salta `generate` e
+`index-cards`. Per generare evidence nell'esperimento, aggiungere
+`--generate-evidence --evidence-model <modello>`. Il generatore conserva il
+backend Gemma 4 per il default e supporta anche modelli chat testuali caricabili
+con `AutoModelForCausalLM` e `AutoTokenizer`. Il contratto rimane
+`reasoning`/`evidence`, con i metadati aggiunti dal codice. L'indicizzazione
+delle carte non fa parte del comando `experiment`.
+
+Test locali senza scaricare pesi o richiedere GPU:
+
+```bash
+python -m unittest discover -s unito_amazon/card_creation/tests
+```
+
+I test della matrice usano modelli simulati ma gli stadi e i checkpoint reali.
+Non sostituiscono una prova di inferenza con i pesi 8B sulla macchina di esecuzione.
+
 ## Installazione e configurazione
 
 Eseguire i seguenti comandi sulla macchina destinata all'inferenza.

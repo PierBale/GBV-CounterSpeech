@@ -21,9 +21,9 @@ DEPENDENCIES = {
 }
 CONFIG_FIELDS = {
     "parse": ("pdf_dir", "markdown_dir", "llama_base_url", "llama_tier", "llama_version"),
-    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "embedding_model"),
+    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model"),
     "index": ("embedding_model", "embedding_max_tokens"),
-    "dense": ("labels_path", "dense_top_j", "embedding_model", "embedding_max_tokens"),
+    "dense": ("labels_path", "queries_path", "dense_top_j", "embedding_model", "embedding_max_tokens"),
     "rerank": ("reranker_model", "reranker_max_tokens"),
     "dedup": ("rerank_top_k", "deduplication_enabled", "deduplication_similarity_threshold"),
     "generate": ("generator_model", "generation_max_new_tokens", "generation_temperature"),
@@ -31,8 +31,8 @@ CONFIG_FIELDS = {
 }
 CODE_FILES = {
     "parse": ("parsing.py",), "chunk": ("chunking.py", "schema.py"),
-    "index": ("vector_store.py",), "dense": ("retrieval.py", "vector_store.py"),
-    "rerank": ("retrieval.py", "reranking.py"),
+    "index": ("vector_store.py",), "dense": ("retrieval.py", "vector_store.py", "queries.py", "schema.py"),
+    "rerank": ("retrieval.py", "reranking.py", "../retrieval/reranker.py"),
     "dedup": ("retrieval.py", "deduplication.py"),
     "generate": ("generation.py", "prompts.py", "schema.py", "card_schema.py"),
     "index-cards": ("card_retrieval.py", "vector_store.py", "schema.py", "card_schema.py"),
@@ -81,10 +81,11 @@ class StageCache:
             "index": [config.chunk_index_path, config.chunk_index_path.with_suffix(".faiss.json")],
             "dense": [config.dense_path], "rerank": [config.ranked_path],
             "dedup": [config.retrieved_path, config.deduplication_log_path],
-            "generate": [config.cards_path, config.attempts_path, config.output_dir / "generation_manifest.json"],
+            "generate": [config.cards_path, config.attempts_path, config.generation_manifest_path],
             "index-cards": [config.card_index_path, config.card_index_path.with_suffix(".faiss.json")],
         }
         values = config.model_dump(mode="json")
+        values["chunk_tokenizer_model"] = config.chunk_tokenizer
         package = Path(__file__).parent
         self.settings = {
             stage: {
@@ -94,6 +95,10 @@ class StageCache:
             for stage, fields in CONFIG_FIELDS.items()
         }
         self._validated: set[str] = set()
+        if config.model_scoped_artifacts:
+            # Each stage validates its own settings and upstream signatures lazily.
+            # Switching models must not erase another combination's checkpoints.
+            return
         snapshot_path = self.directory / "configuration.json"
         previous = self.read_manifest(snapshot_path)
         if previous:
@@ -121,6 +126,14 @@ class StageCache:
     def _manifest_path(self, stage: str) -> Path:
         if stage not in DEPENDENCIES:
             raise ValueError(f"Unknown cache stage: {stage}")
+        if self.config.model_scoped_artifacts:
+            if stage == "chunk":
+                directory = self.directory / "shared"
+            elif stage in {"index", "dense"}:
+                directory = self.config.retrieval_work_dir / "checkpoints"
+            else:
+                directory = self.config.pipeline_work_dir / "checkpoints"
+            return directory / f"{stage}.json"
         return self.directory / f"{stage}.json"
 
     def _output_states(self, stage: str) -> list[dict]:

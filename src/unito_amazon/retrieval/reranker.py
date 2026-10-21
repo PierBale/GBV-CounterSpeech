@@ -90,9 +90,11 @@ class SequenceClassificationReranker(BaseReranker):
         batch_size: int = 16,
         device: str | None = None,
         reranker_name: str | None = None,
+        truncate: bool = True,
     ):
         self.model_name = model_name
         self.max_length = max_length
+        self.truncate = truncate
         self.batch_size = batch_size
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.reranker_name = reranker_name or f"sequence_classifier:{model_name}"
@@ -101,6 +103,8 @@ class SequenceClassificationReranker(BaseReranker):
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         self.model.to(self.device)
         self.model.eval()
+        if not truncate:
+            self.max_length = min(max_length, self.tokenizer.model_max_length)
 
     def rerank(
         self,
@@ -146,20 +150,28 @@ class SequenceClassificationReranker(BaseReranker):
         query: str,
         results: list[RetrievalResult],
     ) -> list[float]:
-        all_scores = []
+        return self.score(query, [result.document.text for result in results])
 
-        pairs = [
-            [query, result.document.text]
-            for result in results
-        ]
+    def score(self, query: str, passages: list[str]) -> list[float]:
+        all_scores = []
+        pairs = [[query, passage] for passage in passages]
 
         for start in range(0, len(pairs), self.batch_size):
             batch_pairs = pairs[start:start + self.batch_size]
 
+            if not self.truncate:
+                for pair in batch_pairs:
+                    length = len(self.tokenizer(*pair, truncation=False)["input_ids"])
+                    if length > self.max_length:
+                        raise ValueError(
+                            f"Reranker input has {length} tokens, exceeding {self.max_length}; "
+                            "the pipeline does not split or truncate it."
+                        )
+
             inputs = self.tokenizer(
                 batch_pairs,
                 padding=True,
-                truncation=True,
+                truncation=self.truncate,
                 return_tensors="pt",
                 max_length=self.max_length,
             )
@@ -186,6 +198,9 @@ class SequenceClassificationReranker(BaseReranker):
 
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
+
+    def close(self) -> None:
+        self.destroy()
 
 
 # va bene per jinaai/jina-reranker-v3 (custom architecture con trust_remote_code)

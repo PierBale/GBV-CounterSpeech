@@ -10,26 +10,33 @@ from .schema import RankedPassage
 
 
 class GemmaCardGenerator:
-    """Text-only use of Gemma's official multimodal Transformers interface."""
+    """Gemma 4's multimodal interface or a standard causal chat LLM.
+
+    The historical class name is retained for existing callers.
+    """
 
     def __init__(self, config: CardCreationConfig):
         report("gemma", f"Preparazione generatore: {config.generator_model}")
         import torch
-        try:
-            from transformers import AutoModelForMultimodalLM, AutoProcessor
-        except ImportError as error:
-            raise RuntimeError(
-                "Gemma 4 card generation requires an updated Transformers version "
-                "with AutoModelForMultimodalLM and gemma4_unified support. "
-                "See card_creation/README.md and the official Gemma model card."
-            ) from error
+        self.multimodal = "gemma-4" in config.generator_model.lower() or "gemma4" in config.generator_model.lower()
+        if self.multimodal:
+            try:
+                from transformers import AutoModelForMultimodalLM as Model, AutoProcessor as Processor
+            except ImportError as error:
+                raise RuntimeError(
+                    "Gemma 4 card generation requires an updated Transformers version "
+                    "with AutoModelForMultimodalLM and gemma4_unified support. "
+                    "See card_creation/README.md and the official Gemma model card."
+                ) from error
+        else:
+            from transformers import AutoModelForCausalLM as Model, AutoTokenizer as Processor
 
         self.torch = torch
         self.config = config
         report("gemma", "Caricamento processor e tokenizer")
-        self.processor = AutoProcessor.from_pretrained(config.generator_model)
+        self.processor = Processor.from_pretrained(config.generator_model)
         report("gemma", f"Caricamento pesi del modello; device={config.device or 'auto'}")
-        self.model = AutoModelForMultimodalLM.from_pretrained(
+        self.model = Model.from_pretrained(
             config.generator_model, dtype="auto", device_map=config.device or "auto",
         ).eval()
         report("gemma", "Modello pronto")
@@ -37,8 +44,8 @@ class GemmaCardGenerator:
     def generate(self, prompt: str) -> str:
         report("gemma", "Applicazione chat template e tokenizzazione del prompt")
         messages = [
-            {"role": "system", "content": [{"type": "text", "text": SYSTEM_PROMPT}]},
-            {"role": "user", "content": [{"type": "text", "text": prompt}]},
+            {"role": "system", "content": self._content(SYSTEM_PROMPT)},
+            {"role": "user", "content": self._content(prompt)},
         ]
         inputs = self.processor.apply_chat_template(
             messages, add_generation_prompt=True, tokenize=True,
@@ -71,6 +78,9 @@ class GemmaCardGenerator:
         report("gemma", f"Inferenza completata: {outputs.shape[-1] - input_length} token generati")
         return response
 
+    def _content(self, text):
+        return [{"type": "text", "text": text}] if self.multimodal else text
+
     def close(self) -> None:
         report("gemma", "Rilascio modello e processor")
         self.model = None
@@ -92,6 +102,8 @@ def normalize_card(
         chunk=CardChunk.model_validate(passage.chunk.model_dump(exclude={"source"})),
         reasoning=content.reasoning, evidence=content.evidence,
         retrieval={
+            "query_id": passage.query_id, "query_text": passage.query_text,
+            "pipeline_id": config.pipeline_id,
             "embedding_model": passage.embedding_model,
             "reranker_model": passage.reranker_model,
             "dense_rank": passage.dense_rank, "dense_score": passage.dense_score,
@@ -106,6 +118,9 @@ def normalize_card(
 def generate_cards(
     config: CardCreationConfig, overwrite: bool = False, cache: StageCache | None = None,
 ) -> None:
+    if not config.generate_evidence:
+        report("generate", "Generazione evidence disabilitata; nessun modello LLM caricato")
+        return
     cache = cache or StageCache(config)
     ticket = cache.prepare(
         "generate", files=[config.retrieved_path], force=overwrite,
@@ -121,9 +136,9 @@ def generate_cards(
     if not passages:
         raise ValueError("No reranked passages; run the retrieve stage first.")
     report("generate", f"Passaggi da elaborare: {len(passages)}; preparazione prompt e chiavi di ripresa")
-    passage_ids = [(passage.label, passage.chunk.chunk_id) for passage in passages]
+    passage_ids = [(passage.query_id, passage.chunk.chunk_id) for passage in passages]
     if len(set(passage_ids)) != len(passage_ids):
-        raise ValueError("Duplicate label/chunk pairs in the reranked passage file.")
+        raise ValueError("Duplicate query/chunk pairs in the reranked passage file.")
     jobs = []
     for passage in passages:
         prompt = build_card_prompt(passage)
@@ -135,7 +150,7 @@ def generate_cards(
             "card_schema": EvidenceCard.model_json_schema(),
         })
         jobs.append((key, passage, prompt))
-    manifest_path = config.output_dir / "generation_manifest.json"
+    manifest_path = config.generation_manifest_path
     signature = fingerprint([key for key, _, _ in jobs])
     if not overwrite and (config.cards_path.exists() or config.attempts_path.exists()):
         report("generate", "Output esistenti: verifica manifest per la ripresa")
@@ -189,6 +204,8 @@ def generate_cards(
                 f"chunk={passage.chunk.chunk_id}; fonte={passage.chunk.source.markdown_file}",
             )
             attempt_record = {
+                "query_id": passage.query_id, "query_text": passage.query_text,
+                "pipeline_id": config.pipeline_id,
                 "generation_key": key, "label": passage.label,
                 "card_id": "card_" + key[:24],
                 "chunk_id": passage.chunk.chunk_id, "generator_model": config.generator_model,

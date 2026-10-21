@@ -1,4 +1,4 @@
-"""Exact cosine retrieval with normalized Qwen embeddings and FAISS."""
+"""Exact dense cosine retrieval with normalized embeddings and FAISS."""
 
 import gc
 import hashlib
@@ -54,6 +54,12 @@ class FaissEvidenceRetriever(BaseRetriever):
             report("embedding", f"Modello pronto; limite input: {self.max_tokens} token")
         return self.encoder
 
+    def format_query(self, query: str) -> str:
+        # BGE-M3 requires neither instructions nor query/document prefixes.
+        if self.model_name == "BAAI/bge-m3":
+            return query
+        return f"Instruct: {self.instruction}\nQuery: {query}"
+
     def _encode(self, texts: list[str]):
         import numpy as np
 
@@ -98,7 +104,7 @@ class FaissEvidenceRetriever(BaseRetriever):
         if self.faiss_index is None:
             raise RuntimeError("Load or build the FAISS index before retrieval.")
         report("faiss", f"Retrieval: top {min(top_k, len(self.documents))} su {len(self.documents)} documenti")
-        query_vector = self._encode([f"Instruct: {self.instruction}\nQuery: {query}"])
+        query_vector = self._encode([self.format_query(query)])
         scores, positions = self.faiss_index.search(
             query_vector, min(top_k, len(self.documents))
         )

@@ -1,0 +1,13 @@
+{
+  "output_dir": "data/card_creation_comparison",
+  "embedding_model": "Qwen/Qwen3-Embedding-8B",
+  "reranker_model": "BAAI/bge-reranker-v2-m3",
+  "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+  "retrieval_top_k": 100,
+  "rerank_top_k": 10,
+  "embedding_max_tokens": 8192,
+  "reranker_max_tokens": 8192,
+  "all_combinations": true,
+  "generate_evidence": false,
+  "generator_model": "google/gemma-4-12B-it"
+}

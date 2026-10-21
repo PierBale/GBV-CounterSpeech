@@ -106,8 +106,8 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
     if not paths:
         raise ValueError(f"No Markdown files found in {config.markdown_dir}")
     report("chunk", f"Trovati {len(paths)} file; minimo desiderato: {config.min_chunk_tokens} token")
-    report("chunk", f"Caricamento del solo tokenizer: {config.embedding_model}")
-    tokenizer = AutoTokenizer.from_pretrained(config.embedding_model)
+    report("chunk", f"Caricamento del solo tokenizer: {config.chunk_tokenizer}")
+    tokenizer = AutoTokenizer.from_pretrained(config.chunk_tokenizer)
     report("chunk", "Tokenizer pronto; aggregazione senza overlap o spezzatura dei paragrafi")
 
     def count_tokens(text: str) -> int:
