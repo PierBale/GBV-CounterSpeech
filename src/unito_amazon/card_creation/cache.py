@@ -21,7 +21,7 @@ DEPENDENCIES = {
 }
 CONFIG_FIELDS = {
     "parse": ("pdf_dir", "markdown_dir", "llama_base_url", "llama_tier", "llama_version"),
-    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model", "editorial_filter_enabled"),
+    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model", "editorial_filter_enabled", "include_section_titles"),
     "index": ("embedding_model", "embedding_max_tokens", "include_section_titles"),
     "dense": ("labels_path", "queries_path", "dense_top_j", "embedding_model", "embedding_max_tokens", "include_section_titles"),
     "rerank": ("reranker_model", "reranker_max_tokens", "include_section_titles"),
@@ -30,7 +30,7 @@ CONFIG_FIELDS = {
     "index-cards": ("embedding_model", "embedding_max_tokens"),
 }
 CODE_FILES = {
-    "parse": ("parsing.py",), "chunk": ("chunking.py", "schema.py", "editorial.py"),
+    "parse": ("parsing.py",), "chunk": ("chunking.py", "schema.py", "editorial.py", "layout.py", "passage_text.py"),
     "index": ("vector_store.py", "passage_text.py", "editorial.py", "retrieval.py"),
     "dense": ("retrieval.py", "vector_store.py", "queries.py", "schema.py", "passage_text.py", "editorial.py"),
     "rerank": ("retrieval.py", "reranking.py", "../retrieval/reranker.py", "passage_text.py", "editorial.py"),

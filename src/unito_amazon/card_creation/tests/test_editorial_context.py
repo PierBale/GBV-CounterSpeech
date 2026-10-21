@@ -26,9 +26,9 @@ class EditorialFilterTests(unittest.TestCase):
         ])
         self.assertEqual(audit[0]["paragraph_text"], "logo: WHO\nlogo: UN Women")
         self.assertTrue(all(row["rules_version"] == EDITORIAL_RULES_VERSION for row in audit))
-        # Removed paragraphs must not make otherwise distant passages merge.
+        # Removed editorial material no longer splits the same logical section.
         chunks = aggregate_paragraphs(retained, lambda text: len(text.split()), minimum=100)
-        self.assertEqual([chunk["paragraph_ids"] for chunk in chunks], [[1], [3]])
+        self.assertEqual([chunk["paragraph_ids"] for chunk in chunks], [[1, 3]])
 
     def test_contents_need_an_exact_heading_and_entry_syntax(self):
         paragraphs = [

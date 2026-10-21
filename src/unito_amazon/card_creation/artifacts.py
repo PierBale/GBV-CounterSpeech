@@ -88,7 +88,9 @@ class RunArtifacts:
                 "editorial_filter_enabled": config.editorial_filter_enabled,
                 "rules_version": EDITORIAL_RULES_VERSION,
                 "audit_path": str(audit_path.relative_to(self.root)),
-                "audit_sha256": file_sha256(audit_path), "excluded_paragraphs": len(decisions),
+                "audit_sha256": file_sha256(audit_path), "audit_records": len(decisions),
+                "below_minimum_chunks": sum(row["rule_id"] == "below_minimum_tokens" for row in decisions),
+                "minimum_body_tokens": config.min_chunk_tokens,
             }
         self.save()
 
@@ -98,24 +100,30 @@ class RunArtifacts:
 
     def _retrieval_record(self, config, passage):
         chunk = passage.chunk
+        text = format_chunk_text(chunk, config.include_section_titles)
+        body = chunk.body_text if chunk.body_text is not None else chunk.text
         # Keep the original nested schema as well as the flat interchange fields.
         original = DensePassage.model_validate({
             key: value for key, value in passage.model_dump(mode="json").items()
             if key in DensePassage.model_fields
         }).model_dump(mode="json")
+        # Legacy input libraries may have body-only text; exported text always
+        # agrees with the actual passage supplied to the model.
+        original["chunk"]["text"] = text
+        original["chunk"]["body_text"] = body
         return {
             **original,
             "run_id": self.run_id, "query_id": passage.query_id,
             "query_text": passage.query_text, "edos_label": passage.label,
-            "chunk_id": chunk.chunk_id, "chunk_text": chunk.text,
-            "model_input_text": format_chunk_text(chunk, config.include_section_titles),
+            "chunk_id": chunk.chunk_id, "text": text, "chunk_text": text,
+            "body_text": body, "model_input_text": text,
             "document_id": chunk.source.source_id,
             "document_source": chunk.source.pdf_file or chunk.source.markdown_file,
             "retrieval_rank": passage.dense_rank, "retrieval_score": passage.dense_score,
             "retrieval_top_k": config.retrieval_top_k,
             "metadata": {
                 "source": chunk.source.model_dump(mode="json"),
-                **chunk.model_dump(mode="json", exclude={"text", "source"}),
+                **chunk.model_dump(mode="json", exclude={"text", "body_text", "source"}),
                 "query_metadata": passage.query_metadata,
             },
         }

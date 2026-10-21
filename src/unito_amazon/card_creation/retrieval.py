@@ -25,6 +25,15 @@ def load_chunks(config: CardCreationConfig) -> list[Chunk]:
         raise ValueError("Chunk library is empty; run the chunk stage first.")
     if len({chunk.chunk_id for chunk in chunks}) != len(chunks):
         raise ValueError("Chunk IDs must be unique; duplicate texts with different IDs are retained.")
+    for chunk in chunks:
+        if (chunk.body_text is None or chunk.body_token_count is None
+                or chunk.body_token_count < config.min_chunk_tokens
+                or chunk.token_count < config.min_chunk_tokens):
+            raise ValueError(
+                f"Legacy or undersized chunk {chunk.chunk_id}; rebuild chunk/index or run experiment "
+                "before retrieving with the current minimum and text format."
+            )
+        format_chunk_text(chunk, config.include_section_titles)
     report("retrieval", f"Caricati {len(chunks)} chunk")
     return chunks
 

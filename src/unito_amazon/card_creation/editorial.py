@@ -13,6 +13,7 @@ CONTENTS_ROW = r".+\S(?:[ \t.]+|[ \t]*/[ \t]*)(?:p\.?[ \t]*)?(?:\d{1,4}|[ivxlcdm
 
 # Whole paragraphs, except explicitly identified publisher boilerplate prefixes.
 PARAGRAPH_RULES = (
+    ("icon_only", r"icon:\s*[^\n]+(?:\n\s*icon:\s*[^\n]+)*"),
     ("logo_only", r"logo:\s*[^\n]+(?:\n\s*logo:\s*[^\n]+)*"),
     ("isbn_only", r"ISBN(?:-1[03])?\s*:?\s*\d[\d Xx-]{8,}(?:\s*\([^()\n]*\))?"),
     ("copyright_notice", r"©[^\n]*\b(?:19|20)\d{2}\b[^\n]*"),
@@ -30,7 +31,7 @@ def plain_heading(heading: str) -> str:
     """Remove presentation markup, preserving the words actually in the source."""
     heading = re.sub(r"</?(?:u|b|strong|em|i|span)(?:\s[^<>]*)?>", "", heading, flags=re.IGNORECASE)
     heading = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", heading)
-    return re.sub(r"[*`]+", "", heading).strip()
+    return re.sub(r"[*`]+|~~", "", heading).strip()
 
 
 def exclusion_rule(section_path: tuple[str, ...], text: str) -> tuple[str, str] | None:

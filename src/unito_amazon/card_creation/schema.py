@@ -20,6 +20,8 @@ class Source(StrictModel):
 class Chunk(StrictModel):
     chunk_id: str
     text: str = Field(min_length=1)
+    body_text: str | None = None
+    body_token_count: int | None = Field(default=None, ge=1)
     token_count: int = Field(ge=1)
     paragraph_ids: list[int]
     section_path: list[str]

@@ -37,8 +37,9 @@ class RetrievalExperimentTests(unittest.TestCase):
             rerank_top_k=2, all_combinations=True, generate_evidence=False, run_id="test-run",
         )
         self.chunks = [Chunk(
-            chunk_id=f"chunk-{i}", text="Repeated text" if i < 3 else "Other text",
-            token_count=100, paragraph_ids=[i], section_path=["Section"],
+            chunk_id=f"chunk-{i}", text="Section: Section\n\n" + (("Repeated text " if i < 3 else "Other text ") * 110).strip(),
+            body_text=(("Repeated text " if i < 3 else "Other text ") * 110).strip(), body_token_count=220,
+            token_count=222, paragraph_ids=[i], section_path=["Section"],
             source=Source(source_id=f"doc-{i}", markdown_file=f"{i}.md", title=f"Document {i}"),
         ) for i in range(1, 4)]
         self.retrieval_calls = []
@@ -125,7 +126,10 @@ class RetrievalExperimentTests(unittest.TestCase):
                     self.assertEqual(row["run_id"], self.config.run_id)
                     self.assertEqual(row["pipeline_id"], pipeline)
                     self.assertEqual(row["edos_label"], "label")
-                    self.assertEqual(row["model_input_text"], "Section: Section\n\n" + row["chunk_text"])
+                    self.assertEqual(row["model_input_text"], "Section: Section\n\n" + row["body_text"])
+                    self.assertEqual(row["text"], row["chunk"]["text"])
+                    self.assertEqual(row["text"], row["model_input_text"])
+                    self.assertEqual(row["chunk_text"], row["model_input_text"])
                 for query in ("q1", "q2"):
                     rows = [row for row in full if row["query_id"] == query]
                     self.assertEqual([row["retrieval_rank"] for row in rows], [2, 3, 1])

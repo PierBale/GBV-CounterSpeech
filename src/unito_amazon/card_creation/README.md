@@ -4,7 +4,7 @@ Pipeline autonoma implementata in `src/unito_amazon/card_creation`.
 Non dipende dal prototipo `Cards/Generation`.
 
 1. PDF -> Markdown con **LlamaParse**, tramite SDK LlamaCloud.
-2. Chunking per paragrafi con minimo desiderato di **200 token**.
+2. Chunking per paragrafi con minimo effettivo di **200 token** nel corpo e nell'input completo.
 3. Embedding **Qwen/Qwen3-Embedding-4B** e indice FAISS esatto.
 4. Query composta da **label EDOS + descrizione**, top **J=100** passaggi.
 5. Reranking **Qwen/Qwen3-Reranker-4B** di tutti i J candidati.
@@ -132,8 +132,9 @@ query/chunk e contiene `run_id`, `query_id`, `query_text`, `edos_label`,
 `embedding_model`, `chunk_id`, `chunk_text`, `document_id`, `document_source`,
 `retrieval_rank`, `retrieval_score`, `retrieval_top_k`, `metadata`.
 `model_input_text` conserva il testo del passaggio effettivamente fornito a
-embedding e reranker, inclusi i titoli quando abilitati. `chunk_text` conserva
-il solo corpo del chunk, separato dal contesto delle intestazioni.
+embedding e reranker, inclusi i titoli quando abilitati. `text`, `chunk_text`,
+`model_input_text` e `chunk.text` contengono lo stesso passaggio completo;
+`body_text` conserva il corpo separato dalle intestazioni.
 Conserva anche il record nested originario: `chunk`, `label`, `definition`,
 `dense_rank`, `dense_score` e metadati della query. In `metadata` restano fonte,
 percorso delle sezioni, ID dei paragrafi e conteggio token. Non vengono inventati
@@ -474,7 +475,7 @@ vengono stampate in console. I messaggi non cambiano prompt, ranking o card.
 
 ## Regole di chunking
 
-I token del corpo sono contati con `chunk_tokenizer_model` (oppure il tokenizer
+Corpo e input completo sono contati con `chunk_tokenizer_model` (oppure il tokenizer
 dell'embedding nel flusso legacy), senza token speciali. Le righe separate da un semplice a capo rimangono nello stesso
 paragrafo; righe vuote e titoli delimitano i paragrafi. I titoli diventano metadati
 di sezione. Viene rimossa solo la formattazione Markdown di presentazione.
@@ -501,6 +502,25 @@ Non consulta query, label, embedding, reranker o LLM. La versione iniziale:
   `Cataloguing-in-Publication (CIP) data.`, `Sales, rights and licensing.`,
   `Third-party materials.` o `General disclaimers.`.
 
+La versione `2.0` aggiunge una pulizia del layout **prima** di interpretare
+le intestazioni Markdown. Rimuove righe isolate `icon: ...` e `logo: ...`, anche
+quando si trovano tra righe di un paragrafo sostanziale. Riconosce marcatori
+espliciti come `Page 18 ► ...` o `... ► Page 19`. Per i running title generici
+richiede almeno due numeri di pagina distinti associati allo stesso titolo;
+il titolo deve comparire nelle intestazioni del documento (anche su più righe,
+fino a tre frammenti) o essere tutto maiuscolo. Sono gestiti titolo seguito
+dal numero, numero seguito da `|`/`►` e titolo accanto a un numero su riga separata.
+I frammenti di titolo su righe non Markdown devono avere forma di titolo,
+secondo la regola esplicita in `layout.py`. I casi non riconosciuti restano.
+
+I titoli correnti riconosciuti vengono rimossi anche quando sono scritti come
+heading Markdown, così non modificano la gerarchia reale delle sezioni. Se un
+marcatore di pagina separa due frammenti del corpo, si rimuove anche il padding
+di righe vuote/separatori circostante: i frammenti vengono riuniti prima del
+chunking. Una vera intestazione Markdown continua a delimitare la sezione.
+Non si riscrivono parole, non si completano frasi e non si ricostruiscono
+automaticamente parole spezzate con trattino.
+
 Non vengono eliminate le prime N pagine, né paragrafi sulla sola presenza di
 parole chiave come `copyright`. Bibliografie, prefazioni, ringraziamenti,
 tabelle e copertine senza marcatori sufficienti vengono conservati. Gli indici
@@ -508,17 +528,24 @@ con layout ambiguo, righe spezzate o HTML possono restare nel corpus.
 Le regex sono euristiche trasparenti: non garantiscono classificazione semantica
 perfetta e non costituiscono un miglioramento di retrieval già validato.
 
-Ogni esclusione viene salvata in `<output_dir>/editorial_exclusions.jsonl`
-con testo del paragrafo dopo la pulizia Markdown preesistente, ID originale,
-sezione, file Markdown, SHA-256 del file, ID della fonte, regola, pattern e
-versione. I Markdown di input rimangono disponibili e non vengono modificati.
+Ogni rimozione/esclusione viene salvata in `<output_dir>/editorial_exclusions.jsonl`
+con file Markdown, SHA-256 del file, ID della fonte, regola e versione.
+Le rimozioni del layout registrano numero di riga e testo originale; i titoli
+correnti registrano anche firma e numeri di pagina osservati. Le esclusioni
+editoriali registrano testo del paragrafo dopo la pulizia Markdown preesistente,
+ID del paragrafo, sezione e pattern. I residui sotto soglia registrano corpo,
+input completo, ID dei paragrafi e conteggi dei token. I Markdown di input
+rimangono disponibili e non vengono modificati.
 L'audit viene anche copiato in `runs/<run_id>/chunking/editorial_exclusions.jsonl`
-e registrato nel manifest del run con checksum. Disabilitare il filtro produce
-un audit vuoto e mantiene tutti i paragrafi precedentemente accettati dal parser.
+e registrato nel manifest del run con checksum. Disabilitare il filtro mantiene
+il layout e i paragrafi editoriali; la soglia minima resta comunque applicata
+e i residui sotto soglia restano registrati nell'audit.
 
-Gli ID dei paragrafi vengono assegnati prima delle esclusioni e non rinumerati.
-Non si aggregano paragrafi attraverso un intervallo escluso. I chunk superstiti
-continuano a usare l'hash di fonte, ID dei paragrafi e testo; una diversa
+Gli ID dei paragrafi vengono assegnati dopo la pulizia del layout e prima delle
+esclusioni editoriali, senza rinumerarli dopo queste ultime. I paragrafi della
+stessa sezione possono essere aggregati attraverso materiale editoriale rimosso;
+una rimozione non crea una sezione artificiale. I chunk superstiti
+continuano a usare l'hash di fonte, ID dei paragrafi e corpo; una diversa
 aggregazione può legittimamente produrre nuovi chunk ID. Tutte le combinazioni
 dell'esperimento condividono lo stesso corpus filtrato.
 
@@ -536,12 +563,15 @@ Corpo del chunk
 Si usano esclusivamente le intestazioni presenti in `section_path`, rimuovendo
 la loro formattazione di presentazione (`**`, backtick e tag HTML semplici).
 Non si generano titoli, riassunti o informazioni mancanti. Se non ci sono titoli,
-si usa soltanto il corpo. `chunk.text` e `chunk_text` mantengono il corpo; i
-titoli originali restano nei metadati. `model_input_text` documenta la
-rappresentazione completa nei JSONL retrieval/reranking. Il `token_count` del
-chunk conta il corpo: i backend controllano separatamente la lunghezza
+si usa soltanto il corpo. Il chunk viene materializzato con `text` uguale al
+passaggio completo: encoder, reranker e prompt dell'evidence leggono quel testo,
+senza anteporre nuovamente i titoli. `body_text` conserva il corpo e i titoli
+originali restano nei metadati. Nei JSONL archiviati anche `text`, `chunk_text` e
+`model_input_text` sono uguali all'input del passaggio. `token_count` conta
+il testo completo e `body_token_count` conta il corpo. I backend controllano separatamente la lunghezza
 dell'input completo, compresi titoli, query e prompt propri del modello.
-`include_section_titles: false` ripristina l'input costituito dal solo corpo.
+`include_section_titles: false` ricostruisce i chunk con input costituito dal
+solo corpo; le vecchie librerie con testo incompatibile richiedono il rechunking.
 
 Entrambe le opzioni sono incluse nelle firme di cache degli stadi interessati.
 I precedenti indici/ranking incompatibili vengono ricostruiti e gli archivi
@@ -556,7 +586,13 @@ I paragrafi brevi consecutivi vengono uniti in ordine fino a raggiungere almeno
 200 token. Se il successivo paragrafo è già lungo, il gruppo breve viene unito
 a quel paragrafo intero. Un residuo breve a fine sezione viene aggiunto al chunk
 precedente della stessa sezione. Se l'intera sezione resta sotto 200 token,
-viene conservata: la soglia non implica la perdita di testo.
+viene esclusa dal corpus di retrieval con regola `below_minimum_tokens`,
+conservandone il testo nell'audit. Non si uniscono sezioni diverse soltanto per
+raggiungere la soglia e non si usano i titoli per rendere eleggibile un corpo
+troppo breve. Ogni chunk pubblicato soddisfa il minimo sia nel corpo sia
+nell'input completo, secondo il tokenizer comune di chunking. La versione
+precedente conservava i residui sotto soglia: questo spiega i chunk di tre token
+anche con `min_chunk_tokens: 200`. I nuovi test sono in `tests/test_chunk_layout.py`.
 
 Nessun paragrafo viene spezzato, nessun testo viene duplicato per overlap e non
 si aggregano sezioni o documenti differenti. Non esiste una lunghezza massima
@@ -576,11 +612,13 @@ e una sintesi qualitativa autonoma, non un counter-argument già formulato.
 Il modello restituisce soltanto l'oggetto intermedio
 `{"reasoning": "...", "evidence": "..."}`, senza envelope `card`, citazioni
 o metadati. Il codice aggiunge automaticamente i metadati e salva il passaggio
-sorgente completo, senza modifiche, in `chunk.text`. Lo stesso oggetto `chunk`
+sorgente ripulito in `chunk.body_text` e il passaggio completo di titoli in
+`chunk.text`. Lo stesso oggetto `chunk`
 contiene `chunk_id`, `section_path` (sezione/sottosezione/... in ordine),
-`paragraph_ids` e `token_count`. I paragrafi aggregati appartengono allo stesso
+`paragraph_ids`, `token_count` e `body_token_count`. I paragrafi aggregati appartengono allo stesso
 percorso di intestazioni Markdown; non si aggregano sezioni diverse. I separatori
-tra paragrafi restano nel testo. Il testo sorgente compare una sola volta.
+tra paragrafi restano nel corpo, salvo le interruzioni di layout riconosciute
+e riunite meccanicamente.
 
 Ogni riga di `cards.jsonl` è un oggetto JSON validato tramite lo schema Pydantic
 in `card_schema.py` (versione `3.0`). Contiene `reasoning`, `evidence`, fonte, chunk, label,

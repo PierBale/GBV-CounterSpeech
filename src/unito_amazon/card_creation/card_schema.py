@@ -27,6 +27,8 @@ class GeneratedContent(StrictModel):
 class CardChunk(StrictModel):
     chunk_id: str
     text: str = Field(min_length=1)
+    body_text: str | None = None
+    body_token_count: int | None = Field(default=None, ge=1)
     section_path: list[str]
     paragraph_ids: list[int]
     token_count: int = Field(ge=1)

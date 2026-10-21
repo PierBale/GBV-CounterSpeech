@@ -7,13 +7,21 @@ from itertools import groupby
 from .config import CardCreationConfig
 from .cache import StageCache
 from .io import file_sha256, fingerprint, write_jsonl
-from .editorial import filter_editorial_paragraphs
+from .editorial import EDITORIAL_RULES_VERSION, filter_editorial_paragraphs
+from .layout import strip_layout_noise
+from .passage_text import compose_passage_text
 from .progress import report
 from .schema import Chunk, Source
 
 
-def markdown_paragraphs(markdown: str) -> list[tuple[int, tuple[str, ...], str]]:
+def markdown_paragraphs(
+    markdown: str, *, clean_layout: bool = False, audit: list[dict] | None = None,
+) -> list[tuple[int, tuple[str, ...], str]]:
     """Split on blank lines and headings; headings never become evidence."""
+    if clean_layout:
+        markdown, decisions = strip_layout_noise(markdown)
+        if audit is not None:
+            audit.extend(decisions)
     markdown = re.sub(r"<!--.*?-->", "", markdown, flags=re.DOTALL)
     headings: dict[int, str] = {}
     paragraphs = []
@@ -64,12 +72,9 @@ def aggregate_paragraphs(
             "token_count": count_tokens(text),
         }
 
-    # An exclusion creates a gap in the original IDs: do not join text across
-    # that gap, or across distinct sections, merely to reach the token minimum.
-    for _, indexed_group in groupby(
-        enumerate(paragraphs), key=lambda item: (item[1][1], item[1][0] - item[0]),
-    ):
-        section_group = (paragraph for _, paragraph in indexed_group)
+    # Removed layout/editorial material does not split a surviving section.
+    # Real section paths still delimit aggregation.
+    for _, section_group in groupby(paragraphs, key=lambda item: item[1]):
         section_chunks = []
         pending = []
         for paragraph in section_group:
@@ -97,6 +102,41 @@ def aggregate_paragraphs(
     return chunks
 
 
+def build_document_chunks(
+    paragraphs: list[tuple[int, tuple[str, ...], str]], source: Source,
+    count_tokens: Callable[[str], int], minimum: int = 200,
+    include_section_titles: bool = True, audit: list[dict] | None = None,
+) -> list[Chunk]:
+    """Materialize complete model inputs, enforcing the configured minimum.
+
+    The minimum applies to the body as well: headings cannot turn a tiny
+    fragment into an eligible evidence passage. Unmergeable sections are
+    excluded with their full body in the audit, never silently discarded.
+    """
+    result = []
+    for item in aggregate_paragraphs(paragraphs, count_tokens, minimum):
+        body = item["text"]
+        text = compose_passage_text(body, item["section_path"], include_section_titles)
+        token_count = count_tokens(text)
+        if item["token_count"] < minimum or token_count < minimum:
+            if audit is not None:
+                audit.append({
+                    "action": "excluded", "rules_version": EDITORIAL_RULES_VERSION,
+                    "rule_id": "below_minimum_tokens", "minimum_tokens": minimum,
+                    "paragraph_ids": item["paragraph_ids"], "section_path": item["section_path"],
+                    "paragraph_text": body, "text": text,
+                    "body_token_count": item["token_count"], "token_count": token_count,
+                })
+            continue
+        result.append(Chunk(
+            chunk_id="chunk_" + fingerprint([source.source_id, item["paragraph_ids"], body])[:24],
+            source=source, text=text, body_text=body, token_count=token_count,
+            body_token_count=item["token_count"], paragraph_ids=item["paragraph_ids"],
+            section_path=item["section_path"],
+        ))
+    return result
+
+
 def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -> None:
     cache = cache or StageCache(config)
     ticket = cache.prepare(
@@ -110,7 +150,7 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
     paths = sorted(config.markdown_dir.rglob("*.md"))
     if not paths:
         raise ValueError(f"No Markdown files found in {config.markdown_dir}")
-    report("chunk", f"Trovati {len(paths)} file; minimo desiderato: {config.min_chunk_tokens} token")
+    report("chunk", f"Trovati {len(paths)} file; minimo effettivo: {config.min_chunk_tokens} token")
     report("chunk", f"Caricamento del solo tokenizer: {config.chunk_tokenizer}")
     tokenizer = AutoTokenizer.from_pretrained(config.chunk_tokenizer)
     report("chunk", "Tokenizer pronto; aggregazione senza overlap o spezzatura dei paragrafi")
@@ -131,7 +171,11 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
     for position, path in enumerate(paths, start=1):
         relative = path.relative_to(config.markdown_dir).as_posix()
         report("chunk", f"File {position}/{len(paths)}: {relative}")
-        paragraphs = markdown_paragraphs(path.read_text(encoding="utf-8"))
+        decisions = []
+        paragraphs = markdown_paragraphs(
+            path.read_text(encoding="utf-8"), clean_layout=config.editorial_filter_enabled,
+            audit=decisions,
+        )
         total_paragraphs += len(paragraphs)
         report("chunk", f"Rilevati {len(paragraphs)} paragrafi; aggregazione in corso")
         manifest_path = path.with_suffix(".parse.json")
@@ -147,22 +191,20 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
             **metadata.get(relative, {}),
         })
         retained, excluded = filter_editorial_paragraphs(paragraphs, config.editorial_filter_enabled)
+        decisions.extend(excluded)
+        file_chunks = build_document_chunks(
+            retained, source, count_tokens, config.min_chunk_tokens,
+            config.include_section_titles, audit=decisions,
+        )
         markdown_digest = file_sha256(path)
         audit.extend({
             **decision, "source_id": source.source_id, "markdown_file": relative,
             "markdown_sha256": markdown_digest,
-        } for decision in excluded)
-        report("chunk", f"{len(retained)} paragrafi conservati; {len(excluded)} esclusioni editoriali registrate")
-        file_chunks = aggregate_paragraphs(retained, count_tokens, config.min_chunk_tokens)
-        for item in file_chunks:
-            if item["token_count"] > config.long_chunk_warning_tokens:
-                warnings.warn(f"Long intact chunk in {relative}: {item['token_count']} tokens")
-            chunk = Chunk(
-                chunk_id="chunk_" + fingerprint(
-                    [source.source_id, item["paragraph_ids"], item["text"]]
-                )[:24],
-                source=source, **item,
-            )
+        } for decision in decisions)
+        report("chunk", f"{len(decisions)} rimozioni/esclusioni registrate nell'audit")
+        for chunk in file_chunks:
+            if chunk.token_count > config.long_chunk_warning_tokens:
+                warnings.warn(f"Long intact chunk in {relative}: {chunk.token_count} tokens")
             chunks.append(chunk.model_dump(mode="json"))
         report("chunk", f"File {position}/{len(paths)} completato: {len(file_chunks)} chunk")
     write_jsonl(config.editorial_audit_path, audit)
