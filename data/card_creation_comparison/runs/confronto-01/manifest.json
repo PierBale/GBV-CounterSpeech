@@ -1,0 +1,689 @@
+{
+  "run_id": "confronto-01",
+  "signature": "279f81b47f33a148215163394fa5a8630f9b3969038dadfbfe22bd99ac4289b5",
+  "created_at": "2026-10-21T13:35:08.954591+00:00",
+  "inputs": {
+    "corpus_sha256": "e754bc1653ebd02418ed3d40c59da07e61a3d2ccafe71e309c1272d355f0061b",
+    "editorial_audit_sha256": "0b005ae3cb44921d047a2485fb0e449adecc0ad182b605d685e023acbef0885d",
+    "queries": [
+      {
+        "query_id": "query_c192db327187de2f00ed39ae",
+        "query_text": "Sexism type: 1.1 threats of harm\nDescription: Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.",
+        "edos_label": "1.1 threats of harm",
+        "definition": "Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_a150fa223fa04dc4b8b04eba",
+        "query_text": "Sexism type: 1.2 incitement and encouragement of harm\nDescription: Encouragement, justification, or normalization of causing harm to women or gendered subjects.",
+        "edos_label": "1.2 incitement and encouragement of harm",
+        "definition": "Encouragement, justification, or normalization of causing harm to women or gendered subjects.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_19307c9d77bd38c0a67bbca1",
+        "query_text": "Sexism type: 2.1 descriptive attacks\nDescription: Negative descriptive generalizations about women or gendered groups.",
+        "edos_label": "2.1 descriptive attacks",
+        "definition": "Negative descriptive generalizations about women or gendered groups.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_52cf40365a704814b5aa5c5f",
+        "query_text": "Sexism type: 2.2 aggressive and emotive attacks\nDescription: Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.",
+        "edos_label": "2.2 aggressive and emotive attacks",
+        "definition": "Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_9103775bc0213d339ef11fde",
+        "query_text": "Sexism type: 2.3 dehumanising attacks & overt sexual objectification\nDescription: Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.",
+        "edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+        "definition": "Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_2a8b165f9e6851ac08ec294c",
+        "query_text": "Sexism type: 3.1 casual use of gendered slurs, profanities, and insults\nDescription: Casual or normalized use of gendered slurs, profanity, and insults.",
+        "edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+        "definition": "Casual or normalized use of gendered slurs, profanity, and insults.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_19423fe74ca6de41641d2091",
+        "query_text": "Sexism type: 3.2 immutable gender differences and gender stereotypes\nDescription: Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.",
+        "edos_label": "3.2 immutable gender differences and gender stereotypes",
+        "definition": "Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_c30b3f55fea4cd82db73cd81",
+        "query_text": "Sexism type: 3.3 backhanded gendered compliments\nDescription: Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.",
+        "edos_label": "3.3 backhanded gendered compliments",
+        "definition": "Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_6121999d1009957f569d383e",
+        "query_text": "Sexism type: 3.4 condescending explanations or unwelcome advice\nDescription: Paternalistic, condescending, or unsolicited advice based on gender stereotypes.",
+        "edos_label": "3.4 condescending explanations or unwelcome advice",
+        "definition": "Paternalistic, condescending, or unsolicited advice based on gender stereotypes.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_1590bafe05a8fd4c971e3fd8",
+        "query_text": "Sexism type: 4.1 supporting mistreatment of individual women\nDescription: Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.",
+        "edos_label": "4.1 supporting mistreatment of individual women",
+        "definition": "Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.",
+        "metadata": {}
+      },
+      {
+        "query_id": "query_88b0edf9a217bf67a56c9cc5",
+        "query_text": "Sexism type: 4.2 supporting systemic discrimination against women as a group\nDescription: Support for systemic discrimination, restriction of rights, or exclusion of women as a group.",
+        "edos_label": "4.2 supporting systemic discrimination against women as a group",
+        "definition": "Support for systemic discrimination, restriction of rights, or exclusion of women as a group.",
+        "metadata": {}
+      }
+    ],
+    "combinations": [
+      [
+        "Qwen/Qwen3-Embedding-8B",
+        "BAAI/bge-reranker-v2-m3"
+      ],
+      [
+        "Qwen/Qwen3-Embedding-8B",
+        "Qwen/Qwen3-Reranker-8B"
+      ],
+      [
+        "BAAI/bge-m3",
+        "BAAI/bge-reranker-v2-m3"
+      ],
+      [
+        "BAAI/bge-m3",
+        "Qwen/Qwen3-Reranker-8B"
+      ]
+    ],
+    "configuration": {
+      "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+      "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+      "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+      "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+      "source_metadata_path": null,
+      "queries_path": null,
+      "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+      "editorial_filter_enabled": true,
+      "include_section_titles": true,
+      "generate_evidence": false,
+      "all_combinations": true,
+      "model_scoped_artifacts": true,
+      "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+      "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+      "llama_tier": "agentic",
+      "llama_version": "2026-09-13",
+      "min_chunk_tokens": 200,
+      "embedding_model": "Qwen/Qwen3-Embedding-8B",
+      "embedding_max_tokens": 8192,
+      "dense_top_j": 100,
+      "reranker_model": "BAAI/bge-reranker-v2-m3",
+      "reranker_max_tokens": 8192,
+      "rerank_top_k": 10,
+      "deduplication_enabled": false,
+      "deduplication_similarity_threshold": 0.97,
+      "generator_model": "google/gemma-4-12B-it",
+      "generation_max_new_tokens": 900,
+      "generation_temperature": 0.7
+    },
+    "include_evidence": false,
+    "orchestration_code": {
+      "artifacts.py": "e5b5d62b1a2a28511c8c02a63c6887fd97ff8856bbe6c646b408de91f34bc076",
+      "experiment.py": "f255bc7b02c4623468da1a614d9638273bb85e310914d417b1dfdc5d636d1a9a",
+      "config.py": "309499aa83922467d157c1c19303eb9cd068e86034896598a13c91518499dbda",
+      "cache.py": "001cfd9ed505ec56db0d83de82482f9d892fa3b79195157ff939706d7521eccb"
+    },
+    "stage_settings": {
+      "parse": {
+        "parameters": {
+          "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+          "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+          "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+          "llama_tier": "agentic",
+          "llama_version": "2026-09-13"
+        },
+        "code": {
+          "parsing.py": "7b3fa66329995c3860dee310a10af6469392d356b1b419161ec0e38250f491e3"
+        }
+      },
+      "chunk": {
+        "parameters": {
+          "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+          "source_metadata_path": null,
+          "min_chunk_tokens": 200,
+          "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+          "editorial_filter_enabled": true,
+          "include_section_titles": true
+        },
+        "code": {
+          "chunking.py": "4b8d4166d563a09b7d740afe0dd5a4b89a9d2599194043f10662d91824c8829c",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c",
+          "layout.py": "6d2495b35b290b89029ff9e8049e4b3c156af6a47c00c6e6aed75b43d5d7d554",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca"
+        }
+      },
+      "index": {
+        "parameters": {
+          "embedding_model": "Qwen/Qwen3-Embedding-8B",
+          "embedding_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "vector_store.py": "fd2d7ae616239efc4f839486e20c20dbdf568703721cdc8b4e94581114e2073c",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c",
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0"
+        }
+      },
+      "dense": {
+        "parameters": {
+          "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+          "queries_path": null,
+          "dense_top_j": 100,
+          "embedding_model": "Qwen/Qwen3-Embedding-8B",
+          "embedding_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "vector_store.py": "fd2d7ae616239efc4f839486e20c20dbdf568703721cdc8b4e94581114e2073c",
+          "queries.py": "b68d53a1ad62919c9ade6fab9bf6bed76fc3d8e1429b20155ba99ed47d0f4e47",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "rerank": {
+        "parameters": {
+          "reranker_model": "BAAI/bge-reranker-v2-m3",
+          "reranker_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "reranking.py": "b3cda12a1ddb99fe886543004b71df7c375c663fea8fe788855fb68b66d075d4",
+          "../retrieval/reranker.py": "b43dc4d1899271c5571aed35577212545155d1f67e612128017782dd9733d443",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "dedup": {
+        "parameters": {
+          "rerank_top_k": 10,
+          "deduplication_enabled": false,
+          "deduplication_similarity_threshold": 0.97
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "deduplication.py": "4339abfebb24cbf3204187c5270b528e91e9f9484dbe6fd20cfa8073c8f95306"
+        }
+      },
+      "generate": {
+        "parameters": {
+          "generator_model": "google/gemma-4-12B-it",
+          "generation_max_new_tokens": 900,
+          "generation_temperature": 0.7,
+          "include_section_titles": true
+        },
+        "code": {
+          "generation.py": "d939ab0f6d72e3cf188a1871ac8eff29a9415866135f7a2f878346069e4287f0",
+          "prompts.py": "df622c145ad5c54cd7583627d2c206dd6a574461750bac80f4588502e587ce3c",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "card_schema.py": "abe2fb93b429e3e774225e61f8dc0668f98e6093076b50e1b49ba59356223944",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "index-cards": {
+        "parameters": {
+          "embedding_model": "Qwen/Qwen3-Embedding-8B",
+          "embedding_max_tokens": 8192
+        },
+        "code": {
+          "card_retrieval.py": "a2d477917808df115f64d938aa18e59ee2c65a851abd03625fa5e43ba3435aa2",
+          "vector_store.py": "fd2d7ae616239efc4f839486e20c20dbdf568703721cdc8b4e94581114e2073c",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "card_schema.py": "abe2fb93b429e3e774225e61f8dc0668f98e6093076b50e1b49ba59356223944"
+        }
+      }
+    }
+  },
+  "retrieval": {
+    "Qwen/Qwen3-Embedding-8B": {
+      "status": "complete",
+      "path": "retrieval/qwen3-embedding-8b.jsonl",
+      "records": 1100,
+      "sha256": "39a06adc9ba22aaede5e201ebe7281ae30d58f9ced6607946f8c649478912f39",
+      "settings": {
+        "parameters": {
+          "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+          "queries_path": null,
+          "dense_top_j": 100,
+          "embedding_model": "Qwen/Qwen3-Embedding-8B",
+          "embedding_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "vector_store.py": "fd2d7ae616239efc4f839486e20c20dbdf568703721cdc8b4e94581114e2073c",
+          "queries.py": "b68d53a1ad62919c9ade6fab9bf6bed76fc3d8e1429b20155ba99ed47d0f4e47",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "Qwen/Qwen3-Reranker-8B",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      }
+    },
+    "BAAI/bge-m3": {
+      "status": "complete",
+      "path": "retrieval/bge-m3.jsonl",
+      "records": 1100,
+      "sha256": "2a89137793d9df544e9c866b3877485bc5eb689edaa5d52f9c03584db8d70b29",
+      "settings": {
+        "parameters": {
+          "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+          "queries_path": null,
+          "dense_top_j": 100,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "vector_store.py": "fd2d7ae616239efc4f839486e20c20dbdf568703721cdc8b4e94581114e2073c",
+          "queries.py": "b68d53a1ad62919c9ade6fab9bf6bed76fc3d8e1429b20155ba99ed47d0f4e47",
+          "schema.py": "5ec4b1e7221ee1e73d4c46d8e36a4486879f1c025cc1866163cf239a60089c53",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "Qwen/Qwen3-Reranker-8B",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      }
+    }
+  },
+  "reranking": {
+    "qwen3-embedding-8b__bge-reranker-v2-m3": {
+      "status": "complete",
+      "path": "reranking/qwen3-embedding-8b__bge-reranker-v2-m3.jsonl",
+      "records": 110,
+      "sha256": "c773d5c20bcd8466a1b21906e14d5966bc22b93de08da5f8d843fd9fa984fafc",
+      "settings": {
+        "parameters": {
+          "reranker_model": "BAAI/bge-reranker-v2-m3",
+          "reranker_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "reranking.py": "b3cda12a1ddb99fe886543004b71df7c375c663fea8fe788855fb68b66d075d4",
+          "../retrieval/reranker.py": "b43dc4d1899271c5571aed35577212545155d1f67e612128017782dd9733d443",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "BAAI/bge-reranker-v2-m3",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      },
+      "full_path": "reranking_full/qwen3-embedding-8b__bge-reranker-v2-m3.jsonl",
+      "full_records": 1100,
+      "full_sha256": "4c145f88a9a8445c9cf8678e426ff56425e73bcf57841380b70cc155be88d4ea",
+      "score_type": "raw_logit"
+    },
+    "qwen3-embedding-8b__qwen3-reranker-8b": {
+      "status": "complete",
+      "path": "reranking/qwen3-embedding-8b__qwen3-reranker-8b.jsonl",
+      "records": 110,
+      "sha256": "a5813107c0113f6ce3b4a617fd0bec022fb4a4b396eb24d3c657fde4a921a38b",
+      "settings": {
+        "parameters": {
+          "reranker_model": "Qwen/Qwen3-Reranker-8B",
+          "reranker_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "reranking.py": "b3cda12a1ddb99fe886543004b71df7c375c663fea8fe788855fb68b66d075d4",
+          "../retrieval/reranker.py": "b43dc4d1899271c5571aed35577212545155d1f67e612128017782dd9733d443",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "Qwen/Qwen3-Reranker-8B",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      },
+      "full_path": "reranking_full/qwen3-embedding-8b__qwen3-reranker-8b.jsonl",
+      "full_records": 1100,
+      "full_sha256": "aa21bbc015403bf2642364387f031d3cb2280d6eaecb52cb9b695aa65eb769e7",
+      "score_type": "qwen_yes_probability"
+    },
+    "bge-m3__bge-reranker-v2-m3": {
+      "status": "complete",
+      "path": "reranking/bge-m3__bge-reranker-v2-m3.jsonl",
+      "records": 110,
+      "sha256": "623f6062b9372209da3171c9812ff2f2f9eb6b06c5db5360d94c0f6417a59c21",
+      "settings": {
+        "parameters": {
+          "reranker_model": "BAAI/bge-reranker-v2-m3",
+          "reranker_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "reranking.py": "b3cda12a1ddb99fe886543004b71df7c375c663fea8fe788855fb68b66d075d4",
+          "../retrieval/reranker.py": "b43dc4d1899271c5571aed35577212545155d1f67e612128017782dd9733d443",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "BAAI/bge-reranker-v2-m3",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      },
+      "full_path": "reranking_full/bge-m3__bge-reranker-v2-m3.jsonl",
+      "full_records": 1100,
+      "full_sha256": "0f1ae3c05dfb200d57f76cb200c56ceb09fb0243751582e2b322374d638bd473",
+      "score_type": "raw_logit"
+    },
+    "bge-m3__qwen3-reranker-8b": {
+      "status": "complete",
+      "path": "reranking/bge-m3__qwen3-reranker-8b.jsonl",
+      "records": 110,
+      "sha256": "7185e6c9cb43a97b437bd1365db37061366be7dd21123500943e3686c08b17a4",
+      "settings": {
+        "parameters": {
+          "reranker_model": "Qwen/Qwen3-Reranker-8B",
+          "reranker_max_tokens": 8192,
+          "include_section_titles": true
+        },
+        "code": {
+          "retrieval.py": "3900cf2d1ca00eabfe5dc8b272bbda6b9ab6e01a1e8d62c224d6dccf58b592c0",
+          "reranking.py": "b3cda12a1ddb99fe886543004b71df7c375c663fea8fe788855fb68b66d075d4",
+          "../retrieval/reranker.py": "b43dc4d1899271c5571aed35577212545155d1f67e612128017782dd9733d443",
+          "passage_text.py": "af436b88519023e40ecfaf04ec2232329d065cb4f29bc5381c103088c0b05eca",
+          "editorial.py": "42293f23c2cdb34f20d57757363a9255858f7eaedc2a1af8eddb04e6b438800c"
+        }
+      },
+      "configuration": {
+        "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+        "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+        "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+        "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "source_metadata_path": null,
+        "queries_path": null,
+        "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+        "editorial_filter_enabled": true,
+        "include_section_titles": true,
+        "generate_evidence": false,
+        "all_combinations": true,
+        "run_id": "confronto-01",
+        "model_scoped_artifacts": true,
+        "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+        "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+        "llama_tier": "agentic",
+        "llama_version": "2026-09-13",
+        "min_chunk_tokens": 200,
+        "long_chunk_warning_tokens": 2000,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_batch_size": 4,
+        "embedding_max_tokens": 8192,
+        "dense_top_j": 100,
+        "reranker_model": "Qwen/Qwen3-Reranker-8B",
+        "reranker_batch_size": 4,
+        "reranker_max_tokens": 8192,
+        "rerank_top_k": 10,
+        "deduplication_enabled": false,
+        "deduplication_similarity_threshold": 0.97,
+        "generator_model": "google/gemma-4-12B-it",
+        "generation_max_new_tokens": 900,
+        "generation_temperature": 0.7,
+        "generation_retries": 5,
+        "device": null
+      },
+      "full_path": "reranking_full/bge-m3__qwen3-reranker-8b.jsonl",
+      "full_records": 1100,
+      "full_sha256": "b3e776d844d2c75a9af67ba29d1278abb14ccc055774c4fab25ca04344820ff3",
+      "score_type": "qwen_yes_probability"
+    }
+  },
+  "evidence": {},
+  "status": "complete",
+  "configuration": {
+    "pdf_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/documents",
+    "markdown_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/1_parsed_results",
+    "output_dir": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison",
+    "labels_path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+    "source_metadata_path": null,
+    "queries_path": null,
+    "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
+    "editorial_filter_enabled": true,
+    "include_section_titles": true,
+    "generate_evidence": false,
+    "all_combinations": true,
+    "run_id": "confronto-01",
+    "model_scoped_artifacts": true,
+    "llama_api_key_env": "LLAMA_CLOUD_API_KEY",
+    "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
+    "llama_tier": "agentic",
+    "llama_version": "2026-09-13",
+    "min_chunk_tokens": 200,
+    "long_chunk_warning_tokens": 2000,
+    "embedding_model": "Qwen/Qwen3-Embedding-8B",
+    "embedding_batch_size": 4,
+    "embedding_max_tokens": 8192,
+    "dense_top_j": 100,
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "reranker_batch_size": 4,
+    "reranker_max_tokens": 8192,
+    "rerank_top_k": 10,
+    "deduplication_enabled": false,
+    "deduplication_similarity_threshold": 0.97,
+    "generator_model": "google/gemma-4-12B-it",
+    "generation_max_new_tokens": 900,
+    "generation_temperature": 0.7,
+    "generation_retries": 5,
+    "device": null
+  },
+  "libraries": {
+    "torch": "2.7.1a0+gite2d141d",
+    "transformers": "5.19.0",
+    "sentence-transformers": "5.4.1",
+    "faiss-cpu": "1.15.1",
+    "numpy": "2.3.5",
+    "pydantic": "2.13.3"
+  },
+  "encoding": {
+    "retrieval": "dense cosine (unit-normalized vectors, FAISS IndexFlatIP)",
+    "qwen_query_instruction": "Given a type of sexism and its description, retrieve passages containing specific verifiable evidence useful to counter this type of sexist hate speech.",
+    "qwen_rerank_instruction": "Given a type of sexism and its description, determine whether the passage contains specific, verifiable evidence relevant to the described type and useful to counter this type of sexist hate speech.",
+    "bge_m3_query_instruction": null,
+    "document_instruction": null,
+    "truncation": false,
+    "chunk_tokenizer": "Qwen/Qwen3-Embedding-8B",
+    "include_section_titles": true,
+    "passage_format": "Section: <heading 1> > <heading 2>\n\n<body>"
+  },
+  "chunking": {
+    "editorial_filter_enabled": true,
+    "rules_version": "1.0",
+    "audit_path": "chunking/editorial_exclusions.jsonl",
+    "audit_sha256": "0b005ae3cb44921d047a2485fb0e449adecc0ad182b605d685e023acbef0885d",
+    "audit_records": 2573,
+    "below_minimum_chunks": 606,
+    "minimum_body_tokens": 200
+  },
+  "updated_at": "2026-10-21T13:42:23.774939+00:00"
+}

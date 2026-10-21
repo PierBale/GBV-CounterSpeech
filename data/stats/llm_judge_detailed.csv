@@ -1,7 +1,0 @@
-﻿source,generation_model,baseline_strategy,challenger_strategy,judge_model,total_comparisons,valid_comparisons,parse_failures,reparsed_from_raw_response,challenger_wins,rag_win_percentage,baseline_wins,baseline_win_percentage,ties,tie_percentage
-edos,Llama-3.1-8B,rag_qwen3_emb_4b,rag_cards,JudgeLM-7B,150,150,0,0,55,36.67,95,63.33,0,0.0
-edos,Llama-3.1-8B,without_rag,rag_cards,JudgeLM-7B,150,150,0,0,67,44.67,82,54.67,1,0.67
-edos,Llama-3.1-8B,without_rag,rag_qwen3_emb_4b,JudgeLM-7B,150,150,0,0,65,43.33,84,56.0,1,0.67
-multiconan,Llama-3.1-8B,rag_qwen3_emb_4b,rag_cards,JudgeLM-7B,150,150,0,0,74,49.33,46,30.67,30,20.0
-multiconan,Llama-3.1-8B,without_rag,rag_cards,JudgeLM-7B,150,150,0,0,102,68.0,29,19.33,19,12.67
-multiconan,Llama-3.1-8B,without_rag,rag_qwen3_emb_4b,JudgeLM-7B,150,150,0,0,107,71.33,32,21.33,11,7.33

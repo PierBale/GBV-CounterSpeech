@@ -7,7 +7,7 @@ src/old/*
 src/2_paragraph_chunks/*
 src/2_paragraph_chunking_llamaparse.ipynb
 data/card_creation/*
-data/card_creation_comparison/
+data/old_results/
 data/old/*
 Toy Pipeline/*
 Cards/*

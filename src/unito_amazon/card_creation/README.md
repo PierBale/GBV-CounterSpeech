@@ -513,6 +513,20 @@ dal numero, numero seguito da `|`/`►` e titolo accanto a un numero su riga sep
 I frammenti di titolo su righe non Markdown devono avere forma di titolo,
 secondo la regola esplicita in `layout.py`. I casi non riconosciuti restano.
 
+La versione `2.1` riconosce anche numero e titolo separati solo da spazi,
+come `12 THE STATE OF THE WORLD’S GIRLS 2020`: il numero iniziale è il
+candidato numero di pagina e l'anno finale rimane parte del titolo. Restano
+necessari due numeri di pagina distinti osservati per lo stesso titolo.
+Una dicitura esplicita `logo:` o `publisher:` nel sorgente può confermare
+il nome dell'ente in piè di pagina ripetuti, come
+`50 European Institute for Gender Equality`.
+I blocchi completi `<page_header>...</page_header>` e
+`<page_footer>...</page_footer>` vengono rimossi come layout esplicitamente
+marcato dal parser. Un titolo marcato `page_header` può identificare anche
+copie senza tag, soltanto per uguaglianza normalizzata esatta e almeno due
+occorrenze; le vere intestazioni Markdown restano conservate. Un blocco senza
+tag di chiusura non viene usato per eliminare il resto del documento.
+
 I titoli correnti riconosciuti vengono rimossi anche quando sono scritti come
 heading Markdown, così non modificano la gerarchia reale delle sezioni. Se un
 marcatore di pagina separa due frammenti del corpo, si rimuove anche il padding

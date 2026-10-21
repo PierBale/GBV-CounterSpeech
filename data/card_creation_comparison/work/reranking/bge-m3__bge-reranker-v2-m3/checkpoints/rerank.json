@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "complete",
+  "signature": "0facede3cce7e22aefd70b9c00d256b8ec0b40dd5481f198923580890b37d814",
+  "inputs": [
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/bge-m3/edos_passages_dense.jsonl"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/bge-m3/edos_passages_dense.jsonl",
+        "exists": true,
+        "sha256": "250c1573db961dd14e9b4eeed1a02af7a85b3f8cfcc1902019583e7e86eb906d"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/reranking/bge-m3__bge-reranker-v2-m3/edos_passages_ranked.jsonl",
+      "exists": true,
+      "sha256": "f602201f959c2a1284cfc367420effa519849bf675ea70cefc3930af386a684f"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "status": "complete",
+  "signature": "6e5a38e0375e1aef595d25662aa4a53352ea41c2006cde7511f7599773cbde3d",
+  "inputs": [
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/chunks.jsonl"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/chunks.jsonl",
+        "exists": true,
+        "sha256": "e754bc1653ebd02418ed3d40c59da07e61a3d2ccafe71e309c1272d355f0061b"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss",
+      "exists": true,
+      "sha256": "df85bfe1c73eb84b57fc675b97c156d804b1db63f34cdc11b89f42ed396caa13"
+    },
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss.json",
+      "exists": true,
+      "sha256": "821fa1d311b2dbc4fcb1dd0534f83caccbb773304276da56f5c6aae78d5dd4d0"
+    }
+  ]
+}

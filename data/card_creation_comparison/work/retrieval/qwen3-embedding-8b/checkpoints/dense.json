@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "status": "complete",
+  "signature": "7057016fb1aa410e6abb2a67ab443a299a9d1466673a6956f69af0dfcfa03d10",
+  "inputs": [
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/chunks.jsonl"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/chunks.jsonl",
+        "exists": true,
+        "sha256": "e754bc1653ebd02418ed3d40c59da07e61a3d2ccafe71e309c1272d355f0061b"
+      }
+    },
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss",
+        "exists": true,
+        "sha256": "df85bfe1c73eb84b57fc675b97c156d804b1db63f34cdc11b89f42ed396caa13"
+      }
+    },
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss.json"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/indexes/chunks.faiss.json",
+        "exists": true,
+        "sha256": "821fa1d311b2dbc4fcb1dd0534f83caccbb773304276da56f5c6aae78d5dd4d0"
+      }
+    },
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/src/unito_amazon/card_creation/edos_labels.json",
+        "exists": true,
+        "sha256": "9b9f8c262dff0174c92a6c0abaf38ed8ec3cb8916b207be6c5826998947fab25"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/retrieval/qwen3-embedding-8b/edos_passages_dense.jsonl",
+      "exists": true,
+      "sha256": "81b63253ef2ee8f2b2069e802eaa0c239d4484b2e5cc09ecdc95b62ed78c9360"
+    }
+  ]
+}

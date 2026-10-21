@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "status": "complete",
+  "signature": "d3f1792339e4cc0f4046618ba905e7af1171515a61faebd5c91772a1d39f5a7d",
+  "inputs": [
+    {
+      "description": {
+        "kind": "file",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/reranking/bge-m3__qwen3-reranker-8b/edos_passages_ranked.jsonl"
+      },
+      "state": {
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/reranking/bge-m3__qwen3-reranker-8b/edos_passages_ranked.jsonl",
+        "exists": true,
+        "sha256": "52f3f6704af610b604d15f7bf84cf02f2ec1df4e29d943dad4662c3c7b678c22"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/reranking/bge-m3__qwen3-reranker-8b/edos_passages.jsonl",
+      "exists": true,
+      "sha256": "f008d70913dcf1b2fc37d7cb16bbdf9beb04fa3dfb23dd8efd05612fc82ca0a9"
+    },
+    {
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison/work/reranking/bge-m3__qwen3-reranker-8b/deduplication_decisions.jsonl",
+      "exists": true,
+      "sha256": "4cff3d9d2b3b55fd3528cba2abd6cac5991da5e88d4e60d7aaf319b19766d64b"
+    }
+  ]
+}

@@ -1,3 +1,0 @@
-﻿Dataset,Model,Chunk-RAG (Qwen3-Emb-4B),Card-RAG (Qwen3-Emb-4B)
-edos,Llama-3.1-8B,65 (lost) - RAG 43.33%; baseline 56.00%; tie 0.67%,67 (lost) - RAG 44.67%; baseline 54.67%; tie 0.67%
-multiconan,Llama-3.1-8B,107 - RAG 71.33%; baseline 21.33%; tie 7.33%,102 - RAG 68.00%; baseline 19.33%; tie 12.67%
