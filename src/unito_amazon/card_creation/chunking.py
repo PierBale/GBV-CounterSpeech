@@ -58,7 +58,7 @@ def markdown_paragraphs(
 def aggregate_paragraphs(
     paragraphs: list[tuple[int, tuple[str, ...], str]],
     count_tokens: Callable[[str], int],
-    minimum: int = 200,
+    minimum: int = 100,
 ) -> list[dict]:
     """Greedily aggregate adjacent short paragraphs, without overlap or splits."""
     chunks = []
@@ -104,7 +104,7 @@ def aggregate_paragraphs(
 
 def build_document_chunks(
     paragraphs: list[tuple[int, tuple[str, ...], str]], source: Source,
-    count_tokens: Callable[[str], int], minimum: int = 200,
+    count_tokens: Callable[[str], int], minimum: int = 100,
     include_section_titles: bool = True, audit: list[dict] | None = None,
 ) -> list[Chunk]:
     """Materialize complete model inputs, enforcing the configured minimum.

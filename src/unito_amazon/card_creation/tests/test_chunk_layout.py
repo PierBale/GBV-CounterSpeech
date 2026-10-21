@@ -63,6 +63,50 @@ class ChunkLayoutTests(unittest.TestCase):
         self.assertIn(("Recommendations",), [item[1] for item in paragraphs])
         self.assertEqual(sum(item[1] == ("Threats",) for item in paragraphs), 2)
 
+    def test_page_prefix_without_separator_keeps_year_in_title(self):
+        markdown = (
+            "# Findings\n\nFirst part\n\n"
+            "12    THE STATE OF THE WORLD’S GIRLS 2020\n\ncontinues.\n\n"
+            "Second part\n\n20 THE STATE OF THE WORLD’S GIRLS 2020\n\ncontinues."
+        )
+        cleaned, audit = strip_layout_noise(markdown)
+        self.assertNotIn("THE STATE", cleaned)
+        self.assertIn("First part\ncontinues.", cleaned)
+        self.assertEqual(len(audit), 2)
+        self.assertTrue(all(row["observed_pages"] == [12, 20] for row in audit))
+
+    def test_publisher_metadata_confirms_repeated_footer(self):
+        markdown = (
+            "logo: European Institute for Gender Equality\n\n# Findings\n\n"
+            "First part\n\n4 European Institute for Gender Equality\n\ncontinues.\n\n"
+            "Second part\n\n50 European Institute for Gender Equality\n\ncontinues."
+        )
+        cleaned, audit = strip_layout_noise(markdown)
+        self.assertNotIn("European Institute", cleaned)
+        self.assertIn("First part\ncontinues.", cleaned)
+        self.assertEqual(sum(row["rule_id"] == "repeated_running_title" for row in audit), 2)
+
+    def test_complete_page_tags_and_plain_repeats_preserve_real_heading(self):
+        title = "4. Towards common definitions of cyber violence against women and girls"
+        markdown = (
+            f"# {title}\n\nFirst part\n\n<page_header>{title}</page_header>\n\ncontinues.\n\n"
+            f"Second part\n\n{title}\n\ncontinues.\n\nThird part\n\n{title}\n\ncontinues.\n\n"
+            "Last part\n\n<page_footer>\nCombating cyber violence 35\n</page_footer>\n\ncontinues."
+        )
+        cleaned, audit = strip_layout_noise(markdown)
+        self.assertTrue(cleaned.startswith(f"# {title}\n"))
+        self.assertEqual(cleaned.count(title), 1)
+        self.assertNotIn("page_header", cleaned)
+        self.assertNotIn("page_footer", cleaned)
+        self.assertIn("Last part\ncontinues.", cleaned)
+        self.assertEqual(sum(row["rule_id"] == "repeated_tagged_running_title" for row in audit), 2)
+
+    def test_unclosed_page_tag_cannot_discard_remaining_content(self):
+        markdown = "# Findings\n\n<page_header>Unclosed marker\n\nSubstantive content remains."
+        cleaned, audit = strip_layout_noise(markdown)
+        self.assertEqual(cleaned, markdown)
+        self.assertEqual(audit, [])
+
     def test_icons_are_removed_even_between_substantive_lines(self):
         markdown = "# Findings\n\nFirst line\nicon: microphone\nsecond line\n\nicon: cross mark"
         cleaned, audit = strip_layout_noise(markdown)

@@ -39,7 +39,7 @@ class CardCreationConfig(BaseModel):
     llama_base_url: str = "https://api.cloud.eu.llamaindex.ai"
     llama_tier: str = "agentic"
     llama_version: str = "2026-09-13"
-    min_chunk_tokens: int = Field(default=200, ge=1)
+    min_chunk_tokens: int = Field(default=100, ge=1)
     long_chunk_warning_tokens: int = Field(default=2000, ge=1)
     embedding_model: str = "Qwen/Qwen3-Embedding-4B"
     embedding_batch_size: int = Field(default=4, ge=1)

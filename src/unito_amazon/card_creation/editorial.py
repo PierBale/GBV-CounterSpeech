@@ -3,7 +3,7 @@
 import re
 
 
-EDITORIAL_RULES_VERSION = "1.0"
+EDITORIAL_RULES_VERSION = "2.1"
 
 # Whole heading matches only. References, forewords, acknowledgements and
 # publication summaries are deliberately not treated as editorial sections.

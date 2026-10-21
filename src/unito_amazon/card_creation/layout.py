@@ -13,8 +13,13 @@ from .editorial import EDITORIAL_RULES_VERSION, plain_heading
 
 GRAPHIC_LINE = r"(?:icon|logo):\s*\S.*"
 EXPLICIT_PAGE = r"(?:Page\s+\d+(?:\s*[►|]\s*.*)?|(?:.*?►\s*)Page\s+\d+)"
-PAGE_FIRST = r"(?P<page>\d{1,4})\s*[|►]\s*(?P<title>.+)"
+PAGE_FIRST = r"(?P<page>\d{1,4})(?:\s*[|►]\s*|\s+)(?P<title>.+)"
 PAGE_LAST = r"(?P<title>.+?)\s+(?P<page>\d{1,4})"
+TAGGED_PAGE_BLOCK = (
+    r"^[ \t]*<page_(?P<kind>header|footer)>"
+    r"(?P<body>(?:(?!</?page_(?:header|footer)>)[\s\S])*)"
+    r"</page_(?P=kind)>[ \t]*$"
+)
 
 
 def display_line(line: str) -> str:
@@ -29,6 +34,23 @@ def strip_layout_noise(markdown: str) -> tuple[str, list[dict]]:
     lines = markdown.replace("\r\n", "\n").splitlines()
     visible = [display_line(line) for line in lines]
     heading_titles = set()
+    tagged_blocks = []
+    tagged_titles = set()
+    normalized_markdown = "\n".join(lines)
+    for match in re.finditer(TAGGED_PAGE_BLOCK, normalized_markdown, re.IGNORECASE | re.MULTILINE):
+        first = normalized_markdown.count("\n", 0, match.start())
+        last = first + match.group().count("\n")
+        tagged_blocks.append((first, last, match["kind"].lower()))
+        title = display_line(" ".join(match["body"].split()))
+        heading_titles.add(title_key(title))
+        if match["kind"].lower() == "header" and title:
+            tagged_titles.add(title_key(title))
+    # A publisher explicitly identified by a logo is source metadata, and can
+    # confirm a repeated publisher/page-number footer without a made-up title.
+    for text in visible:
+        metadata = re.fullmatch(r"(?:logo|publisher):\s*(.+)", text, re.IGNORECASE)
+        if metadata:
+            heading_titles.add(title_key(metadata[1]))
     for position, line in enumerate(lines):
         if not re.match(r"^\s*#{1,6}\s+", line):
             continue
@@ -97,6 +119,22 @@ def strip_layout_noise(markdown: str) -> tuple[str, list[dict]]:
         elif re.fullmatch(EXPLICIT_PAGE, text, re.IGNORECASE):
             discard(position, "explicit_page_marker", EXPLICIT_PAGE)
             page_positions.add(position)
+    for first, last, kind in tagged_blocks:
+        for position in range(first, last + 1):
+            discard(position, f"explicit_page_{kind}", TAGGED_PAGE_BLOCK)
+            page_positions.add(position)
+    # Untagged duplicates of a parser-marked running header are removed by
+    # exact normalized equality. Actual Markdown section headings are retained.
+    for key in tagged_titles:
+        positions = [
+            position for position, text in enumerate(visible)
+            if title_key(text) == key and not re.match(r"^\s*#{1,6}\s+", lines[position])
+        ]
+        if len(positions) >= 2:
+            for position in positions:
+                discard(position, "repeated_tagged_running_title", "exact_source_page_header",
+                        title_signature=key, observed_occurrences=len(positions))
+                page_positions.add(position)
     for position, page_position, key, pattern in candidates:
         if len(observations[key]) < 2:
             continue

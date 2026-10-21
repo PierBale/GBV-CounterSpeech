@@ -4,7 +4,7 @@ Pipeline autonoma implementata in `src/unito_amazon/card_creation`.
 Non dipende dal prototipo `Cards/Generation`.
 
 1. PDF -> Markdown con **LlamaParse**, tramite SDK LlamaCloud.
-2. Chunking per paragrafi con minimo effettivo di **200 token** nel corpo e nell'input completo.
+2. Chunking per paragrafi con minimo effettivo predefinito di **100 token** nel corpo e nell'input completo.
 3. Embedding **Qwen/Qwen3-Embedding-4B** e indice FAISS esatto.
 4. Query composta da **label EDOS + descrizione**, top **J=100** passaggi.
 5. Reranking **Qwen/Qwen3-Reranker-4B** di tutti i J candidati.
@@ -597,9 +597,9 @@ il testo con i titoli e la presenza dell'audit. Questi test sono stati aggiunti
 senza eseguirli sul PC locale, come richiesto.
 
 I paragrafi brevi consecutivi vengono uniti in ordine fino a raggiungere almeno
-200 token. Se il successivo paragrafo è già lungo, il gruppo breve viene unito
+100 token con la configurazione predefinita. Se il successivo paragrafo è già lungo, il gruppo breve viene unito
 a quel paragrafo intero. Un residuo breve a fine sezione viene aggiunto al chunk
-precedente della stessa sezione. Se l'intera sezione resta sotto 200 token,
+precedente della stessa sezione. Se l'intera sezione resta sotto il minimo configurato (100 token per default),
 viene esclusa dal corpus di retrieval con regola `below_minimum_tokens`,
 conservandone il testo nell'audit. Non si uniscono sezioni diverse soltanto per
 raggiungere la soglia e non si usano i titoli per rendere eleggibile un corpo

@@ -3,7 +3,7 @@
   "embedding_model": "Qwen/Qwen3-Embedding-8B",
   "reranker_model": "BAAI/bge-reranker-v2-m3",
   "chunk_tokenizer_model": "Qwen/Qwen3-Embedding-8B",
-  "min_chunk_tokens": 200,
+  "min_chunk_tokens": 100,
   "editorial_filter_enabled": true,
   "include_section_titles": true,
   "retrieval_top_k": 100,

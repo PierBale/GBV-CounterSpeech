@@ -7,7 +7,7 @@
   "llama_base_url": "https://api.cloud.eu.llamaindex.ai",
   "llama_tier": "agentic",
   "llama_version": "2026-09-13",
-  "min_chunk_tokens": 200,
+  "min_chunk_tokens": 100,
   "editorial_filter_enabled": true,
   "include_section_titles": true,
   "long_chunk_warning_tokens": 2000,
