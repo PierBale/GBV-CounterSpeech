@@ -4,7 +4,7 @@ Pipeline autonoma implementata in `src/unito_amazon/card_creation`.
 Non dipende dal prototipo `Cards/Generation`.
 
 1. PDF -> Markdown con **LlamaParse**, tramite SDK LlamaCloud.
-2. Chunking per paragrafi con minimo desiderato di **100 token**.
+2. Chunking per paragrafi con minimo desiderato di **200 token**.
 3. Embedding **Qwen/Qwen3-Embedding-4B** e indice FAISS esatto.
 4. Query composta da **label EDOS + descrizione**, top **J=100** passaggi.
 5. Reranking **Qwen/Qwen3-Reranker-4B** di tutti i J candidati.
@@ -113,6 +113,7 @@ scrive in `data/card_creation_comparison/`. All'interno del run:
 
 ```text
 manifest.json
+chunking/editorial_exclusions.jsonl
 retrieval/qwen3-embedding-8b.jsonl
 retrieval/bge-m3.jsonl
 reranking/qwen3-embedding-8b__bge-reranker-v2-m3.jsonl
@@ -130,6 +131,9 @@ sono stati registrati errori. Ogni riga retrieval rappresenta una coppia
 query/chunk e contiene `run_id`, `query_id`, `query_text`, `edos_label`,
 `embedding_model`, `chunk_id`, `chunk_text`, `document_id`, `document_source`,
 `retrieval_rank`, `retrieval_score`, `retrieval_top_k`, `metadata`.
+`model_input_text` conserva il testo del passaggio effettivamente fornito a
+embedding e reranker, inclusi i titoli quando abilitati. `chunk_text` conserva
+il solo corpo del chunk, separato dal contesto delle intestazioni.
 Conserva anche il record nested originario: `chunk`, `label`, `definition`,
 `dense_rank`, `dense_score` e metadati della query. In `metadata` restano fonte,
 percorso delle sezioni, ID dei paragrafi e conteggio token. Non vengono inventati
@@ -470,15 +474,88 @@ vengono stampate in console. I messaggi non cambiano prompt, ranking o card.
 
 ## Regole di chunking
 
-I token sono contati con il tokenizer Qwen dell'embedding model, senza token
-speciali. Le righe separate da un semplice a capo rimangono nello stesso
+I token del corpo sono contati con `chunk_tokenizer_model` (oppure il tokenizer
+dell'embedding nel flusso legacy), senza token speciali. Le righe separate da un semplice a capo rimangono nello stesso
 paragrafo; righe vuote e titoli delimitano i paragrafi. I titoli diventano metadati
 di sezione. Viene rimossa solo la formattazione Markdown di presentazione.
 
+### Esclusioni editoriali verificabili
+
+`editorial_filter_enabled: true` è il default, esplicitato anche nei due JSON
+di esempio. Il filtro opera sui paragrafi prima dell'aggregazione e usa solo
+regole sintattiche versionate in `editorial.py` (`EDITORIAL_RULES_VERSION`).
+Non consulta query, label, embedding, reranker o LLM. La versione iniziale:
+
+- Esclude paragrafi in sezioni il cui titolo completo è `IMPRINT`,
+  `DISCLAIMER AND COPYRIGHT` o la variante `DISCLAIMERANDCOPYRIGHT`, incluse
+  le loro sottosezioni secondo la gerarchia Markdown.
+- Sotto un titolo esatto `Contents` o `Table of contents`, esclude un paragrafo
+  soltanto se ogni riga non vuota ha forma di voce seguita da numero di pagina
+  arabo o romano; sono ammessi puntini e il formato `/ p.1`.
+- Esclude paragrafi composti soltanto da righe `logo: ...`, un ISBN isolato,
+  un avviso `© ... <anno>` su una sola riga o un credito esplicito
+  `Cover photo:` / `Cover design:` / `Cover design and layout:`.
+- Esclude paragrafi che iniziano con specifiche formule editoriali:
+  `All rights reserved.`, `Some rights reserved.`,
+  `Under the terms of this licence,` (anche `license`),
+  `Cataloguing-in-Publication (CIP) data.`, `Sales, rights and licensing.`,
+  `Third-party materials.` o `General disclaimers.`.
+
+Non vengono eliminate le prime N pagine, né paragrafi sulla sola presenza di
+parole chiave come `copyright`. Bibliografie, prefazioni, ringraziamenti,
+tabelle e copertine senza marcatori sufficienti vengono conservati. Gli indici
+con layout ambiguo, righe spezzate o HTML possono restare nel corpus.
+Le regex sono euristiche trasparenti: non garantiscono classificazione semantica
+perfetta e non costituiscono un miglioramento di retrieval già validato.
+
+Ogni esclusione viene salvata in `<output_dir>/editorial_exclusions.jsonl`
+con testo del paragrafo dopo la pulizia Markdown preesistente, ID originale,
+sezione, file Markdown, SHA-256 del file, ID della fonte, regola, pattern e
+versione. I Markdown di input rimangono disponibili e non vengono modificati.
+L'audit viene anche copiato in `runs/<run_id>/chunking/editorial_exclusions.jsonl`
+e registrato nel manifest del run con checksum. Disabilitare il filtro produce
+un audit vuoto e mantiene tutti i paragrafi precedentemente accettati dal parser.
+
+Gli ID dei paragrafi vengono assegnati prima delle esclusioni e non rinumerati.
+Non si aggregano paragrafi attraverso un intervallo escluso. I chunk superstiti
+continuano a usare l'hash di fonte, ID dei paragrafi e testo; una diversa
+aggregazione può legittimamente produrre nuovi chunk ID. Tutte le combinazioni
+dell'esperimento condividono lo stesso corpus filtrato.
+
+### Titoli nel testo fornito ai modelli
+
+Con `include_section_titles: true` (default), embedding, entrambi i reranker
+e prompt dell'evidence usano un unico formatter deterministico:
+
+```text
+Section: Titolo originale > Sottotitolo originale
+
+Corpo del chunk
+```
+
+Si usano esclusivamente le intestazioni presenti in `section_path`, rimuovendo
+la loro formattazione di presentazione (`**`, backtick e tag HTML semplici).
+Non si generano titoli, riassunti o informazioni mancanti. Se non ci sono titoli,
+si usa soltanto il corpo. `chunk.text` e `chunk_text` mantengono il corpo; i
+titoli originali restano nei metadati. `model_input_text` documenta la
+rappresentazione completa nei JSONL retrieval/reranking. Il `token_count` del
+chunk conta il corpo: i backend controllano separatamente la lunghezza
+dell'input completo, compresi titoli, query e prompt propri del modello.
+`include_section_titles: false` ripristina l'input costituito dal solo corpo.
+
+Entrambe le opzioni sono incluse nelle firme di cache degli stadi interessati.
+I precedenti indici/ranking incompatibili vengono ricostruiti e gli archivi
+dei run precedenti rimangono separati. Dopo questa modifica usare un nuovo
+`run_id`, ad esempio `confronto-02`, per non mescolare corpus o rappresentazioni
+diversi nello stesso esperimento. I test sintattici e i casi negativi sono in
+`tests/test_editorial_context.py`; l'aggiornamento della matrice verifica anche
+il testo con i titoli e la presenza dell'audit. Questi test sono stati aggiunti
+senza eseguirli sul PC locale, come richiesto.
+
 I paragrafi brevi consecutivi vengono uniti in ordine fino a raggiungere almeno
-100 token. Se il successivo paragrafo è già lungo, il gruppo breve viene unito
+200 token. Se il successivo paragrafo è già lungo, il gruppo breve viene unito
 a quel paragrafo intero. Un residuo breve a fine sezione viene aggiunto al chunk
-precedente della stessa sezione. Se l'intera sezione resta sotto 100 token,
+precedente della stessa sezione. Se l'intera sezione resta sotto 200 token,
 viene conservata: la soglia non implica la perdita di testo.
 
 Nessun paragrafo viene spezzato, nessun testo viene duplicato per overlap e non

@@ -8,6 +8,8 @@ from uuid import uuid4
 from .config import CardCreationConfig, model_slug
 from .io import append_jsonl, file_sha256, fingerprint, read_jsonl, write_json, write_jsonl
 from .schema import DensePassage, RetrievalQuery
+from .editorial import EDITORIAL_RULES_VERSION
+from .passage_text import format_chunk_text
 
 
 def timestamp() -> str:
@@ -34,6 +36,7 @@ class RunArtifacts:
         }}
         inputs = {
             "corpus_sha256": file_sha256(config.chunks_path) if config.chunks_path.exists() else None,
+            "editorial_audit_sha256": file_sha256(config.editorial_audit_path) if config.editorial_audit_path.exists() else None,
             "queries": [query.model_dump(mode="json") for query in queries],
             "combinations": combinations, "configuration": semantic,
             "include_evidence": self.include_evidence,
@@ -74,7 +77,19 @@ class RunArtifacts:
             "bge_m3_query_instruction": None,
             "document_instruction": None, "truncation": False,
             "chunk_tokenizer": config.chunk_tokenizer,
+            "include_section_titles": config.include_section_titles,
+            "passage_format": "Section: <heading 1> > <heading 2>\n\n<body>" if config.include_section_titles else "body",
         }
+        if config.editorial_audit_path.exists():
+            audit_path = self.root / "chunking" / "editorial_exclusions.jsonl"
+            decisions = read_jsonl(config.editorial_audit_path)
+            write_jsonl(audit_path, decisions)
+            self.manifest["chunking"] = {
+                "editorial_filter_enabled": config.editorial_filter_enabled,
+                "rules_version": EDITORIAL_RULES_VERSION,
+                "audit_path": str(audit_path.relative_to(self.root)),
+                "audit_sha256": file_sha256(audit_path), "excluded_paragraphs": len(decisions),
+            }
         self.save()
 
     def save(self):
@@ -93,6 +108,7 @@ class RunArtifacts:
             "run_id": self.run_id, "query_id": passage.query_id,
             "query_text": passage.query_text, "edos_label": passage.label,
             "chunk_id": chunk.chunk_id, "chunk_text": chunk.text,
+            "model_input_text": format_chunk_text(chunk, config.include_section_titles),
             "document_id": chunk.source.source_id,
             "document_source": chunk.source.pdf_file or chunk.source.markdown_file,
             "retrieval_rank": passage.dense_rank, "retrieval_score": passage.dense_score,

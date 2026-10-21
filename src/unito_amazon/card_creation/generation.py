@@ -141,7 +141,7 @@ def generate_cards(
         raise ValueError("Duplicate query/chunk pairs in the reranked passage file.")
     jobs = []
     for passage in passages:
-        prompt = build_card_prompt(passage)
+        prompt = build_card_prompt(passage, config.include_section_titles)
         key = fingerprint({
             "model": config.generator_model, "system": SYSTEM_PROMPT,
             "prompt": prompt, "max_new_tokens": config.generation_max_new_tokens,
@@ -238,7 +238,7 @@ def generate_cards(
                         report("generate", f"Passaggio {position}/{len(remaining)} fallito: tentativi esauriti")
                     else:
                         report("generate", "Preparazione di un nuovo tentativo con istruzione di correzione")
-                        prompt = build_card_prompt(passage) + (
+                        prompt = build_card_prompt(passage, config.include_section_titles) + (
                             "\nYour previous output was invalid: " + str(error)
                             + '\nReturn only the required JSON object with non-empty "reasoning" and "evidence" strings.'
                         )

@@ -13,6 +13,7 @@ from .deduplication import (
 from .io import read_jsonl, write_jsonl
 from .progress import report
 from .queries import load_queries
+from .passage_text import format_chunk_text
 from .schema import Chunk, DensePassage, RankedPassage, RetrievalQuery
 from .vector_store import CHUNK_INSTRUCTION, FaissEvidenceRetriever
 
@@ -28,10 +29,10 @@ def load_chunks(config: CardCreationConfig) -> list[Chunk]:
     return chunks
 
 
-def chunks_to_documents(chunks: list[Chunk]) -> list[Document]:
+def chunks_to_documents(chunks: list[Chunk], include_section_titles: bool = True) -> list[Document]:
     return [
         Document(
-            id=chunk.chunk_id, text=chunk.text,
+            id=chunk.chunk_id, text=format_chunk_text(chunk, include_section_titles),
             metadata={"source": chunk.source.model_dump(), "section_path": chunk.section_path},
         )
         for chunk in chunks
@@ -57,7 +58,7 @@ def index_chunks(
     retriever = chunk_retriever(config)
     try:
         retriever.load_or_index(
-            chunks_to_documents(load_chunks(config)), config.chunk_index_path,
+            chunks_to_documents(load_chunks(config), config.include_section_titles), config.chunk_index_path,
             force_reindex=force,
         )
     finally:
@@ -117,7 +118,7 @@ def _dense_retrieval(config: CardCreationConfig, cache: StageCache, queries: dic
     if remaining:
         retriever = chunk_retriever(config)
         try:
-            retriever.load(config.chunk_index_path, chunks_to_documents(chunks))
+            retriever.load(config.chunk_index_path, chunks_to_documents(chunks, config.include_section_titles))
             for key in remaining:
                 query = queries[key]
                 report("retrieve", f"Retrieval query {key}: {query.edos_label}")
@@ -181,7 +182,9 @@ def _rerank_passages(config: CardCreationConfig, cache: StageCache, queries: dic
                 candidates = sorted(dense_groups[key], key=lambda item: item.dense_rank)
                 report("retrieve", f"Reranking query {key}: {query.edos_label}")
                 try:
-                    scores = reranker.score(query.query_text, [item.chunk.text for item in candidates])
+                    scores = reranker.score(query.query_text, [
+                        format_chunk_text(item.chunk, config.include_section_titles) for item in candidates
+                    ])
                     if len(scores) != len(candidates) or any(not math.isfinite(score) for score in scores):
                         raise ValueError(f"Invalid reranker scores for query {key}.")
                 except (Exception, KeyboardInterrupt) as error:
@@ -217,7 +220,7 @@ def _deduplicate(config: CardCreationConfig, cache: StageCache, queries: dict[st
     if config.deduplication_enabled:
         retriever = chunk_retriever(config)
         try:
-            retriever.load(config.chunk_index_path, chunks_to_documents(load_chunks(config)))
+            retriever.load(config.chunk_index_path, chunks_to_documents(load_chunks(config), config.include_section_titles))
             candidate_ids = list(dict.fromkeys(item.chunk.chunk_id for item in ranked))
             vectors = retriever.document_embeddings(candidate_ids)
             candidate_embeddings = dict(zip(candidate_ids, vectors, strict=True))

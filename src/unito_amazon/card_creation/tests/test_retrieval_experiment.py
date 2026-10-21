@@ -62,6 +62,7 @@ class RetrievalExperimentTests(unittest.TestCase):
         if ticket.mode != "cached":
             self.chunk_calls.append(config.chunk_tokenizer)
             write_jsonl(config.chunks_path, (chunk.model_dump(mode="json") for chunk in self.chunks))
+            write_jsonl(config.editorial_audit_path, [])
             cache.checkpoint(ticket, complete=True)
 
     def retriever(self, config):
@@ -124,6 +125,7 @@ class RetrievalExperimentTests(unittest.TestCase):
                     self.assertEqual(row["run_id"], self.config.run_id)
                     self.assertEqual(row["pipeline_id"], pipeline)
                     self.assertEqual(row["edos_label"], "label")
+                    self.assertEqual(row["model_input_text"], "Section: Section\n\n" + row["chunk_text"])
                 for query in ("q1", "q2"):
                     rows = [row for row in full if row["query_id"] == query]
                     self.assertEqual([row["retrieval_rank"] for row in rows], [2, 3, 1])
@@ -131,8 +133,10 @@ class RetrievalExperimentTests(unittest.TestCase):
             calls = [call for call in self.rerank_calls if call[0] == embedding]
             self.assertEqual(calls[0][2:], calls[2][2:])
             self.assertEqual(calls[1][2:], calls[3][2:])
+            self.assertTrue(all(text.startswith("Section: Section\n\n") for call in calls for text in call[3]))
         manifest = json.loads((root / "manifest.json").read_text())
         self.assertEqual(manifest["status"], "complete")
+        self.assertTrue((root / "chunking" / "editorial_exclusions.jsonl").exists())
         self.assertFalse((root / "evidence").exists())
         self.generator.assert_not_called()
         run_experiment(self.config)

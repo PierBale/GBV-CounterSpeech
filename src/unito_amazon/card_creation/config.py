@@ -28,6 +28,8 @@ class CardCreationConfig(BaseModel):
     source_metadata_path: Path | None = None
     queries_path: Path | None = None
     chunk_tokenizer_model: str | None = None
+    editorial_filter_enabled: bool = True
+    include_section_titles: bool = True
     generate_evidence: bool = True
     all_combinations: bool = False
     run_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
@@ -37,7 +39,7 @@ class CardCreationConfig(BaseModel):
     llama_base_url: str = "https://api.cloud.eu.llamaindex.ai"
     llama_tier: str = "agentic"
     llama_version: str = "2026-09-13"
-    min_chunk_tokens: int = Field(default=100, ge=1)
+    min_chunk_tokens: int = Field(default=200, ge=1)
     long_chunk_warning_tokens: int = Field(default=2000, ge=1)
     embedding_model: str = "Qwen/Qwen3-Embedding-4B"
     embedding_batch_size: int = Field(default=4, ge=1)
@@ -92,6 +94,10 @@ class CardCreationConfig(BaseModel):
     @property
     def chunks_path(self) -> Path:
         return self.output_dir / "chunks.jsonl"
+
+    @property
+    def editorial_audit_path(self) -> Path:
+        return self.output_dir / "editorial_exclusions.jsonl"
 
     @property
     def chunk_index_path(self) -> Path:

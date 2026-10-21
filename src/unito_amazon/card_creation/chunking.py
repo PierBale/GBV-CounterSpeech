@@ -6,7 +6,8 @@ from itertools import groupby
 
 from .config import CardCreationConfig
 from .cache import StageCache
-from .io import fingerprint, write_jsonl
+from .io import file_sha256, fingerprint, write_jsonl
+from .editorial import filter_editorial_paragraphs
 from .progress import report
 from .schema import Chunk, Source
 
@@ -49,7 +50,7 @@ def markdown_paragraphs(markdown: str) -> list[tuple[int, tuple[str, ...], str]]
 def aggregate_paragraphs(
     paragraphs: list[tuple[int, tuple[str, ...], str]],
     count_tokens: Callable[[str], int],
-    minimum: int = 100,
+    minimum: int = 200,
 ) -> list[dict]:
     """Greedily aggregate adjacent short paragraphs, without overlap or splits."""
     chunks = []
@@ -63,8 +64,12 @@ def aggregate_paragraphs(
             "token_count": count_tokens(text),
         }
 
-    # Group consecutive occurrences, not all paragraphs sharing a heading name.
-    for _, section_group in groupby(paragraphs, key=lambda item: item[1]):
+    # An exclusion creates a gap in the original IDs: do not join text across
+    # that gap, or across distinct sections, merely to reach the token minimum.
+    for _, indexed_group in groupby(
+        enumerate(paragraphs), key=lambda item: (item[1][1], item[1][0] - item[0]),
+    ):
+        section_group = (paragraph for _, paragraph in indexed_group)
         section_chunks = []
         pending = []
         for paragraph in section_group:
@@ -121,6 +126,7 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
             raise ValueError("Source metadata must map relative Markdown paths to objects.")
 
     chunks = []
+    audit = []
     total_paragraphs = 0
     for position, path in enumerate(paths, start=1):
         relative = path.relative_to(config.markdown_dir).as_posix()
@@ -140,7 +146,14 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
             "title": path.stem.replace("_", " "),
             **metadata.get(relative, {}),
         })
-        file_chunks = aggregate_paragraphs(paragraphs, count_tokens, config.min_chunk_tokens)
+        retained, excluded = filter_editorial_paragraphs(paragraphs, config.editorial_filter_enabled)
+        markdown_digest = file_sha256(path)
+        audit.extend({
+            **decision, "source_id": source.source_id, "markdown_file": relative,
+            "markdown_sha256": markdown_digest,
+        } for decision in excluded)
+        report("chunk", f"{len(retained)} paragrafi conservati; {len(excluded)} esclusioni editoriali registrate")
+        file_chunks = aggregate_paragraphs(retained, count_tokens, config.min_chunk_tokens)
         for item in file_chunks:
             if item["token_count"] > config.long_chunk_warning_tokens:
                 warnings.warn(f"Long intact chunk in {relative}: {item['token_count']} tokens")
@@ -152,8 +165,9 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
             )
             chunks.append(chunk.model_dump(mode="json"))
         report("chunk", f"File {position}/{len(paths)} completato: {len(file_chunks)} chunk")
+    write_jsonl(config.editorial_audit_path, audit)
     if not chunks:
-        raise ValueError("Markdown files contain no non-empty paragraphs.")
+        raise ValueError(f"No paragraphs remain for chunking; inspect {config.editorial_audit_path}.")
     report("chunk", f"Salvataggio di {len(chunks)} chunk da {total_paragraphs} paragrafi")
     write_jsonl(config.chunks_path, chunks)
     cache.checkpoint(ticket, complete=True)

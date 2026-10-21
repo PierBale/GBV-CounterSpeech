@@ -21,20 +21,21 @@ DEPENDENCIES = {
 }
 CONFIG_FIELDS = {
     "parse": ("pdf_dir", "markdown_dir", "llama_base_url", "llama_tier", "llama_version"),
-    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model"),
-    "index": ("embedding_model", "embedding_max_tokens"),
-    "dense": ("labels_path", "queries_path", "dense_top_j", "embedding_model", "embedding_max_tokens"),
-    "rerank": ("reranker_model", "reranker_max_tokens"),
+    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model", "editorial_filter_enabled"),
+    "index": ("embedding_model", "embedding_max_tokens", "include_section_titles"),
+    "dense": ("labels_path", "queries_path", "dense_top_j", "embedding_model", "embedding_max_tokens", "include_section_titles"),
+    "rerank": ("reranker_model", "reranker_max_tokens", "include_section_titles"),
     "dedup": ("rerank_top_k", "deduplication_enabled", "deduplication_similarity_threshold"),
-    "generate": ("generator_model", "generation_max_new_tokens", "generation_temperature"),
+    "generate": ("generator_model", "generation_max_new_tokens", "generation_temperature", "include_section_titles"),
     "index-cards": ("embedding_model", "embedding_max_tokens"),
 }
 CODE_FILES = {
-    "parse": ("parsing.py",), "chunk": ("chunking.py", "schema.py"),
-    "index": ("vector_store.py",), "dense": ("retrieval.py", "vector_store.py", "queries.py", "schema.py"),
-    "rerank": ("retrieval.py", "reranking.py", "../retrieval/reranker.py"),
+    "parse": ("parsing.py",), "chunk": ("chunking.py", "schema.py", "editorial.py"),
+    "index": ("vector_store.py", "passage_text.py", "editorial.py", "retrieval.py"),
+    "dense": ("retrieval.py", "vector_store.py", "queries.py", "schema.py", "passage_text.py", "editorial.py"),
+    "rerank": ("retrieval.py", "reranking.py", "../retrieval/reranker.py", "passage_text.py", "editorial.py"),
     "dedup": ("retrieval.py", "deduplication.py"),
-    "generate": ("generation.py", "prompts.py", "schema.py", "card_schema.py"),
+    "generate": ("generation.py", "prompts.py", "schema.py", "card_schema.py", "passage_text.py", "editorial.py"),
     "index-cards": ("card_retrieval.py", "vector_store.py", "schema.py", "card_schema.py"),
 }
 
@@ -77,7 +78,7 @@ class StageCache:
         self.root = config.output_dir.resolve()
         self.directory = config.cache_dir
         self.outputs = {
-            "chunk": [config.chunks_path],
+            "chunk": [config.chunks_path, config.editorial_audit_path],
             "index": [config.chunk_index_path, config.chunk_index_path.with_suffix(".faiss.json")],
             "dense": [config.dense_path], "rerank": [config.ranked_path],
             "dedup": [config.retrieved_path, config.deduplication_log_path],

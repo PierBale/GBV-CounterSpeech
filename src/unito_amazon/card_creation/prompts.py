@@ -1,4 +1,5 @@
 from .schema import RankedPassage
+from .passage_text import format_chunk_text
 
 
 SYSTEM_PROMPT = (
@@ -8,7 +9,7 @@ SYSTEM_PROMPT = (
 )
 
 
-def build_card_prompt(passage: RankedPassage) -> str:
+def build_card_prompt(passage: RankedPassage, include_section_titles: bool = True) -> str:
     return f"""You are extracting one evidence card for a card-routed RAG system for
 counterspeech against gender-based hate.
 
@@ -73,4 +74,4 @@ Do not return card metadata, the source chunk, labels, validation fields, or
 a code fence; those fields are filled automatically by the application.
 
 Source passage:
-{passage.chunk.text}"""
+{format_chunk_text(passage.chunk, include_section_titles)}"""
