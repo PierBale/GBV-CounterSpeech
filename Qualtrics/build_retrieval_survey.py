@@ -4,10 +4,10 @@ Examples (run from the repository root):
     python3 Qualtrics/build_retrieval_survey.py
     python3 Qualtrics/build_retrieval_survey.py --keep-common-copies
 
-Select the first three rows per label in each JSONL file, in file order.
-Chunks selected by ALL input configurations for the same label appear once,
-even at different ranks, with "all" as their configuration identifier. Other
-chunks retain their configuration-specific questions. --keep-common-copies
+Select the top three reranker ranks per query in each JSONL file.
+Chunks selected by at least two configurations for the same query appear once,
+even at different ranks. Their identifier is "shared", or "all" when selected
+by every configuration. Other chunks retain configuration-specific questions. --keep-common-copies
 keeps every configuration's copy instead. Each exported question identifier
 includes its chunk_id. Native Qualtrics QIDs are recorded separately in the
 CSV, along with all source configurations and ranks for shared questions.
@@ -30,18 +30,26 @@ MAP_FIELDS = [
     'question_id', 'qualtrics_question_id', 'data_export_tag', 'pipeline_id', 'edos_label',
     'reranker_rank', 'chunk_id', 'query_id', 'document_source',
     'embedding_model', 'reranker_model',
+    'run_id', 'query_text', 'source_matches',
 ]
 
 
 def load_candidates(input_dir, top_n):
-    """Return the first top_n rows for every label in each source file."""
+    """Return ranks 1..top_n for each query, independently of file order."""
+    if not isinstance(top_n, int) or isinstance(top_n, bool) or top_n < 1:
+        raise ValueError('top_n must be a positive integer')
     paths = sorted(input_dir.glob('*.jsonl'))
     if not paths:
         raise ValueError(f'No JSONL files found in {input_dir}')
     settings = {}
-    required = {'label', 'definition', 'text', 'chunk_id', 'reranker_rank'}
+    required = {
+        'label', 'definition', 'text', 'chunk_id', 'reranker_rank',
+        'query_id', 'query_text', 'pipeline_id',
+    }
+    query_details = {}
+    run_ids = set()
     for path in paths:
-        labels = defaultdict(list)
+        queries = defaultdict(list)
         with path.open(encoding='utf-8') as stream:
             for line_number, line in enumerate(stream, 1):
                 if not line.strip():
@@ -52,34 +60,54 @@ def load_candidates(input_dir, top_n):
                     raise ValueError(f'{path}:{line_number}: missing {sorted(missing)}')
                 if row.get('pipeline_id', path.stem) != path.stem:
                     raise ValueError(f'{path}:{line_number}: pipeline_id differs from filename')
-                if len(labels[row['label']]) < top_n:
-                    labels[row['label']].append(row)
-        if not labels:
+                query_id = row['query_id']
+                if not isinstance(query_id, str) or not query_id.strip():
+                    raise ValueError(f'{path}:{line_number}: query_id must be nonempty')
+                details = (row['label'], row['definition'], row['query_text'])
+                if query_id in query_details and query_details[query_id] != details:
+                    raise ValueError(f'{path}:{line_number}: conflicting query {query_id}')
+                query_details[query_id] = details
+                rank = row['reranker_rank']
+                if not isinstance(rank, int) or isinstance(rank, bool) or rank < 1:
+                    raise ValueError(f'{path}:{line_number}: reranker_rank must be a positive integer')
+                if row.get('run_id'):
+                    run_ids.add(row['run_id'])
+                queries[query_id].append(row)
+        if not queries:
             raise ValueError(f'No entries found in {path}')
-        settings[path.stem] = (path, dict(labels))
-
-    all_labels = set.union(*(set(labels) for _, labels in settings.values()))
-    for pipeline, (_, labels) in settings.items():
-        for label in sorted(all_labels):
-            rows = labels.get(label, [])
-            if len(rows) != top_n:
-                raise ValueError(f'{pipeline}: expected {top_n} items for {label}, found {len(rows)}')
+        selected = {}
+        for query_id, rows in queries.items():
+            if len({row['reranker_rank'] for row in rows}) != len(rows):
+                raise ValueError(f'{path.stem}: duplicate rank for {query_id}')
             if len({row['chunk_id'] for row in rows}) != len(rows):
-                raise ValueError(f'{pipeline}: duplicate chunk_id among selected items for {label}')
+                raise ValueError(f'{path.stem}: duplicate chunk_id for {query_id}')
+            selected[query_id] = sorted(rows, key=lambda row: row['reranker_rank'])[:top_n]
+        settings[path.stem] = (path, selected)
+
+    if len(run_ids) > 1:
+        raise ValueError('Input files contain different run_id values')
+    all_queries = set.union(*(set(queries) for _, queries in settings.values()))
+    for pipeline, (_, queries) in settings.items():
+        for query_id in sorted(all_queries):
+            rows = queries.get(query_id, [])
+            if [row['reranker_rank'] for row in rows] != list(range(1, top_n + 1)):
+                raise ValueError(f'{pipeline}: expected ranks 1..{top_n} for {query_id}')
     return settings
 
 
 def common_chunks(settings):
-    """Intersect selected chunk IDs across configurations, separately by label."""
-    labels = sorted({label for _, rows in settings.values() for label in rows})
-    if len(settings) < 2:
-        return {label: set() for label in labels}
+    """Find chunks selected by at least two configurations for each query."""
+    counts = defaultdict(lambda: defaultdict(set))
+    for pipeline, (_, queries) in settings.items():
+        for query_id, rows in queries.items():
+            for row in rows:
+                counts[query_id][row['chunk_id']].add(pipeline)
     return {
-        label: set.intersection(*(
-            {row['chunk_id'] for row in rows.get(label, [])}
-            for _, rows in settings.values()
-        ))
-        for label in labels
+        query_id: {
+            chunk_id for chunk_id, pipelines in chunks.items()
+            if len(pipelines) >= 2
+        }
+        for query_id, chunks in counts.items()
     }
 
 
@@ -140,28 +168,36 @@ def build_survey(template, settings, merge_common=True):
 
     add_block('Task description', add_question('QID7', 'Task_description'))
     shared = common_chunks(settings) if merge_common else {}
-    labels = sorted({label for _, rows in settings.values() for label in rows})
+    query_labels = {
+        query_id: rows[0]['label']
+        for _, queries in settings.values()
+        for query_id, rows in queries.items()
+    }
+    query_ids = sorted(query_labels, key=lambda query_id: (query_labels[query_id], query_id))
     # Retain the original label/position/configuration order, with separate pages.
     candidates = [
-        (pipeline, path, rows[label][position])
-        for label in labels
-        for position in range(len(next(iter(settings.values()))[1][label]))
+        (pipeline, path, rows[query_id][position])
+        for query_id in query_ids
+        for position in range(len(next(iter(settings.values()))[1][query_id]))
         for pipeline, (path, rows) in sorted(settings.items())
     ]
     sources = defaultdict(list)
     for pipeline, path, row in candidates:
-        sources[row['label'], row['chunk_id']].append((pipeline, path, row))
+        sources[row['query_id'], row['chunk_id']].append((pipeline, path, row))
     seen_shared = set()
     for number, (pipeline, path, row) in enumerate(candidates, 1):
-        key = row['label'], row['chunk_id']
-        is_shared = row['chunk_id'] in shared.get(row['label'], set())
+        key = row['query_id'], row['chunk_id']
+        is_shared = row['chunk_id'] in shared.get(row['query_id'], set())
         if is_shared and key in seen_shared:
             continue
         if is_shared:
             seen_shared.add(key)
         matches = sources[key] if is_shared else [(pipeline, path, row)]
-        if any((match['text'], match['definition']) != (row['text'], row['definition'])
-               for _, _, match in matches):
+        if any(
+            (match['text'], match['definition'], match['query_text']) !=
+            (row['text'], row['definition'], row['query_text'])
+            for _, _, match in matches
+        ):
             raise ValueError(f'Conflicting text or definition for shared chunk {key}')
         source_matches = [{
             'pipeline_id': name, 'reranker_rank': match['reranker_rank'],
@@ -169,7 +205,10 @@ def build_survey(template, settings, merge_common=True):
             'embedding_model': match.get('embedding_model', ''),
             'reranker_model': match.get('reranker_model', ''),
         } for name, source, match in matches]
-        identifier = 'all' if is_shared else pipeline
+        if is_shared:
+            identifier = 'all' if len(matches) == len(settings) else 'shared'
+        else:
+            identifier = pipeline
         tag = f'Q{number}-{identifier}-{row["chunk_id"]}'
         qid = add_question('QID1', tag, render_question(row))
         add_block(tag, qid)
@@ -185,6 +224,8 @@ def build_survey(template, settings, merge_common=True):
                 if is_shared else row.get('embedding_model', ''),
             'reranker_model': json.dumps(sorted({m['reranker_model'] for m in source_matches}))
                 if is_shared else row.get('reranker_model', ''),
+            'run_id': row.get('run_id', ''), 'query_text': row['query_text'],
+            'source_matches': json.dumps(source_matches, ensure_ascii=False),
         })
     if not mapping:
         raise ValueError('No rating questions selected')
@@ -214,12 +255,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--input-dir', type=Path, default=ROOT / 'data/card_creation_comparison/runs/confronto-02/reranking')
     parser.add_argument('--template', type=Path, default=HERE / 'Draft-retrieval-setting.qsf')
-    parser.add_argument('--top-n', type=int, default=3, help='First N items per label per file (default: 3)')
+    parser.add_argument('--top-n', type=int, default=3, help='Top N reranker ranks per query per file (default: 3)')
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--keep-common-copies', dest='merge_common', action='store_false',
                       help='Keep separate copies of shared chunks for each configuration')
     mode.add_argument('--merge-common-chunks', '--exclude-common-chunks', dest='merge_common',
-                      action='store_true', help='Keep shared chunks once under all (default); --exclude-common-chunks is a legacy alias and no longer removes them')
+                      action='store_true', help='Keep chunks shared by at least two configurations once (default); --exclude-common-chunks is a legacy alias and no longer removes them')
     parser.set_defaults(merge_common=True)
     parser.add_argument('--output', type=Path, help='Output QSF path (default: Qualtrics/Best_retrieval_config.qsf, with _with_common_copies when keeping duplicates)')
     parser.add_argument('--csv-output', type=Path, help='Question map path (default: output filename with _question_map.csv suffix)')
@@ -239,24 +280,24 @@ def main():
         settings = load_candidates(args.input_dir, args.top_n)
 
 
-        # Count occurrences of each (label, chunk_id) across configurations
+        # Count occurrences of each (query_id, chunk_id) across configurations.
         chunk_counts = defaultdict(int)
 
         for configuration, (_, metadata) in settings.items():
-            for label, rows in metadata.items():
+            for query_id, rows in metadata.items():
                 for row in rows:
-                    chunk_counts[(label, row['chunk_id'])] += 1
+                    chunk_counts[(query_id, row['chunk_id'])] += 1
 
-        # Identify chunks selected in every configuration
+        # Include chunks shared by two, three or all configurations.
         shared_chunks = {
-            (label, chunk_id): count
-            for (label, chunk_id), count in chunk_counts.items()
-            if count == len(settings)
+            (query_id, chunk_id): count
+            for (query_id, chunk_id), count in chunk_counts.items()
+            if count >= 2
         }
 
-        print("\nChunks selected in all configurations:")
-        for label, chunk_id in sorted(shared_chunks):
-            print(f"Label: {label}, Chunk: {chunk_id}")
+        print("\nChunks selected in at least 2 configurations:")
+        for (query_id, chunk_id), count in sorted(shared_chunks.items()):
+            print(f"Query: {query_id}, Chunk: {chunk_id}, Configurations: {count}")
 
         print(f"Number of shared chunks: {len(shared_chunks)}")
 
@@ -274,7 +315,7 @@ def main():
         writer.writeheader()
         writer.writerows(mapping)
     print(f'Created {len(mapping)} rating questions, each in its own block, plus the task introduction.')
-    shared_count = sum(item['pipeline_id'] == 'all' for item in mapping)
+    shared_count = sum(item['pipeline_id'] in {'all', 'shared'} for item in mapping)
     print(f'Configurations: {len(settings)}; shared questions: {shared_count}; duplicate copies merged: {merged_count}.')
     print(f'QSF: {output}')
     print(f'Question map: {csv_output}')
