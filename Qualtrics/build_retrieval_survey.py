@@ -11,6 +11,8 @@ by every configuration. Other chunks retain configuration-specific questions. --
 keeps every configuration's copy instead. Each exported question identifier
 includes its chunk_id. Native Qualtrics QIDs are recorded separately in the
 CSV, along with all source configurations and ranks for shared questions.
+The task introduction stays first; Qualtrics randomizes the rating pages for
+each respondent without changing question IDs or the CSV mapping order.
 Only the Python standard library is needed.
 """
 
@@ -130,7 +132,7 @@ def build_survey(template, settings, merge_common=True):
     survey = copy.deepcopy(template)
     elements = survey['SurveyElements']
     questions = {e['PrimaryAttribute']: e for e in elements if e['Element'] == 'SQ'}
-    for qid in ('QID1', 'QID7'):
+    for qid in ('QID29', 'QID7'):
         if qid not in questions:
             raise ValueError(f'Template is missing {qid}')
     for kind in ('BL', 'FL', 'QC'):
@@ -174,7 +176,7 @@ def build_survey(template, settings, merge_common=True):
         for query_id, rows in queries.items()
     }
     query_ids = sorted(query_labels, key=lambda query_id: (query_labels[query_id], query_id))
-    # Retain the original label/position/configuration order, with separate pages.
+    # Assign IDs in the original order; randomize only the presentation flow.
     candidates = [
         (pipeline, path, rows[query_id][position])
         for query_id in query_ids
@@ -210,7 +212,7 @@ def build_survey(template, settings, merge_common=True):
         else:
             identifier = pipeline
         tag = f'Q{number}-{identifier}-{row["chunk_id"]}'
-        qid = add_question('QID1', tag, render_question(row))
+        qid = add_question('QID29', tag, render_question(row))
         add_block(tag, qid)
         mapping.append({
             'question_id': tag, 'qualtrics_question_id': qid,
@@ -230,13 +232,18 @@ def build_survey(template, settings, merge_common=True):
     if not mapping:
         raise ValueError('No rating questions selected')
 
+    # Keep the introduction fixed and present every rating block in random order.
+    randomized_flow = [flow[0], {
+        'Type': 'BlockRandomizer', 'FlowID': f'FL_{len(flow) + 2}',
+        'SubSet': len(flow) - 1, 'EvenPresentation': False, 'Flow': flow[1:],
+    }]
     survey['SurveyElements'] = [e for e in elements if e['Element'] != 'SQ'] + generated
     for element in survey['SurveyElements']:
         if element['Element'] == 'BL':
             element['Payload'] = blocks
         elif element['Element'] == 'FL':
             element['Payload'] = {
-                'Flow': flow, 'Properties': {'Count': len(flow) + 1},
+                'Flow': randomized_flow, 'Properties': {'Count': len(flow) + 2},
                 'FlowID': 'FL_1', 'Type': 'Root',
             }
         elif element['Element'] == 'QC':
@@ -314,7 +321,7 @@ def main():
         writer = csv.DictWriter(stream, fieldnames=MAP_FIELDS)
         writer.writeheader()
         writer.writerows(mapping)
-    print(f'Created {len(mapping)} rating questions, each in its own block, plus the task introduction.')
+    print(f'Created {len(mapping)} rating questions, randomized for each respondent, plus the task introduction first.')
     shared_count = sum(item['pipeline_id'] in {'all', 'shared'} for item in mapping)
     print(f'Configurations: {len(settings)}; shared questions: {shared_count}; duplicate copies merged: {merged_count}.')
     print(f'QSF: {output}')
