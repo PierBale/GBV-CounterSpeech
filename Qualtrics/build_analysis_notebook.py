@@ -68,6 +68,11 @@ ogni coppia è ancora **alpha ordinale**, con IC bootstrap sui voti ricampionati
 L'alpha globale non è la media degli alpha per coppia. Alpha nominale e kappa
 quadratico per coppia restano diagnostiche aggiuntive; l'accordo esatto è una proporzione.
 Un alpha negativo indica disaccordo maggiore di quello atteso per caso, non un voto umano negativo.
+Il calcolo usa **`import krippendorff`**, con
+`krippendorff.alpha(reliability_data=matrix.T, level_of_measurement='ordinal')`.
+La libreria richiede annotatori sulle righe e item sulle colonne. I voti mancanti
+rimangono NaN; gli item condivisi compaiono una volta. Anche ogni replica bootstrap
+usa la libreria. Campioni senza variazione non hanno alpha stimabile.
 """)
 code("""agreement = analysis['agreement']
 display(agreement.loc[agreement.scope == 'global', [
@@ -84,14 +89,22 @@ markdown("""## Ranking delle configurazioni
 La **rilevanza umana media (0–2)** misura la qualità dei tre passaggi senza considerare l'ordine.
 **nDCG@3** considera anche la posizione: gain lineare e sconto `1/log2(rank+1)`.
 Il denominatore ideale usa i migliori tre item del pool annotato della query,
-uguale per tutti i sistemi. La variante esponenziale è un controllo di sensibilità.
+uguale per tutti i sistemi. Si usa esclusivamente il gain lineare nativo della libreria.
 Le metriche globali sono medie macro delle query; gli IC sono bootstrap delle query.
+Il calcolo usa **`sklearn.metrics.ndcg_score`**, con `k=3`, e `dcg_score` per DCG.
+Gli item sono allineati per `question_id` sull'intero pool annotato. Gli score
+d'ordine 3, 2, 1 ricostruiscono il top-3 originale; gli altri item stanno sotto
+il cutoff con score d'ordine 0, mantenendo i loro giudizi umani nell'ideale.
+Non si applicano trasformazioni agli score umani prima del calcolo.
+Si valuta l'ordine finale estratto: eventuali score grezzi uguali sono risolti
+dal rank salvato, senza mediare i possibili ordinamenti a pari merito.
+Con ideale tutto zero la libreria restituisce **0**, che viene incluso nella media.
 """)
 code("""ranking = analysis['summary']
 display(ranking[[
     'rank_ndcg', 'rank_relevance', 'pipeline_id', 'mean_relevance',
     'mean_relevance_ci_low', 'mean_relevance_ci_high', 'ndcg_pool_at3',
-    'ndcg_pool_at3_ci_low', 'ndcg_pool_at3_ci_high', 'ndcg_pool_at3_exponential'
+    'ndcg_pool_at3_ci_low', 'ndcg_pool_at3_ci_high'
 ]].rename(columns={'mean_relevance': 'Rilevanza umana media (0-2)',
                    'mean_relevance_ci_low': 'Rilevanza IC95 inferiore (0-2)',
                    'mean_relevance_ci_high': 'Rilevanza IC95 superiore (0-2)'}))
@@ -108,7 +121,8 @@ Si calcola per query, poi si media: non si concatenano score di query diverse.
 - `kendall_tau_b_top3`: usa i tre item propri di ciascun sistema; le selezioni possono differire.
 - `ndcg_order_at3`: ideale sui tre item propri, per studiare l'ordine condizionatamente alla selezione.
 
-I valori non definiti restano mancanti e il numero di query valide è mostrato.
+Le correlazioni non definite restano mancanti; il numero di query valide è mostrato.
+Per nDCG, un ideale tutto zero produce 0 secondo la convenzione di scikit-learn.
 L'intersezione comune è un sottoinsieme del pool annotato: non è un test dell'intero ranking.
 Un nDCG dell'ordine alto può coesistere con passaggi poco rilevanti o tutti con lo stesso giudizio.
 """)
@@ -142,20 +156,13 @@ Confronto tra **media, mediana e soft label**. Le soft label sono le frequenze
 dei voti sulle classi 0, 1 e 2. Il loro score umano `E[Y] = p1 + 2*p2` coincide
 con la media: con gain lineare producono quindi gli stessi risultati.
 
-Il confronto esponenziale usa `2^mean - 1` per la media, `2^median - 1` per la
-mediana e **`E[2^Y - 1] = p1 + 3*p2` per le soft label**. Quest'ultima è una scelta
-di utilità che conserva l'effetto della distribuzione, non una terza stima indipendente
-dello score umano. Il gain è riscalato su 0–2 senza cambiare nDCG.
-Si calcola nDCG dei gain attesi, non la media degli nDCG individuali.
-Il gain esponenziale può favorire distribuzioni polarizzate a parità di media.
-
-Lo score umano rimane sempre su **0–2**. Le tabelle riportano separatamente
-il rank con gain lineare e quello con gain esponenziale; gli IC sono su query
-e i ricampionamenti sono uguali tra le tre scelte di aggregazione.
-Con la mediana l'etichetta 3.3 ha ideale tutto zero e nDCG non definito:
-il confronto diretto di nDCG usa le **10 query valide comuni**. Gli score umani
-usano tutte le 11 query. La prima tabella mantiene anche le medie su tutte le
-query disponibili e ne mostra il numero per evitare confronti ambigui.
+Si usa solo il nDCG classico lineare di scikit-learn, senza trasformazioni degli score.
+Media e soft label danno quindi gli stessi valori: non sono due misure indipendenti.
+Lo score umano rimane sempre su **0–2**; gli IC sono su query e i ricampionamenti
+sono uguali tra le tre scelte di aggregazione.
+Con la mediana l'etichetta 3.3 ha ideale tutto zero: ora `ndcg_score` assegna **0**,
+in sostituzione del precedente n.d. Il confronto usa quindi **tutte le 11 query**
+per tutte le aggregazioni, sia per gli score umani sia per nDCG.
 I test tra sistemi usano le stesse query, inversione esatta dei segni e correzione
 di Holm: `p_holm` entro aggregazione e metrica, `p_holm_all_configs` su tutti
 i confronti delle tre configurazioni. Gli IC dei delta sono bootstrap appaiati.
@@ -163,18 +170,17 @@ Con poche query e accordo basso il ranking resta esplorativo.
 """)
 code("""comparison = analysis['aggregation_comparison']
 display(comparison[['aggregation', 'pipeline_id', 'mean_relevance', 'rank_ndcg',
-                    'ndcg_pool_at3', 'ndcg_pool_at3_n', 'rank_ndcg_exponential', 'ndcg_pool_at3_exponential',
+                    'ndcg_pool_at3', 'ndcg_pool_at3_n',
                     'kendall_tau_b_common']].rename(
     columns={'mean_relevance': 'Score umano (0-2)'}))
 display(SVG(filename=str(OUT / 'aggregation_comparison.svg')))
 display(SVG(filename=str(OUT / 'aggregation_patterns_by_label.svg')))
 matched = analysis['aggregation_matched']
-print('nDCG esponenziale sulle stesse query valide per tutte le aggregazioni:')
+print('nDCG@3 classico sulle stesse query per tutte le aggregazioni:')
 display(matched.pivot(index='pipeline_id', columns='aggregation',
-                         values='ndcg_pool_at3_exponential'))
+                         values='ndcg_pool_at3'))
 display(matched[['aggregation', 'pipeline_id', 'n_queries', 'rank_ndcg', 'ndcg_pool_at3',
-                    'rank_ndcg_exponential', 'ndcg_pool_at3_exponential',
-                    'ndcg_pool_at3_exponential_ci_low', 'ndcg_pool_at3_exponential_ci_high']])
+                    'ndcg_pool_at3_ci_low', 'ndcg_pool_at3_ci_high']])
 display(pd.read_csv(OUT / 'annotator_model_ranking.csv').sort_values(
     ['annotator', 'rank_ndcg']).rename(columns={'mean_relevance': 'Rilevanza umana (0-2)'}))
 display(analysis['paired'][[
@@ -205,8 +211,10 @@ Si confrontano pipeline embedding + reranker e l'inferenza condiziona sui tre an
 Il ranking non dimostra una superiorità generalizzabile dei singoli modelli.
 
 - [Krippendorff, Computing Alpha-Reliability](https://www.asc.upenn.edu/sites/default/files/2021-03/Computing%20Krippendorff%27s%20Alpha-Reliability.pdf)
+- [Castro (2017), Fast Krippendorff: libreria utilizzata](https://github.com/pln-fing-udelar/fast-krippendorff)
 - [Järvelin e Kekäläinen, 2002, Cumulated Gain-based Evaluation of IR Techniques](https://researchportal.tuni.fi/en/publications/cumulated-gain-based-evaluation-of-ir-techniques/)
 - [SciPy: Kendall tau-b e pari merito](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html)
+- [scikit-learn: implementazione nDCG](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 - [Fornaciari et al. (2021): soft label come distribuzioni dei giudizi](https://aclanthology.org/2021.naacl-main.204/)
 
 Report completo, audit e CSV: `analysis/`. Script: `analyze_retrieval.py`.

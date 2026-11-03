@@ -1,7 +1,7 @@
 """Analyze the human relevance survey; run from any working directory.
 
 python Qualtrics/analyze_retrieval.py
-Dependencies: numpy, pandas, scipy, matplotlib (see requirements-analysis.txt).
+Dependencies: see requirements-analysis.txt (including krippendorff and scikit-learn).
 No model inference or network access is required. Original inputs are read only.
 """
 
@@ -12,56 +12,48 @@ import csv
 import hashlib
 import itertools
 import json
+from importlib.metadata import version as package_version
 from pathlib import Path
 
+import krippendorff
 import numpy as np
 import pandas as pd
 from scipy.stats import kendalltau, spearmanr
+import sklearn
+from sklearn.metrics import cohen_kappa_score, dcg_score, ndcg_score
 
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
+KRIPPENDORFF_VERSION = package_version("krippendorff")
 SOURCES = {
     "alpha": "https://www.asc.upenn.edu/sites/default/files/2021-03/Computing%20Krippendorff%27s%20Alpha-Reliability.pdf",
+    "alpha_implementation": "https://github.com/pln-fing-udelar/fast-krippendorff",
     "ndcg": "https://researchportal.tuni.fi/en/publications/cumulated-gain-based-evaluation-of-ir-techniques/",
+    "ndcg_implementation": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html",
     "tau": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html",
     "soft_labels": "https://aclanthology.org/2021.naacl-main.204/",
 }
 
 
-def krippendorff_alpha(ratings, level="ordinal"):
-    """Units x raters; coincidence weighting supports missing ratings.
+def alpha_from_items(ratings, level="ordinal"):
+    """Adapt units x raters to krippendorff.alpha's raters x units format.
 
-    Ordinal distances use marginal-frequency midranks, not squared raw scores.
-    Units with fewer than two ratings do not contribute to either marginal.
+    No alpha formula is implemented here. Degenerate samples without pairable
+    units or marginal variation have no estimable reliability and stay NaN,
+    including such bootstrap replicates. Missing ratings stay NaN.
     """
     ratings = np.asarray(ratings, dtype=float)
     if ratings.ndim != 2:
         raise ValueError("Expected units x annotators")
     if level not in {"ordinal", "nominal"}:
         raise ValueError(level)
+    if np.isinf(ratings).any():
+        raise ValueError("Missing ratings must be NaN, not infinity")
     ratings = ratings[np.isfinite(ratings).sum(axis=1) >= 2]
-    if not len(ratings):
+    if not len(ratings) or len(np.unique(ratings[np.isfinite(ratings)])) < 2:
         return np.nan
-    values = np.unique(ratings[np.isfinite(ratings)])
-    counts = np.array([(ratings == value).sum(axis=1) for value in values]).T
-    m = counts.sum(axis=1)
-    coincidence = np.einsum("ui,uj,u->ij", counts, counts, 1 / (m - 1))
-    coincidence -= np.diag((counts / (m - 1)[:, None]).sum(axis=0))
-    marginal = coincidence.sum(axis=0)
-    n = marginal.sum()
-    if n <= 1:
-        return np.nan
-    if level == "ordinal":
-        midranks = np.cumsum(marginal) - marginal / 2
-        distance = (midranks[:, None] - midranks[None, :]) ** 2
-    else:
-        distance = (values[:, None] != values[None, :]).astype(float)
-    expected = np.outer(marginal, marginal) - np.diag(marginal)
-    denominator = np.sum(expected * distance)
-    if denominator == 0:
-        return np.nan  # No marginal variation: reliability is not estimable.
-    return 1 - (n - 1) * np.sum(coincidence * distance) / denominator
+    return float(krippendorff.alpha(reliability_data=ratings.T, level_of_measurement=level))
 
 
 def interval(draws):
@@ -72,8 +64,8 @@ def interval(draws):
 
 def agreement_summary(matrix, rng, bootstrap):
     matrix = np.asarray(matrix, dtype=float)
-    alpha = krippendorff_alpha(matrix)
-    draws = [krippendorff_alpha(matrix[rng.integers(len(matrix), size=len(matrix))])
+    alpha = alpha_from_items(matrix)
+    draws = [alpha_from_items(matrix[rng.integers(len(matrix), size=len(matrix))])
              for _ in range(bootstrap)]
     low, high, valid = interval(draws)
     pairwise, extreme = [], []
@@ -87,7 +79,7 @@ def agreement_summary(matrix, rng, bootstrap):
         "n_items": len(matrix), "n_ratings": int(np.isfinite(matrix).sum()),
         "n_items_ge2_raters": int((np.isfinite(matrix).sum(axis=1) >= 2).sum()),
         "alpha_ordinal": alpha, "alpha_ci_low": low, "alpha_ci_high": high,
-        "alpha_bootstrap_valid": valid, "alpha_nominal": krippendorff_alpha(matrix, "nominal"),
+        "alpha_bootstrap_valid": valid, "alpha_nominal": alpha_from_items(matrix, "nominal"),
         "pairwise_exact_agreement": np.mean(pairwise) if pairwise else np.nan,
         "pairwise_extreme_disagreement": np.mean(extreme) if extreme else np.nan,
         "all_raters_exact_agreement": np.mean(np.ptp(complete, axis=1) == 0) if len(complete) else np.nan,
@@ -197,17 +189,6 @@ def expand_selections(mapping, run_dir):
     return selections
 
 
-def dcg(relevance, exponential=False):
-    relevance = np.asarray(relevance, dtype=float)
-    gains = np.exp2(relevance) - 1 if exponential else relevance
-    return float(np.sum(gains / np.log2(np.arange(len(gains)) + 2)))
-
-
-def ndcg(relevance, ideal_pool, k=3, exponential=False):
-    denominator = dcg(sorted(ideal_pool, reverse=True)[:k], exponential)
-    return dcg(relevance[:k], exponential) / denominator if denominator > 0 else np.nan
-
-
 def rank_correlations(scores, relevance):
     if len(scores) < 2 or len(set(scores)) < 2 or len(set(relevance)) < 2:
         return np.nan, np.nan
@@ -220,20 +201,30 @@ def evaluate(selections, items, relevance_column="mean_relevance"):
         raise ValueError("Every selected/pool item needs at least one rating")
     joined = selections.merge(items[["question_id", relevance_column, "fully_relevant_fraction"]],
                               on="question_id", validate="many_to_one")
-    pools = {q: group[relevance_column].to_numpy() for q, group in items.groupby("query_id")}
+    pools = {q: group.set_index("question_id")[relevance_column] for q, group in items.groupby("query_id")}
     rows = []
     for (pipeline, query), group in joined.groupby(["pipeline_id", "query_id"]):
         group = group.sort_values("rank")
         relevance = group[relevance_column].to_numpy()
+        pool = pools[query]
+        positions = pool.index.get_indexer(group.question_id)
+        if (positions < 0).any():
+            raise ValueError("A selected question is missing from the judged pool")
+        # Match by question identity, never by relevance value or row position.
+        # Rank scores 3,2,1 preserve the actual selected order. All other pool
+        # items have ordering score 0, below the top-3; their HUMAN grades stay intact.
+        rank_scores = np.arange(len(group), 0, -1, dtype=float)
+        pool_scores = np.zeros(len(pool), dtype=float)
+        pool_scores[positions] = rank_scores
         tau, rho = rank_correlations(group.reranker_score.tolist(), relevance.tolist())
         rows.append({"pipeline_id": pipeline, "query_id": query,
                      "edos_label": group.edos_label.iloc[0], "n_pool": len(pools[query]),
                      "mean_relevance": float(relevance.mean()),
                      "fully_relevant_fraction": float(group.fully_relevant_fraction.mean()),
-                     "dcg_at3": dcg(relevance),
-                     "ndcg_pool_at3": ndcg(relevance, pools[query]),
-                     "ndcg_pool_at3_exponential": ndcg(relevance, pools[query], exponential=True),
-                     "ndcg_order_at3": ndcg(relevance, relevance),
+                     "dcg_at3": float(dcg_score(relevance[None, :], rank_scores[None, :], k=3)),
+                     "ndcg_pool_at3": float(ndcg_score(pool.to_numpy()[None, :],
+                                                        pool_scores[None, :], k=3)),
+                     "ndcg_order_at3": float(ndcg_score(relevance[None, :], rank_scores[None, :], k=3)),
                      "kendall_tau_b_top3": tau, "spearman_rho_top3": rho,
                      "n_distinct_human_grades": len(set(relevance))})
     return pd.DataFrame(rows), joined
@@ -280,8 +271,7 @@ def common_pool_ordering(items, pipelines, run_dir, relevance_column="mean_relev
 
 
 SUMMARY_METRICS = ["mean_relevance", "fully_relevant_fraction", "ndcg_pool_at3",
-                   "ndcg_pool_at3_exponential", "ndcg_order_at3", "kendall_tau_b_top3",
-                   "kendall_tau_b_common"]
+                   "ndcg_order_at3", "kendall_tau_b_top3", "kendall_tau_b_common"]
 
 
 def summarize_models(per_query, rng, bootstrap):
@@ -339,11 +329,9 @@ def paired_comparisons(per_query, rng, bootstrap, metrics=("ndcg_pool_at3", "mea
 
 
 def aggregate_votes(matrix):
-    """Empirical soft labels and consensus; all scores/utilities remain in 0..2.
+    """Empirical soft labels and consensus scores in 0..2.
 
-    Soft linear relevance is E[Y], exactly the arithmetic mean. Soft exponential
-    gain is E[2**Y - 1], NOT 2**E[Y] - 1. Multiplying gains by 2/3 keeps utilities
-    in 0..2 and leaves nDCG invariant. These utilities are not new human ratings.
+    Soft expected relevance is E[Y], exactly the arithmetic mean.
     """
     if matrix.notna().sum(axis=1).eq(0).any():
         raise ValueError("At least one rating is required for every item")
@@ -362,9 +350,6 @@ def aggregate_votes(matrix):
     # Store the same floating representation to avoid spurious ordering of ties.
     result["soft_expected_relevance"] = result.mean_relevance
     result["fully_relevant_fraction"] = result.p_relevance_2
-    result["mean_gain_exponential_0_2"] = (np.exp2(result.mean_relevance) - 1) * (2 / 3)
-    result["median_gain_exponential_0_2"] = (np.exp2(result.median_relevance) - 1) * (2 / 3)
-    result["soft_gain_exponential_0_2"] = (result.p_relevance_1 + 3 * result.p_relevance_2) * (2 / 3)
     return result
 
 
@@ -379,27 +364,17 @@ def compare_aggregations(selections, items, run_dir, rng, bootstrap):
         variant_rng = np.random.default_rng()
         variant_rng.bit_generator.state = resampling_state
         metrics, _ = evaluate(selections, items, score)
-        gains, _ = evaluate(selections, items, f"{aggregation}_gain_exponential_0_2")
-        gains = gains[["pipeline_id", "query_id", "ndcg_pool_at3", "ndcg_order_at3"]].rename(
-            columns={"ndcg_pool_at3": "ndcg_pool_at3_exponential_expected",
-                     "ndcg_order_at3": "ndcg_order_at3_exponential"})
-        metrics = metrics.merge(gains, on=["pipeline_id", "query_id"], validate="one_to_one")
-        # The exponential column always denotes the gain appropriate to the
-        # aggregation: transform consensus for mean/median; expected gain for soft.
-        metrics["ndcg_pool_at3_exponential"] = metrics.pop("ndcg_pool_at3_exponential_expected")
         common = common_pool_ordering(items, sorted(selections.pipeline_id.unique()), run_dir, score)
         metrics = metrics.merge(common.drop(columns=["edos_label", "n_pool"]),
                                 on=["pipeline_id", "query_id"], validate="one_to_one")
         metrics["rank_ndcg_within_label"] = metrics.groupby("query_id").ndcg_pool_at3.rank(method="min", ascending=False)
-        metrics["rank_ndcg_exponential_within_label"] = metrics.groupby("query_id").ndcg_pool_at3_exponential.rank(method="min", ascending=False)
         metrics["aggregation"] = aggregation
         summary = summarize_models(metrics, variant_rng, bootstrap)
-        summary["rank_ndcg_exponential"] = summary.ndcg_pool_at3_exponential.rank(method="min", ascending=False).astype(int)
         summary["aggregation"] = aggregation
         summaries.append(summary)
         per_label.append(metrics)
         tests = paired_comparisons(metrics, variant_rng, bootstrap,
-                                   metrics=("mean_relevance", "ndcg_pool_at3", "ndcg_pool_at3_exponential"))
+                                   metrics=("mean_relevance", "ndcg_pool_at3"))
         tests["aggregation"] = aggregation
         paired.append(tests)
     comparison = pd.concat(summaries, ignore_index=True)
@@ -408,9 +383,9 @@ def compare_aggregations(selections, items, run_dir, rng, bootstrap):
     all_tests.loc[ordered.index, "p_holm_all_configs"] = np.minimum(1, np.maximum.accumulate(
         ordered.p_exact_sign_flip.to_numpy() * np.arange(len(ordered), 0, -1)))
     details = pd.concat(per_label, ignore_index=True)
-    # nDCG is undefined for all-zero ideal pools. Match the query support when
-    # comparing aggregation choices, rather than comparing 11-query and 10-query means.
-    ndcg_columns = ["ndcg_pool_at3", "ndcg_pool_at3_exponential"]
+    # Use the same query support for all aggregations. scikit-learn returns 0
+    # for all-zero ideal pools, so all 11 queries now contribute to every variant.
+    ndcg_columns = ["ndcg_pool_at3"]
     finite_queries = details.groupby("query_id")[ndcg_columns].agg(lambda s: np.isfinite(s).all()).all(axis=1)
     valid_queries = finite_queries[finite_queries].index
     matched_summaries = []
@@ -419,12 +394,18 @@ def compare_aggregations(selections, items, run_dir, rng, bootstrap):
         variant_rng.bit_generator.state = resampling_state
         matched = summarize_models(group, variant_rng, bootstrap)
         matched["aggregation"] = aggregation
-        matched["rank_ndcg_exponential"] = matched.ndcg_pool_at3_exponential.rank(method="min", ascending=False).astype(int)
         matched_summaries.append(matched)
     matched = pd.concat(matched_summaries, ignore_index=True)
-    keep = ["aggregation", "pipeline_id", "n_queries", "rank_ndcg", "rank_ndcg_exponential"]
+    keep = ["aggregation", "pipeline_id", "n_queries", "rank_ndcg"]
     keep += [c for c in matched if c.startswith("ndcg_pool_at3")]
     return comparison, details, all_tests, matched[keep]
+
+
+def save_svg(figure, path):
+    """Export vector charts without renderer-generated trailing whitespace."""
+    figure.savefig(path, metadata={"Date": None})
+    content = path.read_text(encoding="utf-8")
+    path.write_text("\n".join(line.rstrip() for line in content.splitlines()) + "\n", encoding="utf-8")
 
 
 def make_plots(summary, by_label, agreement, out_dir):
@@ -456,7 +437,7 @@ def make_plots(summary, by_label, agreement, out_dir):
                         xytext=(0, 6), textcoords="offset points",
                         ha="center", va="bottom", fontsize=10, fontweight="bold")
     fig.suptitle("Confronto configurazioni — IC 95% bootstrap sulle query")
-    fig.savefig(out_dir / "model_ranking.svg", metadata={"Date": None})
+    save_svg(fig, out_dir / "model_ranking.svg")
     plt.close(fig)
 
     labels = sorted(by_label.edos_label.unique())
@@ -476,7 +457,7 @@ def make_plots(summary, by_label, agreement, out_dir):
         colorbar = fig.colorbar(im, ax=ax, shrink=.8)
         colorbar.solids.set_rasterized(False)
     fig.suptitle("Pattern per etichetta — una query per etichetta")
-    fig.savefig(out_dir / "patterns_by_label.svg", metadata={"Date": None})
+    save_svg(fig, out_dir / "patterns_by_label.svg")
     plt.close(fig)
 
     local = agreement[agreement.scope == "label"].sort_values("edos_label")
@@ -492,7 +473,7 @@ def make_plots(summary, by_label, agreement, out_dir):
     ax.set(xlabel="Alpha ordinale (IC 95%, bootstrap degli item)", ylabel="Etichetta EDOS",
            title="Accordo tra annotatori per etichetta")
     ax.grid(axis="x", alpha=.2)
-    fig.savefig(out_dir / "agreement_by_label.svg", metadata={"Date": None})
+    save_svg(fig, out_dir / "agreement_by_label.svg")
     plt.close(fig)
 
 
@@ -505,11 +486,11 @@ def plot_aggregation_comparison(comparison, per_label, matched, out_dir):
              for p in pipelines}
     schemes = [("mean", "Media", "#287a8c"), ("median", "Mediana", "#be6d33"),
                ("soft", "Soft label", "#715caa")]
-    fig, axes = plt.subplots(1, 3, figsize=(18, 6), layout="constrained")
+    fig, axes = plt.subplots(1, 2, figsize=(13, 6), layout="constrained")
     n_common = int(matched.n_queries.iloc[0])
     for ax, metric, title, maximum in zip(axes,
-            ["mean_relevance", "ndcg_pool_at3", "ndcg_pool_at3_exponential"],
-            ["Score umano (0–2), 11 query", f"nDCG lineare, {n_common} query comuni", f"nDCG esponenziale, {n_common} query comuni"], [2, 1, 1]):
+            ["mean_relevance", "ndcg_pool_at3"],
+            ["Score umano (0–2), 11 query", f"nDCG@3 classico, {n_common} query"], [2, 1]):
         x = np.arange(len(pipelines))
         for j, (scheme, label, color) in enumerate(schemes):
             source = comparison if metric == "mean_relevance" else matched
@@ -529,30 +510,29 @@ def plot_aggregation_comparison(comparison, per_label, matched, out_dir):
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
     fig.suptitle("Media, mediana e soft label — IC 95% sulle query")
-    fig.savefig(out_dir / "aggregation_comparison.svg", metadata={"Date": None})
+    save_svg(fig, out_dir / "aggregation_comparison.svg")
     plt.close(fig)
 
     labels = sorted(per_label.edos_label.unique())
-    fig, axes = plt.subplots(2, 3, figsize=(15, 11), layout="constrained")
-    for row, metric, gain in [(0, "ndcg_pool_at3", "lineare"), (1, "ndcg_pool_at3_exponential", "esponenziale")]:
-        for column, (scheme, label, _) in enumerate(schemes):
-            ax = axes[row, column]
-            pivot = per_label[per_label.aggregation == scheme].pivot(
-                index="edos_label", columns="pipeline_id", values=metric).reindex(index=labels, columns=pipelines)
-            mesh = ax.pcolormesh(pivot.to_numpy(), vmin=0, vmax=1, cmap="YlGnBu")
-            ax.set_ylim(len(labels), 0)
-            ax.set_xticks(np.arange(len(pipelines)) + .5, [names[p] for p in pipelines], rotation=35, ha="right")
-            ax.set_yticks(np.arange(len(labels)) + .5, [s.split()[0] for s in labels])
-            ax.set(title=f"{label} — gain {gain}", ylabel="Etichetta EDOS")
-            for i in range(len(labels)):
-                for j in range(len(pipelines)):
-                    value = pivot.iloc[i, j]
-                    ax.text(j + .5, i + .5, f"{value:.2f}" if np.isfinite(value) else "n.d.",
-                            ha="center", va="center", color="white" if value > .6 else "#12212a")
+    fig, axes = plt.subplots(1, 3, figsize=(15, 6), layout="constrained")
+    for column, (scheme, label, _) in enumerate(schemes):
+        ax = axes[column]
+        pivot = per_label[per_label.aggregation == scheme].pivot(
+            index="edos_label", columns="pipeline_id", values="ndcg_pool_at3").reindex(index=labels, columns=pipelines)
+        mesh = ax.pcolormesh(pivot.to_numpy(), vmin=0, vmax=1, cmap="YlGnBu")
+        ax.set_ylim(len(labels), 0)
+        ax.set_xticks(np.arange(len(pipelines)) + .5, [names[p] for p in pipelines], rotation=35, ha="right")
+        ax.set_yticks(np.arange(len(labels)) + .5, [s.split()[0] for s in labels])
+        ax.set(title=label, ylabel="Etichetta EDOS")
+        for i in range(len(labels)):
+            for j in range(len(pipelines)):
+                value = pivot.iloc[i, j]
+                ax.text(j + .5, i + .5, f"{value:.2f}" if np.isfinite(value) else "n.d.",
+                        ha="center", va="center", color="white" if value > .6 else "#12212a")
     colorbar = fig.colorbar(mesh, ax=axes, shrink=.65, label="nDCG@3 sul pool annotato")
     colorbar.solids.set_rasterized(False)
-    fig.suptitle("Confronto per etichetta — una query per etichetta")
-    fig.savefig(out_dir / "aggregation_patterns_by_label.svg", metadata={"Date": None})
+    fig.suptitle("nDCG@3 classico per etichetta — una query per etichetta")
+    save_svg(fig, out_dir / "aggregation_patterns_by_label.svg")
     plt.close(fig)
 
 
@@ -607,6 +587,12 @@ Accordo esatto tra coppie di annotatori: {global_agreement.pairwise_exact_agreem
 accordo unanime: {global_agreement.all_raters_exact_agreement:.1%};
 disaccordi estremi 0 contro 2: {global_agreement.pairwise_extreme_disagreement:.1%}.
 Non vengono duplicate le annotazioni dei passaggi condivisi.
+Il calcolo usa `import krippendorff` e `krippendorff.alpha` (versione {KRIPPENDORFF_VERSION}),
+con `level_of_measurement="ordinal"`; il controllo nominale usa `"nominal"`.
+La matrice viene trasposta nel formato richiesto dalla libreria: annotatori × item.
+Ogni replica bootstrap richiama la stessa funzione della libreria; la versione
+installata non espone una funzione per gli intervalli, quindi il ricampionamento
+degli item è gestito dallo script. Campioni senza variazione restano non definiti.
 
 ### Accordo per coppia di annotatori
 
@@ -654,43 +640,33 @@ conservano le frequenze empiriche `p0`, `p1`, `p2`, esportate in `item_consensus
 La loro rilevanza attesa è `p1 + 2*p2`: coincide esattamente con la media dei voti.
 Quindi, con gain lineare, media e soft label danno gli stessi score e nDCG.
 
-Per studiare l'effetto della distribuzione si aggiunge il gain esponenziale:
+Si usa solo il **gain lineare nativo di scikit-learn**, senza trasformare i voti:
+`ndcg_score(y_true, y_score, k=3)`. `y_true` contiene media, mediana o valore atteso
+delle soft label degli item del pool. Non viene calcolata la media degli nDCG
+dei singoli annotatori. Il denominatore è comune alle quattro pipeline entro
+ogni query e variante. Media e soft label sono due rappresentazioni degli stessi
+score attesi e non due misure indipendenti in questo confronto.
 
-- media: `g = 2^mean − 1`;
-- mediana: `g = 2^median − 1`;
-- soft label: `g = E[2^Y − 1] = p1 + 3*p2`.
+{markdown_table(sensitivity, ['aggregation', 'pipeline_id', 'mean_relevance', 'rank_ndcg', 'ndcg_pool_at3'])}
 
-È una scelta esplicita di utilità per questa analisi: `E[g(Y)]` non coincide con
-`g(E[Y])`. Il gain esponenziale atteso può favorire item polarizzati a parità di media;
-non è automaticamente una stima più corretta della rilevanza. I gain sono riscalati
-con il fattore 2/3 su 0–2 (nDCG è invariato); restano utilità derivate, distinte
-dai voti umani. Lo score umano riportato per soft label è sempre `E[Y]` su 0–2.
+**Convenzione scikit-learn e supporto comune.** Con la mediana, l'etichetta 3.3
+ha ideale tutto zero. `sklearn.metrics.ndcg_score` restituisce **0** in questo caso;
+si adotta direttamente la convenzione della libreria, al posto del precedente n.d.
+Tutte le aggregazioni includono quindi le stesse
+**{int(aggregation_matched.n_queries.iloc[0])} query**, inclusa la 3.3:
 
-Per ciascuna variante nDCG divide DCG dei gain per l'ideale ottenuto ordinando
-gli stessi gain nel pool. È **nDCG dei gain attesi**, non la media degli nDCG
-dei singoli annotatori né un'aspettativa del rapporto su possibili etichette.
-Il denominatore è comune alle quattro pipeline entro ogni query e variante.
-
-{markdown_table(sensitivity, ['aggregation', 'pipeline_id', 'mean_relevance', 'rank_ndcg', 'ndcg_pool_at3', 'rank_ndcg_exponential', 'ndcg_pool_at3_exponential'])}
-
-**Query valide e confronto a parità di supporto.** Con la mediana, l'etichetta 3.3
-ha ideale tutto zero: il suo nDCG non è definito. Le medie disponibili sopra usano
-11 query per media/soft e 10 per mediana; non sono un confronto sullo stesso supporto.
-Il confronto di nDCG fra aggregazioni usa quindi le
-**{int(aggregation_matched.n_queries.iloc[0])} query valide in tutte le varianti**:
-
-{markdown_table(aggregation_matched, ['aggregation', 'pipeline_id', 'n_queries', 'rank_ndcg', 'ndcg_pool_at3', 'rank_ndcg_exponential', 'ndcg_pool_at3_exponential'])}
+{markdown_table(aggregation_matched, ['aggregation', 'pipeline_id', 'n_queries', 'rank_ndcg', 'ndcg_pool_at3'])}
 
 Questi risultati e i loro IC sono in `aggregation_common_query_ranking.csv`.
-Nel grafico di confronto, il pannello score umano usa tutte le 11 query,
-mentre i pannelli nDCG usano le query valide comuni. Non si sostituisce con zero
-il nDCG non definito. Le tabelle per etichetta mostrano esplicitamente i mancanti.
+Nel grafico di confronto, score umano e nDCG usano ora tutte le 11 query.
+L'ideale nullo ha nDCG zero anche per la metrica condizionata all'ordine dei tre item.
+Le correlazioni non definite restano invece mancanti.
 
 `aggregation_sensitivity.csv` contiene anche IC 95%, query valide e Kendall tau-b.
 `aggregation_metrics_by_label.csv` mostra ogni aggregazione × query × pipeline.
 `aggregation_comparison.svg` e `aggregation_patterns_by_label.svg` mostrano il confronto.
 `aggregation_paired_comparisons.csv` contiene i test appaiati per score umano e
-i due nDCG: `p_holm` corregge le sei coppie entro aggregazione e metrica;
+nDCG classico: `p_holm` corregge le sei coppie entro aggregazione e metrica;
 `p_holm_all_configs` corregge l'intera famiglia di {len(aggregation_tests)} confronti.
 Con questa correzione complessiva, i confronti con p < 0,05 sono
 {int((aggregation_tests.p_holm_all_configs < .05).sum())}.
@@ -713,11 +689,19 @@ e non cambia passando da media a mediana o soft label.
   DCG@3 = somma di `relevance_i / log2(i+1)`, i=1..3.
   nDCG@3 divide DCG per l'ideale dei **migliori tre item nell'unione annotata**
   dei top-3 di tutte le configurazioni della stessa query: denominatore uguale
-  per tutti i sistemi. `ndcg_pool_at3_exponential` usa `2^relevance−1` come sensibilità.
+  per tutti i sistemi, senza applicare trasformazioni ai voti.
+- Implementazione: `sklearn.metrics.ndcg_score` (scikit-learn {sklearn.__version__}),
+  `k=3`, `ignore_ties=False`. Per query, `y_true` contiene i gain di **tutti** gli
+  item annotati, allineati con `y_score` per `question_id`. I tre item selezionati
+  ricevono score d'ordine 3, 2, 1 secondo il rank originale; gli altri ricevono 0,
+  sotto il cutoff, conservando i propri gain umani per il calcolo dell'ideale.
+  I pari merito sotto il cutoff non cambiano il top-3. DCG usa `sklearn.metrics.dcg_score`.
+  Si valuta il ranking finale estratto: eventuali score grezzi uguali nei tre item
+  sono risolti secondo il rank esportato, anziché mediando i possibili ordinamenti.
 - `ndcg_order_at3` usa come ideale solo i tre item scelti dallo stesso sistema:
   misura l'ordine condizionatamente alla selezione, può essere alto anche con
-  passaggi poco utili. Se l'ideale è tutto zero, nDCG è non definito ed escluso
-  dalla media; il numero di valori validi è sempre esportato.
+  passaggi poco utili. Se l'ideale è tutto zero, nDCG vale 0 secondo scikit-learn
+  ed entra nella media; il numero di valori validi è sempre esportato.
 - Kendall tau-b confronta **score del reranker e consenso umano nella stessa query**,
   con score alto = rilevanza alta, gestendo i pari merito. Spearman rho è esportato
   come controllo. Le correlazioni non sono definite con meno di due item o valori
@@ -747,9 +731,11 @@ e non cambia passando da media a mediana o soft label.
 ## Riferimenti
 
 - Krippendorff, *Computing Krippendorff's Alpha-Reliability*: {SOURCES['alpha']}
+- Castro (2017), Fast Krippendorff, libreria utilizzata: {SOURCES['alpha_implementation']}
 - Järvelin & Kekäläinen (2002), *Cumulated Gain-based Evaluation of IR Techniques*,
   ACM TOIS, DOI 10.1145/582415.582418: {SOURCES['ndcg']}
 - SciPy, `kendalltau`, formula tau-b e gestione dei pari merito: {SOURCES['tau']}
+- scikit-learn, implementazione nDCG: {SOURCES['ndcg_implementation']}
 - Fornaciari et al. (2021), soft label come distribuzioni dei giudizi: {SOURCES['soft_labels']}
 
 ## Riproduzione
@@ -799,16 +785,13 @@ def run_analysis(results_path=HERE / "Best-retrieval-results.csv",
                           "exact_agreement": np.nan, "cohen_kappa_quadratic": np.nan})
             continue
         pair_summary = agreement_summary(values, pair_rng, bootstrap)
-        pair_counts = np.array([np.bincount(values[:, i].astype(int), minlength=3) for i in range(2)])
-        distance = (np.arange(3)[:, None] - np.arange(3)[None, :]) ** 2 / 4
-        expected = np.outer(*pair_counts) / len(values) ** 2
-        observed_disagreement = np.mean((values[:, 0] - values[:, 1]) ** 2 / 4)
-        expected_disagreement = np.sum(expected * distance)
         pairs.append({"annotator_a": a, "annotator_b": b, "n_items": len(values),
                       **{key: pair_summary[key] for key in
                          ["alpha_ordinal", "alpha_ci_low", "alpha_ci_high", "alpha_bootstrap_valid"]},
                       "exact_agreement": np.mean(values[:, 0] == values[:, 1]),
-                      "cohen_kappa_quadratic": 1 - observed_disagreement / expected_disagreement if expected_disagreement else np.nan})
+                      "cohen_kappa_quadratic": cohen_kappa_score(values[:, 0], values[:, 1],
+                                                                  labels=[0, 1, 2], weights="quadratic")
+                      if np.unique(values).size > 1 else np.nan})
     agreement_pairs = pd.DataFrame(pairs)
     per_query, selections = evaluate(selections, items)
     common = common_pool_ordering(items, sorted(selections.pipeline_id.unique()), run_dir)
@@ -845,9 +828,22 @@ def run_analysis(results_path=HERE / "Best-retrieval-results.csv",
              "n_selections": len(selections), "n_missing_ratings": int(matrix.isna().sum().sum()),
              "n_common_items": int(common.groupby("query_id").n_common.first().sum()),
              "bootstrap": bootstrap, "seed": seed, "sources": SOURCES,
+             "agreement_implementation": "krippendorff.alpha",
+             "krippendorff_version": KRIPPENDORFF_VERSION,
+             "agreement_level": "ordinal (primary), nominal (diagnostic)",
+             "agreement_matrix_shape": "annotators x items; item matrix transposed before library call",
+             "agreement_ci": "item bootstrap; krippendorff.alpha called for each nondegenerate replicate",
+             "kappa_implementation": "sklearn.metrics.cohen_kappa_score(weights=quadratic)",
+             "ndcg_implementation": "sklearn.metrics.ndcg_score",
+             "dcg_implementation": "sklearn.metrics.dcg_score",
+             "scikit_learn_version": sklearn.__version__,
+             "ndcg_zero_ideal_policy": "0 (native scikit-learn convention); included in query means",
+             "ndcg_prediction_scores": "3,2,1 in original top-3 order; 0 for other judged pool items",
              "pairwise_bootstrap_seed_sequence": [seed, 1],
              "aggregation_bootstrap_seed_sequence": [seed, 2],
-             "soft_label_definition": "Empirical vote distribution; linear E[Y]; exponential E[2^Y-1]",
+             "soft_label_definition": "Empirical vote distribution; expected relevance E[Y] equals mean",
+             "ndcg_gain": "native linear relevance; no transformations",
+             "ndcg_target": "final extracted top-3 ranking; raw-score ties resolved by exported ranks",
              "annotators_skipped_in_individual_ranking": [a for a in matrix if matrix[a].isna().any()],
              "inputs_sha256": {str(p.relative_to(ROOT) if p.is_relative_to(ROOT) else p): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}}
     out_dir.mkdir(parents=True, exist_ok=True)

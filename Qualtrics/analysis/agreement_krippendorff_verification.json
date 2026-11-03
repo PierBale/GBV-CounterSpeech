@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "implementation": "krippendorff.alpha",
+  "version": "0.8.2",
+  "reliability_data_orientation": "annotators x items",
+  "measurement": "ordinal (primary), nominal (diagnostic)",
+  "unique_items": 101,
+  "n_annotators": 3,
+  "direct_point_estimate_checks": 27,
+  "all_agreement_estimates_and_bootstrap_intervals_unchanged": true,
+  "model_rankings_unchanged": true,
+  "missing_data": "NaN; items with fewer than two ratings excluded from alpha",
+  "degenerate_samples": "NaN when no pairable items or no marginal variation"
+}

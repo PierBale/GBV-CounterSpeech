@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "implementation": "sklearn.metrics.ndcg_score (direct calls)",
+  "sklearn_version": "1.7.2",
+  "gain": "native linear, no transformations",
+  "independent_query_checks": 132,
+  "observed_direct_sklearn_calls": 264,
+  "existing_linear_results_unchanged": true,
+  "mean_equals_soft_expected_relevance": true,
+  "zero_ideal_policy": "native sklearn 0, included in query means",
+  "n_queries": 11
+}

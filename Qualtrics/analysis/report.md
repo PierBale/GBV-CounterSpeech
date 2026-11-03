@@ -24,6 +24,12 @@ Accordo esatto tra coppie di annotatori: 48.5%;
 accordo unanime: 28.7%;
 disaccordi estremi 0 contro 2: 19.1%.
 Non vengono duplicate le annotazioni dei passaggi condivisi.
+Il calcolo usa `import krippendorff` e `krippendorff.alpha` (versione 0.8.2),
+con `level_of_measurement="ordinal"`; il controllo nominale usa `"nominal"`.
+La matrice viene trasposta nel formato richiesto dalla libreria: annotatori × item.
+Ogni replica bootstrap richiama la stessa funzione della libreria; la versione
+installata non espone una funzione per gli intervalli, quindi il ricampionamento
+degli item è gestito dallo script. Campioni senza variazione restano non definiti.
 
 ### Accordo per coppia di annotatori
 
@@ -53,7 +59,7 @@ non la precisione calcolata su una soglia del consenso.
 | 1 | 1 | bge-m3__bge-reranker-v2-m3 | 1.141 | 0.759 | 0.942 | 0.018 | 0.266 |
 | 2 | 2 | qwen3-embedding-8b__qwen3-reranker-8b | 1.071 | 0.677 | 0.919 | 0.164 | 0.074 |
 | 3 | 3 | bge-m3__qwen3-reranker-8b | 1.000 | 0.616 | 0.916 | 0.331 | 0.059 |
-| 4 | 4 | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 0.603 | 0.904 | 0.037 | 0.266 |
+| 4 | 4 | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 0.603 | 0.822 | 0.037 | 0.266 |
 
 Gli intervalli delle metriche e il numero di query valide sono in `model_ranking.csv`.
 I confronti appaiati sono in `paired_comparisons.csv`: delta A−B, IC 95%, test
@@ -105,70 +111,60 @@ conservano le frequenze empiriche `p0`, `p1`, `p2`, esportate in `item_consensus
 La loro rilevanza attesa è `p1 + 2*p2`: coincide esattamente con la media dei voti.
 Quindi, con gain lineare, media e soft label danno gli stessi score e nDCG.
 
-Per studiare l'effetto della distribuzione si aggiunge il gain esponenziale:
+Si usa solo il **gain lineare nativo di scikit-learn**, senza trasformare i voti:
+`ndcg_score(y_true, y_score, k=3)`. `y_true` contiene media, mediana o valore atteso
+delle soft label degli item del pool. Non viene calcolata la media degli nDCG
+dei singoli annotatori. Il denominatore è comune alle quattro pipeline entro
+ogni query e variante. Media e soft label sono due rappresentazioni degli stessi
+score attesi e non due misure indipendenti in questo confronto.
 
-- media: `g = 2^mean − 1`;
-- mediana: `g = 2^median − 1`;
-- soft label: `g = E[2^Y − 1] = p1 + 3*p2`.
+| aggregation | pipeline_id | mean_relevance | rank_ndcg | ndcg_pool_at3 |
+| --- | --- | --- | --- | --- |
+| mean | bge-m3__bge-reranker-v2-m3 | 1.141 | 1 | 0.759 |
+| mean | qwen3-embedding-8b__qwen3-reranker-8b | 1.071 | 2 | 0.677 |
+| mean | bge-m3__qwen3-reranker-8b | 1.000 | 3 | 0.616 |
+| mean | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 4 | 0.603 |
+| median | bge-m3__bge-reranker-v2-m3 | 1.212 | 1 | 0.679 |
+| median | qwen3-embedding-8b__qwen3-reranker-8b | 1.061 | 2 | 0.610 |
+| median | qwen3-embedding-8b__bge-reranker-v2-m3 | 1.061 | 3 | 0.578 |
+| median | bge-m3__qwen3-reranker-8b | 0.939 | 4 | 0.510 |
+| soft | bge-m3__bge-reranker-v2-m3 | 1.141 | 1 | 0.759 |
+| soft | qwen3-embedding-8b__qwen3-reranker-8b | 1.071 | 2 | 0.677 |
+| soft | bge-m3__qwen3-reranker-8b | 1.000 | 3 | 0.616 |
+| soft | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 4 | 0.603 |
 
-È una scelta esplicita di utilità per questa analisi: `E[g(Y)]` non coincide con
-`g(E[Y])`. Il gain esponenziale atteso può favorire item polarizzati a parità di media;
-non è automaticamente una stima più corretta della rilevanza. I gain sono riscalati
-con il fattore 2/3 su 0–2 (nDCG è invariato); restano utilità derivate, distinte
-dai voti umani. Lo score umano riportato per soft label è sempre `E[Y]` su 0–2.
+**Convenzione scikit-learn e supporto comune.** Con la mediana, l'etichetta 3.3
+ha ideale tutto zero. `sklearn.metrics.ndcg_score` restituisce **0** in questo caso;
+si adotta direttamente la convenzione della libreria, al posto del precedente n.d.
+Tutte le aggregazioni includono quindi le stesse
+**11 query**, inclusa la 3.3:
 
-Per ciascuna variante nDCG divide DCG dei gain per l'ideale ottenuto ordinando
-gli stessi gain nel pool. È **nDCG dei gain attesi**, non la media degli nDCG
-dei singoli annotatori né un'aspettativa del rapporto su possibili etichette.
-Il denominatore è comune alle quattro pipeline entro ogni query e variante.
-
-| aggregation | pipeline_id | mean_relevance | rank_ndcg | ndcg_pool_at3 | rank_ndcg_exponential | ndcg_pool_at3_exponential |
-| --- | --- | --- | --- | --- | --- | --- |
-| mean | bge-m3__bge-reranker-v2-m3 | 1.141 | 1 | 0.759 | 1 | 0.701 |
-| mean | qwen3-embedding-8b__qwen3-reranker-8b | 1.071 | 2 | 0.677 | 2 | 0.621 |
-| mean | bge-m3__qwen3-reranker-8b | 1.000 | 3 | 0.616 | 3 | 0.548 |
-| mean | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 4 | 0.603 | 4 | 0.543 |
-| median | bge-m3__bge-reranker-v2-m3 | 1.212 | 1 | 0.747 | 1 | 0.721 |
-| median | qwen3-embedding-8b__qwen3-reranker-8b | 1.061 | 2 | 0.672 | 2 | 0.647 |
-| median | qwen3-embedding-8b__bge-reranker-v2-m3 | 1.061 | 3 | 0.636 | 3 | 0.600 |
-| median | bge-m3__qwen3-reranker-8b | 0.939 | 4 | 0.561 | 4 | 0.507 |
-| soft | bge-m3__bge-reranker-v2-m3 | 1.141 | 1 | 0.759 | 1 | 0.740 |
-| soft | qwen3-embedding-8b__qwen3-reranker-8b | 1.071 | 2 | 0.677 | 2 | 0.659 |
-| soft | bge-m3__qwen3-reranker-8b | 1.000 | 3 | 0.616 | 3 | 0.589 |
-| soft | qwen3-embedding-8b__bge-reranker-v2-m3 | 0.990 | 4 | 0.603 | 4 | 0.572 |
-
-**Query valide e confronto a parità di supporto.** Con la mediana, l'etichetta 3.3
-ha ideale tutto zero: il suo nDCG non è definito. Le medie disponibili sopra usano
-11 query per media/soft e 10 per mediana; non sono un confronto sullo stesso supporto.
-Il confronto di nDCG fra aggregazioni usa quindi le
-**10 query valide in tutte le varianti**:
-
-| aggregation | pipeline_id | n_queries | rank_ndcg | ndcg_pool_at3 | rank_ndcg_exponential | ndcg_pool_at3_exponential |
-| --- | --- | --- | --- | --- | --- | --- |
-| mean | bge-m3__bge-reranker-v2-m3 | 10 | 1 | 0.765 | 1 | 0.701 |
-| mean | qwen3-embedding-8b__qwen3-reranker-8b | 10 | 2 | 0.721 | 2 | 0.660 |
-| mean | qwen3-embedding-8b__bge-reranker-v2-m3 | 10 | 3 | 0.663 | 3 | 0.598 |
-| mean | bge-m3__qwen3-reranker-8b | 10 | 4 | 0.631 | 4 | 0.556 |
-| median | bge-m3__bge-reranker-v2-m3 | 10 | 1 | 0.747 | 1 | 0.721 |
-| median | qwen3-embedding-8b__qwen3-reranker-8b | 10 | 2 | 0.672 | 2 | 0.647 |
-| median | qwen3-embedding-8b__bge-reranker-v2-m3 | 10 | 3 | 0.636 | 3 | 0.600 |
-| median | bge-m3__qwen3-reranker-8b | 10 | 4 | 0.561 | 4 | 0.507 |
-| soft | bge-m3__bge-reranker-v2-m3 | 10 | 1 | 0.765 | 1 | 0.744 |
-| soft | qwen3-embedding-8b__qwen3-reranker-8b | 10 | 2 | 0.721 | 2 | 0.701 |
-| soft | qwen3-embedding-8b__bge-reranker-v2-m3 | 10 | 3 | 0.663 | 3 | 0.630 |
-| soft | bge-m3__qwen3-reranker-8b | 10 | 4 | 0.631 | 4 | 0.601 |
+| aggregation | pipeline_id | n_queries | rank_ndcg | ndcg_pool_at3 |
+| --- | --- | --- | --- | --- |
+| mean | bge-m3__bge-reranker-v2-m3 | 11 | 1 | 0.759 |
+| mean | qwen3-embedding-8b__qwen3-reranker-8b | 11 | 2 | 0.677 |
+| mean | bge-m3__qwen3-reranker-8b | 11 | 3 | 0.616 |
+| mean | qwen3-embedding-8b__bge-reranker-v2-m3 | 11 | 4 | 0.603 |
+| median | bge-m3__bge-reranker-v2-m3 | 11 | 1 | 0.679 |
+| median | qwen3-embedding-8b__qwen3-reranker-8b | 11 | 2 | 0.610 |
+| median | qwen3-embedding-8b__bge-reranker-v2-m3 | 11 | 3 | 0.578 |
+| median | bge-m3__qwen3-reranker-8b | 11 | 4 | 0.510 |
+| soft | bge-m3__bge-reranker-v2-m3 | 11 | 1 | 0.759 |
+| soft | qwen3-embedding-8b__qwen3-reranker-8b | 11 | 2 | 0.677 |
+| soft | bge-m3__qwen3-reranker-8b | 11 | 3 | 0.616 |
+| soft | qwen3-embedding-8b__bge-reranker-v2-m3 | 11 | 4 | 0.603 |
 
 Questi risultati e i loro IC sono in `aggregation_common_query_ranking.csv`.
-Nel grafico di confronto, il pannello score umano usa tutte le 11 query,
-mentre i pannelli nDCG usano le query valide comuni. Non si sostituisce con zero
-il nDCG non definito. Le tabelle per etichetta mostrano esplicitamente i mancanti.
+Nel grafico di confronto, score umano e nDCG usano ora tutte le 11 query.
+L'ideale nullo ha nDCG zero anche per la metrica condizionata all'ordine dei tre item.
+Le correlazioni non definite restano invece mancanti.
 
 `aggregation_sensitivity.csv` contiene anche IC 95%, query valide e Kendall tau-b.
 `aggregation_metrics_by_label.csv` mostra ogni aggregazione × query × pipeline.
 `aggregation_comparison.svg` e `aggregation_patterns_by_label.svg` mostrano il confronto.
 `aggregation_paired_comparisons.csv` contiene i test appaiati per score umano e
-i due nDCG: `p_holm` corregge le sei coppie entro aggregazione e metrica;
-`p_holm_all_configs` corregge l'intera famiglia di 54 confronti.
+nDCG classico: `p_holm` corregge le sei coppie entro aggregazione e metrica;
+`p_holm_all_configs` corregge l'intera famiglia di 36 confronti.
 Con questa correzione complessiva, i confronti con p < 0,05 sono
 0.
 
@@ -190,11 +186,19 @@ e non cambia passando da media a mediana o soft label.
   DCG@3 = somma di `relevance_i / log2(i+1)`, i=1..3.
   nDCG@3 divide DCG per l'ideale dei **migliori tre item nell'unione annotata**
   dei top-3 di tutte le configurazioni della stessa query: denominatore uguale
-  per tutti i sistemi. `ndcg_pool_at3_exponential` usa `2^relevance−1` come sensibilità.
+  per tutti i sistemi, senza applicare trasformazioni ai voti.
+- Implementazione: `sklearn.metrics.ndcg_score` (scikit-learn 1.7.2),
+  `k=3`, `ignore_ties=False`. Per query, `y_true` contiene i gain di **tutti** gli
+  item annotati, allineati con `y_score` per `question_id`. I tre item selezionati
+  ricevono score d'ordine 3, 2, 1 secondo il rank originale; gli altri ricevono 0,
+  sotto il cutoff, conservando i propri gain umani per il calcolo dell'ideale.
+  I pari merito sotto il cutoff non cambiano il top-3. DCG usa `sklearn.metrics.dcg_score`.
+  Si valuta il ranking finale estratto: eventuali score grezzi uguali nei tre item
+  sono risolti secondo il rank esportato, anziché mediando i possibili ordinamenti.
 - `ndcg_order_at3` usa come ideale solo i tre item scelti dallo stesso sistema:
   misura l'ordine condizionatamente alla selezione, può essere alto anche con
-  passaggi poco utili. Se l'ideale è tutto zero, nDCG è non definito ed escluso
-  dalla media; il numero di valori validi è sempre esportato.
+  passaggi poco utili. Se l'ideale è tutto zero, nDCG vale 0 secondo scikit-learn
+  ed entra nella media; il numero di valori validi è sempre esportato.
 - Kendall tau-b confronta **score del reranker e consenso umano nella stessa query**,
   con score alto = rilevanza alta, gestendo i pari merito. Spearman rho è esportato
   come controllo. Le correlazioni non sono definite con meno di due item o valori
@@ -224,9 +228,11 @@ e non cambia passando da media a mediana o soft label.
 ## Riferimenti
 
 - Krippendorff, *Computing Krippendorff's Alpha-Reliability*: https://www.asc.upenn.edu/sites/default/files/2021-03/Computing%20Krippendorff%27s%20Alpha-Reliability.pdf
+- Castro (2017), Fast Krippendorff, libreria utilizzata: https://github.com/pln-fing-udelar/fast-krippendorff
 - Järvelin & Kekäläinen (2002), *Cumulated Gain-based Evaluation of IR Techniques*,
   ACM TOIS, DOI 10.1145/582415.582418: https://researchportal.tuni.fi/en/publications/cumulated-gain-based-evaluation-of-ir-techniques/
 - SciPy, `kendalltau`, formula tau-b e gestione dei pari merito: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html
+- scikit-learn, implementazione nDCG: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html
 - Fornaciari et al. (2021), soft label come distribuzioni dei giudizi: https://aclanthology.org/2021.naacl-main.204/
 
 ## Riproduzione

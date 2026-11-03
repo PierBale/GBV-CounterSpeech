@@ -31,16 +31,18 @@ I risultati sono salvati in `analysis/`:
 - `paired_comparisons.csv`: confronti appaiati e correzione di Holm per metrica.
 - `aggregation_sensitivity.csv`, `annotator_model_ranking.csv`: stabilità rispetto
   a media, mediana, soft label e ai singoli annotatori. La prima tabella include
-  nDCG lineare/esponenziale, rank, IC 95% e correlazioni di ordinamento.
+  nDCG@3 classico lineare, rank, IC 95% e correlazioni di ordinamento.
 - `aggregation_metrics_by_label.csv`: tutte le tre aggregazioni per query e pipeline.
 - `aggregation_common_query_ranking.csv`: confronto nDCG sulle stesse query valide
-  per tutte le aggregazioni. La mediana rende non definito nDCG per la 3.3:
-  questo confronto usa 10 query, gli score umani medi ne usano sempre 11.
+  per tutte le aggregazioni. Seguendo scikit-learn, l'ideale nullo della 3.3 con
+  mediana ha nDCG 0: tutte le 11 query entrano ora in tutte le aggregazioni.
 - `aggregation_paired_comparisons.csv`: test tra pipeline per ciascuna aggregazione,
   con Holm per aggregazione/metrica e anche sull'intera famiglia dei confronti.
 - `annotations_long.csv`, `item_consensus.csv`, `pipeline_selections.csv`:
   dati analitici con attribuzione dei passaggi condivisi a ogni configurazione.
 - `annotators.csv`, `analysis_audit.json`: filtri sulle risposte e hash degli input.
+- `ndcg_sklearn_verification.json`: verifica delle chiamate dirette a scikit-learn
+  su tutte le query e conferma che i risultati lineari rimangono invariati.
 - Cinque grafici SVG vettoriali: ranking, pattern per etichetta, accordo per etichetta,
   confronto tra aggregazioni e pattern per etichetta delle tre aggregazioni.
 
@@ -49,19 +51,35 @@ email o ID originali delle risposte. Nessun input viene modificato.
 
 La metrica principale è nDCG@3 con gain lineare, normalizzato sullo stesso pool
 annotato per query; la rilevanza media mostra la qualità senza considerare il rank.
+Il calcolo usa `sklearn.metrics.ndcg_score`, `k=3`, `ignore_ties=False`; DCG usa
+`sklearn.metrics.dcg_score`. Versione della libreria e impostazioni sono nell'audit.
+Per query si mantengono tutti gli item annotati con i loro gain; i punteggi d'ordine
+3, 2, 1 identificano i tre item selezionati nel rank originale e gli altri item
+hanno punteggio d'ordine 0, sotto il cutoff. Il match è per `question_id`.
+Scikit-learn assegna nDCG 0 quando l'ideale è tutto zero: tale query viene inclusa
+nella media, al posto della precedente convenzione n.d./esclusione.
+Riferimento: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html
 Kendall tau-b serve a studiare l'ordine degli score e gestisce i pari merito.
 Il confronto su item comuni usa l'intersezione dei candidati annotati presenti
 in tutti i file `reranking_full`: non considera come irrilevanti gli item mancanti.
 Le correlazioni su terne proprie sono esportate separatamente e risentono
 della differente selezione dei candidati.
 
-Le soft label conservano `p_relevance_0/1/2` in `item_consensus.csv`. Con gain
-lineare, `E[Y] = p1 + 2*p2` coincide con la media aritmetica. Con gain esponenziale
-si confronta `2^mean−1`, `2^median−1` ed `E[2^Y−1] = p1 + 3*p2` per le soft label.
-Gli ultimi sono gain derivati, riscalati su 0–2; lo score umano delle soft label
-è sempre il valore atteso dei voti su 0–2. Il confronto soft esponenziale è
-nDCG dei gain attesi, non la media degli nDCG dei tre annotatori.
+Le soft label conservano `p_relevance_0/1/2` in `item_consensus.csv`.
+`E[Y] = p1 + 2*p2` coincide con la media aritmetica: con nDCG lineare nativo
+di scikit-learn, media e soft label producono gli stessi risultati.
+Tutti gli score umani restano su 0–2 e non vengono trasformati.
 L'agreement di Krippendorff usa sempre i voti originali e non cambia tra aggregazioni.
+
+Per nDCG si valuta il ranking finale estratto: eventuali score grezzi uguali
+sono risolti dai rank salvati. Kendall e Spearman usano invece gli score grezzi
+con i loro pari merito. Alpha globale, per etichetta e per coppia usano
+`import krippendorff` e `krippendorff.alpha`, con livello ordinale (principale)
+o nominale (diagnostica). La matrice viene trasposta in annotatori × item;
+i mancanti restano NaN. L'adattatore locale gestisce solo formato e campioni
+degeneri, senza implementare la formula. Ogni replica bootstrap richiama la
+libreria. La versione installata non fornisce gli IC, quindi il ricampionamento
+degli item è gestito dallo script. Kappa, nDCG e DCG usano scikit-learn.
 
 Con una sola query per etichetta e tre annotatori, i pattern per etichetta sono
 descrittivi. Gli intervalli condizionano sugli annotatori osservati e il ranking

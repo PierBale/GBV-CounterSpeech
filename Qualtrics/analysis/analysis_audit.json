@@ -11,10 +11,23 @@
   "seed": 20261103,
   "sources": {
     "alpha": "https://www.asc.upenn.edu/sites/default/files/2021-03/Computing%20Krippendorff%27s%20Alpha-Reliability.pdf",
+    "alpha_implementation": "https://github.com/pln-fing-udelar/fast-krippendorff",
     "ndcg": "https://researchportal.tuni.fi/en/publications/cumulated-gain-based-evaluation-of-ir-techniques/",
+    "ndcg_implementation": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html",
     "tau": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html",
     "soft_labels": "https://aclanthology.org/2021.naacl-main.204/"
   },
+  "agreement_implementation": "krippendorff.alpha",
+  "krippendorff_version": "0.8.2",
+  "agreement_level": "ordinal (primary), nominal (diagnostic)",
+  "agreement_matrix_shape": "annotators x items; item matrix transposed before library call",
+  "agreement_ci": "item bootstrap; krippendorff.alpha called for each nondegenerate replicate",
+  "kappa_implementation": "sklearn.metrics.cohen_kappa_score(weights=quadratic)",
+  "ndcg_implementation": "sklearn.metrics.ndcg_score",
+  "dcg_implementation": "sklearn.metrics.dcg_score",
+  "scikit_learn_version": "1.7.2",
+  "ndcg_zero_ideal_policy": "0 (native scikit-learn convention); included in query means",
+  "ndcg_prediction_scores": "3,2,1 in original top-3 order; 0 for other judged pool items",
   "pairwise_bootstrap_seed_sequence": [
     20261103,
     1
@@ -23,7 +36,9 @@
     20261103,
     2
   ],
-  "soft_label_definition": "Empirical vote distribution; linear E[Y]; exponential E[2^Y-1]",
+  "soft_label_definition": "Empirical vote distribution; expected relevance E[Y] equals mean",
+  "ndcg_gain": "native linear relevance; no transformations",
+  "ndcg_target": "final extracted top-3 ranking; raw-score ties resolved by exported ranks",
   "annotators_skipped_in_individual_ranking": [],
   "inputs_sha256": {
     "Qualtrics\\Best-retrieval-results.csv": "3599844a46d675441a58a81a449d9c1e73672ce3fc65a791cf3a146d3246157f",
