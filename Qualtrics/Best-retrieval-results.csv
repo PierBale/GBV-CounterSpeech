@@ -1,0 +1,854 @@
+StartDate,EndDate,Status,IPAddress,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,RecipientLastName,RecipientFirstName,RecipientEmail,ExternalReference,LocationLatitude,LocationLongitude,DistributionChannel,UserLanguage,Ultimo ID dell'elemento del flusso visualizzato,Ultimi ID della domanda visualizzati,Q1-bge-m3__bge-reranker-v2-m3-chunk_df2288a86f3f8a0a56e4e0aa,Q2-bge-m3__qwen3-reranker-8b-chunk_1713bcff2114a70bef1ace47,Q3-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_00044e8dca3c44a18dde8020,Q4-shared-chunk_2dd53f36e40e471ed8a452b1,Q5-bge-m3__bge-reranker-v2-m3-chunk_b9ee7ca290e2a3e97639c489,Q6-bge-m3__qwen3-reranker-8b-chunk_1b382b40c0a3399f4018cd28,Q7-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_74cb83e2de5fc8be38dfc084,Q8-qwen3-embedding-8b__qwen3-reranker-8b-chunk_4af584fa62b4a5fd2ada61f3,Q9-bge-m3__bge-reranker-v2-m3-chunk_8524235361e45ec29078d0fa,Q10-bge-m3__qwen3-reranker-8b-chunk_80f9ab69192e1ba5389d6819,Q12-qwen3-embedding-8b__qwen3-reranker-8b-chunk_1a9fc296cf26ccd722debde3,Q13-all-chunk_bee41b5250c2db19ccdee397,Q16-qwen3-embedding-8b__qwen3-reranker-8b-chunk_3eb6132f1397333bc438efac,Q17-shared-chunk_9736e15ea4d8d2bba844c7f3,Q18-bge-m3__qwen3-reranker-8b-chunk_80f9ab69192e1ba5389d6819,Q20-qwen3-embedding-8b__qwen3-reranker-8b-chunk_6f700c62a62eb60c88ae692a,Q21-bge-m3__bge-reranker-v2-m3-chunk_2127cecc05d1ff10c4edfe90,Q22-bge-m3__qwen3-reranker-8b-chunk_3a434954926dd52770500d50,Q23-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_df718c68fe619709a07b7aa4,Q25-bge-m3__bge-reranker-v2-m3-chunk_8524235361e45ec29078d0fa,Q26-shared-chunk_3a434954926dd52770500d50,Q27-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_b840ef690b545e4fbba0b9e4,Q29-bge-m3__bge-reranker-v2-m3-chunk_a271bbf8c38b10d6edfe717e,Q30-shared-chunk_c48a8d140804fd15af14c651,Q31-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_1cc058dfe70b48e3309c5eec,Q33-bge-m3__bge-reranker-v2-m3-chunk_b38bb9b365869b5e28b16150,Q34-bge-m3__qwen3-reranker-8b-chunk_bee41b5250c2db19ccdee397,Q35-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_937db75b6e9f6766c4228c08,Q36-qwen3-embedding-8b__qwen3-reranker-8b-chunk_0c618eaf277207a2eb187e86,Q37-all-chunk_8eff3ec4f0b38dd6e80f2a48,Q40-all-chunk_1713bcff2114a70bef1ace47,Q41-bge-m3__bge-reranker-v2-m3-chunk_df2288a86f3f8a0a56e4e0aa,Q44-qwen3-embedding-8b__qwen3-reranker-8b-chunk_1a9fc296cf26ccd722debde3,Q46-bge-m3__qwen3-reranker-8b-chunk_73bca342beafc707f8f16325,Q47-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_f1f38369922e35f0adf8d32f,Q49-bge-m3__bge-reranker-v2-m3-chunk_1713bcff2114a70bef1ace47,Q50-bge-m3__qwen3-reranker-8b-chunk_aba414b46b481c560c438282,Q51-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_43ecc7c609ce1d2dd7128042,Q52-qwen3-embedding-8b__qwen3-reranker-8b-chunk_0b5b73c03b83988586776c0f,Q53-bge-m3__bge-reranker-v2-m3-chunk_1b382b40c0a3399f4018cd28,Q54-bge-m3__qwen3-reranker-8b-chunk_80f9ab69192e1ba5389d6819,Q55-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_f1f38369922e35f0adf8d32f,Q56-qwen3-embedding-8b__qwen3-reranker-8b-chunk_3e2b12722e5155a33f11cbf3,Q57-bge-m3__bge-reranker-v2-m3-chunk_23932360ec17266e6cdaf717,Q58-bge-m3__qwen3-reranker-8b-chunk_c48a8d140804fd15af14c651,Q59-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_0cf708c3b3fb1ab3fc4aa998,Q60-qwen3-embedding-8b__qwen3-reranker-8b-chunk_3230dc68ec7e6aba06725a35,Q61-bge-m3__bge-reranker-v2-m3-chunk_318d4f13010c280d5f0ff127,Q62-shared-chunk_bee41b5250c2db19ccdee397,Q63-shared-chunk_1b382b40c0a3399f4018cd28,Q64-qwen3-embedding-8b__qwen3-reranker-8b-chunk_3e2b12722e5155a33f11cbf3,Q65-bge-m3__bge-reranker-v2-m3-chunk_8a0a09ff4843b07648f48eaa,Q67-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_24a4f2a69be82e6cf034cdf3,Q68-qwen3-embedding-8b__qwen3-reranker-8b-chunk_73bca342beafc707f8f16325,Q70-bge-m3__qwen3-reranker-8b-chunk_1713bcff2114a70bef1ace47,Q71-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_a38abb7c06f613bdcef4dfe7,Q73-shared-chunk_d227c6d0e96739e990ba89ba,Q74-shared-chunk_3a434954926dd52770500d50,Q76-qwen3-embedding-8b__qwen3-reranker-8b-chunk_510fc2ba7254ba96b2aa40d1,Q77-shared-chunk_18b886f8590c50910598fe58,Q81-bge-m3__bge-reranker-v2-m3-chunk_1cc058dfe70b48e3309c5eec,Q82-bge-m3__qwen3-reranker-8b-chunk_e76bd79d89d31f6cbdaf1022,Q83-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_3f116839d0ce9137f4753399,Q84-qwen3-embedding-8b__qwen3-reranker-8b-chunk_d97fea01b59a802863c71f1e,Q85-shared-chunk_1b382b40c0a3399f4018cd28,Q87-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_24a4f2a69be82e6cf034cdf3,Q88-shared-chunk_00044e8dca3c44a18dde8020,Q89-bge-m3__bge-reranker-v2-m3-chunk_318d4f13010c280d5f0ff127,Q90-shared-chunk_c48a8d140804fd15af14c651,Q93-bge-m3__bge-reranker-v2-m3-chunk_f87121001b56e34ccd7783c6,Q94-bge-m3__qwen3-reranker-8b-chunk_bee41b5250c2db19ccdee397,Q95-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_cc0de56e50ab23e527323533,Q96-qwen3-embedding-8b__qwen3-reranker-8b-chunk_337d2b6d9e407b07b42cc25c,Q97-shared-chunk_d227c6d0e96739e990ba89ba,Q98-shared-chunk_1b382b40c0a3399f4018cd28,Q100-qwen3-embedding-8b__qwen3-reranker-8b-chunk_d6af9d86dad0f4e615df4745,Q102-bge-m3__qwen3-reranker-8b-chunk_bee41b5250c2db19ccdee397,Q103-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_947d30c2933294cd036075b5,Q104-qwen3-embedding-8b__qwen3-reranker-8b-chunk_7674c4e2bd8446bb4ced8192,Q105-bge-m3__bge-reranker-v2-m3-chunk_6b8b321e30fb5ba1e52ac37a,Q106-bge-m3__qwen3-reranker-8b-chunk_318d4f13010c280d5f0ff127,Q107-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_39e6e65318552c306d01a489,Q108-qwen3-embedding-8b__qwen3-reranker-8b-chunk_df718c68fe619709a07b7aa4,Q109-all-chunk_0822266b42ae7e39859d88f5,Q113-bge-m3__bge-reranker-v2-m3-chunk_7826a653bbf8948b652276d8,Q114-bge-m3__qwen3-reranker-8b-chunk_d6af9d86dad0f4e615df4745,Q115-shared-chunk_6b9a75a3ffb90651de393af1,Q116-qwen3-embedding-8b__qwen3-reranker-8b-chunk_7674c4e2bd8446bb4ced8192,Q117-bge-m3__bge-reranker-v2-m3-chunk_a238eb9734e203c1ec935d94,Q118-bge-m3__qwen3-reranker-8b-chunk_b6d1fd2024fe15487a33c3a4,Q119-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_28ba66ba7443e2fa898cf3eb,Q121-shared-chunk_ae3c6f62fcc5231bf7f0a520,Q122-bge-m3__qwen3-reranker-8b-chunk_3a434954926dd52770500d50,Q123-qwen3-embedding-8b__bge-reranker-v2-m3-chunk_415c837a96af9fc4706c3d65,Q124-qwen3-embedding-8b__qwen3-reranker-8b-chunk_a563c4caffe51c69a0574eaf,Q125-shared-chunk_6b8b321e30fb5ba1e52ac37a,Q126-bge-m3__qwen3-reranker-8b-chunk_c8cd55406cc196d341ce8bc5,Q128-qwen3-embedding-8b__qwen3-reranker-8b-chunk_200bfa6e26190fabf44a651d,Q129-bge-m3__bge-reranker-v2-m3-chunk_15bffa6e81b41ba082eb90a2,Q130-bge-m3__qwen3-reranker-8b-chunk_cc0de56e50ab23e527323533,Q132-qwen3-embedding-8b__qwen3-reranker-8b-chunk_337d2b6d9e407b07b42cc25c
+Data di inizio,Data di fine,Tipo risposta,Indirizzo IP,Avanzamento,Durata (in secondi),Terminato,Data registrata,ID di risposta,Cognome del destinatario,Nome del destinatario,E-mail del destinatario,Riferimento a dati esterni,Latitudine posizione,Longitudine posizione,Canale di distribuzione,Lingua dell'utente,Ultimo ID dell'elemento del flusso visualizzato,Ultimi ID della domanda visualizzati,"EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: 2. Online experiences of gender-based harassment
+
+PERCENTAGE OF GIRLS AND YOUNG WOMEN FACING DIFFERENT TYPES OF HARASSMENT
+
+
+  
+    
+        Type of Harassment
+        Percentage
+    
+  
+  
+    
+        Racist comments
+29
+    
+
+        Stalking
+32
+    
+
+        Body shaming
+39
+    
+
+        Threats of physical violence
+21
+    
+
+        Abusive and insulting language
+59
+    
+
+        Threats of sexual violence
+39
+    
+
+        Purposeful embarrassment
+41
+    
+
+        Sexual harassment
+37
+    
+
+        Anti LGBTIQ+ Comments
+26","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+Gender trolling attacks are precipitated by women asserting their opinions online;
+
+They feature graphic sexualised and gender-based insults;
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: REFERENCES
+
+FRA. (2014). Violence against women: an EU-wide survey – Main results. Luxembourg: Publications Office of the European Union, p. 104.
+
+FRA. (2017). Challenges to women’s human rights in the EU: Gender discrimination, sexist hate speech and gender-based violence against women and girls. FRA.
+
+Fox, J., Cruz, C., & Lee., J. Y. (2015). Perpetuating online sexism offline: Anonymity, interactivity, and the effects of sexist hashtags on social media. Computers in Human Behavior. 52.","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: Non-consensual Distribution of Intimate Images > Threats
+
+Death threats and rape threats have become common and even normalized in online dialogue (Van der Wilk 2018). Research by Safety Net Canada (2013) found that threats and intimidation were the most commonly reported forms of TFGBV against victim services workers in Canada. Women journalists (Barton and Storm 2014; Jane 2018), academics (Veletsianos et al. 2018), politicians and human rights defenders (Amnesty International 2018) face rape threats and death threats online, particularly if they are speaking or writing about equality issues or typically male-dominated topics. Some have received these threats over multiple years and many receive them on a
+daily basis. Research commissioned by Amnesty International (ibid.) demonstrated that 41 percent of women who had been harassed on Twitter felt that their physical safety was threatened on at least one occasion of online harassment. The report provided graphic examples of violent rape and death threats sent to women in the study.","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: Glossary
+
+This backlash increasingly manifests through gender-neutral policy frameworks that have moved beyond fringe far-right politics into mainstream discourse, obscuring the gendered nature of violence and presenting gender equality measures as either unnecessary expenditure or potentially harmful to men and society.
+
+Gender-based violence
+
+Gender based violence against women means violence that is directed against a woman because she is a woman or that affects women disproportionately.3 Gender-based violence is understood to be a form of discrimination and a violation of the fundamental freedoms of the victim and includes violence in close relationships, sexual violence (including rape, sexual assault and harassment), trafficking in human beings, slavery, and different forms of harmful practices, such as forced marriages, female genital mutilation and so-called ‘honour crimes’. Women victims of gender-based violence and their children often require special support and protection.4","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: Endnotes
+
+52 IPU. “Sexism, Harassment and Violence against Women Parliamentarians.” Issues Brief. October 2016, 3. http://archive.ipu.org/pdf/publications/issuesbrief-e.pdf.
+
+53 Organization for Security and Co-operation in Europe (OSCE). “Violence against Women Journalists and Politicians: A Growing Threat. The Annual Report of the OSCE PA Special Representative on Gender Issues, 2021,” 18. https://www.oscepa.org/en/documents/special-representatives/gender-issues/report-17/4247-2021-report-by-the-special-representative-on-gender-issues-violence-against-women-journalists-and-politicians-a-growing-crisis/file.","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: Digital Threats: The Landscape of TFGBV > Targeted Violence against Influential Women
+
+In member states of the African Union, 42 percent of women politicians have received online death threats, rape threats, or threats of beatings and abductions.54
+
+In Southeast Asia, 50 percent of women politicians have faced online abuse.55
+
+For women who are not part of the ethnic majority in a given country, the abuse intensifies. In the United Kingdom, a study found that nearly half of all abuse against female members of Parliament (MPs) on X (formerly Twitter) targeted Diane Abbot, the first black woman elected to the British Parliament, and even when she was removed from the sample, women of color received 30 percent more abuse than white women.56","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: Scope of the General Recommendation
+
+11. Whilst both men and women may experience incidents of inter-personal violence and abuse, women are considerably more likely to experience repeated and severe forms of abuse, including sexual violence. They are also more likely to have experienced sustained physical, psychological or emotional abuse, or violence which results in injury or death, including by an intimate partner.
+
+12. Digital forms of gender-based violence against women can be particularly pronounced for women and girls at risk of or exposed to intersecting forms of discrimination, and may be exacerbated by factors such as disability, sexual orientation, political affiliation, religion, social origin, migration status or celebrity status, among others.4 Gender-based violence against women perpetrated in the digital sphere has a serious impact on women’s and girls’ lives, including psychological and physical health, their livelihoods, their physical safety and their reputation.","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Posting and sharing violent content consist of portraying women as sexual objects or targets of violence.
+
+Use of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.
+
+Pushing women to commit suicide.
+
+Direct violence
+
+Some forms of cyber violence against women have a direct impact on their immediate physical safety:
+
+Trafficking of women using technological means such as recruitment, luring women into prostitution and sharing stolen graphical content to advertise for prostitution.
+
+Sexualised extortion, also called sextortion and identity theft resulting in physical abuse.
+
+Online grooming consists of setting up an online abusive relationship with a child, in order to bring the child into sexual abuse or child-trafficking situations. The term “grooming” is criticised by victims, as it covers the child sexual abuse dimension of the act.
+
+In Real-World Attacks is defined as cyber violence having repercussions in “real life”.
+
+19
+
+Policy Department for Citizens' Rights and Constitutional Affairs","EDOS Label1.1 threats of harm – Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.3. Women’s visibility and representation online
+
+76 Amnesty International (2018), Op. Cit
+
+77 Inter Parliamentary Union, “Sexism, harassment and violence against women parliamentarians”, Issues Brief, Oct. 2016, available at http://archive.ipu.org/pdf/publications/issuesbrief-e.pdf
+
+31
+
+Policy Department for Citizens' Rights and Constitutional Affairs
+
+Female politicians are overall targets for mob attacks and extremely violent cyber abuse. In the IPU study cited above, a Member of the European Parliament (MEP) explains that she “receive(s) emails, sometimes accompanied by pornographic images, and the message ‘get out of politics; get married instead.” Another Parliamentarian explains that she once received in four days more than 500 rape threats on Twitter. In the UK, ‘vile’ twitter attacks are broadly perceived as pushing women out of politics78.","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+31 This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: Hate Speech
+
+Social media sites and online chat fora such as 4chan and 8chan have been known to host groups who promote hatred of women (Jane 2014), including incels and MRAs (Ging 2017). In several documented cases, members of these groups have enacted violence against women in the real world. Elliot Rogers, who is hailed as a hero
+
+among incels, killed six people after releasing a manifesto online where he stated he was going to get retribution for being rejected sexually by women. Prior to the killings, Rogers posted videos about his hatred of feminists and anger toward women on various sites, including one called sluthate.com. The internet creates spaces for these types of ideas to proliferate (Baele, Brace and Coan 2019). In Canada, there have been two attacks associated with incels: the 2018 Toronto van attack, where a man claiming to be associated with incels ran over multiple people with a rented van (ibid.) and, more recently, the murder of a sex worker by a man claiming to be affiliated with incels (Cecco 2020). These men felt entitled to sex with women and wanted to harm them as retribution for their lack of sexual access to them.","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+40 Rape culture is defined as “the complex of beliefs that encourages male sexual aggression and supports violence against women. It is a society where violence is seen as sexy and sexuality as violent. In a rape culture women perceive a continuum of threatened violence that ranges from sexual remarks to sexual touching to rape itself.”, in Buchwald, E., Fletcher P.R., Roth, M. (2005), “Transforming a Rape Culture”, Milkweed Editions, Minneapolis.","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Posting and sharing violent content consist of portraying women as sexual objects or targets of violence.
+
+Use of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.
+
+Pushing women to commit suicide.
+
+Direct violence
+
+Some forms of cyber violence against women have a direct impact on their immediate physical safety:
+
+Trafficking of women using technological means such as recruitment, luring women into prostitution and sharing stolen graphical content to advertise for prostitution.
+
+Sexualised extortion, also called sextortion and identity theft resulting in physical abuse.
+
+Online grooming consists of setting up an online abusive relationship with a child, in order to bring the child into sexual abuse or child-trafficking situations. The term “grooming” is criticised by victims, as it covers the child sexual abuse dimension of the act.
+
+In Real-World Attacks is defined as cyber violence having repercussions in “real life”.
+
+19
+
+Policy Department for Citizens' Rights and Constitutional Affairs","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: Online Misogyny, Radicalization, and Violent Extremism
+
+Online antifeminist groups,
+known collectively as “the
+manosphere,” are not simply
+places where men go to speak
+poorly of women but are forums
+for the (re)production of violent
+extremism and recruitment to
+right-wing groups that advocate
+for rollbacks of women’s and
+minorities’ rights.”
+
+The language used on these forums is in and of itself enough to cause alarm. A study by the Centre for Countering Digital Hate (CCDH) found that incel (involuntary celibate) forum members post about rape once every 29 minutes and that 89 percent of these posts are supportive of it.82 Another 5 percent of posters were not morally against rape but instead found it “unimaginative” and expressed their desire to “reduce a woman to nothing.”83 Between 2021 and","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+() Both legal and statistical definitions have been taken into account.
+
+(92) Relevant type of conduct includes inciting/instigating hatred, violence or discrimination; preaching discrimination, violence or hatred; stimulating, causing, inducing or inciting acts or activities that may lead to discrimination, hatred or violence; displaying racism, homophobia, xenophobia, anti-religious prejudice; instigating the suppression of the rights and freedoms of an organisation’s members; violating her/his dignity because of the crime’s degrading or humiliating nature; creating an intimidating, hostile or offensive situation for her/him; denying or grossly trivialising crimes of genocide, war or against peace and humanity; glorifying or justifying crimes.","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).","EDOS Label1.2 incitement and encouragement of harm – Encouragement, justification, or normalization of causing harm to women or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+From research carried out in 2017 about the way British media frame cyber violence, it becomes clear how the legitimisation and normalisation of violence in media reports framed public opinion, debate and action, and implicitly victim blame(d) via “silencing strategies”39. Advice given to victims of cyber harassment to not “feed the troll” actually calls upon victims not to challenge or resist “abusive (i.e. sexist, racist or misogynist) language and attitudes”. Moreover, the authors of the study argue that the way media report on trolling is “silencing victims” by under-reporting and normalising “trolling events” such as “rape threats, death threats, and body shaming, (...) and the advice given to victims on how they should respond to online abuse”. The authors recall that rape culture40 on the internet is prevalent and “incorporates aspects of popular misogyny, and entails anti-female violent expression via the threats of rape and death (or bodily harm) directed at women online. Expressions of aggressive male sexuality are eroticised in the online sphere (...) and in the press”.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: Scope of the General Recommendation
+
+11. Whilst both men and women may experience incidents of inter-personal violence and abuse, women are considerably more likely to experience repeated and severe forms of abuse, including sexual violence. They are also more likely to have experienced sustained physical, psychological or emotional abuse, or violence which results in injury or death, including by an intimate partner.
+
+12. Digital forms of gender-based violence against women can be particularly pronounced for women and girls at risk of or exposed to intersecting forms of discrimination, and may be exacerbated by factors such as disability, sexual orientation, political affiliation, religion, social origin, migration status or celebrity status, among others.4 Gender-based violence against women perpetrated in the digital sphere has a serious impact on women’s and girls’ lives, including psychological and physical health, their livelihoods, their physical safety and their reputation.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: Gender-Based Violence
+
+In sheer numbers, women and girls remain the primary targets of gender-based violence. However, despite the focus on cis-women and girls in most research on gender-based violence, it is not only cis-women and girls who are harmed by gender-based violence. Emerging research shows that transgender, non-binary and gender-nonconforming people (Wirtz et al. 2018),1 as well as men who fall outside patriarchal norms of masculinity, such as gay men, are harmed by gender-based violence (Evens et al. 2019). These individuals are targeted due to their gender nonconformity, gender expression and gender identity (Wirtz et al. 2018). Statistics on these groups show they face significant levels of harassment, physical attacks and sexual assaults due to their gender identity and expression (James et al. 2015; Evens et al. 2019). As gender-based violence is rooted in the systemic reinforcement of gender norms and inequality, it is important to recognize how it affects these groups as well as cis-women and girls.
+
+1 For this paper, the term “transgender” will refer to people whose birth sex does not match their gender identity, including transgender, gender-nonconforming and non-binary people.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 2 Defining gender-based cyber violence > 2.1 Typology of gender-based cyber violence
+
+12 Henry, N. and Powell, A., 2016. Sexual violence in the digital age: The scope and limits of criminal law. Social & Legal Studies, 25(4), pp.397-418.
+
+50
+
+Annex I: European added value assessment on Combating gender-based Cyber violence
+
+
+
+TermExamples
+
+
+• Perpetrators are usually anonymous13
+• Often targeted against women with threats and/or fantasies of sexual violence.14
+Cyber harassment and bullying• Offending a person online with unwanted, sexually explicit messages, threats of violence, or hate speech15
+• A persistent and repeated course of conduct targeted at a specific person, designed to cause severe emotional distress and often a fear of physical harm.16
+Hate speech online• All forms of expression, which share, encourage, promote or justify race hatred, xenophobia, anti-Semitism or every other form of hatred based on intolerance including aggressive nationalism, ethnocentrism, discrimination and hostility of minorities, emigrants or persons of foreign origin.17
+• Hate speech campaigns are often efficiently organised, in which the same victim or group of victims are simultaneously targeted by multiple perpetrators.
+Flaming• Vitriolic content, denoted by explicit language and misogyny.18
+• Deliberately using heated, emotionally charged or contrarian statements to elicit a response from another online user.19
+Image-based sexual abuse/
+Non-consensual
+pornography• The sexually explicit portrayal of one or more persons that is distributed without the subject’s consent.20
+• Often committed by a victim’s former partner and posted on a specialised website or social media profile.
+• Involves posting or distributing sexually graphic images or videos.
+• Up to 90% of non-consensual pornography victims are women21
+• Contrary to its name, this need not be motivated by personal revenge. Perpetrators may be seeking sexual gratification, or want the victim to do something for them, using the images as a form of social or economic blackmail.22
+• When the victim is a minor it is considered child pornography.
+Doxing• Publishing a victim’s personal details and sensitive data online, such as home address, photographs, name and the names of family members.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > How is cyber bullying linked to offline violence and vice versa? > What is online gender-based hate speech?
+
+Online gender-based hate speech, in particular, targets women, girls and LGBTIQ+ individuals because of their gender. It often takes the form of sexualisation, objectification, body shaming or
+
+cruel remarks regarding their gender, but also their religion, ethnicity, disability or sexual orientation.
+
+Often comments target female journalists, politicians, activists and other public figures: women and girls are particularly exposed to violence if they assert their views, defend their identity or challenge traditional norms and gender roles or other human rights issues on public forums. This in itself should not be considered something to shy away from, but the reaction these women receive is so overwhelming that many fear being too outspoken online. Studies have shown that women and girls who exercise their right to freedom of expression, even on less controversial topics, often face backlash (Council of Europe Gender Equality Strategy, 2016; FRA, 2016; Inter-Parliamentary Union, 2016; FRA, 2017).","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles
+
+Compounded gender stereotypes can have a disproportionate negative impact on certain groups of women, such as women in custody, women from minority or indigenous groups, women with disabilities, women from lower caste groups or with lower economic status, migrant women, LBTI women, etc. Changing social norms so that VAWG can be eliminated is inevitably a discussion about power between women and men. It is also a wider discussion about power between different social groups. Addressing VAWG requires rooting the discussion more broadly to encompass gender norms and the intersection of multiple inequalities, to ensure that the various risk factors that perpetuate discrimination and abuse are captured for all segments of the population.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 2. Conceptualising and defining cyber violence against women and girls > 2.1. State of the art (1) > Trolling
+
+While cyber bullies are likely to have an existing relationship with victims, perpetrators of trolling are usually anonymous (CSES, 2019).
+
+Trolling ‘may function to establish an aggressive online area, rejecting new posters and discouraging the advancement of online communities’ (Bratu, 2017).
+
+Gendertrolling is a term used to refer to gender-based insults, vicious language and rape and death threats by a coordinated group of trolls to humiliate women, particularly those who assert their opinion online (Mantilla, 2013).","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+31 This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1. Societal gender stereotypes reverberate in the online world > 2.1.1. Gender inequality and the continuum of violence against women
+
+As in real life, women, and particularly those women with intersecting identities and vulnerabilities, experience on the internet a continuum of aggressions that ranges from unwanted sexual advances, sexist and/or racist (ageist/ableist/homophobic, etc.) insults, to frequent, harmful, frightening, sometimes life-threatening abuse32. The concept of the continuum of violence, first coined by Liz Kelly in 198733, allows to understand how cyber violence and hate speech online are not isolated phenomena, but merely reflect a global range of perpetrations committed against women.","EDOS Label2.1 descriptive attacks – Negative descriptive generalizations about women or gendered groups.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+Gender is only referenced explicitly as one of the grounds of hate speech in Estonia, Greece, Spain, Latvia, Lithuania, Hungary, Malta, Austria, Portugal and Slovenia. It is imperative for other Member States to acknowledge this facet of hate speech, otherwise it is impossible to collect data targeted specifically at women, girls and LGBTIQ+ individuals in those countries.
+
+Based on these reviews, the attributes that distinguish gender-based online hate speech from other forms of violence are listed below.
+
+Use of ICT to send demeaning, unwanted, cruel remarks, citing the victim’s gender and spreading hateful language targeted at women and girls","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: 2. Conceptualising and defining cyber violence against women and girls > Flaming
+
+Flaming is a form of ‘aggressive, hostile, profanity-laced’ (O’Sullivan and Flanagin, 2003) online communication, which is always characterised by ‘insults, negative affect and “typographic energy” such as capital letters and exclamation marks’ (Jane, 2015). It entails deliberately ‘swearing or using otherwise offensive language’ (Moor, Heuvelman and Verleur, 2010) to express emotionally charged or contrarian statements, usually to elicit a response from another online user (CSES, 2019).","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+Gender trolling attacks are precipitated by women asserting their opinions online;
+
+They feature graphic sexualised and gender-based insults;
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: 2. Online experiences of gender-based harassment
+
+PERCENTAGE OF GIRLS AND YOUNG WOMEN FACING DIFFERENT TYPES OF HARASSMENT
+
+
+  
+    
+        Type of Harassment
+        Percentage
+    
+  
+  
+    
+        Racist comments
+29
+    
+
+        Stalking
+32
+    
+
+        Body shaming
+39
+    
+
+        Threats of physical violence
+21
+    
+
+        Abusive and insulting language
+59
+    
+
+        Threats of sexual violence
+39
+    
+
+        Purposeful embarrassment
+41
+    
+
+        Sexual harassment
+37
+    
+
+        Anti LGBTIQ+ Comments
+26","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.3. Women’s visibility and representation online
+
+76 Amnesty International (2018), Op. Cit
+
+77 Inter Parliamentary Union, “Sexism, harassment and violence against women parliamentarians”, Issues Brief, Oct. 2016, available at http://archive.ipu.org/pdf/publications/issuesbrief-e.pdf
+
+31
+
+Policy Department for Citizens' Rights and Constitutional Affairs
+
+Female politicians are overall targets for mob attacks and extremely violent cyber abuse. In the IPU study cited above, a Member of the European Parliament (MEP) explains that she “receive(s) emails, sometimes accompanied by pornographic images, and the message ‘get out of politics; get married instead.” Another Parliamentarian explains that she once received in four days more than 500 rape threats on Twitter. In the UK, ‘vile’ twitter attacks are broadly perceived as pushing women out of politics78.","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.2. The impact of cyber violence and hate speech online against women > 3.3.1. Types of online platforms where perpetrations occur
+
+Two reports point at Twitter’s specific nature that leads to an overload of violent content aimed directly at individual women. The Demos “Misogyny on Twitter” report published in 2014 reveals for example that “of over 100,000 Tweets mentioning ‘rape’ between 26th December 2013 and 9th February
+
+95 Code of Conduct on countering illegal hate speech online (2018), “Results of the 3rd monitoring exercise”, available at http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=612086","EDOS Label2.2 aggressive and emotive attacks – Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.
+ParagraphSection: References
+
+Inter-Parliamentary Union (2016), ‘Sexism, harassment and violence against women parliamentarians’, Issues Brief, October, Geneva (https://www.ipu.org/resources/publications/issue-briefs/2016-10/sexism-harassment-and-violence-against-women-parliamentarians).
+
+Irish Department of Justice and Equality (2017), National Strategy for Women and Girls 2017–2020: Creating a better society for all, Dublin (https://www.gov.ie/pdf/?file=https://assets.gov.ie/95975/bd524a60-e19f-44e8-80ce-9cdc58853403.pdf#page=null).
+References","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+Gender trolling attacks are precipitated by women asserting their opinions online;
+
+They feature graphic sexualised and gender-based insults;
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 2. Conceptualising and defining cyber violence against women and girls > 2.1. State of the art (1) > Cyber harassment / cyber bullying
+
+Cyber harassment is a persistent and repeated course of conduct targeted at a specific person, designed to cause severe emotional distress and often a fear of physical harm (Council of Europe Cybercrime Convention Committee, 2018).
+
+In cyber bullying, the focus is placed almost exclusively on the experiences of children, adolescents and young adults, characterised by legal and emotional vulnerability (Patchin, 2015; Wang et al., 2019).
+
+Online hate speech targeting women usually involves sexualisation, objectification and body-shaming comments, as well as degrading comments and rape threats, often from members of incel communities (Santos, Amaral and Simões, 2020).
+
+Significantly, the EU Code of Conduct’s definition of hate speech online does not mention gender, sexism or misogyny as it largely focuses on racism and xenophobia (European Commission, 2016).
+2. Conceptualising and defining cyber violence against women and girls","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: Obligations arising under the Istanbul Convention in relation to violence against women and domestic violence in its digital dimension > Online sexual harassment
+
+(e) cyberflashing consists of sending unsolicited sexual images via dating or messaging applications, texts, or using Airdrop or Bluetooth technologies.
+
+39. Some of the above behaviours are commonly known as sexist hate speech. As recognised by the Council of Europe Recommendation on preventing and combating sexism, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as sexist hate speech, which often constitutes a first step in the process towards physical violence, may also escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence or rape, thus falling within the remit of Article 40 of the Istanbul Convention.","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.2. Racist threats
+
+A recent report by Amnesty International reveals the scale of online sexist and racist abuse experienced by women75. Black and Asian women being visible or challenging norms are for instance highly targeted by racial violence online, although racist violence deploys on all women of colour. For instance, Diane Abbott, a black Member of Parliament (MP) in the United Kingdom (UK) was repeatedly victimised with a combination of sexist and racist abuse, including rape and death threats and through use of racist hate speech including the use of animal metaphors to depict her. Amnesty International carried out a survey on Twitter to understand the abuse women MPs face online, with a focus on the six weeks prior to the 8 June 2017 UK General Elections. Diane Abbott received almost half (45.14%) of all abusive tweets in the run up to the Election and, overall, black and Asian women MPs in Westminster received 35% more abusive tweets than white women MPs.","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Posting and sharing violent content consist of portraying women as sexual objects or targets of violence.
+
+Use of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.
+
+Pushing women to commit suicide.
+
+Direct violence
+
+Some forms of cyber violence against women have a direct impact on their immediate physical safety:
+
+Trafficking of women using technological means such as recruitment, luring women into prostitution and sharing stolen graphical content to advertise for prostitution.
+
+Sexualised extortion, also called sextortion and identity theft resulting in physical abuse.
+
+Online grooming consists of setting up an online abusive relationship with a child, in order to bring the child into sexual abuse or child-trafficking situations. The term “grooming” is criticised by victims, as it covers the child sexual abuse dimension of the act.
+
+In Real-World Attacks is defined as cyber violence having repercussions in “real life”.
+
+19
+
+Policy Department for Citizens' Rights and Constitutional Affairs","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: References
+
+Inter-Parliamentary Union (2016), ‘Sexism, harassment and violence against women parliamentarians’, Issues Brief, October, Geneva (https://www.ipu.org/resources/publications/issue-briefs/2016-10/sexism-harassment-and-violence-against-women-parliamentarians).
+
+Irish Department of Justice and Equality (2017), National Strategy for Women and Girls 2017–2020: Creating a better society for all, Dublin (https://www.gov.ie/pdf/?file=https://assets.gov.ie/95975/bd524a60-e19f-44e8-80ce-9cdc58853403.pdf#page=null).
+References","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.2. Racist threats
+
+Seyi Akiwowo, a young British black female politician was targeted by racist hate speech after her short speech at the European Youth Event in 2016. Hate speech deployed against her involved racist, hateful and sexist comments and slurs. Her video was posted on a neo-Nazi site accompanied by calls for mob attacks. Similarly, she “told Amnesty International that the abuse she experienced on Twitter and other social media platforms included racial slurs like ‘ngger’, ‘nggerress’, ‘negro’, references to lynching and being hanged, as well as ‘monkey’, ‘ape’ and being told to ‘die of an STI76’”.
+
+In a worldwide survey of violence against female parliamentarians, the Inter-Parliamentary Union (IPU) reveals how online violence targets black women in power: “A European parliamentarian of African origin recounted how a billboard in her country, paid for by far-right groups, demanded that she be “whitened with bleach and burned alive77”.","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: Services provided by women’s centres > Introduction
+
+Sexualised violence is one of the most pervasive and harmful forms of violence against women and girls (VAWG), causing deep and lasting trauma to women and girls across Europe and beyond. It encompasses a continuum of behaviours that violate physical, psychological, and sexual integrity. It includes rape and sexual assault, coerced or unwanted sexual acts, sexual harassment, sexual exploitation, forced or non-consensual sexual touching, non-consensual image sharing, online sexual abuse, stalking with sexual intent, grooming, and child sexual abuse. It can occur in intimate relationships, within families, in workplaces and institutions, in public spaces, online, and in situations of conflict, displacement, or detention.","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > How is cyber bullying linked to offline violence and vice versa? > What is online gender-based hate speech?
+
+Online gender-based hate speech, in particular, targets women, girls and LGBTIQ+ individuals because of their gender. It often takes the form of sexualisation, objectification, body shaming or
+
+cruel remarks regarding their gender, but also their religion, ethnicity, disability or sexual orientation.
+
+Often comments target female journalists, politicians, activists and other public figures: women and girls are particularly exposed to violence if they assert their views, defend their identity or challenge traditional norms and gender roles or other human rights issues on public forums. This in itself should not be considered something to shy away from, but the reaction these women receive is so overwhelming that many fear being too outspoken online. Studies have shown that women and girls who exercise their right to freedom of expression, even on less controversial topics, often face backlash (Council of Europe Gender Equality Strategy, 2016; FRA, 2016; Inter-Parliamentary Union, 2016; FRA, 2017).","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: REFERENCES
+
+INHOPE (2017), Facts, Figures & Trends, “The fight against online Child Sexual Abuse in perspective”, available at http://www.inhope.org/tns/resources/statistics-and-infographics/statistics-and-infographics-2017.aspx
+
+Inter Parliamentary Union (2016), “Sexism, harassment and violence against women parliamentarians”, Issues Brief, Oct. 2016, available at http://archive.ipu.org/pdf/publications/issuesbrief-e.pdf","EDOS Label2.3 dehumanising attacks & overt sexual objectification – Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.
+ParagraphSection: 3 The problem of gender-based cyber violence > 3.1 Scale of the problem > Scale of the problem of gender-based cyber violence: National level evidence
+
+Sexual Victimization among Spanish Adults. Sexuality Research and Social Policy.
+
+71 Dhrodia, A. (2017). Unsocial Media: The Real Toll of Online Abuse against Women. Amnesty Global Insights. Medium. [online]
+
+72 Dhrodia, A. (2017). Unsocial Media: The Real Toll of Online Abuse against Women. Amnesty Global Insights. Medium. [online]","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(93) Relevant types of conduct include: calumny; defamation; spreading false information; sending a message or anything else that is manifestly offensive and/or indecent or obscene; threatening; publicly defaming; offending the reputation of others; using any threatening, abusive or insulting words or behaviour; displaying any written or printed material that is threatening, abusive or insulting; insulting another person in her/his presence or even in her/ his absence, but in public or with intent to reach that person in her/his absence.","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+31 This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.2. Racist threats
+
+Seyi Akiwowo, a young British black female politician was targeted by racist hate speech after her short speech at the European Youth Event in 2016. Hate speech deployed against her involved racist, hateful and sexist comments and slurs. Her video was posted on a neo-Nazi site accompanied by calls for mob attacks. Similarly, she “told Amnesty International that the abuse she experienced on Twitter and other social media platforms included racial slurs like ‘ngger’, ‘nggerress’, ‘negro’, references to lynching and being hanged, as well as ‘monkey’, ‘ape’ and being told to ‘die of an STI76’”.
+
+In a worldwide survey of violence against female parliamentarians, the Inter-Parliamentary Union (IPU) reveals how online violence targets black women in power: “A European parliamentarian of African origin recounted how a billboard in her country, paid for by far-right groups, demanded that she be “whitened with bleach and burned alive77”.","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims
+
+Whether cyber violence and hate speech online involve “image-based sexual abuse”, “digital voyeurism”, “upskirting”, “cyber sexual harassment”, “rape threats” or “cyber bullying”, victims can suffer long term consequences. It affects their agency, privacy, trust and integrity and makes them go through a devastating psychological cycle. Victims are targeted for a variety of reasons, often related to gender and other identities. Victims may experience threats and abuse for their multiple and intersecting identities. Sexism then encounters for example racism, targeting and threatening specifically women of various ethnic and religious backgrounds. Finally, women endorsing a public persona can also be targeted for being visible and vocal, whether as a politician, artist, journalist or activist.","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: FORMS OF ONLINE GENDER-BASED VIOLENCE > 5 GENDER-BASED HATE SPEECH
+
+Gender-based hate speech includes hurtful, harmful, hateful, insulting, demeaning, shaming, and vitriolic statements, comments, or other forms of expression that target a person for their sex, gender, or sexual orientation; and includes comments suggesting that the person targeted deserves to face harm or should harm themselves.27
+
+27 https://asiapacific.unwomen.org/sites/default/files/Field%2000ffice%2020ESEAsia/Docs/Publications/2020/12/ap-ICT-VAWG-report-7Dec20.pdf
+
+illustration: stylized figures holding smartphones","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.2. The impact of cyber violence and hate speech online against women > 3.3.1. Types of online platforms where perpetrations occur
+
+Two reports point at Twitter’s specific nature that leads to an overload of violent content aimed directly at individual women. The Demos “Misogyny on Twitter” report published in 2014 reveals for example that “of over 100,000 Tweets mentioning ‘rape’ between 26th December 2013 and 9th February
+
+95 Code of Conduct on countering illegal hate speech online (2018), “Results of the 3rd monitoring exercise”, available at http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=612086","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+Gender trolling attacks are precipitated by women asserting their opinions online;
+
+They feature graphic sexualised and gender-based insults;
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.","EDOS Label3.1 casual use of gendered slurs, profanities, and insults – Casual or normalized use of gendered slurs, profanity, and insults.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+
+
+ONLINE GENDER-BASED HATE SPEECH
+TYPE OF CONDUCTVARIABLES
+Member StateIncitement to violence, hatred, discrimination, commission of crime (92)Calumny, defamation, insults (93)Sexism (94)By ICT means, any other means or in publicGender (on grounds of gender)Repeated over timeIntentional act (95)Effects on victim (harm the victim) (96)
+
+
+BelgiumX
+BulgariaXX
+CzechiaXX
+DenmarkXXX
+GermanyXX
+EstoniaXXXX
+IrelandXXXXX
+GreeceXXXXX
+SpainXXX
+FranceXX
+CroatiaXX
+Italy ()X
+CyprusXXX
+LatviaXXXX
+LithuaniaXXX
+LuxembourgXX
+HungaryXXXX
+Malta ()XX
+Netherlands ()XXX
+AustriaXXX
+PolandXXX
+PortugalXXX
+RomaniaXX
+SloveniaXX
+SlovakiaXXX
+FinlandXX
+SwedenXXX","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: 6. ENGAGING IN SOCIAL NORMS CHANGE > Stereotypes
+
+Gender and other stereotypes are at the heart of discrimination. Stereotypes are harmful when they result in a violation or violations of human rights and fundamental freedoms, when they limit women’s and men’s capacity to develop their personal abilities, pursue their professional careers and make choices about their lives and life plans. Harmful stereotypes can be explicitly hostile/negative (e.g. women are irrational, weak, etc.) or can appear harmless (e.g. women are nurturing, social, etc.), but inadvertently perpetuate discriminatory ideas. It is for example based on the stereotype that women are more nurturing that child-rearing responsibilities often fall disproportionately or even exclusively on them. Even in instances
+of Gender based violence, gender stereotyping and predisposed notions of and beliefs about women's behaviour results in victim blaming, rather than holding the perpetrator to account.
+
+In a survey conducted by Ipsos and the Female Quotient across 28 countries with men and women, it was found that (Unstereotype Alliance, 2018)","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles > media content > Using a Safety versus a Freedom Lens in the UK
+
+When messages were used instead to refer to women’s freedom and how VAWG may restrict women’s mobility, respondents reported being more alerted to the equality implications of VAWG and to the fact that the current situation is unfair and that it is not inevitable and does not have to be this way.
+
+Source: EVAW (2014) Unpublished public attitudes research among 1,000 UK adults by YouGov for the End Violence Against Women Coalition, UK.
+
+To find the right “frame”, it is important to:","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: KEY TERMS AND CONCEPTS
+
+Gender stereotypes: generalized views or preconceptions about attributes or characteristics that are or ought to be possessed by, or the roles that are or should be performed by, women and men (OHCHR).
+
+Intersectionality: a concept that seeks to capture both the structural and dynamic consequences of the interaction between two or more forms of discrimination or systems of subordination. It specifically addresses the manner in which racism, patriarchy, economic disadvantages and other discriminatory systems contribute to axes of inequality that structure the relative positions of women and men, races and other groups. Moreover, it addresses the way that specific acts and policies create burdens that flow along these intersecting axes actively contributing to create a dynamic of disempowerment (UN, 2000).","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles
+
+Compounded gender stereotypes can have a disproportionate negative impact on certain groups of women, such as women in custody, women from minority or indigenous groups, women with disabilities, women from lower caste groups or with lower economic status, migrant women, LBTI women, etc. Changing social norms so that VAWG can be eliminated is inevitably a discussion about power between women and men. It is also a wider discussion about power between different social groups. Addressing VAWG requires rooting the discussion more broadly to encompass gender norms and the intersection of multiple inequalities, to ensure that the various risk factors that perpetuate discrimination and abuse are captured for all segments of the population.","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > KEY FINDINGS
+
+Cyber violence and hate speech online against women are part of the continuum of violence against women. Normalisation of violence against women in the media leads to victim-blaming and the invisibilisation of victim’s perspective.
+ Gender inequality in the tech sector reverberates on platforms and algorithms may reinforce gender biases.
+ Anonymity, crowd culture and the permanence of harmful data online leads to multiple re-victimisations.
+
+Following the examination of definitions and types of violence in the previous chapter, it is now possible to look at the root causes of cyber violence and hate speech online against women. This chapter analyses how societal gender stereotypes, gender imbalances in the tech industry and the specific architecture of digital platforms create, drive and sustain the phenomenon.","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles
+
+60% say “I don’t see my community of friends, family and acquaintances represented accurately in most advertising”.
+
+64% think “Advertisers need to do more to eliminate traditional or old-fashioned roles of men and women in their ads”.
+
+84% “really like when ads include a positive message about making the world better”.
+
+75% of consumers say they “feel more positive toward companies that demonstrate in their advertising that men and women have the same capabilities and roles”.
+
+In addition to broad-based gender stereotypes that exist, different contexts generate unique social norms and gender roles, which can vary even within the same geographic or socio-political setting for different groups of women and girls (Fergus 2012).","EDOS Label3.2 immutable gender differences and gender stereotypes – Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.4. Permanence of data and re-victimisation
+
+70 Council of Europe, Gender equality unit (2016) Background note on sexist hate speech, available at https://bit.ly/2LDTcVt
+
+71 European Women’s Lobby (2017), #HerNetHerRights online conference, available at https://www.womenlobby.org/Watch-HerNetHerRights-online-conference-here?lang=en
+____________________________________________________________________________
+
+Many aspects, norms, cultural and technological settings allow for women to be victimised online. Societal gender stereotypes echo on the internet, making cyber spaces a continuity of public spaces and intimate partner sphere where “in real life” violence happens. The industry producing these tools and platforms is not immune to its own gender inequality and there is a growing body of knowledge pointing to the masculinity of the tech sector as a root cause for sexual harassment both offline and online. The cyber forms of violence and hate speech against women are furthermore facilitated by behavioural and technological factors once considered impossible to address effectively. The recent European Regulation on Data Protection has a strong impact on European citizens’ empowerment vis-à-vis their digital rights.
+
+The following chapter will attempt to draw a picture of the phenomenon of cyber violence and hate speech online by looking at the victims, the impact of cyber violence and hate speech online against women and the perpetrators.
+
+29
+
+Policy Department for Citizens' Rights and Constitutional Affairs","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: FORMS OF ONLINE GENDER-BASED VIOLENCE > 5 GENDER-BASED HATE SPEECH
+
+Gender-based hate speech includes hurtful, harmful, hateful, insulting, demeaning, shaming, and vitriolic statements, comments, or other forms of expression that target a person for their sex, gender, or sexual orientation; and includes comments suggesting that the person targeted deserves to face harm or should harm themselves.27
+
+27 https://asiapacific.unwomen.org/sites/default/files/Field%2000ffice%2020ESEAsia/Docs/Publications/2020/12/ap-ICT-VAWG-report-7Dec20.pdf
+
+illustration: stylized figures holding smartphones","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: REFERENCES
+
+FRA. (2014). Violence against women: an EU-wide survey – Main results. Luxembourg: Publications Office of the European Union, p. 104.
+
+FRA. (2017). Challenges to women’s human rights in the EU: Gender discrimination, sexist hate speech and gender-based violence against women and girls. FRA.
+
+Fox, J., Cruz, C., & Lee., J. Y. (2015). Perpetuating online sexism offline: Anonymity, interactivity, and the effects of sexist hashtags on social media. Computers in Human Behavior. 52.","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(93) Relevant types of conduct include: calumny; defamation; spreading false information; sending a message or anything else that is manifestly offensive and/or indecent or obscene; threatening; publicly defaming; offending the reputation of others; using any threatening, abusive or insulting words or behaviour; displaying any written or printed material that is threatening, abusive or insulting; insulting another person in her/his presence or even in her/ his absence, but in public or with intent to reach that person in her/his absence.","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > How is cyber bullying linked to offline violence and vice versa? > What is online gender-based hate speech?
+
+Online gender-based hate speech, in particular, targets women, girls and LGBTIQ+ individuals because of their gender. It often takes the form of sexualisation, objectification, body shaming or
+
+cruel remarks regarding their gender, but also their religion, ethnicity, disability or sexual orientation.
+
+Often comments target female journalists, politicians, activists and other public figures: women and girls are particularly exposed to violence if they assert their views, defend their identity or challenge traditional norms and gender roles or other human rights issues on public forums. This in itself should not be considered something to shy away from, but the reaction these women receive is so overwhelming that many fear being too outspoken online. Studies have shown that women and girls who exercise their right to freedom of expression, even on less controversial topics, often face backlash (Council of Europe Gender Equality Strategy, 2016; FRA, 2016; Inter-Parliamentary Union, 2016; FRA, 2017).","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: A3.2. Cyber stalking: common components at national level > A3.3. Cyber harassment: common components at national level
+
+(81) Gender includes offences directed at people because of their sex or gender, or affecting people of a particular sex or gender disproportionately, negative comments on sexual or gender identity, subjecting of a person to actions associated with his or her belonging to a specific gender, including actions of sexual nature, aggravated if motivated on the grounds of gender.
+
+(82) Effects include: in order to intimidate or disturb her; causing the victim to fear that the violence against her and/or against her family and/or against her property; causing serious concern or distress; causing reasonable fear, threat, humiliation, annoyance; unreasonably impairing the conduct of a person’s life; interfering with the victim’s life; interfering with privacy; affecting the peace of the person, with the purpose or effect of degrading their living conditions; altering physical or mental health; aiming at or likely resulting in physical, psychological, sexual or economic harm; intent to cause harm or being reckless; the purpose or result of such actions is the violation of the person’s dignity and the creation of an intimidating, hostile, humiliating, degrading or offensive environment; causing material/personal harm; impairing freedom of determination.
+
+(83) Relationship with the victim is an aggravating circumstance (spouse, former spouse, cohabitant or former cohabitant, against a person raised by him or under his supervision, care or medical treatment) in EL; abusing work relationship in EL; against a minor (aggravating circumstance) in EL, HU and SI.
+
+(84) No specific information.
+Annexes","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+31 This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+The following proposed definition is based on the analysis of the key components of national-level definitions. The box below lists the core components of online gender-based hate speech and the number of Member States mentioning these in their own definitions.
+Most frequently recurring types of conduct:
+
+Inciting discrimination, hostility or violence: 19 Member States (50)
+
+Condoning, denying or trivialising international crimes: 10 Member States (51)
+
+Sexism: 2 Member States (52)","EDOS Label3.3 backhanded gendered compliments – Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > How is online hate speech gendered?
+
+In the light of the COVID-19 pandemic, access to the internet was widely viewed as a necessity and almost as a fundamental human right. However, digitalisation is not gender neutral. A 2018 EIGE study on Gender Equality and Digitalisation in the European Union highlighted the gendered aspects of digitalisation, including women and girls being potential targets of sexualised and hateful comments from a very young age. Gender-based hate speech has a strong potential to further widen the gender digital divide, by making women and girls feel unwelcome and in danger in the cybersphere. Often resulting in the abandonment of digital spaces, gendered forms of cyber hate have a devastating impact on women’s confidence when it comes to digital technology, further contributing to science, technology, engineering and mathematics (STEM)/ICT gender segregation and the gender pay gap.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 6. ENGAGING IN SOCIAL NORMS CHANGE > Stereotypes
+
+Gender and other stereotypes are at the heart of discrimination. Stereotypes are harmful when they result in a violation or violations of human rights and fundamental freedoms, when they limit women’s and men’s capacity to develop their personal abilities, pursue their professional careers and make choices about their lives and life plans. Harmful stereotypes can be explicitly hostile/negative (e.g. women are irrational, weak, etc.) or can appear harmless (e.g. women are nurturing, social, etc.), but inadvertently perpetuate discriminatory ideas. It is for example based on the stereotype that women are more nurturing that child-rearing responsibilities often fall disproportionately or even exclusively on them. Even in instances
+of Gender based violence, gender stereotyping and predisposed notions of and beliefs about women's behaviour results in victim blaming, rather than holding the perpetrator to account.
+
+In a survey conducted by Ipsos and the Female Quotient across 28 countries with men and women, it was found that (Unstereotype Alliance, 2018)","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+Beyond the continuum of violence against women, there are other societal causes contributing to women’s victimisation online. Cyber violence is often presented by the media as being: a) a gender- neutral phenomenon; and b) a phenomenon of an individual matter resulting from of women’s naïveté/responsibility. Women are generally advised to “not feed the troll38”, to “change their privacy settings” or to “go offline for a while”. This both reflects and contributes to cyber violence being normalised while covering up the victims’ perspectives.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+31 This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles
+
+Men’s social standing and reputation as upheld by the loyalty, obedience and fidelity of their female spouses, siblings and children, the absence of which may be a justification for violence.
+
+Men considered as effeminate and weak if they are gender egalitarian or support feminist movements.
+
+Notions of femininity based on passivity, vulnerability, purity and heterosexuality.
+
+Women who assert, speak out, or defend equal rights as ‘man-hating’ or unwomanly.
+
+Lesbian, bisexual, and transgender women as outside the feminine ‘norm’ and as needing policing/ correction.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+21
+
+Policy Department for Citizens' Rights and Constitutional Affairs
+
+violence rather than focusing on perpetrators and mechanisms of violence41. The advice to women “not to share intimate or private images” is in fact questionable. “It obscures the variety of methods that harassers use to obtain images. (...) Research suggests privacy of images is not always in the victim’s control. While many images of women and girls are obtained from public or semi-public social media accounts, many others are obtained illegally through hacking accounts and internet-enabled devices, through “upskirting” and “creep shots”, as well as through images originally shared privately with an intimate partner42”. Women, and often underage girls, are therefore being victim-blamed for patterns they are not responsible for, and victims of.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 3. GUIDING PRINCIPLES > 3.4 Adopting an Intersectional Approach
+
+Interventions to address gender roles and stereotypes cannot occur without an understanding that although all women are in some way subject to gender discrimination, all women are not discriminated against in the same way, while particular groups of women (with different economic, social, political and cultural status) may face multiple forms of discrimination (Crenshaw 1991 and Wing 1997). Intersectional discrimination has been recognized as a serious obstacle to the achievement of gender equality and is at the core of the ‘leave no one behind’ principle of the Sustainable Development Goals. Factors including race, ethnicity, caste, class, age, religion, sexual orientation, marital status, geographic location, disability, HIV status or status as a migrant, refugee or internally displaced person, can all influence the forms and nature of violence women and girls may suffer (Fergus 2012). These factors can direct discrimination and violence towards, as well as create inequalities that are unique to particular groups of women, or that disproportionately affect some groups of women. A sound understanding of the multiple forms of discrimination faced by different groups of women in different contexts needs to be embedded in all interventions.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: A3.5. Online gender-based hate speech: common components at national level
+
+(93) Relevant types of conduct include: calumny; defamation; spreading false information; sending a message or anything else that is manifestly offensive and/or indecent or obscene; threatening; publicly defaming; offending the reputation of others; using any threatening, abusive or insulting words or behaviour; displaying any written or printed material that is threatening, abusive or insulting; insulting another person in her/his presence or even in her/ his absence, but in public or with intent to reach that person in her/his absence.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: Illustrative Gender Stereotypes and Gender Discriminatory Roles > media content > Using a Safety versus a Freedom Lens in the UK
+
+Highlight how commonly accepted gender roles and stereotypes are implicated in the perpetration and acceptance of VAWG - e.g. men’s sexual entitle- ment as a justification for sexual violence.
+
+Show the connections and commonalities between different forms of violence and general stereotypes e.g. the way racist stereotypes are used to explain VAWG in minority groups and communities.
+
+Present strong, intelligent, empowered and diverse women role models and voices in media coverage.
+ Provide the other side of the story with existing research and evidence.","EDOS Label3.4 condescending explanations or unwelcome advice – Paternalistic, condescending, or unsolicited advice based on gender stereotypes.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+From research carried out in 2017 about the way British media frame cyber violence, it becomes clear how the legitimisation and normalisation of violence in media reports framed public opinion, debate and action, and implicitly victim blame(d) via “silencing strategies”39. Advice given to victims of cyber harassment to not “feed the troll” actually calls upon victims not to challenge or resist “abusive (i.e. sexist, racist or misogynist) language and attitudes”. Moreover, the authors of the study argue that the way media report on trolling is “silencing victims” by under-reporting and normalising “trolling events” such as “rape threats, death threats, and body shaming, (...) and the advice given to victims on how they should respond to online abuse”. The authors recall that rape culture40 on the internet is prevalent and “incorporates aspects of popular misogyny, and entails anti-female violent expression via the threats of rape and death (or bodily harm) directed at women online. Expressions of aggressive male sexuality are eroticised in the online sphere (...) and in the press”.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: 5 Possible EU intervention and policy options > 5.2.4 Victim support and safeguards
+
+Victim blaming regularly occurs for a number of reasons, including misunderstanding the link between online and offline violence, and discounting or minimising the harms related to violence against women.
+
+Victims still retain the onus for dealing with cyber violence and finding support.
+
+Furthermore, research on the transposition and implementation of the Victims’ Rights Directive (2012/29/EU) found that victim support services across the EU remain generally under-funded and that Member States implement inconsistent referral mechanisms.284,285 The varying approaches to criminalising gender-based cyber violence and its forms across the Member States also mean that the rights, protection and support structures afforded by the Victims’ Rights Directive are inconsistently applied to gender-based cyber violence.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: 4.4 Existing initiatives to combat gender-based cyber violence > 4.4.2 Existing victim support measures > 4.4.4 Role of the media
+
+As stakeholders who were consulted for this study have pointed out, the media plays a significant role in both reporting gender-based cybercrimes and in some cases perpetuating outdated stereotypes about women in work, women as sex objects, the rights of LGBT+ individuals, and how people with disabilities or from ethnic minority backgrounds behave and are to be treated in society. One interviewee mentioned that violent acts against women are not isolated incidents, but rather culminations of beliefs and behaviours, and indeed these beliefs can be influenced by how the media frames violence against women. If it is portrayed positively, or encouraged, there is little incentive to avoid such behaviours. As other interviewees pointed out, news media that blames the victims of gender-based violence, both online and offline, conveys to Internet users that they are not victims if they encounter abuse online, and therefore their stories are not serious enough to report.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+Beyond the continuum of violence against women, there are other societal causes contributing to women’s victimisation online. Cyber violence is often presented by the media as being: a) a gender- neutral phenomenon; and b) a phenomenon of an individual matter resulting from of women’s naïveté/responsibility. Women are generally advised to “not feed the troll38”, to “change their privacy settings” or to “go offline for a while”. This both reflects and contributes to cyber violence being normalised while covering up the victims’ perspectives.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: Lithuania > Legal framework and policy approach to gender-based cyber violence
+
+The following challenges, beyond those mentioned above, have been highlighted by NGOs and civil society organisations:422423
+
+Professionals do not have sufficient knowledge to identify and tackle newer forms of sexual harassment, including sexting, image-based sexual abuse and sextortion.
+
+Victim blaming often occurs, for example based on the false dichotomy between online and offline violence against women or law enforcement discounting or minimising the harms of violence against women.
+
+In practice, the onus remains on adult victims to deal with cyber violence and the options are using the services of victim support organisations, such as Victim Support Netherlands, or mental health care institutions.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.1.2. Normalisation and invisibility of online cyber violence against women
+
+21
+
+Policy Department for Citizens' Rights and Constitutional Affairs
+
+violence rather than focusing on perpetrators and mechanisms of violence41. The advice to women “not to share intimate or private images” is in fact questionable. “It obscures the variety of methods that harassers use to obtain images. (...) Research suggests privacy of images is not always in the victim’s control. While many images of women and girls are obtained from public or semi-public social media accounts, many others are obtained illegally through hacking accounts and internet-enabled devices, through “upskirting” and “creep shots”, as well as through images originally shared privately with an intimate partner42”. Women, and often underage girls, are therefore being victim-blamed for patterns they are not responsible for, and victims of.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: REFERENCES
+
+Lewis, Ruth., and Rowe, Michael., Wiper, Clare., “Online Abuse of Feminists as An Emerging form of Violence Against Women and Girls”, The British Journal of Criminology, Volume 57, Issue 6.
+
+Lumsden, K., Morgan, H. (2017), Media framing of trolling and online abuse: silencing strategies, symbolic violence, and victim blaming, Feminist Media Studies Vol.17, No.6.","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: 2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.2. Gender imbalance in the tech sector trickles down
+
+41 Powell, A. (2016), “Be careful posting images online’ is just another form of modern-day victim-blaming”, The Conversation, available at http://theconversation.com/be-careful-posting-images-online-is-just-another-form-of-modern-day-victim-blaming-64116
+
+42 Ibid.
+
+43 Amnesty International (2018), Toxic Twitter, a toxic place for women, available at https://www.amnesty.org/en/latest/research/2018/03/online-violence-against-women-chapter-1/","EDOS Label4.1 supporting mistreatment of individual women – Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.
+ParagraphSection: Intersectional Equality Factors > Silencing
+
+TFGBV has become so pervasive that some victim-survivors begin to normalize or tolerate it. Research on academic women who had been harassed online (Veletsianos et al. 2018) shows that they minimize the violence and sometimes blame themselves for the abuse they receive online. Plan International (2020) found that many of the young women and girls it surveyed normalized TFGBV; they were more likely to ignore the violence than resist it as they got older, in part, because they learned to deal with abusers, finding it “not a big deal” or getting “used to it” (ibid., 28). These reports are troubling. They show how TFGBV prevents women and girls from participating in online communication, stifles conversations and advocacy about equality, and dissuades women from taking up leadership positions. Women, transgender and gender-nonconforming people should be free to participate in digital spaces without fear of violence.","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: A framework to prevent violence against women > 2. Conditions that need to be addressed to eliminate the problem
+
+1. Individual, relationship, community, organizational and societal/l structures, laws and policies, practices and social norms that:
+(a) Support gender inequality, as manifested in:
+ discrimination against women, and their unequal access to power and resources in public and private life;
+ harmful constructions of masculinity (e.g. entitled, aggressive, dominant) and femininity (e.g. subordinate, sexualized, objectified);
+ stereotyped gender roles; and
+ negative male peer associations and weak peer associations among women and girls
+(b) Condone, tolerate, perpetuate and/or positively portray the use of VAW.
+
+2. Exposure to violence in the family, the community, organizations and institutions
+
+3. Other circumstances and contexts that interact or intersect with gender inequality to increase the probability of violence being perpetrated against women (e.g. poverty, alcohol misuse).","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: Scope of the General Recommendation
+
+3. Committee on the Elimination of Discrimination against Women (2017), General Recommendation No. 35 on gender-based violence against women, updating General Recommendation No. 19, available at: https://tbinternet.ohchr.org/Treaties/CEDAW/Shared%20Documents/1_Global/CEDAW_C_GC_35_8267_E.pdf.
+
+4. CEDAW Committee General Recommendation No. 28 on the core obligation of States Parties under Article 2 of the Convention on the Elimination of All Forms of Discrimination against Women, General Recommendation No. 33 on women’s access to justice and General Recommendation No. 35 on gender-based violence against women, updating General Recommendation No. 19 confirms that discrimination against women is inextricably linked to other factors that affect their lives. According to the CEDAW Committee, these factors may include ethnicity/race, indigenous or minority status, colour, socio-economic status and/or caste, language, religion or belief, political opinion, national origin, marital and/or maternal status, age, urban/rural location, health status, disability, property ownership, being lesbian, bisexual, transgender or intersex, illiteracy, trafficking of women, armed conflict, seeking asylum, being a refugee, internal displacement, statelessness, migration, heading households, widowhood, living with HIV/AIDS, deprivation of liberty, being
+13. In addition, it has severe implications for women’s participatory rights online. The hateful abuse to which women are subjected in online environments causes many women to withdraw from participating online, including from expressing their views on online platforms. This is particularly problematic for women and girls’ human rights’ defenders, journalists or those in politics, but also for social media influencers or others active on social media and/or in public. Violence against women and girls in the digital sphere thus silences their voices and reduces their perspectives in public debate. As such, GREVIO considers it to not only amount to gender-based violence against women but to undermine a number of other human rights of women as protected by international law.","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: Hate Speech
+
+Hate speech can target women because of a combination of their identity factors or, more specifically, their gender. In Malawi, 46.3 percent of women surveyed had been subjected to hate speech online (Malanga 2020). Gendered hate speech made up 3.1 percent of reports to internet platforms in the European Union (Van der Wilk 2018). Online hate reinforces systemic inequalities, makes it difficult for certain groups to engage online, and can spill over into the physical world, causing violence and even death. In a case in Pakistan, a woman who had been the target of hate speech was shot at in public due to hate speech aimed at her online (Bukhari 2014).","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 3. GUIDING PRINCIPLES > 3.4 Adopting an Intersectional Approach
+
+Interventions to address gender roles and stereotypes cannot occur without an understanding that although all women are in some way subject to gender discrimination, all women are not discriminated against in the same way, while particular groups of women (with different economic, social, political and cultural status) may face multiple forms of discrimination (Crenshaw 1991 and Wing 1997). Intersectional discrimination has been recognized as a serious obstacle to the achievement of gender equality and is at the core of the ‘leave no one behind’ principle of the Sustainable Development Goals. Factors including race, ethnicity, caste, class, age, religion, sexual orientation, marital status, geographic location, disability, HIV status or status as a migrant, refugee or internally displaced person, can all influence the forms and nature of violence women and girls may suffer (Fergus 2012). These factors can direct discrimination and violence towards, as well as create inequalities that are unique to particular groups of women, or that disproportionately affect some groups of women. A sound understanding of the multiple forms of discrimination faced by different groups of women in different contexts needs to be embedded in all interventions.","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 1.2. Defining cyber violence and hate speech online against women > 1.2.1. UN, EU and national definitions
+
+5 CEDAW (2017), “General recommendation No. 35 on gender-based violence against women, updating general recommendation No. 19”, available at https://tbinternet.ohchr.org/Treaties/CEDAW/Shared%20Documents/1_Global/CEDAW_C_GC_35_8267_E.pdf
+
+11
+
+Policy Department for Citizens' Rights and Constitutional Affairs
+
+mail accounts, mobile phones and other electronic devices, with a view to discrediting them and/or inciting other violations and abuses against them, are a growing concern and a manifestation of systemic gender-based discrimination, requiring effective responses compliant with human rights”. 6","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 4 Legal and policy frameworks > 4.1 International legal and policy framework
+
+The United Nations (UN) has directly recognised gender-based cyber violence in several
+resolutions, strategies recommendations and reports. In the UN General Assembly resolution on
+protecting women human rights defenders, the General Assembly lists the types of cyber violence
+and information-technology-related violations that women could face. These include online
+harassment, cyberstalking, violation of privacy, censorship and the hacking of e-mail accounts,
+mobile phones and other electronic devices, with a view to discrediting them and/or inciting other
+violations and abuses against them. The General Assembly states that these types of violations are
+a growing concern and can be a manifestation of systemic gender-based discrimination.173","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: Scope of the General Recommendation
+
+2. In 1992, the Committee on the Elimination of Discrimination against Women (the CEDAW Committee) adopted General Recommendation No. 19 on violence against women, which recognised gender-based violence as a form of discrimination.
+9. GREVIO endorses the view of other independent women’s rights treaty bodies that gender-based violence against women affects women throughout their life cycle,3 and that the experience of gender-based violence against women is both a cause and a consequence of women’s and girls’ historically rooted inequality with men and boys. It is violence perpetrated as a result of or in order to perpetuate stereotypes of women and men in society, social norms, concepts of masculinity and notions of women’s inferiority. Women and girls may experience gender-based violence against women in all aspects of their lives, including in their families and intimate relationships, by friends and acquaintances, within their communities, places of work, including remote working as well as work provided on/through platforms, in education, sport, arts, leisure, in politics, in seeking health care, during and after migration and in many other settings.","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+The following proposed definition is based on the analysis of the key components of national-level definitions. The box below lists the core components of online gender-based hate speech and the number of Member States mentioning these in their own definitions.
+Most frequently recurring types of conduct:
+
+Inciting discrimination, hostility or violence: 19 Member States (50)
+
+Condoning, denying or trivialising international crimes: 10 Member States (51)
+
+Sexism: 2 Member States (52)","EDOS Label4.2 supporting systemic discrimination against women as a group – Support for systemic discrimination, restriction of rights, or exclusion of women as a group.
+ParagraphSection: 4. Towards common definitions of cyber violence against women and girls > How is online hate speech gendered?
+
+In the light of the COVID-19 pandemic, access to the internet was widely viewed as a necessity and almost as a fundamental human right. However, digitalisation is not gender neutral. A 2018 EIGE study on Gender Equality and Digitalisation in the European Union highlighted the gendered aspects of digitalisation, including women and girls being potential targets of sexualised and hateful comments from a very young age. Gender-based hate speech has a strong potential to further widen the gender digital divide, by making women and girls feel unwelcome and in danger in the cybersphere. Often resulting in the abandonment of digital spaces, gendered forms of cyber hate have a devastating impact on women’s confidence when it comes to digital technology, further contributing to science, technology, engineering and mathematics (STEM)/ICT gender segregation and the gender pay gap."
+"{""ImportId"":""startDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""endDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""status""}","{""ImportId"":""ipAddress""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""_recordId""}","{""ImportId"":""recipientLastName""}","{""ImportId"":""recipientFirstName""}","{""ImportId"":""recipientEmail""}","{""ImportId"":""externalDataReference""}","{""ImportId"":""locationLatitude""}","{""ImportId"":""locationLongitude""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""LastSeenFlowID""}","{""ImportId"":""LastSeenQuestions""}","{""ImportId"":""QID31""}","{""ImportId"":""QID32""}","{""ImportId"":""QID33""}","{""ImportId"":""QID34""}","{""ImportId"":""QID35""}","{""ImportId"":""QID36""}","{""ImportId"":""QID37""}","{""ImportId"":""QID38""}","{""ImportId"":""QID39""}","{""ImportId"":""QID40""}","{""ImportId"":""QID41""}","{""ImportId"":""QID42""}","{""ImportId"":""QID43""}","{""ImportId"":""QID44""}","{""ImportId"":""QID45""}","{""ImportId"":""QID46""}","{""ImportId"":""QID47""}","{""ImportId"":""QID48""}","{""ImportId"":""QID49""}","{""ImportId"":""QID50""}","{""ImportId"":""QID51""}","{""ImportId"":""QID52""}","{""ImportId"":""QID53""}","{""ImportId"":""QID54""}","{""ImportId"":""QID55""}","{""ImportId"":""QID56""}","{""ImportId"":""QID57""}","{""ImportId"":""QID58""}","{""ImportId"":""QID59""}","{""ImportId"":""QID60""}","{""ImportId"":""QID61""}","{""ImportId"":""QID62""}","{""ImportId"":""QID63""}","{""ImportId"":""QID64""}","{""ImportId"":""QID65""}","{""ImportId"":""QID66""}","{""ImportId"":""QID67""}","{""ImportId"":""QID68""}","{""ImportId"":""QID69""}","{""ImportId"":""QID70""}","{""ImportId"":""QID71""}","{""ImportId"":""QID72""}","{""ImportId"":""QID73""}","{""ImportId"":""QID74""}","{""ImportId"":""QID75""}","{""ImportId"":""QID76""}","{""ImportId"":""QID77""}","{""ImportId"":""QID78""}","{""ImportId"":""QID79""}","{""ImportId"":""QID80""}","{""ImportId"":""QID81""}","{""ImportId"":""QID82""}","{""ImportId"":""QID83""}","{""ImportId"":""QID84""}","{""ImportId"":""QID85""}","{""ImportId"":""QID86""}","{""ImportId"":""QID87""}","{""ImportId"":""QID88""}","{""ImportId"":""QID89""}","{""ImportId"":""QID90""}","{""ImportId"":""QID91""}","{""ImportId"":""QID92""}","{""ImportId"":""QID93""}","{""ImportId"":""QID94""}","{""ImportId"":""QID95""}","{""ImportId"":""QID96""}","{""ImportId"":""QID97""}","{""ImportId"":""QID98""}","{""ImportId"":""QID99""}","{""ImportId"":""QID100""}","{""ImportId"":""QID101""}","{""ImportId"":""QID102""}","{""ImportId"":""QID103""}","{""ImportId"":""QID104""}","{""ImportId"":""QID105""}","{""ImportId"":""QID106""}","{""ImportId"":""QID107""}","{""ImportId"":""QID108""}","{""ImportId"":""QID109""}","{""ImportId"":""QID110""}","{""ImportId"":""QID111""}","{""ImportId"":""QID112""}","{""ImportId"":""QID113""}","{""ImportId"":""QID114""}","{""ImportId"":""QID115""}","{""ImportId"":""QID116""}","{""ImportId"":""QID117""}","{""ImportId"":""QID118""}","{""ImportId"":""QID119""}","{""ImportId"":""QID120""}","{""ImportId"":""QID121""}","{""ImportId"":""QID122""}","{""ImportId"":""QID123""}","{""ImportId"":""QID124""}","{""ImportId"":""QID125""}","{""ImportId"":""QID126""}","{""ImportId"":""QID127""}","{""ImportId"":""QID128""}","{""ImportId"":""QID129""}","{""ImportId"":""QID130""}","{""ImportId"":""QID131""}"
+2026-10-28 19:01:20,2026-10-29 13:24:54,0,78.212.3.199,100,66213,1,2026-10-29 13:24:54,R_2yfSiNyMCWMPdT2,,,,,43.1479,12.1097,anonymous,IT,FL_EOS_ID,,3,3,2,3,1,3,2,3,2,3,3,3,2,3,2,3,3,3,3,1,2,1,1,2,2,2,2,2,2,2,3,3,3,2,1,2,3,2,3,1,3,2,3,2,3,1,2,3,1,2,2,2,2,2,2,2,3,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,3,2,3,3,2,3,1,1,3,3,3,3,3,1,3,2,3,3,1,3,2,1,1,1,1,1,3,2
+2026-11-02 11:16:50,2026-11-02 12:59:18,0,130.192.98.149,100,6148,1,2026-11-02 12:59:19,R_21vqQJDjWJD1N72,,,,,45.0729,7.689,anonymous,IT,FL_EOS_ID,,1,3,1,3,3,2,1,3,3,3,2,1,3,3,2,3,3,3,3,3,3,1,3,2,1,3,1,2,1,3,3,1,2,1,1,3,3,3,3,2,3,1,3,3,3,1,1,2,1,3,3,2,3,2,3,1,3,1,3,3,3,3,3,2,2,1,1,1,1,2,1,1,1,3,2,3,1,2,3,2,3,1,3,3,3,3,3,3,1,1,3,3,2,2,3,3,1,3,3,1,3
+2026-10-27 10:52:11,2026-11-03 10:59:49,0,93.35.145.53,100,605258,1,2026-11-03 10:59:50,R_2QSbrvYeclBFO0F,,,,,45.0729,7.689,anonymous,IT,FL_EOS_ID,,1,3,1,3,3,1,1,3,3,3,1,1,3,3,3,3,3,1,3,3,1,2,1,2,3,2,1,2,1,2,1,3,3,3,1,2,3,3,3,2,3,1,3,1,2,1,1,2,1,2,2,1,1,1,1,1,3,1,1,3,3,1,3,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,2,1,1,2,1,1,3,2,3,3,1,1,3,3,1,1,1,2,1,1,3,1,2
