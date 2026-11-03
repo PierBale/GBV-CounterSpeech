@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "question_map": "Qualtrics/Best_retrieval_config_question_map.csv",
+  "run_id": "confronto-02",
+  "unique_query_chunk_pairs": 101,
+  "annotated_judgments": 303,
+  "pipeline_selections": 132,
+  "items_by_number_of_pipelines": {
+    "1": 80,
+    "2": 15,
+    "3": 2,
+    "4": 4
+  },
+  "selections_by_pipeline": {
+    "bge-m3__bge-reranker-v2-m3": 33,
+    "bge-m3__qwen3-reranker-8b": 33,
+    "qwen3-embedding-8b__bge-reranker-v2-m3": 33,
+    "qwen3-embedding-8b__qwen3-reranker-8b": 33
+  },
+  "example": {
+    "question_id": "Q4-shared-chunk_2dd53f36e40e471ed8a452b1",
+    "label": "1.1 threats of harm",
+    "votes_0_2": [
+      2,
+      2,
+      2
+    ],
+    "pipeline_ranks": {
+      "qwen3-embedding-8b__qwen3-reranker-8b": 1,
+      "qwen3-embedding-8b__bge-reranker-v2-m3": 3
+    }
+  },
+  "checks": [
+    "raw top-3 union equals question map",
+    "all source_matches memberships and ranks",
+    "saved pipeline_selections equals original sample",
+    "export ImportIds and QSF question IDs",
+    "raw votes equal saved annotations",
+    "shared votes and consensus preserved",
+    "model_ranking independently recomputed from original sample and raw votes"
+  ]
+}

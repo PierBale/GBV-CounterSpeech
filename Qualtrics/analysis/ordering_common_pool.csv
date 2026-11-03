@@ -1,0 +1,45 @@
+﻿pipeline_id,query_id,edos_label,n_common,n_pool,kendall_tau_b_common,spearman_rho_common,n_distinct_human_grades_common
+bge-m3__bge-reranker-v2-m3,query_1590bafe05a8fd4c971e3fd8,4.1 supporting mistreatment of individual women,5,8,0.0,0.09999999999999999,5
+bge-m3__qwen3-reranker-8b,query_1590bafe05a8fd4c971e3fd8,4.1 supporting mistreatment of individual women,5,8,0.19999999999999998,0.3,5
+qwen3-embedding-8b__bge-reranker-v2-m3,query_1590bafe05a8fd4c971e3fd8,4.1 supporting mistreatment of individual women,5,8,0.0,0.09999999999999999,5
+qwen3-embedding-8b__qwen3-reranker-8b,query_1590bafe05a8fd4c971e3fd8,4.1 supporting mistreatment of individual women,5,8,0.19999999999999998,0.3,5
+bge-m3__bge-reranker-v2-m3,query_19307c9d77bd38c0a67bbca1,2.1 descriptive attacks,3,10,-0.816496580927726,-0.8660254037844387,2
+bge-m3__qwen3-reranker-8b,query_19307c9d77bd38c0a67bbca1,2.1 descriptive attacks,3,10,0.816496580927726,0.8660254037844387,2
+qwen3-embedding-8b__bge-reranker-v2-m3,query_19307c9d77bd38c0a67bbca1,2.1 descriptive attacks,3,10,-0.816496580927726,-0.8660254037844387,2
+qwen3-embedding-8b__qwen3-reranker-8b,query_19307c9d77bd38c0a67bbca1,2.1 descriptive attacks,3,10,0.816496580927726,0.8660254037844387,2
+bge-m3__bge-reranker-v2-m3,query_19423fe74ca6de41641d2091,3.2 immutable gender differences and gender stereotypes,5,8,0.7999999999999999,0.8999999999999998,5
+bge-m3__qwen3-reranker-8b,query_19423fe74ca6de41641d2091,3.2 immutable gender differences and gender stereotypes,5,8,-0.31622776601683794,-0.46169025843831935,5
+qwen3-embedding-8b__bge-reranker-v2-m3,query_19423fe74ca6de41641d2091,3.2 immutable gender differences and gender stereotypes,5,8,0.7999999999999999,0.8999999999999998,5
+qwen3-embedding-8b__qwen3-reranker-8b,query_19423fe74ca6de41641d2091,3.2 immutable gender differences and gender stereotypes,5,8,-0.39999999999999997,-0.6,5
+bge-m3__bge-reranker-v2-m3,query_2a8b165f9e6851ac08ec294c,"3.1 casual use of gendered slurs, profanities, and insults",4,9,0.9128709291752769,0.9486832980505139,3
+bge-m3__qwen3-reranker-8b,query_2a8b165f9e6851ac08ec294c,"3.1 casual use of gendered slurs, profanities, and insults",4,9,-0.39999999999999997,-0.5000000000000001,3
+qwen3-embedding-8b__bge-reranker-v2-m3,query_2a8b165f9e6851ac08ec294c,"3.1 casual use of gendered slurs, profanities, and insults",4,9,0.9128709291752769,0.9486832980505139,3
+qwen3-embedding-8b__qwen3-reranker-8b,query_2a8b165f9e6851ac08ec294c,"3.1 casual use of gendered slurs, profanities, and insults",4,9,0.0,0.0,3
+bge-m3__bge-reranker-v2-m3,query_52cf40365a704814b5aa5c5f,2.2 aggressive and emotive attacks,3,6,0.816496580927726,0.8660254037844387,2
+bge-m3__qwen3-reranker-8b,query_52cf40365a704814b5aa5c5f,2.2 aggressive and emotive attacks,3,6,0.9999999999999999,1.0,2
+qwen3-embedding-8b__bge-reranker-v2-m3,query_52cf40365a704814b5aa5c5f,2.2 aggressive and emotive attacks,3,6,0.816496580927726,0.8660254037844387,2
+qwen3-embedding-8b__qwen3-reranker-8b,query_52cf40365a704814b5aa5c5f,2.2 aggressive and emotive attacks,3,6,0.816496580927726,0.8660254037844387,2
+bge-m3__bge-reranker-v2-m3,query_6121999d1009957f569d383e,3.4 condescending explanations or unwelcome advice,3,10,0.816496580927726,0.8660254037844387,2
+bge-m3__qwen3-reranker-8b,query_6121999d1009957f569d383e,3.4 condescending explanations or unwelcome advice,3,10,0.0,0.0,2
+qwen3-embedding-8b__bge-reranker-v2-m3,query_6121999d1009957f569d383e,3.4 condescending explanations or unwelcome advice,3,10,0.816496580927726,0.8660254037844387,2
+qwen3-embedding-8b__qwen3-reranker-8b,query_6121999d1009957f569d383e,3.4 condescending explanations or unwelcome advice,3,10,0.0,0.0,2
+bge-m3__bge-reranker-v2-m3,query_88b0edf9a217bf67a56c9cc5,4.2 supporting systemic discrimination against women as a group,5,10,0.5270462766947298,0.7181848464596079,4
+bge-m3__qwen3-reranker-8b,query_88b0edf9a217bf67a56c9cc5,4.2 supporting systemic discrimination against women as a group,5,10,-0.9486832980505137,-0.9746794344808964,4
+qwen3-embedding-8b__bge-reranker-v2-m3,query_88b0edf9a217bf67a56c9cc5,4.2 supporting systemic discrimination against women as a group,5,10,0.5270462766947298,0.7181848464596079,4
+qwen3-embedding-8b__qwen3-reranker-8b,query_88b0edf9a217bf67a56c9cc5,4.2 supporting systemic discrimination against women as a group,5,10,-0.9486832980505137,-0.9746794344808964,4
+bge-m3__bge-reranker-v2-m3,query_9103775bc0213d339ef11fde,2.3 dehumanising attacks & overt sexual objectification,3,12,-0.33333333333333337,-0.5,3
+bge-m3__qwen3-reranker-8b,query_9103775bc0213d339ef11fde,2.3 dehumanising attacks & overt sexual objectification,3,12,1.0,1.0,3
+qwen3-embedding-8b__bge-reranker-v2-m3,query_9103775bc0213d339ef11fde,2.3 dehumanising attacks & overt sexual objectification,3,12,-0.33333333333333337,-0.5,3
+qwen3-embedding-8b__qwen3-reranker-8b,query_9103775bc0213d339ef11fde,2.3 dehumanising attacks & overt sexual objectification,3,12,1.0,1.0,3
+bge-m3__bge-reranker-v2-m3,query_a150fa223fa04dc4b8b04eba,1.2 incitement and encouragement of harm,3,8,-0.33333333333333337,-0.5,3
+bge-m3__qwen3-reranker-8b,query_a150fa223fa04dc4b8b04eba,1.2 incitement and encouragement of harm,3,8,-0.816496580927726,-0.8660254037844387,3
+qwen3-embedding-8b__bge-reranker-v2-m3,query_a150fa223fa04dc4b8b04eba,1.2 incitement and encouragement of harm,3,8,-0.33333333333333337,-0.5,3
+qwen3-embedding-8b__qwen3-reranker-8b,query_a150fa223fa04dc4b8b04eba,1.2 incitement and encouragement of harm,3,8,-0.816496580927726,-0.8660254037844387,3
+bge-m3__bge-reranker-v2-m3,query_c192db327187de2f00ed39ae,1.1 threats of harm,1,11,,,1
+bge-m3__qwen3-reranker-8b,query_c192db327187de2f00ed39ae,1.1 threats of harm,1,11,,,1
+qwen3-embedding-8b__bge-reranker-v2-m3,query_c192db327187de2f00ed39ae,1.1 threats of harm,1,11,,,1
+qwen3-embedding-8b__qwen3-reranker-8b,query_c192db327187de2f00ed39ae,1.1 threats of harm,1,11,,,1
+bge-m3__bge-reranker-v2-m3,query_c30b3f55fea4cd82db73cd81,3.3 backhanded gendered compliments,4,9,,,1
+bge-m3__qwen3-reranker-8b,query_c30b3f55fea4cd82db73cd81,3.3 backhanded gendered compliments,4,9,,,1
+qwen3-embedding-8b__bge-reranker-v2-m3,query_c30b3f55fea4cd82db73cd81,3.3 backhanded gendered compliments,4,9,,,1
+qwen3-embedding-8b__qwen3-reranker-8b,query_c30b3f55fea4cd82db73cd81,3.3 backhanded gendered compliments,4,9,,,1

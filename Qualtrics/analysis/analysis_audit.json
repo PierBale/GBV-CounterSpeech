@@ -1,0 +1,41 @@
+{
+  "run_id": "confronto-02",
+  "n_annotators": 3,
+  "n_items": 101,
+  "n_queries": 11,
+  "n_labels": 11,
+  "n_selections": 132,
+  "n_missing_ratings": 0,
+  "n_common_items": 39,
+  "bootstrap": 10000,
+  "seed": 20261103,
+  "sources": {
+    "alpha": "https://www.asc.upenn.edu/sites/default/files/2021-03/Computing%20Krippendorff%27s%20Alpha-Reliability.pdf",
+    "ndcg": "https://researchportal.tuni.fi/en/publications/cumulated-gain-based-evaluation-of-ir-techniques/",
+    "tau": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kendalltau.html",
+    "soft_labels": "https://aclanthology.org/2021.naacl-main.204/"
+  },
+  "pairwise_bootstrap_seed_sequence": [
+    20261103,
+    1
+  ],
+  "aggregation_bootstrap_seed_sequence": [
+    20261103,
+    2
+  ],
+  "soft_label_definition": "Empirical vote distribution; linear E[Y]; exponential E[2^Y-1]",
+  "annotators_skipped_in_individual_ranking": [],
+  "inputs_sha256": {
+    "Qualtrics\\Best-retrieval-results.csv": "3599844a46d675441a58a81a449d9c1e73672ce3fc65a791cf3a146d3246157f",
+    "Qualtrics\\Best_retrieval_config_question_map.csv": "b77dd68f02e2a42fddeed060d8abaed7506731c33317c05f14c366b210280221",
+    "Qualtrics\\Best_retrieval_config.qsf": "d256caf2b6c3b68d99b8a001c14b9baf503378ff96e5b43c92c2d1023ba5078b",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking\\bge-m3__bge-reranker-v2-m3.jsonl": "a6e56de07d257c6c3c7db419a3dfa0fd6ad90ae827c5b628e6ee073b0528e53c",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking\\bge-m3__qwen3-reranker-8b.jsonl": "b0526cf9ac547ff6a8d4cc354f2c146ae868e4efa4f4f52d463a5eeb6c537eab",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking\\qwen3-embedding-8b__bge-reranker-v2-m3.jsonl": "b64f3dbf895a6eefdaf639cecf2f25bf1268f17fc24a06ed151371de1ec786dc",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking\\qwen3-embedding-8b__qwen3-reranker-8b.jsonl": "df48504a3116b6811e830da3d152b75b6470bdfb6b53b556d06a798b3ec4e474",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking_full\\bge-m3__bge-reranker-v2-m3.jsonl": "7283e47621566999aa439e0c324e5367ecbc89ac003fc3692aa583a8a49e3359",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking_full\\bge-m3__qwen3-reranker-8b.jsonl": "d33a76097177884c5a0c9b53e2e8c70e01479a095e2e2e6dbdde6cd46173b3d8",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking_full\\qwen3-embedding-8b__bge-reranker-v2-m3.jsonl": "b4018d6dfbba9ec2c8fcfcde946a103474aafbab1ef43a59d7bb3984be1cb3c3",
+    "data\\card_creation_comparison\\runs\\confronto-02\\reranking_full\\qwen3-embedding-8b__qwen3-reranker-8b.jsonl": "494e5b8d7f000fbeb8e8d235b1f386f1131a60a62e0cc8df9529d5a2a6ab15b7"
+  }
+}

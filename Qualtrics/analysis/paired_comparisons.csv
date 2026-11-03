@@ -1,0 +1,13 @@
+﻿metric,pipeline_a,pipeline_b,n_queries,delta_a_minus_b,delta_ci_low,delta_ci_high,p_exact_sign_flip,wins_a,ties,wins_b,p_holm
+ndcg_pool_at3,bge-m3__bge-reranker-v2-m3,bge-m3__qwen3-reranker-8b,11,0.14270901590476576,-0.03131546340749921,0.29891161958817386,0.1416015625,9,0,2,0.7080078125
+ndcg_pool_at3,bge-m3__bge-reranker-v2-m3,qwen3-embedding-8b__bge-reranker-v2-m3,11,0.15616736365896847,0.03985304017054889,0.2935258249873841,0.029296875,8,1,2,0.17578125
+ndcg_pool_at3,bge-m3__bge-reranker-v2-m3,qwen3-embedding-8b__qwen3-reranker-8b,11,0.08211920556015001,-0.10244454277046132,0.2856751840502965,0.4560546875,5,0,6,1.0
+ndcg_pool_at3,bge-m3__qwen3-reranker-8b,qwen3-embedding-8b__bge-reranker-v2-m3,11,0.013458347754202737,-0.18201896153386027,0.21646726563521776,0.900390625,5,0,6,1.0
+ndcg_pool_at3,bge-m3__qwen3-reranker-8b,qwen3-embedding-8b__qwen3-reranker-8b,11,-0.060589810344615705,-0.18405790933850813,0.061380905961919155,0.369140625,3,1,7,1.0
+ndcg_pool_at3,qwen3-embedding-8b__bge-reranker-v2-m3,qwen3-embedding-8b__qwen3-reranker-8b,11,-0.07404815809881844,-0.24309068989472077,0.12338052145306104,0.46875,3,0,8,1.0
+mean_relevance,bge-m3__bge-reranker-v2-m3,bge-m3__qwen3-reranker-8b,11,0.1414141414141414,-0.14141414141414146,0.37398989898989543,0.365234375,8,1,2,1.0
+mean_relevance,bge-m3__bge-reranker-v2-m3,qwen3-embedding-8b__bge-reranker-v2-m3,11,0.15151515151515155,0.010101010101010105,0.2828282828282828,0.09375,8,1,2,0.5625
+mean_relevance,bge-m3__bge-reranker-v2-m3,qwen3-embedding-8b__qwen3-reranker-8b,11,0.07070707070707068,-0.21212121212121213,0.3939393939393939,0.763671875,6,0,5,1.0
+mean_relevance,bge-m3__qwen3-reranker-8b,qwen3-embedding-8b__bge-reranker-v2-m3,11,0.010101010101010131,-0.2828282828282829,0.3535353535353536,1.0,4,1,6,1.0
+mean_relevance,bge-m3__qwen3-reranker-8b,qwen3-embedding-8b__qwen3-reranker-8b,11,-0.07070707070707072,-0.29292929292929304,0.16161616161616163,0.6171875,3,3,5,1.0
+mean_relevance,qwen3-embedding-8b__bge-reranker-v2-m3,qwen3-embedding-8b__qwen3-reranker-8b,11,-0.08080808080808087,-0.37373737373737376,0.26262626262626254,0.69140625,4,2,5,1.0
