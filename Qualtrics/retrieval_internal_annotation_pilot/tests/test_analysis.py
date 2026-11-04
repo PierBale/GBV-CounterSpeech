@@ -11,7 +11,7 @@ from unittest.mock import patch
 from sklearn.metrics import ndcg_score
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from analyze_retrieval import (HERE, ROOT, aggregate_votes, expand_selections, alpha_from_items,
+from Qualtrics.retrieval_internal_annotation_pilot.analyze_retrieval import (HERE, ROOT, aggregate_votes, expand_selections, alpha_from_items,
                               load_survey, rank_correlations, evaluate)
 
 
@@ -143,7 +143,7 @@ class SurveyIntegrationTests(unittest.TestCase):
         # Reconstruct membership directly from the extraction files, independently
         # of source_matches, so an omitted shared membership cannot pass unnoticed.
         import json
-        from build_retrieval_survey import render_question
+        from Qualtrics.retrieval_internal_annotation_pilot.build_retrieval_survey import render_question
 
         raw = {}
         run_dir = ROOT / 'data/card_creation_comparison/runs/confronto-02/reranking'
