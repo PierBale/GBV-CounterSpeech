@@ -5,16 +5,15 @@ import gc
 from .progress import report
 
 
-# Mirrors the annotators' question: is the passage useful to respond to the
-# harm of this specific category? Explicit negatives target the two failure
-# modes of the previous run (generic definitions, off-topic statistics).
+# Chosen with scripts/diagnose_reranker_instructions.py (no human labels):
+# naming "sexist speech" in the instruction made the reranker judge passages
+# about sexist hate speech in general as relevant to every label (16 distinct
+# chunks in the top-4 of 11 labels; own-label rank 4.1-4.4 of 11). This
+# instruction leaves the category to the query (32/25 distinct chunks; own-label
+# rank 2.1/2.8) and keeps the annotation criterion (useful to respond).
 RERANK_INSTRUCTION = (
-    "Given a category of sexist speech and its definition, judge whether the passage "
-    "contains information that directly addresses this specific category (its harms, "
-    "prevalence, why its claims are wrong, or how to respond to it) and could support "
-    "a counter-message to a post of this type. Answer \"no\" if the passage only gives "
-    "a general definition of sexism or hate speech, or reports facts that are not "
-    "about this category."
+    "Judge whether the passage is about the specific behaviour described in the "
+    "query and contains information that would help respond to it."
 )
 
 

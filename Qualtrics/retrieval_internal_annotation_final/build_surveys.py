@@ -14,7 +14,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-RUN_ID = "edos-v2-words-clean-v4-20261104"
+RUN_ID = "edos-v2-words-clean-v4b-20261104"
 INPUT_DIR = ROOT / "data/card_creation_comparison_edos_v2_words_clean_v4_20261104/runs" / RUN_ID / "reranking"
 ANNOTATORS = ("marem", "arianna", "marta")
 TOP_K = 4
