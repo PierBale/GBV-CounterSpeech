@@ -1,0 +1,50 @@
+{
+  "editorial_rules_version": "3.0",
+  "old_run": "edos-v2-words-20261104",
+  "new_run": "edos-v2-words-clean-20261104",
+  "before": {
+    "chunks": 3805,
+    "bibliographic_or_note_heading": 225,
+    "contents_heading": 8,
+    "acknowledgements_heading": 13,
+    "directory_heading": 3,
+    "max_body_words": 1199
+  },
+  "after": {
+    "chunks": 3579,
+    "bibliographic_or_note_heading": 76,
+    "contents_heading": 3,
+    "acknowledgements_heading": 0,
+    "directory_heading": 0,
+    "max_body_words": 706
+  },
+  "audit_rules": {
+    "graphic_description_line": 815,
+    "isbn_only": 2,
+    "copyright_notice": 2,
+    "publisher_boilerplate": 6,
+    "contents_entries": 136,
+    "acknowledgements_section": 71,
+    "below_minimum_words": 643,
+    "repeated_running_title": 738,
+    "page_number_with_running_title": 396,
+    "explicit_page_footer": 41,
+    "repeated_tagged_running_title": 192,
+    "explicit_page_header": 47,
+    "editorial_section": 113,
+    "bibliographic_entry": 952,
+    "organisation_directory_section": 6,
+    "cover_credit": 4,
+    "explicit_page_marker": 26,
+    "html_contents_table": 4
+  },
+  "source_hashes": {
+    "data\\card_creation_comparison_edos_v2_words_20261104\\chunks.jsonl": "1c6c6cdc911231138b118335db3ecbe48a10a9791d715523328b074f1a3f3423",
+    "data\\card_creation_comparison_edos_v2_words_20261104\\editorial_exclusions.jsonl": "e1caf040f7d7d3a5b5635bee48f5e6aafdb63561380e74bbfa5d497e81bb1766",
+    "data\\card_creation_comparison_edos_v2_words_clean_20261104\\chunks.jsonl": "b66d2a8a9559cb98da91dbce7808ed49e139e8ba483dcd32cd318d2a8eb81ad3",
+    "data\\card_creation_comparison_edos_v2_words_clean_20261104\\editorial_exclusions.jsonl": "4ca700e0418f75c473b4e926a9a2c5bd85654d2d460f5af0de55387e2d6511cc"
+  },
+  "subsection_merging_changed": false,
+  "min_chunk_words": 100,
+  "limitations": "Heuristic filtering, not semantic relevance classification. Bibliographic/note headings can contain useful text; remaining mixed/ambiguous entries are retained. Three retained Contents chunks are substantive introduction text."
+}

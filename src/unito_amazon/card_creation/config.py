@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from typing import Literal
 
 from pydantic import AliasChoices, BaseModel, ConfigDict, Field, model_validator
 
@@ -28,6 +29,7 @@ class CardCreationConfig(BaseModel):
     source_metadata_path: Path | None = None
     queries_path: Path | None = None
     chunk_tokenizer_model: str | None = None
+    chunk_size_unit: Literal["tokens", "words"] = "tokens"
     editorial_filter_enabled: bool = True
     include_section_titles: bool = True
     generate_evidence: bool = True
@@ -40,6 +42,7 @@ class CardCreationConfig(BaseModel):
     llama_tier: str = "agentic"
     llama_version: str = "2026-09-13"
     min_chunk_tokens: int = Field(default=100, ge=1)
+    min_chunk_words: int = Field(default=100, ge=1)
     long_chunk_warning_tokens: int = Field(default=2000, ge=1)
     embedding_model: str = "Qwen/Qwen3-Embedding-4B"
     embedding_batch_size: int = Field(default=4, ge=1)
@@ -72,8 +75,14 @@ class CardCreationConfig(BaseModel):
         return self.dense_top_j
 
     @property
-    def chunk_tokenizer(self) -> str:
+    def chunk_tokenizer(self) -> str | None:
+        if self.chunk_size_unit == "words":
+            return None
         return self.chunk_tokenizer_model or self.embedding_model
+
+    @property
+    def min_chunk_size(self) -> int:
+        return self.min_chunk_words if self.chunk_size_unit == "words" else self.min_chunk_tokens
 
     @property
     def pipeline_id(self) -> str:

@@ -21,7 +21,7 @@ DEPENDENCIES = {
 }
 CONFIG_FIELDS = {
     "parse": ("pdf_dir", "markdown_dir", "llama_base_url", "llama_tier", "llama_version"),
-    "chunk": ("markdown_dir", "source_metadata_path", "min_chunk_tokens", "chunk_tokenizer_model", "editorial_filter_enabled", "include_section_titles"),
+    "chunk": ("markdown_dir", "source_metadata_path", "chunk_size_unit", "min_chunk_words", "min_chunk_tokens", "chunk_tokenizer_model", "editorial_filter_enabled", "include_section_titles"),
     "index": ("embedding_model", "embedding_max_tokens", "include_section_titles"),
     "dense": ("labels_path", "queries_path", "dense_top_j", "embedding_model", "embedding_max_tokens", "include_section_titles"),
     "rerank": ("reranker_model", "reranker_max_tokens", "include_section_titles"),
@@ -95,6 +95,8 @@ class StageCache:
             }
             for stage, fields in CONFIG_FIELDS.items()
         }
+        unused = "min_chunk_tokens" if config.chunk_size_unit == "words" else "min_chunk_words"
+        self.settings["chunk"]["parameters"].pop(unused)
         self._validated: set[str] = set()
         if config.model_scoped_artifacts:
             # Each stage validates its own settings and upstream signatures lazily.

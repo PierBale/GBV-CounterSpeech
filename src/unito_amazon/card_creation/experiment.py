@@ -12,7 +12,7 @@ from .retrieval import index_chunks, retrieve_passages
 
 
 def run_experiment(config: CardCreationConfig, force_reindex: bool = False, overwrite: bool = False):
-    # Freeze the tokenizer before changing embedding models; chunk exactly once.
+    # Token mode freezes a common tokenizer; word mode needs none. Chunk once.
     common = config.model_copy(update={
         "chunk_tokenizer_model": config.chunk_tokenizer,
         "model_scoped_artifacts": True,

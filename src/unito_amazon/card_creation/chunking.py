@@ -3,6 +3,8 @@ import re
 import warnings
 from collections.abc import Callable
 from itertools import groupby
+from html.parser import HTMLParser
+from typing import Literal
 
 from .config import CardCreationConfig
 from .cache import StageCache
@@ -12,6 +14,27 @@ from .layout import strip_layout_noise
 from .passage_text import compose_passage_text
 from .progress import report
 from .schema import Chunk, Source
+
+
+WORD_COUNT_METHOD = "Unicode words/numbers; internal apostrophes and hyphens retained; HTML tags excluded"
+WORD_PATTERN = re.compile(r"[^\W_]+(?:['’\-‐‑][^\W_]+)*", re.UNICODE)
+
+
+class _VisibleText(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+
+    def handle_data(self, data):
+        self.parts.append(data)
+
+
+def count_words(text: str) -> int:
+    """Count visible words and numbers, ignoring markup and punctuation-only spans."""
+    parser = _VisibleText()
+    parser.feed(text)
+    parser.close()
+    return len(WORD_PATTERN.findall(" ".join(parser.parts)))
 
 
 def markdown_paragraphs(
@@ -59,6 +82,7 @@ def aggregate_paragraphs(
     paragraphs: list[tuple[int, tuple[str, ...], str]],
     count_tokens: Callable[[str], int],
     minimum: int = 100,
+    *, size_unit: Literal["tokens", "words"] = "tokens",
 ) -> list[dict]:
     """Greedily aggregate adjacent short paragraphs, without overlap or splits."""
     chunks = []
@@ -69,7 +93,7 @@ def aggregate_paragraphs(
             "text": text,
             "paragraph_ids": [item[0] for item in items],
             "section_path": list(items[0][1]),
-            "token_count": count_tokens(text),
+            ("word_count" if size_unit == "words" else "token_count"): count_tokens(text),
         }
 
     # Removed layout/editorial material does not split a surviving section.
@@ -95,7 +119,7 @@ def aggregate_paragraphs(
                 previous = section_chunks[-1]
                 previous["text"] += "\n\n" + residual["text"]
                 previous["paragraph_ids"] += residual["paragraph_ids"]
-                previous["token_count"] = count_tokens(previous["text"])
+                previous["word_count" if size_unit == "words" else "token_count"] = count_tokens(previous["text"])
             else:
                 section_chunks.append(residual)
         chunks.extend(section_chunks)
@@ -104,8 +128,9 @@ def aggregate_paragraphs(
 
 def build_document_chunks(
     paragraphs: list[tuple[int, tuple[str, ...], str]], source: Source,
-    count_tokens: Callable[[str], int], minimum: int = 100,
+    count_tokens: Callable[[str], int] | None = None, minimum: int = 100,
     include_section_titles: bool = True, audit: list[dict] | None = None,
+    *, size_unit: Literal["tokens", "words"] = "tokens",
 ) -> list[Chunk]:
     """Materialize complete model inputs, enforcing the configured minimum.
 
@@ -113,25 +138,33 @@ def build_document_chunks(
     fragment into an eligible evidence passage. Unmergeable sections are
     excluded with their full body in the audit, never silently discarded.
     """
+    counter = count_words if size_unit == "words" else count_tokens
+    if counter is None:
+        raise ValueError("Token-based chunking requires a token counter.")
+    size_key = "word_count" if size_unit == "words" else "token_count"
     result = []
-    for item in aggregate_paragraphs(paragraphs, count_tokens, minimum):
+    for item in aggregate_paragraphs(paragraphs, counter, minimum, size_unit=size_unit):
         body = item["text"]
         text = compose_passage_text(body, item["section_path"], include_section_titles)
-        token_count = count_tokens(text)
-        if item["token_count"] < minimum or token_count < minimum:
+        size = counter(text)
+        body_size = item[size_key]
+        if body_size < minimum or size < minimum:
             if audit is not None:
                 audit.append({
                     "action": "excluded", "rules_version": EDITORIAL_RULES_VERSION,
-                    "rule_id": "below_minimum_tokens", "minimum_tokens": minimum,
+                    "rule_id": f"below_minimum_{size_unit}", f"minimum_{size_unit}": minimum,
                     "paragraph_ids": item["paragraph_ids"], "section_path": item["section_path"],
                     "paragraph_text": body, "text": text,
-                    "body_token_count": item["token_count"], "token_count": token_count,
+                    f"body_{size_key}": body_size, size_key: size,
                 })
             continue
         result.append(Chunk(
             chunk_id="chunk_" + fingerprint([source.source_id, item["paragraph_ids"], body])[:24],
-            source=source, text=text, body_text=body, token_count=token_count,
-            body_token_count=item["token_count"], paragraph_ids=item["paragraph_ids"],
+            source=source, text=text, body_text=body,
+            token_count=size if size_unit == "tokens" else None,
+            body_token_count=body_size if size_unit == "tokens" else None,
+            word_count=count_words(text), body_word_count=count_words(body),
+            paragraph_ids=item["paragraph_ids"],
             section_path=item["section_path"],
         ))
     return result
@@ -145,18 +178,18 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
     )
     if ticket.mode == "cached":
         return
-    from transformers import AutoTokenizer
     report("chunk", f"Ricerca Markdown in {config.markdown_dir}")
     paths = sorted(config.markdown_dir.rglob("*.md"))
     if not paths:
         raise ValueError(f"No Markdown files found in {config.markdown_dir}")
-    report("chunk", f"Trovati {len(paths)} file; minimo effettivo: {config.min_chunk_tokens} token")
-    report("chunk", f"Caricamento del solo tokenizer: {config.chunk_tokenizer}")
-    tokenizer = AutoTokenizer.from_pretrained(config.chunk_tokenizer)
-    report("chunk", "Tokenizer pronto; aggregazione senza overlap o spezzatura dei paragrafi")
-
-    def count_tokens(text: str) -> int:
-        return len(tokenizer.encode(text, add_special_tokens=False))
+    report("chunk", f"Trovati {len(paths)} file; minimo effettivo: {config.min_chunk_size} {config.chunk_size_unit}")
+    count_tokens = None
+    if config.chunk_size_unit == "tokens":
+        from transformers import AutoTokenizer
+        report("chunk", f"Caricamento del solo tokenizer: {config.chunk_tokenizer}")
+        tokenizer = AutoTokenizer.from_pretrained(config.chunk_tokenizer)
+        count_tokens = lambda text: len(tokenizer.encode(text, add_special_tokens=False))
+    report("chunk", "Aggregazione senza overlap o spezzatura dei paragrafi")
 
     metadata = {}
     if config.source_metadata_path:
@@ -193,8 +226,8 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
         retained, excluded = filter_editorial_paragraphs(paragraphs, config.editorial_filter_enabled)
         decisions.extend(excluded)
         file_chunks = build_document_chunks(
-            retained, source, count_tokens, config.min_chunk_tokens,
-            config.include_section_titles, audit=decisions,
+            retained, source, count_tokens, config.min_chunk_size,
+            config.include_section_titles, audit=decisions, size_unit=config.chunk_size_unit,
         )
         markdown_digest = file_sha256(path)
         audit.extend({
@@ -203,7 +236,7 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
         } for decision in decisions)
         report("chunk", f"{len(decisions)} rimozioni/esclusioni registrate nell'audit")
         for chunk in file_chunks:
-            if chunk.token_count > config.long_chunk_warning_tokens:
+            if chunk.token_count is not None and chunk.token_count > config.long_chunk_warning_tokens:
                 warnings.warn(f"Long intact chunk in {relative}: {chunk.token_count} tokens")
             chunks.append(chunk.model_dump(mode="json"))
         report("chunk", f"File {position}/{len(paths)} completato: {len(file_chunks)} chunk")

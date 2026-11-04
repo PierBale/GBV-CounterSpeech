@@ -18,6 +18,62 @@ o quote di diversificazione. La deduplicazione opera separatamente per categoria
 un passaggio può essere selezionato per più label. Le label e le descrizioni iniziali sono in `edos_labels.json`;
 le descrizioni sono quelle già utilizzate nel progetto e possono essere riviste.
 
+## Chunking per numero di parole
+
+La revisione con filtri editoriali 3.0 usa `config.edos-v2-words-clean.json`,
+output `data/card_creation_comparison_edos_v2_words_clean_20261104/` e run
+`edos-v2-words-clean-20261104`. Conserva il minimo di 100 parole e i confini
+delle sottosezioni. Esclude intestazioni esatte di ringraziamenti e directory
+di membri; riconosce indici testuali, anche con righe a capo, e tabelle con
+titoli e numeri di pagina. Se un paragrafo contiene sia la tabella dell'indice
+sia testo introduttivo, rimuove solo la tabella.
+
+Le citazioni vengono escluse soltanto con sintassi bibliografica riconoscibile
+in sezioni bibliografiche o note numerate. Le note discorsive e i blocchi misti
+ambigui vengono conservati. Non basta contenere un URL o trovarsi sotto
+`Notes`/`Contents` per essere esclusi. Le decisioni, con testo originale,
+regola e ID del paragrafo, sono registrate in `editorial_exclusions.jsonl`;
+le rimozioni parziali hanno `action: trimmed`. Sono euristiche conservative,
+non una classificazione semantica della rilevanza.
+
+Da `src`, nel job GPU:
+
+```bash
+python -u -m unito_amazon.card_creation experiment \
+  --config unito_amazon/card_creation/config.edos-v2-words-clean.json \
+  --no-generate-evidence --run-id edos-v2-words-clean-20261104
+```
+
+Il nuovo confronto EDOS usa `config.edos-v2-words.json`, con
+`"chunk_size_unit": "words"` e `"min_chunk_words": 100`. Il minimo riguarda il
+corpo: i titoli non possono rendere ammissibile un frammento breve. I paragrafi
+adiacenti vengono aggregati nella stessa sezione; la coda breve viene assorbita
+dal chunk precedente. Una sezione interamente sotto soglia viene registrata
+nell'audit come `below_minimum_words`. I paragrafi lunghi restano interi, senza
+overlap né lunghezza massima in parole.
+
+Il conteggio usa parole e numeri Unicode, ignora i tag HTML e la punteggiatura
+isolata e mantiene apostrofi/trattini interni (`women’s`, `gender-based`). I chunk
+salvano `body_word_count` e `word_count`; i conteggi di token sono `null`, perché
+in questa modalità non viene caricato alcun tokenizer durante il chunking.
+Embedding e reranking mantengono i controlli sui propri limiti di token.
+
+Il corpus viene segmentato una sola volta prima delle quattro combinazioni:
+il contenuto e gli ID dei chunk sono uguali per tutti gli embedder e reranker.
+I risultati sono isolati in `data/card_creation_comparison_edos_v2_words_20261104/`,
+con run `edos-v2-words-20261104`. PDF, Markdown e definizioni sono riutilizzati
+dal corpus già preparato in `data/card_creation_comparison_edos_v2_20261104/`.
+Le configurazioni precedenti conservano il default `chunk_size_unit: tokens`,
+`min_chunk_tokens` e il tokenizer comune esplicito.
+
+Da `src`, sul nodo GPU:
+
+```bash
+python -u -m unito_amazon.card_creation experiment \
+  --config unito_amazon/card_creation/config.edos-v2-words.json \
+  --no-generate-evidence --run-id edos-v2-words-20261104
+```
+
 ## Esperimenti di retrieval e reranking
 
 Il comando `experiment` orchestra gli stessi stadi di chunking, indicizzazione,

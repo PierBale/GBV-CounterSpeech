@@ -70,6 +70,85 @@ class EditorialFilterTests(unittest.TestCase):
         paragraphs = [(1, ("IMPRINT",), "logo: WHO")]
         self.assertEqual(filter_editorial_paragraphs(paragraphs, enabled=False), (paragraphs, []))
 
+    def test_acknowledgements_and_explicit_members_directory_are_removed(self):
+        paragraphs = [
+            (1, ("**Acknowledgements**", "Contributors"), "We thank the reviewers."),
+            (2, ("List of WAVE Members <small>(as of 15 December 2025)</small>",), "Directory table."),
+            (3, ("Foreword",), "Important context about violence against women."),
+            (4, ("Acknowledging women's experiences",), "Important findings."),
+        ]
+        retained, audit = filter_editorial_paragraphs(paragraphs, True)
+        self.assertEqual([p[0] for p in retained], [3, 4])
+        self.assertEqual([r["rule_id"] for r in audit], ["acknowledgements_section", "organisation_directory_section"])
+
+    def test_contents_tables_removed_without_losing_mislabelled_introduction(self):
+        table = '<table><tr><td>Introduction</td><td>4</td></tr><tr><td>Methods</td><td>10</td></tr><tr><td>Results</td><td>15</td></tr></table>'
+        body = "Language and communication can promote gender equality."
+        paragraphs = [(1, ("**Contents**",), table), (2, ("Contents",), table + "\n\n" + body),
+                      (3, ("Contents",), body)]
+        retained, audit = filter_editorial_paragraphs(paragraphs, True)
+        self.assertEqual(retained, [(2, ("Contents",), body), paragraphs[2]])
+        self.assertEqual([r["action"] for r in audit], ["excluded", "trimmed"])
+        self.assertEqual(audit[1]["removed_text"], table)
+        self.assertEqual(audit[1]["paragraph_text"], paragraphs[1][2])
+
+    def test_real_data_tables_survive_even_below_contents_heading(self):
+        table = '<table><tr><td>Country</td><td>Prevalence</td></tr><tr><td>A</td><td>15%</td></tr><tr><td>B</td><td>20%</td></tr></table>'
+        paragraphs = [(1, ("Contents",), table), (2, ("Findings",), table)]
+        self.assertEqual(filter_editorial_paragraphs(paragraphs, True), (paragraphs, []))
+
+    def test_wrapped_text_contents_are_removed(self):
+        text = "Introduction 4\n2. Cyber violence against women\nand girls 12\n3. Legal framework 20\nList of tables"
+        retained, audit = filter_editorial_paragraphs([(1, ("Contents",), text)], True)
+        self.assertEqual(retained, [])
+        self.assertEqual(audit[0]["rule_id"], "contents_entries")
+
+    def test_citations_removed_and_explanatory_endnotes_preserved(self):
+        paragraphs = [
+            (1, ("References",), "Smith, A. (2020), Violence against women. London: Publisher."),
+            (2, ("Endnotes",), '1 Human Rights Watch. “Online Violence.” Report, 2023. https://example.org/report'),
+            (3, ("Results",), '<sup>42</sup> Amnesty International (2018), Toxic Twitter. Available at https://example.org/report'),
+            (4, ("Endnotes",), "4 The seven strategies are not mutually exclusive and should not be seen as silos."),
+            (5, ("Endnotes",), "5 WHO (2020) found that violence has long-term consequences. See https://example.org/report"),
+            (6, ("Endnotes",), "6 The survey of women (2020) provides further evidence at https://example.org/report"),
+            (7, ("Results",), "WHO (2020) Violence against women. Available at https://example.org/report"),
+        ]
+        retained, audit = filter_editorial_paragraphs(paragraphs, True)
+        self.assertEqual([p[0] for p in retained], [4, 5, 6, 7])
+        self.assertEqual([r["paragraph_id"] for r in audit], [1, 2, 3])
+        self.assertTrue(all(r["rule_id"] == "bibliographic_entry" for r in audit))
+
+    def test_bare_reference_links_and_ibid_removed_only_with_context(self):
+        paragraphs = [(1, ("References",), "https://example.org/report"),
+                      (2, ("Findings",), "https://example.org/report"),
+                      (3, ("Findings",), "<sup>42</sup> Ibid."),
+                      (4, ("Findings",), "Victims can seek support at https://example.org/support")]
+        retained, audit = filter_editorial_paragraphs(paragraphs, True)
+        self.assertEqual([p[0] for p in retained], [2, 4])
+        self.assertEqual([r["paragraph_id"] for r in audit], [1, 3])
+
+    def test_disabled_filter_also_preserves_contents_and_bibliography(self):
+        paragraphs = [(1, ("Acknowledgements",), "We thank colleagues."),
+                      (2, ("References",), "Smith, A. (2020), Report. https://example.org")]
+        self.assertEqual(filter_editorial_paragraphs(paragraphs, False), (paragraphs, []))
+
+    def test_citation_attached_to_substantive_text_is_preserved(self):
+        mixed = ('17. Council of Europe Commissioner for Human Rights (2020), '
+                 '“Stop cyberviolence against women and girls”, available at https://example.org/report.\n'
+                 '(b) non-consensual taking or producing of intimate images includes upskirting and creepshots.')
+        paragraphs = [(1, ("Findings",), mixed),
+                      (2, ("Endnotes",), '7 Smith, A. (2020), violence affects access to education. https://example.org'),
+                      (3, ("Endnotes",), '8 WHO (2020), Women are exposed to violence in multiple settings. https://example.org')]
+        self.assertEqual(filter_editorial_paragraphs(paragraphs, True), (paragraphs, []))
+
+    def test_unparenthesized_reference_year_and_accessed_link(self):
+        paragraphs = [(1, ("References",), "Unilever. 2016. Girls and Beauty Confidence: The Global Report. https://example.org"),
+                      (2, ("Endnotes",), "9 https://example.org/report accessed on 27 July 2020"),
+                      (3, ("Findings",), "Women were interviewed in 2016. Their experiences informed the survey.")]
+        retained, audit = filter_editorial_paragraphs(paragraphs, True)
+        self.assertEqual([p[0] for p in retained], [3])
+        self.assertEqual([r["paragraph_id"] for r in audit], [1, 2])
+
 
 class PassageContextTests(unittest.TestCase):
     def setUp(self):

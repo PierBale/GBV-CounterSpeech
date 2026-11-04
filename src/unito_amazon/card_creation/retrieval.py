@@ -6,6 +6,7 @@ import numpy as np
 from unito_amazon.retrieval.schema import Document
 
 from .cache import StageCache
+from .chunking import count_words
 from .config import CardCreationConfig
 from .deduplication import (
     DEDUPLICATION_METHOD, SEMDEDUP_REFERENCE, normalized_text_hash, select_nonredundant,
@@ -26,9 +27,23 @@ def load_chunks(config: CardCreationConfig) -> list[Chunk]:
     if len({chunk.chunk_id for chunk in chunks}) != len(chunks):
         raise ValueError("Chunk IDs must be unique; duplicate texts with different IDs are retained.")
     for chunk in chunks:
-        if (chunk.body_text is None or chunk.body_token_count is None
-                or chunk.body_token_count < config.min_chunk_tokens
-                or chunk.token_count < config.min_chunk_tokens):
+        if config.chunk_size_unit == "words":
+            valid_size = (
+                chunk.body_text is not None and chunk.body_word_count is not None
+                and chunk.word_count is not None
+                and chunk.body_word_count == count_words(chunk.body_text)
+                and chunk.word_count == count_words(chunk.text)
+                and chunk.body_word_count >= config.min_chunk_words
+                and chunk.word_count >= config.min_chunk_words
+            )
+        else:
+            valid_size = (
+                chunk.body_text is not None and chunk.body_token_count is not None
+                and chunk.token_count is not None
+                and chunk.body_token_count >= config.min_chunk_tokens
+                and chunk.token_count >= config.min_chunk_tokens
+            )
+        if not valid_size:
             raise ValueError(
                 f"Legacy or undersized chunk {chunk.chunk_id}; rebuild chunk/index or run experiment "
                 "before retrieving with the current minimum and text format."

@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from unito_amazon.card_creation.config import EMBEDDING_MODELS, RERANKING_MODELS, load_config, model_slug
+from unito_amazon.card_creation.config import CardCreationConfig, EMBEDDING_MODELS, RERANKING_MODELS, load_config, model_slug
 from unito_amazon.card_creation.queries import load_queries
 
 DEFAULT_CONFIG = ROOT / "src/unito_amazon/card_creation/config.edos-v2.json"
@@ -107,7 +107,12 @@ def assert_inventory(expected, root=ROOT):
 def verify(config, root=ROOT):
     check_isolation(config, root)
     manifest = json.loads((config.output_dir / "preparation_manifest.json").read_text(encoding="utf-8"))
-    if manifest["configuration"] != portable_config(config, root):
+    # Older preparations omit settings introduced later; apply their legacy defaults.
+    recorded = CardCreationConfig.model_validate(manifest["configuration"]).model_dump(mode="json")
+    for key in PATH_FIELDS:
+        if recorded[key] is not None:
+            recorded[key] = Path(recorded[key]).as_posix()
+    if recorded != portable_config(config, root):
         raise ValueError("Configuration changed after preparation; use a new experiment directory.")
     assert_inventory(manifest["previous_files_sha256"], root)
     assert_inventory(manifest["frozen_inputs_sha256"], root)

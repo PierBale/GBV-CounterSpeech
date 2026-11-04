@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "status": "complete",
+  "signature": "91689d53c72f3db25f9d2cc95bb507740da43a08af9662634d25d31bd3d2302c",
+  "inputs": [
+    {
+      "description": {
+        "kind": "directory",
+        "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown",
+        "patterns": [
+          "*.md",
+          "*.parse.json"
+        ]
+      },
+      "state": {
+        "exists": true,
+        "files": [
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_1.md",
+            "exists": true,
+            "sha256": "030786f8da067b7b9cd11791bd87147230458971b3b05445a23578bc1e2cd0d3"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_10.md",
+            "exists": true,
+            "sha256": "7dd32a4fb485e9407bf6fcd0af1cb383649754d9446bc394d1371b9bb66b0955"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_11.md",
+            "exists": true,
+            "sha256": "a421662e5fb70f89f1267db688a7d3c181ac558ae2202afe7d71394c7e279e46"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_12.md",
+            "exists": true,
+            "sha256": "18027a371f546c5ff31b82d514bb0de1093a955cddc58c61a7ae701cc7fe54c6"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_2.md",
+            "exists": true,
+            "sha256": "7d6c14046fcc3404ff9d45b6bd74cecb7fac066a3f81674b07252e652c2fdc4d"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_26.md",
+            "exists": true,
+            "sha256": "aa92d758beb448e87e36724c441031862db4cef3df0ee6c8b4300118cedfc927"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_28.md",
+            "exists": true,
+            "sha256": "1289aaf5d488e80ee966a760cfbcc057e6dd34122f038277814b8e08ce3a70cb"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_28.parse.json",
+            "exists": true,
+            "sha256": "538a5e6bf559f7a5ef2aff54b6cbe032ad5f256a8c37cd4223e3b9f6b11efe6a"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_29.md",
+            "exists": true,
+            "sha256": "9ef96025a154388227f9d3d52e13470e3975eeeeef4036d3d9ada4dd9964e910"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_29.parse.json",
+            "exists": true,
+            "sha256": "8cc25c4bf404264ee02de0f64fb2a5ab642993d12de7ed8b936c79ba2a132c3a"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_3.md",
+            "exists": true,
+            "sha256": "e529d995362a45946d01a60d768b4cfe46f568fe37f48fe8862927c9ef1fdf08"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_30.md",
+            "exists": true,
+            "sha256": "a2bf12fe728655f4cda5ffd5c5769a2afe9851a5c2e053d710cbbeeb228ea6ad"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_30.parse.json",
+            "exists": true,
+            "sha256": "dcdc0b7f80fd13820d8d3e37446344404f825089991fedb5de0eefeea9b190a2"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_31.md",
+            "exists": true,
+            "sha256": "f939072b7cf0e2195a5197292e85bb886b8045603ccf1b2e76397017057480f6"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_31.parse.json",
+            "exists": true,
+            "sha256": "b26b4e50e34681afcf59fd4ad1657930f84b73e75c80f7dc00d0fcf0bfb861c8"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_32.md",
+            "exists": true,
+            "sha256": "04a423f116e7397cbf468ec7ef9e2147dacd826444af4b11afc40f88257bb4a9"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_32.parse.json",
+            "exists": true,
+            "sha256": "a28d990c129e9ce78ba44031083363de2bb582bae88303a6b8d2d28463269af7"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_4.md",
+            "exists": true,
+            "sha256": "902eea4df75bd9d87258a37b834a471e3663d5477f227201824370c15bb67912"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_5.md",
+            "exists": true,
+            "sha256": "c2182e59533a4edc54d6b88b3c1e414c1da299a4f0f0e74f86c5a60a42858e39"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_6.md",
+            "exists": true,
+            "sha256": "63fd8982a46422a62ca6934470f88bf196178a70dd0a10107a771bd4d22ca766"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_7.md",
+            "exists": true,
+            "sha256": "c04c87578f215bbfc217378c8fe3960d664098f19925eaab66c0df1ab3676416"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_8.md",
+            "exists": true,
+            "sha256": "681469a6d1e2ca88afc383ad55f141d2a798d3befad71e0e6945d454ce92440e"
+          },
+          {
+            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_9.md",
+            "exists": true,
+            "sha256": "b1dc2ee475f346c0e0792432e9152c4f289acb47161882c6d73c4b4aafa814b2"
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_words_clean_20261104\\chunks.jsonl",
+      "exists": true,
+      "sha256": "b66d2a8a9559cb98da91dbce7808ed49e139e8ba483dcd32cd318d2a8eb81ad3"
+    },
+    {
+      "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_words_clean_20261104\\editorial_exclusions.jsonl",
+      "exists": true,
+      "sha256": "4ca700e0418f75c473b4e926a9a2c5bd85654d2d460f5af0de55387e2d6511cc"
+    }
+  ]
+}

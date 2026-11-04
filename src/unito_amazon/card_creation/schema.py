@@ -22,7 +22,9 @@ class Chunk(StrictModel):
     text: str = Field(min_length=1)
     body_text: str | None = None
     body_token_count: int | None = Field(default=None, ge=1)
-    token_count: int = Field(ge=1)
+    token_count: int | None = Field(default=None, ge=1)
+    body_word_count: int | None = Field(default=None, ge=0)
+    word_count: int | None = Field(default=None, ge=0)
     paragraph_ids: list[int]
     section_path: list[str]
     source: Source

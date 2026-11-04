@@ -10,6 +10,7 @@ from .io import append_jsonl, file_sha256, fingerprint, read_jsonl, write_json, 
 from .schema import DensePassage, RetrievalQuery
 from .editorial import EDITORIAL_RULES_VERSION
 from .passage_text import format_chunk_text
+from .chunking import WORD_COUNT_METHOD
 
 
 def timestamp() -> str:
@@ -77,6 +78,7 @@ class RunArtifacts:
             "bge_m3_query_instruction": None,
             "document_instruction": None, "truncation": False,
             "chunk_tokenizer": config.chunk_tokenizer,
+            "chunk_size_unit": config.chunk_size_unit,
             "include_section_titles": config.include_section_titles,
             "passage_format": "Section: <heading 1> > <heading 2>\n\n<body>" if config.include_section_titles else "body",
         }
@@ -89,8 +91,10 @@ class RunArtifacts:
                 "rules_version": EDITORIAL_RULES_VERSION,
                 "audit_path": str(audit_path.relative_to(self.root)),
                 "audit_sha256": file_sha256(audit_path), "audit_records": len(decisions),
-                "below_minimum_chunks": sum(row["rule_id"] == "below_minimum_tokens" for row in decisions),
-                "minimum_body_tokens": config.min_chunk_tokens,
+                "below_minimum_chunks": sum(row["rule_id"] == f"below_minimum_{config.chunk_size_unit}" for row in decisions),
+                "size_unit": config.chunk_size_unit,
+                f"minimum_body_{config.chunk_size_unit}": config.min_chunk_size,
+                "word_count_method": WORD_COUNT_METHOD if config.chunk_size_unit == "words" else None,
             }
         self.save()
 

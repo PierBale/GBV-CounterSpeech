@@ -1,4 +1,59 @@
-# Nuova annotazione EDOS: run edos-v2-20261104
+# Nuova annotazione EDOS: run edos-v2-words-clean-20261104
+
+La revisione corrente aggiunge filtri editoriali conservativi (versione 3.0).
+Usa `config.edos-v2-words-clean.json`, run `edos-v2-words-clean-20261104` e output
+`data/card_creation_comparison_edos_v2_words_clean_20261104/`. Riutilizza i 18
+Markdown già parsificati. Il minimo di 100 parole e i confini delle sottosezioni
+restano invariati. I vecchi chunk e la loro revisione restano nel precedente output.
+
+I filtri escludono ringraziamenti e directory con intestazioni esplicite,
+riconoscono indici testuali/HTML e identificano citazioni bibliografiche nelle
+note o nelle sezioni dedicate. Introduzioni sotto un titolo `Contents`, note
+esplicative e blocchi misti ambigui vengono conservati. Le decisioni sono
+registrate nell'audit, comprese le rimozioni parziali delle tabelle dell'indice.
+
+Nel job precedente, dalla directory `src`, usare:
+
+```bash
+python -u -m unito_amazon.card_creation experiment \
+  --config unito_amazon/card_creation/config.edos-v2-words-clean.json \
+  --no-generate-evidence --run-id edos-v2-words-clean-20261104
+```
+
+Lo script `scripts/run_edos_v2.slurm` usa questa configurazione e genera anche
+QSF e mappa sotto il nuovo output. Per la successiva analisi, usare le nuove
+cartelle `survey/` e `runs/edos-v2-words-clean-20261104/`.
+
+## Versione precedente per parole
+
+Il confronto attuale usa **minimo 100 parole nel corpo**, con
+`config.edos-v2-words.json`, output `data/card_creation_comparison_edos_v2_words_20261104/`
+e run `edos-v2-words-20261104`. I 18 documenti sono già parsificati nel corpus
+`data/card_creation_comparison_edos_v2_20261104/markdown/` e vengono riutilizzati.
+Il conteggio esclude titoli, tag HTML e punteggiatura; parole con apostrofi o
+trattini interni contano una volta. Paragrafi e sezioni restano le unità di base,
+senza suddivisione dei paragrafi lunghi e senza overlap. Le sezioni sotto soglia
+sono registrate nell'audit. Non viene caricato alcun tokenizer per il chunking.
+
+Da `src`, nel job GPU precedente, sostituire il comando finale con:
+
+```bash
+python -u -m unito_amazon.card_creation experiment \
+  --config unito_amazon/card_creation/config.edos-v2-words.json \
+  --no-generate-evidence --run-id edos-v2-words-20261104
+```
+
+Oppure inviare dalla radice `sbatch scripts/run_edos_v2.slurm`: lo script usa ora
+la configurazione per parole e genera anche il questionario nel nuovo output.
+Sul server trasferire il codice aggiornato e il corpus parsificato. La precedente
+configurazione `config.edos-v2.json` rimane disponibile per il confronto a token;
+i suoi output, quelli di `confronto-02` e il parsing non vengono sovrascritti.
+
+Per la futura analisi, usare `data/card_creation_comparison_edos_v2_words_20261104/survey/`
+per risultati, QSF, mappa e output, e il relativo `runs/edos-v2-words-20261104/`
+per i ranking.
+
+## Preparazione precedente e comandi per il run a token
 
 Le 11 definizioni in `src/unito_amazon/card_creation/edos_labels.json` sono ora quelle
 fornite per la nuova annotazione, con gli apostrofi del testo HTML normalizzati.
