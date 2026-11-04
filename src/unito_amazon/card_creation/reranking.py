@@ -38,7 +38,7 @@ class QwenReranker:
     def __init__(
         self, model_name: str = "Qwen/Qwen3-Reranker-4B",
         batch_size: int = 4, max_tokens: int = 32768,
-        device: str | None = None,
+        device: str | None = None, instruction: str | None = None,
     ):
         report("reranker", f"Caricamento tokenizer e modello {model_name}; device={device or 'auto'}")
         import torch
@@ -46,6 +46,8 @@ class QwenReranker:
 
         self.torch = torch
         self.batch_size = batch_size
+        # Overridable only for diagnostics; the pipeline always uses RERANK_INSTRUCTION.
+        self.instruction = instruction or RERANK_INSTRUCTION
         self.max_tokens = max_tokens
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left")
         if self.tokenizer.pad_token_id is None:
@@ -88,7 +90,7 @@ class QwenReranker:
             features = []
             for passage in passages[start : start + self.batch_size]:
                 body = self.tokenizer.encode(
-                    f"<Instruct>: {RERANK_INSTRUCTION}\n<Query>: {query}\n<Document>: {passage}",
+                    f"<Instruct>: {self.instruction}\n<Query>: {query}\n<Document>: {passage}",
                     add_special_tokens=False,
                 )
                 tokens = self.prefix + body + self.suffix
