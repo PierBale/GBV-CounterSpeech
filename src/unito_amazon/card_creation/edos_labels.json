@@ -1,13 +1,13 @@
 {
-  "1.1 threats of harm": "Direct or indirect threats of harm, violence, punishment, or intimidation against women or gendered subjects.",
-  "1.2 incitement and encouragement of harm": "Encouragement, justification, or normalization of causing harm to women or gendered subjects.",
-  "2.1 descriptive attacks": "Negative descriptive generalizations about women or gendered groups.",
-  "2.2 aggressive and emotive attacks": "Aggressive, degrading, or emotionally hostile insults against women, feminists, or gendered subjects.",
-  "2.3 dehumanising attacks & overt sexual objectification": "Dehumanization, animalization, sexual objectification, or reduction of women to sexual or body objects.",
-  "3.1 casual use of gendered slurs, profanities, and insults": "Casual or normalized use of gendered slurs, profanity, and insults.",
-  "3.2 immutable gender differences and gender stereotypes": "Claims presenting gender differences or stereotypes as natural, fixed, biological, or inevitable.",
-  "3.3 backhanded gendered compliments": "Apparently positive but limiting or patronizing gendered compliments, including benevolent sexism.",
-  "3.4 condescending explanations or unwelcome advice": "Paternalistic, condescending, or unsolicited advice based on gender stereotypes.",
-  "4.1 supporting mistreatment of individual women": "Justifying, minimizing, or normalizing mistreatment of individual women, including victim blaming.",
-  "4.2 supporting systemic discrimination against women as a group": "Support for systemic discrimination, restriction of rights, or exclusion of women as a group."
+  "1.1 threats of harm": "Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.",
+  "1.2 incitement and encouragement of harm": "Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.",
+  "2.1 descriptive attacks": "Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.",
+  "2.2 aggressive and emotive attacks": "Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.",
+  "2.3 dehumanising attacks and overt sexual objectification": "Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.",
+  "3.1 casual use of gendered slurs, profanities, and insults": "Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).",
+  "3.2 immutable gender differences and gender stereotypes": "Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.",
+  "3.3 backhanded gendered compliments": "Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.",
+  "3.4 condescending explanations or unwelcome advice": "Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).",
+  "4.1 supporting mistreatment of individual women": "Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.",
+  "4.2 supporting systemic discrimination against women as a group": "Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination."
 }

@@ -1,0 +1,8 @@
+{
+  "pdf_sha256": "e2389fcd84de481601496c427548aeaa5fb9e917a48ce9864264c5e449c3e6a8",
+  "tier": "agentic",
+  "version": "2026-09-13",
+  "base_url": "https://api.cloud.eu.llamaindex.ai",
+  "pdf_file": "en_doc_31.pdf",
+  "parse_job_id": "pjb-gmmahe9c2go9uq8k05evtsg0dlza"
+}

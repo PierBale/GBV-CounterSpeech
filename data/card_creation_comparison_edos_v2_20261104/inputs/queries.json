@@ -1,0 +1,79 @@
+[
+  {
+    "query_id": "query_c5633d7d5e0c1007ed4545ba",
+    "query_text": "Sexism type: 1.1 threats of harm\nDescription: Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.",
+    "edos_label": "1.1 threats of harm",
+    "definition": "Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_e68ec3b1d015bced57e3d96d",
+    "query_text": "Sexism type: 1.2 incitement and encouragement of harm\nDescription: Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.",
+    "edos_label": "1.2 incitement and encouragement of harm",
+    "definition": "Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_d3c8c516184faf27b65ce471",
+    "query_text": "Sexism type: 2.1 descriptive attacks\nDescription: Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.",
+    "edos_label": "2.1 descriptive attacks",
+    "definition": "Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_a5aaec16f663858cebf4bd3f",
+    "query_text": "Sexism type: 2.2 aggressive and emotive attacks\nDescription: Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.",
+    "edos_label": "2.2 aggressive and emotive attacks",
+    "definition": "Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_223b16dfd8f863334d40fd17",
+    "query_text": "Sexism type: 2.3 dehumanising attacks and overt sexual objectification\nDescription: Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.",
+    "edos_label": "2.3 dehumanising attacks and overt sexual objectification",
+    "definition": "Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_96eacb482c436e246c1ee330",
+    "query_text": "Sexism type: 3.1 casual use of gendered slurs, profanities, and insults\nDescription: Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).",
+    "edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "definition": "Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_f06e4fdb53012bce278c4ff1",
+    "query_text": "Sexism type: 3.2 immutable gender differences and gender stereotypes\nDescription: Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.",
+    "edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "definition": "Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_853f16f00e9507f8db9d5318",
+    "query_text": "Sexism type: 3.3 backhanded gendered compliments\nDescription: Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.",
+    "edos_label": "3.3 backhanded gendered compliments",
+    "definition": "Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_911a818a97b10f3b1d6cb99c",
+    "query_text": "Sexism type: 3.4 condescending explanations or unwelcome advice\nDescription: Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).",
+    "edos_label": "3.4 condescending explanations or unwelcome advice",
+    "definition": "Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_296a71fdf181f9dfb527e577",
+    "query_text": "Sexism type: 4.1 supporting mistreatment of individual women\nDescription: Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.",
+    "edos_label": "4.1 supporting mistreatment of individual women",
+    "definition": "Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.",
+    "metadata": {}
+  },
+  {
+    "query_id": "query_e78df7654106f2a8dd0339de",
+    "query_text": "Sexism type: 4.2 supporting systemic discrimination against women as a group\nDescription: Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.",
+    "edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "definition": "Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.",
+    "metadata": {}
+  }
+]

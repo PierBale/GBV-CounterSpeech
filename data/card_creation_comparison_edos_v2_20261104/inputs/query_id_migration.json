@@ -1,0 +1,68 @@
+[
+  {
+    "edos_label": "1.1 threats of harm",
+    "old_query_id": "query_c192db327187de2f00ed39ae",
+    "new_query_id": "query_c5633d7d5e0c1007ed4545ba",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "1.2 incitement and encouragement of harm",
+    "old_query_id": "query_a150fa223fa04dc4b8b04eba",
+    "new_query_id": "query_e68ec3b1d015bced57e3d96d",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "2.1 descriptive attacks",
+    "old_query_id": "query_19307c9d77bd38c0a67bbca1",
+    "new_query_id": "query_d3c8c516184faf27b65ce471",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "2.2 aggressive and emotive attacks",
+    "old_query_id": "query_52cf40365a704814b5aa5c5f",
+    "new_query_id": "query_a5aaec16f663858cebf4bd3f",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "2.3 dehumanising attacks and overt sexual objectification",
+    "old_query_id": "query_9103775bc0213d339ef11fde",
+    "new_query_id": "query_223b16dfd8f863334d40fd17",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+    "old_query_id": "query_2a8b165f9e6851ac08ec294c",
+    "new_query_id": "query_96eacb482c436e246c1ee330",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "3.2 immutable gender differences and gender stereotypes",
+    "old_query_id": "query_19423fe74ca6de41641d2091",
+    "new_query_id": "query_f06e4fdb53012bce278c4ff1",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "3.3 backhanded gendered compliments",
+    "old_query_id": "query_c30b3f55fea4cd82db73cd81",
+    "new_query_id": "query_853f16f00e9507f8db9d5318",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "3.4 condescending explanations or unwelcome advice",
+    "old_query_id": "query_6121999d1009957f569d383e",
+    "new_query_id": "query_911a818a97b10f3b1d6cb99c",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "4.1 supporting mistreatment of individual women",
+    "old_query_id": "query_1590bafe05a8fd4c971e3fd8",
+    "new_query_id": "query_296a71fdf181f9dfb527e577",
+    "definition_changed": true
+  },
+  {
+    "edos_label": "4.2 supporting systemic discrimination against women as a group",
+    "old_query_id": "query_88b0edf9a217bf67a56c9cc5",
+    "new_query_id": "query_e78df7654106f2a8dd0339de",
+    "definition_changed": true
+  }
+]
