@@ -57,7 +57,6 @@ class EditorialFilterTests(unittest.TestCase):
             (1, ("Results",), "Copyright law may affect responses to image-based abuse."),
             (2, ("Results",), "logo: WHO\nSubstantive findings about violence."),
             (3, ("Results",), "| Group | Finding |\n| Women | Exposure to abuse |"),
-            (4, ("References",), "A paper about gender-based violence. 2025."),
             (5, ("Foreword",), "Context about gender-based violence."),
             (6, (), "Preventing violence against women, second edition"),
             (7, ("Copyright",), "A substantive discussion without a publishing notice."),
@@ -116,7 +115,9 @@ class EditorialFilterTests(unittest.TestCase):
         retained, audit = filter_editorial_paragraphs(paragraphs, True)
         self.assertEqual([p[0] for p in retained], [4, 5, 6, 7])
         self.assertEqual([r["paragraph_id"] for r in audit], [1, 2, 3])
-        self.assertTrue(all(r["rule_id"] == "bibliographic_entry" for r in audit))
+        # Reference lists are excluded whole; notes are judged one by one.
+        self.assertEqual([r["rule_id"] for r in audit],
+                         ["reference_list_section", "bibliographic_entry", "bibliographic_entry"])
 
     def test_bare_reference_links_and_ibid_removed_only_with_context(self):
         paragraphs = [(1, ("References",), "https://example.org/report"),

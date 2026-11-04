@@ -5,10 +5,16 @@ import gc
 from .progress import report
 
 
+# Mirrors the annotators' question: is the passage useful to respond to the
+# harm of this specific category? Explicit negatives target the two failure
+# modes of the previous run (generic definitions, off-topic statistics).
 RERANK_INSTRUCTION = (
-    "Given a type of sexism and its description, determine whether the passage "
-    "contains specific, verifiable evidence relevant to the described type and useful "
-    "to counter this type of sexist hate speech."
+    "Given a category of sexist speech and its definition, judge whether the passage "
+    "contains information that directly addresses this specific category (its harms, "
+    "prevalence, why its claims are wrong, or how to respond to it) and could support "
+    "a counter-message to a post of this type. Answer \"no\" if the passage only gives "
+    "a general definition of sexism or hate speech, or reports facts that are not "
+    "about this category."
 )
 
 
@@ -50,6 +56,13 @@ class QwenReranker:
         self.max_tokens = min(max_tokens, self.model.config.max_position_embeddings)
         self.yes_id = self.tokenizer.convert_tokens_to_ids("yes")
         self.no_id = self.tokenizer.convert_tokens_to_ids("no")
+        # Only the two output rows are needed. Projecting the final hidden state
+        # onto them in float32 avoids bf16 logit rounding (steps of ~0.125 at
+        # this magnitude), which produced many tied scores in earlier runs.
+        head = self.model.get_output_embeddings()
+        if getattr(head, "bias", None) is not None:
+            raise ValueError("Unexpected bias in the Qwen reranker output layer.")
+        self.yes_no_weight = head.weight[[self.no_id, self.yes_id]].detach().float()
         self.prefix = self.tokenizer.encode(
             '<|im_start|>system\nJudge whether the Document meets the requirements '
             'based on the Query and the Instruct provided. Note that the answer '
@@ -88,8 +101,10 @@ class QwenReranker:
             inputs = self.tokenizer.pad(features, padding=True, return_tensors="pt")
             inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
             with self.torch.inference_mode():
-                logits = self.model(**inputs, logits_to_keep=1).logits[:, -1, :]
-                yes_no = logits[:, [self.no_id, self.yes_id]].float()
+                # Left padding: position -1 is the last real token of every row.
+                hidden = self.model.get_decoder()(**inputs).last_hidden_state[:, -1, :]
+                weight = self.yes_no_weight.to(hidden.device)
+                yes_no = hidden.float() @ weight.T
                 scores.extend(yes_no.softmax(dim=-1)[:, 1].cpu().tolist())
             report("reranker", f"Batch {batch_number}/{total_batches} completato; {len(scores)}/{len(passages)} punteggi")
         return scores

@@ -1,10 +1,22 @@
 """Deterministic query selection, shared by every retrieval configuration."""
 
 import json
+import re
 
 from .config import CardCreationConfig
 from .io import fingerprint, read_jsonl
 from .schema import RetrievalQuery
+
+
+def default_query_text(label: str, definition: str) -> str:
+    """Label name and definition only.
+
+    No shared "Sexism type:"/"Description:" frame and no EDOS number: identical
+    words in every query pulled generic definitions of sexism to the top for all
+    labels in the edos-v2-words-clean-20261104 run.
+    """
+    name = re.sub(r"^\d+(?:\.\d+)*\s+", "", label)  # "3.3 backhanded ..." -> "backhanded ..."
+    return f"{name.capitalize()}: {definition}"
 
 
 def load_queries(config: CardCreationConfig) -> list[RetrievalQuery]:
@@ -15,7 +27,7 @@ def load_queries(config: CardCreationConfig) -> list[RetrievalQuery]:
     ):
         raise ValueError("Labels JSON must map each category to a non-empty definition.")
     records = read_jsonl(config.queries_path) if config.queries_path else [
-        {"edos_label": label, "query_text": f"Sexism type: {label}\nDescription: {definition}"}
+        {"edos_label": label, "query_text": default_query_text(label, definition)}
         for label, definition in labels.items()
     ]
     queries = []

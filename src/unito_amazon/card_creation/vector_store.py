@@ -12,9 +12,14 @@ from .io import fingerprint
 from .progress import report
 
 
+# Aligned with the annotation criterion (context relevance). It asks for the
+# specific category rather than "verifiable evidence" in general, which in the
+# previous run favoured statistics tables and generic definitions of sexism.
 CHUNK_INSTRUCTION = (
-    "Given a type of sexism and its description, retrieve passages containing "
-    "specific verifiable evidence useful to counter this type of sexist hate speech."
+    "Given a category of sexist speech and its definition, retrieve passages that "
+    "directly address this specific category, such as its harms, its prevalence, "
+    "why its claims are wrong, or how to respond to it, and that could support a "
+    "counter-message to a post of this type."
 )
 CARD_INSTRUCTION = (
     "Given a hateful message, retrieve evidence useful for writing a factual "

@@ -14,8 +14,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-RUN_ID = "edos-v2-words-clean-20261104"
-INPUT_DIR = ROOT / "data/card_creation_comparison_edos_v2_words_clean_20261104/runs" / RUN_ID / "reranking"
+RUN_ID = "edos-v2-words-clean-v4-20261104"
+INPUT_DIR = ROOT / "data/card_creation_comparison_edos_v2_words_clean_v4_20261104/runs" / RUN_ID / "reranking"
 ANNOTATORS = ("marem", "arianna", "marta")
 TOP_K = 4
 COMMON_SIZE = 27
@@ -149,12 +149,23 @@ def split_pool(items, seed=SEED):
     return pools
 
 
+# Source markup allowed outside tables; everything else is shown as text.
+ALLOWED_INLINE_TAG = re.compile(r"&lt;(/?)(sup|sub|br)\s*/?&gt;", re.I)
+
+
+def escape_text(part):
+    """Escape chunk text (a literal "<5%" must not open a tag), keeping sup/sub/br."""
+    return ALLOWED_INLINE_TAG.sub(r"<\1\2>", html.escape(part, quote=False))
+
+
 def render_context(row):
-    text = re.sub(r"^Section:[ \t]*([^\n]*)\n+", r"\1<br><br>", row["text"], count=1)
+    section = re.match(r"^Section:[ \t]*([^\n]*)\n+", row["text"])
+    text = row["text"][section.end():] if section else row["text"]
+    heading = escape_text(section[1]) + "<br><br>" if section else ""
     parts = re.split(r"(<table\b.*?</table>)", text, flags=re.S | re.I)
-    paragraph = "".join(part if part.lower().startswith("<table") else
-                        '<div style="white-space: pre-wrap">' + part + '</div>'
-                        for part in parts if part)
+    paragraph = heading + "".join(part if part.lower().startswith("<table") else
+                                  '<div style="white-space: pre-wrap">' + escape_text(part) + '</div>'
+                                  for part in parts if part)
     return (f'<p><strong>EDOS Label</strong></p><p><strong>{html.escape(row["label"])}</strong>'
             f' – {html.escape(row["definition"])}</p><br>'
             f'<p><strong>Paragraph</strong></p>{paragraph}<br>')

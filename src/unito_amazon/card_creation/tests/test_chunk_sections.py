@@ -11,7 +11,9 @@ class ChunkSectionTests(unittest.TestCase):
             "# Section\n\n## First subsection\n\nFirst paragraph.\n\nSecond paragraph.\n\n"
             "### Detail\n\nDetail paragraph.\n\n## Second subsection\n\nOther paragraph."
         )
-        chunks = aggregate_paragraphs(paragraphs, lambda text: len(text.split()), minimum=100)
+        chunks = aggregate_paragraphs(
+            paragraphs, lambda text: len(text.split()), minimum=100, merge_short_sections=False,
+        )
         self.assertEqual(len(chunks), 3)
         self.assertEqual(chunks[0]["section_path"], ["Section", "First subsection"])
         self.assertEqual(chunks[0]["paragraph_ids"], [1, 2])

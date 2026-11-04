@@ -9,7 +9,7 @@ from typing import Literal
 from .config import CardCreationConfig
 from .cache import StageCache
 from .io import file_sha256, fingerprint, write_jsonl
-from .editorial import EDITORIAL_RULES_VERSION, filter_editorial_paragraphs
+from .editorial import EDITORIAL_RULES_VERSION, clean_body_markup, filter_editorial_paragraphs, plain_heading
 from .layout import strip_layout_noise
 from .passage_text import compose_passage_text
 from .progress import report
@@ -63,67 +63,148 @@ def markdown_paragraphs(
             section = tuple(headings[level] for level in sorted(headings))
             paragraphs.append((len(paragraphs) + 1, section, text))
 
-    for line in markdown.replace("\r\n", "\n").splitlines():
+    lines = markdown.replace("\r\n", "\n").splitlines()
+    caption_open = False
+    for position, line in enumerate(lines):
         match = re.match(r"^\s*(#{1,6})\s+(.+?)\s*#*\s*$", line)
-        if match:
+        if match and is_caption_heading(match.group(2), lines[position + 1:]):
+            # A table/figure caption marked up as a heading: it describes the
+            # following object and must not become the section of later text.
             flush()
+            pending.append(plain_heading(match.group(2)))
+            caption_open = True
+            if audit is not None:
+                audit.append({
+                    "action": "converted", "rules_version": EDITORIAL_RULES_VERSION,
+                    "rule_id": "caption_heading_as_text", "rule_pattern": CAPTION_HEADING,
+                    "line_number": position + 1, "line_text": line,
+                })
+        elif match:
+            flush()
+            caption_open = False
             level = len(match.group(1))
             headings = {key: value for key, value in headings.items() if key < level}
             headings[level] = match.group(2).strip()
         elif not line.strip():
+            if not caption_open:
+                flush()
+        elif re.fullmatch(r"\s*<hr\s*/?>\s*", line, re.I):
             flush()
+            caption_open = False
         else:
+            caption_open = False
             pending.append(line)
     flush()
     return paragraphs
+
+
+# Numbered table/figure captions; other captions only when a table follows.
+CAPTION_HEADING = r"(?:table|figure|fig\.?|chart|graph|map)\s*\d+[a-z]?\b.*"
+WEAK_CAPTION_HEADING = r".*\(\s*%.*|.*%\s*\).*|percentage\s+of\b.*"
+
+
+def is_caption_heading(heading: str, following: list[str]) -> bool:
+    text = plain_heading(heading)
+    if re.fullmatch(CAPTION_HEADING, text, re.I):
+        return True
+    if not re.fullmatch(WEAK_CAPTION_HEADING, text, re.I):
+        return False
+    next_line = next((line for line in following if line.strip()), "")
+    return next_line.lstrip().lower().startswith("<table")
 
 
 def aggregate_paragraphs(
     paragraphs: list[tuple[int, tuple[str, ...], str]],
     count_tokens: Callable[[str], int],
     minimum: int = 100,
-    *, size_unit: Literal["tokens", "words"] = "tokens",
+    *, size_unit: Literal["tokens", "words"] = "tokens", merge_short_sections: bool = True,
 ) -> list[dict]:
-    """Greedily aggregate adjacent short paragraphs, without overlap or splits."""
-    chunks = []
+    """Greedily aggregate adjacent short paragraphs, without overlap or splits.
 
-    def make_chunk(items):
-        text = "\n\n".join(item[2] for item in items)
+    Paragraphs are first aggregated within their own section. A section that
+    stays below the minimum as a whole ("orphan", e.g. a short KEY FINDINGS box)
+    is then merged with the adjacent unit sharing the longest heading prefix
+    (at least the top-level heading; the following unit wins ties, since such
+    boxes usually introduce what follows). The merged chunk takes the common
+    heading prefix as its section; the deeper headings of each merged part are
+    kept as a line in the body, so no source heading is lost. The minimum is
+    always checked on paragraph text only ("evidence" size), never on headings.
+    """
+    size_key = "word_count" if size_unit == "words" else "token_count"
+
+    def evidence_size(items):
+        return count_tokens("\n\n".join(item[2] for item in items))
+
+    def common_prefix(first, second):
+        prefix = []
+        for left, right in zip(first, second):
+            if left != right:
+                break
+            prefix.append(left)
+        return tuple(prefix)
+
+    def make_chunk(items, path):
+        parts, previous = [], tuple(path)
+        for item in items:
+            if tuple(item[1]) != previous:
+                headings = [plain_heading(heading) for heading in item[1][len(path):]]
+                headings = [heading for heading in headings if heading]
+                if headings:
+                    parts.append(" > ".join(headings))
+                previous = tuple(item[1])
+            parts.append(item[2])
+        text = "\n\n".join(parts)
         return {
             "text": text,
             "paragraph_ids": [item[0] for item in items],
-            "section_path": list(items[0][1]),
-            ("word_count" if size_unit == "words" else "token_count"): count_tokens(text),
+            "section_path": list(path),
+            "merged_section_paths": list(dict.fromkeys(tuple(item[1]) for item in items)),
+            "evidence_size": evidence_size(items),
+            size_key: count_tokens(text),
         }
 
+    units = []  # [items, path, is_short], in document order
     # Removed layout/editorial material does not split a surviving section.
-    # Real section paths still delimit aggregation.
-    for _, section_group in groupby(paragraphs, key=lambda item: item[1]):
-        section_chunks = []
+    for path, section_group in groupby(paragraphs, key=lambda item: item[1]):
+        section_units = []
         pending = []
         for paragraph in section_group:
             if count_tokens(paragraph[2]) >= minimum:
-                if pending:
-                    section_chunks.append(make_chunk([*pending, paragraph]))
-                    pending = []
-                else:
-                    section_chunks.append(make_chunk([paragraph]))
+                section_units.append([*pending, paragraph])
+                pending = []
             else:
                 pending.append(paragraph)
-                if count_tokens("\n\n".join(item[2] for item in pending)) >= minimum:
-                    section_chunks.append(make_chunk(pending))
+                if evidence_size(pending) >= minimum:
+                    section_units.append(pending)
                     pending = []
         if pending:
-            residual = make_chunk(pending)
-            if section_chunks:
-                previous = section_chunks[-1]
-                previous["text"] += "\n\n" + residual["text"]
-                previous["paragraph_ids"] += residual["paragraph_ids"]
-                previous["word_count" if size_unit == "words" else "token_count"] = count_tokens(previous["text"])
+            if section_units:
+                section_units[-1] = section_units[-1] + pending
             else:
-                section_chunks.append(residual)
-        chunks.extend(section_chunks)
-    return chunks
+                section_units.append(pending)
+        units.extend([items, tuple(path), evidence_size(items) < minimum] for items in section_units)
+
+    changed = merge_short_sections
+    while changed:
+        changed = False
+        for position, (items, path, short) in enumerate(units):
+            if not short:
+                continue
+            candidates = []
+            for neighbor, is_next in ((position + 1, True), (position - 1, False)):
+                if 0 <= neighbor < len(units):
+                    prefix = common_prefix(path, units[neighbor][1])
+                    if prefix:
+                        candidates.append((len(prefix), is_next, neighbor, prefix))
+            if not candidates:
+                continue
+            _, _, neighbor, prefix = max(candidates)
+            first, last = sorted((position, neighbor))
+            merged = units[first][0] + units[last][0]
+            units[first:last + 1] = [[merged, prefix, evidence_size(merged) < minimum]]
+            changed = True
+            break
+    return [make_chunk(items, path) for items, path, _ in units]
 
 
 def build_document_chunks(
@@ -148,7 +229,8 @@ def build_document_chunks(
         text = compose_passage_text(body, item["section_path"], include_section_titles)
         size = counter(text)
         body_size = item[size_key]
-        if body_size < minimum or size < minimum:
+        # Inline subsection headings of merged sections never count as evidence.
+        if item["evidence_size"] < minimum or body_size < minimum or size < minimum:
             if audit is not None:
                 audit.append({
                     "action": "excluded", "rules_version": EDITORIAL_RULES_VERSION,
@@ -158,6 +240,15 @@ def build_document_chunks(
                     f"body_{size_key}": body_size, size_key: size,
                 })
             continue
+        if len(item["merged_section_paths"]) > 1 and audit is not None:
+            audit.append({
+                "action": "merged", "rules_version": EDITORIAL_RULES_VERSION,
+                "rule_id": "short_section_merged_with_adjacent",
+                "rule_pattern": "orphan section below minimum; longest common heading prefix",
+                "paragraph_ids": item["paragraph_ids"], "section_path": item["section_path"],
+                "merged_section_paths": [list(path) for path in item["merged_section_paths"]],
+                "text": text,
+            })
         result.append(Chunk(
             chunk_id="chunk_" + fingerprint([source.source_id, item["paragraph_ids"], body])[:24],
             source=source, text=text, body_text=body,
@@ -225,6 +316,11 @@ def create_chunks(config: CardCreationConfig, cache: StageCache | None = None) -
         })
         retained, excluded = filter_editorial_paragraphs(paragraphs, config.editorial_filter_enabled)
         decisions.extend(excluded)
+        if config.editorial_filter_enabled:
+            retained = [
+                (paragraph_id, section, cleaned) for paragraph_id, section, text in retained
+                if (cleaned := clean_body_markup(text))
+            ]
         file_chunks = build_document_chunks(
             retained, source, count_tokens, config.min_chunk_size,
             config.include_section_titles, audit=decisions, size_unit=config.chunk_size_unit,

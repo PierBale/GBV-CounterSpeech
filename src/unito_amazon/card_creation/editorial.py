@@ -4,17 +4,41 @@ import re
 from html.parser import HTMLParser
 
 
-EDITORIAL_RULES_VERSION = "3.0"
+EDITORIAL_RULES_VERSION = "4.0"
 
 # Whole heading matches only. Forewords, summaries and explanatory notes survive.
 EDITORIAL_SECTION = r"(?:imprint|disclaimer\s*(?:and\s*)?copyright)"
 ACKNOWLEDGEMENTS_SECTION = r"acknowledg(?:e)?ments?"
 DIRECTORY_SECTION = r"(?:list\s+of\s+(?:[\w&.-]+\s+){0,5}members|directory\s+of\s+(?:organisations|organizations|members))(?:\s*\([^)]*\))?"
-BIBLIOGRAPHIC_SECTION = r"(?:\d+[.)]?\s*)?(?:references|bibliography|endnotes|footnotes|notes|sources used to prepare the factsheet)"
-CONTENTS_SECTION = r"(?:contents|table\s+of\s+contents)"
+# Reference lists contain no explanatory notes: the whole section is excluded.
+REFERENCE_LIST_SECTION = r"(?:\d+[.)]?\s*)?(?:references|bibliography|list\s+of\s+references|works\s+cited)"
+# Note sections mix citations and explanatory notes: judged note by note.
+NOTES_SECTION = r"(?:\d+[.)]?\s*)?(?:endnotes|footnotes|notes|sources used to prepare the factsheet)"
+BIBLIOGRAPHIC_SECTION = rf"(?:{REFERENCE_LIST_SECTION}|{NOTES_SECTION})"
+CONTENTS_SECTION = r"(?:contents|table\s+of\s+contents|list\s+of\s+(?:tables|figures|boxes|charts|graphs|maps|illustrations))"
 CONTENTS_ROW = r".+\S(?:[ \t.]+|[ \t]*/[ \t]*)(?:p\.?[ \t]*)?(?:\d{1,4}|[ivxlcdm]{1,8})"
 HTML_TABLE = re.compile(r"<table\b[^>]*>.*?</table\s*>", re.I | re.S)
-NOTE_MARKER = r"^\s*(?:<sup>\s*\(?\d{1,4}\)?\s*</sup>|\[\d{1,4}\]|\(?\d{1,4}\)?[.)]?\s+)"
+NOTE_MARKER = r"^\s*(?:\(<sup>\s*\d{1,4}\s*</sup>\)|<sup>\s*\(?\d{1,4}\)?\s*</sup>|\[\d{1,4}\]|\(?\d{1,4}\)?[.)]?\s+)"
+# Markers that identify a note anywhere in the body (unlike '1.', which also opens list items).
+STRONG_NOTE_MARKER = r"^\s*(?:\(<sup>\s*\d{1,4}\s*</sup>\)|<sup>\s*\(?\d{1,4}\)?\s*</sup>|\[\d{1,4}\])"
+# Syntactic signs that a note is (or contains) a source reference.
+CITATION_SIGNAL = re.compile(
+    r"https?://|www\.|\bdoi\b|\bavailable\s+(?:at|from|online)\b|\bretrieved\s+from\b|\baccessed\b|"
+    r"\((?:19|20)\d{2}[a-z]?\)|\(n\.d\.\)|\bop\.?\s*cit\b|\bibid\b|\bet\s+al\b|"
+    r",\s*\d{1,4}(?:[–-]\d{1,4})?\.\s*$",
+    re.IGNORECASE,
+)
+# A quoted title: capitalised and short, followed by punctuation (case-sensitive,
+# so quoted legal wording such as “to promote awareness ...” is not a title).
+QUOTED_TITLE = re.compile(r"[“\"‘][A-Z0-9][^”\"’]{2,120}?[.,]?[”\"’]\s*(?:[,.(]|$)")
+EXPLANATORY_NOTE_MIN_WORDS = 10
+LONG_NOTE_MIN_WORDS = 40
+# Lowercase only: capitalised words in quoted titles ("When Women Are ...") do not count.
+PROSE_VERB = re.compile(
+    r"\b(?:is|are|was|were|has|have|had|can|may|must|should|affects?|increases?|reduces?|"
+    r"found|finds|shows?|showed|reports?|reported|estimates?|indicates?|suggests?|"
+    r"provides?|concludes?|demonstrates?|experienced|requires?)\b"
+)
 
 # Whole paragraphs, except explicitly identified publisher boilerplate prefixes.
 PARAGRAPH_RULES = (
@@ -138,10 +162,56 @@ def is_bibliographic_entry(text: str, *, in_bibliography: bool) -> bool:
     return False
 
 
+def is_explanatory_note(note: str) -> bool:
+    """Short notes survive only as prose without source-reference syntax; long
+    notes (explanations that end with their source) survive unless the note as
+    a whole is a citation."""
+    plain = visible_text(re.sub(NOTE_MARKER, "", note, count=1, flags=re.I))
+    words = len(re.findall(r"[^\W_]+", plain))
+    if words < EXPLANATORY_NOTE_MIN_WORDS:
+        return False
+    if is_bibliographic_entry(note, in_bibliography=True):
+        return False
+    if words < LONG_NOTE_MIN_WORDS and (CITATION_SIGNAL.search(plain) or QUOTED_TITLE.search(plain)):
+        # A short note with a source survives only if it states something
+        # (a finding or a claim), as with citations attached to findings.
+        return bool(PROSE_VERB.search(re.sub(r"https?://\S+", "", plain)))
+    return True
+
+
+def split_notes(text: str, marker: str, *, wrapped_lines: bool) -> list[tuple[bool, str]] | None:
+    """Split a block whose first line is a note into (is_note, text) units.
+
+    In note sections an unmarked line continues the previous note. In body
+    text it does not: parsers insert page-bottom notes mid-sentence, so the
+    following unmarked line is usually the body resuming and is always kept.
+    """
+    lines = [line for line in text.splitlines() if line.strip()]
+    if not lines or not re.match(marker, lines[0], re.I):
+        return None
+    units: list[tuple[bool, str]] = []
+    for line in lines:
+        if re.match(marker, line, re.I):
+            units.append((True, line))
+        elif wrapped_lines and units and units[-1][0]:
+            units[-1] = (True, units[-1][1] + "\n" + line)
+        elif units and not units[-1][0]:
+            units[-1] = (False, units[-1][1] + "\n" + line)
+        else:
+            units.append((False, line))
+    return units
+
+
+def in_section(section_path: tuple[str, ...], pattern: str) -> bool:
+    return any(re.fullmatch(pattern, visible_text(plain_heading(h)), re.I) for h in section_path)
+
+
 def exclusion_rule(section_path: tuple[str, ...], text: str) -> tuple[str, str] | None:
     headings = [visible_text(plain_heading(heading)) for heading in section_path]
     if any(re.fullmatch(EDITORIAL_SECTION, heading, re.IGNORECASE) for heading in headings):
         return "editorial_section", EDITORIAL_SECTION
+    if any(re.fullmatch(REFERENCE_LIST_SECTION, heading, re.I) for heading in headings):
+        return "reference_list_section", REFERENCE_LIST_SECTION
     if any(re.fullmatch(ACKNOWLEDGEMENTS_SECTION, heading, re.I) for heading in headings):
         return "acknowledgements_section", ACKNOWLEDGEMENTS_SECTION
     if any(re.fullmatch(DIRECTORY_SECTION, heading, re.I) for heading in headings):
@@ -157,6 +227,30 @@ def exclusion_rule(section_path: tuple[str, ...], text: str) -> tuple[str, str] 
         if re.fullmatch(pattern, text, re.IGNORECASE):
             return name, pattern
     return None
+
+
+LEADING_NOTE_MARKER = re.compile(
+    r"^([ \t]*)(?:\(<sup>\s*(\d{1,4})\s*</sup>\)|<sup>\s*\(?(\d{1,4})\)?\s*</sup>)[ \t]*", re.M | re.I,
+)
+INLINE_NOTE_REFERENCE = re.compile(
+    r"[ \t]*\(<sup>\s*\d{1,4}(?:\s*[,–-]\s*\d{1,4})*\s*</sup>\)"
+    r"|[ \t]*<sup>\s*\(?\d{1,4}(?:\s*[,–-]\s*\d{1,4})*\)?\s*</sup>",
+    re.I,
+)
+
+
+def clean_body_markup(text: str) -> str:
+    """Remove presentation residue; words of the source are never changed.
+
+    Applied after the editorial rules, which rely on note markers. Line-initial
+    note markers become plain "[n]"; inline note calls are dropped; parser
+    strikethrough and underline/small tags carry no meaning in these sources.
+    """
+    text = LEADING_NOTE_MARKER.sub(lambda m: f"{m[1]}[{m[2] or m[3]}] ", text)
+    text = INLINE_NOTE_REFERENCE.sub("", text)
+    text = text.replace("~~", "")
+    text = re.sub(r"</?(?:u|small)\s*>", "", text, flags=re.I)
+    return text.strip()
 
 
 def filter_editorial_paragraphs(paragraphs: list[tuple[int, tuple[str, ...], str]], enabled: bool):
@@ -183,6 +277,34 @@ def filter_editorial_paragraphs(paragraphs: list[tuple[int, tuple[str, ...], str
                 if not cleaned:
                     continue
                 text = cleaned
+        if enabled and not in_section(section, REFERENCE_LIST_SECTION):
+            # Notes are judged one by one: explanatory notes stay, references go.
+            notes_section = in_section(section, NOTES_SECTION)
+            marker = NOTE_MARKER if notes_section else STRONG_NOTE_MARKER
+            units = split_notes(text, marker, wrapped_lines=notes_section)
+            if units:
+                notes = [unit for is_note, unit in units if is_note]
+                kept = [unit for is_note, unit in units if not is_note or is_explanatory_note(unit)]
+                if len(kept) < len(units):
+                    cleaned = "\n\n".join(kept)
+                    removed_notes = [note for note in notes if note not in kept]
+                    excluded.append({
+                        "action": "trimmed" if kept else "excluded",
+                        "rules_version": EDITORIAL_RULES_VERSION,
+                        "rule_id": (
+                            "bibliographic_entry"
+                            if all(is_bibliographic_entry(note, in_bibliography=True) for note in removed_notes)
+                            else "non_explanatory_notes"
+                        ),
+                        "rule_pattern": f"note marker; < {EXPLANATORY_NOTE_MIN_WORDS} words or citation syntax",
+                        "paragraph_id": paragraph_id, "section_path": list(section),
+                        "paragraph_text": text,
+                        "removed_text": "\n\n".join(note for note in notes if note not in kept),
+                        "retained_text": cleaned,
+                    })
+                    if not kept:
+                        continue
+                    text = cleaned
         rule = exclusion_rule(section, text) if enabled else None
         if rule is None:
             retained.append((paragraph_id, section, text))

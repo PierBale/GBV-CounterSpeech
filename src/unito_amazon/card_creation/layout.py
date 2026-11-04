@@ -12,8 +12,19 @@ from .editorial import EDITORIAL_RULES_VERSION, plain_heading
 
 
 GRAPHIC_LINE = r"(?:icon|logo):\s*\S.*"
-EXPLICIT_PAGE = r"(?:Page\s+\d+(?:\s*[►|]\s*.*)?|(?:.*?►\s*)Page\s+\d+)"
-PAGE_FIRST = r"(?P<page>\d{1,4})(?:\s*[|►]\s*|\s+)(?P<title>.+)"
+# LlamaParse describes visuals with a lowercase type prefix ("photo: ...").
+# Case-sensitive, so capitalised captions written in the source ("Image: ...") survive.
+GENERATED_VISUAL_LINE = r"(?:photo|illustration|image|map|chart|diagram):\s*\S.*"
+# Council of Europe layouts use either ► (U+25BA) or ▶ (U+25B6) as separator.
+PAGE_ARROW = "[►▶]"
+EXPLICIT_PAGE = rf"(?:Page\s+\d+(?:\s*(?:{PAGE_ARROW}|\|)\s*.*)?|(?:.*?{PAGE_ARROW}\s*)Page\s+\d+)"
+PAGE_FIRST = rf"(?P<page>\d{{1,4}})(?:\s*(?:\||{PAGE_ARROW})\s*|\s+)(?P<title>.+)"
+HORIZONTAL_RULE = r"<hr\s*/?>"
+# A page-bottom note starts with an explicit marker; 'N.' alone is accepted only
+# inside a region opened by a horizontal rule.
+NOTE_LINE = re.compile(
+    r"^\s*(?:\(<sup>\s*\d{1,4}\s*</sup>\)|<sup>\s*\(?\d{1,4}\)?\s*</sup>|\(\d{1,4}\)|\[\d{1,4}\]|\d{1,4}\.)\s+\S"
+)
 PAGE_LAST = r"(?P<title>.+?)\s+(?P<page>\d{1,4})"
 TAGGED_PAGE_BLOCK = (
     r"^[ \t]*<page_(?P<kind>header|footer)>"
@@ -116,6 +127,8 @@ def strip_layout_noise(markdown: str) -> tuple[str, list[dict]]:
     for position, text in enumerate(visible):
         if re.fullmatch(GRAPHIC_LINE, text, re.IGNORECASE):
             discard(position, "graphic_description_line", GRAPHIC_LINE)
+        elif re.fullmatch(GENERATED_VISUAL_LINE, text):
+            discard(position, "generated_visual_description", GENERATED_VISUAL_LINE)
         elif re.fullmatch(EXPLICIT_PAGE, text, re.IGNORECASE):
             discard(position, "explicit_page_marker", EXPLICIT_PAGE)
             page_positions.add(position)
@@ -146,15 +159,52 @@ def strip_layout_noise(markdown: str) -> tuple[str, list[dict]]:
                     title_signature=key, observed_pages=sorted(observations[key]))
             page_positions.add(page_position)
 
+    # Page-bottom notes: a horizontal rule followed only by marker-initial notes
+    # (with their wrapped continuation lines). The rule itself is layout; the
+    # notes are moved out of the body flow, so a sentence interrupted by the page
+    # break can be rejoined, and reinserted as separate paragraphs afterwards.
+    relocated: dict[int, list[list[int]]] = {}
+    note_positions = set()
+    for position, line in enumerate(lines):
+        if position in removed or not re.fullmatch(HORIZONTAL_RULE, line.strip(), re.IGNORECASE):
+            continue
+        notes, current, cursor = [], None, position + 1
+        while cursor < len(lines):
+            text = lines[cursor]
+            if cursor in removed or not text.strip():
+                if cursor not in removed:
+                    current = None
+                cursor += 1
+                continue
+            if re.match(r"^\s*#{1,6}\s+", text) or text.strip() == "---":
+                break
+            if NOTE_LINE.match(text):
+                current = [cursor]
+                notes.append(current)
+            elif current is not None:
+                current.append(cursor)
+            else:
+                break
+            cursor += 1
+        discard(position, "footnote_separator", HORIZONTAL_RULE)
+        if notes:
+            relocated[position] = notes
+            note_positions.update(item for note in notes for item in note)
+
+    def is_padding(index):
+        return (index in removed or index in note_positions
+                or not visible[index] or visible[index] == "---")
+
     skipped = set(removed)
+    insertions: dict[int, list[str]] = defaultdict(list)
     # A recognized page break is a layout boundary, not a paragraph or section
     # boundary. Remove surrounding padding only when joining two body fragments;
     # a genuine Markdown heading on either side retains its structural boundary.
-    for position in page_positions:
+    for position in sorted(page_positions):
         left, right = position - 1, position + 1
-        while left >= 0 and (left in removed or not visible[left] or visible[left] == "---"):
+        while left >= 0 and is_padding(left):
             left -= 1
-        while right < len(lines) and (right in removed or not visible[right] or visible[right] == "---"):
+        while right < len(lines) and is_padding(right):
             right += 1
         if left < 0 or right >= len(lines):
             continue
@@ -162,6 +212,27 @@ def strip_layout_noise(markdown: str) -> tuple[str, list[dict]]:
             continue
         skipped.update(range(left + 1, right))
         removed[position]["joined_body_fragments"] = True
-    return "\n".join(line for position, line in enumerate(lines) if position not in skipped), [
-        removed[position] for position in sorted(removed)
-    ]
+        # Notes skipped by this join reappear after the rejoined paragraph.
+        end = right
+        while end + 1 < len(lines) and lines[end + 1].strip() and not re.match(r"^\s*#{1,6}\s+", lines[end + 1]):
+            end += 1
+        for rule_position, notes in relocated.items():
+            if left < rule_position < right:
+                for note in notes:
+                    insertions[end].extend(["", *(lines[item] for item in note)])
+                    discard(note[0], "page_footnote_relocated", "notes after a horizontal rule",
+                            action="relocated", note_text="\n".join(lines[item] for item in note),
+                            inserted_after_line=end + 1)
+    # Notes not crossed by a join stay in place, each as its own paragraph.
+    for rule_position, notes in relocated.items():
+        for note in notes:
+            if note[0] in skipped:
+                continue
+            insertions[note[-1]].append("")
+    output = []
+    for position, line in enumerate(lines):
+        if position not in skipped:
+            output.append(line)
+        if position in insertions:
+            output.extend([*insertions[position], ""])
+    return "\n".join(output), [removed[position] for position in sorted(removed)]
