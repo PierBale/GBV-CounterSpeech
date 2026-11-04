@@ -48,7 +48,7 @@
         },
         "1": {
           "Type": "Standard",
-          "Description": "1.1 threats of harm | Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+          "Description": "1.1 threats of harm | Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44",
           "ID": "BL_final_0002",
           "BlockElements": [
             {
@@ -68,7 +68,7 @@
         },
         "2": {
           "Type": "Standard",
-          "Description": "1.1 threats of harm | Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+          "Description": "1.1 threats of harm | Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1",
           "ID": "BL_final_0003",
           "BlockElements": [
             {
@@ -88,7 +88,7 @@
         },
         "3": {
           "Type": "Standard",
-          "Description": "1.1 threats of harm | Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+          "Description": "1.1 threats of harm | Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b",
           "ID": "BL_final_0004",
           "BlockElements": [
             {
@@ -108,7 +108,7 @@
         },
         "4": {
           "Type": "Standard",
-          "Description": "1.2 incitement and encouragement of harm | Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+          "Description": "1.2 incitement and encouragement of harm | Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e",
           "ID": "BL_final_0005",
           "BlockElements": [
             {
@@ -128,7 +128,7 @@
         },
         "5": {
           "Type": "Standard",
-          "Description": "1.2 incitement and encouragement of harm | Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+          "Description": "1.2 incitement and encouragement of harm | Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841",
           "ID": "BL_final_0006",
           "BlockElements": [
             {
@@ -148,7 +148,7 @@
         },
         "6": {
           "Type": "Standard",
-          "Description": "1.2 incitement and encouragement of harm | Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+          "Description": "1.2 incitement and encouragement of harm | Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230",
           "ID": "BL_final_0007",
           "BlockElements": [
             {
@@ -168,7 +168,7 @@
         },
         "7": {
           "Type": "Standard",
-          "Description": "2.1 descriptive attacks | Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+          "Description": "2.1 descriptive attacks | Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16",
           "ID": "BL_final_0008",
           "BlockElements": [
             {
@@ -188,7 +188,7 @@
         },
         "8": {
           "Type": "Standard",
-          "Description": "2.1 descriptive attacks | Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+          "Description": "2.1 descriptive attacks | Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e",
           "ID": "BL_final_0009",
           "BlockElements": [
             {
@@ -208,7 +208,7 @@
         },
         "9": {
           "Type": "Standard",
-          "Description": "2.2 aggressive and emotive attacks | Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+          "Description": "2.2 aggressive and emotive attacks | Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7",
           "ID": "BL_final_0010",
           "BlockElements": [
             {
@@ -228,7 +228,7 @@
         },
         "10": {
           "Type": "Standard",
-          "Description": "2.2 aggressive and emotive attacks | Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+          "Description": "2.2 aggressive and emotive attacks | Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e",
           "ID": "BL_final_0011",
           "BlockElements": [
             {
@@ -248,7 +248,7 @@
         },
         "11": {
           "Type": "Standard",
-          "Description": "2.2 aggressive and emotive attacks | Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+          "Description": "2.3 dehumanising attacks and overt sexual objectification | Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d",
           "ID": "BL_final_0012",
           "BlockElements": [
             {
@@ -268,7 +268,7 @@
         },
         "12": {
           "Type": "Standard",
-          "Description": "2.3 dehumanising attacks and overt sexual objectification | Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+          "Description": "2.3 dehumanising attacks and overt sexual objectification | Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7",
           "ID": "BL_final_0013",
           "BlockElements": [
             {
@@ -288,7 +288,7 @@
         },
         "13": {
           "Type": "Standard",
-          "Description": "2.3 dehumanising attacks and overt sexual objectification | Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+          "Description": "2.3 dehumanising attacks and overt sexual objectification | Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335",
           "ID": "BL_final_0014",
           "BlockElements": [
             {
@@ -308,7 +308,7 @@
         },
         "14": {
           "Type": "Standard",
-          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e",
           "ID": "BL_final_0015",
           "BlockElements": [
             {
@@ -328,7 +328,7 @@
         },
         "15": {
           "Type": "Standard",
-          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049",
           "ID": "BL_final_0016",
           "BlockElements": [
             {
@@ -348,7 +348,7 @@
         },
         "16": {
           "Type": "Standard",
-          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56",
           "ID": "BL_final_0017",
           "BlockElements": [
             {
@@ -368,7 +368,7 @@
         },
         "17": {
           "Type": "Standard",
-          "Description": "3.2 immutable gender differences and gender stereotypes | Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+          "Description": "3.2 immutable gender differences and gender stereotypes | Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24",
           "ID": "BL_final_0018",
           "BlockElements": [
             {
@@ -388,7 +388,7 @@
         },
         "18": {
           "Type": "Standard",
-          "Description": "3.2 immutable gender differences and gender stereotypes | Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+          "Description": "3.3 backhanded gendered compliments | Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb",
           "ID": "BL_final_0019",
           "BlockElements": [
             {
@@ -408,7 +408,7 @@
         },
         "19": {
           "Type": "Standard",
-          "Description": "3.3 backhanded gendered compliments | Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+          "Description": "3.3 backhanded gendered compliments | Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419",
           "ID": "BL_final_0020",
           "BlockElements": [
             {
@@ -428,7 +428,7 @@
         },
         "20": {
           "Type": "Standard",
-          "Description": "3.3 backhanded gendered compliments | Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+          "Description": "3.3 backhanded gendered compliments | Q43522782264965f3-chunk_1596ed71ffde7043811e3e00",
           "ID": "BL_final_0021",
           "BlockElements": [
             {
@@ -448,7 +448,7 @@
         },
         "21": {
           "Type": "Standard",
-          "Description": "3.3 backhanded gendered compliments | Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+          "Description": "3.4 condescending explanations or unwelcome advice | Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142",
           "ID": "BL_final_0022",
           "BlockElements": [
             {
@@ -468,7 +468,7 @@
         },
         "22": {
           "Type": "Standard",
-          "Description": "3.4 condescending explanations or unwelcome advice | Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+          "Description": "3.4 condescending explanations or unwelcome advice | Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d",
           "ID": "BL_final_0023",
           "BlockElements": [
             {
@@ -488,7 +488,7 @@
         },
         "23": {
           "Type": "Standard",
-          "Description": "3.4 condescending explanations or unwelcome advice | Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+          "Description": "3.4 condescending explanations or unwelcome advice | Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537",
           "ID": "BL_final_0024",
           "BlockElements": [
             {
@@ -508,7 +508,7 @@
         },
         "24": {
           "Type": "Standard",
-          "Description": "4.1 supporting mistreatment of individual women | Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+          "Description": "4.1 supporting mistreatment of individual women | Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9",
           "ID": "BL_final_0025",
           "BlockElements": [
             {
@@ -528,7 +528,7 @@
         },
         "25": {
           "Type": "Standard",
-          "Description": "4.1 supporting mistreatment of individual women | Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+          "Description": "4.1 supporting mistreatment of individual women | Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea",
           "ID": "BL_final_0026",
           "BlockElements": [
             {
@@ -548,7 +548,7 @@
         },
         "26": {
           "Type": "Standard",
-          "Description": "4.2 supporting systemic discrimination against women as a group | Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+          "Description": "4.1 supporting mistreatment of individual women | Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0",
           "ID": "BL_final_0027",
           "BlockElements": [
             {
@@ -568,7 +568,7 @@
         },
         "27": {
           "Type": "Standard",
-          "Description": "4.2 supporting systemic discrimination against women as a group | Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+          "Description": "4.2 supporting systemic discrimination against women as a group | Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a",
           "ID": "BL_final_0028",
           "BlockElements": [
             {
@@ -578,6 +578,46 @@
             {
               "Type": "Question",
               "QuestionID": "QID85"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "28": {
+          "Type": "Standard",
+          "Description": "4.2 supporting systemic discrimination against women as a group | Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207",
+          "ID": "BL_final_0029",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID86"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID87"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "29": {
+          "Type": "Standard",
+          "Description": "4.2 supporting systemic discrimination against women as a group | Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0",
+          "ID": "BL_final_0030",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID88"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID89"
             }
           ],
           "Options": {
@@ -735,10 +775,20 @@
             "ID": "BL_final_0028",
             "Type": "Standard",
             "FlowID": "FL_29"
+          },
+          {
+            "ID": "BL_final_0029",
+            "Type": "Standard",
+            "FlowID": "FL_30"
+          },
+          {
+            "ID": "BL_final_0030",
+            "Type": "Standard",
+            "FlowID": "FL_31"
           }
         ],
         "Properties": {
-          "Count": 29
+          "Count": 31
         },
         "FlowID": "FL_1",
         "Type": "Root"
@@ -770,7 +820,7 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "QC",
       "PrimaryAttribute": "Survey Question Count",
-      "SecondaryAttribute": "56",
+      "SecondaryAttribute": "60",
       "TertiaryAttribute": null,
       "Payload": null
     },
@@ -958,11 +1008,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID32",
-      "SecondaryAttribute": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+      "SecondaryAttribute": "Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">KEY FINDINGS: WOMEN’S EXPERIENCE OF VIOLENCE BY ANY PERPETRATOR > EXTENT OF VIOLENCE AGAINST WOMEN BY ANY PERPETRATOR > Physical violence (including being threatened with physical violence)<br><br>— Threatened to harm you in a way that frightened you?\n\n— Pushed, shoved or pulled your hair on purpose in a way that hurt or frightened you?\n\n— Thrown something at you or slapped you on purpose in a way that hurt or frightened you?\n\n— Beat you with his/her fist or with an object or kicked you on purpose in a way that hurt or frightened you?\n\n— Burned you on purpose?\n\n16\n\n— Tried to suffocate you or strangled you on purpose?\n\n— Threatened to use or actually used a knife, gun or acid or something similar against you?\n\n— Ever used force against you in any other way than mentioned above, in a way that hurt or frightened you?</div><br>",
-        "DataExportTag": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p>A framework to prevent violence against women<br><br><div style=\"white-space: pre-wrap\">1. The problem\n\nViolence and the threat of violence against women (VAW), including those women experiencing multiple and intersecting forms of discrimination. Such violence is a form of discrimination against women which impairs or nullifies the enjoyment by women of human rights and fundamental freedoms. It is also an obstacle to national development and poverty reduction goals. Its health, social and economic impacts extend to children, communities and society as whole.\n\n2. Conditions that need to be addressed to eliminate the problem\n\n1. Individual, relationship, community, organizational and societal/l structures, laws and policies, practices and social norms that:\n(a) Support gender inequality, as manifested in:\n discrimination against women, and their unequal access to power and resources in public and private life;\n harmful constructions of masculinity (e.g. entitled, aggressive, dominant) and femininity (e.g. subordinate, sexualized, objectified);\n stereotyped gender roles; and\n negative male peer associations and weak peer associations among women and girls\n(b) Condone, tolerate, perpetuate and/or positively portray the use of VAW.\n\n2. Exposure to violence in the family, the community, organizations and institutions\n\n3. Other circumstances and contexts that interact or intersect with gender inequality to increase the probability of violence being perpetrated against women (e.g. poverty, alcohol misuse).</div><br>",
+        "DataExportTag": "Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -973,7 +1023,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+        "QuestionDescription": "Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1007,12 +1057,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID33",
-      "SecondaryAttribute": "Notes_Q32a9eda75047ddf0",
+      "SecondaryAttribute": "Notes_Q4dc5f2ecb14a8bb7",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q32a9eda75047ddf0",
+        "DataExportTag": "Notes_Q4dc5f2ecb14a8bb7",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1022,7 +1072,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q32a9eda75047ddf0",
+        "QuestionDescription": "Notes_Q4dc5f2ecb14a8bb7",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1043,11 +1093,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID34",
-      "SecondaryAttribute": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+      "SecondaryAttribute": "Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Digital Threats: The Landscape of TFGBV > Targeted Violence against Influential Women<br><br>In a survey of women parliamentarians from 39 countries conducted by the Inter-Parliamentary Union, 81 percent reported that they experienced violence on digital platforms.<sup>52</sup>\n\nAmong women parliamentarians in the European Union, 59 percent had been the target of sexist attacks on online social networks.<sup>53</sup>\n\nIn member states of the African Union, 42 percent of women politicians have received online death threats, rape threats, or threats of beatings and abductions.<sup>54</sup>\n\nIn Southeast Asia, 50 percent of women politicians have faced online abuse.<sup>55</sup>\n\nFor women who are not part of the ethnic majority in a given country, the abuse intensifies. In the United Kingdom, a study found that nearly half of all abuse against female members of Parliament (MPs) on X (formerly Twitter) targeted Diane Abbot, the first black woman elected to the British Parliament, and even when she was removed from the sample, women of color received 30 percent more abuse than white women.<sup>56</sup></div><br>",
-        "DataExportTag": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p>Intersectional Equality Factors &gt; Economic Harms<br><br><div style=\"white-space: pre-wrap\">Economic harms can be caused intentionally or unintentionally by the abuser. Certain abusers act deliberately and state openly that their intention is to harm their target financially, such as by trying to make them lose their jobs or become unemployable, whereas in other cases, the economic impacts are secondary to the violence (Jane 2018). Online harassment has led to problems at work, problems at school and financial losses, and has made it difficult for some people to find a job due to the reputational damage caused by the abuse and increased stressors impacting work productivity (Citron 2014; Angus Reid 2016). In a report from Malawi, 76.1 percent of women who</div><br>",
+        "DataExportTag": "Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1058,7 +1108,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+        "QuestionDescription": "Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1092,12 +1142,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID35",
-      "SecondaryAttribute": "Notes_Q234cf8e0cacf42d9",
+      "SecondaryAttribute": "Notes_Q363a0511ec4837f6",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q234cf8e0cacf42d9",
+        "DataExportTag": "Notes_Q363a0511ec4837f6",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1107,7 +1157,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q234cf8e0cacf42d9",
+        "QuestionDescription": "Notes_Q363a0511ec4837f6",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1128,11 +1178,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID36",
-      "SecondaryAttribute": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+      "SecondaryAttribute": "Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Page 10 ▶ Preventing and combating sexism\n\nsexist behaviour, comments and jokes are at one end of the continuum. However, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as, in particular, sexist hate speech, may escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence, rape or potentially lethal action. Other consequences may include loss of resources, self-harm or suicide. Tackling sexism is thus part of States’ positive obligation to guarantee human rights, gender equality and to prevent violence against women and girls in accordance with international human rights law and, for States Parties, the Istanbul Convention.</div><br>",
-        "DataExportTag": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p>5. SURVEYS AND ADMINISTRATIVE DATA SOURCES (1–2 pages) &gt; Cyber harassment<br><br><div style=\"white-space: pre-wrap\">Components:\n\nUnwanted sexually explicit emails or text (or online) messages;\n Inappropriate or offensive advances on social networking websites or internet chat rooms;\n Threats of physical and/or sexual violence by email or text (or online) message;\n Hate speech, meaning language that denigrates, insults, threatens or targets an individual based on her identity (gender) and other traits (e.g. sexual orientation or disability).\n\nSub-components:\n\nUse of force (use of threats / abuse of vulnerability, power, trust)\n Perpetrated by someone belonging to the intimate sphere (spouse, cohabiting partner, non-cohabiting partner, former spouse, ex partner, parents, between spouses or people who live together or have lived together, another member of the family, children, relatives, within the family or domestic unit, in her own home)</div><br>",
+        "DataExportTag": "Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1143,7 +1193,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+        "QuestionDescription": "Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1177,12 +1227,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID37",
-      "SecondaryAttribute": "Notes_Qfa19881a2d5f4619",
+      "SecondaryAttribute": "Notes_Qf545b1b1b8d98f8f",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qfa19881a2d5f4619",
+        "DataExportTag": "Notes_Qf545b1b1b8d98f8f",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1192,7 +1242,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qfa19881a2d5f4619",
+        "QuestionDescription": "Notes_Qf545b1b1b8d98f8f",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1213,11 +1263,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID38",
-      "SecondaryAttribute": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+      "SecondaryAttribute": "Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Online Misogyny, Radicalization, and Violent Extremism<br><br>The language used on these forums is in and of itself enough to cause alarm. A study by the Centre for Countering Digital Hate (CCDH) found that incel (involuntary celibate) forum members post about rape once every 29 minutes and that 89 percent of these posts are supportive of it.<sup>82</sup> Another 5 percent of posters were not morally against rape but instead found it “unimaginative” and expressed their desire to “reduce a woman to nothing.”<sup>83</sup> Between 2021 and\n\n2022, the CCDH also found a 59 percent increase in references to mass murders, primarily centered around the glorification of Elliot Rodgers.<sup>84</sup> In 2014, Rodgers posted a 141-page manifesto before killing six people in a shooting and stabbing spree in California.<sup>85</sup> In his manifesto, he outlined his deep hatred for women and his frustration with his lack of sexual experience; incel forums frequently reference this manifesto, glorifying Rodgers’ acts of violence and encouraging others to do the same.<sup>86</sup> Incel terrorism is on the rise, particularly in predominantly white, English-speaking countries,<sup>87</sup> but extreme violence is not the only way the manosphere manifests.</div><br>",
-        "DataExportTag": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p>Appendix to Recommendation CM/Rec(2019)1 &gt; Guidelines for preventing and combating sexism: measures for implementation &gt; Context<br><br><div style=\"white-space: pre-wrap\">The need to tackle sexism, sexist norms and behaviour and sexist speech is implicit in a number of international and regional instruments. Both the Council of Europe Convention on Preventing and Combating Violence against Women and Domestic Violence (CETS No. 210, Istanbul Convention) and the United Nations Convention on the Elimination of All Forms of Discrimination against Women (CEDAW) recognise a continuum between gender stereotypes, gender inequality, sexism and violence against women and girls. In this way, acts of “everyday” sexism in the form of apparently inconsequential or minor\nsexist behaviour, comments and jokes are at one end of the continuum. However, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as, in particular, sexist hate speech, may escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence, rape or potentially lethal action. Other consequences may include loss of resources, self-harm or suicide. Tackling sexism is thus part of States’ positive obligation to guarantee human rights, gender equality and to prevent violence against women and girls in accordance with international human rights law and, for States Parties, the Istanbul Convention.</div><br>",
+        "DataExportTag": "Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1228,7 +1278,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+        "QuestionDescription": "Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1262,12 +1312,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID39",
-      "SecondaryAttribute": "Notes_Q2f4cd5276d36a91f",
+      "SecondaryAttribute": "Notes_Q4c0edbbd22ccd0cd",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q2f4cd5276d36a91f",
+        "DataExportTag": "Notes_Q4c0edbbd22ccd0cd",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1277,7 +1327,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q2f4cd5276d36a91f",
+        "QuestionDescription": "Notes_Q4c0edbbd22ccd0cd",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1298,11 +1348,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID40",
-      "SecondaryAttribute": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+      "SecondaryAttribute": "Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
-        "DataExportTag": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p>4. Towards common definitions of cyber violence against women and girls &gt; Proposed definition<br><br><div style=\"white-space: pre-wrap\">attacks perpetrated against more vulnerable groups of women and girls (including journal- ists, politicians, activists, LGBTIQ+, etc.) are detected and more insights are gained into the phenomenon.\n\nOnline gender-based hate speech is defined as content posted and shared through ICT means that:\n\nis hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or\n\nspreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).\n\nIt can also involve posting and sharing, through ICT means, violent content that consists of portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles.\n\nThe acts can:\n\na. start online and continue offline;\n\nb. start offline and continue online;\n\nc. can be perpetrated by an unknown person / group of people who are unknown to the victim; or\n\nd. can be perpetrated by a person or/ group of people who are known to the victim.</div><br>",
+        "DataExportTag": "Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1313,7 +1363,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+        "QuestionDescription": "Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1347,12 +1397,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID41",
-      "SecondaryAttribute": "Notes_Qe89f23f7da336f95",
+      "SecondaryAttribute": "Notes_Qeb36ba85a34172b0",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qe89f23f7da336f95",
+        "DataExportTag": "Notes_Qeb36ba85a34172b0",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1362,7 +1412,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qe89f23f7da336f95",
+        "QuestionDescription": "Notes_Qeb36ba85a34172b0",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1383,11 +1433,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID42",
-      "SecondaryAttribute": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+      "SecondaryAttribute": "Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Obligations arising under the Istanbul Convention in relation to violence against women and domestic violence in its digital dimension > Online sexual harassment<br><br>(d) sexualised bullying constitutes behaviours such as circulating gossip or rumours about a victim’s alleged sexual behaviour, posting sexualised comments under the victim’s posts or photos, impersonating a victim and sharing sexual content or sexually harassing others, thus impacting their reputation and/or livelihood, or “outing” someone without their consent with the purpose of scaring, threatening and body shaming; and\n\n(e) cyberflashing consists of sending unsolicited sexual images via dating or messaging applications, texts, or using Airdrop or Bluetooth technologies.\n\n39. Some of the above behaviours are commonly known as sexist hate speech. As recognised by the Council of Europe Recommendation on preventing and combating sexism, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as sexist hate speech, which often constitutes a first step in the process towards physical violence, may also escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence or rape, thus falling within the remit of Article 40 of the Istanbul Convention.</div><br>",
-        "DataExportTag": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p>1.2. Defining cyber violence and hate speech online against women &gt; 1.2.2. Academic and civil society definitions &gt; Sexist hate speech<br><br><div style=\"white-space: pre-wrap\">Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.\n\n[31] This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101\n____________________________________________________________________________\n\nPosting and sharing violent content consist of portraying women as sexual objects or targets of violence.\n\nUse of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.</div><br>",
+        "DataExportTag": "Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1398,7 +1448,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+        "QuestionDescription": "Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1432,12 +1482,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID43",
-      "SecondaryAttribute": "Notes_Q42221b7d797ac6e5",
+      "SecondaryAttribute": "Notes_Q50ae91220e91108f",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q42221b7d797ac6e5",
+        "DataExportTag": "Notes_Q50ae91220e91108f",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1447,7 +1497,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q42221b7d797ac6e5",
+        "QuestionDescription": "Notes_Q50ae91220e91108f",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1468,11 +1518,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID44",
-      "SecondaryAttribute": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+      "SecondaryAttribute": "Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br>Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men.<sup>9</sup> It impinges upon equality and dignity at work.<sup>10</sup>\n\nSexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.</div><br>",
-        "DataExportTag": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p>Causes and forms of sexist hate speech<br><br><div style=\"white-space: pre-wrap\">Multiple factors contribute to sexist hate speech, including the prevalence of patriarchal societies, the dissemination of degrading messages about women or girls, violent and hypersexualised images, notably in the media, and the expectations about women and men’s sexuality and roles in society. Gender inequalities in the media sector are also part of the problem. In 2015, women made up 25 % of the people in the news. This shows that women are seriously under-represented in the media which often presents messages and images of women and men that reinforce gender stereotypes. Social media, education, stereotypical textbooks and toys, the family and social circles, as well as art (cinema, music, videos, books) are all influenced by existing social and cultural norms. They therefore tend to perpetuate gender stereotypes and to contribute to the persistence of sexist hate speech.\n\nFunction of women in news stories\n\n(% Europe, Global Media Monitoring Project, 2015)\n\n</div><table><tr><th>Function</th><th>Percentage (%)</th></tr>\n<tr><th>Expert or commentator</th><td>18</td></tr>\n<tr><th>Spokesperson</th><td>22</td></tr>\n<tr><th>Subject</th><td>25</td></tr>\n<tr><th>Eye witness</th><td>28</td></tr>\n<tr><th>Personal experience</th><td>38</td></tr>\n<tr><th>Popular Opinion</th><td>42</td></tr></table><div style=\"white-space: pre-wrap\">\nLack of awareness, unwillingness (among the public at large, authorities and private stakeholders) to address the issue, gaps in legislation and policies and problems with their enforcement, particularly concerning new media, as well as anonymity online, also contribute to a climate of impunity for abusers. Some ideologies such as extreme nationalism and conservatism, and anti-feminist movements, are fertile grounds to spread hate towards women, especially when they do not conform to traditional gender roles.</div><br>",
+        "DataExportTag": "Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1483,7 +1533,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionDescription": "Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1517,12 +1567,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID45",
-      "SecondaryAttribute": "Notes_Q624a6b86d88b0fb9",
+      "SecondaryAttribute": "Notes_Qa75a785ebe8b3005",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q624a6b86d88b0fb9",
+        "DataExportTag": "Notes_Qa75a785ebe8b3005",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1532,7 +1582,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q624a6b86d88b0fb9",
+        "QuestionDescription": "Notes_Qa75a785ebe8b3005",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1553,11 +1603,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID46",
-      "SecondaryAttribute": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+      "SecondaryAttribute": "Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech<br><br>Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.\n\n<sup>31</sup> This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101\n____________________________________________________________________________\n\nPosting and sharing violent content consist of portraying women as sexual objects or targets of violence.\n\nUse of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.</div><br>",
-        "DataExportTag": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p>What is sexual harassment?<br><br><div style=\"white-space: pre-wrap\">Some of the sexist behaviour listed in the Council of Europe recommendation on combating sexism, such as ‘derogatory comments, objectification, sexist humour’ can be categorised as sexual harassment as defined under Article 12a of the Staff Regulations.\n\nAbout a third of women who faced sexual harassment in the EU experienced it in the workplace.\n\nAdditionally, any ongoing pattern of sexist behaviour can create an environment that is ‘intimidating, hostile, offensive or disturbing,’ as defined under Article 12a of the Staff Regulations.\n\nSuch behaviour is also illegal under several EU directives and prohibited under the Council of Europe Convention on Preventing and Combating Violence against Women and Domestic Violence (the Istanbul Convention). EU law distinguishes between sex-based harassment, which is any unwanted behaviour directed to someone because they are a woman or a man, and sexual harassment, which involves unwanted conduct of a sexual nature. Sex-based harassment includes sexual harassment and some sexist behaviour.</div><br>",
+        "DataExportTag": "Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1568,7 +1618,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+        "QuestionDescription": "Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1602,12 +1652,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID47",
-      "SecondaryAttribute": "Notes_Q3def227a679f862c",
+      "SecondaryAttribute": "Notes_Q06ba934f98cca3e4",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q3def227a679f862c",
+        "DataExportTag": "Notes_Q06ba934f98cca3e4",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1617,7 +1667,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q3def227a679f862c",
+        "QuestionDescription": "Notes_Q06ba934f98cca3e4",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1638,11 +1688,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID48",
-      "SecondaryAttribute": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+      "SecondaryAttribute": "Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br><hr/>\n\n9. Higher Council for professional equality between men and women (2016), “Kit to act against sexism – Three tools for the world of work”, available at <u>https://rm.coe.int/16806fbc1e</u>.\n10. Article 26.2 of the European Social Charter (revised) requires parties “to promote awareness, information and prevention of recurrent reprehensible or distinctly negative and offensive actions directed against individual workers in the workplace or in relation to work and to take all appropriate measures to protect workers from such conduct”.\n\nRecommendation CM/Rec(2019)1 ▶ Page 21\n\nSome workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.</div><br>",
-        "DataExportTag": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p>1.2. Defining cyber violence and hate speech online against women &gt; 1.2.1. UN, EU and national definitions<br><br><div style=\"white-space: pre-wrap\">UN definitions\n\nThe UN Committee on the Elimination of Discrimination against Women (CEDAW) General Recommendation 19 defines gender-based violence as “violence that is directed against a woman because she is a woman or that affects women disproportionately. It includes acts that inflict physical, mental or sexual harm or suffering, threats of such acts, coercion and other deprivations of liberty”.\n\nCEDAW General Recommendation 35 extends the definition coined under General Recommendation 19 by adding that “...Gender-based violence against women (...) manifests in a continuum of multiple, interrelated and recurring forms, in a range of settings, from private to public, including technology-mediated settings”. And “Gender-based violence against women occurs in all spaces and spheres of human interaction, whether public or private (...) and their redefinition through technology-mediated environments, such as contemporary forms of violence occurring in the Internet and digital spaces”.</div><br>",
+        "DataExportTag": "Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1653,7 +1703,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionDescription": "Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1687,12 +1737,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID49",
-      "SecondaryAttribute": "Notes_Q1f182ec6d9db7ee9",
+      "SecondaryAttribute": "Notes_Qb1f387788df9ef6f",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q1f182ec6d9db7ee9",
+        "DataExportTag": "Notes_Qb1f387788df9ef6f",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1702,7 +1752,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q1f182ec6d9db7ee9",
+        "QuestionDescription": "Notes_Qb1f387788df9ef6f",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1723,11 +1773,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID50",
-      "SecondaryAttribute": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+      "SecondaryAttribute": "Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech<br><br>Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.\n\n<sup>31</sup> This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101\n____________________________________________________________________________\n\nPosting and sharing violent content consist of portraying women as sexual objects or targets of violence.\n\nUse of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.</div><br>",
-        "DataExportTag": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p>Hate Speech<br><br><div style=\"white-space: pre-wrap\">Hate speech can target women because of a combination of their identity factors or, more specifically, their gender. In Malawi, 46.3 percent of women surveyed had been subjected to hate speech online (Malanga 2020). Gendered hate speech made up 3.1 percent of reports to internet platforms in the European Union (Van der Wilk 2018). Online hate reinforces systemic inequalities, makes it difficult for certain groups to engage online, and can spill over into the physical world, causing violence and even death. In a case in Pakistan, a woman who had been the target of hate speech was shot at in public due to hate speech aimed at her online (Bukhari 2014).</div><br>",
+        "DataExportTag": "Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1738,7 +1788,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+        "QuestionDescription": "Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1772,12 +1822,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID51",
-      "SecondaryAttribute": "Notes_Q51b6cb78a3fd2632",
+      "SecondaryAttribute": "Notes_Q1c8ccf55cd6d2844",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q51b6cb78a3fd2632",
+        "DataExportTag": "Notes_Q1c8ccf55cd6d2844",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1787,7 +1837,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q51b6cb78a3fd2632",
+        "QuestionDescription": "Notes_Q1c8ccf55cd6d2844",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1808,11 +1858,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID52",
-      "SecondaryAttribute": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+      "SecondaryAttribute": "Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.B. Internet, social media and online sexist hate speech<br><br>Online sexism is rampant throughout Europe, with women disproportionately affected – especially young women and girls, women journalists, politicians, public figures and women’s human rights defenders. One aspect of online sexism is adversely commenting on expressed views or opinions. While attacks on men are more often based on their professional opinions or competence, women are more likely to be subject to sexist and sexualised abuse and invective, the extremity of which may be magnified by the anonymity offered by the internet. Online attacks not only affect women’s dignity but may also prevent women, including in the workplace, from expressing opinions and result in pushing them out of online spaces, undermining the right to free speech and opinion in a democratic society, limiting professional opportunities and reinforcing the gendered democratic deficit. Another aspect is that the digital age has deepened the scrutiny to which women’s bodies, speech and activism are subjected. In addition, sexist misuse of social media – such as posting of intimate visual material without the consent of those depicted – is a form of violence that needs to be addressed.</div><br>",
-        "DataExportTag": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p>Combating Sexist Hate Speech<br><br><div style=\"white-space: pre-wrap\">Council of Europe\nGender Equality Strategy\n\nSexist hate speech is rampant in Europe and women are disproportionately targeted. Sexist hate speech takes place online and offline and in all forms of social interaction: at school, in the family, in social circles, in the public space, at work, via emails, websites and (social) media. Although it has taken a new dimension through the Internet, the root causes of sexist hate speech preceded the technology and are fundamentally linked to the persistent unequal power relations between women and men. Sexist hate speech is a form of violence against women and girls that perpetuates and exacerbates gender inequality. Both knowledge and policy action at all levels need to be developed to combat sexist hate speech.\n\nThe Council of Europe’s Gender Equality Strategy 2014-2017 explicitly includes tackling sexism as a form of hate speech under its strategic objective 1 – combating gender stereotypes and sexism.</div><br>",
+        "DataExportTag": "Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1823,7 +1873,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+        "QuestionDescription": "Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1857,12 +1907,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID53",
-      "SecondaryAttribute": "Notes_Q1ec960205b2c35d8",
+      "SecondaryAttribute": "Notes_Q4eaec01d7ae212c9",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q1ec960205b2c35d8",
+        "DataExportTag": "Notes_Q4eaec01d7ae212c9",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1872,7 +1922,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q1ec960205b2c35d8",
+        "QuestionDescription": "Notes_Q4eaec01d7ae212c9",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1893,11 +1943,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID54",
-      "SecondaryAttribute": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+      "SecondaryAttribute": "Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. Conceptualising and defining cyber violence against women and girls > 2.1. State of the art <sup>(1)</sup> > Cyber harassment / cyber bullying<br><br>Cyber harassment is a persistent and repeated course of conduct targeted at a specific person, designed to cause severe emotional distress and often a fear of physical harm (Council of Europe Cybercrime Convention Committee, 2018).\n\nIn cyber bullying, the focus is placed almost exclusively on the experiences of children, adolescents and young adults, characterised by legal and emotional vulnerability (Patchin, 2015; Wang et al., 2019).\n\nOnline hate speech targeting women usually involves sexualisation, objectification and body-shaming comments, as well as degrading comments and rape threats, often from members of incel communities (Santos, Amaral and Simões, 2020).\n\nSignificantly, the EU Code of Conduct’s definition of hate speech online does not mention gender, sexism or misogyny as it largely focuses on racism and xenophobia (European Commission, 2016).\n2. Conceptualising and defining cyber violence against women and girls</div><br>",
-        "DataExportTag": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p>2. Online experiences of gender-based harassment<br><br><div style=\"white-space: pre-wrap\">A. Being online                                         “I remember this one specific incident, when\nGirls who face harassment simply for existing           I was young… I used to get a lot of messages\nonline reported harassment which was mainly sexual      from boys asking me to send nudes or\nin nature:                                              blackmailing me about a picture that I posted\n                                                        that they’re going share it or edit it in a bad\n➜ receiving sexual comments or explicit messages,       way and share it with everyone if I don’t do\n  including propositions of transactional sex,          this or that. Or just generally talking, like\n➜ receiving sexual or explicit photos or images,        saying bad words to me. At that young age it\n                                                        was, honestly, horrible. So, it was the worst\n➜ receiving requests to send photos of themselves,      time in my life, using social media. Between\n  including examples of blackmail,                      the age of 9 and 14.”\n➜ unauthorised sharing of content and/or                               Young woman, 20, Sudan\n  demonstrating knowledge of the girl’s personal       Young women in the qualitative interviews also\n  information.\n                                                       described being sent sexual images, graphic photos\n                                                       of genitalia or pornography:\n “…what happened to me it’s when a guy just\n tried to hold something about me on social             “Actually it happens even if I don’t post\n media, and saying, ‘What currency would you            anything… It’s just like, men have this\n like? Would you like dollars? Would you like           mentality where they can just play around\n euro? What do you want? …You know, just                with you, that kind of thing, they start\n one night I can give you a lot of money that           sending you explicit photos of themselves…\n will change your life. I can give you all the          having a guy just send me a naked photo\n money in this world. Come and fuck you and             of himself… is really freaky.…They just go\n everything.’ Can you imagine such things?              into your inbox: ‘Hey babe,’ and then I open\n Yeah. I felt very bad.”                                this message and I freak out, ’What the hell\n  Young woman, 23, South Sudan                          is happening?’… They are sending you\n                                                        things without your consent, which is just\n                                                        disrespectful.”\n                                                        Young woman, 23, Malawi\nSexual objectification is very much part of a girl’s social media experience, with the way girls are dressed or present themselves online being subject to intense and critical scrutiny.</div><br>",
+        "DataExportTag": "Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1908,7 +1958,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+        "QuestionDescription": "Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -1942,12 +1992,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID55",
-      "SecondaryAttribute": "Notes_Q9e3f549cee2cefd0",
+      "SecondaryAttribute": "Notes_Q30376f88cb1e79a8",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q9e3f549cee2cefd0",
+        "DataExportTag": "Notes_Q30376f88cb1e79a8",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -1957,7 +2007,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q9e3f549cee2cefd0",
+        "QuestionDescription": "Notes_Q30376f88cb1e79a8",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -1978,11 +2028,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID56",
-      "SecondaryAttribute": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+      "SecondaryAttribute": "Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
-        "DataExportTag": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p>Obligations arising under the Istanbul Convention in relation to violence against women and domestic violence in its digital dimension &gt; Online sexual harassment<br><br><div style=\"white-space: pre-wrap\">(d) sexualised bullying constitutes behaviours such as circulating gossip or rumours about a victim’s alleged sexual behaviour, posting sexualised comments under the victim’s posts or photos, impersonating a victim and sharing sexual content or sexually harassing others, thus impacting their reputation and/or livelihood, or “outing” someone without their consent with the purpose of scaring, threatening and body shaming; and\n\n(e) cyberflashing consists of sending unsolicited sexual images via dating or messaging applications, texts, or using Airdrop or Bluetooth technologies.\n\n39. Some of the above behaviours are commonly known as sexist hate speech. As recognised by the Council of Europe Recommendation on preventing and combating sexism, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as sexist hate speech, which often constitutes a first step in the process towards physical violence, may also escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence or rape, thus falling within the remit of Article 40 of the Istanbul Convention.</div><br>",
+        "DataExportTag": "Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -1993,7 +2043,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+        "QuestionDescription": "Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2027,12 +2077,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID57",
-      "SecondaryAttribute": "Notes_Qd245d1ef9f88c751",
+      "SecondaryAttribute": "Notes_Q26bef2b5690d69e3",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qd245d1ef9f88c751",
+        "DataExportTag": "Notes_Q26bef2b5690d69e3",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2042,7 +2092,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qd245d1ef9f88c751",
+        "QuestionDescription": "Notes_Q26bef2b5690d69e3",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2063,11 +2113,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID58",
-      "SecondaryAttribute": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+      "SecondaryAttribute": "Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.2. The impact of cyber violence and hate speech online against women > 3.3.1. Types of online platforms where perpetrations occur<br><br>Two reports point at Twitter’s specific nature that leads to an overload of violent content aimed directly at individual women. The Demos “Misogyny on Twitter” report published in 2014 reveals for example that “of over 100,000 Tweets mentioning ‘rape’ between 26th December 2013 and 9th February\n\n<sup>95</sup> Code of Conduct on countering illegal hate speech online (2018), “Results of the 3rd monitoring exercise”, available at http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=612086\n\n<sup>97</sup> Projet de loi renforçant la lutte contre les violences sexuelles et sexistes (2018), available at http://www.assemblee-nationale.fr/15/projets/pl0778.asp</div><br>",
-        "DataExportTag": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p>YOUTH GUIDE TO END ONLINE GENDER-BASED VIOLENCE &gt; START WITH YOURSELF<br><br><div style=\"white-space: pre-wrap\">Don’t use hate speech, sexist or aggressive language online.\n\nDon’t keep sending messages when a woman has told you no. Recognise that no means no. Do not create multiple accounts to communicate with anyone, this is classified as online stalking.\n\nEducate yourself and others:\n\nBy taking the time to understand the nature, extent, and impact of online gender-based violence, men and boys can effectively educate themselves and others. They can share resources, participate in awareness campaigns, and engage in discussions about respectful online behaviour.\n\nInform yourself of the realities of men’s violence against women online.\n\nSUPPORT VICTIMS AND SURVIVORS:\n\nListen (or read), believe, respect and do not judge.</div><br>",
+        "DataExportTag": "Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2078,7 +2128,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+        "QuestionDescription": "Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2112,12 +2162,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID59",
-      "SecondaryAttribute": "Notes_Qd22e08c5b6e7c74c",
+      "SecondaryAttribute": "Notes_Qc0a791c4dc29f096",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qd22e08c5b6e7c74c",
+        "DataExportTag": "Notes_Qc0a791c4dc29f096",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2127,7 +2177,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qd22e08c5b6e7c74c",
+        "QuestionDescription": "Notes_Qc0a791c4dc29f096",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2148,11 +2198,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID60",
-      "SecondaryAttribute": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+      "SecondaryAttribute": "Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.2. Racist threats<br><br>Seyi Akiwowo, a young British black female politician was targeted by racist hate speech after her short speech at the European Youth Event in 2016. Hate speech deployed against her involved racist, hateful and sexist comments and slurs. Her video was posted on a neo-Nazi site accompanied by calls for mob attacks. Similarly, she “told Amnesty International that the abuse she experienced on Twitter and other social media platforms included racial slurs like ‘ngger’, ‘nggerress’, ‘negro’, references to lynching and being hanged, as well as ‘monkey’, ‘ape’ and being told to ‘die of an STI<sup>76</sup>’”.\n\nIn a worldwide survey of violence against female parliamentarians, the Inter-Parliamentary Union (IPU) reveals how online violence targets black women in power: “A European parliamentarian of African origin recounted how a billboard in her country, paid for by far-right groups, demanded that she be “whitened with bleach and burned alive<sup>77</sup>”.</div><br>",
-        "DataExportTag": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p>Subordination and trivialisation: Patronising language<br><br><div style=\"white-space: pre-wrap\">One example of trivialisation is the additions of diminutive affixes to denote that the referent is female. Gender-sensitive writers should avoid these expressions as they can trivialise women.\n\nGender-sensitive language\n\nTip!\n\nThink about the meaning of the words kitchenette and novelette compared to the words kitchen and novel to see the effect of the -ette suffix.\n\nLanguage which refers to people unknown to you in terms of endearment (‘My dear’, ‘Darling’, ‘Love’, and ‘Dear’ when used in speech) is patronising, condescending and promotes trivialisation. These forms should not be used unless the interlocutor has a close relationship with the speaker.\n\nAnother common way of trivialising women is to refer to adult women as ‘girls’. This is patronising and should be avoided.\n\nAdditionally, sometimes the word ‘woman’ is used dismissively e.g. ‘Get out of my way, woman!’\n\nAs well as avoiding obvious gender insults you should take care to avoid patronising women using more innocuous terms.\n\nGender-neutral/sensitive language\n\nOr\nI’ll get one of the women from my office to help me move the boxes.\n\nSee Chapter 6 section on gendered nouns for other phrases to look out for!</div><br>",
+        "DataExportTag": "Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2163,7 +2213,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+        "QuestionDescription": "Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2197,12 +2247,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID61",
-      "SecondaryAttribute": "Notes_Q0d94c8fb23979d49",
+      "SecondaryAttribute": "Notes_Q113e15ad31cc81fc",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q0d94c8fb23979d49",
+        "DataExportTag": "Notes_Q113e15ad31cc81fc",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2212,7 +2262,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q0d94c8fb23979d49",
+        "QuestionDescription": "Notes_Q113e15ad31cc81fc",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2233,11 +2283,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID62",
-      "SecondaryAttribute": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+      "SecondaryAttribute": "Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Annex 2. Legal and statistical definitions at EU and international levels > A2.5. Online gender-based hate speech: common components at EU and international levels<br><br></div><table>\n<thead>\n<tr><th colspan=\"6\">INTERNATIONAL DEFINITIONS</th></tr>\n<tr><th>Organisation</th><th colspan=\"3\">TYPE OF CONDUCT</th><th colspan=\"2\">VARIABLES</th></tr>\n<tr><th>Organisation</th><th>Incitement to discrimination, hostility or violence</th><th>Condoning, denying or trivialising international crimes</th><th>Gender hate speech: inciting, promoting or justifying hatred based on sex</th><th>ICT means</th><th>Gender</th></tr>\n</thead>\n<tbody>\n<tr><td>CoE</td><td></td><td></td><td>X</td><td></td><td>X</td></tr>\n<tr><td>CERD</td><td>X</td><td></td><td></td><td></td><td></td></tr>\n<tr><td>ICCPR</td><td>X</td><td></td><td></td><td></td><td></td></tr>\n</tbody>\n</table><div style=\"white-space: pre-wrap\">\nAnnexes\n\n</div><table>\n<thead>\n<tr><th colspan=\"6\">EU DEFINITIONS</th></tr>\n<tr><th>Organisation</th><th colspan=\"3\">TYPE OF CONDUCT</th><th colspan=\"2\">VARIABLES</th></tr>\n<tr><th></th><th>Incitement to discrimination, hostility or violence</th><th>Condoning, denying or trivialising international crimes</th><th>Gender hate speech: inciting, promoting or justifying hatred based on sex</th><th>ICT means</th><th>Gender</th></tr>\n</thead>\n<tbody>\n<tr><td>FRA</td><td></td><td></td><td></td><td>X</td><td>X</td></tr>\n<tr><td>European Parliament</td><td></td><td></td><td>X</td><td></td><td></td></tr>\n<tr><td>EU Framework Decision on combating certain forms and expressions of racism and xenophobia by means of criminal law</td><td>X</td><td>X</td><td></td><td></td><td></td></tr>\n<tr><td>EWL</td><td></td><td></td><td>X</td><td></td><td></td></tr>\n</tbody>\n</table><br>",
-        "DataExportTag": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p>Causes and forms of sexist hate speech<br><br><div style=\"white-space: pre-wrap\">Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.\n\nPrevalence of sexual harassment among women (%, European Union, 2014)\n</div><table><tr><th>Period</th><th>Prevalence (%)</th></tr>\n<tr><th>In the last 12 months</th><td>21</td></tr>\n<tr><th>Since the age of 15</th><td>55</td></tr></table><div style=\"white-space: pre-wrap\">\nSexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.</div><br>",
+        "DataExportTag": "Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2248,7 +2298,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+        "QuestionDescription": "Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2282,12 +2332,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID63",
-      "SecondaryAttribute": "Notes_Q1138fe8cf18959e6",
+      "SecondaryAttribute": "Notes_Qac36b49029e83596",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q1138fe8cf18959e6",
+        "DataExportTag": "Notes_Qac36b49029e83596",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2297,7 +2347,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q1138fe8cf18959e6",
+        "QuestionDescription": "Notes_Qac36b49029e83596",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2318,11 +2368,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID64",
-      "SecondaryAttribute": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+      "SecondaryAttribute": "Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.2 immutable gender differences and gender stereotypes</strong> – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Where does sexism come from?<br><br>We all create stereotypes, which manifest themselves as unconscious bias. In fact, studies have shown that people who believe they are objective, or that they are not sexist, are less objective and more likely to behave in a sexist way (<sup>19</sup>).\n\nGender stereotypes were first catalogued in the United States in the 1970s. They were based on the characteristics reported as being the most socially desirable in women and men. Stereotypically feminine attributes included gullibility, shyness and compassion, while stereotypically masculine attributes included aggressiveness, independence and leadership ability.\n\n<hr/>\n\n(<sup>17</sup>) Rippon, 2019.\n(<sup>18</sup>) Heilman, M. E., Manzi, F. and Braun, S., ‘Presumed incompetent: perceived lack of fit and gender bias in recruitment and selection’, Handbook of gendered careers in management: getting in, getting on, getting out, Edward Elgar, Cheltenham, 2015, pp. 90–104 (http://dro.dur.ac.uk/16470/).\n(<sup>19</sup>) Criado Perez, C., Invisible Women – Exposing data bias in a world designed for men, Chatto & Windus, London, 2019.\nPart 1.Understand</div><br>",
-        "DataExportTag": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.2 immutable gender differences and gender stereotypes</strong> – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.</p><br><p><strong>Paragraph</strong></p>Stereotypes: How language manifests gender-related stereotypes<br><br><div style=\"white-space: pre-wrap\">Stereotypes are generalised images about people within a society. A gender stereotype is a preconceived idea where women and men are assigned characteristics and roles determined and limited by their gender.\n\nStereotypes about gender often take one of two forms. One assumes all members of a category (such as a profession) share a gender, for example the assumption that all company directors are men and all secretaries are women. The other is assuming that all members of a gender share a characteristic, for example believing that all women love to shop or that ‘boys don’t cry’.\n\nThese stereotypes hurt people of all genders by placing expectations on what people should be.</div><br>",
+        "DataExportTag": "Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2333,7 +2383,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+        "QuestionDescription": "Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2367,12 +2417,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID65",
-      "SecondaryAttribute": "Notes_Qf773d831ae5c9f34",
+      "SecondaryAttribute": "Notes_Q462a6a2b05089d2a",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qf773d831ae5c9f34",
+        "DataExportTag": "Notes_Q462a6a2b05089d2a",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2382,7 +2432,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qf773d831ae5c9f34",
+        "QuestionDescription": "Notes_Q462a6a2b05089d2a",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2403,11 +2453,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID66",
-      "SecondaryAttribute": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+      "SecondaryAttribute": "Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.2 immutable gender differences and gender stereotypes</strong> – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>The need to tackle sexism, sexist norms and behaviour and sexist speech is implicit in a number of international and regional instruments. Both the Council of Europe Convention on Preventing and Combating Violence against Women and Domestic Violence (CETS No. 210, Istanbul Convention) and the United Nations Convention on the Elimination of All Forms of Discrimination against Women (CEDAW) recognise a continuum between gender stereotypes, gender inequality, sexism and violence against women and girls. In this way, acts of “everyday” sexism in the form of apparently inconsequential or minor\n\n<hr/>\n\n2. “Gender stereotypes are preconceived social and cultural patterns or ideas whereby women and men are assigned characteristics and roles determined and limited by their sex. Gender stereotyping presents a serious obstacle to the achievement of real gender equality and feeds into gender discrimination. Such stereotyping can limit the development of the natural talents and abilities of girls and boys, women and men, their educational and professional preferences and experiences, as well as life opportunities in general.” (Council of Europe Gender Equality Strategy 2018-2023, Strategic objective 1)</div><br>",
-        "DataExportTag": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p>Common challenges when using gender-sensitive language<br><br><div style=\"white-space: pre-wrap\">This chapter presents the most common stumbling blocks when trying to write in a gender-sensitive manner.\n\nThis chapter is designed to help you understand the issues which lead to language being gender-discriminatory so that you can recognise it when you see it.\n\nNon-linguistic communication\n\nThere are many ways of communicating and we include some reference to other forms of visual communication, such as images and emojis.\n\nTip!\n\nChapter 6 contains a table of solutions to help you use gender- sensitive language on a day-to-day basis.\n\nCategories of gender-discriminatory language\n\nThere are three broad categories under which much gender-discriminatory language falls:\n\nStereotypes: assigning gender when gender is unknown or irrelevant as a result of stereotypes.\n Invisibility and omission: language which casts the male as the generic norm and keeps women from being visible in public life.\n Subordination and trivialisation: language which paints one gender, often women, as inferior, or belittles them.\n\nThese three categories are very closely related. In fact, invisibility, omission, subordination and trivialisation stem from gender stereotypes and can reflect attitudes held across society.\n\nTip!\n\nAlways ask yourself if what you are saying could fall into any of these categories – if so, think of a different way to express yourself.\nChapter 4: Challenges</div><br>",
+        "DataExportTag": "Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2418,7 +2468,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+        "QuestionDescription": "Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2452,12 +2502,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID67",
-      "SecondaryAttribute": "Notes_Q385d03e836fbc617",
+      "SecondaryAttribute": "Notes_Q4769b6aeddac27e7",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q385d03e836fbc617",
+        "DataExportTag": "Notes_Q4769b6aeddac27e7",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2467,7 +2517,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q385d03e836fbc617",
+        "QuestionDescription": "Notes_Q4769b6aeddac27e7",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2488,11 +2538,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID68",
-      "SecondaryAttribute": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+      "SecondaryAttribute": "Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Avoiding stereotypes: Avoid gendered stereotypes as descriptive terms > Examples<br><br>Gender-discriminatory language\n❌ Paul’s ladylike handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-sensitive language\n✔ Paul’s weak handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-discriminatory language\n❌ You throw like a girl.\n\nGender-sensitive language\n✔ You do not throw well.\\\n\nGender-discriminatory language\n❌ The team taking part in the charity obstacle course who were scared of the cold water had to man up and dive in at the first obstacle.\n\nGender-neutral language\n✔ The team taking part in the charity obstacle course who were scared of the cold water had to be tough and dive in at the first obstacle.\n\n\\This is the implied usage of the phrase ‘like a girl’ in English, to do something badly or in a silly or weak manner. Some campaigners are trying to reclaim this phrase to show the positive side of being ‘like a girl!’\n\nphoto: a young man performing a basketball dunk\n\nScoring like a girl\nChapter 4: Challenges</div><br>",
-        "DataExportTag": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p>Impact of sexist hate speech on women and girls<br><br><div style=\"white-space: pre-wrap\">Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.</div><br>",
+        "DataExportTag": "Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2503,7 +2553,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+        "QuestionDescription": "Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2537,12 +2587,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID69",
-      "SecondaryAttribute": "Notes_Qabed04d5b412ef07",
+      "SecondaryAttribute": "Notes_Qf3ab511f59bc54d3",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qabed04d5b412ef07",
+        "DataExportTag": "Notes_Qf3ab511f59bc54d3",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2552,7 +2602,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qabed04d5b412ef07",
+        "QuestionDescription": "Notes_Qf3ab511f59bc54d3",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2573,11 +2623,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID70",
-      "SecondaryAttribute": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+      "SecondaryAttribute": "Q43522782264965f3-chunk_1596ed71ffde7043811e3e00",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br><hr/>\n\n9. Higher Council for professional equality between men and women (2016), “Kit to act against sexism – Three tools for the world of work”, available at <u>https://rm.coe.int/16806fbc1e</u>.\n10. Article 26.2 of the European Social Charter (revised) requires parties “to promote awareness, information and prevention of recurrent reprehensible or distinctly negative and offensive actions directed against individual workers in the workplace or in relation to work and to take all appropriate measures to protect workers from such conduct”.\n\nRecommendation CM/Rec(2019)1 ▶ Page 21\n\nSome workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.</div><br>",
-        "DataExportTag": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p>Avoiding stereotypes: Avoid gendered stereotypes as descriptive terms<br><br><div style=\"white-space: pre-wrap\">Avoid using words which imply a gender connotation to describe an aspect of a person or object. It is especially important to avoid doing this where the gendered term is used as an insult.\n\nThese expressions normally paint the feminine as the negative. Describing something as feminine is used as an insult, often to mean weak or ineffective. Using language in this way is sexist. Do not employ gender stereotypes to describe the way something is or the way the action is done.\n\nExamples\n\nGender-discriminatory language\n❌ Paul’s ladylike handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-sensitive language\n✔ Paul’s weak handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-discriminatory language\n❌ You throw like a girl.\n\nGender-sensitive language\n✔ You do not throw well.\\\n\nGender-discriminatory language\n❌ The team taking part in the charity obstacle course who were scared of the cold water had to man up and dive in at the first obstacle.\n\nGender-neutral language\n✔ The team taking part in the charity obstacle course who were scared of the cold water had to be tough and dive in at the first obstacle.\n\n\\This is the implied usage of the phrase ‘like a girl’ in English, to do something badly or in a silly or weak manner. Some campaigners are trying to reclaim this phrase to show the positive side of being ‘like a girl!’\n\nScoring like a girl\nChapter 4: Challenges</div><br>",
+        "DataExportTag": "Q43522782264965f3-chunk_1596ed71ffde7043811e3e00",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2588,7 +2638,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionDescription": "Q43522782264965f3-chunk_1596ed71ffde7043811e3e00",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2622,12 +2672,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID71",
-      "SecondaryAttribute": "Notes_Qdd3ca1b38827fd9b",
+      "SecondaryAttribute": "Notes_Q43522782264965f3",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qdd3ca1b38827fd9b",
+        "DataExportTag": "Notes_Q43522782264965f3",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2637,7 +2687,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qdd3ca1b38827fd9b",
+        "QuestionDescription": "Notes_Q43522782264965f3",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2658,11 +2708,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID72",
-      "SecondaryAttribute": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+      "SecondaryAttribute": "Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Page 10 ▶ Preventing and combating sexism\n\nsexist behaviour, comments and jokes are at one end of the continuum. However, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as, in particular, sexist hate speech, may escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence, rape or potentially lethal action. Other consequences may include loss of resources, self-harm or suicide. Tackling sexism is thus part of States’ positive obligation to guarantee human rights, gender equality and to prevent violence against women and girls in accordance with international human rights law and, for States Parties, the Istanbul Convention.</div><br>",
-        "DataExportTag": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p>What is sexism?<br><br><div style=\"white-space: pre-wrap\">Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence. Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
+        "DataExportTag": "Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2673,7 +2723,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+        "QuestionDescription": "Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2707,12 +2757,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID73",
-      "SecondaryAttribute": "Notes_Q0280f38c136240ba",
+      "SecondaryAttribute": "Notes_Q9b398dff99d745eb",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q0280f38c136240ba",
+        "DataExportTag": "Notes_Q9b398dff99d745eb",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2722,7 +2772,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q0280f38c136240ba",
+        "QuestionDescription": "Notes_Q9b398dff99d745eb",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2743,11 +2793,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID74",
-      "SecondaryAttribute": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+      "SecondaryAttribute": "Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Combating Sexist Hate Speech<br><br>photo: blurred image of a person walking\n\nCouncil of Europe\nGender Equality Strategy\n\nSexist hate speech is rampant in Europe and women are disproportionately targeted. Sexist hate speech takes place online and offline and in all forms of social interaction: at school, in the family, in social circles, in the public space, at work, via emails, websites and (social) media. Although it has taken a new dimension through the Internet, the root causes of sexist hate speech preceded the technology and are fundamentally linked to the persistent unequal power relations between women and men. Sexist hate speech is a form of violence against women and girls that perpetuates and exacerbates gender inequality. Both knowledge and policy action at all levels need to be developed to combat sexist hate speech.\n\nThe Council of Europe’s Gender Equality Strategy 2014-2017 explicitly includes tackling sexism as a form of hate speech under its strategic objective 1 – combating gender stereotypes and sexism.</div><br>",
-        "DataExportTag": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p>Appendix to Recommendation CM/Rec(2019)1 &gt; Guidelines for preventing and combating sexism: measures for implementation &gt; Definition<br><br><div style=\"white-space: pre-wrap\">For the purpose of this Recommendation, sexism is:\n\nAny act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:\n\ni. violating the inherent dignity or rights of a person or a group of persons; or\nii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or\niii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or\niv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or\nv. maintaining and reinforcing gender stereotypes.</div><br>",
+        "DataExportTag": "Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2758,7 +2808,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+        "QuestionDescription": "Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2792,12 +2842,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID75",
-      "SecondaryAttribute": "Notes_Qa2b8321a33b0c533",
+      "SecondaryAttribute": "Notes_Q80a2b52797e4468c",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qa2b8321a33b0c533",
+        "DataExportTag": "Notes_Q80a2b52797e4468c",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2807,7 +2857,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qa2b8321a33b0c533",
+        "QuestionDescription": "Notes_Q80a2b52797e4468c",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2828,11 +2878,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID76",
-      "SecondaryAttribute": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+      "SecondaryAttribute": "Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
-        "DataExportTag": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p>II.D. Workplace<br><br><div style=\"white-space: pre-wrap\">Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men. It impinges upon equality and dignity at work.\n\nSexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.\nSome workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.</div><br>",
+        "DataExportTag": "Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2843,7 +2893,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+        "QuestionDescription": "Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2877,12 +2927,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID77",
-      "SecondaryAttribute": "Notes_Q82d3409dd8ba5eec",
+      "SecondaryAttribute": "Notes_Qe07dac98d55f4e59",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q82d3409dd8ba5eec",
+        "DataExportTag": "Notes_Qe07dac98d55f4e59",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2892,7 +2942,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q82d3409dd8ba5eec",
+        "QuestionDescription": "Notes_Qe07dac98d55f4e59",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2913,11 +2963,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID78",
-      "SecondaryAttribute": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+      "SecondaryAttribute": "Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Causes and forms of sexist hate speech > Prevalence of sexual harassment among women (%, European Union, 2014)<br><br></div><table><tr><th>Period</th><th>Prevalence (%)</th></tr>\n<tr><th>In the last 12 months</th><td>21</td></tr>\n<tr><th>Since the age of 15</th><td>55</td></tr></table><div style=\"white-space: pre-wrap\">\n\nPage 2 ▶ Combating Sexist Hate Speech\n\nphoto: woman speaking into a megaphone at a protest\n\nSexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.\n\nMultiple factors contribute to sexist hate speech, including the prevalence of patriarchal societies, the dissemination of degrading messages about women or girls, violent and hypersexualised images, notably in the media, and the expectations about women and men’s sexuality and roles in society. Gender inequalities in the media sector are also part of the problem. In 2015, women made up 25 % of the people in the news. This shows that women are seriously under-represented in the media which often presents messages and images of women and men that reinforce gender stereotypes. Social media, education, stereotypical textbooks and toys, the family and social circles, as well as art (cinema, music, videos, books) are all influenced by existing social and cultural norms. They therefore tend to perpetuate gender stereotypes and to contribute to the persistence of sexist hate speech.</div><br>",
-        "DataExportTag": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p>Cyber harassment &gt; 3.3 Intersectional perspective on individual impacts<br><br><div style=\"white-space: pre-wrap\">Amnesty International research suggests that women from different religious communities can also experience unique forms of discrimination and violence online. As one UK Muslim journalist summarised, “I actually don’t think there are that many visible Muslim women with public platforms, so when you do have one, you become the individual that everything is targeted to.” With already limited representation online, silencing women from these communities can lead to completely erasing their contributions to discussions and information online.\n\nLesbian, bisexual, and transgender women are also common victims of gender-based cyber violence. Although there is still limited data regarding the prevalence of violence and discrimination online towards these groups, there are some figures indicating that lesbian women are more likely to experience hate-motivated harassment than gay men, and lesbian and transgender women are more likely to have experienced discrimination based on their gender.</div><br>",
+        "DataExportTag": "Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -2928,7 +2978,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+        "QuestionDescription": "Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -2962,12 +3012,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID79",
-      "SecondaryAttribute": "Notes_Q078eba773950a45f",
+      "SecondaryAttribute": "Notes_Qa29a2448af95c3a8",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q078eba773950a45f",
+        "DataExportTag": "Notes_Qa29a2448af95c3a8",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -2977,7 +3027,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q078eba773950a45f",
+        "QuestionDescription": "Notes_Qa29a2448af95c3a8",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -2998,11 +3048,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID80",
-      "SecondaryAttribute": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+      "SecondaryAttribute": "Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Cyber harassment > 3.3 Intersectional perspective on individual impacts<br><br><sup>141</sup> The GamerGate controversy was an online phenomenon that began in 2014. Female bloggers, developers and critics in the video gaming industry, who wrote about sexism and progressivism within the industry’s culture, were victims of a widespread online harassment campaign pioneered by “GamerGaters”, who participated in trolling, inflicting death and rape threats, doxing, and cyberstalking to silence these women and the progressive standpoints they touted.\n<sup>142</sup> Amnesty International. (2020). Chapter 2: <u>Triggers of Violence and Abuse Against Women on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>143</sup> Petter, O. (2018). <u>Racism is Rife on Dating Apps – Where Does it Come From and How Can it Be Fixed?</u> The Independent. [online]\n<sup>144</sup> Amnesty International. (2020). Chapter 2: <u>Triggers of Violence and Abuse Against Women on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>145</sup> FRA. (2017). <u>Challenges to women’s human rights in the EU: Gender discrimination, sexist hate speech and gender-based violence against women and girls.</u> FRA.\n<sup>146</sup> Goulds, S. et al. (2020). Free to be Online? Girls and young women’s experiences of online harassment. Plan International.\n<sup>147</sup> Amnesty International. (2020). Chapter 3: <u>Women’s Experience of Violence and Abuse on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>148</sup> Powell, A. and Henry, N. (2016). Technology-Facilitated Sexual Violence Victimization: Results From an Online Survey of Australian Adults. Journal of Interpersonal Violence. 1-29. DOI: 10.1177/0886260516672055.</div><br>",
-        "DataExportTag": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p>2. Online experiences of gender-based harassment<br><br><div style=\"white-space: pre-wrap\">PERCENTAGE OF GIRLS AND YOUNG WOMEN FACING DIFFERENT TYPES OF HARASSMENT\n\nPERCENTAGE OF GIRLS AND YOUNG WOMEN FACING DIFFERENT TYPES OF HARASSMENT\n\n</div><table>\n  <thead>\n    <tr>\n        <th>Type of Harassment</th>\n        <th>Percentage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n        <td>Racist comments</td>\n<td>29</td>\n    </tr>\n<tr>\n        <td>Stalking</td>\n<td>32</td>\n    </tr>\n<tr>\n        <td>Body shaming</td>\n<td>39</td>\n    </tr>\n<tr>\n        <td>Threats of physical violence</td>\n<td>21</td>\n    </tr>\n<tr>\n        <td>Abusive and insulting language</td>\n<td>59</td>\n    </tr>\n<tr>\n        <td>Threats of sexual violence</td>\n<td>39</td>\n    </tr>\n<tr>\n        <td>Purposeful embarrassment</td>\n<td>41</td>\n    </tr>\n<tr>\n        <td>Sexual harassment</td>\n<td>37</td>\n    </tr>\n<tr>\n        <td>Anti LGBTIQ+ Comments</td>\n<td>26</td>\n    </tr>\n  </tbody>\n</table><div style=\"white-space: pre-wrap\">\n\nOf the girls who have been harassed, 47% have been threatened with physical or sexual violence.\nHarassment appears to fall into two specific categories:\nA. Harassment that girls experience simply for                B. A heightened level of harassment when girls are\nbeing a girl and for being online. It is unrelated to the     actively engaged in speaking out online. Activists\ncontent of what she posts and is ubiquitous to girls’         are attacked for what they are saying and for their\nexperiences of social media use. It gets worse if you         outspokenness. Harassers are interacting with the\nare Black, identify as LGBTIQ+ or have a disability.          content, with the debates girls and young women are\n                                                              involved in and the issues they raise.</div><br>",
+        "DataExportTag": "Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -3013,7 +3063,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+        "QuestionDescription": "Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -3047,12 +3097,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID81",
-      "SecondaryAttribute": "Notes_Q47c6c0e5959c1e88",
+      "SecondaryAttribute": "Notes_Q4c7ad876212f200d",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q47c6c0e5959c1e88",
+        "DataExportTag": "Notes_Q4c7ad876212f200d",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -3062,7 +3112,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q47c6c0e5959c1e88",
+        "QuestionDescription": "Notes_Q4c7ad876212f200d",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -3083,11 +3133,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID82",
-      "SecondaryAttribute": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+      "SecondaryAttribute": "Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Sexism and sexist behaviour result in physical, sexual, psychological or socio-economic harm and impact different sectors of the population differently. Women and girls are disproportionately affected by such behaviour. Sexism and sexist behaviour constitute a barrier to the empowerment and advancement of women and girls; the elimination of sexism and sexist behaviour would benefit everyone: women, girls, men and boys.\n\nSexism and sexist behaviour occur across the full range of human activity, including in cyberspace (internet and social media). They can be experienced individually or collectively by a person or a group of persons, even if neither the individual nor the group has been directly targeted, for example through sexist advertising, or posting of pictures of naked women in the workplace. The three levels of perpetuating and experiencing sexism are: individual, institutional (for example family, work or education environment), and structural (for example through societal gender inequalities, social norms and behaviour). Sexism is silencing when individuals and groups fail to report or complain about sexist behaviour for fear of not being taken seriously, of being ostracised or even held responsible.</div><br>",
-        "DataExportTag": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p>Recommendations &gt; PRINCIPLES OF A WOMEN’S SHELTER<br><br><div style=\"white-space: pre-wrap\">Shelters provide crisis intervention and ongoing support, including counselling, legal and practical assistance, housing and employment advice, and help throughout legal procedures. Support must be offered by trained female counsellors who understand the gendered dynamics of violence and believe women’s stories without prejudice. Women are seen as experts in their own situations, and counselling focuses on empowerment rather than pathology.\n\nShelters are also communal spaces, offering an environment where women and children can experience new, non-violent ways of living and relating. They serve as models of equality and shared responsibility, helping women overcome internalised gender stereotypes and rediscover their strength and agency.</div><br>",
+        "DataExportTag": "Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -3098,7 +3148,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+        "QuestionDescription": "Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -3132,12 +3182,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID83",
-      "SecondaryAttribute": "Notes_Q1b1f24f847668cce",
+      "SecondaryAttribute": "Notes_Q0399020b9d5b40e3",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Q1b1f24f847668cce",
+        "DataExportTag": "Notes_Q0399020b9d5b40e3",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -3147,7 +3197,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Q1b1f24f847668cce",
+        "QuestionDescription": "Notes_Q0399020b9d5b40e3",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -3168,11 +3218,11 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID84",
-      "SecondaryAttribute": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+      "SecondaryAttribute": "Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a",
       "TertiaryAttribute": null,
       "Payload": {
-        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br>Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men.<sup>9</sup> It impinges upon equality and dignity at work.<sup>10</sup>\n\nSexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.</div><br>",
-        "DataExportTag": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p>3. GUIDING PRINCIPLES &gt; 3.4 Adopting an Intersectional Approach<br><br><div style=\"white-space: pre-wrap\">Interventions to address gender roles and stereotypes cannot occur without an understanding that although all women are in some way subject to gender discrimination, all women are not discriminated against in the same way, while particular groups of women (with different economic, social, political and cultural status) may face multiple forms of discrimination (Crenshaw 1991 and Wing 1997). Intersectional discrimination has been recognized as a serious obstacle to the achievement of gender equality and is at the core of the ‘leave no one behind’ principle of the Sustainable Development Goals. Factors including race, ethnicity, caste, class, age, religion, sexual orientation, marital status, geographic location, disability, HIV status or status as a migrant, refugee or internally displaced person, can all influence the forms and nature of violence women and girls may suffer (Fergus 2012). These factors can direct discrimination and violence towards, as well as create inequalities that are unique to particular groups of women, or that disproportionately affect some groups of women. A sound understanding of the multiple forms of discrimination faced by different groups of women in different contexts needs to be embedded in all interventions.</div><br>",
+        "DataExportTag": "Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a",
         "QuestionType": "MC",
         "Selector": "SAVR",
         "SubSelector": "TX",
@@ -3183,7 +3233,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionDescription": "Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a",
         "Choices": {
           "1": {
             "Display": "0 - Not relevant"
@@ -3217,12 +3267,12 @@
       "SurveyID": "SV_1X34YGdTiaOe2G2",
       "Element": "SQ",
       "PrimaryAttribute": "QID85",
-      "SecondaryAttribute": "Notes_Qbc6fb5dfdbf13e6b",
+      "SecondaryAttribute": "Notes_Q0bcc6460c95391f4",
       "TertiaryAttribute": null,
       "Payload": {
         "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
         "DefaultChoices": false,
-        "DataExportTag": "Notes_Qbc6fb5dfdbf13e6b",
+        "DataExportTag": "Notes_Q0bcc6460c95391f4",
         "QuestionType": "TE",
         "Selector": "ML",
         "DataVisibility": {
@@ -3232,7 +3282,7 @@
         "Configuration": {
           "QuestionDescriptionOption": "UseText"
         },
-        "QuestionDescription": "Notes_Qbc6fb5dfdbf13e6b",
+        "QuestionDescription": "Notes_Q0bcc6460c95391f4",
         "Validation": {
           "Settings": {
             "ForceResponse": "OFF",
@@ -3247,6 +3297,176 @@
           "AllowFreeResponse": "false"
         },
         "QuestionID": "QID85"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID86",
+      "SecondaryAttribute": "Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p>CM/Rec(2019)1<sup>1</sup><br><br><div style=\"white-space: pre-wrap\">Recalling that discrimination on the grounds of sex and/or gender constitutes a violation of human rights and an impediment to the enjoyment of human rights and fundamental freedoms, as recognised by the United Nations Committee on the Elimination of Discrimination against Women in its General Recommendation No. 28 on the core obligations of States parties under Article 2 of the Convention on the Elimination of All Forms of Discrimination against Women;\n\nRecalling that sexism is a manifestation of historically unequal power relations between women and men, which leads to discrimination and prevents the full advancement of women in society;\nNoting that sexism is widespread and prevalent in all sectors and all societies;</div><br>",
+        "DataExportTag": "Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID86"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID87",
+      "SecondaryAttribute": "Notes_Q4eebc5e654de25c7",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q4eebc5e654de25c7",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q4eebc5e654de25c7",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID87"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID88",
+      "SecondaryAttribute": "Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p>Illustrative Gender Stereotypes and Gender Discriminatory Roles<br><br><div style=\"white-space: pre-wrap\">Men’s social standing and reputation as upheld by the loyalty, obedience and fidelity of their female spouses, siblings and children, the absence of which may be a justification for violence.\n\nMen considered as effeminate and weak if they are gender egalitarian or support feminist movements.\n\nNotions of femininity based on passivity, vulnerability, purity and heterosexuality.\n\nWomen who assert, speak out, or defend equal rights as ‘man-hating’ or unwomanly.\n\nLesbian, bisexual, and transgender women as outside the feminine ‘norm’ and as needing policing/ correction.\n\nSome groups of minority women as inherently more sexually available or “up for it”.\n\nFamilies and elders as entitled to control girls’ and women’s behaviour more rigidly than boys’/men’s, and to make decisions about marriage, dating, and other aspects of women and girls’ social lives.</div><br>",
+        "DataExportTag": "Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID88"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID89",
+      "SecondaryAttribute": "Notes_Qa49d39b9e8879d7a",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qa49d39b9e8879d7a",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qa49d39b9e8879d7a",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID89"
       }
     }
   ]

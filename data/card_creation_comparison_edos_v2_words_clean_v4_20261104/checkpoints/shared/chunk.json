@@ -1,12 +1,12 @@
 {
   "version": 1,
   "status": "complete",
-  "signature": "b76a6d3ac5a4d67a2e0d80d06bad618cc08df19c7c709aeba97e390e5f13bd0e",
+  "signature": "ba623f3cf743e8cda0945527e2fa6a40733023adc5c37fc33a47817eb5252e99",
   "inputs": [
     {
       "description": {
         "kind": "directory",
-        "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown",
+        "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown",
         "patterns": [
           "*.md",
           "*.parse.json"
@@ -16,119 +16,119 @@
         "exists": true,
         "files": [
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_1.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_1.md",
             "exists": true,
-            "sha256": "030786f8da067b7b9cd11791bd87147230458971b3b05445a23578bc1e2cd0d3"
+            "sha256": "b32636cde43380406a0779b4f20af63c18ee2f2e1496a54810d487854e2e8ae9"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_10.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_10.md",
             "exists": true,
-            "sha256": "7dd32a4fb485e9407bf6fcd0af1cb383649754d9446bc394d1371b9bb66b0955"
+            "sha256": "32c0ec9c62c982b2f4b48f7588ac1739f5f7556b77ad161062ba4e3bc3e00b7d"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_11.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_11.md",
             "exists": true,
-            "sha256": "a421662e5fb70f89f1267db688a7d3c181ac558ae2202afe7d71394c7e279e46"
+            "sha256": "9a32596bd81164bc4b5b7a19a34c654d7c77c551c016763f55929a963fd43796"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_12.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_12.md",
             "exists": true,
-            "sha256": "18027a371f546c5ff31b82d514bb0de1093a955cddc58c61a7ae701cc7fe54c6"
+            "sha256": "6495c25b060da846ce2f8fad3b9a5e82d722e58d65ff724039cc051429dbb3f9"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_2.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_2.md",
             "exists": true,
-            "sha256": "7d6c14046fcc3404ff9d45b6bd74cecb7fac066a3f81674b07252e652c2fdc4d"
+            "sha256": "0a4cb2ead784d601fcab13fa5e08fb59a821e46cb6f96746a75a5dc248ec0956"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_26.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_26.md",
             "exists": true,
-            "sha256": "aa92d758beb448e87e36724c441031862db4cef3df0ee6c8b4300118cedfc927"
+            "sha256": "6548b40b84b28f12cc7726851a64874d1b09c3753b008b1a2138302724fbdebb"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_28.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_28.md",
             "exists": true,
-            "sha256": "1289aaf5d488e80ee966a760cfbcc057e6dd34122f038277814b8e08ce3a70cb"
+            "sha256": "7cfea093f1cacaf4085204de139504f6498aba953b52a6723d5d31b59b3d3ced"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_28.parse.json",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_28.parse.json",
             "exists": true,
-            "sha256": "538a5e6bf559f7a5ef2aff54b6cbe032ad5f256a8c37cd4223e3b9f6b11efe6a"
+            "sha256": "7338aa52ed652467fdcf6f687e520b74147647b519c254fc4985bd68e03abaed"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_29.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_29.md",
             "exists": true,
-            "sha256": "9ef96025a154388227f9d3d52e13470e3975eeeeef4036d3d9ada4dd9964e910"
+            "sha256": "a949994f4a4fad7d2fd1606458d2672412cf8850d5ba2f2510c8e93a6bbf0ee0"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_29.parse.json",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_29.parse.json",
             "exists": true,
-            "sha256": "8cc25c4bf404264ee02de0f64fb2a5ab642993d12de7ed8b936c79ba2a132c3a"
+            "sha256": "4f3d1f096c4d5277e01a69d9fa6e6ef467a04aa4c469973039461c7ebd482164"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_3.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_3.md",
             "exists": true,
-            "sha256": "e529d995362a45946d01a60d768b4cfe46f568fe37f48fe8862927c9ef1fdf08"
+            "sha256": "9957ff733c38eb5f356336c4d70542d65cf13803811ebec6b6848e73ce567a5f"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_30.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_30.md",
             "exists": true,
-            "sha256": "a2bf12fe728655f4cda5ffd5c5769a2afe9851a5c2e053d710cbbeeb228ea6ad"
+            "sha256": "13eef3c0317912079f4f48a808277ee096479627972f000b9f0b44de5821c5ce"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_30.parse.json",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_30.parse.json",
             "exists": true,
-            "sha256": "dcdc0b7f80fd13820d8d3e37446344404f825089991fedb5de0eefeea9b190a2"
+            "sha256": "cd6038e6d9bde33bc1ca7b841e5bb3f7e889efcfbb65384e34144513ec5d072a"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_31.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_31.md",
             "exists": true,
-            "sha256": "f939072b7cf0e2195a5197292e85bb886b8045603ccf1b2e76397017057480f6"
+            "sha256": "5e4db5f57801db32a6114072eec1290a808fc9e06e47cf88bac950e2f59a40a1"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_31.parse.json",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_31.parse.json",
             "exists": true,
-            "sha256": "b26b4e50e34681afcf59fd4ad1657930f84b73e75c80f7dc00d0fcf0bfb861c8"
+            "sha256": "ecf6e6f4520f661ee3a645575dcf6e8d2adcd9bf9e4356738f6268fbec7cc5a9"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_32.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_32.md",
             "exists": true,
-            "sha256": "04a423f116e7397cbf468ec7ef9e2147dacd826444af4b11afc40f88257bb4a9"
+            "sha256": "23be847b2706562585218c3be65fd4bc63dea120cc275e9d5ee5d905bc72a9ee"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_32.parse.json",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_32.parse.json",
             "exists": true,
-            "sha256": "a28d990c129e9ce78ba44031083363de2bb582bae88303a6b8d2d28463269af7"
+            "sha256": "b08483b076a547d6ab3890302b572518c9f924d9ada8ef11d2784104d86d89ad"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_4.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_4.md",
             "exists": true,
-            "sha256": "902eea4df75bd9d87258a37b834a471e3663d5477f227201824370c15bb67912"
+            "sha256": "0d448edf2f0fb392f621d38a51bab42f01bc42c3aa1c63b2ebbfe7ba8533416c"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_5.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_5.md",
             "exists": true,
-            "sha256": "c2182e59533a4edc54d6b88b3c1e414c1da299a4f0f0e74f86c5a60a42858e39"
+            "sha256": "06866d30709910dbddf266c4561592161efa087230a6c76d89e2937a032c8e89"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_6.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_6.md",
             "exists": true,
-            "sha256": "63fd8982a46422a62ca6934470f88bf196178a70dd0a10107a771bd4d22ca766"
+            "sha256": "cf5aefb4e53cff55e604ecd916cca5dcb3b3d2d71aae81d60475a8f8bf6acca8"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_7.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_7.md",
             "exists": true,
-            "sha256": "c04c87578f215bbfc217378c8fe3960d664098f19925eaab66c0df1ab3676416"
+            "sha256": "57812ba0fd6ef9023a27185de8fda1677b6269c4fdf418cedf10badf93c7a204"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_8.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_8.md",
             "exists": true,
-            "sha256": "681469a6d1e2ca88afc383ad55f141d2a798d3befad71e0e6945d454ce92440e"
+            "sha256": "c65a1af26f9d9446b7a9d428667ca7027594b67aed92e53187da15662251ffcd"
           },
           {
-            "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_20261104\\markdown\\en_doc_9.md",
+            "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_20261104/markdown/en_doc_9.md",
             "exists": true,
-            "sha256": "b1dc2ee475f346c0e0792432e9152c4f289acb47161882c6d73c4b4aafa814b2"
+            "sha256": "c7fcdb1d4be4aafabb65c3a8faf91650b0d7509f191602de2567f13ea266ef4e"
           }
         ]
       }
@@ -136,14 +136,14 @@
   ],
   "outputs": [
     {
-      "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_words_clean_v4_20261104\\chunks.jsonl",
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_words_clean_v4_20261104/chunks.jsonl",
       "exists": true,
-      "sha256": "00443cf378f3f5040056d78b25e6fbcd78eaf528d720120e97333f64022a05a0"
+      "sha256": "d453ba228322349ab7812221b6b1ac00ee6db9baefa8ae211ea9a3cef1f1ab55"
     },
     {
-      "path": "C:\\Users\\micha\\OneDrive\\Desktop\\Università\\Progetti\\GBV-CounterSpeech\\data\\card_creation_comparison_edos_v2_words_clean_v4_20261104\\editorial_exclusions.jsonl",
+      "path": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/card_creation_comparison_edos_v2_words_clean_v4_20261104/editorial_exclusions.jsonl",
       "exists": true,
-      "sha256": "b5f95b8e70d7ff731d607349ba386e81b13911fef8de4d71b0c7d0b9ded517bd"
+      "sha256": "f57d13571491ac01a5ad51177e67ebeb29b74801ef86ac08c138bfaa4fd99733"
     }
   ]
 }

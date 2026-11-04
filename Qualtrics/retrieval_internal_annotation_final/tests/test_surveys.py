@@ -40,21 +40,21 @@ class FinalSurveyTests(unittest.TestCase):
                     actual[key] = source["reranker_rank"]
                     self.assertEqual(source["reranker_score"], expected[key]["reranker_score"])
         self.assertEqual(actual, {key: row["reranker_rank"] for key, row in expected.items()})
-        self.assertEqual(len(expected), 176)
-        self.assertEqual(len(pairs), 111)
-        self.assertEqual(len(set(pairs)), 111)
-        self.assertEqual(len(set(ids)), 111)
+        self.assertEqual(len(expected), builder.N_SELECTIONS)
+        self.assertEqual(len(pairs), builder.N_ITEMS)
+        self.assertEqual(len(set(pairs)), builder.N_ITEMS)
+        self.assertEqual(len(set(ids)), builder.N_ITEMS)
         self.assertEqual(set(pairs), {(query, chunk) for _, query, chunk in expected})
 
     def test_assignment_and_label_balance(self):
         self.assertEqual({name: len(rows) for name, rows in self.maps.items()},
-                         {"comune": 27, "marem": 28, "arianna": 28, "marta": 28})
+                         {"comune": 29, "marem": 27, "arianna": 27, "marta": 27})
         per_annotator = Counter()
         for name, rows in self.maps.items():
             for annotator in builder.ANNOTATORS if name == "comune" else [name]:
                 per_annotator[annotator] += len(rows)
-        self.assertEqual(dict(per_annotator), {name: 55 for name in builder.ANNOTATORS})
-        self.assertEqual(sum(per_annotator.values()), 165)
+        self.assertEqual(dict(per_annotator), {name: 56 for name in builder.ANNOTATORS})
+        self.assertEqual(sum(per_annotator.values()), 168)
         for counts in self.manifest["counts_by_label"].values():
             self.assertGreaterEqual(counts["comune"], 1)
             private = [counts[name] for name in builder.ANNOTATORS]

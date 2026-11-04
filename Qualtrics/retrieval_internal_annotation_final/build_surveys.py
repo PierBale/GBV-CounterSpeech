@@ -8,7 +8,7 @@ import html
 import json
 import random
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 
@@ -18,7 +18,10 @@ RUN_ID = "edos-v2-words-clean-v4b-20261104"
 INPUT_DIR = ROOT / "data/card_creation_comparison_edos_v2_words_clean_v4_20261104/runs" / RUN_ID / "reranking"
 ANNOTATORS = ("marem", "arianna", "marta")
 TOP_K = 4
-COMMON_SIZE = 27
+N_SELECTIONS = 4 * 4 * 11  # top-4 x 4 configurations x 11 EDOS labels
+N_ITEMS = 110  # unique (query, chunk) pairs in run edos-v2-words-clean-v4b-20261104
+COMMON_SIZE = 29
+PRIVATE_SIZE = (N_ITEMS - COMMON_SIZE) // 3  # 27
 SEED = 20261104
 MAP_FIELDS = [
     "question_id", "qualtrics_question_id", "data_export_tag", "notes_question_id",
@@ -90,8 +93,9 @@ def load_pool(input_dir):
     if len({label_key(d[0]) for d in query_details.values()}) != 11:
         raise ValueError("Expected one query per EDOS label")
     items = sorted(merged.values(), key=lambda x: (label_key(x["row"]["label"]), x["question_id"]))
-    if len(items) != 111 or sum(len(x["source_matches"]) for x in items) != 176:
-        raise ValueError("Expected 111 unique query/chunk items from 176 top-four selections")
+    if len(items) != N_ITEMS or sum(len(x["source_matches"]) for x in items) != N_SELECTIONS:
+        raise ValueError(f"Expected {N_ITEMS} unique query/chunk items from {N_SELECTIONS} top-four selections, "
+                         f"found {len(items)}")
     return items, source_hashes
 
 
@@ -102,40 +106,66 @@ def split_pool(items, seed=SEED):
     for item in items:
         groups[item["row"]["label"]].append(item)
     labels = sorted(groups, key=label_key)
-    # Largest-remainder allocation: 27 shared items proportional to label pool sizes.
+    # Largest-remainder allocation: COMMON_SIZE shared items proportional to label pool sizes.
     quotas = {label: len(groups[label]) * COMMON_SIZE // len(items) for label in labels}
     tie_breaks = {label: rng.random() for label in labels}
     remainders = sorted(labels, key=lambda label: (
         -(len(groups[label]) * COMMON_SIZE % len(items)), tie_breaks[label]))
     for label in remainders[:COMMON_SIZE - sum(quotas.values())]:
         quotas[label] += 1
+    # The same chunk can be paired with several labels. Spread such items, so
+    # that no annotator judges one passage many times (anchoring, and all the
+    # judgments of a frequent passage coming from a single person).
+    chunk_of = lambda item: item["row"]["chunk_id"]
+    frequency = Counter(chunk_of(item) for item in items)
     pools = {name: [] for name in ("comune", *ANNOTATORS)}
+    seen = {name: Counter() for name in pools}  # chunk occurrences per survey
     remaining = {}
     for label in labels:
         group = groups[label].copy()
         rng.shuffle(group)
-        pools["comune"].extend(group[:quotas[label]])
-        remaining[label] = group[quotas[label]:]
+        # Stable sort: random order among items whose chunk is equally new to the common pool.
+        group.sort(key=lambda item: seen["comune"][chunk_of(item)])
+        chosen = []
+        for _ in range(quotas[label]):
+            group.sort(key=lambda item: seen["comune"][chunk_of(item)])
+            item = group.pop(0)
+            chosen.append(item)
+            seen["comune"][chunk_of(item)] += 1
+        pools["comune"].extend(chosen)
+        remaining[label] = group
+    # Per-label quotas per annotator: equal shares, extras to the emptiest pools.
     capacity = {name: (len(items) - COMMON_SIZE) // 3 for name in ANNOTATORS}
-    extras = {}
+    label_quota = {}
     for label in labels:
-        group = remaining[label]
-        base = len(group) // 3
-        for i, name in enumerate(ANNOTATORS):
-            pools[name].extend(group[i * base:(i + 1) * base])
+        base = len(remaining[label]) // 3
+        label_quota[label] = {name: base for name in ANNOTATORS}
+        for name in ANNOTATORS:
             capacity[name] -= base
-        extras[label] = group[3 * base:]
     for label in labels:
         names = list(ANNOTATORS)
         rng.shuffle(names)
         names.sort(key=lambda name: -capacity[name])
-        for item, name in zip(extras[label], names):
+        for name in names[:len(remaining[label]) % 3]:
             if capacity[name] < 1:
                 raise ValueError("Cannot balance private pools")
-            pools[name].append(item)
+            label_quota[label][name] += 1
             capacity[name] -= 1
     if any(capacity.values()):
         raise ValueError("Private pool capacities were not filled")
+    # Fill the quotas: most repeated chunks first, each to the annotator who
+    # has seen it least (counting the common survey, which everyone sees).
+    for label in labels:
+        group = remaining[label]
+        rng.shuffle(group)
+        group.sort(key=lambda item: -frequency[chunk_of(item)])
+        for item in group:
+            names = [name for name in ANNOTATORS if label_quota[label][name] > 0]
+            rng.shuffle(names)
+            name = min(names, key=lambda name: seen["comune"][chunk_of(item)] + seen[name][chunk_of(item)])
+            pools[name].append(item)
+            seen[name][chunk_of(item)] += 1
+            label_quota[label][name] -= 1
     # Randomize offline, independently for each survey, but keep EDOS groups ordered.
     for name, pool in pools.items():
         order_rng = random.Random(f"{seed}:presentation:{name}")
@@ -154,7 +184,13 @@ ALLOWED_INLINE_TAG = re.compile(r"&lt;(/?)(sup|sub|br)\s*/?&gt;", re.I)
 
 
 def escape_text(part):
-    """Escape chunk text (a literal "<5%" must not open a tag), keeping sup/sub/br."""
+    """Escape chunk text (a literal "<5%" must not open a tag), keeping sup/sub/br.
+
+    Display only: Markdown blockquote markers ("> ") and heading hashes
+    ("### ") are dropped, keeping their words. The model input is unchanged.
+    """
+    part = re.sub(r"^[ \t]*(?:>[ \t]?)+", "", part, flags=re.M)
+    part = re.sub(r"^[ \t]*#{1,6}[ \t]+", "", part, flags=re.M)
     return ALLOWED_INLINE_TAG.sub(r"<\1\2>", html.escape(part, quote=False))
 
 
@@ -257,10 +293,10 @@ def build_package(input_dir=INPUT_DIR, template_path=HERE / "Draft-retrieval-set
     for name, pool in pools.items():
         surveys[name], mappings[name] = build_survey(template, name, pool)
     all_ids = [r["question_id"] for rows in mappings.values() for r in rows]
-    if len(all_ids) != 111 or len(set(all_ids)) != 111:
+    if len(all_ids) != N_ITEMS or len(set(all_ids)) != N_ITEMS:
         raise ValueError("Every item must belong to exactly one of the four questionnaires")
-    if [len(mappings[name]) for name in ("comune", *ANNOTATORS)] != [27, 28, 28, 28]:
-        raise ValueError("Expected one common pool of 27 and three private pools of 28")
+    if [len(mappings[name]) for name in ("comune", *ANNOTATORS)] != [COMMON_SIZE, *[PRIVATE_SIZE] * 3]:
+        raise ValueError(f"Expected one common pool of {COMMON_SIZE} and three private pools of {PRIVATE_SIZE}")
     label_counts = {}
     for label in sorted({x["row"]["label"] for x in items}, key=label_key):
         counts = {name: sum(r["edos_label"] == label for r in rows) for name, rows in mappings.items()}
@@ -269,11 +305,11 @@ def build_package(input_dir=INPUT_DIR, template_path=HERE / "Draft-retrieval-set
         label_counts[label] = counts
     manifest = {
         "run_id": RUN_ID, "top_k": TOP_K, "n_configurations": 4, "n_labels": 11,
-        "n_raw_selections": 176, "n_unique_items": 111,
+        "n_raw_selections": N_SELECTIONS, "n_unique_items": N_ITEMS,
         "deduplication_key": ["query_id", "chunk_id"], "dimension": "context_relevance",
-        "rating_scale": [0, 1, 2], "seed": seed, "common_size": 27,
-        "common_percentage": 100 * 27 / 111, "private_size_per_annotator": 28,
-        "ratings_per_annotator": 55, "total_expected_ratings": 165,
+        "rating_scale": [0, 1, 2], "seed": seed, "common_size": COMMON_SIZE,
+        "common_percentage": 100 * COMMON_SIZE / N_ITEMS, "private_size_per_annotator": PRIVATE_SIZE,
+        "ratings_per_annotator": COMMON_SIZE + PRIVATE_SIZE, "total_expected_ratings": 3 * (COMMON_SIZE + PRIVATE_SIZE),
         "common_sampling": "Proportional allocation by EDOS label using largest remainders; seeded sampling within each label.",
         "private_sampling": "Disjoint pools, equal total size, per-label counts differing by at most one.",
         "presentation": "EDOS labels in numeric order, items shuffled offline within each label; no Qualtrics randomizer.",
@@ -318,7 +354,8 @@ def main():
         (args.output_dir / name).write_bytes(content.encode())
     for name in surveys:
         print(f"{name}.qsf: {len(mappings[name])} items, each with relevance and optional notes")
-    print("111 unique items; 27 common + 28 per annotator; 55 judgments each, 165 in total.")
+    print(f"{N_ITEMS} unique items; {COMMON_SIZE} common + {PRIVATE_SIZE} per annotator; "
+          f"{COMMON_SIZE + PRIVATE_SIZE} judgments each, {3 * (COMMON_SIZE + PRIVATE_SIZE)} in total.")
 
 
 if __name__ == "__main__":
