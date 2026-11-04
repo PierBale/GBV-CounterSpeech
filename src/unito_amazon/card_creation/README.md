@@ -36,7 +36,7 @@ regola e ID del paragrafo, sono registrate in `editorial_exclusions.jsonl`;
 le rimozioni parziali hanno `action: trimmed`. Sono euristiche conservative,
 non una classificazione semantica della rilevanza.
 
-Da `src`, nel job GPU:
+Da `src`, nel job GPU precedente:
 
 ```bash
 python -u -m unito_amazon.card_creation experiment \
@@ -44,8 +44,8 @@ python -u -m unito_amazon.card_creation experiment \
   --no-generate-evidence --run-id edos-v2-words-clean-20261104
 ```
 
-Il nuovo confronto EDOS usa `config.edos-v2-words.json`, con
-`"chunk_size_unit": "words"` e `"min_chunk_words": 100`. Il minimo riguarda il
+La configurazione corrente usa `"chunk_size_unit": "words"` e
+`"min_chunk_words": 100`. Il minimo riguarda il
 corpo: i titoli non possono rendere ammissibile un frammento breve. I paragrafi
 adiacenti vengono aggregati nella stessa sezione; la coda breve viene assorbita
 dal chunk precedente. Una sezione interamente sotto soglia viene registrata
@@ -60,19 +60,79 @@ Embedding e reranking mantengono i controlli sui propri limiti di token.
 
 Il corpus viene segmentato una sola volta prima delle quattro combinazioni:
 il contenuto e gli ID dei chunk sono uguali per tutti gli embedder e reranker.
-I risultati sono isolati in `data/card_creation_comparison_edos_v2_words_20261104/`,
-con run `edos-v2-words-20261104`. PDF, Markdown e definizioni sono riutilizzati
-dal corpus già preparato in `data/card_creation_comparison_edos_v2_20261104/`.
-Le configurazioni precedenti conservano il default `chunk_size_unit: tokens`,
-`min_chunk_tokens` e il tokenizer comune esplicito.
+PDF, Markdown e definizioni sono riutilizzati dal corpus già preparato in
+`data/card_creation_comparison_edos_v2_20261104/`. Il default generico della
+pipeline rimane `chunk_size_unit: tokens`, per compatibilità con gli esperimenti
+precedenti; solo la configurazione EDOS corrente seleziona il conteggio per parole.
 
-Da `src`, sul nodo GPU:
+## Esecuzione corrente: parsing locale e confronto sul cluster
+
+Il parsing dei 18 documenti è già completato. Per riprenderlo dalla radice del
+repository, in PowerShell, usando l'ambiente locale del progetto:
+
+```powershell
+cd src
+& C:\venvs\gbv\Scripts\python.exe -m unito_amazon.card_creation parse --config unito_amazon/card_creation/config.edos-v2-words-clean.json --no-all-combinations
+```
+
+Il parsing riusa i Markdown presenti e usa il servizio remoto LlamaParse EU,
+tier `agentic`, versione `2026-09-13`. La chiave `LLAMA_CLOUD_API_KEY_MOLIVERI`
+deve essere nell'ambiente o nel `.env` alla radice. Non richiede GPU.
+
+Trasferire sul server il codice aggiornato e il corpus in
+`data/card_creation_comparison_edos_v2_20261104/`, compresi i Markdown e i sidecar
+di parsing. Dalla radice del checkout sul server:
 
 ```bash
-python -u -m unito_amazon.card_creation experiment \
-  --config unito_amazon/card_creation/config.edos-v2-words.json \
-  --no-generate-evidence --run-id edos-v2-words-20261104
+source ~/mambaforge/etc/profile.d/conda.sh
+conda activate llm_new_env
+sbatch scripts/run_edos_v2.slurm
 ```
+
+Il job esegue la CLI esistente `experiment` per le quattro combinazioni e poi
+genera i quattro questionari con
+`Qualtrics/retrieval_internal_annotation_final/build_surveys.py`. Lo script eredita
+l'ambiente attivato; il proprio script cluster può mantenere le variabili
+`HPCX_HOME` e `PYTHONPATH` già usate per PyTorch, sostituendo solo il comando finale
+con quello mostrato sopra. In un nodo GPU già allocato basta il comando
+`experiment`, eseguito da `src`; la generazione del questionario resta separata.
+
+Gli output correnti sono in `data/card_creation_comparison_edos_v2_words_clean_20261104/`:
+`chunks.jsonl`, `editorial_exclusions.jsonl`, il confronto dei filtri, i checkpoint
+e, dopo l'inferenza, `runs/edos-v2-words-clean-20261104/`.
+I questionari sono in `Qualtrics/retrieval_internal_annotation_final/`: usano i
+primi quattro chunk per query e configurazione, unendo le 176 selezioni in 111
+item univoci. Il comune contiene 27 item; i pool marem, arianna e marta ne
+contengono 28 ciascuno. Ogni annotatrice compila il comune e il proprio pool,
+per 55 item totali. Un medesimo `(query_id, chunk_id)` appare una sola volta nel
+pool complessivo; `source_matches` conserva tutti i modelli e i rispettivi rank.
+Le etichette sono ordinate; gli item sono mescolati offline all'interno di ogni
+etichetta. Ogni item comprende una valutazione 0–2 e note facoltative.
+
+Le definizioni del run sono lo snapshot `inputs/edos_labels.json` nel corpus
+preparato: le modifiche al file principale non vi si propagano automaticamente.
+Se cambiano corpus, definizioni o impostazioni dopo l'avvio dell'inferenza,
+usare nuovi `output_dir` e `run_id`. Gli archivi precedenti, il parsing e le
+annotazioni storiche rimangono conservati.
+
+Le due configurazioni EDOS superate sono archiviate accanto ai relativi dati:
+`data/card_creation_comparison_edos_v2_20261104/inputs/config.edos-v2.json` e
+`data/card_creation_comparison_edos_v2_words_20261104/config.edos-v2-words.json`.
+
+Per generare soltanto i quattro QSF usando i ranking già disponibili, dalla
+radice del progetto:
+
+```bash
+python Qualtrics/retrieval_internal_annotation_final/build_surveys.py
+```
+
+Le istruzioni per importazione, assegnazione e mappe sono in
+`Qualtrics/retrieval_internal_annotation_final/README.md`. Le risposte dei quattro
+questionari vanno esportate separatamente, conservando i rispettivi QSF e mappe.
+La precedente analisi, con score umani 0–2, `krippendorff.alpha`, NDCG classico di
+scikit-learn e grafici SVG, resta in `Qualtrics/retrieval_internal_annotation_pilot/`.
+È legata al vecchio campione top 3; l'analisi finale dovrà leggere i quattro
+export e le nuove assegnazioni senza trasferire i vecchi giudizi al nuovo run.
 
 ## Esperimenti di retrieval e reranking
 

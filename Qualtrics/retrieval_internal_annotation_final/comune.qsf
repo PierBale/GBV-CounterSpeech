@@ -1,0 +1,3253 @@
+{
+  "SurveyEntry": {
+    "SurveyID": "SV_1X34YGdTiaOe2G2",
+    "SurveyName": "retrieval_internal_annotation_final_comune",
+    "SurveyDescription": null,
+    "SurveyOwnerID": "UR_w7uTTEGDaAHtEYN",
+    "SurveyBrandID": "qualtricsxmc289rjt2g",
+    "DivisionID": null,
+    "SurveyLanguage": "IT",
+    "SurveyActiveResponseSet": "RS_85NGJAenQGfbudM",
+    "SurveyStatus": "Inactive",
+    "SurveyStartDate": "0000-00-00 00:00:00",
+    "SurveyExpirationDate": "0000-00-00 00:00:00",
+    "SurveyCreationDate": "2026-10-26 08:40:06",
+    "CreatorID": "UR_w7uTTEGDaAHtEYN",
+    "LastModified": "2026-10-26 08:55:13",
+    "LastAccessed": "0000-00-00 00:00:00",
+    "LastActivated": "0000-00-00 00:00:00",
+    "Deleted": null
+  },
+  "SurveyElements": [
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "BL",
+      "PrimaryAttribute": "Survey Blocks",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "0": {
+          "Type": "Standard",
+          "Description": "Task description",
+          "ID": "BL_final_0001",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID30"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID31"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "1": {
+          "Type": "Standard",
+          "Description": "1.1 threats of harm | Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+          "ID": "BL_final_0002",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID32"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID33"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "2": {
+          "Type": "Standard",
+          "Description": "1.1 threats of harm | Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+          "ID": "BL_final_0003",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID34"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID35"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "3": {
+          "Type": "Standard",
+          "Description": "1.1 threats of harm | Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+          "ID": "BL_final_0004",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID36"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID37"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "4": {
+          "Type": "Standard",
+          "Description": "1.2 incitement and encouragement of harm | Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+          "ID": "BL_final_0005",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID38"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID39"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "5": {
+          "Type": "Standard",
+          "Description": "1.2 incitement and encouragement of harm | Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+          "ID": "BL_final_0006",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID40"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID41"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "6": {
+          "Type": "Standard",
+          "Description": "1.2 incitement and encouragement of harm | Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+          "ID": "BL_final_0007",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID42"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID43"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "7": {
+          "Type": "Standard",
+          "Description": "2.1 descriptive attacks | Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+          "ID": "BL_final_0008",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID44"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID45"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "8": {
+          "Type": "Standard",
+          "Description": "2.1 descriptive attacks | Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+          "ID": "BL_final_0009",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID46"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID47"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "9": {
+          "Type": "Standard",
+          "Description": "2.2 aggressive and emotive attacks | Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+          "ID": "BL_final_0010",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID48"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID49"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "10": {
+          "Type": "Standard",
+          "Description": "2.2 aggressive and emotive attacks | Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+          "ID": "BL_final_0011",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID50"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID51"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "11": {
+          "Type": "Standard",
+          "Description": "2.2 aggressive and emotive attacks | Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+          "ID": "BL_final_0012",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID52"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID53"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "12": {
+          "Type": "Standard",
+          "Description": "2.3 dehumanising attacks and overt sexual objectification | Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+          "ID": "BL_final_0013",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID54"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID55"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "13": {
+          "Type": "Standard",
+          "Description": "2.3 dehumanising attacks and overt sexual objectification | Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+          "ID": "BL_final_0014",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID56"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID57"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "14": {
+          "Type": "Standard",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+          "ID": "BL_final_0015",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID58"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID59"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "15": {
+          "Type": "Standard",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+          "ID": "BL_final_0016",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID60"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID61"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "16": {
+          "Type": "Standard",
+          "Description": "3.1 casual use of gendered slurs, profanities, and insults | Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+          "ID": "BL_final_0017",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID62"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID63"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "17": {
+          "Type": "Standard",
+          "Description": "3.2 immutable gender differences and gender stereotypes | Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+          "ID": "BL_final_0018",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID64"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID65"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "18": {
+          "Type": "Standard",
+          "Description": "3.2 immutable gender differences and gender stereotypes | Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+          "ID": "BL_final_0019",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID66"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID67"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "19": {
+          "Type": "Standard",
+          "Description": "3.3 backhanded gendered compliments | Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+          "ID": "BL_final_0020",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID68"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID69"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "20": {
+          "Type": "Standard",
+          "Description": "3.3 backhanded gendered compliments | Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+          "ID": "BL_final_0021",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID70"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID71"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "21": {
+          "Type": "Standard",
+          "Description": "3.3 backhanded gendered compliments | Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+          "ID": "BL_final_0022",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID72"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID73"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "22": {
+          "Type": "Standard",
+          "Description": "3.4 condescending explanations or unwelcome advice | Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+          "ID": "BL_final_0023",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID74"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID75"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "23": {
+          "Type": "Standard",
+          "Description": "3.4 condescending explanations or unwelcome advice | Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+          "ID": "BL_final_0024",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID76"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID77"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "24": {
+          "Type": "Standard",
+          "Description": "4.1 supporting mistreatment of individual women | Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+          "ID": "BL_final_0025",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID78"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID79"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "25": {
+          "Type": "Standard",
+          "Description": "4.1 supporting mistreatment of individual women | Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+          "ID": "BL_final_0026",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID80"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID81"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "26": {
+          "Type": "Standard",
+          "Description": "4.2 supporting systemic discrimination against women as a group | Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+          "ID": "BL_final_0027",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID82"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID83"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        },
+        "27": {
+          "Type": "Standard",
+          "Description": "4.2 supporting systemic discrimination against women as a group | Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+          "ID": "BL_final_0028",
+          "BlockElements": [
+            {
+              "Type": "Question",
+              "QuestionID": "QID84"
+            },
+            {
+              "Type": "Question",
+              "QuestionID": "QID85"
+            }
+          ],
+          "Options": {
+            "BlockLocking": "false",
+            "RandomizeQuestions": "false",
+            "BlockVisibility": "Expanded"
+          }
+        }
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "FL",
+      "PrimaryAttribute": "Survey Flow",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "Flow": [
+          {
+            "ID": "BL_final_0001",
+            "Type": "Standard",
+            "FlowID": "FL_2"
+          },
+          {
+            "ID": "BL_final_0002",
+            "Type": "Standard",
+            "FlowID": "FL_3"
+          },
+          {
+            "ID": "BL_final_0003",
+            "Type": "Standard",
+            "FlowID": "FL_4"
+          },
+          {
+            "ID": "BL_final_0004",
+            "Type": "Standard",
+            "FlowID": "FL_5"
+          },
+          {
+            "ID": "BL_final_0005",
+            "Type": "Standard",
+            "FlowID": "FL_6"
+          },
+          {
+            "ID": "BL_final_0006",
+            "Type": "Standard",
+            "FlowID": "FL_7"
+          },
+          {
+            "ID": "BL_final_0007",
+            "Type": "Standard",
+            "FlowID": "FL_8"
+          },
+          {
+            "ID": "BL_final_0008",
+            "Type": "Standard",
+            "FlowID": "FL_9"
+          },
+          {
+            "ID": "BL_final_0009",
+            "Type": "Standard",
+            "FlowID": "FL_10"
+          },
+          {
+            "ID": "BL_final_0010",
+            "Type": "Standard",
+            "FlowID": "FL_11"
+          },
+          {
+            "ID": "BL_final_0011",
+            "Type": "Standard",
+            "FlowID": "FL_12"
+          },
+          {
+            "ID": "BL_final_0012",
+            "Type": "Standard",
+            "FlowID": "FL_13"
+          },
+          {
+            "ID": "BL_final_0013",
+            "Type": "Standard",
+            "FlowID": "FL_14"
+          },
+          {
+            "ID": "BL_final_0014",
+            "Type": "Standard",
+            "FlowID": "FL_15"
+          },
+          {
+            "ID": "BL_final_0015",
+            "Type": "Standard",
+            "FlowID": "FL_16"
+          },
+          {
+            "ID": "BL_final_0016",
+            "Type": "Standard",
+            "FlowID": "FL_17"
+          },
+          {
+            "ID": "BL_final_0017",
+            "Type": "Standard",
+            "FlowID": "FL_18"
+          },
+          {
+            "ID": "BL_final_0018",
+            "Type": "Standard",
+            "FlowID": "FL_19"
+          },
+          {
+            "ID": "BL_final_0019",
+            "Type": "Standard",
+            "FlowID": "FL_20"
+          },
+          {
+            "ID": "BL_final_0020",
+            "Type": "Standard",
+            "FlowID": "FL_21"
+          },
+          {
+            "ID": "BL_final_0021",
+            "Type": "Standard",
+            "FlowID": "FL_22"
+          },
+          {
+            "ID": "BL_final_0022",
+            "Type": "Standard",
+            "FlowID": "FL_23"
+          },
+          {
+            "ID": "BL_final_0023",
+            "Type": "Standard",
+            "FlowID": "FL_24"
+          },
+          {
+            "ID": "BL_final_0024",
+            "Type": "Standard",
+            "FlowID": "FL_25"
+          },
+          {
+            "ID": "BL_final_0025",
+            "Type": "Standard",
+            "FlowID": "FL_26"
+          },
+          {
+            "ID": "BL_final_0026",
+            "Type": "Standard",
+            "FlowID": "FL_27"
+          },
+          {
+            "ID": "BL_final_0027",
+            "Type": "Standard",
+            "FlowID": "FL_28"
+          },
+          {
+            "ID": "BL_final_0028",
+            "Type": "Standard",
+            "FlowID": "FL_29"
+          }
+        ],
+        "Properties": {
+          "Count": 29
+        },
+        "FlowID": "FL_1",
+        "Type": "Root"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "PL",
+      "PrimaryAttribute": "Preview Link",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "PreviewType": "Brand",
+        "PreviewID": "c09106dc-774d-4a60-9b1b-1b904e5275d6"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "PROJ",
+      "PrimaryAttribute": "CORE",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": "1.1.0",
+      "Payload": {
+        "ProjectCategory": "CORE",
+        "SchemaVersion": "1.1.0"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "QC",
+      "PrimaryAttribute": "Survey Question Count",
+      "SecondaryAttribute": "56",
+      "TertiaryAttribute": null,
+      "Payload": null
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "RS",
+      "PrimaryAttribute": "RS_85NGJAenQGfbudM",
+      "SecondaryAttribute": "Insieme di risposte predefinito",
+      "TertiaryAttribute": null,
+      "Payload": null
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SCO",
+      "PrimaryAttribute": "Scoring",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "ScoringCategories": [],
+        "ScoringCategoryGroups": [],
+        "ScoringSummaryCategory": null,
+        "ScoringSummaryAfterQuestions": 0,
+        "ScoringSummaryAfterSurvey": 0,
+        "DefaultScoringCategory": null,
+        "AutoScoringCategory": null
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SO",
+      "PrimaryAttribute": "Survey Options",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "BackButton": "true",
+        "SaveAndContinue": "true",
+        "SurveyProtection": "PublicSurvey",
+        "BallotBoxStuffingPrevention": "false",
+        "NoIndex": "Yes",
+        "SecureResponseFiles": "true",
+        "SurveyExpiration": "None",
+        "SurveyTermination": "DisplayMessage",
+        "Header": "",
+        "Footer": "",
+        "ProgressBarDisplay": "NoText",
+        "PartialData": "+1 week",
+        "ValidationMessage": null,
+        "PreviousButton": "",
+        "NextButton": "",
+        "SurveyTitle": "retrieval_internal_annotation_final_comune",
+        "SkinLibrary": "qualtricsxmc289rjt2g",
+        "SkinType": "component",
+        "Skin": {
+          "brandingId": null,
+          "templateId": "*simple",
+          "overrides": null
+        },
+        "NewScoring": 1,
+        "SurveyMetaDescription": "La modalità più semplice, affidabile ed efficace per raccogliere i dati delle esperienze. Scopri Experience Management e prova subito un account gratuito.",
+        "EOSMessage": "MS_PlCZEYPgLRn8HSX",
+        "ShowExportTags": "false",
+        "CollectGeoLocation": "false",
+        "PasswordProtection": "No",
+        "AnonymizeResponse": "No",
+        "RefererCheck": "No",
+        "BallotBoxStuffingPreventionBehavior": null,
+        "BallotBoxStuffingPreventionMessage": null,
+        "BallotBoxStuffingPreventionMessageLibrary": null,
+        "BallotBoxStuffingPreventionURL": null,
+        "UseCustomSurveyLinkCompletedMessage": null,
+        "SurveyLinkCompletedMessage": null,
+        "SurveyLinkCompletedMessageLibrary": null,
+        "ResponseSummary": "No",
+        "EOSMessageLibrary": "UR_w7uTTEGDaAHtEYN",
+        "EOSRedirectURL": null,
+        "EmailThankYou": "false",
+        "ThankYouEmailMessageLibrary": null,
+        "ThankYouEmailMessage": null,
+        "ValidateMessage": "false",
+        "ValidationMessageLibrary": null,
+        "InactiveSurvey": "DefaultMessage",
+        "PartialDeletion": null,
+        "PartialDataCloseAfter": "LastActivity",
+        "InactiveMessageLibrary": null,
+        "InactiveMessage": null,
+        "AvailableLanguages": {
+          "IT": []
+        }
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "STAT",
+      "PrimaryAttribute": "Survey Statistics",
+      "SecondaryAttribute": null,
+      "TertiaryAttribute": null,
+      "Payload": {
+        "MobileCompatible": true,
+        "ID": "Survey Statistics"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID30",
+      "SecondaryAttribute": "Task_description",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<h2>Task description</h2>\n\n<br>In this task, you will be shown a label from the EDOS taxonomy and a short paragraph taken from a report.<br><br>Your task is to assess the&nbsp;<strong>Context Relevance</strong>, i.e., if the paragraph contains information that is needed to answer to the harm defined by the EDOS label.",
+        "DefaultChoices": false,
+        "DataExportTag": "Task_description",
+        "QuestionType": "DB",
+        "Selector": "TB",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Task_description",
+        "ChoiceOrder": [],
+        "Validation": {
+          "Settings": {
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 9,
+        "NextAnswerId": 1,
+        "QuestionID": "QID30"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID31",
+      "SecondaryAttribute": "Annotator",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>Annotatrice</strong></p><p>Seleziona il tuo nome.</p>",
+        "DataExportTag": "Annotator",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Annotator",
+        "Choices": {
+          "1": {
+            "Display": "marem"
+          },
+          "2": {
+            "Display": "arianna"
+          },
+          "3": {
+            "Display": "marta"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID31"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID32",
+      "SecondaryAttribute": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">KEY FINDINGS: WOMEN’S EXPERIENCE OF VIOLENCE BY ANY PERPETRATOR > EXTENT OF VIOLENCE AGAINST WOMEN BY ANY PERPETRATOR > Physical violence (including being threatened with physical violence)<br><br>— Threatened to harm you in a way that frightened you?\n\n— Pushed, shoved or pulled your hair on purpose in a way that hurt or frightened you?\n\n— Thrown something at you or slapped you on purpose in a way that hurt or frightened you?\n\n— Beat you with his/her fist or with an object or kicked you on purpose in a way that hurt or frightened you?\n\n— Burned you on purpose?\n\n16\n\n— Tried to suffocate you or strangled you on purpose?\n\n— Threatened to use or actually used a knife, gun or acid or something similar against you?\n\n— Ever used force against you in any other way than mentioned above, in a way that hurt or frightened you?</div><br>",
+        "DataExportTag": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q32a9eda75047ddf0-chunk_432898be06f177c853adb25a",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID32"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID33",
+      "SecondaryAttribute": "Notes_Q32a9eda75047ddf0",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q32a9eda75047ddf0",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q32a9eda75047ddf0",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID33"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID34",
+      "SecondaryAttribute": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Digital Threats: The Landscape of TFGBV > Targeted Violence against Influential Women<br><br>In a survey of women parliamentarians from 39 countries conducted by the Inter-Parliamentary Union, 81 percent reported that they experienced violence on digital platforms.<sup>52</sup>\n\nAmong women parliamentarians in the European Union, 59 percent had been the target of sexist attacks on online social networks.<sup>53</sup>\n\nIn member states of the African Union, 42 percent of women politicians have received online death threats, rape threats, or threats of beatings and abductions.<sup>54</sup>\n\nIn Southeast Asia, 50 percent of women politicians have faced online abuse.<sup>55</sup>\n\nFor women who are not part of the ethnic majority in a given country, the abuse intensifies. In the United Kingdom, a study found that nearly half of all abuse against female members of Parliament (MPs) on X (formerly Twitter) targeted Diane Abbot, the first black woman elected to the British Parliament, and even when she was removed from the sample, women of color received 30 percent more abuse than white women.<sup>56</sup></div><br>",
+        "DataExportTag": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q234cf8e0cacf42d9-chunk_21b13a7046fc06d1f09325d9",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID34"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID35",
+      "SecondaryAttribute": "Notes_Q234cf8e0cacf42d9",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q234cf8e0cacf42d9",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q234cf8e0cacf42d9",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID35"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID36",
+      "SecondaryAttribute": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.1 threats of harm</strong> – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Page 10 ▶ Preventing and combating sexism\n\nsexist behaviour, comments and jokes are at one end of the continuum. However, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as, in particular, sexist hate speech, may escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence, rape or potentially lethal action. Other consequences may include loss of resources, self-harm or suicide. Tackling sexism is thus part of States’ positive obligation to guarantee human rights, gender equality and to prevent violence against women and girls in accordance with international human rights law and, for States Parties, the Istanbul Convention.</div><br>",
+        "DataExportTag": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qfa19881a2d5f4619-chunk_4a694f30113953b7aa669adc",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID36"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID37",
+      "SecondaryAttribute": "Notes_Qfa19881a2d5f4619",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qfa19881a2d5f4619",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qfa19881a2d5f4619",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID37"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID38",
+      "SecondaryAttribute": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Online Misogyny, Radicalization, and Violent Extremism<br><br>The language used on these forums is in and of itself enough to cause alarm. A study by the Centre for Countering Digital Hate (CCDH) found that incel (involuntary celibate) forum members post about rape once every 29 minutes and that 89 percent of these posts are supportive of it.<sup>82</sup> Another 5 percent of posters were not morally against rape but instead found it “unimaginative” and expressed their desire to “reduce a woman to nothing.”<sup>83</sup> Between 2021 and\n\n2022, the CCDH also found a 59 percent increase in references to mass murders, primarily centered around the glorification of Elliot Rodgers.<sup>84</sup> In 2014, Rodgers posted a 141-page manifesto before killing six people in a shooting and stabbing spree in California.<sup>85</sup> In his manifesto, he outlined his deep hatred for women and his frustration with his lack of sexual experience; incel forums frequently reference this manifesto, glorifying Rodgers’ acts of violence and encouraging others to do the same.<sup>86</sup> Incel terrorism is on the rise, particularly in predominantly white, English-speaking countries,<sup>87</sup> but extreme violence is not the only way the manosphere manifests.</div><br>",
+        "DataExportTag": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q2f4cd5276d36a91f-chunk_b178a7cda66384880158283c",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID38"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID39",
+      "SecondaryAttribute": "Notes_Q2f4cd5276d36a91f",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q2f4cd5276d36a91f",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q2f4cd5276d36a91f",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID39"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID40",
+      "SecondaryAttribute": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
+        "DataExportTag": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qe89f23f7da336f95-chunk_4476416d95d481f671cb57dd",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID40"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID41",
+      "SecondaryAttribute": "Notes_Qe89f23f7da336f95",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qe89f23f7da336f95",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qe89f23f7da336f95",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID41"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID42",
+      "SecondaryAttribute": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>1.2 incitement and encouragement of harm</strong> – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Obligations arising under the Istanbul Convention in relation to violence against women and domestic violence in its digital dimension > Online sexual harassment<br><br>(d) sexualised bullying constitutes behaviours such as circulating gossip or rumours about a victim’s alleged sexual behaviour, posting sexualised comments under the victim’s posts or photos, impersonating a victim and sharing sexual content or sexually harassing others, thus impacting their reputation and/or livelihood, or “outing” someone without their consent with the purpose of scaring, threatening and body shaming; and\n\n(e) cyberflashing consists of sending unsolicited sexual images via dating or messaging applications, texts, or using Airdrop or Bluetooth technologies.\n\n39. Some of the above behaviours are commonly known as sexist hate speech. As recognised by the Council of Europe Recommendation on preventing and combating sexism, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as sexist hate speech, which often constitutes a first step in the process towards physical violence, may also escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence or rape, thus falling within the remit of Article 40 of the Istanbul Convention.</div><br>",
+        "DataExportTag": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q42221b7d797ac6e5-chunk_821eae084d58e17b05920999",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID42"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID43",
+      "SecondaryAttribute": "Notes_Q42221b7d797ac6e5",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q42221b7d797ac6e5",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q42221b7d797ac6e5",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID43"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID44",
+      "SecondaryAttribute": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br>Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men.<sup>9</sup> It impinges upon equality and dignity at work.<sup>10</sup>\n\nSexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.</div><br>",
+        "DataExportTag": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q624a6b86d88b0fb9-chunk_3f5d627d3aa00b5374c8d222",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID44"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID45",
+      "SecondaryAttribute": "Notes_Q624a6b86d88b0fb9",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q624a6b86d88b0fb9",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q624a6b86d88b0fb9",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID45"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID46",
+      "SecondaryAttribute": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.1 descriptive attacks</strong> – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech<br><br>Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.\n\n<sup>31</sup> This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101\n____________________________________________________________________________\n\nPosting and sharing violent content consist of portraying women as sexual objects or targets of violence.\n\nUse of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.</div><br>",
+        "DataExportTag": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q3def227a679f862c-chunk_371445a7ea454e971118f066",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID46"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID47",
+      "SecondaryAttribute": "Notes_Q3def227a679f862c",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q3def227a679f862c",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q3def227a679f862c",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID47"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID48",
+      "SecondaryAttribute": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br><hr/>\n\n9. Higher Council for professional equality between men and women (2016), “Kit to act against sexism – Three tools for the world of work”, available at <u>https://rm.coe.int/16806fbc1e</u>.\n10. Article 26.2 of the European Social Charter (revised) requires parties “to promote awareness, information and prevention of recurrent reprehensible or distinctly negative and offensive actions directed against individual workers in the workplace or in relation to work and to take all appropriate measures to protect workers from such conduct”.\n\nRecommendation CM/Rec(2019)1 ▶ Page 21\n\nSome workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.</div><br>",
+        "DataExportTag": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q1f182ec6d9db7ee9-chunk_b476c8c5f25c4412b1a73372",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID48"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID49",
+      "SecondaryAttribute": "Notes_Q1f182ec6d9db7ee9",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q1f182ec6d9db7ee9",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q1f182ec6d9db7ee9",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID49"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID50",
+      "SecondaryAttribute": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech<br><br>Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.\n\n<sup>31</sup> This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101\n____________________________________________________________________________\n\nPosting and sharing violent content consist of portraying women as sexual objects or targets of violence.\n\nUse of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.</div><br>",
+        "DataExportTag": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q51b6cb78a3fd2632-chunk_371445a7ea454e971118f066",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID50"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID51",
+      "SecondaryAttribute": "Notes_Q51b6cb78a3fd2632",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q51b6cb78a3fd2632",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q51b6cb78a3fd2632",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID51"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID52",
+      "SecondaryAttribute": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.2 aggressive and emotive attacks</strong> – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.B. Internet, social media and online sexist hate speech<br><br>Online sexism is rampant throughout Europe, with women disproportionately affected – especially young women and girls, women journalists, politicians, public figures and women’s human rights defenders. One aspect of online sexism is adversely commenting on expressed views or opinions. While attacks on men are more often based on their professional opinions or competence, women are more likely to be subject to sexist and sexualised abuse and invective, the extremity of which may be magnified by the anonymity offered by the internet. Online attacks not only affect women’s dignity but may also prevent women, including in the workplace, from expressing opinions and result in pushing them out of online spaces, undermining the right to free speech and opinion in a democratic society, limiting professional opportunities and reinforcing the gendered democratic deficit. Another aspect is that the digital age has deepened the scrutiny to which women’s bodies, speech and activism are subjected. In addition, sexist misuse of social media – such as posting of intimate visual material without the consent of those depicted – is a form of violence that needs to be addressed.</div><br>",
+        "DataExportTag": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q1ec960205b2c35d8-chunk_b3be8e0e2655791c9428a463",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID52"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID53",
+      "SecondaryAttribute": "Notes_Q1ec960205b2c35d8",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q1ec960205b2c35d8",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q1ec960205b2c35d8",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID53"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID54",
+      "SecondaryAttribute": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. Conceptualising and defining cyber violence against women and girls > 2.1. State of the art <sup>(1)</sup> > Cyber harassment / cyber bullying<br><br>Cyber harassment is a persistent and repeated course of conduct targeted at a specific person, designed to cause severe emotional distress and often a fear of physical harm (Council of Europe Cybercrime Convention Committee, 2018).\n\nIn cyber bullying, the focus is placed almost exclusively on the experiences of children, adolescents and young adults, characterised by legal and emotional vulnerability (Patchin, 2015; Wang et al., 2019).\n\nOnline hate speech targeting women usually involves sexualisation, objectification and body-shaming comments, as well as degrading comments and rape threats, often from members of incel communities (Santos, Amaral and Simões, 2020).\n\nSignificantly, the EU Code of Conduct’s definition of hate speech online does not mention gender, sexism or misogyny as it largely focuses on racism and xenophobia (European Commission, 2016).\n2. Conceptualising and defining cyber violence against women and girls</div><br>",
+        "DataExportTag": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q9e3f549cee2cefd0-chunk_aba414b46b481c560c438282",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID54"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID55",
+      "SecondaryAttribute": "Notes_Q9e3f549cee2cefd0",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q9e3f549cee2cefd0",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q9e3f549cee2cefd0",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID55"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID56",
+      "SecondaryAttribute": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>2.3 dehumanising attacks and overt sexual objectification</strong> – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
+        "DataExportTag": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qd245d1ef9f88c751-chunk_4476416d95d481f671cb57dd",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID56"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID57",
+      "SecondaryAttribute": "Notes_Qd245d1ef9f88c751",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qd245d1ef9f88c751",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qd245d1ef9f88c751",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID57"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID58",
+      "SecondaryAttribute": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.2. The impact of cyber violence and hate speech online against women > 3.3.1. Types of online platforms where perpetrations occur<br><br>Two reports point at Twitter’s specific nature that leads to an overload of violent content aimed directly at individual women. The Demos “Misogyny on Twitter” report published in 2014 reveals for example that “of over 100,000 Tweets mentioning ‘rape’ between 26th December 2013 and 9th February\n\n<sup>95</sup> Code of Conduct on countering illegal hate speech online (2018), “Results of the 3rd monitoring exercise”, available at http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=612086\n\n<sup>97</sup> Projet de loi renforçant la lutte contre les violences sexuelles et sexistes (2018), available at http://www.assemblee-nationale.fr/15/projets/pl0778.asp</div><br>",
+        "DataExportTag": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qd22e08c5b6e7c74c-chunk_f5bb09fd9f2bd70e48280a44",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID58"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID59",
+      "SecondaryAttribute": "Notes_Qd22e08c5b6e7c74c",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qd22e08c5b6e7c74c",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qd22e08c5b6e7c74c",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID59"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID60",
+      "SecondaryAttribute": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 3.1. The victims > 3.1.2. Racist threats<br><br>Seyi Akiwowo, a young British black female politician was targeted by racist hate speech after her short speech at the European Youth Event in 2016. Hate speech deployed against her involved racist, hateful and sexist comments and slurs. Her video was posted on a neo-Nazi site accompanied by calls for mob attacks. Similarly, she “told Amnesty International that the abuse she experienced on Twitter and other social media platforms included racial slurs like ‘ngger’, ‘nggerress’, ‘negro’, references to lynching and being hanged, as well as ‘monkey’, ‘ape’ and being told to ‘die of an STI<sup>76</sup>’”.\n\nIn a worldwide survey of violence against female parliamentarians, the Inter-Parliamentary Union (IPU) reveals how online violence targets black women in power: “A European parliamentarian of African origin recounted how a billboard in her country, paid for by far-right groups, demanded that she be “whitened with bleach and burned alive<sup>77</sup>”.</div><br>",
+        "DataExportTag": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q0d94c8fb23979d49-chunk_3e2b12722e5155a33f11cbf3",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID60"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID61",
+      "SecondaryAttribute": "Notes_Q0d94c8fb23979d49",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q0d94c8fb23979d49",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q0d94c8fb23979d49",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID61"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID62",
+      "SecondaryAttribute": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.1 casual use of gendered slurs, profanities, and insults</strong> – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Annex 2. Legal and statistical definitions at EU and international levels > A2.5. Online gender-based hate speech: common components at EU and international levels<br><br></div><table>\n<thead>\n<tr><th colspan=\"6\">INTERNATIONAL DEFINITIONS</th></tr>\n<tr><th>Organisation</th><th colspan=\"3\">TYPE OF CONDUCT</th><th colspan=\"2\">VARIABLES</th></tr>\n<tr><th>Organisation</th><th>Incitement to discrimination, hostility or violence</th><th>Condoning, denying or trivialising international crimes</th><th>Gender hate speech: inciting, promoting or justifying hatred based on sex</th><th>ICT means</th><th>Gender</th></tr>\n</thead>\n<tbody>\n<tr><td>CoE</td><td></td><td></td><td>X</td><td></td><td>X</td></tr>\n<tr><td>CERD</td><td>X</td><td></td><td></td><td></td><td></td></tr>\n<tr><td>ICCPR</td><td>X</td><td></td><td></td><td></td><td></td></tr>\n</tbody>\n</table><div style=\"white-space: pre-wrap\">\nAnnexes\n\n</div><table>\n<thead>\n<tr><th colspan=\"6\">EU DEFINITIONS</th></tr>\n<tr><th>Organisation</th><th colspan=\"3\">TYPE OF CONDUCT</th><th colspan=\"2\">VARIABLES</th></tr>\n<tr><th></th><th>Incitement to discrimination, hostility or violence</th><th>Condoning, denying or trivialising international crimes</th><th>Gender hate speech: inciting, promoting or justifying hatred based on sex</th><th>ICT means</th><th>Gender</th></tr>\n</thead>\n<tbody>\n<tr><td>FRA</td><td></td><td></td><td></td><td>X</td><td>X</td></tr>\n<tr><td>European Parliament</td><td></td><td></td><td>X</td><td></td><td></td></tr>\n<tr><td>EU Framework Decision on combating certain forms and expressions of racism and xenophobia by means of criminal law</td><td>X</td><td>X</td><td></td><td></td><td></td></tr>\n<tr><td>EWL</td><td></td><td></td><td>X</td><td></td><td></td></tr>\n</tbody>\n</table><br>",
+        "DataExportTag": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q1138fe8cf18959e6-chunk_b59d9ff0db18992c22e16134",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID62"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID63",
+      "SecondaryAttribute": "Notes_Q1138fe8cf18959e6",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q1138fe8cf18959e6",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q1138fe8cf18959e6",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID63"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID64",
+      "SecondaryAttribute": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.2 immutable gender differences and gender stereotypes</strong> – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Where does sexism come from?<br><br>We all create stereotypes, which manifest themselves as unconscious bias. In fact, studies have shown that people who believe they are objective, or that they are not sexist, are less objective and more likely to behave in a sexist way (<sup>19</sup>).\n\nGender stereotypes were first catalogued in the United States in the 1970s. They were based on the characteristics reported as being the most socially desirable in women and men. Stereotypically feminine attributes included gullibility, shyness and compassion, while stereotypically masculine attributes included aggressiveness, independence and leadership ability.\n\n<hr/>\n\n(<sup>17</sup>) Rippon, 2019.\n(<sup>18</sup>) Heilman, M. E., Manzi, F. and Braun, S., ‘Presumed incompetent: perceived lack of fit and gender bias in recruitment and selection’, Handbook of gendered careers in management: getting in, getting on, getting out, Edward Elgar, Cheltenham, 2015, pp. 90–104 (http://dro.dur.ac.uk/16470/).\n(<sup>19</sup>) Criado Perez, C., Invisible Women – Exposing data bias in a world designed for men, Chatto & Windus, London, 2019.\nPart 1.Understand</div><br>",
+        "DataExportTag": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qf773d831ae5c9f34-chunk_6eac20fdad8679e34c35593e",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID64"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID65",
+      "SecondaryAttribute": "Notes_Qf773d831ae5c9f34",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qf773d831ae5c9f34",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qf773d831ae5c9f34",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID65"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID66",
+      "SecondaryAttribute": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.2 immutable gender differences and gender stereotypes</strong> – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>The need to tackle sexism, sexist norms and behaviour and sexist speech is implicit in a number of international and regional instruments. Both the Council of Europe Convention on Preventing and Combating Violence against Women and Domestic Violence (CETS No. 210, Istanbul Convention) and the United Nations Convention on the Elimination of All Forms of Discrimination against Women (CEDAW) recognise a continuum between gender stereotypes, gender inequality, sexism and violence against women and girls. In this way, acts of “everyday” sexism in the form of apparently inconsequential or minor\n\n<hr/>\n\n2. “Gender stereotypes are preconceived social and cultural patterns or ideas whereby women and men are assigned characteristics and roles determined and limited by their sex. Gender stereotyping presents a serious obstacle to the achievement of real gender equality and feeds into gender discrimination. Such stereotyping can limit the development of the natural talents and abilities of girls and boys, women and men, their educational and professional preferences and experiences, as well as life opportunities in general.” (Council of Europe Gender Equality Strategy 2018-2023, Strategic objective 1)</div><br>",
+        "DataExportTag": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q385d03e836fbc617-chunk_9b808e6c96ecfebe2ede69e5",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID66"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID67",
+      "SecondaryAttribute": "Notes_Q385d03e836fbc617",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q385d03e836fbc617",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q385d03e836fbc617",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID67"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID68",
+      "SecondaryAttribute": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Avoiding stereotypes: Avoid gendered stereotypes as descriptive terms > Examples<br><br>Gender-discriminatory language\n❌ Paul’s ladylike handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-sensitive language\n✔ Paul’s weak handshake did not impress his new boss, who believes salespeople need a firm handshake.\n\nGender-discriminatory language\n❌ You throw like a girl.\n\nGender-sensitive language\n✔ You do not throw well.\\\n\nGender-discriminatory language\n❌ The team taking part in the charity obstacle course who were scared of the cold water had to man up and dive in at the first obstacle.\n\nGender-neutral language\n✔ The team taking part in the charity obstacle course who were scared of the cold water had to be tough and dive in at the first obstacle.\n\n\\This is the implied usage of the phrase ‘like a girl’ in English, to do something badly or in a silly or weak manner. Some campaigners are trying to reclaim this phrase to show the positive side of being ‘like a girl!’\n\nphoto: a young man performing a basketball dunk\n\nScoring like a girl\nChapter 4: Challenges</div><br>",
+        "DataExportTag": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qabed04d5b412ef07-chunk_a3779fbee1aa553e8a56b790",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID68"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID69",
+      "SecondaryAttribute": "Notes_Qabed04d5b412ef07",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qabed04d5b412ef07",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qabed04d5b412ef07",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID69"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID70",
+      "SecondaryAttribute": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br><hr/>\n\n9. Higher Council for professional equality between men and women (2016), “Kit to act against sexism – Three tools for the world of work”, available at <u>https://rm.coe.int/16806fbc1e</u>.\n10. Article 26.2 of the European Social Charter (revised) requires parties “to promote awareness, information and prevention of recurrent reprehensible or distinctly negative and offensive actions directed against individual workers in the workplace or in relation to work and to take all appropriate measures to protect workers from such conduct”.\n\nRecommendation CM/Rec(2019)1 ▶ Page 21\n\nSome workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.</div><br>",
+        "DataExportTag": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qdd3ca1b38827fd9b-chunk_b476c8c5f25c4412b1a73372",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID70"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID71",
+      "SecondaryAttribute": "Notes_Qdd3ca1b38827fd9b",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qdd3ca1b38827fd9b",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qdd3ca1b38827fd9b",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID71"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID72",
+      "SecondaryAttribute": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.3 backhanded gendered compliments</strong> – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Page 10 ▶ Preventing and combating sexism\n\nsexist behaviour, comments and jokes are at one end of the continuum. However, these acts are often humiliating and contribute to a social climate where women are demeaned, their self-regard lowered and their activities and choices restricted, including at work, in the private, public or online sphere. Sexist behaviour such as, in particular, sexist hate speech, may escalate to or incite overtly offensive and threatening acts, including sexual abuse or violence, rape or potentially lethal action. Other consequences may include loss of resources, self-harm or suicide. Tackling sexism is thus part of States’ positive obligation to guarantee human rights, gender equality and to prevent violence against women and girls in accordance with international human rights law and, for States Parties, the Istanbul Convention.</div><br>",
+        "DataExportTag": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q0280f38c136240ba-chunk_4a694f30113953b7aa669adc",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID72"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID73",
+      "SecondaryAttribute": "Notes_Q0280f38c136240ba",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q0280f38c136240ba",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q0280f38c136240ba",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID73"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID74",
+      "SecondaryAttribute": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Combating Sexist Hate Speech<br><br>photo: blurred image of a person walking\n\nCouncil of Europe\nGender Equality Strategy\n\nSexist hate speech is rampant in Europe and women are disproportionately targeted. Sexist hate speech takes place online and offline and in all forms of social interaction: at school, in the family, in social circles, in the public space, at work, via emails, websites and (social) media. Although it has taken a new dimension through the Internet, the root causes of sexist hate speech preceded the technology and are fundamentally linked to the persistent unequal power relations between women and men. Sexist hate speech is a form of violence against women and girls that perpetuates and exacerbates gender inequality. Both knowledge and policy action at all levels need to be developed to combat sexist hate speech.\n\nThe Council of Europe’s Gender Equality Strategy 2014-2017 explicitly includes tackling sexism as a form of hate speech under its strategic objective 1 – combating gender stereotypes and sexism.</div><br>",
+        "DataExportTag": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qa2b8321a33b0c533-chunk_b31f5c3054523ce5f16beec4",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID74"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID75",
+      "SecondaryAttribute": "Notes_Qa2b8321a33b0c533",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qa2b8321a33b0c533",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qa2b8321a33b0c533",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID75"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID76",
+      "SecondaryAttribute": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>3.4 condescending explanations or unwelcome advice</strong> – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">What is sexism?<br><br>Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.\n\nDespite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence (<sup>2</sup>). Sexist attitudes, practices and behaviour contribute to these inequalities.</div><br>",
+        "DataExportTag": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q82d3409dd8ba5eec-chunk_4476416d95d481f671cb57dd",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID76"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID77",
+      "SecondaryAttribute": "Notes_Q82d3409dd8ba5eec",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q82d3409dd8ba5eec",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q82d3409dd8ba5eec",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID77"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID78",
+      "SecondaryAttribute": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Causes and forms of sexist hate speech > Prevalence of sexual harassment among women (%, European Union, 2014)<br><br></div><table><tr><th>Period</th><th>Prevalence (%)</th></tr>\n<tr><th>In the last 12 months</th><td>21</td></tr>\n<tr><th>Since the age of 15</th><td>55</td></tr></table><div style=\"white-space: pre-wrap\">\n\nPage 2 ▶ Combating Sexist Hate Speech\n\nphoto: woman speaking into a megaphone at a protest\n\nSexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.\n\nMultiple factors contribute to sexist hate speech, including the prevalence of patriarchal societies, the dissemination of degrading messages about women or girls, violent and hypersexualised images, notably in the media, and the expectations about women and men’s sexuality and roles in society. Gender inequalities in the media sector are also part of the problem. In 2015, women made up 25 % of the people in the news. This shows that women are seriously under-represented in the media which often presents messages and images of women and men that reinforce gender stereotypes. Social media, education, stereotypical textbooks and toys, the family and social circles, as well as art (cinema, music, videos, books) are all influenced by existing social and cultural norms. They therefore tend to perpetuate gender stereotypes and to contribute to the persistence of sexist hate speech.</div><br>",
+        "DataExportTag": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q078eba773950a45f-chunk_a25f90bf15218fd6622b44f6",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID78"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID79",
+      "SecondaryAttribute": "Notes_Q078eba773950a45f",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q078eba773950a45f",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q078eba773950a45f",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID79"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID80",
+      "SecondaryAttribute": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.1 supporting mistreatment of individual women</strong> – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Cyber harassment > 3.3 Intersectional perspective on individual impacts<br><br><sup>141</sup> The GamerGate controversy was an online phenomenon that began in 2014. Female bloggers, developers and critics in the video gaming industry, who wrote about sexism and progressivism within the industry’s culture, were victims of a widespread online harassment campaign pioneered by “GamerGaters”, who participated in trolling, inflicting death and rape threats, doxing, and cyberstalking to silence these women and the progressive standpoints they touted.\n<sup>142</sup> Amnesty International. (2020). Chapter 2: <u>Triggers of Violence and Abuse Against Women on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>143</sup> Petter, O. (2018). <u>Racism is Rife on Dating Apps – Where Does it Come From and How Can it Be Fixed?</u> The Independent. [online]\n<sup>144</sup> Amnesty International. (2020). Chapter 2: <u>Triggers of Violence and Abuse Against Women on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>145</sup> FRA. (2017). <u>Challenges to women’s human rights in the EU: Gender discrimination, sexist hate speech and gender-based violence against women and girls.</u> FRA.\n<sup>146</sup> Goulds, S. et al. (2020). Free to be Online? Girls and young women’s experiences of online harassment. Plan International.\n<sup>147</sup> Amnesty International. (2020). Chapter 3: <u>Women’s Experience of Violence and Abuse on Twitter.</u> In: Amnesty International. (2020). Toxic Twitter.\n<sup>148</sup> Powell, A. and Henry, N. (2016). Technology-Facilitated Sexual Violence Victimization: Results From an Online Survey of Australian Adults. Journal of Interpersonal Violence. 1-29. DOI: 10.1177/0886260516672055.</div><br>",
+        "DataExportTag": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q47c6c0e5959c1e88-chunk_be3df07872ccbe11479e4fdc",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID80"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID81",
+      "SecondaryAttribute": "Notes_Q47c6c0e5959c1e88",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q47c6c0e5959c1e88",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q47c6c0e5959c1e88",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID81"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID82",
+      "SecondaryAttribute": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context<br><br>Sexism and sexist behaviour result in physical, sexual, psychological or socio-economic harm and impact different sectors of the population differently. Women and girls are disproportionately affected by such behaviour. Sexism and sexist behaviour constitute a barrier to the empowerment and advancement of women and girls; the elimination of sexism and sexist behaviour would benefit everyone: women, girls, men and boys.\n\nSexism and sexist behaviour occur across the full range of human activity, including in cyberspace (internet and social media). They can be experienced individually or collectively by a person or a group of persons, even if neither the individual nor the group has been directly targeted, for example through sexist advertising, or posting of pictures of naked women in the workplace. The three levels of perpetuating and experiencing sexism are: individual, institutional (for example family, work or education environment), and structural (for example through societal gender inequalities, social norms and behaviour). Sexism is silencing when individuals and groups fail to report or complain about sexist behaviour for fear of not being taken seriously, of being ostracised or even held responsible.</div><br>",
+        "DataExportTag": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Q1b1f24f847668cce-chunk_44d021807ec65e3d23d9544d",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID82"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID83",
+      "SecondaryAttribute": "Notes_Q1b1f24f847668cce",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Q1b1f24f847668cce",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Q1b1f24f847668cce",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID83"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID84",
+      "SecondaryAttribute": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "<p><strong>EDOS Label</strong></p><p><strong>4.2 supporting systemic discrimination against women as a group</strong> – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.</p><br><p><strong>Paragraph</strong></p><div style=\"white-space: pre-wrap\">II.D. Workplace<br><br>Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men.<sup>9</sup> It impinges upon equality and dignity at work.<sup>10</sup>\n\nSexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.</div><br>",
+        "DataExportTag": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+        "QuestionType": "MC",
+        "Selector": "SAVR",
+        "SubSelector": "TX",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Qbc6fb5dfdbf13e6b-chunk_3f5d627d3aa00b5374c8d222",
+        "Choices": {
+          "1": {
+            "Display": "0 - Not relevant"
+          },
+          "2": {
+            "Display": "1 - Partially relevant"
+          },
+          "3": {
+            "Display": "2 - Relevant"
+          }
+        },
+        "ChoiceOrder": [
+          "1",
+          "2",
+          "3"
+        ],
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "ON",
+            "ForceResponseType": "ON",
+            "Type": "None"
+          }
+        },
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "QuestionID": "QID84"
+      }
+    },
+    {
+      "SurveyID": "SV_1X34YGdTiaOe2G2",
+      "Element": "SQ",
+      "PrimaryAttribute": "QID85",
+      "SecondaryAttribute": "Notes_Qbc6fb5dfdbf13e6b",
+      "TertiaryAttribute": null,
+      "Payload": {
+        "QuestionText": "If you have any additional comments or reflections, please use this space to share them.",
+        "DefaultChoices": false,
+        "DataExportTag": "Notes_Qbc6fb5dfdbf13e6b",
+        "QuestionType": "TE",
+        "Selector": "ML",
+        "DataVisibility": {
+          "Private": false,
+          "Hidden": false
+        },
+        "Configuration": {
+          "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "Notes_Qbc6fb5dfdbf13e6b",
+        "Validation": {
+          "Settings": {
+            "ForceResponse": "OFF",
+            "Type": "None"
+          }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 4,
+        "NextAnswerId": 1,
+        "SearchSource": {
+          "AllowFreeResponse": "false"
+        },
+        "QuestionID": "QID85"
+      }
+    }
+  ]
+}

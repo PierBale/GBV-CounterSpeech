@@ -13,11 +13,4 @@ cd src
 python -u -m unito_amazon.card_creation experiment --config unito_amazon/card_creation/config.edos-v2-words-clean.json
 cd ..
 
-NEW=data/card_creation_comparison_edos_v2_words_clean_20261104
-CORPUS=data/card_creation_comparison_edos_v2_20261104
-python Qualtrics/build_retrieval_survey.py \
-  --input-dir "$NEW/runs/edos-v2-words-clean-20261104/reranking" \
-  --template "$CORPUS/inputs/survey_template.qsf" \
-  --top-n 3 --merge-common-chunks \
-  --output "$NEW/survey/Best_retrieval_config.qsf" \
-  --csv-output "$NEW/survey/Best_retrieval_config_question_map.csv"
+python Qualtrics/retrieval_internal_annotation_final/build_surveys.py
