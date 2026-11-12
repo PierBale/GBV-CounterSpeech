@@ -34,6 +34,8 @@ class RunArtifacts:
         semantic = {key: value for key, value in configuration.items() if key not in {
             "run_id", "device", "embedding_batch_size", "reranker_batch_size",
             "generation_retries", "long_chunk_warning_tokens",
+            # OpenRouter generation settings do not affect retrieval runs.
+            "openrouter_models", "openrouter_model",
         }}
         inputs = {
             "corpus_sha256": file_sha256(config.chunks_path) if config.chunks_path.exists() else None,

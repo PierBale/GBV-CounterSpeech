@@ -24,5 +24,11 @@
   "model_scoped_artifacts": true,
   "deduplication_enabled": false,
   "generate_evidence": false,
+  "openrouter_models": [
+    {"model": "openai/gpt-6.1-sol", "provider": "openai"},
+    {"model": "openai/gpt-6-luna", "provider": "openai"},
+    {"model": "deepseek/deepseek-v4.1-flash-1017", "provider": "sail-research"}
+  ],
+  "openrouter_model": "openai/gpt-6-luna",
   "device": "cuda"
 }

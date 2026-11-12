@@ -19,6 +19,16 @@ def model_slug(model: str) -> str:
     return re.sub(r"[^a-z0-9.-]+", "-", model.rsplit("/", 1)[-1].lower())
 
 
+class OpenRouterModel(BaseModel):
+    """A generator served through OpenRouter. `provider` is the OpenRouter provider
+    slug pinned without fallback (None: to be chosen before running this model)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    model: str
+    provider: str | None = None
+
+
 class CardCreationConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -62,12 +72,24 @@ class CardCreationConfig(BaseModel):
     generation_max_new_tokens: int = Field(default=900, ge=1)
     generation_temperature: float = Field(default=0.7, ge=0, allow_inf_nan=False)
     generation_retries: int = Field(default=5, ge=0)
+    # OpenRouter generation (openrouter_generation.py): candidate models and the one in use.
+    openrouter_models: list[OpenRouterModel] = Field(default_factory=list)
+    openrouter_model: str | None = None
     device: str | None = None
 
     @model_validator(mode="after")
     def check_top_k(self):
         if self.rerank_top_k > self.dense_top_j:
             raise ValueError("rerank_top_k cannot exceed dense_top_j.")
+        return self
+
+    @model_validator(mode="after")
+    def check_openrouter_model(self):
+        names = [entry.model for entry in self.openrouter_models]
+        if len(names) != len(set(names)):
+            raise ValueError("openrouter_models contains duplicated models.")
+        if self.openrouter_model is not None and self.openrouter_model not in names:
+            raise ValueError(f"openrouter_model {self.openrouter_model!r} is not listed in openrouter_models.")
         return self
 
     @property
