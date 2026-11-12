@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-11-12T17:55:55.027948+00:00",
+  "calls": 12,
+  "calls_with_cost": 11,
+  "total_cost_usd_from_calls": 0.001826,
+  "batch_cost_usd": {},
+  "key_usage_before_run": {
+    "checked_at": "2026-11-12T17:53:08.526309+00:00",
+    "usage": 0.0015856,
+    "usage_daily": 0.0015856,
+    "usage_weekly": 0.0015856,
+    "usage_monthly": 0.0015856,
+    "limit": 5,
+    "limit_remaining": 4.9984144,
+    "limit_reset": null
+  },
+  "key_usage_after_run": {
+    "checked_at": "2026-11-12T17:55:54.963425+00:00",
+    "usage": 0.0032502,
+    "usage_daily": 0.0032502,
+    "usage_weekly": 0.0032502,
+    "usage_monthly": 0.0032502,
+    "limit": 5,
+    "limit_remaining": 4.9967498,
+    "limit_reset": null
+  },
+  "per_call": [
+    {
+      "card_id": "card_af77c8446009247434731d5e",
+      "label": "1.1 threats of harm",
+      "status": "api_error",
+      "batch_id": null,
+      "cost_usd": null
+    },
+    {
+      "card_id": "card_5de0b3b949d0daa941148640",
+      "label": "1.1 threats of harm",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001557
+    },
+    {
+      "card_id": "card_10bd346113429dbd6f58fd09",
+      "label": "1.2 incitement and encouragement of harm",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0002026
+    },
+    {
+      "card_id": "card_c693abe600fdc93458b1c0ce",
+      "label": "2.1 descriptive attacks",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.00016
+    },
+    {
+      "card_id": "card_98d673413a0fa657517a0c3b",
+      "label": "2.2 aggressive and emotive attacks",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001547
+    },
+    {
+      "card_id": "card_5b15a88a8a337488a70d3452",
+      "label": "2.3 dehumanising attacks and overt sexual objectification",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001597
+    },
+    {
+      "card_id": "card_55f8dad81698eebd39b17d30",
+      "label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.000159
+    },
+    {
+      "card_id": "card_516cc3b154fb1107ba1e9aad",
+      "label": "3.2 immutable gender differences and gender stereotypes",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001752
+    },
+    {
+      "card_id": "card_e7a7bb6a8587e38ff4ba4c4c",
+      "label": "3.3 backhanded gendered compliments",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.000148
+    },
+    {
+      "card_id": "card_c95ee61fe70c6c51cff469b7",
+      "label": "3.4 condescending explanations or unwelcome advice",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001833
+    },
+    {
+      "card_id": "card_4fc6bce9967c4897638c90e3",
+      "label": "4.1 supporting mistreatment of individual women",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001664
+    },
+    {
+      "card_id": "card_ff7916063793fffef56d8aa1",
+      "label": "4.2 supporting systemic discrimination against women as a group",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.0001609
+    }
+  ],
+  "key_usage_increase_during_run_usd": 0.001665
+}
