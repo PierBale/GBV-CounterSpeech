@@ -1,0 +1,45 @@
+configuration,label,mean_relevance@4,nDCG@4
+bge-m3__bge-reranker-v2-m3,1.1 threats of harm,1.0,0.5390874262348062
+bge-m3__bge-reranker-v2-m3,1.2 incitement and encouragement of harm,0.25,0.10272459231693522
+bge-m3__bge-reranker-v2-m3,2.1 descriptive attacks,1.25,0.8495111923291456
+bge-m3__bge-reranker-v2-m3,2.2 aggressive and emotive attacks,0.5,0.3354350434265104
+bge-m3__bge-reranker-v2-m3,"3.1 casual use of gendered slurs, profanities, and insults",0.25,0.13445389546353415
+bge-m3__bge-reranker-v2-m3,3.2 immutable gender differences and gender stereotypes,2.0,1.0
+bge-m3__bge-reranker-v2-m3,3.4 condescending explanations or unwelcome advice,1.25,0.786895617614416
+bge-m3__bge-reranker-v2-m3,4.1 supporting mistreatment of individual women,0.5,0.39038004999210174
+bge-m3__bge-reranker-v2-m3,4.2 supporting systemic discrimination against women as a group,0.5,0.34124370925347763
+bge-m3__bge-reranker-v2-m3,2.3 dehumanising attacks and overt sexual objectification,0.75,0.5327609559639601
+bge-m3__bge-reranker-v2-m3,3.3 backhanded gendered compliments,0.75,0.3606868528432478
+bge-m3__qwen3-reranker-8b,1.1 threats of harm,1.0,0.5135312443624668
+bge-m3__qwen3-reranker-8b,1.2 incitement and encouragement of harm,0.75,0.508267483075668
+bge-m3__qwen3-reranker-8b,2.2 aggressive and emotive attacks,1.25,1.0
+bge-m3__qwen3-reranker-8b,3.2 immutable gender differences and gender stereotypes,2.0,1.0
+bge-m3__qwen3-reranker-8b,3.3 backhanded gendered compliments,1.25,0.5311164016814772
+bge-m3__qwen3-reranker-8b,3.4 condescending explanations or unwelcome advice,0.75,0.5606626602347022
+bge-m3__qwen3-reranker-8b,4.2 supporting systemic discrimination against women as a group,1.0,0.5944571092412672
+bge-m3__qwen3-reranker-8b,2.1 descriptive attacks,1.0,0.6109920753926033
+bge-m3__qwen3-reranker-8b,"3.1 casual use of gendered slurs, profanities, and insults",1.0,0.4524659147594273
+bge-m3__qwen3-reranker-8b,4.1 supporting mistreatment of individual women,1.25,0.7087212693585176
+bge-m3__qwen3-reranker-8b,2.3 dehumanising attacks and overt sexual objectification,0.75,0.4114356354945556
+qwen3-embedding-8b__qwen3-reranker-8b,1.1 threats of harm,1.5,0.7792537931316096
+qwen3-embedding-8b__qwen3-reranker-8b,1.2 incitement and encouragement of harm,1.25,0.8495111923291456
+qwen3-embedding-8b__qwen3-reranker-8b,2.2 aggressive and emotive attacks,1.25,1.0
+qwen3-embedding-8b__qwen3-reranker-8b,2.3 dehumanising attacks and overt sexual objectification,0.75,0.4262087647711681
+qwen3-embedding-8b__qwen3-reranker-8b,"3.1 casual use of gendered slurs, profanities, and insults",1.0,0.4524659147594273
+qwen3-embedding-8b__qwen3-reranker-8b,3.2 immutable gender differences and gender stereotypes,2.0,1.0
+qwen3-embedding-8b__qwen3-reranker-8b,3.3 backhanded gendered compliments,0.75,0.3475582778491182
+qwen3-embedding-8b__qwen3-reranker-8b,3.4 condescending explanations or unwelcome advice,1.0,0.6951165556982364
+qwen3-embedding-8b__qwen3-reranker-8b,2.1 descriptive attacks,1.25,0.7302516338608744
+qwen3-embedding-8b__qwen3-reranker-8b,4.1 supporting mistreatment of individual women,1.25,0.6561025987612447
+qwen3-embedding-8b__qwen3-reranker-8b,4.2 supporting systemic discrimination against women as a group,1.0,0.6275270415439392
+qwen3-embedding-8b__bge-reranker-v2-m3,1.2 incitement and encouragement of harm,0.75,0.4037022076586439
+qwen3-embedding-8b__bge-reranker-v2-m3,2.1 descriptive attacks,1.0,0.6109920753926033
+qwen3-embedding-8b__bge-reranker-v2-m3,2.3 dehumanising attacks and overt sexual objectification,0.75,0.5179878266873477
+qwen3-embedding-8b__bge-reranker-v2-m3,"3.1 casual use of gendered slurs, profanities, and insults",0.25,0.13445389546353415
+qwen3-embedding-8b__bge-reranker-v2-m3,3.2 immutable gender differences and gender stereotypes,2.0,1.0
+qwen3-embedding-8b__bge-reranker-v2-m3,3.3 backhanded gendered compliments,1.25,0.7589939133436738
+qwen3-embedding-8b__bge-reranker-v2-m3,4.2 supporting systemic discrimination against women as a group,0.5,0.34124370925347763
+qwen3-embedding-8b__bge-reranker-v2-m3,1.1 threats of harm,1.25,0.6366824387328317
+qwen3-embedding-8b__bge-reranker-v2-m3,2.2 aggressive and emotive attacks,0.5,0.3354350434265104
+qwen3-embedding-8b__bge-reranker-v2-m3,3.4 condescending explanations or unwelcome advice,1.5,0.9082209380838204
+qwen3-embedding-8b__bge-reranker-v2-m3,4.1 supporting mistreatment of individual women,1.0,0.5585075862632192

@@ -1,0 +1,111 @@
+question_id,survey,edos_label,chunk_id,gold,gold_source
+Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44,comune,1.1 threats of harm,chunk_1af1d271fbb3edc000bc0d44,1,harmonized
+Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1,comune,1.1 threats of harm,chunk_303528c2ac040ddcbe3f2cd1,2,median_of_3
+Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b,comune,1.1 threats of harm,chunk_81ac68577124450a8fd9db9b,1,median_of_3
+Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e,comune,1.2 incitement and encouragement of harm,chunk_959242d94fa363d04dc1b45e,2,median_of_3
+Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841,comune,1.2 incitement and encouragement of harm,chunk_93cd474ca73aee9e9a6ff841,1,harmonized
+Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230,comune,1.2 incitement and encouragement of harm,chunk_1e6a316fb20fc71dcaa38230,0,median_of_3
+Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16,comune,2.1 descriptive attacks,chunk_348b1aa54150426fda5b3f16,1,harmonized
+Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e,comune,2.1 descriptive attacks,chunk_fd0e89195cea83dab4c6d44e,2,median_of_3
+Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7,comune,2.2 aggressive and emotive attacks,chunk_740ccda6d2357a42325e96f7,0,median_of_3
+Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e,comune,2.2 aggressive and emotive attacks,chunk_4cbdfe7d5ea68d4027c43a9e,1,median_of_3
+Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d,comune,2.3 dehumanising attacks and overt sexual objectification,chunk_718821ad29cc30888833123d,0,median_of_3
+Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7,comune,2.3 dehumanising attacks and overt sexual objectification,chunk_4e42631439af21409a5d3ea7,2,median_of_3
+Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335,comune,2.3 dehumanising attacks and overt sexual objectification,chunk_e8ae2f03a0eb9ea0ca5f0335,1,median_of_3
+Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e,comune,"3.1 casual use of gendered slurs, profanities, and insults",chunk_470edb697d0c77b54eed867e,2,harmonized
+Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049,comune,"3.1 casual use of gendered slurs, profanities, and insults",chunk_ca4bfb14eec60de82c407049,1,harmonized
+Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56,comune,"3.1 casual use of gendered slurs, profanities, and insults",chunk_2a9f489d50d44f5a47304e56,0,median_of_3
+Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24,comune,3.2 immutable gender differences and gender stereotypes,chunk_7b96a23fcd4d58061876fc24,2,median_of_3
+Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb,comune,3.3 backhanded gendered compliments,chunk_448daa7158663571f185ffbb,1,harmonized
+Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419,comune,3.3 backhanded gendered compliments,chunk_5437e27e98d60e6f2a587419,1,harmonized
+Q43522782264965f3-chunk_1596ed71ffde7043811e3e00,comune,3.3 backhanded gendered compliments,chunk_1596ed71ffde7043811e3e00,2,harmonized
+Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142,comune,3.4 condescending explanations or unwelcome advice,chunk_afd2a7f2267ea7e7df35d142,0,median_of_3
+Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d,comune,3.4 condescending explanations or unwelcome advice,chunk_ad285e76a178faf67da4cf6d,1,median_of_3
+Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537,comune,3.4 condescending explanations or unwelcome advice,chunk_c8d1a02481982166ad918537,1,median_of_3
+Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9,comune,4.1 supporting mistreatment of individual women,chunk_d0d9585b428ab415755394c9,0,median_of_3
+Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea,comune,4.1 supporting mistreatment of individual women,chunk_bdf35babea9313ce7e5f0eea,0,median_of_3
+Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0,comune,4.1 supporting mistreatment of individual women,chunk_854d101ecfec0702fae859a0,0,median_of_3
+Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a,comune,4.2 supporting systemic discrimination against women as a group,chunk_6b8b321e30fb5ba1e52ac37a,0,median_of_3
+Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207,comune,4.2 supporting systemic discrimination against women as a group,chunk_1500d420821ba665489c1207,0,harmonized
+Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0,comune,4.2 supporting systemic discrimination against women as a group,chunk_4a02d907b0c74dae2be00ee0,2,harmonized
+Q0e6c8d9b3fdc6005-chunk_2f43fba56668d13014796555,marem,1.1 threats of harm,chunk_2f43fba56668d13014796555,1,private
+Q57c277862ad30612-chunk_8b150239d091de512efa0587,marem,1.1 threats of harm,chunk_8b150239d091de512efa0587,2,private
+Qdcd1704122a039b7-chunk_ea6d7f85d415886ca5d26892,marem,1.1 threats of harm,chunk_ea6d7f85d415886ca5d26892,2,private
+Qf06c161a55a9aec1-chunk_b20794f82266693dc9a9da7d,marem,1.2 incitement and encouragement of harm,chunk_b20794f82266693dc9a9da7d,1,private
+Q52be96733daa503c-chunk_4f6584444a96170df0971b59,marem,1.2 incitement and encouragement of harm,chunk_4f6584444a96170df0971b59,0,private
+Qca61d670778dac07-chunk_18c37456894ea2054cb9c845,marem,1.2 incitement and encouragement of harm,chunk_18c37456894ea2054cb9c845,2,private
+Q2c128e299d5c193b-chunk_2285201187af5165ceb4f6b2,marem,2.1 descriptive attacks,chunk_2285201187af5165ceb4f6b2,1,private
+Q0da4dc7aeaa1eba9-chunk_7b96a23fcd4d58061876fc24,marem,2.1 descriptive attacks,chunk_7b96a23fcd4d58061876fc24,1,private
+Qe37b14c6fe45fa8d-chunk_fdc71d3930469320ac287c75,marem,2.2 aggressive and emotive attacks,chunk_fdc71d3930469320ac287c75,0,private
+Q54f6fd56ec9afb8a-chunk_2a9f489d50d44f5a47304e56,marem,2.2 aggressive and emotive attacks,chunk_2a9f489d50d44f5a47304e56,2,private
+Qac3fd422eb0a5856-chunk_1af1d271fbb3edc000bc0d44,marem,2.3 dehumanising attacks and overt sexual objectification,chunk_1af1d271fbb3edc000bc0d44,1,private
+Q41cbd64064e375a3-chunk_54fe54304ddccd44aeb3a5b4,marem,2.3 dehumanising attacks and overt sexual objectification,chunk_54fe54304ddccd44aeb3a5b4,2,private
+Qeb30212bcbb2a6d9-chunk_fd0e89195cea83dab4c6d44e,marem,2.3 dehumanising attacks and overt sexual objectification,chunk_fd0e89195cea83dab4c6d44e,2,private
+Q717dd9357443c90d-chunk_5437e27e98d60e6f2a587419,marem,"3.1 casual use of gendered slurs, profanities, and insults",chunk_5437e27e98d60e6f2a587419,2,private
+Qead9a7d9d9dac7d9-chunk_c779b2dbf693b10f4d8c4d74,marem,"3.1 casual use of gendered slurs, profanities, and insults",chunk_c779b2dbf693b10f4d8c4d74,0,private
+Q5f7a3286a961847d-chunk_afd2a7f2267ea7e7df35d142,marem,3.2 immutable gender differences and gender stereotypes,chunk_afd2a7f2267ea7e7df35d142,2,private
+Q1b6dbaec846bcdef-chunk_15efed6b978a921a73b8f5b5,marem,3.3 backhanded gendered compliments,chunk_15efed6b978a921a73b8f5b5,2,private
+Q82d55231123e1e7a-chunk_ca4bfb14eec60de82c407049,marem,3.3 backhanded gendered compliments,chunk_ca4bfb14eec60de82c407049,2,private
+Q1e3f2789c319c55c-chunk_a2f121ed8daeb0b5433884cd,marem,3.3 backhanded gendered compliments,chunk_a2f121ed8daeb0b5433884cd,0,private
+Q12f0c723cbe4a340-chunk_2a9f489d50d44f5a47304e56,marem,3.4 condescending explanations or unwelcome advice,chunk_2a9f489d50d44f5a47304e56,0,private
+Q4382365dadc62fc7-chunk_458151f964bf77149b28b3dc,marem,3.4 condescending explanations or unwelcome advice,chunk_458151f964bf77149b28b3dc,2,private
+Qe97d7ada1f7627f9-chunk_a05d43c3d8c15b61ada9abc2,marem,3.4 condescending explanations or unwelcome advice,chunk_a05d43c3d8c15b61ada9abc2,2,private
+Qd12ac670042fb456-chunk_2285201187af5165ceb4f6b2,marem,4.1 supporting mistreatment of individual women,chunk_2285201187af5165ceb4f6b2,0,private
+Q0f87720da66f8938-chunk_5620141a9111cec9058c59e6,marem,4.1 supporting mistreatment of individual women,chunk_5620141a9111cec9058c59e6,1,private
+Qa5a712385134b08a-chunk_0236ca815c1b18c96d0a21cc,marem,4.1 supporting mistreatment of individual women,chunk_0236ca815c1b18c96d0a21cc,2,private
+Qca9ca4806a448849-chunk_ad285e76a178faf67da4cf6d,marem,4.2 supporting systemic discrimination against women as a group,chunk_ad285e76a178faf67da4cf6d,1,private
+Qc722a97683a926c7-chunk_2127cecc05d1ff10c4edfe90,marem,4.2 supporting systemic discrimination against women as a group,chunk_2127cecc05d1ff10c4edfe90,1,private
+Q1ebceb235c195057-chunk_b80353d40a882f6af80c0802,arianna,1.1 threats of harm,chunk_b80353d40a882f6af80c0802,2,private
+Q2e50e001e49c82b5-chunk_4540e3e04353de1cd9861db6,arianna,1.1 threats of harm,chunk_4540e3e04353de1cd9861db6,0,private
+Q7a87c7387340faa7-chunk_b11fac080552eafa554f72c2,arianna,1.1 threats of harm,chunk_b11fac080552eafa554f72c2,1,private
+Q4cfc5f5b47f4ea2d-chunk_2285201187af5165ceb4f6b2,arianna,1.2 incitement and encouragement of harm,chunk_2285201187af5165ceb4f6b2,0,private
+Q5d99653dfa3ce6d2-chunk_2a9f489d50d44f5a47304e56,arianna,1.2 incitement and encouragement of harm,chunk_2a9f489d50d44f5a47304e56,1,private
+Qcfe84e1a4e829d97-chunk_45a5625414dd61fce0729f1a,arianna,1.2 incitement and encouragement of harm,chunk_45a5625414dd61fce0729f1a,0,private
+Qbae15cb77558f324-chunk_e1e052a49af18652162a855a,arianna,2.1 descriptive attacks,chunk_e1e052a49af18652162a855a,2,private
+Qdf90da503a3edc9f-chunk_c8d1a02481982166ad918537,arianna,2.1 descriptive attacks,chunk_c8d1a02481982166ad918537,1,private
+Q1ac68250ad63d694-chunk_99e94e5e35b7b2da3946b375,arianna,2.2 aggressive and emotive attacks,chunk_99e94e5e35b7b2da3946b375,0,private
+Q4615e46375d5e290-chunk_1e6a316fb20fc71dcaa38230,arianna,2.2 aggressive and emotive attacks,chunk_1e6a316fb20fc71dcaa38230,0,private
+Q9d1329bac1b971b9-chunk_5437e27e98d60e6f2a587419,arianna,2.2 aggressive and emotive attacks,chunk_5437e27e98d60e6f2a587419,0,private
+Qb554ac95a2faca45-chunk_93cd474ca73aee9e9a6ff841,arianna,2.3 dehumanising attacks and overt sexual objectification,chunk_93cd474ca73aee9e9a6ff841,1,private
+Q4ed71b7c199a4c5f-chunk_959242d94fa363d04dc1b45e,arianna,2.3 dehumanising attacks and overt sexual objectification,chunk_959242d94fa363d04dc1b45e,0,private
+Qc93bf54a60b9674b-chunk_2a9f489d50d44f5a47304e56,arianna,2.3 dehumanising attacks and overt sexual objectification,chunk_2a9f489d50d44f5a47304e56,1,private
+Qabe0874caec38175-chunk_979c87ff56824d6562e360ac,arianna,"3.1 casual use of gendered slurs, profanities, and insults",chunk_979c87ff56824d6562e360ac,0,private
+Qff7e631e2f1e820a-chunk_b20794f82266693dc9a9da7d,arianna,"3.1 casual use of gendered slurs, profanities, and insults",chunk_b20794f82266693dc9a9da7d,0,private
+Q26c7eaf984c35742-chunk_35181cf1bd1535bf73cab246,arianna,3.2 immutable gender differences and gender stereotypes,chunk_35181cf1bd1535bf73cab246,2,private
+Qe6897df96d1227b2-chunk_ad285e76a178faf67da4cf6d,arianna,3.3 backhanded gendered compliments,chunk_ad285e76a178faf67da4cf6d,1,private
+Qb5b7d65549063fc0-chunk_9964cdd5874dc8daa38672ce,arianna,3.3 backhanded gendered compliments,chunk_9964cdd5874dc8daa38672ce,0,private
+Q89cced591c05121b-chunk_ced1b3ae98c0ba79a7484de3,arianna,3.3 backhanded gendered compliments,chunk_ced1b3ae98c0ba79a7484de3,0,private
+Q076f4c49afd92ed0-chunk_f44ef1a2593eff91be24201e,arianna,3.4 condescending explanations or unwelcome advice,chunk_f44ef1a2593eff91be24201e,0,private
+Q9b6b93ee697a7f59-chunk_dc019f75e9f69c3343645199,arianna,3.4 condescending explanations or unwelcome advice,chunk_dc019f75e9f69c3343645199,0,private
+Qe62142ce39a7a41f-chunk_1e5847bcd82cd3f59290b782,arianna,4.1 supporting mistreatment of individual women,chunk_1e5847bcd82cd3f59290b782,2,private
+Q982150e64b1a2dbc-chunk_2127cecc05d1ff10c4edfe90,arianna,4.1 supporting mistreatment of individual women,chunk_2127cecc05d1ff10c4edfe90,2,private
+Qa7a978795a143f79-chunk_1af1d271fbb3edc000bc0d44,arianna,4.1 supporting mistreatment of individual women,chunk_1af1d271fbb3edc000bc0d44,2,private
+Qc846fecdb9436f18-chunk_4cbdfe7d5ea68d4027c43a9e,arianna,4.2 supporting systemic discrimination against women as a group,chunk_4cbdfe7d5ea68d4027c43a9e,1,private
+Qc4f84bdb8e8ad7bc-chunk_afd2a7f2267ea7e7df35d142,arianna,4.2 supporting systemic discrimination against women as a group,chunk_afd2a7f2267ea7e7df35d142,0,private
+Qe95143312f756f0c-chunk_147ea61dc4ac875bea6b36f9,marta,1.1 threats of harm,chunk_147ea61dc4ac875bea6b36f9,2,private
+Qa269679cdca716cd-chunk_320a6a2cff82bd4af0c82e12,marta,1.1 threats of harm,chunk_320a6a2cff82bd4af0c82e12,1,private
+Qa961f7adfe286fb0-chunk_45a5625414dd61fce0729f1a,marta,1.1 threats of harm,chunk_45a5625414dd61fce0729f1a,0,private
+Qb6e8e5995ea659f4-chunk_e8ae2f03a0eb9ea0ca5f0335,marta,1.2 incitement and encouragement of harm,chunk_e8ae2f03a0eb9ea0ca5f0335,1,private
+Q99b87c331d9b582f-chunk_2127cecc05d1ff10c4edfe90,marta,1.2 incitement and encouragement of harm,chunk_2127cecc05d1ff10c4edfe90,1,private
+Q2213ca68a8b29ff4-chunk_2a9f489d50d44f5a47304e56,marta,2.1 descriptive attacks,chunk_2a9f489d50d44f5a47304e56,1,private
+Q15f88b362065d9f5-chunk_ad285e76a178faf67da4cf6d,marta,2.1 descriptive attacks,chunk_ad285e76a178faf67da4cf6d,1,private
+Q5550e91d1d258aa0-chunk_e71c54bfb7b52f276d18f00c,marta,2.1 descriptive attacks,chunk_e71c54bfb7b52f276d18f00c,1,private
+Qd47b8c52bc2e41e7-chunk_2285201187af5165ceb4f6b2,marta,2.2 aggressive and emotive attacks,chunk_2285201187af5165ceb4f6b2,0,private
+Q9493a43a486daba1-chunk_b20794f82266693dc9a9da7d,marta,2.2 aggressive and emotive attacks,chunk_b20794f82266693dc9a9da7d,2,private
+Q9e7124cb3fe679ed-chunk_5437e27e98d60e6f2a587419,marta,2.3 dehumanising attacks and overt sexual objectification,chunk_5437e27e98d60e6f2a587419,1,private
+Qca637be906241d2b-chunk_c8d1a02481982166ad918537,marta,2.3 dehumanising attacks and overt sexual objectification,chunk_c8d1a02481982166ad918537,0,private
+Q12657423483fb229-chunk_1e6a316fb20fc71dcaa38230,marta,2.3 dehumanising attacks and overt sexual objectification,chunk_1e6a316fb20fc71dcaa38230,0,private
+Q065323b3fc6c3bf1-chunk_fdc71d3930469320ac287c75,marta,"3.1 casual use of gendered slurs, profanities, and insults",chunk_fdc71d3930469320ac287c75,0,private
+Q9b3d36c1e896d1f5-chunk_eb302d7c62840b79111f5bcf,marta,"3.1 casual use of gendered slurs, profanities, and insults",chunk_eb302d7c62840b79111f5bcf,2,private
+Qcde49eb76c9f8c3d-chunk_91ab0aee213b559182a9d4dd,marta,3.2 immutable gender differences and gender stereotypes,chunk_91ab0aee213b559182a9d4dd,2,private
+Q8f187204700a3d42-chunk_88a89b37237c3173b29166b6,marta,3.2 immutable gender differences and gender stereotypes,chunk_88a89b37237c3173b29166b6,2,private
+Qab7a8359d0ff255e-chunk_959242d94fa363d04dc1b45e,marta,3.3 backhanded gendered compliments,chunk_959242d94fa363d04dc1b45e,1,private
+Qc6c1962aa1a7f29b-chunk_2a9f489d50d44f5a47304e56,marta,3.3 backhanded gendered compliments,chunk_2a9f489d50d44f5a47304e56,0,private
+Qdd4919a886fc3ada-chunk_ca4bfb14eec60de82c407049,marta,3.4 condescending explanations or unwelcome advice,chunk_ca4bfb14eec60de82c407049,2,private
+Q2e173a5b6c9484e8-chunk_9964cdd5874dc8daa38672ce,marta,3.4 condescending explanations or unwelcome advice,chunk_9964cdd5874dc8daa38672ce,0,private
+Q83f7da44b37ac0a2-chunk_ced1b3ae98c0ba79a7484de3,marta,4.1 supporting mistreatment of individual women,chunk_ced1b3ae98c0ba79a7484de3,0,private
+Q8b20c1ee06783042-chunk_2a9f489d50d44f5a47304e56,marta,4.1 supporting mistreatment of individual women,chunk_2a9f489d50d44f5a47304e56,0,private
+Q538279e12ac6da70-chunk_4cbdfe7d5ea68d4027c43a9e,marta,4.1 supporting mistreatment of individual women,chunk_4cbdfe7d5ea68d4027c43a9e,0,private
+Q3d1cf8e693b5ab2c-chunk_a1578d9e710dfc843ebe3a68,marta,4.2 supporting systemic discrimination against women as a group,chunk_a1578d9e710dfc843ebe3a68,1,private
+Q890a887759ae35ff-chunk_1e5847bcd82cd3f59290b782,marta,4.2 supporting systemic discrimination against women as a group,chunk_1e5847bcd82cd3f59290b782,2,private
+Qe8dc26b9eb73bdf3-chunk_1af1d271fbb3edc000bc0d44,marta,4.2 supporting systemic discrimination against women as a group,chunk_1af1d271fbb3edc000bc0d44,1,private

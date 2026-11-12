@@ -1,0 +1,72 @@
+{
+  "annotators": [
+    "marem",
+    "arianna",
+    "marta"
+  ],
+  "percentage_agreement": {
+    "n_items": 29,
+    "all_identical": 0.2413793103448276,
+    "at_least_two_identical": 0.8275862068965517,
+    "mean_pairwise": 0.43678160919540227,
+    "pairwise": {
+      "marem-arianna": 0.4482758620689655,
+      "marem-marta": 0.41379310344827586,
+      "arianna-marta": 0.4482758620689655
+    },
+    "items_with_0_vs_2": 0.3448275862068966
+  },
+  "krippendorff_alpha": {
+    "ordinal": {
+      "alpha": 0.2343692263570245,
+      "ci95": [
+        -0.00856903367454216,
+        0.45057540781231403
+      ]
+    },
+    "interval": {
+      "alpha": 0.2312666413084823,
+      "ci95": [
+        -0.007184431584946997,
+        0.4464260008372086
+      ]
+    },
+    "nominal": {
+      "alpha": 0.1585463258785943,
+      "ci95": [
+        -0.027479091995221028,
+        0.33170933495149063
+      ]
+    }
+  },
+  "krippendorff_alpha_ordinal_pairwise": {
+    "marem-arianna": 0.0640394088669951,
+    "marem-marta": 0.35019559547957113,
+    "arianna-marta": 0.3137126036284993
+  },
+  "score_distribution": {
+    "marem": {
+      "0": 11,
+      "1": 8,
+      "2": 10
+    },
+    "arianna": {
+      "0": 10,
+      "1": 8,
+      "2": 11
+    },
+    "marta": {
+      "0": 13,
+      "1": 10,
+      "2": 6
+    }
+  },
+  "libraries": {
+    "krippendorff": null
+  },
+  "bootstrap": {
+    "method": "scipy.stats.bootstrap, percentile, resampling items",
+    "replicates": 10000,
+    "seed": 20261109
+  }
+}

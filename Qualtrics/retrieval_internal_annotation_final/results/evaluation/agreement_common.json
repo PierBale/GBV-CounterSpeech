@@ -1,0 +1,132 @@
+{
+  "all_three": {
+    "n_items": 29,
+    "n_ratings": 87,
+    "n_items_ge2_raters": 29,
+    "alpha_ordinal": 0.2343692263570245,
+    "alpha_ci_low": -0.0059567691523696046,
+    "alpha_ci_high": 0.45386864124565596,
+    "alpha_bootstrap_valid": 10000,
+    "alpha_nominal": 0.1585463258785943,
+    "pairwise_exact_agreement": 0.4367816091954023,
+    "pairwise_extreme_disagreement": 0.1724137931034483,
+    "all_raters_exact_agreement": 0.2413793103448276
+  },
+  "pairwise": {
+    "marem-arianna": {
+      "n_items": 29,
+      "n_ratings": 58,
+      "n_items_ge2_raters": 29,
+      "alpha_ordinal": 0.0640394088669951,
+      "alpha_ci_low": -0.3343565485218629,
+      "alpha_ci_high": 0.43473352066299614,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.18059299191374667,
+      "pairwise_exact_agreement": 0.4482758620689655,
+      "pairwise_extreme_disagreement": 0.27586206896551724,
+      "all_raters_exact_agreement": 0.4482758620689655
+    },
+    "marem-marta": {
+      "n_items": 29,
+      "n_ratings": 58,
+      "n_items_ge2_raters": 29,
+      "alpha_ordinal": 0.35019559547957113,
+      "alpha_ci_low": 0.0013156626717128678,
+      "alpha_ci_high": 0.6253836811700563,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.122282608695652,
+      "pairwise_exact_agreement": 0.41379310344827586,
+      "pairwise_extreme_disagreement": 0.10344827586206896,
+      "all_raters_exact_agreement": 0.41379310344827586
+    },
+    "arianna-marta": {
+      "n_items": 29,
+      "n_ratings": 58,
+      "n_items_ge2_raters": 29,
+      "alpha_ordinal": 0.3137126036284993,
+      "alpha_ci_low": -0.06061139476187246,
+      "alpha_ci_high": 0.6091347964684732,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.17911791179117909,
+      "pairwise_exact_agreement": 0.4482758620689655,
+      "pairwise_extreme_disagreement": 0.13793103448275862,
+      "all_raters_exact_agreement": 0.4482758620689655
+    }
+  },
+  "all_three_identical": 0.2413793103448276,
+  "n_discussed_items": 10,
+  "after_discussion": {
+    "all_three": {
+      "n_items": 29,
+      "n_ratings": 87,
+      "n_items_ge2_raters": 29,
+      "alpha_ordinal": 0.7523749474569147,
+      "alpha_ci_low": 0.5912580594287198,
+      "alpha_ci_high": 0.8551321375641863,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.5777414075286416,
+      "pairwise_exact_agreement": 0.7241379310344828,
+      "pairwise_extreme_disagreement": 0.0,
+      "all_raters_exact_agreement": 0.5862068965517241
+    },
+    "pairwise": {
+      "marem-arianna": {
+        "n_items": 29,
+        "n_ratings": 58,
+        "n_items_ge2_raters": 29,
+        "alpha_ordinal": 0.7802634156075965,
+        "alpha_ci_low": 0.5501425601588597,
+        "alpha_ci_high": 0.9181034482758621,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.6295264623955432,
+        "pairwise_exact_agreement": 0.7586206896551724,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.7586206896551724
+      },
+      "marem-marta": {
+        "n_items": 29,
+        "n_ratings": 58,
+        "n_items_ge2_raters": 29,
+        "alpha_ordinal": 0.6973550156739812,
+        "alpha_ci_low": 0.4623791000841043,
+        "alpha_ci_high": 0.8538090175500344,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.474169741697417,
+        "pairwise_exact_agreement": 0.6551724137931034,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.6551724137931034
+      },
+      "arianna-marta": {
+        "n_items": 29,
+        "n_ratings": 58,
+        "n_items_ge2_raters": 29,
+        "alpha_ordinal": 0.793618607098231,
+        "alpha_ci_low": 0.5942737782240006,
+        "alpha_ci_high": 0.9193855073165418,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.6342804766269479,
+        "pairwise_exact_agreement": 0.7586206896551724,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.7586206896551724
+      }
+    },
+    "all_three_identical": 0.5862068965517241,
+    "items_unanimous_from_start": 7,
+    "items_resolved_by_discussion": 10,
+    "items_still_one_point_apart": 12
+  },
+  "vs_harmonized_on_discussed_items": {
+    "marem": {
+      "exact_agreement": 0.2,
+      "mean_absolute_difference": 1.0
+    },
+    "arianna": {
+      "exact_agreement": 0.3,
+      "mean_absolute_difference": 0.9
+    },
+    "marta": {
+      "exact_agreement": 0.4,
+      "mean_absolute_difference": 0.6
+    }
+  }
+}

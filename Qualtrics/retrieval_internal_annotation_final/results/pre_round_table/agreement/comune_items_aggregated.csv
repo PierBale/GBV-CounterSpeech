@@ -1,0 +1,30 @@
+question_id,edos_label,chunk_id,marem,arianna,marta,median,all_identical,notes
+Q4dc5f2ecb14a8bb7-chunk_1af1d271fbb3edc000bc0d44,1.1 threats of harm,chunk_1af1d271fbb3edc000bc0d44,2,2,0,2,False,
+Q363a0511ec4837f6-chunk_303528c2ac040ddcbe3f2cd1,1.1 threats of harm,chunk_303528c2ac040ddcbe3f2cd1,2,2,1,2,False,
+Qf545b1b1b8d98f8f-chunk_81ac68577124450a8fd9db9b,1.1 threats of harm,chunk_81ac68577124450a8fd9db9b,1,1,2,1,False,
+Q4c0edbbd22ccd0cd-chunk_959242d94fa363d04dc1b45e,1.2 incitement and encouragement of harm,chunk_959242d94fa363d04dc1b45e,2,2,1,2,False,
+Qeb36ba85a34172b0-chunk_93cd474ca73aee9e9a6ff841,1.2 incitement and encouragement of harm,chunk_93cd474ca73aee9e9a6ff841,0,2,1,1,False,"marem: il paragrafo spiega il fenomeno della cyber violence ad alto livello, ma non va nello specifico sulla edos label"
+Q50ae91220e91108f-chunk_1e6a316fb20fc71dcaa38230,1.2 incitement and encouragement of harm,chunk_1e6a316fb20fc71dcaa38230,0,1,0,0,False,"marem: il paragrafo spiega il fenomeno della cyber violence ad alto livello (e in modo poco approfondito), ma non va nello specifico sulla edos label. La parte più specifica, sul postare contenuto violento, invece, non riguarda questa. label"
+Qa75a785ebe8b3005-chunk_348b1aa54150426fda5b3f16,2.1 descriptive attacks,chunk_348b1aa54150426fda5b3f16,2,1,0,1,False,
+Q06ba934f98cca3e4-chunk_fd0e89195cea83dab4c6d44e,2.1 descriptive attacks,chunk_fd0e89195cea83dab4c6d44e,1,2,2,2,False,
+Qb1f387788df9ef6f-chunk_740ccda6d2357a42325e96f7,2.2 aggressive and emotive attacks,chunk_740ccda6d2357a42325e96f7,0,0,0,0,True,"marem: il paragrafo spiega il fenomeno ad alto livello, ma non va nello specifico sulla edos label"
+Q1c8ccf55cd6d2844-chunk_4cbdfe7d5ea68d4027c43a9e,2.2 aggressive and emotive attacks,chunk_4cbdfe7d5ea68d4027c43a9e,1,1,1,1,True,"arianna: paragraph is not as specific as the edos label: hate speech may contain negative emotions against women, but it is not specified in the paragraph"
+Q4eaec01d7ae212c9-chunk_718821ad29cc30888833123d,2.3 dehumanising attacks and overt sexual objectification,chunk_718821ad29cc30888833123d,0,1,0,0,False,"marem: il paragrafo spiega il fenomeno ad alto livello, ma non va nello specifico sulla edos label"
+Q30376f88cb1e79a8-chunk_4e42631439af21409a5d3ea7,2.3 dehumanising attacks and overt sexual objectification,chunk_4e42631439af21409a5d3ea7,2,2,1,2,False,marta: Very confused 
+Q26bef2b5690d69e3-chunk_e8ae2f03a0eb9ea0ca5f0335,2.3 dehumanising attacks and overt sexual objectification,chunk_e8ae2f03a0eb9ea0ca5f0335,2,1,1,1,False,
+Qc0a791c4dc29f096-chunk_470edb697d0c77b54eed867e,"3.1 casual use of gendered slurs, profanities, and insults",chunk_470edb697d0c77b54eed867e,0,2,1,1,False,
+Q113e15ad31cc81fc-chunk_ca4bfb14eec60de82c407049,"3.1 casual use of gendered slurs, profanities, and insults",chunk_ca4bfb14eec60de82c407049,0,2,2,2,False,marem: giusto per 3.3
+Qac36b49029e83596-chunk_2a9f489d50d44f5a47304e56,"3.1 casual use of gendered slurs, profanities, and insults",chunk_2a9f489d50d44f5a47304e56,0,0,0,0,True,arianna: paragraph mentions cases with intentionality
+Q462a6a2b05089d2a-chunk_7b96a23fcd4d58061876fc24,3.2 immutable gender differences and gender stereotypes,chunk_7b96a23fcd4d58061876fc24,2,2,2,2,True,
+Q4769b6aeddac27e7-chunk_448daa7158663571f185ffbb,3.3 backhanded gendered compliments,chunk_448daa7158663571f185ffbb,0,2,1,1,False,
+Qf3ab511f59bc54d3-chunk_5437e27e98d60e6f2a587419,3.3 backhanded gendered compliments,chunk_5437e27e98d60e6f2a587419,0,2,0,0,False,
+Q43522782264965f3-chunk_1596ed71ffde7043811e3e00,3.3 backhanded gendered compliments,chunk_1596ed71ffde7043811e3e00,2,0,2,2,False,
+Q9b398dff99d745eb-chunk_afd2a7f2267ea7e7df35d142,3.4 condescending explanations or unwelcome advice,chunk_afd2a7f2267ea7e7df35d142,0,0,0,0,True,"marem: il paragrafo spiega il fenomeno ad alto livello, ma non va nello specifico sulla edos label"
+Q80a2b52797e4468c-chunk_ad285e76a178faf67da4cf6d,3.4 condescending explanations or unwelcome advice,chunk_ad285e76a178faf67da4cf6d,1,1,0,1,False,
+Qe07dac98d55f4e59-chunk_c8d1a02481982166ad918537,3.4 condescending explanations or unwelcome advice,chunk_c8d1a02481982166ad918537,1,1,1,1,True,
+Qa29a2448af95c3a8-chunk_d0d9585b428ab415755394c9,4.1 supporting mistreatment of individual women,chunk_d0d9585b428ab415755394c9,1,0,0,0,False,
+Q4c7ad876212f200d-chunk_bdf35babea9313ce7e5f0eea,4.1 supporting mistreatment of individual women,chunk_bdf35babea9313ce7e5f0eea,1,0,0,0,False,
+Q0399020b9d5b40e3-chunk_854d101ecfec0702fae859a0,4.1 supporting mistreatment of individual women,chunk_854d101ecfec0702fae859a0,0,0,0,0,True,
+Q0bcc6460c95391f4-chunk_6b8b321e30fb5ba1e52ac37a,4.2 supporting systemic discrimination against women as a group,chunk_6b8b321e30fb5ba1e52ac37a,1,0,0,0,False,
+Q4eebc5e654de25c7-chunk_1500d420821ba665489c1207,4.2 supporting systemic discrimination against women as a group,chunk_1500d420821ba665489c1207,2,0,1,1,False,
+Qa49d39b9e8879d7a-chunk_4a02d907b0c74dae2be00ee0,4.2 supporting systemic discrimination against women as a group,chunk_4a02d907b0c74dae2be00ee0,2,0,2,2,False,
