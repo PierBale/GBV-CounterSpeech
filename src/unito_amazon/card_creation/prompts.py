@@ -50,6 +50,8 @@ Evidence requirements:
   gender-based violence.
 * Prefer qualitative findings, mechanisms, consequences, and general patterns
   over quantitative details.
+* Do not include percentages, frequencies, counts, dates, numerical estimates, or other statistics unless they are essential to understanding the evidence.
+* Do not include individual incidents, named perpetrators, or illustrative examples when the paragraph already provides a broader finding or mechanism that captures their relevance.
 * Preserve the causal or relational structure of the paragraph when relevant.
 * Preserve relevant actors and groups when they are necessary to understand
   the evidence.

@@ -57,6 +57,7 @@ from .schema import RankedPassage
 BASE_URL = "https://openrouter.ai/api/v1"
 API_KEY_ENV = "OPENROUTER_API"
 FINAL_STATUSES = ("completed", "failed", "cancelled", "expired")
+TRANSIENT_STATUSES = (408, 429, 500, 502, 503, 504)
 CODE_FILES = ("openrouter_generation.py", "generation.py", "prompts.py", "card_schema.py", "passage_text.py", "schema.py")
 # Explicit schema for strict structured outputs (no keywords strict mode may reject);
 # the response is then validated with GeneratedContent (non-empty strings).
@@ -286,7 +287,9 @@ def run_batch(args, api_key, jobs, output_dir, pipeline_config):
             "model": args.model,
             "provider": batch_provider(args),
             "completion_window": "24h",
-            "requests": [{"custom_id": card_id, "body": by_id[card_id][3]} for card_id in pending],
+            # As in OpenRouter's example, each body repeats the model.
+            "requests": [{"custom_id": card_id, "body": {"model": args.model, **by_id[card_id][3]}}
+                         for card_id in pending],
         }
         response = requests.post(f"{BASE_URL}/batches", headers=headers(api_key), json=payload, timeout=120)
         if response.status_code >= 400:
@@ -342,10 +345,22 @@ def run_sync(args, api_key, jobs, output_dir, pipeline_config):
         for retry in range(args.retries + 1):
             record = {"card_id": card_id, "label": passage.label, "chunk_id": passage.chunk.chunk_id,
                       "mode": "sync", "retry": retry, "requested_at": now(), "request": request}
-            started = time.perf_counter()
-            response = requests.post(f"{BASE_URL}/chat/completions", headers=headers(api_key),
-                                     json=request, timeout=300)
-            record["latency_s"] = round(time.perf_counter() - started, 3)
+            for wait_attempt in range(args.rate_limit_retries + 1):
+                started = time.perf_counter()
+                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers(api_key),
+                                         json=request, timeout=300)
+                record["latency_s"] = round(time.perf_counter() - started, 3)
+                if response.status_code not in TRANSIENT_STATUSES or wait_attempt == args.rate_limit_retries:
+                    break
+                # Rate limit or temporary provider failure: log it, wait, resend the same request.
+                append_jsonl(output_dir / "attempts.jsonl", {**record, "status": "transient_error",
+                                                            "error": f"HTTP {response.status_code} {response.text[:500]}"})
+                retry_after = response.headers.get("Retry-After", "")
+                wait = int(retry_after) if retry_after.isdigit() else min(15 * 2 ** wait_attempt, 300)
+                print(f"{passage.label}: HTTP {response.status_code}, retrying in {wait} s "
+                      f"({wait_attempt + 1}/{args.rate_limit_retries})")
+                time.sleep(wait)
+                record["requested_at"] = now()
             if response.status_code >= 400:
                 append_jsonl(output_dir / "attempts.jsonl", {**record, "status": "api_error",
                                                             "error": f"HTTP {response.status_code} {response.text[:500]}"})
@@ -384,7 +399,9 @@ def main():
     parser.add_argument("--temperature", type=float, default=None,
                         help="not sent by default: GPT-6 Luna does not advertise temperature")
     parser.add_argument("--max-completion-tokens", type=int, default=4000)
-    parser.add_argument("--retries", type=int, default=2, help="sync mode only")
+    parser.add_argument("--retries", type=int, default=2, help="sync mode only: retries after an invalid output")
+    parser.add_argument("--rate-limit-retries", type=int, default=8,
+                        help="sync mode only: waits and resends after HTTP 429/5xx (15 s, 30 s, ... up to 5 min)")
     parser.add_argument("--poll-seconds", type=int, default=60, help="batch mode: polling interval")
     parser.add_argument("--name", default=None, help="output folder name (default: model, pipeline, top-k)")
     parser.add_argument("--dry-run", action="store_true", help="write prompts and requests, send nothing")
