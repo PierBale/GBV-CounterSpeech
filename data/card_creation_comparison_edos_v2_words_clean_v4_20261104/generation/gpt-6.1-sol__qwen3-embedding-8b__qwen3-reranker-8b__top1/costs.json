@@ -1,0 +1,157 @@
+{
+  "generated_at": "2026-11-13T10:10:27.153170+00:00",
+  "calls": 11,
+  "calls_with_cost": 11,
+  "total_cost_usd_from_calls": 0.035784,
+  "total_tokens_from_calls": {
+    "input_tokens": 9142,
+    "output_tokens": 1750,
+    "reasoning_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "batches": {},
+  "key_usage_before_run": {
+    "checked_at": "2026-11-13T10:08:00.075057+00:00",
+    "usage": 0,
+    "usage_daily": 0,
+    "usage_weekly": 0,
+    "usage_monthly": 0,
+    "limit": 50,
+    "limit_remaining": 50,
+    "limit_reset": null
+  },
+  "key_usage_after_run": {
+    "checked_at": "2026-11-13T10:10:27.133034+00:00",
+    "usage": 0.032342,
+    "usage_daily": 0.032342,
+    "usage_weekly": 0.032342,
+    "usage_monthly": 0.032342,
+    "limit": 50,
+    "limit_remaining": 49.967658,
+    "limit_reset": null
+  },
+  "per_call": [
+    {
+      "card_id": "card_526845edda685061dcfdf8ac",
+      "label": "1.1 threats of harm",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003378,
+      "input_tokens": 794,
+      "output_tokens": 179,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_a9719fdfd1985bb4284e32b5",
+      "label": "1.2 incitement and encouragement of harm",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003456,
+      "input_tokens": 848,
+      "output_tokens": 176,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_315afc8e6b00f80327fdfd57",
+      "label": "2.1 descriptive attacks",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.002974,
+      "input_tokens": 752,
+      "output_tokens": 147,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_5bcbc0821451d3048ba1925d",
+      "label": "2.2 aggressive and emotive attacks",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003328,
+      "input_tokens": 839,
+      "output_tokens": 165,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_88f427669e8c67a5e46e34e7",
+      "label": "2.3 dehumanising attacks and overt sexual objectification",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003288,
+      "input_tokens": 869,
+      "output_tokens": 155,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_5cede5605ddaf708811770d7",
+      "label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003274,
+      "input_tokens": 877,
+      "output_tokens": 152,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_aa00d1fe6a59f905d4b50a9c",
+      "label": "3.2 immutable gender differences and gender stereotypes",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003148,
+      "input_tokens": 754,
+      "output_tokens": 164,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_eda984445de20e581e875881",
+      "label": "3.3 backhanded gendered compliments",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003134,
+      "input_tokens": 892,
+      "output_tokens": 135,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_2d39dc7c616f294d748a0e04",
+      "label": "3.4 condescending explanations or unwelcome advice",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.00291,
+      "input_tokens": 825,
+      "output_tokens": 126,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_d1e0312d53faae0048a0849f",
+      "label": "4.1 supporting mistreatment of individual women",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003452,
+      "input_tokens": 921,
+      "output_tokens": 161,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    },
+    {
+      "card_id": "card_5f180319453fd246f1c27444",
+      "label": "4.2 supporting systemic discrimination against women as a group",
+      "status": "accepted",
+      "batch_id": null,
+      "cost_usd": 0.003442,
+      "input_tokens": 771,
+      "output_tokens": 190,
+      "reasoning_tokens": 0,
+      "cached_input_tokens": 0
+    }
+  ],
+  "key_usage_increase_during_run_usd": 0.032342
+}

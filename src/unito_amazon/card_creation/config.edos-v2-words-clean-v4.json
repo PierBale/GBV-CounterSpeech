@@ -29,6 +29,6 @@
     {"model": "openai/gpt-6-luna", "provider": "openai"},
     {"model": "deepseek/deepseek-v4.1-flash-1017", "provider": "sail-research"}
   ],
-  "openrouter_model": "openai/gpt-6-luna",
+  "openrouter_model": "openai/gpt-6.1-sol",
   "device": "cuda"
 }

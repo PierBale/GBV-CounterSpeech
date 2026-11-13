@@ -169,8 +169,8 @@ class PassageContextTests(unittest.TestCase):
             label="Label", definition="Definition", embedding_model="embedding", reranker_model="reranker",
             chunk=self.chunk, dense_rank=1, dense_score=0.8, reranker_rank=1, reranker_score=-2.0,
         )
-        self.assertTrue(build_card_prompt(passage).endswith("Paragraph:\n" + expected))
-        self.assertTrue(build_card_prompt(passage, False).endswith("Paragraph:\n" + self.chunk.text))
+        self.assertTrue(build_card_prompt(passage).endswith("Paragraph: " + expected))
+        self.assertTrue(build_card_prompt(passage, False).endswith("Paragraph: " + self.chunk.text))
 
     def test_no_headings_or_disabled_option_leave_body_unchanged(self):
         self.assertEqual(format_chunk_text(self.chunk, False), self.chunk.text)

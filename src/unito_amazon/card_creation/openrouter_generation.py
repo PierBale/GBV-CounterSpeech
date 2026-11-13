@@ -96,12 +96,17 @@ def select_passages(config, embedding_model: str, reranker_model: str, top_k: in
     })
     ranked = [RankedPassage.model_validate(row) for row in read_jsonl(current.ranked_path)]
     selected = sorted((p for p in ranked if p.reranker_rank <= top_k), key=lambda p: (p.label, p.reranker_rank))
-    archive = config.output_dir / "runs" / config.run_id / "reranking" / f"{current.pipeline_id}.jsonl"
-    if archive.exists():
+    # Full archive (every reranked position) when present, else the top rerank_top_k only.
+    run_dir = config.output_dir / "runs" / config.run_id
+    archive = next((path for path in (run_dir / "reranking_full" / f"{current.pipeline_id}.jsonl",
+                                      run_dir / "reranking" / f"{current.pipeline_id}.jsonl") if path.exists()), None)
+    if archive is not None:
         frozen = {(row["label"], row["reranker_rank"]): row["chunk"]["chunk_id"] for row in read_jsonl(archive)}
         for passage in selected:
             expected = frozen.get((passage.label, passage.reranker_rank))
-            if expected is not None and expected != passage.chunk.chunk_id:
+            if expected is None:
+                raise ValueError(f"{passage.label} rank {passage.reranker_rank} is not in the run archive {archive}.")
+            if expected != passage.chunk.chunk_id:
                 raise ValueError(f"Work ranking differs from run archive {config.run_id}: "
                                  f"{passage.label} rank {passage.reranker_rank}")
     labels = {p.label for p in ranked}
