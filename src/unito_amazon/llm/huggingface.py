@@ -206,13 +206,14 @@ class HuggingFaceLLM(BaseLLM):
         if torch.cuda.is_available():
             common_kwargs["device_map"] = "auto"
 
-        if _is_qwen35(self.model_name):
+        # Gemma 4 is loaded as in card creation (card_creation/generation.py).
+        if _is_qwen35(self.model_name) or _is_gemma4(self.model_name):
             try:
                 from transformers import AutoModelForMultimodalLM
             except ImportError as error:
                 raise RuntimeError(
-                    "Qwen3.5 requires a Transformers version that provides "
-                    "AutoModelForMultimodalLM."
+                    "Qwen3.5 and Gemma 4 require a Transformers version that "
+                    "provides AutoModelForMultimodalLM."
                 ) from error
 
             model = AutoModelForMultimodalLM.from_pretrained(
