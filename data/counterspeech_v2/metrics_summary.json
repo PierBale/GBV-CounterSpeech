@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-11-17T15:02:56.828929+00:00",
+  "protocol": "COLING 2025 MCG shared task (hitz-zentroa/eval-MCG-COLING-2025, traditional_metrics.py), without novelty",
+  "references": "MultiCONAN only: one reference per hateful message, drawn at random when there are several",
+  "reference_seed": 42,
+  "bertscore_model": "bert-base-multilingual-cased",
+  "datasets": {
+    "edos": {
+      "messages": 970,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 32.3392,
+          "n": 970
+        },
+        "rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.734,
+          "n": 970
+        },
+        "card_rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 40.9381,
+          "n": 970
+        },
+        "card_rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 39.9711,
+          "n": 970
+        },
+        "card_rag_gold_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 39.9928,
+          "n": 970
+        }
+      }
+    },
+    "multiconan": {
+      "messages": 560,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": 0.1181,
+          "bleu": 0.0069,
+          "bertscore": 0.6786,
+          "gen_len": 34.1286,
+          "n": 560
+        },
+        "rag": {
+          "rougeL": 0.1138,
+          "bleu": 0.0043,
+          "bertscore": 0.6724,
+          "gen_len": 44.4661,
+          "n": 560
+        },
+        "card_rag": {
+          "rougeL": 0.1041,
+          "bleu": 0.0031,
+          "bertscore": 0.6693,
+          "gen_len": 42.3089,
+          "n": 560
+        },
+        "card_rag_label": {
+          "rougeL": 0.1123,
+          "bleu": 0.005,
+          "bertscore": 0.6701,
+          "gen_len": 41.0375,
+          "n": 560
+        }
+      },
+      "messages_with_several_references": 47,
+      "mean_available_reference_count": 1.1821428571428572
+    }
+  }
+}

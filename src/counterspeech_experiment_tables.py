@@ -7,7 +7,7 @@ Writes to data/counterspeech_v2/tables/:
   examples_edos.tex           qualitative examples, EDOS (predicted and gold label)
   examples_multiconan.tex     qualitative examples, MultiCONAN (predicted label)
   examples_edos_label_mismatch.tex  EDOS examples where predicted and gold labels differ
-  metrics_multiconan.tex      reference-based metrics on MultiCONAN (after the metrics stage)
+  metrics.tex                 automatic metrics, EDOS and MultiCONAN (after the metrics stage)
   judgelm_order_agreement.tex agreement of JudgeLM with itself across presentation orders
 """
 
@@ -29,7 +29,7 @@ SHORT_NAMES = {"zero_shot": "Zero-shot", "rag": "RAG", "card_rag": "Card-RAG",
                "card_rag_label": "Card-RAG + pred. label", "card_rag_gold_label": "Card-RAG + gold label"}
 CARD_SYSTEMS = ("card_rag", "card_rag_label", "card_rag_gold_label")
 DATASETS = (("edos", "EDOS"), ("multiconan", "MultiCONAN"))
-LABEL_NOTE = (r"pred.: EDOS label predicted by the M7-FE classifier; gold: EDOS annotation "
+LABEL_NOTE = (r"pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation "
               r"(available only for EDOS). Both are used to filter the cards and are stated in the prompt.")
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
@@ -130,12 +130,12 @@ def examples_table(key: str, generations: dict, points: dict) -> str:
     gold = key.startswith("edos")
     mismatch = key == "edos_label_mismatch"
     label_caption = (
-        "EDOS label: the label predicted by the M7-FE classifier (used by Card-RAG + pred. label) and the "
+        "EDOS label: the label predicted by the EDOS classifier (used by Card-RAG + pred. label) and the "
         "gold annotation (used by Card-RAG + gold label)." if gold else
-        "EDOS label: predicted by the M7-FE classifier and used by Card-RAG + pred. label "
+        "EDOS label: predicted by the EDOS classifier and used by Card-RAG + pred. label "
         "(MultiCONAN has no EDOS annotation)."
     )
-    subject = ("EDOS messages where the label predicted by the M7-FE classifier differs from the gold "
+    subject = ("EDOS messages where the label predicted by the EDOS classifier differs from the gold "
                "annotation" if mismatch else f"{dict(DATASETS)[key]} messages where evidence cards helped")
     lines = [
         r"\begin{table*}[t]", r"\centering", r"\small",
@@ -205,40 +205,49 @@ def order_agreement_table(summary: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-METRIC_COLUMNS = (("bleu_4", "BLEU-4"), ("meteor", "METEOR"), ("rouge_l", "ROUGE-L"))
+# (field, header, higher is better: bold the best value)
+METRIC_COLUMNS = (("rougeL", "ROUGE-L", True), ("bleu", "BLEU", True), ("bertscore", "BERTScore", True),
+                  ("gen_len", "Length", False))
 
 
 def metrics_table(summary: dict) -> str:
-    """Reference-based metrics on MultiCONAN: mean ± sd per system, best mean in bold."""
-    strategies = [s for s in STRATEGIES if s in summary["strategies"]]
-    best = {field: max(summary["strategies"][s][field]["mean"] for s in strategies) for field, _ in METRIC_COLUMNS}
-    adjusted = holm({(strategy, field): (summary["paired_wilcoxon"].get(f"zero_shot|{strategy}|{field}") or {}).get("p")
-                     for strategy in strategies if strategy != "zero_shot" for field, _ in METRIC_COLUMNS})
-    header = " & ".join(rf"\textbf{{{name}}}" for _, name in METRIC_COLUMNS)
+    """Automatic metrics per dataset and system, as in the COLING 2025 MCG shared task; '--' without references."""
+    multiconan = summary["datasets"].get("multiconan", {})
+    sizes = ", ".join(f"{name}: {summary['datasets'][key]['messages']}" for key, name in DATASETS
+                      if key in summary["datasets"])
+    header = " & ".join(rf"\textbf{{{name}}}" for _, name, _ in METRIC_COLUMNS)
     lines = [
         r"\begin{table*}[t]", r"\centering", r"\small",
-        r"\caption{Reference-based metrics of Gemma-4-E4B counter-speech on MultiCONAN "
-        rf"({summary['messages']} messages; each response is scored against all MultiCONAN references of the "
-        rf"same message, {summary['mean_reference_count']:.2f} on average). Mean $\pm$ standard deviation of "
-        r"sentence-level scores. Best mean in bold; "
-        rf"$^*$: paired Wilcoxon test against Zero-shot, $p<0.05$ after Holm correction over the {len(adjusted)} "
-        r"tests in the table. " + LABEL_NOTE.split(";")[0] + ".}",
-        r"\label{tab:metrics-multiconan}",
-        r"\resizebox{\textwidth}{!}{%", r"\begin{tabular}{l" + "c" * len(METRIC_COLUMNS) + "}", r"\toprule",
-        rf"\textbf{{System}} & {header} \\", r"\midrule",
+        rf"\caption{{Automatic metrics of Gemma-4-E4B counter-speech ({sizes} messages), computed as in the "
+        r"COLING 2025 Multilingual Counterspeech Generation shared task: ROUGE-L (with stemming), corpus "
+        r"BLEU-4, mean BERTScore F1 (bert-base-multilingual-cased) and mean length in words. "
+        r"Reference-based metrics only for MultiCONAN (--: EDOS has no reference counter-speech), with one "
+        r"reference per message"
+        + (f", drawn at random for the {multiconan['messages_with_several_references']} messages with several"
+           if multiconan.get("messages_with_several_references") else "")
+        + r". Best value per dataset in bold. " + LABEL_NOTE + "}",
+        r"\label{tab:automatic-metrics}",
+        r"\begin{tabular}{l" + "c" * len(METRIC_COLUMNS) + "}", r"\toprule",
+        rf"\textbf{{System}} & {header} \\",
     ]
-    for strategy in strategies:
-        cells = []
-        for field, _ in METRIC_COLUMNS:
-            stats = summary["strategies"][strategy][field]
-            cell = f"{stats['mean']:.3f} $\\pm$ {stats['sd']:.3f}"
-            if stats["mean"] == best[field]:
-                cell = rf"\textbf{{{stats['mean']:.3f}}} $\pm$ {stats['sd']:.3f}"
-            if adjusted.get((strategy, field), 1.0) < 0.05:
-                cell += r"$^*$"
-            cells.append(cell)
-        lines.append(f"{NAMES[strategy]} & " + " & ".join(cells) + r" \\")
-    lines += [r"\bottomrule", r"\end{tabular}%", "}", r"\end{table*}"]
+    for key, name in DATASETS:
+        if key not in summary["datasets"]:
+            continue
+        rows = summary["datasets"][key]["strategies"]
+        strategies = [s for s in STRATEGIES if s in rows]
+        best = {field: max((rows[s][field] for s in strategies if rows[s][field] is not None), default=None)
+                for field, _, bold in METRIC_COLUMNS if bold}
+        lines += [r"\midrule", rf"\multicolumn{{{len(METRIC_COLUMNS) + 1}}}{{l}}{{\textit{{{name}}}}} \\"]
+        for strategy in strategies:
+            cells = []
+            for field, _, bold in METRIC_COLUMNS:
+                value = rows[strategy][field]
+                if value is None:
+                    cells.append("--")
+                    continue
+                cells.append(rf"\textbf{{{value:.3f}}}" if bold and value == best[field] else f"{value:.3f}")
+            lines.append(f"{NAMES[strategy]} & " + " & ".join(cells) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}"]
     return "\n".join(lines) + "\n"
 
 
@@ -256,12 +265,12 @@ def main() -> None:
         (out / "judgelm_order_agreement.tex").write_text(order_agreement_table(summary), encoding="utf-8")
     for key in EXAMPLES:
         (out / f"examples_{key}.tex").write_text(examples_table(key, generations, points), encoding="utf-8")
-    metrics_summary = config.output_dir / "metrics_multiconan_summary.json"
+    metrics_summary = config.output_dir / "metrics_summary.json"
     if metrics_summary.exists():
-        (out / "metrics_multiconan.tex").write_text(
+        (out / "metrics.tex").write_text(
             metrics_table(json.loads(metrics_summary.read_text(encoding="utf-8"))), encoding="utf-8")
     else:
-        print("No metrics_multiconan_summary.json yet: run the metrics stage for the metrics table.")
+        print("No metrics_summary.json yet: run the metrics stage for the metrics table.")
     print(f"Tables written to {out}")
     print(r"Preamble: \usepackage{booktabs,graphicx,tabularx}")
 

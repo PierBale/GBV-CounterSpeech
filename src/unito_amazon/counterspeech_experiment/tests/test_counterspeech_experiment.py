@@ -193,19 +193,41 @@ class MetricsTests(unittest.TestCase):
                        for strategy in STRATEGIES if source == "edos" or strategy != "card_rag_gold_label"]
             config.generations_path.write_text("\n".join(json.dumps(r) for r in records) + "\n", encoding="utf-8")
             references = {"message 0": ["ref a", "ref b"], "message 1": ["ref c"]}
-            seen = []
+            calls = []
 
-            def fake_scores(candidates, refs, **kwargs):
-                seen.extend(refs)
-                self.assertFalse(kwargs["include_bertscore"])
-                return [{"bleu_4": 0.5, "meteor": 0.5, "rouge_l": 0.5} for _ in candidates]
+            class FakeMetric:
+                def __init__(self, name):
+                    self.name = name
 
+                def compute(self, predictions, references, **kwargs):
+                    calls.append((self.name, predictions, references, kwargs))
+                    return {"rouge": {"rougeL": [0.1, 0.3]}, "bleu": {"bleu": 0.05},
+                            "bertscore": {"f1": [0.5, 0.7]}}[self.name]
+
+            fake_metrics = {name: FakeMetric(name) for name in ("rouge", "bleu", "bertscore")}
             with mock.patch.object(metrics, "multiconan_references", return_value=references), \
-                    mock.patch.object(metrics.metric_library, "_reference_metrics", side_effect=fake_scores):
+                    mock.patch.object(metrics, "load_metrics", return_value=fake_metrics):
                 metrics.run_metrics(config)
-                metrics.run_metrics(config)  # everything reused
-            self.assertEqual(len(seen), 2 * 4)  # MultiCONAN only, no gold-label system, computed once
-            self.assertIn(["ref a", "ref b"], seen)
-            summary = json.loads((config.output_dir / "metrics_multiconan_summary.json").read_text(encoding="utf-8"))
-            self.assertEqual(list(summary["strategies"]), list(STRATEGIES[:4]))
-            self.assertEqual(summary["mean_reference_count"], 1.5)
+            self.assertEqual(len(calls), 3 * 4)  # one call per metric and system, reference-based on MultiCONAN only
+            name, predictions, refs, kwargs = calls[0]
+            self.assertEqual((name, predictions), ("rouge", ["reply 0 zero_shot", "reply 1 zero_shot"]))
+            self.assertIn(refs[0], ["ref a", "ref b"])  # one reference, drawn at random
+            self.assertEqual(refs[1], "ref c")
+            self.assertTrue(all(call[2] == refs for call in calls))  # same references for every system
+            self.assertTrue(kwargs["use_stemmer"])
+            self.assertEqual(calls[1][3]["model_type"], "bert-base-multilingual-cased")
+            summary = json.loads((config.output_dir / "metrics_summary.json").read_text(encoding="utf-8"))
+            multiconan, edos = summary["datasets"]["multiconan"], summary["datasets"]["edos"]
+            self.assertEqual(list(multiconan["strategies"]), list(STRATEGIES[:4]))
+            self.assertEqual(multiconan["strategies"]["zero_shot"],
+                             {"rougeL": 0.2, "bleu": 0.05, "bertscore": 0.6, "gen_len": 3.0, "n": 2})
+            self.assertEqual((multiconan["messages_with_several_references"],
+                              multiconan["mean_available_reference_count"]), (1, 1.5))
+            self.assertEqual(list(edos["strategies"]), list(STRATEGIES))
+            self.assertEqual(edos["strategies"]["card_rag_gold_label"],
+                             {"rougeL": None, "bleu": None, "bertscore": None, "gen_len": 3.0, "n": 1})
+
+            import counterspeech_experiment_tables as tables
+            table = tables.metrics_table(summary)
+            self.assertIn(r"Card-RAG + EDOS label (gold) & -- & -- & -- & 3.000 \\", table)
+            self.assertIn(r"\textbf{0.200} & \textbf{0.050} & \textbf{0.600} & 3.000 \\", table)

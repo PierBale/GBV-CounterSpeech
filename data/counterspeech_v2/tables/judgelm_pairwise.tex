@@ -1,7 +1,7 @@
 \begin{table*}[t]
 \centering
 \small
-\caption{JudgeLM-7B pairwise evaluation of Gemma-4-E4B counter-speech, separated by dataset (EDOS: 970 messages, MultiCONAN: 560 messages). Every pair is judged in both presentation orders; per message the two outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. The larger of System Wins and Baseline Wins is in bold. $^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the 16 comparisons in the table. pred.: EDOS label predicted by the M7-FE classifier; gold: EDOS annotation (available only for EDOS). Both are used to filter the cards and are stated in the prompt.}
+\caption{JudgeLM-7B pairwise evaluation of Gemma-4-E4B counter-speech, separated by dataset (EDOS: 970 messages, MultiCONAN: 560 messages). Every pair is judged in both presentation orders; per message the two outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. The larger of System Wins and Baseline Wins is in bold. $^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the 16 comparisons in the table. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). Both are used to filter the cards and are stated in the prompt.}
 \label{tab:pairwise-gemma-4-e4b-judgelm-7b}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrr}

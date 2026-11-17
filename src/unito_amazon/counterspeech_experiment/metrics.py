@@ -1,26 +1,31 @@
-"""Reference-based metrics on MultiCONAN (BLEU-4, METEOR, ROUGE-L; no BERTScore).
+"""Automatic metrics (EDOS and MultiCONAN), computed as in the COLING 2025 MCG shared task.
 
-Each generated response is scored against every MultiCONAN reference written for the
-same hateful message (multi-reference, as supported by all three metrics). Every score
-comes from a library, loaded with Hugging Face evaluate through
-unito_amazon.evaluation.metrics._reference_metrics: "bleu" (sentence BLEU-4, smoothed),
-"meteor" (NLTK) and "rouge" (rouge-score, ROUGE-L with stemming). The paired tests use scipy.
+EDOS has no reference counter-speech: it gets gen_len only, the reference-based fields are None.
+
+Same settings as evaluation/scripts/traditional_metrics.py of
+https://github.com/hitz-zentroa/eval-MCG-COLING-2025 (novelty excluded), one score per system:
+  rougeL     Hugging Face evaluate "rouge", use_stemmer=True, mean over the responses
+  bleu       evaluate "bleu" with default settings: corpus BLEU-4, no smoothing
+  bertscore  mean F1 of evaluate "bertscore" with bert-base-multilingual-cased, no rescaling
+  gen_len    mean number of whitespace-separated words of the responses
+Scores are rounded to 4 decimals as in the shared task. As in the shared task, each response has
+a single reference: when MultiCONAN has several references for a hateful message, one is drawn at
+random, seeded with the experiment seed and the message, so every system gets the same one.
 """
 
+import random
 from collections import defaultdict
 from datetime import datetime, timezone
-from itertools import combinations
-from statistics import fmean, stdev
+from statistics import fmean
 
-from scipy.stats import wilcoxon
+import numpy as np
 
-from unito_amazon.card_creation.io import read_jsonl, write_json, write_jsonl
+from unito_amazon.card_creation.io import read_jsonl, write_json
 from unito_amazon.dataset_manager.loader import DatasetLoader
-from unito_amazon.evaluation import metrics as metric_library
 
 from .config import ExperimentConfig, strategies_for
 
-REFERENCE_FIELDS = ("bleu_4", "meteor", "rouge_l")
+BERTSCORE_MODEL = "bert-base-multilingual-cased"
 
 
 def multiconan_references() -> dict[str, list[str]]:
@@ -35,72 +40,89 @@ def multiconan_references() -> dict[str, list[str]]:
     return dict(references)
 
 
-def metric_key(record: dict) -> tuple:
-    return record["id"], record["generation_strategy"], record["generated_counter_speech"]
+def pick_reference(references: list[str], message: str, seed: int) -> str:
+    """One reference per message, independent of order and identical across systems."""
+    return random.Random(f"{seed}|{message}").choice(references)
+
+
+def load_metrics() -> dict:
+    import evaluate
+
+    return {name: evaluate.load(name) for name in ("rouge", "bleu", "bertscore")}
+
+
+def mean(values) -> float:
+    return round(float(np.mean(values)), 4)
+
+
+def gen_len(predictions: list[str]) -> float:
+    return mean([len(prediction.split()) for prediction in predictions])
+
+
+def compute_metrics(labels: list[str], predictions: list[str], loaded: dict, device: str | None) -> dict:
+    """compute_metrics of the shared-task script.
+
+    ROUGE-L is the exact mean of the per-response scores (use_aggregator=False) instead of the
+    bootstrap median of evaluate's aggregator, which estimates the same mean but changes slightly
+    from run to run.
+    """
+    rouge = loaded["rouge"].compute(predictions=predictions, references=labels, use_stemmer=True,
+                                    use_aggregator=False)["rougeL"]
+    bertscore = loaded["bertscore"].compute(predictions=predictions, references=labels,
+                                            model_type=BERTSCORE_MODEL, device=device)["f1"]
+    return {
+        "rougeL": mean(rouge),
+        "bleu": round(loaded["bleu"].compute(predictions=predictions, references=labels)["bleu"], 4),
+        "bertscore": mean(bertscore),
+        "gen_len": gen_len(predictions),
+    }
 
 
 def run_metrics(config: ExperimentConfig) -> None:
-    generations = [record for record in read_jsonl(config.generations_path) if record["source"] == "multiconan"]
-    if not generations:
-        raise ValueError(f"No MultiCONAN generations in {config.generations_path}.")
-    references = multiconan_references()
-    path = config.output_dir / "metrics_multiconan.jsonl"
-    existing = {metric_key(record): record for record in read_jsonl(path)} if path.exists() else {}
-    missing = [record for record in generations if metric_key(record) not in existing]
-    print(f"{len(generations)} MultiCONAN generations, {len(generations) - len(missing)} already scored.")
+    """Every dataset gets gen_len; only MultiCONAN has references for ROUGE-L, BLEU and BERTScore."""
+    generations = defaultdict(lambda: defaultdict(list))
+    for record in read_jsonl(config.generations_path):
+        generations[record["source"]][record["generation_strategy"]].append(record)
+    references = multiconan_references() if "multiconan" in config.datasets else {}
+    loaded = None
+    datasets = {}
+    for dataset in config.datasets:
+        strategies = strategies_for(dataset, config.strategies)
+        scores, reference_counts = {}, []
+        for strategy in strategies:
+            records = generations[dataset][strategy]
+            if not records:
+                raise ValueError(f"No {dataset} generations for {strategy} in {config.generations_path}.")
+            predictions = [record["generated_counter_speech"] or "" for record in records]
+            if dataset == "multiconan":
+                labels, reference_counts = [], []
+                for record in records:
+                    message = record["hateful_message"].strip()
+                    if not (refs := references.get(message)):
+                        raise ValueError(f"No MultiCONAN reference for {record['id']}.")
+                    labels.append(pick_reference(refs, message, config.sample_seed))
+                    reference_counts.append(len(refs))
+                loaded = loaded or load_metrics()
+                scores[strategy] = compute_metrics(labels, predictions, loaded, config.device)
+            else:
+                scores[strategy] = {"rougeL": None, "bleu": None, "bertscore": None, "gen_len": gen_len(predictions)}
+            scores[strategy]["n"] = len(records)
+            print(f"{dataset} {strategy}: {scores[strategy]}")
+        datasets[dataset] = {"messages": len(generations[dataset][strategies[0]]), "strategies": scores}
+        if reference_counts:
+            datasets[dataset].update({
+                "messages_with_several_references": sum(count > 1 for count in reference_counts),
+                "mean_available_reference_count": fmean(reference_counts),
+            })
 
-    if missing:
-        candidates, reference_lists = [], []
-        for record in missing:
-            refs = references.get(record["hateful_message"].strip())
-            if not refs:
-                raise ValueError(f"No MultiCONAN reference for {record['id']}.")
-            candidates.append(" ".join(record["generated_counter_speech"].split()))
-            reference_lists.append(refs)
-        # Lists of references: BLEU, ROUGE and METEOR score against each reference.
-        scores = metric_library._reference_metrics(
-            candidates, reference_lists, bertscore_model_type=None,
-            bertscore_device=config.device, bertscore_batch_size=16, include_bertscore=False,
-        )
-        for record, refs, score in zip(missing, reference_lists, scores, strict=True):
-            existing[metric_key(record)] = {
-                "id": record["id"], "source": record["source"], "generation_strategy": record["generation_strategy"],
-                "generation_model": record["generation_model"], "hateful_message": record["hateful_message"],
-                "generated_counter_speech": record["generated_counter_speech"],
-                "response_format_valid": record.get("response_format_valid"),
-                "references": refs, "reference_count": len(refs),
-                "metrics": score,
-            }
-    ordered = [existing[metric_key(record)] for record in generations]
-    write_jsonl(path, ordered)
-    write_json(config.output_dir / "metrics_multiconan_summary.json", summarize_metrics(ordered, config))
+    path = config.output_dir / "metrics_summary.json"
+    write_json(path, {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "protocol": "COLING 2025 MCG shared task (hitz-zentroa/eval-MCG-COLING-2025, traditional_metrics.py), "
+                    "without novelty",
+        "references": "MultiCONAN only: one reference per hateful message, drawn at random when there are several",
+        "reference_seed": config.sample_seed,
+        "bertscore_model": BERTSCORE_MODEL,
+        "datasets": datasets,
+    })
     print(f"Metrics written to {path}")
-
-
-def summarize_metrics(records: list[dict], config: ExperimentConfig) -> dict:
-    strategies = strategies_for("multiconan", config.strategies)
-    by_strategy = defaultdict(dict)
-    for record in records:
-        by_strategy[record["generation_strategy"]][record["id"]] = record["metrics"]
-    summary = {"generated_at": datetime.now(timezone.utc).isoformat(), "dataset": "multiconan",
-               "references": "all MultiCONAN references of the same hateful message",
-               "messages": len(by_strategy[strategies[0]]),
-               "mean_reference_count": fmean(record["reference_count"] for record in records),
-               "strategies": {}, "paired_wilcoxon": {}}
-    for strategy in strategies:
-        rows = list(by_strategy[strategy].values())
-        summary["strategies"][strategy] = {
-            field: {"mean": fmean(values), "sd": stdev(values) if len(values) > 1 else None, "n": len(values)}
-            for field in REFERENCE_FIELDS
-            if (values := [row[field] for row in rows if row.get(field) is not None])
-        }
-    for system_a, system_b in combinations(strategies, 2):
-        ids = sorted(set(by_strategy[system_a]) & set(by_strategy[system_b]))
-        for field in REFERENCE_FIELDS:
-            differences = [by_strategy[system_b][i][field] - by_strategy[system_a][i][field] for i in ids]
-            nonzero = [d for d in differences if d != 0]
-            summary["paired_wilcoxon"][f"{system_a}|{system_b}|{field}"] = {
-                "mean_difference_b_minus_a": fmean(differences), "messages": len(ids),
-                "p": wilcoxon(nonzero).pvalue if len(nonzero) >= 10 else None,
-            }
-    return summary
