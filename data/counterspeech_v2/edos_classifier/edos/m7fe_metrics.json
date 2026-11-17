@@ -1,0 +1,262 @@
+{
+  "method": "M7-FE: hard vote over four base models; Mistral on ties",
+  "num_examples": 970,
+  "accuracy": 0.6329896907216495,
+  "macro_f1": 0.5970871649527474,
+  "weighted_f1": 0.6315111993360139,
+  "fallback_used_count": 89,
+  "fallback_used_rate": 0.09175257731958762,
+  "labels": [
+    "1.1 threats of harm",
+    "1.2 incitement and encouragement of harm",
+    "2.1 descriptive attacks",
+    "2.2 aggressive and emotive attacks",
+    "2.3 dehumanising attacks & overt sexual objectification",
+    "3.1 casual use of gendered slurs, profanities, and insults",
+    "3.2 immutable gender differences and gender stereotypes",
+    "3.3 backhanded gendered compliments",
+    "3.4 condescending explanations or unwelcome advice",
+    "4.1 supporting mistreatment of individual women",
+    "4.2 supporting systemic discrimination against women as a group"
+  ],
+  "confusion_matrix": [
+    [
+      10,
+      5,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      56,
+      1,
+      8,
+      2,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      3,
+      142,
+      15,
+      9,
+      6,
+      19,
+      3,
+      1,
+      1,
+      6
+    ],
+    [
+      2,
+      5,
+      21,
+      119,
+      8,
+      34,
+      0,
+      0,
+      0,
+      0,
+      3
+    ],
+    [
+      0,
+      2,
+      10,
+      6,
+      32,
+      4,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      5,
+      5,
+      44,
+      3,
+      122,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      36,
+      2,
+      0,
+      3,
+      67,
+      2,
+      2,
+      0,
+      5
+    ],
+    [
+      0,
+      0,
+      2,
+      0,
+      3,
+      1,
+      4,
+      8,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      4,
+      0,
+      0,
+      0,
+      5,
+      0,
+      4,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      3,
+      3,
+      2,
+      0,
+      1,
+      0,
+      0,
+      10,
+      1
+    ],
+    [
+      0,
+      2,
+      16,
+      2,
+      0,
+      2,
+      6,
+      0,
+      0,
+      1,
+      44
+    ]
+  ],
+  "classification_report": {
+    "1.1 threats of harm": {
+      "precision": 0.5882352941176471,
+      "recall": 0.625,
+      "f1-score": 0.6060606060606061,
+      "support": 16.0
+    },
+    "1.2 incitement and encouragement of harm": {
+      "precision": 0.7088607594936709,
+      "recall": 0.7671232876712328,
+      "f1-score": 0.7368421052631579,
+      "support": 73.0
+    },
+    "2.1 descriptive attacks": {
+      "precision": 0.5916666666666667,
+      "recall": 0.6926829268292682,
+      "f1-score": 0.6382022471910113,
+      "support": 205.0
+    },
+    "2.2 aggressive and emotive attacks": {
+      "precision": 0.5979899497487438,
+      "recall": 0.6197916666666666,
+      "f1-score": 0.6086956521739131,
+      "support": 192.0
+    },
+    "2.3 dehumanising attacks & overt sexual objectification": {
+      "precision": 0.5333333333333333,
+      "recall": 0.5614035087719298,
+      "f1-score": 0.5470085470085471,
+      "support": 57.0
+    },
+    "3.1 casual use of gendered slurs, profanities, and insults": {
+      "precision": 0.7011494252873564,
+      "recall": 0.6703296703296703,
+      "f1-score": 0.6853932584269663,
+      "support": 182.0
+    },
+    "3.2 immutable gender differences and gender stereotypes": {
+      "precision": 0.6320754716981132,
+      "recall": 0.5630252100840336,
+      "f1-score": 0.5955555555555555,
+      "support": 119.0
+    },
+    "3.3 backhanded gendered compliments": {
+      "precision": 0.6153846153846154,
+      "recall": 0.4444444444444444,
+      "f1-score": 0.5161290322580645,
+      "support": 18.0
+    },
+    "3.4 condescending explanations or unwelcome advice": {
+      "precision": 0.5714285714285714,
+      "recall": 0.2857142857142857,
+      "f1-score": 0.38095238095238093,
+      "support": 14.0
+    },
+    "4.1 supporting mistreatment of individual women": {
+      "precision": 0.8333333333333334,
+      "recall": 0.47619047619047616,
+      "f1-score": 0.6060606060606061,
+      "support": 21.0
+    },
+    "4.2 supporting systemic discrimination against women as a group": {
+      "precision": 0.6984126984126984,
+      "recall": 0.6027397260273972,
+      "f1-score": 0.6470588235294118,
+      "support": 73.0
+    },
+    "accuracy": 0.6329896907216495,
+    "macro avg": {
+      "precision": 0.6428972835367954,
+      "recall": 0.5734950184299459,
+      "f1-score": 0.5970871649527474,
+      "support": 970.0
+    },
+    "weighted avg": {
+      "precision": 0.6371665605801755,
+      "recall": 0.6329896907216495,
+      "f1-score": 0.6315111993360139,
+      "support": 970.0
+    }
+  },
+  "prediction_files": {
+    "deberta9": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/counterspeech_v2/edos_classifier/edos/deberta9.csv",
+    "dtfn3": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/counterspeech_v2/edos_classifier/edos/dtfn3.csv",
+    "dtfn7": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/counterspeech_v2/edos_classifier/edos/dtfn7.csv",
+    "dtfn8": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/counterspeech_v2/edos_classifier/edos/dtfn8.csv",
+    "mistral": "/beegfs/home/moliveri/unito-projects/GBV-CounterSpeech/data/counterspeech_v2/edos_classifier/edos/mistral.csv"
+  },
+  "model_repositories": {
+    "deberta9": "sahrishkhan/edos-deberta-9-c-model",
+    "dtfn3": "sahrishkhan/edos-roberta-deberta-3-c-model",
+    "dtfn7": "sahrishkhan/edos-roberta-deberta-7-c-model",
+    "dtfn8": "sahrishkhan/edos-roberta-deberta-8-c-model",
+    "mistral": "sahrishkhan/edos-mistral-c-model"
+  }
+}

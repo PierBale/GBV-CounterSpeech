@@ -1,0 +1,249 @@
+{
+  "dataset": "EDOS Task C official sexist test split",
+  "num_examples": 970,
+  "accuracy": 0.5824742268041238,
+  "macro_f1": 0.5123596266917508,
+  "weighted_f1": 0.5812913494121895,
+  "labels": [
+    "1.1 threats of harm",
+    "1.2 incitement and encouragement of harm",
+    "2.1 descriptive attacks",
+    "2.2 aggressive and emotive attacks",
+    "2.3 dehumanising attacks & overt sexual objectification",
+    "3.1 casual use of gendered slurs, profanities, and insults",
+    "3.2 immutable gender differences and gender stereotypes",
+    "3.3 backhanded gendered compliments",
+    "3.4 condescending explanations or unwelcome advice",
+    "4.1 supporting mistreatment of individual women",
+    "4.2 supporting systemic discrimination against women as a group"
+  ],
+  "confusion_matrix": [
+    [
+      10,
+      3,
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      52,
+      0,
+      10,
+      2,
+      1,
+      0,
+      0,
+      0,
+      2,
+      2
+    ],
+    [
+      1,
+      1,
+      115,
+      19,
+      14,
+      4,
+      35,
+      3,
+      3,
+      1,
+      9
+    ],
+    [
+      1,
+      2,
+      19,
+      109,
+      8,
+      46,
+      0,
+      0,
+      0,
+      2,
+      5
+    ],
+    [
+      0,
+      1,
+      9,
+      6,
+      31,
+      3,
+      3,
+      3,
+      0,
+      0,
+      1
+    ],
+    [
+      2,
+      2,
+      5,
+      44,
+      3,
+      123,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      33,
+      2,
+      4,
+      4,
+      64,
+      2,
+      2,
+      0,
+      6
+    ],
+    [
+      0,
+      0,
+      5,
+      0,
+      3,
+      1,
+      2,
+      4,
+      0,
+      1,
+      2
+    ],
+    [
+      0,
+      0,
+      5,
+      1,
+      0,
+      0,
+      6,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      2,
+      4,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      10,
+      1
+    ],
+    [
+      0,
+      2,
+      15,
+      1,
+      0,
+      2,
+      3,
+      0,
+      3,
+      1,
+      46
+    ]
+  ],
+  "classification_report": {
+    "1.1 threats of harm": {
+      "precision": 0.5,
+      "recall": 0.625,
+      "f1-score": 0.5555555555555556,
+      "support": 16.0
+    },
+    "1.2 incitement and encouragement of harm": {
+      "precision": 0.7878787878787878,
+      "recall": 0.7123287671232876,
+      "f1-score": 0.7482014388489209,
+      "support": 73.0
+    },
+    "2.1 descriptive attacks": {
+      "precision": 0.5476190476190477,
+      "recall": 0.5609756097560976,
+      "f1-score": 0.5542168674698795,
+      "support": 205.0
+    },
+    "2.2 aggressive and emotive attacks": {
+      "precision": 0.558974358974359,
+      "recall": 0.5677083333333334,
+      "f1-score": 0.5633074935400517,
+      "support": 192.0
+    },
+    "2.3 dehumanising attacks & overt sexual objectification": {
+      "precision": 0.45588235294117646,
+      "recall": 0.543859649122807,
+      "f1-score": 0.496,
+      "support": 57.0
+    },
+    "3.1 casual use of gendered slurs, profanities, and insults": {
+      "precision": 0.6684782608695652,
+      "recall": 0.6758241758241759,
+      "f1-score": 0.6721311475409836,
+      "support": 182.0
+    },
+    "3.2 immutable gender differences and gender stereotypes": {
+      "precision": 0.5614035087719298,
+      "recall": 0.5378151260504201,
+      "f1-score": 0.5493562231759657,
+      "support": 119.0
+    },
+    "3.3 backhanded gendered compliments": {
+      "precision": 0.3076923076923077,
+      "recall": 0.2222222222222222,
+      "f1-score": 0.25806451612903225,
+      "support": 18.0
+    },
+    "3.4 condescending explanations or unwelcome advice": {
+      "precision": 0.1111111111111111,
+      "recall": 0.07142857142857142,
+      "f1-score": 0.08695652173913043,
+      "support": 14.0
+    },
+    "4.1 supporting mistreatment of individual women": {
+      "precision": 0.5882352941176471,
+      "recall": 0.47619047619047616,
+      "f1-score": 0.5263157894736842,
+      "support": 21.0
+    },
+    "4.2 supporting systemic discrimination against women as a group": {
+      "precision": 0.6216216216216216,
+      "recall": 0.6301369863013698,
+      "f1-score": 0.6258503401360545,
+      "support": 73.0
+    },
+    "accuracy": 0.5824742268041238,
+    "macro avg": {
+      "precision": 0.5189906046906866,
+      "recall": 0.5112263561229784,
+      "f1-score": 0.5123596266917508,
+      "support": 970.0
+    },
+    "weighted avg": {
+      "precision": 0.581835902050275,
+      "recall": 0.5824742268041238,
+      "f1-score": 0.5812913494121895,
+      "support": 970.0
+    }
+  },
+  "model_key": "mistral",
+  "model_repo": "sahrishkhan/edos-mistral-c-model",
+  "checkpoint": "/beegfs/home/moliveri/edos_task_c_checkpoints/edos-mistral-c-model/edos-mistral-c-model.pth"
+}

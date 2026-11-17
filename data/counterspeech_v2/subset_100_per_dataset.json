@@ -1,0 +1,1807 @@
+{
+  "sample_size_per_dataset": 100,
+  "seed": 42,
+  "edos_split": "test",
+  "items": [
+    {
+      "id": "sexism2022_english-2732",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "fuck. single. mothers. (but don’t actually fuck them, or youll get trapped for 18 years)",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14909",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "[URL] Yeah but she's a typical white girl. Thin brows, no lashes, thin lips, but also with bad skin. All of my white friends look pretty... tired without makeup.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-17346",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "If you were chad she’d be on your cock right now for doing the same exact thing. Let that sink in.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19272",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Those bitches love talking about how independent they are yet they call guys Low value if they don’t pay for every date and every meal lol tf. Also I’m pretty sure most of the girls on there are ugly. They just want a betabux pretty much",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-1134",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Husband is tired and working too much? Be an ungrateful bitch, start a fight, and make him sleep on the sofa. Granted, he was an A grade eager cuck, but I bet he's better off like this",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8889",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Most here would fuck her.",
+      "gold_edos_label": "3.3 backhanded gendered compliments",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-6874",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "The West treats women like small children, i hate the beta males as much as the low IQ herd females.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19131",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Rape is an inextricable part of women's history. Your rape fantasy thinly disguised as sarcasm is testament to that.",
+      "gold_edos_label": "3.4 condescending explanations or unwelcome advice",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11692",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Pretty soon, looking at a woman is \"eye rape\". All men should move to Mars and leave this stinking Earth to women.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-2113",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "What a disgustingly ugly cunt she is",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11496",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I hope she gets raped",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9692",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Go for more traditional women. They cheat at a far lower rate than city girls.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-1839",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Remember Herman Cain presidential campaign, 2012 #Sexual misconduct accusations. 1 woman came forward, as that mess settle down, Democrats found another woman. Then Democrats found 2 more women that sunk his campaign. What are the odds. [URL]",
+      "gold_edos_label": "4.1 supporting mistreatment of individual women",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-427",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Jap girls will fuck plenty of white guys. All of them are high estrogen and need big cocks they hate the feminine rice",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19888",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "If your a simp women will destroy you. If you tell them to fuck off they are MUCH more likely to leave you alone. Choose.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-16708",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Imagine having to work with a woman along with all the stress from your other responsibilities. I've been there bro it fucking sucks, but be careful always, they will use their gender to their advantage.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-10623",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Hungarian women are wiser than all the sl#ts in the world [URL]",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11296",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "If you don't want your mother fucked, keep her off the streets",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-2621",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Crooked Hillary wanted to send a drone strike out on Julian Assange Can NOT wait till she gets charged! That bitch should hang, not just for TREASON but MURDER! #ClintonCash #ClintonBodyCount",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7118",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Different is right. Women are not going to give the same because we don't have the brute force required to do a man's job. But, we can make a home- a beautiful, loving, comfortable home and raise respectful children.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8908",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "At least she is 1000x times more durable than any woman out there, while being sure she wont charge you with false-rape accusations. Not to mention that she wont deny you sex whenever you want as well.",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-15575",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Meh- women in 2018 are pure cancer. Don't even touch them with a 12 foot barge pole.",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-16769",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "A smart person can predict the future, a dumbass can only see the short term benefits. \\#metoo, feminism, black lives matter, nazi's, socialism, Marxists, etc all fall in the same category. It's all leftist bullshit.",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-6846",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "\" I finally found muh nawalt princess. I'm in a much better place\". Yea, setting yourself to get taking advantage of AGAIN. This girl you're with will take EVERYTHING this time. Fuck.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-3208",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "its a compliment suited for a bitch, given how some women are slave to their basest desires they deserve compliments no better than those granted to dogs",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-10488",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Did you know women in America are being oppressed? They should read your comment they'd realize how good they have it",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8503",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "And toxic masculinity is actually a byproduct of toxic femininity.",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19257",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "IMHO I would have done the same, and then moved on. So yeah, say, what a bitch, move on, what's wrong with this?",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9124",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I started to loose attraction to black women in middle school ,they just seem to only date hood niggas",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-18481",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "But I thought women could instantly detect sexism, creepiness and bad personalities. Oh wait, I meant attractiveness",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-2818",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "lol go for it dude, whamens can do no wrong",
+      "gold_edos_label": "3.3 backhanded gendered compliments",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-5599",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Karma's a bitch!",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-12580",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Good point. Some guys have absolutely no standards. Even a 500 pound woman finds some desperate loser willing to \"love her for who she is\"",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-1211",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Fuck that cunt. Hope she gets locked up for saying that shit on social media. Cheating bitch",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14700",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Just take it easy on the weights so you don't end up with the big biceps and linebacker shoulders too many women have these days.",
+      "gold_edos_label": "3.3 backhanded gendered compliments",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-17991",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "[USER] Women need some meat on 'em. These scrawny city girls who eat nothing but salad scare me.",
+      "gold_edos_label": "3.4 condescending explanations or unwelcome advice",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-5162",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "You don’t have to say anything and you don’t have to block or remove her. Just move on to the *next* bitch",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19869",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "CRAZY BIMBO IS BACK! White Uncle Tom: Rachel Dolezal says she's \"Trans-Black.\" Ugh, this dumb bitch! I thought society was through with her! [URL]",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-194",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Clearly I meant both. I'd rather regularly fuck a 7 that's fun to chill with than a 9 that makes me question reality and stresses me tf out. That's why the quote goes \"For every hot chick out there, there's a dude who's tired of fucking her.\"",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-17649",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Sadly most women love themselves a good slave....and most men oblige and submit out of weakness.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11626",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Perhaps a page should be taken out of the Klinton/Obamaha playbook and punch back twice as hard; destroy her privacy completely.",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8318",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "she had an extremely sensitive ex boyfriend that made her go through hell Says every woman ever You need to either hard next or step up the dread game in a hurry",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-10911",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Sen. Elizabeth ‘Pocahontas’ Warren implied Sen. Kirsten Gillibrand is a slut when she claimed President Trump was “slut shaming” Gillibrand [URL]",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9684",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Even femcels+the hambeats on IT admitt that they could easily get sex if they wanted. Theres nothing you have to do to get sex as female. You dont even have to be female, even transwomen are enough in 2k18",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9935",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Don’t misunderstand me, I love my mother to death. At the same time, I would also like to give her a few slaps due to her meddling in my affairs.",
+      "gold_edos_label": "1.1 threats of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-12555",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "feminists are women that cannot get laid, same thing as the beta males...",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7938",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "The View. Empty head emotional woman's daily bitchcraft lesson.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7984",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Guys! Red just said he likes his dog better than women! Incels would totally fuck a dog over a cum-faced Stacy. That is the blackest of dogpills. Or the doggest of blackpills?",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-13880",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Fuck yes! Bus ride bitches... they're fucking criminals for goodness sake...",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7161",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Hillary Clinton fucking delivered a damn BlackHawk helicopter to ISIS Leader Baghdadi as a GIFT!!!! How sweet of her!!! The Bitch!",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-13280",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "But men suffer more during the pandemic because for every 70 cents a woman loses, a man loses a whole dollar.",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19953",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Of course. I've seen a lot of good samaritan's, including myself and friends, beings thrown in court/jail or beings sued by frustrated women. I would never help a woman again if nobody else around to back me up.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-18300",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I question why someone already has not taken out ol sour puss...i mean....she verbally vomits muslum cockroach shit...hates america...wants all americans dead...i say terminate her worthless ass with prejudice !!!",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8173",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I don’t even believe in everything TRP preaches, but this story is not an exception to what they say. That pussy must have been something dangerous for you to keep going back to her like she had you on a line.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9116",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Dick sexually battered a woman after groping her? Impossible! Dick has to hands to grope with!",
+      "gold_edos_label": "4.1 supporting mistreatment of individual women",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11170",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "that is knajjd, everybody hate that pricks gutts, he ban people randomly, he is also 5'2 and looks like a girl",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-15730",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Just like the universities in the US right? I mean, \"We\", live in a rape culture in North America according to #Feminazis . Islam is peaceful everybody, sure they rape women and children, but we can't judge.#FuckIslam[USER]",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-3791",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Just another INSANE LibTurd. I believe these women are sociopaths. \"It’s all a game to the sociopath. Life is a game. With little inside themselves they spend most of their life playing stupid mind games.\" Refrence: [URL]",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7606",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "That one bitch should care she got suspended...lol it's gonna haunt her later in life",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-4250",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Depends on where you are, generally by military the bases they will, but away from them it's very hard. You shouldn't need prostitutes in Japan, the women are very easy to pick up if you know how.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-455",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "AWALT, yes, but this sounds more than a cunty wife. Get to a hospital ASAP.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14061",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "The sad reality is without sex, men don’t need or want women. But women desire and crave male attention, that’s why they are constantly invading and taking over male spaces.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-289",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Indeed, her pussy is drying up per second that simp talks. She will probably get fucked by the babies daddy that night.",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11284",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "This right here. Attractive women are attracted to trust fundy douche nozzle frat boys. Debate me.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-16099",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "if your girlfriend dresses like a slut when you 2 go out, she is still on the market bro. try to hit it a few more times but withdraw show of affection.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-919",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "All older women want relationships doesn't matter the app 🤣",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19595",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Fuck that cunt. She's in hell alright. Ill pray she's suffering for eternity.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19911",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Gab her by the pussy. [URL]",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11239",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "It was pretty much that during the last election. The dems just need a few more single moms in society to competly control everything",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7096",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Well, feminists also don't like women they consider prettier than them. So there's that.",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-625",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Imagine the woman you find most attractive in the world, she would let him fuck her in the ass on their first date. There is no competing, you never even qualified for the event.",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-2798",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "either you worship women or you're a misogynist.",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-18136",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Yeah the only way a man can satisfy those women is to get a running start and kick that pussy like it is a door you are trying to bust down. Maybe once your leg is in them up to the knee they will feel something.",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-5368",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "It's sad. A few years ago, it was all positive masculinity, self-improvement, with a side of Game. These days, they've put the pussy on the pedestal as bad as the BP crowd.",
+      "gold_edos_label": "4.2 supporting systemic discrimination against women as a group",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-19892",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Now THERE'S a woman with Principles! You'd pick a pedophile over a murdering,thieving bitch? Aren't you in DEEP enough you stooopid cow? Why not just STFU???",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-16414",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "If a female is having sex and relationships they do not have social anxiety.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14485",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "It's different since nobody (least of all feminazis like you) gives a flying fuck about sexual assault when it's men, but only barbaric wackos don't care about girls getting an education.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7103",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "As if reading your BS would make me an intellectual. Women are more than willing to date damaged men as long as the guy is hot. They don't care about \"work\", they care about looks. [URL]",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-4221",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I don't see why they even bothered, nobody said cellulite wasn't natural, just that it isn't attractive at all. Oh boo hoo women have to deal with having a flawed appearance, cry me a river.",
+      "gold_edos_label": "3.3 backhanded gendered compliments",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-4575",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I don't like Malaysian girls..",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8926",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "F - FACE: Has it fallen on one side? A - ARMS: Can they raise them? S - SPEECH: Is it slurred? T - TIME... to get her knickers down. The rohypnol has kicked in.",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-8221",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "so they couldn't be bothered to put in the effort to look good for their husbands, eh?",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-6755",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "You realize this is mgtow, not the single mother fanclub? Jesus man. Here's a pro-tip. Never send a message until you get a reply. Here's another; stop being thirsty AF and dating single mothers. Go get an escort and stop embarrassing yourself.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-11844",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I always wanted to see one of those so I could run up, pull out my cock and fuck her face.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-571",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I feel the same way. It would be nice to have a wife and kids. But it would be horrible to have a vindictive ex and kids I never see. The risk is not worth the reward.",
+      "gold_edos_label": "2.1 descriptive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-13099",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "She is an attention whore AND since she is a stay at home wife/mother she is probably cheating and will definitely divorce rape this guy in 5-10 years.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7072",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "No she's not lmao. IRL ratings are sugarcoated. She might be a 5 or a 6 IRL, but her more accurate PSL (puahate-sluthate-lookism) rating is 4. [URL] Large nose, asymmetric jawline and a strong chin.",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-3853",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I hate that limo-leftist cunt and her crossdressing Jew.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-3830",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Karma's an even bigger bitch than she is",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-6237",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Many Instagram models in Indonesia are whore. Social media simps kill women",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-5676",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "we do not accept girls since they can lose their virginity whenever they want maybe try to join other subs like r/foreveralonewomen",
+      "gold_edos_label": "3.2 immutable gender differences and gender stereotypes",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-2737",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "You can't make a ho a housewaifu.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-16025",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Really? You know for a fact that ALL parents of those bitches have insurance that covers defamation by their daughters. Right? You reviewed their coverage? Quit re-proving your idiocy. It's too cringeworthy.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7549",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "You really are fucked in the head boy. To say evil doesn't exist is like saying you've never had a shit. Anything more you want to add you Degenerate twat. Fuck you and Israel.",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-395",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Shut your bitchass mouth lady. You clog up my gab feed",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-7266",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Kick her in the cunt!",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14810",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I'm sure that kinder gentler baboon troop was soon overtaken by the dump defenders troop with the young being massacred and the females being taken as spoils. Yeah, sounds pretty great.",
+      "gold_edos_label": "1.2 incitement and encouragement of harm",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-9087",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "I would pay to see her Ass Cracker. #nsfw",
+      "gold_edos_label": "2.3 dehumanising attacks & overt sexual objectification",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-13460",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "Do female pilots sit in a cuntpit ?",
+      "gold_edos_label": "3.1 casual use of gendered slurs, profanities, and insults",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "sexism2022_english-14525",
+      "source": "edos",
+      "split": "test",
+      "target": "WOMEN",
+      "hateful_message": "What a nice little trashy whore she is.",
+      "gold_edos_label": "2.2 aggressive and emotive attacks",
+      "reference_counter_speech": null
+    },
+    {
+      "id": "multiconan-4479",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women can't possibly be rational. Their minds are too limited.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "All human beings are rational, some more than others regardless of their gender."
+    },
+    {
+      "id": "multiconan-3495",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are essentially childlike, they remain this way most of their lives. Soft and emotional.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not childlike, nor are they \"soft and emotional.\" Their emotions are part of who they are, snd are a part of human nature."
+    },
+    {
+      "id": "multiconan-2284",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women mustn't have the same right to vote as men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Why should we restrict women's rights? We should respect their rights as well."
+    },
+    {
+      "id": "multiconan-1456",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "The U.S. military, for example, is a thing for true males.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Don't assume that military service is restricted to men. About 15% of the U.S. military service are women."
+    },
+    {
+      "id": "multiconan-3486",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "We cannot coexist with millions of women subhumans that are literally ruining anything good.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings. If we are to live in a diverse and interactive society, we must welcome people that are different from us, regardless of their gender."
+    },
+    {
+      "id": "multiconan-1979",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are merely childlike, incapable of real progress and unfit to govern.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You mean that they could learn a thing or two from the political contributions of men? Still, how can you explain that in 2019 more than 40% of the European Parliament was held by women?"
+    },
+    {
+      "id": "multiconan-3177",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "women are not capable of holding a job",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I do not think it's an absolute statement that a woman cannot hold a job. Do you have any evidence of that?"
+    },
+    {
+      "id": "multiconan-3202",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are sexual targets and their existence is devoted to satisfy men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women should be protected and respected for who they are, not for the part they play in a man's life. They should be valued and protected equally. They are human beings just as men are."
+    },
+    {
+      "id": "multiconan-1567",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are little more than objects to be dominated by men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Society has evolved: there are many people, regardless of gender, that consider women to be full members of society with full human rights."
+    },
+    {
+      "id": "multiconan-4895",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are more likely to commit crime.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "This is not true. Only about 7% percent of all U.S. prison inmates are female."
+    },
+    {
+      "id": "multiconan-4000",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Why would you want to be respectful of women if all women are the same?",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If you want to be respected in our society, you must be respectful of women. What does it mean that all women are the same?"
+    },
+    {
+      "id": "multiconan-948",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are nothing but trouble, they should be submissive.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Luckily this is not the case. In many parts of the world, including parts of the Middle East and Africa, increasing numbers of women play breadwinning roles and become lifelines for their families."
+    },
+    {
+      "id": "multiconan-1995",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is just a tool for oppressing men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is a social movement that claims equality, it's so far from oppressing men."
+    },
+    {
+      "id": "multiconan-1256",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "This world has become so corruptedt by feminism, that only the strong men can rule over it.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Society has surely developed beyond operating on the rule that 'might is right' and 'survival of the fittest'?"
+    },
+    {
+      "id": "multiconan-3180",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "A woman should not be allowed to have an abortion. The man should decide for her.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "A person's right to have an abortion is a personal one. And if that person has the right to make her or his own choice, then they should have the right to do as they wish."
+    },
+    {
+      "id": "multiconan-2279",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are subhuman, they are weak and childlike, they cannot be trusted with important decisions.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are people with dignity, and they deserve respect and protection, just like anybody else."
+    },
+    {
+      "id": "multiconan-4894",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women have no place in a modern democracy like the UK.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You don't have to be a feminist to see that there are women-inclusive and women-only organisations. I think this shows that you don't know much about this country."
+    },
+    {
+      "id": "multiconan-2070",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women can never contribute to the country's wealth because they are a bunch of whores.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are important in our society, and they are valued for their contributions. Unfortunately their rights are not being respected and their contribution is not being acknowledged."
+    },
+    {
+      "id": "multiconan-1983",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists want women ruling men, that's all.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is not a gender supremacy ideology, it is about individual rights and the right of every person to choose."
+    },
+    {
+      "id": "multiconan-2471",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists are against the interests of the men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You would be surprised how many feminists are very good at convincing people that changing a misogynistic and violent world is not against the interests of men."
+    },
+    {
+      "id": "multiconan-3981",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is a threat to human dignity.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism means equality of the genders. Equality of rights is necessary for a functioning society."
+    },
+    {
+      "id": "multiconan-1067",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Slutty dressing is the main cause of rape.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If a man is raped we call it rape, and consider him the victim; when a woman is raped we call it a \"misunderstanding\" and she is considered the culprit. Shouldn't the fault be that of the rapist, regardless of gender?"
+    },
+    {
+      "id": "multiconan-4493",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "These people cannot be changed. I think this is an example of a feminist commenting on the behaviour of a man: not helpful.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "How do you know that this is not an example of a woman talking about her own problems with another woman?"
+    },
+    {
+      "id": "multiconan-4878",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are made for making food.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not 'made for making food'. And the vast majority of them are not sexist, which means that they do not find it strange to express their own preferences."
+    },
+    {
+      "id": "multiconan-2782",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are nothing but trouble human beings to any man, they must be submissive to him.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You are absolutely right: women are human beings, they are human beings worth caring for, respecting and trying to develop as people. Being \"trouble\" to men doesn't make them less human. In which way are they \"trouble\"?"
+    },
+    {
+      "id": "multiconan-3501",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are always fighting because they are subhumans.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings like us, and they have rights as any other human beings."
+    },
+    {
+      "id": "multiconan-103",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, they remain this way most of their lives. Soft and emotional. It has devastated our once great patriarchal civilizations.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Both men and women can possess characteristics like 'soft' and 'emotional',which are not determined by gender, nor are they a negative thing. Maybe we could all use a bit more compassion and 'emotion' in today's world?"
+    },
+    {
+      "id": "multiconan-3287",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "women falsely accuse men of harrassment.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "if a woman says she was harassed wouldn't you report it? It's the courts duty to establish the truth, and you could have helped the woman to regain her confidence."
+    },
+    {
+      "id": "multiconan-1442",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women must be submissive and serve to men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women should be treated as equal in life."
+    },
+    {
+      "id": "multiconan-4294",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women don't have the right to vote in the US.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The right of people to vote is enshrined in the US constitution and is guaranteed for men and women equally."
+    },
+    {
+      "id": "multiconan-4993",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are only useful as housekeepers.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "That is just not true. In fact, as long as there are only men in positions of power, there is a gender bias in the workplace, which hinders the advancement of women in society."
+    },
+    {
+      "id": "multiconan-1453",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Men are not rapists because feminists are just a bunch of sluts.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Do you suggest men have the right to rape women if they are feminists?"
+    },
+    {
+      "id": "multiconan-1451",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Men's rights are undeniable. Women come after that.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "How do you know the men's rights are not a threat to the rights of your mother, daugher and women around you? And what are the men's rights you are referring to?"
+    },
+    {
+      "id": "multiconan-1988",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women's work is to look after for their children.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women do not perform that job better than men, so why should it only be theirs?"
+    },
+    {
+      "id": "multiconan-3841",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is just a bunch of mean, bitchy cuntwits that only exist to divide society.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I think you are confusing cause and effect. Women are people, with rights, and they have every right to fight against misogynist, who \"only exist to divide society\"."
+    },
+    {
+      "id": "multiconan-2569",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women should not to be allowed to vote.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I would be very interested to meet an MP who believes this."
+    },
+    {
+      "id": "multiconan-4678",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, incapable of critical thought.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings with the potential to be rational and thoughtful as anyone else. This is why I support women's right to choose their own happiness."
+    },
+    {
+      "id": "multiconan-3740",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists talking about gender inequality should just be silenced. Women are inferior and they should remain so.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "And yet, according to some statistics, up to 20% of women and 4% of men in the UK say they have experienced sexual violence since the age of 16. So this is indeed an issue of gender inequality, don't you think it is something not to be silent about?"
+    },
+    {
+      "id": "multiconan-1448",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are subhuman.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I would say you've got an interesting point there, but I really don't see it. Why would they be part of society if they're subhumans?"
+    },
+    {
+      "id": "multiconan-4998",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Woman are basically childlike.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "They are not childlike and are capable of great achievements."
+    },
+    {
+      "id": "multiconan-4486",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "A woman's place is with her husband or his family. This is what they are made for.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women cannot be confined at home, they are important for our society, and their presence is needed everywhere."
+    },
+    {
+      "id": "multiconan-1228",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "If only women behaved like men wanted and didn't fight back, 10% of all sexual assaults would be solved.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Are you serious? How can you say that? To have sex with someone without their consent is violence."
+    },
+    {
+      "id": "multiconan-1984",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists want women in charge in order to revenge the rapes.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminists aren't vengeful. Why should we fear a feminist ideology that promotes love and consent?"
+    },
+    {
+      "id": "multiconan-1808",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Men should not spend time with women. It is in their best interest to remain far from their bad influence.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "According to your beliefs, men and women are different in their rights. They are not."
+    },
+    {
+      "id": "multiconan-3736",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women mustn't be allowed to vote.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "On the contrary it is really important that women have the right to vote. We have to remember that even if men and women are different, they deserve the same rights."
+    },
+    {
+      "id": "multiconan-4689",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are a burden to society and should not be allowed to vote.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The decision on who has the right to vote is based on the law. If you do not want to allow people to have the right to vote because of their gender, then you have a problem."
+    },
+    {
+      "id": "multiconan-3186",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "If a woman wants an abortion, she is a bitch.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I don't know about you, but I think only a woman should have to choose whether or not she wants an abortion for herself. If a woman wants an abortion she should get one from a qualified medical professional."
+    },
+    {
+      "id": "multiconan-1443",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are there to fulfill men desires. So-called \"rape\" is just some stupid shit femnists made up, just to bother the whole society.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Let's look at the data: by 2020, over 40% of women in the US have encountered sexual violence. This is something to be scared of."
+    },
+    {
+      "id": "multiconan-1239",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "This world has become so corrupted by feminism, that only the strong men can rule it.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "No one should ask for the power to rule over others, to be a dictator or to have total control over the means of life. This is a world of equal distribution, where anyone can achieve anything."
+    },
+    {
+      "id": "multiconan-1460",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "A woman is more equal when she is wearing a dress. This is what is fair: women can be good women when they respect men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Isn't it about time we stop turning a blind eye to the blatant inequalities that exist in our society? Shouldn't we be raising our voices against these blatant inequalities? All men and women are created equal."
+    },
+    {
+      "id": "multiconan-1440",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women have it so easy. They stay home and have babies.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Not all women are interested in parenting. Likewise, not all men are interested in their carreers."
+    },
+    {
+      "id": "multiconan-1011",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "The feminist movement is a dangerous force in our country. It has warped our thought and corrupted our politics.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I think it is necessary to have a critical mind and open-minded attitude towards problems and topics in our society. The root causes are complex but the most important problem is patriarchy and its various manifestations."
+    },
+    {
+      "id": "multiconan-952",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is about the destruction of manhood, and the disempowerment of white man.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "It is about equality. Your assertion that a women's empowerment movement is somehow about dissolving masculinity and allowing someone to be 'disempowered' is absolutely FALSE."
+    },
+    {
+      "id": "multiconan-2496",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women should not be allowed to work.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "That is a rather extreme view. If a women is not allowed to have a job, then there is gender discrimination at work."
+    },
+    {
+      "id": "multiconan-2292",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "We must allow men to have complete moral and intellectual superiority. This because they are superior to women.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You make a very strong argument that men are more likely than women to experience 'moral and intellectual superiority'. How can you justify this discriminatory attitude?"
+    },
+    {
+      "id": "multiconan-2068",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "why do we never talk about female-on-male rape? Isn't this a crime as well?",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Rape is always a crime, whether a man or a woman is the victim. Rape is a crime regardless of gender. But male-on-female rape is prevailing by far."
+    },
+    {
+      "id": "multiconan-951",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women need to accept that they are weak.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Many women work multiple jobs to provide for their children and they also do the housework... do you call that weakness?"
+    },
+    {
+      "id": "multiconan-1449",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are not capable of dealing with public responsibilities. They should stay at home and raise the children.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women have been more than capable of holding powerful positions in our society, and they are often rewarded with public offices that few would dare dream of holding themselves."
+    },
+    {
+      "id": "multiconan-3831",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are just weak and childlike. The majority of the electorate believe that a woman cannot run a country such as US.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "On the contrary: more than half of American adults say they would be happy having a woman being president of the United States (roughly as many feel the same way about a man)."
+    },
+    {
+      "id": "multiconan-4902",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "We should stop feminists.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The main problem with feminism today is not about stopping men supremacy, but about avoiding the creation of an \"us vs. them\" mentality, which is polarizing and can easily turn violent. Feminists can do a lot to fight this poisonous trend."
+    },
+    {
+      "id": "multiconan-4477",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, and should be submissive to their husbands.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings, and deserve respect."
+    },
+    {
+      "id": "multiconan-4701",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, incapable of critical thought and emotions, unable to form complex and long-term plans.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The theory of the feminine gender as a \"limiting factor\" in human development has been around for a long time but it is not accepted by scientific and medical literature."
+    },
+    {
+      "id": "multiconan-2497",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are capable of nothing and they just need to be protected.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women do not want protection. They are hurt by violence because they are discriminated against. If there was no culture of violence, nobody would need protecting."
+    },
+    {
+      "id": "multiconan-3478",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "I hate feminists. They are such a bunch of cry babies and unpleasant people.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is a ideology and a movement for womens empowerment. It is not about hatred of men. Feminism is about equality. And equality is very important, is it not?"
+    },
+    {
+      "id": "multiconan-4691",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are nothing but trouble and shouldn't be allowed to leave their houses.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "There is nothing wrong with women wanting to have happy and fulfilling lives, wherever they may be."
+    },
+    {
+      "id": "multiconan-3197",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are naturally inferiors and should be treated as such.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not naturally inferiors. They have the same rights as men, and the same responsibilities."
+    },
+    {
+      "id": "multiconan-3290",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, they remain this way most of their lives. This degrading behavior is utterly repulsive and should not be tolerated.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human and deserve respect. Don't you think so?"
+    },
+    {
+      "id": "multiconan-1452",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Why do all feminists hate Men? It is because they are Men. That is all.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Why did you say that? It makes no sense to infer it's about genitals to people claiming equality."
+    },
+    {
+      "id": "multiconan-3721",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, they must only remain at home with the kids and take care of the house.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not childlike, in fact, they are often the key to success for their families. Also, they have the right to exit their homes if they wish."
+    },
+    {
+      "id": "multiconan-1446",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women provoke men, first they want to have sex with men and then start whining about it. When they regret their choice, it is not our fault.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The rapes of many women by men would not have happened if it was enough to understand that \"no means no.\""
+    },
+    {
+      "id": "multiconan-2478",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists want to rule the world to get rid of minorities, they hate men because they want to be the oppressors.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "What oppressors? What minorities? This is not what feminists are about!"
+    },
+    {
+      "id": "multiconan-1807",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is a cult. It has corrupted the highest levels of society, and should be stopped.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is a call for equality, and it has served the world well in the past, but it has still much to fight for. Now is not the time to undermine its progress."
+    },
+    {
+      "id": "multiconan-2300",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are subhuman and deserve nothing but hatred and violence.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "You should be very, very careful what you wish for. Would you wish that for your mother or your daughter?"
+    },
+    {
+      "id": "multiconan-2997",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is a dangerous ideology that is oppressing men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is not about oppressing men. It is about the rights of women to live their lives as they wish. It is about equality between the sexes."
+    },
+    {
+      "id": "multiconan-3839",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women want to be dominated by a tough man.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I think a woman would rather be dominated by a gentle man than a monster."
+    },
+    {
+      "id": "multiconan-4683",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women who want to control their fertility are just prostitutes. They shouldn't be allowed to do so freely.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If women wanted to control their fertility they would be the only ones responsible for their own choice."
+    },
+    {
+      "id": "multiconan-1454",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Why the mainstream media don't use more masculine voices in the news?",
+      "gold_edos_label": null,
+      "reference_counter_speech": "People don't decide who's presenting the news. That's up to the news media, who are attempting to insert some gender equity into a world that seems to be struggling to produce it."
+    },
+    {
+      "id": "multiconan-1066",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Divorce increased poverty, and guess who are the victims? Men! This is because the law protects women's greediness.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If you compare the percentage of people in poverty by sex, there is a clear gender difference. But guess what? Women are much more likely to be poverty victims. Still, I believe that the important thing is to provide long-term supports to break the cycle of poverty, regardless of gender."
+    },
+    {
+      "id": "multiconan-1793",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are not human, and cannot contribute to our civilization",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings with dignity. They deserve respect and that goes for everyone."
+    },
+    {
+      "id": "multiconan-4697",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women aren't as smart as men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "There is no evidence that women are less smart than men, and there is evidence that women are often disadvantaged. To suggest otherwise is just a form of sexism."
+    },
+    {
+      "id": "multiconan-3475",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are nothing but objects to be dominated by the will of a man.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are human beings with human rights. To suggest that they are objects to be dominated by a man's wishes is discrimination and oppression."
+    },
+    {
+      "id": "multiconan-3195",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "We must teach our children to consider women as inferior, because this is what they are.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The lesson you're teaching your children to be good citizens can be: observe the law and respect the rights of other people. Women are equal to men."
+    },
+    {
+      "id": "multiconan-1976",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is incompatible with the European tradition: men at work, women at home.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The European Convention on Human Rights also protects the rights of women: Article 14 prohibits any discrimination on the basis of sex."
+    },
+    {
+      "id": "multiconan-1782",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "If women wanted to control their fertility they would be prostitutes.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If women want to control their fertility they have the right to do it, because they are free to make choices for their own lives."
+    },
+    {
+      "id": "multiconan-708",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Equality is crap, even for woman. The more power women have, the more they depart from domestic duties , the unhappier they become.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If women are stressed about balancing family and career it is because men are still not sharing equally in the [responsibilities at home](https://www.huffingtonpost.ca/2017/09/27/women-chores-home_a_23224733/). It is not the choices that cause women stress, it is patriarchy and archaic gender roles."
+    },
+    {
+      "id": "multiconan-1794",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are subhuman and are created to please men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not subhuman and cannot be reduced to their bodies being a man's property."
+    },
+    {
+      "id": "multiconan-3296",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "What has feminism ever done for you?",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminism is a human rights movement, and it has always stood for the equality of the sexes."
+    },
+    {
+      "id": "multiconan-703",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "I'm tired of woman taking part in political debate. Feminism is a divisive force in society.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "A new social concept almost always brings division but this doesn't make it unworthy of implementation. The abolition of slavery in the U.S. being the best example."
+    },
+    {
+      "id": "multiconan-1447",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are basically childlike, they remain this way most of their lives. With the exception of divorce and separation, no one talks about them.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Why do you say this about women? Try explaining it to your mother or grandmother."
+    },
+    {
+      "id": "multiconan-3980",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "I don't want another girl in my family. I already have one, but I wanted only boys.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "It doesn't matter how many children you have. Women are human beings. They are people with full human rights."
+    },
+    {
+      "id": "multiconan-2466",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is a destructive ideology that has hurt so many and caused so much harm to our world.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "I don't think feminism is a bad idea in itself. That's what people do when they are given the choice to engage in a movement for equality."
+    },
+    {
+      "id": "multiconan-1998",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "At my age, I can't bear to look at what the world will be like with women in power.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Look, if you want to blame a whole gender for our society's ills, that's your right, but I believe in the power of reason."
+    },
+    {
+      "id": "multiconan-2477",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminists want women's supremacy.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Feminists believe in equality of rights. They believe that men and women are created equal, and that men and women can have equal rights."
+    },
+    {
+      "id": "multiconan-1681",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "We all suffer from the feminists and feminism, it is an excuse to stifle free speech.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Hate speech towards women is a very serious matter and can easily lead to physical harm, discrimination, or even murder. Feminists fight to stop this, not to stifle free speech."
+    },
+    {
+      "id": "multiconan-2789",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women say they want equal rights but what they really want is to dominate men.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Women are not 'against men's rights', they are not 'men's oppressors', and they aren't interested in oppressing anyone."
+    },
+    {
+      "id": "multiconan-1445",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "International Criminal Court (ICC) chief prosecutor, Fatou Bensouda, is just another female 'human rights lawyer' full of herself.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "Fatou Bensouda is a known, highly respected human rights lawyer and has fought to build foundations for accountability for human rights violations committed by foreign military powers. In other words she is well connected to the United States and is well-suited to handle cases of State-sponsored violence."
+    },
+    {
+      "id": "multiconan-4690",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women desperately looking for men are just unacceptable.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "If women truly wanted to have relationships and fulfilment they should be allowed to, not being pressured into giving up on what they want."
+    },
+    {
+      "id": "multiconan-3481",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Women are bad for the economy, this is why the world is filled with problems.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The fact that women are disadvantaged in many areas of life does not imply that they are bad people."
+    },
+    {
+      "id": "multiconan-4272",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "The west has allowed feminism to take over our countries and is now poisoning our children's brains.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "The western world is aiming to be equal and diverse. It is no secret that feminism fights for the same thing."
+    },
+    {
+      "id": "multiconan-1438",
+      "source": "multiconan",
+      "split": null,
+      "target": "WOMEN",
+      "hateful_message": "Feminism is a witch hunt, driven by an underground, female dominated movement to subvert society and enforce their radical feminism.",
+      "gold_edos_label": null,
+      "reference_counter_speech": "It's a witch hunt when so many people are willing to believe in lies, harass, and fabricate incidents in an effort to create a climate of fear. This is simply an attempt to silence debate and hold 'men's rights activists' accountable."
+    }
+  ]
+}
