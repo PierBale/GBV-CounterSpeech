@@ -1,9 +1,10 @@
 """Counter-speech experiment: zero-shot, RAG, card-RAG, card-RAG + predicted EDOS label.
 
 Run from src:
-  python counterspeech_experiment.py sample     # 100 messages per dataset (no GPU)
-  python counterspeech_experiment.py generate   # retrieval + Gemma 4 E4B (GPU)
+  python counterspeech_experiment.py sample     # all unique messages: EDOS test 970, MultiCONAN 560 (no GPU)
+  python counterspeech_experiment.py generate   # retrieval + Gemma 4 E4B (GPU); 5 systems on EDOS, 4 on MultiCONAN
   python counterspeech_experiment.py judge      # JudgeLM, all pairs, both orders (GPU)
+  python counterspeech_experiment.py metrics    # MultiCONAN reference-based metrics (BERTScore: GPU)
   python counterspeech_experiment.py summary    # recompute judge_summary.json only
 
 The EDOS Task C labels must exist first, see run_counterspeech_experiment.sh.
@@ -18,14 +19,18 @@ from unito_amazon.counterspeech_experiment.config import ExperimentConfig
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("stage", choices=["sample", "generate", "judge", "summary"])
+    parser.add_argument("stage", choices=["sample", "generate", "judge", "metrics", "summary"])
     parser.add_argument("--output-dir", type=Path, help="default: data/counterspeech_v2")
     parser.add_argument("--device", default=None)
     parser.add_argument("--generation-batch-size", type=int)
     parser.add_argument("--judge-batch-size", type=int)
+    parser.add_argument("--sample-size", default=None,
+                        help="messages per dataset, or 'all' (default); a larger sample extends the saved one")
     args = parser.parse_args()
 
     overrides = {"device": args.device}
+    if args.sample_size:
+        overrides["sample_size"] = None if args.sample_size == "all" else int(args.sample_size)
     if args.output_dir:
         overrides["output_dir"] = args.output_dir.resolve()
     if args.generation_batch_size:
@@ -46,6 +51,10 @@ def main() -> None:
         from unito_amazon.counterspeech_experiment.judging import run_judge
 
         run_judge(config)
+    elif args.stage == "metrics":
+        from unito_amazon.counterspeech_experiment.metrics import run_metrics
+
+        run_metrics(config)
     else:
         from unito_amazon.card_creation.io import write_json
         from unito_amazon.counterspeech_experiment.judging import summarize

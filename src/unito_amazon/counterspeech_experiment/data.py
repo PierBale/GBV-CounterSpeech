@@ -25,7 +25,12 @@ def _optional(value):
 
 
 def build_subset(config: ExperimentConfig) -> dict:
-    """Sample unique hateful messages per dataset (EDOS: sexist test messages only)."""
+    """Sample unique hateful messages per dataset (EDOS: sexist test messages only).
+
+    sample_size=None takes every unique message, shuffled with the same seed: the
+    shuffle is a permutation whose first n rows equal the sample of size n, so a
+    smaller earlier subset is a prefix of the full one.
+    """
     items = []
     for dataset in config.datasets:
         if dataset == "edos":
@@ -35,8 +40,10 @@ def build_subset(config: ExperimentConfig) -> dict:
             frame = DatasetLoader.load_dataset("multiconan", targets=["WOMEN"])
         else:
             raise ValueError(f"Unknown dataset: {dataset!r}")
-        frame = sample_messages(frame, config.sample_size, config.sample_seed)
-        if len(frame) < config.sample_size:
+        available = frame["hate_speech"].astype(str).str.strip().nunique()
+        size = available if config.sample_size is None else config.sample_size
+        frame = sample_messages(frame, size, config.sample_seed)
+        if len(frame) < size:
             raise ValueError(f"Only {len(frame)} unique messages in {dataset}.")
         for _, row in frame.iterrows():
             items.append({
@@ -46,8 +53,8 @@ def build_subset(config: ExperimentConfig) -> dict:
                 "reference_counter_speech": _optional(row["counter_speech"]),
             })
         print(f"Sampled {len(frame)} unique messages from {dataset} (seed {config.sample_seed}).")
-    return {"sample_size_per_dataset": config.sample_size, "seed": config.sample_seed,
-            "edos_split": config.edos_split, "items": items}
+    return {"sample_size_per_dataset": "all" if config.sample_size is None else config.sample_size,
+            "seed": config.sample_seed, "edos_split": config.edos_split, "items": items}
 
 
 def load_or_create_subset(config: ExperimentConfig) -> list[dict]:
@@ -56,12 +63,33 @@ def load_or_create_subset(config: ExperimentConfig) -> list[dict]:
     path = config.subset_path
     if path.exists():
         saved = json.loads(path.read_text(encoding="utf-8"))
-        if saved != subset:
+        if saved == subset:
+            return subset["items"]
+        if not extends(saved, subset):
             raise ValueError(f"{path} differs from the configured sample; use another output_dir.")
+        # Same seed, larger sample: the old messages come first, so their generations and
+        # judgments are reused. The smaller subset is kept for reference.
+        archive = path.with_name(f"subset_{saved['sample_size_per_dataset']}_per_dataset.json")
+        write_json(archive, saved)
+        write_json(path, subset)
+        print(f"Subset extended from {saved['sample_size_per_dataset']} to {subset['sample_size_per_dataset']} "
+              f"messages per dataset (previous subset kept in {archive.name}).")
     else:
         write_json(path, subset)
         print(f"Subset saved to {path}")
     return subset["items"]
+
+
+def extends(smaller: dict, larger: dict) -> bool:
+    """True if `larger` only adds messages after those of `smaller`, per dataset."""
+    if not all(smaller.get(key) == larger.get(key) for key in ("seed", "edos_split")):
+        return False
+    for source in {item["source"] for item in larger["items"]} | {item["source"] for item in smaller["items"]}:
+        old = [item for item in smaller["items"] if item["source"] == source]
+        new = [item for item in larger["items"] if item["source"] == source]
+        if len(new) < len(old) or new[:len(old)] != old:
+            return False
+    return True
 
 
 def classifier_file(config: ExperimentConfig, source: str) -> Path:

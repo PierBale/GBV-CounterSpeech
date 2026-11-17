@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Agreement of JudgeLM-7B with itself across the two presentation orders of each pair (outcome from the point of view of the first system: win, tie, loss). Exact: share of messages with the same outcome in both orders; $\kappa$: Cohen's kappa; $\alpha$: Krippendorff's ordinal alpha; $\rho$: Spearman correlation of the score differences; Flip: share of messages where each order gives a clear but different winner.}
+\label{tab:judgelm-order-agreement}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+\textbf{System A} & \textbf{System B} & \textbf{n} & \textbf{Exact} & $\kappa$ & $\alpha$ & $\rho$ & \textbf{Flip} \\
+\midrule
+\multicolumn{8}{l}{\textit{EDOS}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & 970 & 0.53 & 0.04 & 0.04 & 0.12 & 0.47 \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & 970 & 0.58 & 0.13 & 0.13 & 0.15 & 0.42 \\
+Zero-shot & Card-RAG + EDOS label (pred.) & 970 & 0.56 & 0.05 & 0.05 & 0.06 & 0.44 \\
+Zero-shot & Card-RAG + EDOS label (gold) & 970 & 0.57 & 0.06 & 0.05 & 0.08 & 0.43 \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & 970 & 0.41 & -0.16 & -0.18 & -0.21 & 0.59 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 970 & 0.45 & -0.09 & -0.11 & -0.11 & 0.55 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & 970 & 0.46 & -0.06 & -0.09 & -0.07 & 0.54 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 970 & 0.43 & -0.13 & -0.15 & -0.18 & 0.57 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & 970 & 0.41 & -0.16 & -0.19 & -0.21 & 0.59 \\
+Card-RAG + EDOS label (pred.) & Card-RAG + EDOS label (gold) & 970 & 0.32 & -0.06 & -0.55 & -0.57 & 0.67 \\
+\cmidrule(lr){1-8}
+\textit{All pairs} &  & 9700 & 0.47 & -0.04 & -0.08 & -0.08 & 0.53 \\
+\midrule
+\multicolumn{8}{l}{\textit{MultiCONAN}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & 560 & 0.59 & 0.09 & 0.05 & 0.10 & 0.40 \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & 560 & 0.59 & 0.11 & 0.06 & 0.13 & 0.40 \\
+Zero-shot & Card-RAG + EDOS label (pred.) & 560 & 0.54 & 0.06 & -0.10 & 0.04 & 0.44 \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & 560 & 0.45 & 0.03 & -0.09 & -0.01 & 0.53 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 560 & 0.44 & 0.05 & -0.12 & 0.00 & 0.54 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 560 & 0.45 & 0.10 & -0.10 & 0.01 & 0.51 \\
+\cmidrule(lr){1-8}
+\textit{All pairs} &  & 3360 & 0.51 & 0.09 & -0.02 & 0.07 & 0.47 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

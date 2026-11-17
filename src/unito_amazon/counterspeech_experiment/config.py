@@ -8,7 +8,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 CARD_RUN_DIR = PROJECT_ROOT / "data" / "card_creation_comparison_edos_v2_words_clean_v4_20261104"
 
 # Fixed order: it defines the pairs and which system is shown first in the forward order.
-STRATEGIES = ("zero_shot", "rag", "card_rag", "card_rag_label")
+# card_rag_label uses the EDOS label predicted by the classifier; card_rag_gold_label the
+# gold EDOS annotation, which exists only for EDOS.
+STRATEGIES = ("zero_shot", "rag", "card_rag", "card_rag_label", "card_rag_gold_label")
+GOLD_LABEL_STRATEGIES = {"card_rag_gold_label"}
+
+
+def strategies_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> tuple[str, ...]:
+    """Strategies applicable to a dataset: gold-label ones need EDOS annotations."""
+    return tuple(s for s in strategies if source == "edos" or s not in GOLD_LABEL_STRATEGIES)
 
 
 @dataclass(frozen=True)
@@ -17,7 +25,7 @@ class ExperimentConfig:
 
     # Data: unique hateful messages, sampled per dataset.
     datasets: tuple[str, ...] = ("edos", "multiconan")
-    sample_size: int = 100
+    sample_size: int | None = None  # None = every unique message (EDOS test: 970, MultiCONAN: 560)
     sample_seed: int = 42
     edos_split: str = "test"
 

@@ -1,0 +1,178 @@
+{
+  "annotators": [
+    "marta",
+    "arianna",
+    "marem"
+  ],
+  "faithfulness": {
+    "percentage_agreement": {
+      "n_items": 45,
+      "all_identical": 0.7555555555555555,
+      "at_least_two_identical": 1.0,
+      "mean_pairwise": 0.837037037037037,
+      "pairwise": {
+        "marta-arianna": 0.8222222222222222,
+        "marta-marem": 0.9111111111111111,
+        "arianna-marem": 0.7777777777777778
+      },
+      "items_with_0_vs_2": 0.0
+    },
+    "krippendorff_alpha": {
+      "ordinal": {
+        "alpha": 0.0013550135501355642,
+        "ci95": [
+          -0.11666666666666647,
+          0.1728395061728395
+        ]
+      },
+      "interval": {
+        "alpha": 0.0013550135501355642,
+        "ci95": [
+          -0.1166666666666667,
+          0.1728395061728395
+        ]
+      },
+      "nominal": {
+        "alpha": 0.0013550135501355642,
+        "ci95": [
+          -0.1166666666666667,
+          0.1728395061728395
+        ]
+      }
+    },
+    "krippendorff_alpha_ordinal_pairwise": {
+      "marta-arianna": -0.08536585365853666,
+      "marta-marem": 0.2936507936507936,
+      "arianna-marem": -0.11250000000000004
+    },
+    "score_distribution": {
+      "marta": {
+        "0": 0,
+        "1": 2,
+        "2": 43
+      },
+      "arianna": {
+        "0": 0,
+        "1": 6,
+        "2": 39
+      },
+      "marem": {
+        "0": 0,
+        "1": 4,
+        "2": 41
+      }
+    },
+    "cards_with_disagreement": 11,
+    "by_model": {
+      "deepseek/deepseek-v4.1-flash-1017": {
+        "cards": 22,
+        "mean_rating": 1.9393939393939394,
+        "median_distribution": {
+          "1.0": 0,
+          "2.0": 22
+        }
+      },
+      "openai/gpt-6.1-sol": {
+        "cards": 23,
+        "mean_rating": 1.8840579710144927,
+        "median_distribution": {
+          "1.0": 1,
+          "2.0": 22
+        }
+      },
+      "mann_whitney_on_card_medians": {
+        "u": 264.0,
+        "p": 0.35052890898233335
+      }
+    }
+  },
+  "answer_relevance": {
+    "percentage_agreement": {
+      "n_items": 45,
+      "all_identical": 0.37777777777777777,
+      "at_least_two_identical": 0.9333333333333333,
+      "mean_pairwise": 0.562962962962963,
+      "pairwise": {
+        "marta-arianna": 0.4666666666666667,
+        "marta-marem": 0.7333333333333333,
+        "arianna-marem": 0.4888888888888889
+      },
+      "items_with_0_vs_2": 0.13333333333333333
+    },
+    "krippendorff_alpha": {
+      "ordinal": {
+        "alpha": 0.4188840959059187,
+        "ci95": [
+          0.20936636559571972,
+          0.5950503350801203
+        ]
+      },
+      "interval": {
+        "alpha": 0.3915522703273495,
+        "ci95": [
+          0.17871653499319595,
+          0.5697287166732855
+        ]
+      },
+      "nominal": {
+        "alpha": 0.29749422427581296,
+        "ci95": [
+          0.13391691724894966,
+          0.4456575646192731
+        ]
+      }
+    },
+    "krippendorff_alpha_ordinal_pairwise": {
+      "marta-arianna": 0.30849353627131393,
+      "marta-marem": 0.7042965367965368,
+      "arianna-marem": 0.24548394548394536
+    },
+    "score_distribution": {
+      "marta": {
+        "0": 5,
+        "1": 17,
+        "2": 23
+      },
+      "arianna": {
+        "0": 11,
+        "1": 19,
+        "2": 15
+      },
+      "marem": {
+        "0": 5,
+        "1": 17,
+        "2": 23
+      }
+    },
+    "cards_with_disagreement": 28,
+    "by_model": {
+      "deepseek/deepseek-v4.1-flash-1017": {
+        "cards": 22,
+        "mean_rating": 1.2121212121212122,
+        "median_distribution": {
+          "0.0": 2,
+          "1.0": 11,
+          "2.0": 9
+        }
+      },
+      "openai/gpt-6.1-sol": {
+        "cards": 23,
+        "mean_rating": 1.3768115942028984,
+        "median_distribution": {
+          "0.0": 2,
+          "1.0": 8,
+          "2.0": 13
+        }
+      },
+      "mann_whitney_on_card_medians": {
+        "u": 216.5,
+        "p": 0.3630369669413479
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "scipy.stats.bootstrap, percentile, resampling cards",
+    "replicates": 10000,
+    "seed": 20261117
+  }
+}

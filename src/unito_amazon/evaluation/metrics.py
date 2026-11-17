@@ -110,6 +110,7 @@ def _reference_metrics(
     bertscore_model_type: str | None,
     bertscore_device: str | None,
     bertscore_batch_size: int,
+    include_bertscore: bool = True,
 ) -> list[dict]:
     bleu = _load_metric("bleu")
     rouge = _load_metric("rouge")
@@ -135,6 +136,11 @@ def _reference_metrics(
         meteor.compute(predictions=[candidate], references=[reference])["meteor"]
         for candidate, reference in zip(candidates, references, strict=True)
     ]
+    if not include_bertscore:
+        return [
+            {"bleu_4": _round(b), "rouge_l": _round(r), "meteor": _round(m)}
+            for b, r, m in zip(sentence_bleu, rouge_l, meteor_scores, strict=True)
+        ]
 
     bertscore = _load_metric("bertscore", cache=False)
     bertscore_kwargs = {

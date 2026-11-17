@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Reference-based metrics of Gemma-4-E4B counter-speech on MultiCONAN (560 messages; each response is scored against all MultiCONAN references of the same message, 1.18 on average). Mean $\pm$ standard deviation of sentence-level scores. Best mean in bold; $^*$: paired Wilcoxon test against Zero-shot, $p<0.05$ after Holm correction over the 9 tests in the table. pred.: EDOS label predicted by the M7-FE classifier.}
+\label{tab:metrics-multiconan}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{System} & \textbf{BLEU-4} & \textbf{METEOR} & \textbf{ROUGE-L} \\
+\midrule
+Zero-shot & \textbf{0.048} $\pm$ 0.016 & 0.156 $\pm$ 0.073 & \textbf{0.121} $\pm$ 0.057 \\
+RAG (Qwen3-Emb-8B) & 0.039 $\pm$ 0.010$^*$ & \textbf{0.173} $\pm$ 0.060$^*$ & 0.116 $\pm$ 0.042 \\
+Card-RAG (Qwen3-Emb-8B) & 0.039 $\pm$ 0.010$^*$ & 0.153 $\pm$ 0.057 & 0.107 $\pm$ 0.042$^*$ \\
+Card-RAG + EDOS label (pred.) & 0.041 $\pm$ 0.011$^*$ & 0.161 $\pm$ 0.061$^*$ & 0.115 $\pm$ 0.044$^*$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

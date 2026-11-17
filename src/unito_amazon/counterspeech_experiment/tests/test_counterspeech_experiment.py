@@ -48,11 +48,13 @@ class RetrievalTests(unittest.TestCase):
         retrievers.cards = [card(i, "2.1" if i % 2 else "3.2") for i in range(20)]
         retrievers.card_retriever = FakeRetriever(retrievers.cards)
         retrievers.chunk_retriever = FakeRetriever([Document(id=f"c{i}", text="chunk") for i in range(9)])
-        retrieved = retrievers.retrieve("message", "2.1 descriptive attacks")
+        retrieved = retrievers.retrieve("message", "2.1 descriptive attacks", "3.2 stereotypes")
         self.assertEqual([r.document.id for r in retrieved["card_rag"]], [f"card{i}" for i in range(5)])
         self.assertEqual([r.document.id for r in retrieved["card_rag_label"]], ["card1", "card3", "card5", "card7", "card9"])
         self.assertEqual([r.rank for r in retrieved["card_rag_label"]], [1, 2, 3, 4, 5])
+        self.assertEqual([r.document.id for r in retrieved["card_rag_gold_label"]], ["card0", "card2", "card4", "card6", "card8"])
         self.assertEqual(len(retrieved["rag"]), 5)
+        self.assertNotIn("card_rag_gold_label", retrievers.retrieve("message", "2.1 descriptive attacks"))
         with self.assertRaises(ValueError):
             retrievers.retrieve("message", "1.1 threats of harm")
 
@@ -78,15 +80,18 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.config = dataclasses.replace(ExperimentConfig(), output_dir=Path(self.directory.name),
                                           generation_batch_size=3)
         items = [{"id": f"m{i}", "source": "edos" if i < 2 else "multiconan", "split": None, "target": "WOMEN",
-                  "hateful_message": f"message {i}", "gold_edos_label": None, "reference_counter_speech": None,
+                  "hateful_message": f"message {i}", "reference_counter_speech": None,
+                  "gold_edos_label": "3.2 immutable gender differences" if i < 2 else None,
                   "predicted_edos_label": "2.1 descriptive attacks", "classifier": {}} for i in range(4)]
-        cards = [card(i, "2.1") for i in range(6)]
+        cards = [card(i, "2.1") for i in range(6)] + [card(i, "3.2") for i in range(6, 11)]
         retrieved = {"rag": [result(Document(id=f"c{i}", text=f"chunk {i}"), i) for i in range(1, 6)],
                      "card_rag": [result(c, i) for i, c in enumerate(cards[:5], start=1)],
-                     "card_rag_label": [result(c, i) for i, c in enumerate(cards[1:6], start=1)]}
+                     "card_rag_label": [result(c, i) for i, c in enumerate(cards[1:6], start=1)],
+                     "card_rag_gold_label": [result(c, i) for i, c in enumerate(cards[6:11], start=1)]}
         fake = mock.MagicMock()
         fake.retrieve.return_value = retrieved
-        fake.definitions = {"2.1": ("descriptive attacks", "definition 2.1")}
+        fake.definitions = {"2.1": ("descriptive attacks", "definition 2.1"),
+                            "3.2": ("immutable gender differences", "definition 3.2")}
         fake.metadata.return_value = {}
         self.patches = [
             mock.patch.object(generation, "attach_predicted_labels", return_value=items),
@@ -106,18 +111,25 @@ class GenerationAndJudgeTests(unittest.TestCase):
         with fake_factory(llm):
             generation.run_generation(self.config)
             generation.run_generation(self.config)  # nothing left to generate
-        self.assertEqual(llm.calls, 16)
+        self.assertEqual(llm.calls, 2 * 5 + 2 * 4)  # gold-label strategy only for EDOS
         records = [json.loads(line) for line in self.config.generations_path.read_text(encoding="utf-8").splitlines()]
-        self.assertEqual(len(records), 16)
+        self.assertEqual(len(records), 18)
+        self.assertEqual({r["generation_strategy"] for r in records if r["source"] == "multiconan"},
+                         set(STRATEGIES) - {"card_rag_gold_label"})
         by_strategy = {r["generation_strategy"]: r for r in records if r["id"] == "m0"}
         self.assertNotIn("<evidence>", by_strategy["zero_shot"]["prompt"])
         self.assertIn("Evidence 5:", by_strategy["rag"]["prompt"])
         self.assertNotIn("<category>", by_strategy["card_rag"]["prompt"])
         self.assertIn("Category of gender-based violence: descriptive attacks", by_strategy["card_rag_label"]["prompt"])
+        gold = by_strategy["card_rag_gold_label"]
+        self.assertIn("Category of gender-based violence: immutable gender differences", gold["prompt"])
+        self.assertEqual((gold["edos_label_used_kind"], by_strategy["card_rag_label"]["edos_label_used_kind"]),
+                         ("gold", "predicted"))
+        self.assertEqual([e["id"] for e in gold["evidence"]], [f"card{i}" for i in range(6, 11)])
         self.assertTrue(all(r["response_format_valid"] for r in records))
 
         comparisons = judging.build_comparisons(records, STRATEGIES)
-        self.assertEqual(len(comparisons), 4 * 6 * 2)
+        self.assertEqual(len(comparisons), 2 * 10 * 2 + 2 * 6 * 2)
 
         def fake_judgments(batch):
             # Always prefers the first-shown response, except card_rag_label which always wins.
@@ -139,7 +151,9 @@ class GenerationAndJudgeTests(unittest.TestCase):
                 mock.patch.object(judging, "LLMJudge", return_value=judge):
             judging.run_judge(self.config)
         summary = json.loads((self.config.output_dir / "judge_summary.json").read_text(encoding="utf-8"))
-        self.assertEqual(summary["valid_judgments"], 48)
+        self.assertEqual(summary["valid_judgments"], 64)
+        self.assertNotIn("multiconan|card_rag|card_rag_gold_label", summary["pairs"])
+        self.assertEqual(summary["pairs"]["edos|card_rag_label|card_rag_gold_label"]["messages"], 2)
         position_bias = summary["pairs"]["all|zero_shot|rag"]
         self.assertEqual((position_bias["a_wins"], position_bias["ties"], position_bias["b_wins"]), (0, 4, 0))
         self.assertEqual(position_bias["order_agreement"], 0)
@@ -151,3 +165,47 @@ class GenerationAndJudgeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SubsetExtensionTests(unittest.TestCase):
+    def test_a_larger_sample_with_the_same_seed_extends_the_saved_one(self):
+        from unito_amazon.counterspeech_experiment.data import extends
+
+        def subset(size, ids):
+            return {"sample_size_per_dataset": size, "seed": 42, "edos_split": "test",
+                    "items": [{"id": i, "source": i[0]} for i in ids]}
+
+        small = subset(1, ["e1", "m1"])
+        self.assertTrue(extends(small, subset(2, ["e1", "e2", "m1", "m2"])))
+        self.assertFalse(extends(small, subset(2, ["e2", "e1", "m1", "m2"])))
+        self.assertFalse(extends(small, {**subset(2, ["e1", "e2", "m1", "m2"]), "seed": 7}))
+
+
+class MetricsTests(unittest.TestCase):
+    def test_multiconan_responses_are_scored_against_all_references_of_the_message(self):
+        from unito_amazon.counterspeech_experiment import metrics
+
+        with tempfile.TemporaryDirectory() as directory:
+            config = dataclasses.replace(ExperimentConfig(), output_dir=Path(directory))
+            records = [{"id": f"m{i}", "source": source, "generation_strategy": strategy, "generation_model": "g",
+                        "hateful_message": f" message {i} ", "generated_counter_speech": f"reply {i} {strategy}"}
+                       for i, source in ((0, "multiconan"), (1, "multiconan"), (2, "edos"))
+                       for strategy in STRATEGIES if source == "edos" or strategy != "card_rag_gold_label"]
+            config.generations_path.write_text("\n".join(json.dumps(r) for r in records) + "\n", encoding="utf-8")
+            references = {"message 0": ["ref a", "ref b"], "message 1": ["ref c"]}
+            seen = []
+
+            def fake_scores(candidates, refs, **kwargs):
+                seen.extend(refs)
+                self.assertFalse(kwargs["include_bertscore"])
+                return [{"bleu_4": 0.5, "meteor": 0.5, "rouge_l": 0.5} for _ in candidates]
+
+            with mock.patch.object(metrics, "multiconan_references", return_value=references), \
+                    mock.patch.object(metrics.metric_library, "_reference_metrics", side_effect=fake_scores):
+                metrics.run_metrics(config)
+                metrics.run_metrics(config)  # everything reused
+            self.assertEqual(len(seen), 2 * 4)  # MultiCONAN only, no gold-label system, computed once
+            self.assertIn(["ref a", "ref b"], seen)
+            summary = json.loads((config.output_dir / "metrics_multiconan_summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(list(summary["strategies"]), list(STRATEGIES[:4]))
+            self.assertEqual(summary["mean_reference_count"], 1.5)

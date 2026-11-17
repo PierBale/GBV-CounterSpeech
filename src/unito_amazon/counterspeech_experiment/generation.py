@@ -16,7 +16,7 @@ from unito_amazon.generation.prompts import (
 from unito_amazon.generation.schema import parse_counter_narrative
 from unito_amazon.llm.schema import LLMGenerationConfig
 
-from .config import PROJECT_ROOT, ExperimentConfig
+from .config import PROJECT_ROOT, ExperimentConfig, strategies_for
 from .data import attach_predicted_labels, label_code, load_or_create_subset
 from .retrieval import ExperimentRetrievers
 
@@ -28,7 +28,12 @@ def build_prompts(config: ExperimentConfig) -> dict:
         "rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
+        "card_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
     }
+
+
+# EDOS label that each label-aware strategy uses for card filtering and in the prompt.
+LABEL_FIELD = {"card_rag_label": "predicted_edos_label", "card_rag_gold_label": "gold_edos_label"}
 
 
 def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
@@ -40,21 +45,28 @@ def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
         retrievers.load()
         requests = []
         for position, item in enumerate(items, start=1):
-            retrieved = retrievers.retrieve(item["hateful_message"], item["predicted_edos_label"])
-            category = retrievers.definitions[label_code(item["predicted_edos_label"])]
-            for strategy in config.strategies:
+            strategies = strategies_for(item["source"], config.strategies)
+            gold = item["gold_edos_label"] if "card_rag_gold_label" in strategies else None
+            if "card_rag_gold_label" in strategies and not gold:
+                raise ValueError(f"{item['id']} has no gold EDOS label.")
+            retrieved = retrievers.retrieve(item["hateful_message"], item["predicted_edos_label"], gold)
+            for strategy in strategies:
                 results = retrieved.get(strategy, [])
                 prompt = prompts[strategy]
+                category = None
                 if strategy == "zero_shot":
                     user_prompt = prompt.build(item["hateful_message"])
-                elif strategy == "card_rag_label":
+                elif strategy in LABEL_FIELD:
+                    category = retrievers.definitions[label_code(item[LABEL_FIELD[strategy]])]
                     user_prompt = prompt.build(item["hateful_message"], results, category)
                 else:
                     user_prompt = prompt.build(item["hateful_message"], results)
                 requests.append({
                     "item": item, "strategy": strategy, "system_prompt": prompt.system_prompt,
                     "prompt": user_prompt, "results": results,
-                    "category_in_prompt": list(category) if strategy == "card_rag_label" else None,
+                    "category_in_prompt": list(category) if category else None,
+                    "edos_label_used": item[LABEL_FIELD[strategy]] if strategy in LABEL_FIELD else None,
+                    "edos_label_used_kind": LABEL_FIELD.get(strategy, "").removesuffix("_edos_label") or None,
                 })
             if position % 20 == 0 or position == len(items):
                 print(f"Retrieval: {position}/{len(items)} messages")
@@ -120,6 +132,8 @@ def run_generation(config: ExperimentConfig) -> None:
     try:
         for strategy in config.strategies:
             todo = [request for request in pending if request["strategy"] == strategy]
+            if not todo:
+                continue
             for start in range(0, len(todo), config.generation_batch_size):
                 batch = todo[start:start + config.generation_batch_size]
                 llm_config = LLMGenerationConfig(**generation_config, system_prompt=batch[0]["system_prompt"])
@@ -137,6 +151,8 @@ def run_generation(config: ExperimentConfig) -> None:
                         "generated_counter_speech": text, "response_format_valid": valid, "raw_response": raw,
                         "system_prompt": request["system_prompt"], "prompt": request["prompt"],
                         "category_in_prompt": request["category_in_prompt"],
+                        "edos_label_used": request["edos_label_used"],
+                        "edos_label_used_kind": request["edos_label_used_kind"],
                         "evidence": evidence_records(request["results"]),
                         "context_length": measure_context(request["prompt"], len(request["results"]),
                                                           tokenizer, config.generator_model),

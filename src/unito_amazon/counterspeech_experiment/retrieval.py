@@ -82,20 +82,27 @@ class ExperimentRetrievers:
         self.chunk_retriever.load_or_index(self.chunks, self.config.index_dir / "chunks_qwen3-embedding-8b.faiss")
         self.card_retriever.load_or_index(self.cards, self.config.index_dir / "cards_evidence_qwen3-embedding-8b.faiss")
 
-    def retrieve(self, message: str, predicted_label: str) -> dict[str, list[RetrievalResult]]:
+    def retrieve(self, message: str, predicted_label: str,
+                 gold_label: str | None = None) -> dict[str, list[RetrievalResult]]:
         k = self.config.top_k
         ranked_cards = self.card_retriever.retrieve(message, top_k=len(self.cards))
-        code = label_code(predicted_label)
-        filtered = [result for result in ranked_cards if result.document.metadata["edos_label_code"] == code]
-        if len(filtered) < k:
-            raise ValueError(f"Only {len(filtered)} cards for label {predicted_label!r}; top_k={k}.")
-        return {
+
+        def within(label: str) -> list[RetrievalResult]:
+            """Top-k of the same ranking among the cards of one label (same scores, ranks renumbered)."""
+            code = label_code(label)
+            filtered = [result for result in ranked_cards if result.document.metadata["edos_label_code"] == code]
+            if len(filtered) < k:
+                raise ValueError(f"Only {len(filtered)} cards for label {label!r}; top_k={k}.")
+            return [result.model_copy(update={"rank": rank}) for rank, result in enumerate(filtered[:k], start=1)]
+
+        retrieved = {
             "rag": self.chunk_retriever.retrieve(message, top_k=k),
             "card_rag": ranked_cards[:k],
-            # Same scores as card_rag; ranks renumbered within the label.
-            "card_rag_label": [result.model_copy(update={"rank": rank})
-                               for rank, result in enumerate(filtered[:k], start=1)],
+            "card_rag_label": within(predicted_label),
         }
+        if gold_label is not None:
+            retrieved["card_rag_gold_label"] = within(gold_label)
+        return retrieved
 
     def metadata(self) -> dict:
         return {

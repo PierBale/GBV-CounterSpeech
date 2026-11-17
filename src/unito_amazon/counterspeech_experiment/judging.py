@@ -16,7 +16,7 @@ from unito_amazon.card_creation.io import append_jsonl, read_jsonl, write_json
 from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.evaluation.schema import JUDGE_PROTOCOL_VERSION
 
-from .config import ExperimentConfig
+from .config import ExperimentConfig, strategies_for
 
 
 def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> list[dict]:
@@ -28,10 +28,11 @@ def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> l
         groups[key][record["generation_strategy"]] = record
     comparisons = []
     for (source, message_id), group in sorted(groups.items()):
-        missing = set(strategies) - set(group)
+        applicable = strategies_for(source, strategies)
+        missing = set(applicable) - set(group)
         if missing:
             raise ValueError(f"Missing generations for {source} {message_id}: {sorted(missing)}.")
-        for system_a, system_b in combinations(strategies, 2):
+        for system_a, system_b in combinations(applicable, 2):
             for order, (first, second) in (("a_first", (system_a, system_b)), ("b_first", (system_b, system_a))):
                 comparisons.append({
                     "id": message_id, "source": source, "system_a": system_a, "system_b": system_b,
@@ -94,6 +95,56 @@ def _score_difference(record: dict) -> float:
     return first - second if record["response_1_strategy"] == record["system_a"] else second - first
 
 
+def _agreement(first: list[float], second: list[float], first_diff: list[float], second_diff: list[float]) -> dict:
+    """Agreement of JudgeLM with itself across the two presentation orders.
+
+    Outcomes from A's point of view, coded -1 (B wins), 0 (tie), 1 (A wins). Cohen's kappa
+    from scikit-learn (nominal and linearly weighted), Krippendorff's ordinal alpha from
+    krippendorff, Spearman correlation of the score differences A - B from scipy.
+    """
+    import krippendorff
+    import numpy as np
+    from scipy.stats import spearmanr
+    from sklearn.metrics import cohen_kappa_score
+
+    def defined(value):
+        return None if value is None or np.isnan(value) else float(value)
+
+    n = len(first)
+    decisive_both = [(x, y) for x, y in zip(first, second) if x != 0 and y != 0]
+    return {
+        "messages": n,
+        "exact_agreement": sum(x == y for x, y in zip(first, second)) / n,
+        "cohen_kappa": defined(cohen_kappa_score(first, second, labels=[-1, 0, 1])),
+        "cohen_kappa_linear": defined(cohen_kappa_score(first, second, labels=[-1, 0, 1], weights="linear")),
+        "krippendorff_alpha_ordinal": defined(krippendorff.alpha(
+            reliability_data=np.array([first, second], dtype=float), level_of_measurement="ordinal",
+            value_domain=[-1, 0, 1])) if len(set(first) | set(second)) > 1 else None,
+        "spearman_score_difference": defined(spearmanr(first_diff, second_diff).statistic)
+        if len(set(first_diff)) > 1 and len(set(second_diff)) > 1 else None,
+        # A clear winner in both orders, but a different one: the decision follows the position.
+        "opposite_winner_rate": sum(x != y for x, y in decisive_both) / n,
+        "tie_in_one_order_rate": sum((x == 0) != (y == 0) for x, y in zip(first, second)) / n,
+    }
+
+
+def order_agreement(by_item: dict, strategies: tuple[str, ...]) -> dict:
+    """Agreement between the a_first and b_first judgments, per dataset and pair and overall."""
+    coded = {1.0: 1, 0.5: 0, 0.0: -1}
+    groups = defaultdict(lambda: ([], [], [], []))
+    for (source, a, b, _), orders in by_item.items():
+        if set(orders) != {"a_first", "b_first"}:
+            continue
+        values = (coded[_points_for_a(orders["a_first"])], coded[_points_for_a(orders["b_first"])],
+                  _score_difference(orders["a_first"]), _score_difference(orders["b_first"]))
+        for key in (f"{source}|{a}|{b}", f"all|{a}|{b}", f"{source}|all pairs", "all|all pairs"):
+            for column, value in zip(groups[key], values):
+                column.append(value)
+    order = {f"{a}|{b}": index for index, (a, b) in enumerate(combinations(strategies, 2))}
+    return {key: _agreement(*groups[key]) for key in sorted(
+        groups, key=lambda k: (k.split("|", 1)[0] != "all", k.split("|", 1)[0], order.get(k.split("|", 1)[1], -1)))}
+
+
 def summarize(config: ExperimentConfig) -> dict:
     latest = {}
     for record in read_jsonl(config.judgments_path):
@@ -121,6 +172,8 @@ def summarize(config: ExperimentConfig) -> dict:
                 agree += pair[0] == pair[1]
                 points.append(sum(pair) / 2)
                 differences.append(sum(_score_difference(record) for record in orders.values()) / 2)
+            if not points and not incomplete:
+                continue  # pair not applicable to this dataset (gold labels exist only for EDOS)
             wins, losses = sum(p > 0.5 for p in points), sum(p < 0.5 for p in points)
             nonzero = [d for d in differences if d != 0]
             tables[f"{source}|{system_a}|{system_b}"] = {
@@ -146,4 +199,5 @@ def summarize(config: ExperimentConfig) -> dict:
                    "Sign test on wins vs losses; Wilcoxon on the per-message mean JudgeLM score difference."),
         "first_position_win_rate": {source: wins / total for source, (wins, total) in first_position_wins.items()},
         "pairs": tables,
+        "order_agreement": order_agreement(by_item, config.strategies),
     }

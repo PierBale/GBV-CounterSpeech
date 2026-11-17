@@ -9,6 +9,7 @@
 #   sbatch run_counterspeech_experiment.sh
 # Only some stages (default: all, in this order):
 #   STAGES="generate judge" sbatch run_counterspeech_experiment.sh
+#   STAGES="metrics" sbatch run_counterspeech_experiment.sh   # MultiCONAN reference-based metrics
 # Every stage resumes: finished outputs are reused, not recomputed.
 
 source ~/mambaforge/etc/profile.d/conda.sh
@@ -29,7 +30,7 @@ fi
 PROJECT_DIR="$(cd "$SRC_DIR/.." && pwd)"
 OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_DIR/data/counterspeech_v2}"
 CLASSIFIER_OUTPUT="$OUTPUT_DIR/edos_classifier"
-STAGES="${STAGES:-classifier sample generate judge}"
+STAGES="${STAGES:-classifier sample generate judge metrics}"
 
 python -c "import torch; print('Torch', torch.__version__, '| CUDA', torch.cuda.is_available())"
 echo "Project: $PROJECT_DIR"
@@ -50,7 +51,7 @@ for stage in $STAGES; do
           bash "$PROJECT_DIR/EDOS Classifier/run_official_task_c.sh"
       fi
       ;;
-    sample|generate|judge)
+    sample|generate|judge|metrics)
       (cd "$SRC_DIR" && python counterspeech_experiment.py "$stage" --output-dir "$OUTPUT_DIR")
       ;;
     *)
