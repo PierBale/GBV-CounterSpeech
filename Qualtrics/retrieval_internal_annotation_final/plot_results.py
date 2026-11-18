@@ -100,12 +100,15 @@ def figure_factorial(summary: pd.DataFrame):
     save(fig, "3_embedder_x_reranker")
 
 
-def figure_heatmap(per_label: pd.DataFrame):
+HEATMAP_PANELS = [("mean_relevance@4", "Mean@4", 2.0), ("nDCG@4", "nDCG@4", 1.0)]
+
+
+def figure_heatmap(per_label: pd.DataFrame, panels=HEATMAP_PANELS, name="4_patterns_per_label"):
     """As the pilot's patterns_by_label: mean relevance and nDCG@4 per EDOS label."""
     cmap = LinearSegmentedColormap.from_list("blue", BLUE_RAMP)
-    fig, axes = plt.subplots(1, 2, figsize=(10.4, 6.4), sharey=True)
-    for ax, (metric, title, maximum) in zip(axes, [("mean_relevance@4", "Mean relevance of the top-4 (0–2)", 2.0),
-                                                   ("nDCG@4", "nDCG@4", 1.0)]):
+    fig, axes = plt.subplots(1, len(panels), figsize=(5.2 * len(panels) + 1.6 * (len(panels) == 1), 6.4),
+                             sharey=True, squeeze=False)
+    for ax, (metric, title, maximum) in zip(axes[0], panels):
         wide = per_label.pivot(index="label", columns="configuration", values=metric)[ORDER]
         image = ax.imshow(wide.to_numpy(), cmap=cmap, vmin=0, vmax=maximum, aspect="auto")
         for (row, column), value in np.ndenumerate(wide.to_numpy()):
@@ -124,9 +127,7 @@ def figure_heatmap(per_label: pd.DataFrame):
         bar.outline.set_visible(False)
         bar.ax.tick_params(labelsize=7, colors=TEXT_2)
         ax.set_title(title, fontsize=9.5, pad=58)
-    fig.suptitle("Patterns per EDOS label — one query per label", x=0.01, ha="left",
-                 fontsize=10, fontweight="bold", y=1.05)
-    save(fig, "4_patterns_per_label")
+    save(fig, name)
 
 
 def figure_agreement(agreement: dict):
@@ -175,6 +176,7 @@ def main():
     figure_model_ranking(summary)
     figure_factorial(summary)
     figure_heatmap(per_label)
+    figure_heatmap(per_label, HEATMAP_PANELS[:1], "4_patterns_per_label_mean")
     figure_agreement(agreement)
     print("Figures written to", FIGURES)
 
