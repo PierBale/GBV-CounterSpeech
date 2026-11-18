@@ -25,6 +25,17 @@ FIGURES = EVALUATION / "figures"
 SURFACE, TEXT, TEXT_2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
 BLUE_RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
+# Wisteria sequential ramp: the OKLCH hue of wisteria (#c9a0dc, 314.9) held fixed,
+# lightness evenly from 0.96 to 0.58, chroma at most 0.105 (pastel).
+WISTERIA_RAMP = ["#f6eff9", "#e6d6ed", "#d6bee2", "#c6a6d6", "#b690c7", "#a47ab7", "#9266a5"]
+HEATMAP_CMAP = LinearSegmentedColormap.from_list("wisteria", WISTERIA_RAMP)
+
+
+def cell_ink(rgba) -> str:
+    """Black or white text, whichever contrasts more with the cell colour (WCAG luminance)."""
+    linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgba[:3]]
+    luminance = 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+    return TEXT if (luminance + 0.05) / 0.05 >= 1.05 / (luminance + 0.05) else "#ffffff"
 
 NAMES = {
     "qwen3-embedding-8b__qwen3-reranker-8b": "Qwen3-Emb + Qwen3-Rerank",
@@ -105,7 +116,7 @@ HEATMAP_PANELS = [("mean_relevance@4", "Mean@4", 2.0), ("nDCG@4", "nDCG@4", 1.0)
 
 def figure_heatmap(per_label: pd.DataFrame, panels=HEATMAP_PANELS, name="4_patterns_per_label"):
     """As the pilot's patterns_by_label: mean relevance and nDCG@4 per EDOS label."""
-    cmap = LinearSegmentedColormap.from_list("blue", BLUE_RAMP)
+    cmap = HEATMAP_CMAP
     fig, axes = plt.subplots(1, len(panels), figsize=(5.2 * len(panels) + 1.6 * (len(panels) == 1), 6.4),
                              sharey=True, squeeze=False)
     for ax, (metric, title, maximum) in zip(axes[0], panels):
@@ -113,7 +124,7 @@ def figure_heatmap(per_label: pd.DataFrame, panels=HEATMAP_PANELS, name="4_patte
         image = ax.imshow(wide.to_numpy(), cmap=cmap, vmin=0, vmax=maximum, aspect="auto")
         for (row, column), value in np.ndenumerate(wide.to_numpy()):
             ax.text(column, row, f"{value:.2f}", ha="center", va="center", fontsize=8,
-                    color="#ffffff" if value >= 0.55 * maximum else TEXT)
+                    color=cell_ink(cmap(value / maximum)))
         ax.set_xticks(range(len(ORDER)), [NAMES[c].replace(" + ", "\n+ ") for c in ORDER], color=TEXT, fontsize=7.5)
         ax.set_yticks(range(len(wide)), [short_label(label) for label in wide.index], color=TEXT, fontsize=8)
         ax.tick_params(length=0)
@@ -125,6 +136,7 @@ def figure_heatmap(per_label: pd.DataFrame, panels=HEATMAP_PANELS, name="4_patte
         ax.tick_params(which="minor", length=0)
         bar = fig.colorbar(image, ax=ax, fraction=0.04, pad=0.02, orientation="horizontal", location="top")
         bar.outline.set_visible(False)
+        bar.set_ticks(np.linspace(0, maximum, 5))
         bar.ax.tick_params(labelsize=7, colors=TEXT_2)
         ax.set_title(title, fontsize=9.5, pad=58)
     save(fig, name)
@@ -176,7 +188,7 @@ def main():
     figure_model_ranking(summary)
     figure_factorial(summary)
     figure_heatmap(per_label)
-    figure_heatmap(per_label, HEATMAP_PANELS[:1], "4_patterns_per_label_mean")
+    figure_heatmap(per_label, [("mean_relevance@4", "Context Relevance", 2.0)], "4_patterns_per_label_mean")
     figure_agreement(agreement)
     print("Figures written to", FIGURES)
 

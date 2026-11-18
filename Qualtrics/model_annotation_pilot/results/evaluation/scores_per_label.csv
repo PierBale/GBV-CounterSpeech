@@ -1,0 +1,23 @@
+generator_model,label,faithfulness,answer_relevance
+deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,2.0,1.8333333333333333
+deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,2.0,1.3333333333333333
+deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,2.0,1.6666666666666667
+deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,1.8333333333333333,0.6666666666666666
+deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,1.6666666666666667,1.0
+deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",1.5,0.6666666666666666
+deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,2.0,2.0
+deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,1.8333333333333333,1.1666666666666667
+deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,1.8333333333333333,0.6666666666666666
+deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,2.0,1.5
+deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,2.0,1.6666666666666667
+openai/gpt-6.1-sol,1.1 threats of harm,2.0,1.3333333333333333
+openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,2.0,1.6666666666666667
+openai/gpt-6.1-sol,2.1 descriptive attacks,2.0,1.6666666666666667
+openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,2.0,0.8333333333333334
+openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,1.8333333333333333,0.8333333333333334
+openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",1.5,0.8333333333333334
+openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,2.0,2.0
+openai/gpt-6.1-sol,3.3 backhanded gendered compliments,2.0,1.5
+openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,2.0,1.3333333333333333
+openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,1.8333333333333333,1.1666666666666667
+openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,2.0,1.6666666666666667

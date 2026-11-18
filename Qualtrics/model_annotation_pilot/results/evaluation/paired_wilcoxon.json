@@ -1,0 +1,20 @@
+{
+  "faithfulness": {
+    "pairs": 66,
+    "mean_difference_gpt_minus_deepseek": 0.045454545454545456,
+    "gpt_better": 5,
+    "deepseek_better": 3,
+    "ties": 58,
+    "statistic": 13.0,
+    "p": 0.47048642205878966
+  },
+  "answer_relevance": {
+    "pairs": 66,
+    "mean_difference_gpt_minus_deepseek": 0.06060606060606061,
+    "gpt_better": 14,
+    "deepseek_better": 12,
+    "ties": 40,
+    "statistic": 151.0,
+    "p": 0.5013284239023776
+  }
+}

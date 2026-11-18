@@ -1,0 +1,133 @@
+question_id,survey,generator_model,primary_edos_label,reranker_rank,chunk_id,faithfulness,faithfulness_source,answer_relevance,answer_relevance_source
+card_07d6f8ad179827507ec2514c__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,3,chunk_81ac68577124450a8fd9db9b,2,median_of_3,2,median_of_3
+card_ba4249304ffb91cc425e8a91__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,1.1 threats of harm,2,chunk_b11fac080552eafa554f72c2,2,median_of_3,0,median_of_3
+card_3542ae7e3ded23beb7969fb0__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,1.1 threats of harm,6,chunk_1da8ac0b6d0489775d9189c1,2,median_of_3,2,median_of_3
+card_44e2e87c96ccdb719e01f02a__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,6,chunk_1da8ac0b6d0489775d9189c1,2,median_of_3,2,median_of_3
+card_c09b5396beb72fce6a5a8db6__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,3,chunk_93cd474ca73aee9e9a6ff841,2,median_of_3,2,median_of_3
+card_2367f234d2d5317a16a03dea__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,5,chunk_1e6a316fb20fc71dcaa38230,2,median_of_3,1,median_of_3
+card_c35bb9b52f97449373a6e1eb__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,6,chunk_0c0d449322428a147b6ac389,2,median_of_3,2,median_of_3
+card_ff7874374b5a86fe7bfdbe1c__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,4,chunk_2a9f489d50d44f5a47304e56,2,median_of_3,1,median_of_3
+card_28817602f6e9200029cd72b3__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,1,chunk_e71c54bfb7b52f276d18f00c,2,median_of_3,2,median_of_3
+card_e6883d1e1ab8bad2c0e1eea2__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,4,chunk_ad285e76a178faf67da4cf6d,2,median_of_3,1,median_of_3
+card_c3e517b5c1b5091bee965f5a__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.1 descriptive attacks,4,chunk_ad285e76a178faf67da4cf6d,2,median_of_3,1,median_of_3
+card_cf6167c414df667c731e662d__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.1 descriptive attacks,6,chunk_c8d1a02481982166ad918537,2,median_of_3,2,median_of_3
+card_13d1cb3d472cecc410555c51__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,4,chunk_5437e27e98d60e6f2a587419,2,median_of_3,1,median_of_3
+card_01f6e73c2168fef53d23f7e0__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,1,chunk_b20794f82266693dc9a9da7d,2,median_of_3,2,median_of_3
+card_49ec5cc0bc81537b665dab31__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,4,chunk_5437e27e98d60e6f2a587419,2,median_of_3,0,median_of_3
+card_123fc00399875a256b14494b__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,6,chunk_93cd474ca73aee9e9a6ff841,2,median_of_3,1,median_of_3
+card_b81e33f93f1037b909900394__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,1,chunk_2a9f489d50d44f5a47304e56,2,median_of_3,2,median_of_3
+card_f8d7f4cebfb8b3876317dfcd__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,6,chunk_93cd474ca73aee9e9a6ff841,2,median_of_3,1,median_of_3
+card_745720b891d43a518de12c29__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,2,chunk_1e6a316fb20fc71dcaa38230,2,median_of_3,1,median_of_3
+card_a44a49404a3859c991dac5b6__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,5,chunk_4cbdfe7d5ea68d4027c43a9e,2,median_of_3,0,median_of_3
+card_f3041a42e4f5ad6722e264cc__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",1,chunk_c779b2dbf693b10f4d8c4d74,1,median_of_3,0,harmonized
+card_084c2d057568ed4fbb9abb1e__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",2,chunk_470edb697d0c77b54eed867e,2,median_of_3,1,median_of_3
+card_fa8d9af4aecfc601a3aa7eae__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",4,chunk_eb302d7c62840b79111f5bcf,2,median_of_3,2,harmonized
+card_00b15fcad656474e2900c303__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",2,chunk_470edb697d0c77b54eed867e,2,median_of_3,1,harmonized
+card_c0b82958458931a5775f7b1b__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",5,chunk_5437e27e98d60e6f2a587419,2,median_of_3,2,median_of_3
+card_9ce173f8f827c4a78c372ada__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,6,chunk_2a9f489d50d44f5a47304e56,2,median_of_3,2,median_of_3
+card_c6e67aff27968f7f4ca279ed__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,4,chunk_88a89b37237c3173b29166b6,2,median_of_3,2,median_of_3
+card_0e230985a541b5b251c08409__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,3,chunk_afd2a7f2267ea7e7df35d142,2,median_of_3,2,median_of_3
+card_a573092335c6542b5d6e7f08__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,1,chunk_35181cf1bd1535bf73cab246,2,median_of_3,2,median_of_3
+card_62662f3df722a6c8f0d0b7a0__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,3,chunk_15efed6b978a921a73b8f5b5,2,median_of_3,2,median_of_3
+card_4959d4ee8ae889ca27e6d327__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,6,chunk_ad285e76a178faf67da4cf6d,2,median_of_3,1,median_of_3
+card_8018e0ff7b26925ad9e5d8ca__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,2,chunk_5437e27e98d60e6f2a587419,2,median_of_3,2,median_of_3
+card_15628a5ad03703cb3b9727b1__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,2,chunk_5437e27e98d60e6f2a587419,2,median_of_3,2,median_of_3
+card_154fa66eea1ad7d33ffaa1cd__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,5,chunk_ad285e76a178faf67da4cf6d,2,median_of_3,0,median_of_3
+card_d1c2da456cd10f65596b9032__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,3,chunk_9964cdd5874dc8daa38672ce,2,median_of_3,1,harmonized
+card_6687105fc3946e0916a1d4e7__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,3,chunk_9964cdd5874dc8daa38672ce,2,median_of_3,1,median_of_3
+card_4327701bda9523e088048486__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,2,chunk_458151f964bf77149b28b3dc,2,median_of_3,2,median_of_3
+card_af895ce0a8ba98c9c7560fb2__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,5,chunk_2a9f489d50d44f5a47304e56,2,median_of_3,1,median_of_3
+card_e123ca4bf0ea12fcc7888657__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,3,chunk_5620141a9111cec9058c59e6,2,median_of_3,1,median_of_3
+card_5584de87312e55a46d687a43__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,4,chunk_1af1d271fbb3edc000bc0d44,2,median_of_3,1,median_of_3
+card_f1d2b3f027f39a9d2fcdf8c0__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,5,chunk_2a9f489d50d44f5a47304e56,2,median_of_3,1,median_of_3
+card_2a4e6d0d357ad921ddccc58e__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,1,chunk_ad285e76a178faf67da4cf6d,2,median_of_3,1,median_of_3
+card_f68ac3bbbc1bd994a2f132a4__deepseek_deepseek-v4_1-flash-1017,comune,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,2,chunk_4cbdfe7d5ea68d4027c43a9e,2,median_of_3,2,harmonized
+card_ad5e64f6c0e9679091b3c417__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,6,chunk_6b8b321e30fb5ba1e52ac37a,2,median_of_3,2,harmonized
+card_25c4d4943ee564ed77ad6a8d__openai_gpt-6_1-sol,comune,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,4,chunk_afd2a7f2267ea7e7df35d142,2,median_of_3,2,median_of_3
+card_bf55766fc88a935015f54317__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,1,chunk_b80353d40a882f6af80c0802,2,private,2,private
+card_788ceea31789f4cd6d3549b7__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,1.1 threats of harm,3,chunk_81ac68577124450a8fd9db9b,2,private,1,private
+card_7e807ac03d0890a138fee7b9__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,5,chunk_45a5625414dd61fce0729f1a,2,private,2,private
+card_7de4eb5b4f67f3549331af84__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,3,chunk_93cd474ca73aee9e9a6ff841,2,private,2,private
+card_dadd227691fc1f23ff54826e__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,5,chunk_1e6a316fb20fc71dcaa38230,2,private,1,private
+card_79c6d3f202e7c18e366d49f8__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,2,chunk_2127cecc05d1ff10c4edfe90,2,private,0,private
+card_17b20afbcbbf292d1aa8d574__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,2.1 descriptive attacks,3,chunk_e1e052a49af18652162a855a,2,private,2,private
+card_a776ef4bc8a99608c19f6293__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,3,chunk_e1e052a49af18652162a855a,2,private,2,private
+card_03621246730498e7cf0f3431__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,2,chunk_2a9f489d50d44f5a47304e56,2,private,1,private
+card_dada9eaf6afdfff4ad92be91__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,5,chunk_40cc51dc8cca27ccb68b3f95,2,private,0,private
+card_a88950e1c9e0ceb4fde4eb60__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,5,chunk_40cc51dc8cca27ccb68b3f95,2,private,0,private
+card_110382a05eebc8b37089d529__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,2,chunk_1e6a316fb20fc71dcaa38230,2,private,1,private
+card_03d5500b53927eb70a2effb2__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,3,chunk_54fe54304ddccd44aeb3a5b4,2,private,2,private
+card_6dce359b5e3484c600aa1c50__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,4,chunk_718821ad29cc30888833123d,2,private,0,private
+card_c643d25edce4c13633077c64__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",3,chunk_fdc71d3930469320ac287c75,0,private,0,private
+card_dc712c75c6652d5f7482bb39__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",3,chunk_fdc71d3930469320ac287c75,2,private,1,private
+card_b63eb0e9929946c80df3ee73__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,6,chunk_2a9f489d50d44f5a47304e56,2,private,2,private
+card_36c569ce10848e625e4917ec__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,5,chunk_b6118041538ba12ef7b14423,2,private,2,private
+card_df765372ae2da5442fc65a39__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,1,chunk_2a9f489d50d44f5a47304e56,2,private,1,private
+card_8b7e86cb261a532b0ad8b2cc__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,3,chunk_15efed6b978a921a73b8f5b5,1,private,2,private
+card_2c50e7901d9f7dc06c2d9213__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,4,chunk_9964cdd5874dc8daa38672ce,2,private,0,private
+card_e019d89f6b53ae5b083f073d__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,2,chunk_458151f964bf77149b28b3dc,2,private,2,private
+card_49613319de3797a9dfe9b3b0__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,1,chunk_a05d43c3d8c15b61ada9abc2,1,private,1,private
+card_cffd0618d76817a8d403d6e1__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,1,chunk_1e5847bcd82cd3f59290b782,2,private,2,private
+card_6bfa59805d864ed664d6c5ac__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,2,chunk_4cbdfe7d5ea68d4027c43a9e,1,private,0,private
+card_ac61ec828a71eca8f3a439be__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,1,chunk_1e5847bcd82cd3f59290b782,2,private,1,private
+card_a2519d09da2ef411c1547f6f__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,6,chunk_6b8b321e30fb5ba1e52ac37a,2,private,1,private
+card_34d3218fd1309168ba78b039__deepseek_deepseek-v4_1-flash-1017,marem,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,3,chunk_1e5847bcd82cd3f59290b782,2,private,2,private
+card_efc02a5ac23f016d3f98d079__openai_gpt-6_1-sol,marem,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,3,chunk_1e5847bcd82cd3f59290b782,2,private,2,private
+card_08b6565df5a66d14b526493e__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,4,chunk_ea6d7f85d415886ca5d26892,2,private,2,private
+card_bca34b8951e7da0f7b037781__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,1.1 threats of harm,2,chunk_b11fac080552eafa554f72c2,2,private,1,private
+card_12e49cdfe7f31f4babdd8768__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,2,chunk_2127cecc05d1ff10c4edfe90,2,private,2,private
+card_d7bd4b0b8c341661483cc5d9__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,6,chunk_0c0d449322428a147b6ac389,2,private,2,private
+card_1cea533a839c56ee1f62c956__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,4,chunk_2a9f489d50d44f5a47304e56,2,private,1,private
+card_2ade9986523ba7154e801079__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,2.1 descriptive attacks,1,chunk_e71c54bfb7b52f276d18f00c,2,private,2,private
+card_ed17dae48efe72056ff2dfc1__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,2.1 descriptive attacks,2,chunk_7b96a23fcd4d58061876fc24,2,private,2,private
+card_3bf21bc9342bcb2c46966fdb__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,2,chunk_7b96a23fcd4d58061876fc24,2,private,2,private
+card_3eb03903623a0864030cdb03__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,3,chunk_4cbdfe7d5ea68d4027c43a9e,1,private,0,private
+card_a91acce4d0cfe66209465141__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,1,chunk_b20794f82266693dc9a9da7d,2,private,2,private
+card_0c64d2ec28127122def1b3be__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,4,chunk_718821ad29cc30888833123d,2,private,0,private
+card_c0da5c43232d24a88ad635a9__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,1,chunk_2a9f489d50d44f5a47304e56,1,private,1,private
+card_8a886912493228bd5aabbbda__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,5,chunk_4cbdfe7d5ea68d4027c43a9e,0,private,0,private
+card_564f257a22b0cea0e889e61a__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",5,chunk_5437e27e98d60e6f2a587419,2,private,0,private
+card_f72dfad796691f24a200d951__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",6,chunk_4cbdfe7d5ea68d4027c43a9e,2,private,0,private
+card_da6ab5fa0576e69886583a70__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,"3.1 casual use of gendered slurs, profanities, and insults",1,chunk_c779b2dbf693b10f4d8c4d74,1,private,1,private
+card_84876c3cb8260436bd071fb6__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,2,chunk_7b96a23fcd4d58061876fc24,2,private,2,private
+card_409ecc7e977c40bbbf8d2982__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,1,chunk_35181cf1bd1535bf73cab246,2,private,2,private
+card_363bad848caba70e17c9544e__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,2,chunk_7b96a23fcd4d58061876fc24,2,private,2,private
+card_b1d3a399fc93a49e22f7415a__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,6,chunk_ad285e76a178faf67da4cf6d,2,private,0,private
+card_a5f29e66b1af33aecaee3dc3__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,3.3 backhanded gendered compliments,5,chunk_1596ed71ffde7043811e3e00,2,private,1,private
+card_e7bb9a19f1a0af263eec026b__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,1,chunk_a05d43c3d8c15b61ada9abc2,2,private,2,private
+card_22326308e924514106220eca__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,6,chunk_959242d94fa363d04dc1b45e,2,private,0,private
+card_5e15342c75f9af575999e066__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,6,chunk_959242d94fa363d04dc1b45e,2,private,0,private
+card_bbd6606239f0daf35cc076dc__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,4,chunk_1af1d271fbb3edc000bc0d44,2,private,2,private
+card_6a51d7e45bed5de684e00632__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,6,chunk_f44ef1a2593eff91be24201e,2,private,2,private
+card_bdff57c0fe7470d5ec162246__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,2,chunk_4cbdfe7d5ea68d4027c43a9e,2,private,0,private
+card_cacc268f3fa908e336a64580__openai_gpt-6_1-sol,arianna,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,1,chunk_ad285e76a178faf67da4cf6d,2,private,2,private
+card_6e6b2c18caae7353c4add625__deepseek_deepseek-v4_1-flash-1017,arianna,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,4,chunk_afd2a7f2267ea7e7df35d142,2,private,2,private
+card_ba8c2c734f5c675bbb5a5956__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,1.1 threats of harm,1,chunk_b80353d40a882f6af80c0802,2,private,2,private
+card_07fc8264ae62607eb893ad14__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,1.1 threats of harm,4,chunk_ea6d7f85d415886ca5d26892,2,private,1,private
+card_03766662a2430ed7f2eb131e__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,1.1 threats of harm,5,chunk_45a5625414dd61fce0729f1a,2,private,2,private
+card_7bf4a7dec97d54b11e32ea5a__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,1.2 incitement and encouragement of harm,1,chunk_18c37456894ea2054cb9c845,2,private,2,private
+card_2823b3ab3a9d6c47a3400b29__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,1.2 incitement and encouragement of harm,1,chunk_18c37456894ea2054cb9c845,2,private,2,private
+card_c61214d5a55101def3d87d05__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,5,chunk_2a9f489d50d44f5a47304e56,2,private,2,private
+card_e171e3c9095692cfde4ccffe__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,2.1 descriptive attacks,6,chunk_c8d1a02481982166ad918537,2,private,1,private
+card_f20889d9ef5477df0012e2f2__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,2.1 descriptive attacks,5,chunk_2a9f489d50d44f5a47304e56,2,private,1,private
+card_6eaae8ef8516bdd9f067a960__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,6,chunk_93cd474ca73aee9e9a6ff841,2,private,1,private
+card_267683a5e3585a5aad0c4128__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,2.2 aggressive and emotive attacks,2,chunk_2a9f489d50d44f5a47304e56,2,private,1,private
+card_24f5cdac5f8e288387b55dbf__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,2.2 aggressive and emotive attacks,3,chunk_4cbdfe7d5ea68d4027c43a9e,2,private,0,private
+card_96d8245f30a6ac1a997c4b49__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,2.3 dehumanising attacks and overt sexual objectification,6,chunk_93cd474ca73aee9e9a6ff841,2,private,1,private
+card_8829b2c85e2ab99577a49caf__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,2.3 dehumanising attacks and overt sexual objectification,3,chunk_54fe54304ddccd44aeb3a5b4,2,private,2,private
+card_0e0dc25c558ddf245fca1e5d__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",4,chunk_eb302d7c62840b79111f5bcf,2,private,1,private
+card_b222623c6eccd330f6ea3fb0__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,"3.1 casual use of gendered slurs, profanities, and insults",6,chunk_4cbdfe7d5ea68d4027c43a9e,0,private,0,private
+card_6d5835235331eee3dea75ecd__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,5,chunk_b6118041538ba12ef7b14423,2,private,2,private
+card_4ad03ee68fe0661d97690f69__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.2 immutable gender differences and gender stereotypes,4,chunk_88a89b37237c3173b29166b6,2,private,2,private
+card_4efa7304111f3acb2f43e86e__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,3.2 immutable gender differences and gender stereotypes,3,chunk_afd2a7f2267ea7e7df35d142,2,private,2,private
+card_7bf42e0cbd0fe9d0c3b64eb5__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,5,chunk_1596ed71ffde7043811e3e00,2,private,2,private
+card_0caea7f00281e1b4e29b9271__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,4,chunk_9964cdd5874dc8daa38672ce,2,private,1,private
+card_1a8ef6c0a816f7f25e3a607b__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.3 backhanded gendered compliments,1,chunk_2a9f489d50d44f5a47304e56,2,private,2,private
+card_e6a0d0e1a59392bc3c538b61__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,4,chunk_afd2a7f2267ea7e7df35d142,2,private,2,private
+card_c0703fee9a50b64d4954d390__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,3.4 condescending explanations or unwelcome advice,4,chunk_afd2a7f2267ea7e7df35d142,2,private,0,private
+card_14e0e4359d932982636c3530__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,3.4 condescending explanations or unwelcome advice,5,chunk_ad285e76a178faf67da4cf6d,2,private,1,private
+card_53d8ebbd1964c3ca5aeb5c5b__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,3,chunk_5620141a9111cec9058c59e6,2,private,2,private
+card_2bc5460b6de82a9f0f6bb41c__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,4.1 supporting mistreatment of individual women,2,chunk_4cbdfe7d5ea68d4027c43a9e,2,private,1,private
+card_813094087a56074e80eb99f1__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,4.1 supporting mistreatment of individual women,6,chunk_f44ef1a2593eff91be24201e,2,private,2,private
+card_cbc59846642f1b2c22956277__openai_gpt-6_1-sol,marta,openai/gpt-6.1-sol,4.2 supporting systemic discrimination against women as a group,5,chunk_4a02d907b0c74dae2be00ee0,2,private,2,private
+card_7aea2367a5a9a3576272d19e__deepseek_deepseek-v4_1-flash-1017,marta,deepseek/deepseek-v4.1-flash-1017,4.2 supporting systemic discrimination against women as a group,5,chunk_4a02d907b0c74dae2be00ee0,2,private,2,private

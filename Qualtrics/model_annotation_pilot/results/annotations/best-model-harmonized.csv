@@ -1,0 +1,741 @@
+StartDate;EndDate;Status;IPAddress;Progress;Duration (in seconds);Finished;RecordedDate;ResponseId;RecipientLastName;RecipientFirstName;RecipientEmail;ExternalReference;LocationLatitude;LocationLongitude;DistributionChannel;UserLanguage;Ultimo ID dell'elemento del flusso visualizzato;Ultimi ID della domanda visualizzati;Annotator;faithfulness_card_07d6f8ad179827507ec2514c__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_07d6f8ad179827507ec2514c__deepseek_deepseek-v4_1-flas...;Notes_card_07d6f8ad179827507ec2514c__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_ba4249304ffb91cc425e8a91__openai_gpt-6_1-sol;answer_relevance_card_ba4249304ffb91cc425e8a91__openai_gpt-6_1-sol;Notes_card_ba4249304ffb91cc425e8a91__openai_gpt-6_1-sol;faithfulness_card_3542ae7e3ded23beb7969fb0__openai_gpt-6_1-sol;answer_relevance_card_3542ae7e3ded23beb7969fb0__openai_gpt-6_1-sol;Notes_card_3542ae7e3ded23beb7969fb0__openai_gpt-6_1-sol;faithfulness_card_44e2e87c96ccdb719e01f02a__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_44e2e87c96ccdb719e01f02a__deepseek_deepseek-v4_1-flas...;Notes_card_44e2e87c96ccdb719e01f02a__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_c09b5396beb72fce6a5a8db6__openai_gpt-6_1-sol;answer_relevance_card_c09b5396beb72fce6a5a8db6__openai_gpt-6_1-sol;Notes_card_c09b5396beb72fce6a5a8db6__openai_gpt-6_1-sol;faithfulness_card_2367f234d2d5317a16a03dea__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_2367f234d2d5317a16a03dea__deepseek_deepseek-v4_1-flas...;Notes_card_2367f234d2d5317a16a03dea__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_c35bb9b52f97449373a6e1eb__openai_gpt-6_1-sol;answer_relevance_card_c35bb9b52f97449373a6e1eb__openai_gpt-6_1-sol;Notes_card_c35bb9b52f97449373a6e1eb__openai_gpt-6_1-sol;faithfulness_card_ff7874374b5a86fe7bfdbe1c__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_ff7874374b5a86fe7bfdbe1c__deepseek_deepseek-v4_1-flas...;Notes_card_ff7874374b5a86fe7bfdbe1c__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_28817602f6e9200029cd72b3__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_28817602f6e9200029cd72b3__deepseek_deepseek-v4_1-flas...;Notes_card_28817602f6e9200029cd72b3__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_e6883d1e1ab8bad2c0e1eea2__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_e6883d1e1ab8bad2c0e1eea2__deepseek_deepseek-v4_1-flas...;Notes_card_e6883d1e1ab8bad2c0e1eea2__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_c3e517b5c1b5091bee965f5a__openai_gpt-6_1-sol;answer_relevance_card_c3e517b5c1b5091bee965f5a__openai_gpt-6_1-sol;Notes_card_c3e517b5c1b5091bee965f5a__openai_gpt-6_1-sol;faithfulness_card_cf6167c414df667c731e662d__openai_gpt-6_1-sol;answer_relevance_card_cf6167c414df667c731e662d__openai_gpt-6_1-sol;Notes_card_cf6167c414df667c731e662d__openai_gpt-6_1-sol;faithfulness_card_13d1cb3d472cecc410555c51__openai_gpt-6_1-sol;answer_relevance_card_13d1cb3d472cecc410555c51__openai_gpt-6_1-sol;Notes_card_13d1cb3d472cecc410555c51__openai_gpt-6_1-sol;faithfulness_card_01f6e73c2168fef53d23f7e0__openai_gpt-6_1-sol;answer_relevance_card_01f6e73c2168fef53d23f7e0__openai_gpt-6_1-sol;Notes_card_01f6e73c2168fef53d23f7e0__openai_gpt-6_1-sol;faithfulness_card_49ec5cc0bc81537b665dab31__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_49ec5cc0bc81537b665dab31__deepseek_deepseek-v4_1-flas...;Notes_card_49ec5cc0bc81537b665dab31__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_123fc00399875a256b14494b__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_123fc00399875a256b14494b__deepseek_deepseek-v4_1-flas...;Notes_card_123fc00399875a256b14494b__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_b81e33f93f1037b909900394__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_b81e33f93f1037b909900394__deepseek_deepseek-v4_1-flas...;Notes_card_b81e33f93f1037b909900394__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_f8d7f4cebfb8b3876317dfcd__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_f8d7f4cebfb8b3876317dfcd__deepseek_deepseek-v4_1-flas...;Notes_card_f8d7f4cebfb8b3876317dfcd__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_745720b891d43a518de12c29__openai_gpt-6_1-sol;answer_relevance_card_745720b891d43a518de12c29__openai_gpt-6_1-sol;Notes_card_745720b891d43a518de12c29__openai_gpt-6_1-sol;faithfulness_card_a44a49404a3859c991dac5b6__openai_gpt-6_1-sol;answer_relevance_card_a44a49404a3859c991dac5b6__openai_gpt-6_1-sol;Notes_card_a44a49404a3859c991dac5b6__openai_gpt-6_1-sol;faithfulness_card_f3041a42e4f5ad6722e264cc__openai_gpt-6_1-sol;answer_relevance_card_f3041a42e4f5ad6722e264cc__openai_gpt-6_1-sol;Notes_card_f3041a42e4f5ad6722e264cc__openai_gpt-6_1-sol;faithfulness_card_084c2d057568ed4fbb9abb1e__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_084c2d057568ed4fbb9abb1e__deepseek_deepseek-v4_1-flas...;Notes_card_084c2d057568ed4fbb9abb1e__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_fa8d9af4aecfc601a3aa7eae__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_fa8d9af4aecfc601a3aa7eae__deepseek_deepseek-v4_1-flas...;Notes_card_fa8d9af4aecfc601a3aa7eae__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_00b15fcad656474e2900c303__openai_gpt-6_1-sol;answer_relevance_card_00b15fcad656474e2900c303__openai_gpt-6_1-sol;Notes_card_00b15fcad656474e2900c303__openai_gpt-6_1-sol;faithfulness_card_c0b82958458931a5775f7b1b__openai_gpt-6_1-sol;answer_relevance_card_c0b82958458931a5775f7b1b__openai_gpt-6_1-sol;Notes_card_c0b82958458931a5775f7b1b__openai_gpt-6_1-sol;faithfulness_card_9ce173f8f827c4a78c372ada__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_9ce173f8f827c4a78c372ada__deepseek_deepseek-v4_1-flas...;Notes_card_9ce173f8f827c4a78c372ada__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_c6e67aff27968f7f4ca279ed__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_c6e67aff27968f7f4ca279ed__deepseek_deepseek-v4_1-flas...;Notes_card_c6e67aff27968f7f4ca279ed__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_0e230985a541b5b251c08409__openai_gpt-6_1-sol;answer_relevance_card_0e230985a541b5b251c08409__openai_gpt-6_1-sol;Notes_card_0e230985a541b5b251c08409__openai_gpt-6_1-sol;faithfulness_card_a573092335c6542b5d6e7f08__openai_gpt-6_1-sol;answer_relevance_card_a573092335c6542b5d6e7f08__openai_gpt-6_1-sol;Notes_card_a573092335c6542b5d6e7f08__openai_gpt-6_1-sol;faithfulness_card_62662f3df722a6c8f0d0b7a0__openai_gpt-6_1-sol;answer_relevance_card_62662f3df722a6c8f0d0b7a0__openai_gpt-6_1-sol;Notes_card_62662f3df722a6c8f0d0b7a0__openai_gpt-6_1-sol;faithfulness_card_4959d4ee8ae889ca27e6d327__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_4959d4ee8ae889ca27e6d327__deepseek_deepseek-v4_1-flas...;Notes_card_4959d4ee8ae889ca27e6d327__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_8018e0ff7b26925ad9e5d8ca__openai_gpt-6_1-sol;answer_relevance_card_8018e0ff7b26925ad9e5d8ca__openai_gpt-6_1-sol;Notes_card_8018e0ff7b26925ad9e5d8ca__openai_gpt-6_1-sol;faithfulness_card_15628a5ad03703cb3b9727b1__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_15628a5ad03703cb3b9727b1__deepseek_deepseek-v4_1-flas...;Notes_card_15628a5ad03703cb3b9727b1__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_154fa66eea1ad7d33ffaa1cd__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_154fa66eea1ad7d33ffaa1cd__deepseek_deepseek-v4_1-flas...;Notes_card_154fa66eea1ad7d33ffaa1cd__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_d1c2da456cd10f65596b9032__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_d1c2da456cd10f65596b9032__deepseek_deepseek-v4_1-flas...;Notes_card_d1c2da456cd10f65596b9032__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_6687105fc3946e0916a1d4e7__openai_gpt-6_1-sol;answer_relevance_card_6687105fc3946e0916a1d4e7__openai_gpt-6_1-sol;Notes_card_6687105fc3946e0916a1d4e7__openai_gpt-6_1-sol;faithfulness_card_4327701bda9523e088048486__openai_gpt-6_1-sol;answer_relevance_card_4327701bda9523e088048486__openai_gpt-6_1-sol;Notes_card_4327701bda9523e088048486__openai_gpt-6_1-sol;faithfulness_card_af895ce0a8ba98c9c7560fb2__openai_gpt-6_1-sol;answer_relevance_card_af895ce0a8ba98c9c7560fb2__openai_gpt-6_1-sol;Notes_card_af895ce0a8ba98c9c7560fb2__openai_gpt-6_1-sol;faithfulness_card_e123ca4bf0ea12fcc7888657__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_e123ca4bf0ea12fcc7888657__deepseek_deepseek-v4_1-flas...;Notes_card_e123ca4bf0ea12fcc7888657__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_5584de87312e55a46d687a43__openai_gpt-6_1-sol;answer_relevance_card_5584de87312e55a46d687a43__openai_gpt-6_1-sol;Notes_card_5584de87312e55a46d687a43__openai_gpt-6_1-sol;faithfulness_card_f1d2b3f027f39a9d2fcdf8c0__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_f1d2b3f027f39a9d2fcdf8c0__deepseek_deepseek-v4_1-flas...;Notes_card_f1d2b3f027f39a9d2fcdf8c0__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_2a4e6d0d357ad921ddccc58e__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_2a4e6d0d357ad921ddccc58e__deepseek_deepseek-v4_1-flas...;Notes_card_2a4e6d0d357ad921ddccc58e__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_f68ac3bbbc1bd994a2f132a4__deepseek_deepseek-v4_1-flash-10...;answer_relevance_card_f68ac3bbbc1bd994a2f132a4__deepseek_deepseek-v4_1-flas...;Notes_card_f68ac3bbbc1bd994a2f132a4__deepseek_deepseek-v4_1-flash-1017;faithfulness_card_ad5e64f6c0e9679091b3c417__openai_gpt-6_1-sol;answer_relevance_card_ad5e64f6c0e9679091b3c417__openai_gpt-6_1-sol;Notes_card_ad5e64f6c0e9679091b3c417__openai_gpt-6_1-sol;faithfulness_card_25c4d4943ee564ed77ad6a8d__openai_gpt-6_1-sol;answer_relevance_card_25c4d4943ee564ed77ad6a8d__openai_gpt-6_1-sol;Notes_card_25c4d4943ee564ed77ad6a8d__openai_gpt-6_1-sol
+Data di inizio;Data di fine;Tipo risposta;Indirizzo IP;Avanzamento;Durata (in secondi);Terminato;Data registrata;ID di risposta;Cognome del destinatario;Nome del destinatario;E-mail del destinatario;Riferimento a dati esterni;Latitudine posizione;Longitudine posizione;Canale di distribuzione;Lingua dell'utente;Ultimo ID dell'elemento del flusso visualizzato;Ultimi ID della domanda visualizzati;AnnotatriceSeleziona il tuo nome.;"Paragraph
+5. SURVEYS AND ADMINISTRATIVE DATA SOURCES (1–2 pages) > Cyber harassment
+
+Components:
+
+Unwanted sexually explicit emails or text (or online) messages;
+ Inappropriate or offensive advances on social networking websites or internet chat rooms;
+ Threats of physical and/or sexual violence by email or text (or online) message;
+ Hate speech, meaning language that denigrates, insults, threatens or targets an individual based on her identity (gender) and other traits (e.g. sexual orientation or disability).
+
+Sub-components:
+
+Use of force (use of threats / abuse of vulnerability, power, trust)
+ Perpetrated by someone belonging to the intimate sphere (spouse, cohabiting partner, non-cohabiting partner, former spouse, ex partner, parents, between spouses or people who live together or have lived together, another member of the family, children, relatives, within the family or domestic unit, in her own home)
+Argument
+Cyber harassment includes threats of physical and/or sexual violence delivered by email, text, or online message. It also includes hate speech, meaning language that denigrates, insults, threatens, or targets an individual because of her gender and other traits. These threats can involve use of force through threats or abuse of vulnerability, power, or trust, and can be perpetrated by someone in the intimate sphere, including a spouse, partner, former partner, family member, or someone within the domestic unit or home.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.1 threats of harm – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.
+Argument
+Cyber harassment includes threats of physical and/or sexual violence delivered by email, text, or online message. It also includes hate speech, meaning language that denigrates, insults, threatens, or targets an individual because of her gender and other traits. These threats can involve use of force through threats or abuse of vulnerability, power, or trust, and can be perpetrated by someone in the intimate sphere, including a spouse, partner, former partner, family member, or someone within the domestic unit or home.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Intersectional Equality Factors > What Are the Harms?
+
+The harms caused by TFGBV are felt both at the individual and the systemic level (Bailey and Mathen 2019). Individual people can have their privacy invaded and their autonomy threatened, experience psychological harms, feel fearful, limit their expression and face reputational, professional and economic consequences. Yet, on a broader scale, this violence also has significant systemic impacts. It reinforces inequality and maintains discriminatory norms that limit women and transgender people from living with freedom and realizing all of their human rights. It maintains and reinforces patriarchal gender hierarchies and institutionally undermines the violence experienced by those targeted by TFGBV. Researchers in lower- and middle-income countries have been particularly robust in their analysis of the intersectional, political, institutional and structural linkages associated with TFGBV, recognizing how institutional power, social hierarchies and the digital divide each play a role in contributing to TFGBV. This section will review some of the more commonly reported harms in research to date, including psychological and emotional harms, privacy invasions, risks to safety, the silencing of women’s voices and economic damages.
+Argument
+Technology-facilitated gender-based violence can invade privacy, threaten autonomy, cause psychological harm and fear, and lead people to limit their expression or face reputational, professional and economic consequences. At a systemic level, it reinforces patriarchal gender hierarchies and discriminatory norms that restrict women’s and transgender people’s freedom and realization of their human rights.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.1 threats of harm – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.
+Argument
+Technology-facilitated gender-based violence can invade privacy, threaten autonomy, cause psychological harm and fear, and lead people to limit their expression or face reputational, professional and economic consequences. At a systemic level, it reinforces patriarchal gender hierarchies and discriminatory norms that restrict women’s and transgender people’s freedom and realization of their human rights.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.
+
+Danielle Keats Citron also describes how violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities. She explains the role of crowds in destroying privacy
+Argument
+Online mob attacks against women include often-credible rape and death threats, with real-life targeting adding to their credibility. These attacks span multiple platforms and involve intense, sustained threats from many attackers in concerted and often coordinated campaigns. Violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities, and crowds play a role in destroying privacy.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.1 threats of harm – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.
+Argument
+Online mob attacks against women include often-credible rape and death threats, with real-life targeting adding to their credibility. These attacks span multiple platforms and involve intense, sustained threats from many attackers in concerted and often coordinated campaigns. Violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities, and crowds play a role in destroying privacy.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+2. SOCIETAL CONTEXT AND ROOT CAUSES OF CYBER VIOLENCE AND HATE SPEECH ONLINE AGAINST WOMEN > 2.3. The architecture of cyber spaces and women’s victimisation > 2.3.3. Mob mentality
+
+They include rape and death threats — often credible ones — and frequently involve real-life targeting, which adds to the credibility of the threats;
+
+They cross multiple social media or online platforms;
+
+They occur at unusually high levels of intensity and frequency (numerous threats or messages per day or even per hour);
+
+They are perpetuated for an unusual duration (months or even years);
+
+They involve many attackers in a concerted and often coordinated campaign.
+
+Danielle Keats Citron also describes how violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities. She explains the role of crowds in destroying privacy
+Argument
+Coordinated online mobs target women with credible rape and death threats and often extend the targeting into real life, which increases the threats’ credibility. Such campaigns cross multiple platforms, occur at high intensity and frequency, and persist for prolonged periods through many attackers acting in a concerted or coordinated way. Violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities, and crowds can destroy women’s privacy.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.1 threats of harm – Expressing intent, willingness or desire to harm an individual woman or group of women. This could include, but is not limited to: physical, sexual, emotional or privacy-based forms of harm.
+Argument
+Coordinated online mobs target women with credible rape and death threats and often extend the targeting into real life, which increases the threats’ credibility. Such campaigns cross multiple platforms, occur at high intensity and frequency, and persist for prolonged periods through many attackers acting in a concerted or coordinated way. Violent mobs threaten and target women with sexual violence, especially women with intersecting vulnerabilities, and crowds can destroy women’s privacy.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+attacks perpetrated against more vulnerable groups of women and girls (including journal- ists, politicians, activists, LGBTIQ+, etc.) are detected and more insights are gained into the phenomenon.
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).
+
+It can also involve posting and sharing, through ICT means, violent content that consists of portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles.
+
+The acts can:
+
+a. start online and continue offline;
+
+b. start offline and continue online;
+
+c. can be perpetrated by an unknown person / group of people who are unknown to the victim; or
+
+d. can be perpetrated by a person or/ group of people who are known to the victim.
+Argument
+Online gender-based hate speech includes content that spreads, incites, promotes, or justifies hatred against women and girls based on gender or gender combined with other characteristics. It can include violent content portraying women and girls as sexual objects or targets of violence, shared privately or publicly and often directed at women in public-facing roles. Acts of abuse can start online and continue offline, or start offline and continue online.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.2 incitement and encouragement of harm – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.
+Argument
+Online gender-based hate speech includes content that spreads, incites, promotes, or justifies hatred against women and girls based on gender or gender combined with other characteristics. It can include violent content portraying women and girls as sexual objects or targets of violence, shared privately or publicly and often directed at women in public-facing roles. Acts of abuse can start online and continue offline, or start offline and continue online.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+[31] This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________
+
+Posting and sharing violent content consist of portraying women as sexual objects or targets of violence.
+
+Use of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.
+Argument
+Sexist hate speech is defined as expressions that spread, incite, promote, or justify hatred based on sex. Posting and sharing violent content involves portraying women as sexual objects or as targets of violence. Sexist and insulting comments are used to abuse women for expressing their own views and for turning away sexual advances.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.2 incitement and encouragement of harm – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.
+Argument
+Sexist hate speech is defined as expressions that spread, incite, promote, or justify hatred based on sex. Posting and sharing violent content involves portraying women as sexual objects or as targets of violence. Sexist and insulting comments are used to abuse women for expressing their own views and for turning away sexual advances.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Online Misogyny, Radicalization, and Violent Extremism
+
+The language used on these forums is in and of itself enough to cause alarm. A study by the Centre for Countering Digital Hate (CCDH) found that incel (involuntary celibate) forum members post about rape once every 29 minutes and that 89 percent of these posts are supportive of it. Another 5 percent of posters were not morally against rape but instead found it “unimaginative” and expressed their desire to “reduce a woman to nothing.” Between 2021 and
+
+2022, the CCDH also found a 59 percent increase in references to mass murders, primarily centered around the glorification of Elliot Rodgers. In 2014, Rodgers posted a 141-page manifesto before killing six people in a shooting and stabbing spree in California. In his manifesto, he outlined his deep hatred for women and his frustration with his lack of sexual experience; incel forums frequently reference this manifesto, glorifying Rodgers’ acts of violence and encouraging others to do the same. Incel terrorism is on the rise, particularly in predominantly white, English-speaking countries, but extreme violence is not the only way the manosphere manifests.
+Argument
+Incel forums contain expressions of support for rape, including responses that object to it as unimaginative rather than morally wrong and express a desire to degrade women. These forums also glorify acts of violence associated with hatred of women, circulate a perpetrator’s misogynistic manifesto, and encourage others to emulate those acts.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.2 incitement and encouragement of harm – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.
+Argument
+Incel forums contain expressions of support for rape, including responses that object to it as unimaginative rather than morally wrong and express a desire to degrade women. These forums also glorify acts of violence associated with hatred of women, circulate a perpetrator’s misogynistic manifesto, and encourage others to emulate those acts.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Causes and forms of sexist hate speech
+
+Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.
+
+Prevalence of sexual harassment among women (%, European Union, 2014)
+PeriodPrevalence (%)
+In the last 12 months21
+Since the age of 1555
+Sexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.
+Argument
+Sexist hate speech includes expressions that spread, incite, promote, or justify hatred based on sex. Its forms include brutal and sexualised threats of death, rape, and violence, as well as victim blaming and re-victimisation, which can shift blame onto targeted women. It can also use humour, false compliments, or supposed jokes to humiliate and ridicule the target.
+How relevant is the argument to the paragraph?";"EDOS Label
+1.2 incitement and encouragement of harm – Inciting or encouraging an individual, group, or general audience to harm a woman or group of women. It includes language where the author seeks to rationalise and/or justify harming women to another person.
+Argument
+Sexist hate speech includes expressions that spread, incite, promote, or justify hatred based on sex. Its forms include brutal and sexualised threats of death, rape, and violence, as well as victim blaming and re-victimisation, which can shift blame onto targeted women. It can also use humour, false compliments, or supposed jokes to humiliate and ridicule the target.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Avoiding stereotypes: Using different adjectives for women and men
+
+Sometimes in English different adjectives are used to describe the same feature in women and men. There are also some words which – despite not having an explicit gender – have strong connotations that are strongly associated with only women or men.
+
+This stems from the fact that some character traits, such as being ambitious, are considered by society attractive in men but negative in women.
+
+It is not always easy to spot when adjectives are promoting gender stereotypes. The examples in the table below show some words to look out for and to avoid using to describe women.
+
+> Tip!
+>
+> When describing a characteristic of a woman, ask yourself, ‘would I ever use this word to describe a man?’ (and vice versa) If not, then look for a term without gender connotations.
+Argument
+Different adjectives are sometimes used to describe the same feature in women and men, and some words without explicit gender carry strong connotations associated with only women or men. This reflects societal judgments that traits such as ambition are attractive in men but negative in women, so adjectives can promote gender stereotypes when used to describe women. A practical check is whether the same word would be used to describe a man; if not, a term without gender connotations should be sought.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.1 descriptive attacks – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.
+Argument
+Different adjectives are sometimes used to describe the same feature in women and men, and some words without explicit gender carry strong connotations associated with only women or men. This reflects societal judgments that traits such as ambition are attractive in men but negative in women, so adjectives can promote gender stereotypes when used to describe women. A practical check is whether the same word would be used to describe a man; if not, a term without gender connotations should be sought.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Definition
+
+For the purpose of this Recommendation, sexism is:
+
+Any act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:
+
+i. violating the inherent dignity or rights of a person or a group of persons; or
+ii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or
+iii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or
+iv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or
+v. maintaining and reinforcing gender stereotypes.
+Argument
+Sexism includes spoken or written words, visual representations, practices, or behaviours based on the idea that a person or a group is inferior because of their sex, occurring in public or private life and online or offline. Such acts are sexist when they have the purpose or effect of violating dignity or rights, causing physical, sexual, psychological, or socio-economic harm or suffering, creating an intimidating, hostile, degrading, humiliating, or offensive environment, constituting a barrier to autonomy and the full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.1 descriptive attacks – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.
+Argument
+Sexism includes spoken or written words, visual representations, practices, or behaviours based on the idea that a person or a group is inferior because of their sex, occurring in public or private life and online or offline. Such acts are sexist when they have the purpose or effect of violating dignity or rights, causing physical, sexual, psychological, or socio-economic harm or suffering, creating an intimidating, hostile, degrading, humiliating, or offensive environment, constituting a barrier to autonomy and the full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Definition
+
+For the purpose of this Recommendation, sexism is:
+
+Any act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:
+
+i. violating the inherent dignity or rights of a person or a group of persons; or
+ii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or
+iii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or
+iv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or
+v. maintaining and reinforcing gender stereotypes.
+Argument
+Spoken or written words and visual representations based on sex-based inferiority fall within the definition of sexism when their purpose or effect is to violate dignity or rights, cause harm or suffering, create a hostile or degrading environment, obstruct autonomy and the full realisation of human rights, or reinforce gender stereotypes. This definition applies in public and private settings, both online and offline.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.1 descriptive attacks – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.
+Argument
+Spoken or written words and visual representations based on sex-based inferiority fall within the definition of sexism when their purpose or effect is to violate dignity or rights, cause harm or suffering, create a hostile or degrading environment, obstruct autonomy and the full realisation of human rights, or reinforce gender stereotypes. This definition applies in public and private settings, both online and offline.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+II.D. Workplace
+
+Workplace sexism takes many forms and is present in the public and the private sector. It manifests itself through sexist comments, and behaviour aimed at an employee or group of employees. Sexism in the workplace includes, among others, derogatory comments, objectification, sexist humour or jokes, over-familiar remarks, silencing or ignoring people, gratuitous comments about dress and physical appearance, sexist body language, lack of respect and masculine practices which intimidate or exclude women and favour fellow men. It impinges upon equality and dignity at work.
+
+Sexist assumptions based on traditional gender roles may result in the belief that women, as mothers or would-be mothers or carers, are less reliable colleagues and employees. Conversely, there may be hostility towards mothers who do not stay at home or, alternatively, they may be excluded from important opportunities to advance their careers and, as a consequence, their professional lives. This contributes to the glass ceiling that limits women’s promotion opportunities. Such assumptions can also result in sexist remarks towards men who take up caring responsibilities.
+Some workplace environments are especially male-dominated, with a high risk of fostering a culture of sexism. In addition, women occupying decision-making positions or those perceived as challenging the institutional male-dominated hierarchy may be especially subject to sexism. Similarly, men may experience sexism in female-dominated workplaces, or for being employed in typically “female” work.
+Argument
+Workplace sexism includes derogatory comments, objectification, sexist jokes, and gratuitous remarks about dress and physical appearance, undermining equality and dignity at work. Traditional gender-role assumptions can cast women who are mothers, would-be mothers, or carers as less reliable colleagues and employees. Mothers may face hostility for not staying at home or exclusion from career-advancing opportunities, contributing to the glass ceiling that limits women’s promotion opportunities.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.1 descriptive attacks – Characterising or describing women in a derogatory manner. This could include, but not limited to: negative generalisations about women’s abilities, appearance, sexual behaviour, intellect, character, or morals.
+Argument
+Workplace sexism includes derogatory comments, objectification, sexist jokes, and gratuitous remarks about dress and physical appearance, undermining equality and dignity at work. Traditional gender-role assumptions can cast women who are mothers, would-be mothers, or carers as less reliable colleagues and employees. Mothers may face hostility for not staying at home or exclusion from career-advancing opportunities, contributing to the glass ceiling that limits women’s promotion opportunities.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Impact of sexist hate speech on women and girls
+
+Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.
+Argument
+Sexist hate speech aims to humiliate or objectify women, devalue their skills and opinions, damage their reputations, instill vulnerability and fear, and control or punish departures from expected behaviour. Its psychological, emotional and/or physical impacts are real and severe, despite being treated as harmless or something women should endure. It undermines women’s and girls’ freedom of speech, silencing women and obliging them to adapt their behaviour and limit their movements and participation in diverse activities.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.2 aggressive and emotive attacks – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.
+Argument
+Sexist hate speech aims to humiliate or objectify women, devalue their skills and opinions, damage their reputations, instill vulnerability and fear, and control or punish departures from expected behaviour. Its psychological, emotional and/or physical impacts are real and severe, despite being treated as harmless or something women should endure. It undermines women’s and girls’ freedom of speech, silencing women and obliging them to adapt their behaviour and limit their movements and participation in diverse activities.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+2. Conceptualising and defining cyber violence against women and girls > Flaming
+
+Flaming is a form of ‘aggressive, hostile, profanity-laced’ (O’Sullivan and Flanagin, 2003) online communication, which is always characterised by ‘insults, negative affect and “typographic energy” such as capital letters and exclamation marks’ (Jane, 2015). It entails deliberately ‘swearing or using otherwise offensive language’ (Moor, Heuvelman and Verleur, 2010) to express emotionally charged or contrarian statements, usually to elicit a response from another online user (CSES, 2019).
+
+This term appears mostly in scholarly work, where it is often considered an umbrella term for trolling, cyber bullying and cyber harassment. Very few mentions of flaming appear in national policies or laws.
+
+Tends to occur in the context of online discussions about controversial issues (e.g. of a political, social, cultural or religious nature).
+
+Can be openly misogynous in nature and is often targeted at women with threats and/or fantasies of sexual violence or incitement to sexual violence (Andersen, 2021).
+Argument
+Flaming is aggressive, hostile online communication characterised by insults, negative emotion, and emphatic typography such as capital letters and exclamation marks. It deliberately uses swearing or offensive language to express emotionally charged or contrarian statements, usually to provoke a response from another user. Flaming can be openly misogynous and is often directed at women through threats or fantasies of sexual violence, or incitement to sexual violence.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.2 aggressive and emotive attacks – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.
+Argument
+Flaming is aggressive, hostile online communication characterised by insults, negative emotion, and emphatic typography such as capital letters and exclamation marks. It deliberately uses swearing or offensive language to express emotionally charged or contrarian statements, usually to provoke a response from another user. Flaming can be openly misogynous and is often directed at women through threats or fantasies of sexual violence, or incitement to sexual violence.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Impact of sexist hate speech on women and girls
+
+Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.
+Argument
+Sexist hate speech is often dismissed as harmless, and women are explicitly or implicitly told to bear with it, even though its psychological, emotional, and physical impacts are severe. Its aims include humiliating or objectifying women, undervaluing their skills and opinions, destroying their reputation, making them feel vulnerable and fearful, and controlling or punishing them for not conforming to expected behavior. It has the effect of silencing women and obliging them to adapt their behavior and limit their movements and participation in diverse activities.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.2 aggressive and emotive attacks – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.
+Argument
+Sexist hate speech is often dismissed as harmless, and women are explicitly or implicitly told to bear with it, even though its psychological, emotional, and physical impacts are severe. Its aims include humiliating or objectifying women, undervaluing their skills and opinions, destroying their reputation, making them feel vulnerable and fearful, and controlling or punishing them for not conforming to expected behavior. It has the effect of silencing women and obliging them to adapt their behavior and limit their movements and participation in diverse activities.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+attacks perpetrated against more vulnerable groups of women and girls (including journal- ists, politicians, activists, LGBTIQ+, etc.) are detected and more insights are gained into the phenomenon.
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).
+
+It can also involve posting and sharing, through ICT means, violent content that consists of portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles.
+
+The acts can:
+
+a. start online and continue offline;
+
+b. start offline and continue online;
+
+c. can be perpetrated by an unknown person / group of people who are unknown to the victim; or
+
+d. can be perpetrated by a person or/ group of people who are known to the victim.
+Argument
+Online gender-based hate speech is content posted and shared through ICT means that is hateful toward women and/or girls because of their gender or because of a combination of gender and other factors such as race, age, disability, sexuality, ethnicity, nationality, religion or profession. It also includes content that spreads, incites, promotes or justifies hatred based on gender or on a combination of gender and other factors. Such content can portray women and girls as sexual objects or targets of violence and is often targeted at women in public-facing roles. These acts can start online and continue offline, start offline and continue online, and can be perpetrated by unknown persons or groups as well as by persons or groups known to the victim.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.2 aggressive and emotive attacks – Expressing strong negative sentiment against women, such as disgust or hatred. This can be through direct description of the speaker’s subjective emotions, baseless accusations, or the use of gendered slurs, gender-based profanities and gender-based insults.
+Argument
+Online gender-based hate speech is content posted and shared through ICT means that is hateful toward women and/or girls because of their gender or because of a combination of gender and other factors such as race, age, disability, sexuality, ethnicity, nationality, religion or profession. It also includes content that spreads, incites, promotes or justifies hatred based on gender or on a combination of gender and other factors. Such content can portray women and girls as sexual objects or targets of violence and is often targeted at women in public-facing roles. These acts can start online and continue offline, start offline and continue online, and can be perpetrated by unknown persons or groups as well as by persons or groups known to the victim.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Causes and forms of sexist hate speech
+
+Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.
+
+Prevalence of sexual harassment among women (%, European Union, 2014)
+PeriodPrevalence (%)
+In the last 12 months21
+Since the age of 1555
+Sexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.
+Argument
+Sexist hate speech can express contempt toward a person or treat them as inferior or essentially reduced to their sexual dimension. Online and offline forms include slut-shaming, body-shaming, non-consensual sharing of sexual images, sexualised threats of rape and violence, and offensive comments about appearance, sexuality, sexual orientation, or gender roles; supposed jokes and false compliments can be used to humiliate and ridicule targets. Many targeted women do not report sexist hate speech, so its true extent remains partly hidden.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.3 dehumanising attacks and overt sexual objectification – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.
+Argument
+Sexist hate speech can express contempt toward a person or treat them as inferior or essentially reduced to their sexual dimension. Online and offline forms include slut-shaming, body-shaming, non-consensual sharing of sexual images, sexualised threats of rape and violence, and offensive comments about appearance, sexuality, sexual orientation, or gender roles; supposed jokes and false compliments can be used to humiliate and ridicule targets. Many targeted women do not report sexist hate speech, so its true extent remains partly hidden.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+4. Towards common definitions of cyber violence against women and girls > Proposed definition
+
+attacks perpetrated against more vulnerable groups of women and girls (including journal- ists, politicians, activists, LGBTIQ+, etc.) are detected and more insights are gained into the phenomenon.
+
+Online gender-based hate speech is defined as content posted and shared through ICT means that:
+
+is hateful towards women and/or girls because of their gender, or because of a combination of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession); and/or
+
+spreads, incites, promotes or justifies hatred based on gender, or because of a combi- nation of gender and other factors (e.g. race, age, disability, sexuality, ethnicity, nationality, religion or profession).
+
+It can also involve posting and sharing, through ICT means, violent content that consists of portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles.
+
+The acts can:
+
+a. start online and continue offline;
+
+b. start offline and continue online;
+
+c. can be perpetrated by an unknown person / group of people who are unknown to the victim; or
+
+d. can be perpetrated by a person or/ group of people who are known to the victim.
+Argument
+Online gender-based hate speech includes content posted and shared through ICT means that is hateful toward women and/or girls because of gender or combined gender and other factors, and content that spreads, incites, promotes, or justifies hatred on those bases. It can also involve violent content portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles. Such acts may begin online and continue offline, begin offline and continue online, and may be perpetrated by unknown people or by people known to the victim.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.3 dehumanising attacks and overt sexual objectification – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.
+Argument
+Online gender-based hate speech includes content posted and shared through ICT means that is hateful toward women and/or girls because of gender or combined gender and other factors, and content that spreads, incites, promotes, or justifies hatred on those bases. It can also involve violent content portraying women and girls as sexual objects or targets of violence. This content can be sent privately or publicly and is often targeted at women in public-facing roles. Such acts may begin online and continue offline, begin offline and continue online, and may be perpetrated by unknown people or by people known to the victim.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+1.2. Defining cyber violence and hate speech online against women > 1.2.2. Academic and civil society definitions > Sexist hate speech
+
+Sexist hate speech is defined as expressions which spread, incite, promote or justify hatred based on sex.
+
+[31] This section builds on the definitions presented earlier in the study and draws on definitions proposed in the following reports: Internet Governance Forum (2015), “Online Abuse and Gender-Based Violence Against Women”, available at https://www.intgovforum.org/multilingual/content/online-abuse-and-gender-based-violence-against-women, as well as the database produced by the Women’s Media Center, “Online Abuse 101”, available at http://www.womensmediacenter.com/speech-project/online-abuse-101
+____________________________________________________________________________
+
+Posting and sharing violent content consist of portraying women as sexual objects or targets of violence.
+
+Use of sexist and insulting comments, abusing women for expressing their own views and for turning away sexual advances.
+Argument
+Posting and sharing violent content includes portraying women as sexual objects or targets of violence. Sexist online abuse also includes insulting women for expressing their own views or rejecting sexual advances.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.3 dehumanising attacks and overt sexual objectification – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.
+Argument
+Posting and sharing violent content includes portraying women as sexual objects or targets of violence. Sexist online abuse also includes insulting women for expressing their own views or rejecting sexual advances.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Hate Speech
+
+Hate speech can target women because of a combination of their identity factors or, more specifically, their gender. In Malawi, 46.3 percent of women surveyed had been subjected to hate speech online (Malanga 2020). Gendered hate speech made up 3.1 percent of reports to internet platforms in the European Union (Van der Wilk 2018). Online hate reinforces systemic inequalities, makes it difficult for certain groups to engage online, and can spill over into the physical world, causing violence and even death. In a case in Pakistan, a woman who had been the target of hate speech was shot at in public due to hate speech aimed at her online (Bukhari 2014).
+Argument
+Hate speech can target women because of their gender or a combination of identity factors. Online hate reinforces systemic inequalities and makes it harder for targeted groups to engage online. It can also spill over into the physical world, causing violence and even death.
+How relevant is the argument to the paragraph?";"EDOS Label
+2.3 dehumanising attacks and overt sexual objectification – Derogating women by comparing them to non-human entities such as vermin, disease or refuse, or overtly reducing them to sexual objects.
+Argument
+Hate speech can target women because of their gender or a combination of identity factors. Online hate reinforces systemic inequalities and makes it harder for targeted groups to engage online. It can also spill over into the physical world, causing violence and even death.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+A3.5. Online gender-based hate speech: common components at national level
+
+(93) Relevant types of conduct include: calumny; defamation; spreading false information; sending a message or anything else that is manifestly offensive and/or indecent or obscene; threatening; publicly defaming; offending the reputation of others; using any threatening, abusive or insulting words or behaviour; displaying any written or printed material that is threatening, abusive or insulting; insulting another person in her/his presence or even in her/ his absence, but in public or with intent to reach that person in her/his absence.
+
+(94) Relevant types of conduct include: acting in a way that constitutes spreading sexism; imposing on any person any comment or behaviour with sexual or sexist connotations.
+
+(95) Intentionality refers to: committing the offence intentionally; sending a message that he knows to be false; with intent to cause annoyance, harassment and/or unreasonable concern to another person; with intent thereby to stir up violence or racial/religious hatred.
+
+(96) Effects include: harming a person’s reputation; causing substantial harm; bringing the victim into disrepute in public opinion; putting them at risk of losing confidence; creating an intimidating, hostile or offensive situation; posing a threat to life, liberty or physical integrity; likely to stir up hatred.
+Annexes
+Argument
+Components of online gender-based hate speech include abusive or insulting words and written material, conduct that spreads sexism, and comments or behaviour with sexual or sexist connotations. Associated effects include reputational harm, loss of confidence, and the creation of an intimidating, hostile or offensive situation. The information does not distinguish casual uses of gendered insults from intentional attacks.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.1 casual use of gendered slurs, profanities, and insults – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).
+Argument
+Components of online gender-based hate speech include abusive or insulting words and written material, conduct that spreads sexism, and comments or behaviour with sexual or sexist connotations. Associated effects include reputational harm, loss of confidence, and the creation of an intimidating, hostile or offensive situation. The information does not distinguish casual uses of gendered insults from intentional attacks.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+YOUTH GUIDE TO END ONLINE GENDER-BASED VIOLENCE > START WITH YOURSELF
+
+Don’t use hate speech, sexist or aggressive language online.
+
+Don’t keep sending messages when a woman has told you no. Recognise that no means no. Do not create multiple accounts to communicate with anyone, this is classified as online stalking.
+
+Educate yourself and others:
+
+By taking the time to understand the nature, extent, and impact of online gender-based violence, men and boys can effectively educate themselves and others. They can share resources, participate in awareness campaigns, and engage in discussions about respectful online behaviour.
+
+Inform yourself of the realities of men’s violence against women online.
+
+SUPPORT VICTIMS AND SURVIVORS:
+
+Listen (or read), believe, respect and do not judge.
+Argument
+Men and boys are advised not to use hate speech, sexist or aggressive language online and to engage in discussions about respectful online behaviour. They can educate themselves and others about the nature, extent, and impact of online gender-based violence and inform themselves about the realities of men’s violence against women online. Supporting victims and survivors involves listening, believing, respecting, and not judging them.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.1 casual use of gendered slurs, profanities, and insults – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).
+Argument
+Men and boys are advised not to use hate speech, sexist or aggressive language online and to engage in discussions about respectful online behaviour. They can educate themselves and others about the nature, extent, and impact of online gender-based violence and inform themselves about the realities of men’s violence against women online. Supporting victims and survivors involves listening, believing, respecting, and not judging them.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Language inclusivity scale
+
+For practical guidance, you can refer to a language inclusivity scale to understand what language should be outright avoided, considered and adopted to support greater gender equality.
+
+Definition of key terms
+
+Sexist language: when someone intentionally uses derogatory and discriminatory language against a particular gender.
+
+Gender-biased language: such language either implicitly or explicitly favours one gender over another and is a form of gender discrimination.
+
+Gender-neutral language: such language is not gender-specific and considers people in general with no reference to women or men.
+
+Gender-inclusive language: an approach that places both women and men at the same level and that does not convey gender stereotypes.
+Argument
+A language inclusivity scale distinguishes sexist language, defined as intentional derogatory and discriminatory language against a particular gender, from gender-biased language, which implicitly or explicitly favours one gender and is a form of gender discrimination. It also distinguishes gender-neutral language, which is not gender-specific and considers people in general, from gender-inclusive language, which places women and men at the same level and does not convey gender stereotypes.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.1 casual use of gendered slurs, profanities, and insults – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).
+Argument
+A language inclusivity scale distinguishes sexist language, defined as intentional derogatory and discriminatory language against a particular gender, from gender-biased language, which implicitly or explicitly favours one gender and is a form of gender discrimination. It also distinguishes gender-neutral language, which is not gender-specific and considers people in general, from gender-inclusive language, which places women and men at the same level and does not convey gender stereotypes.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+YOUTH GUIDE TO END ONLINE GENDER-BASED VIOLENCE > START WITH YOURSELF
+
+Don’t use hate speech, sexist or aggressive language online.
+
+Don’t keep sending messages when a woman has told you no. Recognise that no means no. Do not create multiple accounts to communicate with anyone, this is classified as online stalking.
+
+Educate yourself and others:
+
+By taking the time to understand the nature, extent, and impact of online gender-based violence, men and boys can effectively educate themselves and others. They can share resources, participate in awareness campaigns, and engage in discussions about respectful online behaviour.
+
+Inform yourself of the realities of men’s violence against women online.
+
+SUPPORT VICTIMS AND SURVIVORS:
+
+Listen (or read), believe, respect and do not judge.
+Argument
+Avoiding sexist language online is part of taking personal responsibility for ending online gender-based violence. Men and boys can educate themselves and others by learning about its nature, extent, and impact, sharing resources, participating in awareness campaigns, and discussing respectful online behaviour.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.1 casual use of gendered slurs, profanities, and insults – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).
+Argument
+Avoiding sexist language online is part of taking personal responsibility for ending online gender-based violence. Men and boys can educate themselves and others by learning about its nature, extent, and impact, sharing resources, participating in awareness campaigns, and discussing respectful online behaviour.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Impact of sexist hate speech on women and girls
+
+Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.
+Argument
+Sexist hate speech is often treated as harmless or non-serious, and women are explicitly or implicitly expected to tolerate it. Yet it can undermine women’s and girls’ freedom of speech and have severe psychological, emotional or physical impacts. Its silencing effects constrain women’s behaviour, movements and participation in diverse activities.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.1 casual use of gendered slurs, profanities, and insults – Using gendered slurs, gender-based profanities and insults, but not to intentionally attack women. Only terms that traditionally describe women are in scope (e.g. ‘b*tch’, ‘sl*t’).
+Argument
+Sexist hate speech is often treated as harmless or non-serious, and women are explicitly or implicitly expected to tolerate it. Yet it can undermine women’s and girls’ freedom of speech and have severe psychological, emotional or physical impacts. Its silencing effects constrain women’s behaviour, movements and participation in diverse activities.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Causes and forms of sexist hate speech
+
+Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.
+
+Prevalence of sexual harassment among women (%, European Union, 2014)
+PeriodPrevalence (%)
+In the last 12 months21
+Since the age of 1555
+Sexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.
+Argument
+Sexist hate speech can express contempt toward a person based on sex or gender and can treat that person as inferior or essentially reduced to their sexual dimension. It includes offensive comments on appearance, sexuality, sexual orientation, or gender roles, as well as false compliments or supposed jokes that use humour to humiliate and ridicule the target. Many targeted women do not report sexist hate speech, which partly hides its extent.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.2 immutable gender differences and gender stereotypes – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.
+Argument
+Sexist hate speech can express contempt toward a person based on sex or gender and can treat that person as inferior or essentially reduced to their sexual dimension. It includes offensive comments on appearance, sexuality, sexual orientation, or gender roles, as well as false compliments or supposed jokes that use humour to humiliate and ridicule the target. Many targeted women do not report sexist hate speech, which partly hides its extent.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context
+
+2. “Gender stereotypes are preconceived social and cultural patterns or ideas whereby women and men are assigned characteristics and roles determined and limited by their sex. Gender stereotyping presents a serious obstacle to the achievement of real gender equality and feeds into gender discrimination. Such stereotyping can limit the development of the natural talents and abilities of girls and boys, women and men, their educational and professional preferences and experiences, as well as life opportunities in general.” (Council of Europe Gender Equality Strategy 2018-2023, Strategic objective 1)
+
+Sexism and sexist behaviour result in physical, sexual, psychological or socio-economic harm and impact different sectors of the population differently. Women and girls are disproportionately affected by such behaviour. Sexism and sexist behaviour constitute a barrier to the empowerment and advancement of women and girls; the elimination of sexism and sexist behaviour would benefit everyone: women, girls, men and boys.
+Argument
+Gender stereotypes are preconceived social and cultural patterns or ideas that assign women and men characteristics and roles determined and limited by their sex. Such stereotyping is a serious obstacle to gender equality and feeds into gender discrimination. It can limit the development of girls’ and boys’, women’s and men’s natural talents and abilities, their educational and professional preferences and experiences, and their life opportunities in general. Sexism and sexist behaviour cause physical, sexual, psychological or socio-economic harm, disproportionately affect women and girls, and constitute a barrier to women’s and girls’ empowerment and advancement.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.2 immutable gender differences and gender stereotypes – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.
+Argument
+Gender stereotypes are preconceived social and cultural patterns or ideas that assign women and men characteristics and roles determined and limited by their sex. Such stereotyping is a serious obstacle to gender equality and feeds into gender discrimination. It can limit the development of girls’ and boys’, women’s and men’s natural talents and abilities, their educational and professional preferences and experiences, and their life opportunities in general. Sexism and sexist behaviour cause physical, sexual, psychological or socio-economic harm, disproportionately affect women and girls, and constitute a barrier to women’s and girls’ empowerment and advancement.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+What is sexism?
+
+Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.
+
+Despite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence. Sexist attitudes, practices and behaviour contribute to these inequalities.
+Argument
+Sexism is linked to beliefs about the fundamental nature of women and men and the roles they should play in society. Gender stereotypes can rank one gender as superior to another, through either conscious, hostile thinking or unconscious bias. Sexist attitudes, practices and behaviour contribute to women’s under-representation in decision-making, exclusion from certain economic sectors, unequal responsibility for unpaid care, lower pay and disproportionate exposure to gender-based violence.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.2 immutable gender differences and gender stereotypes – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.
+Argument
+Sexism is linked to beliefs about the fundamental nature of women and men and the roles they should play in society. Gender stereotypes can rank one gender as superior to another, through either conscious, hostile thinking or unconscious bias. Sexist attitudes, practices and behaviour contribute to women’s under-representation in decision-making, exclusion from certain economic sectors, unequal responsibility for unpaid care, lower pay and disproportionate exposure to gender-based violence.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Where does sexism come from?
+
+> ### Definition: gender stereotypes
+>
+> Preconceived ideas whereby females and males are arbitrarily assigned characteristics and roles determined and limited by their gender.
+>
+> Source: EIGE.
+
+Gender stereotypes underpin sexist behaviour and practices. Gender stereotypes do not need to be hostile to be harmful. Many workplace realities have been shaped by the belief that women and men have complementary characteristics, for example that men are individualistic and dominant, while women are caring and collaborative.
+
+However, stereotypically masculine characteristics are frequently valued more highly than stereotypically feminine characteristics (examples given below), although there is evidence this is changing. This is also true in the work context, where professional development books and programmes frequently urge women to stop displaying stereotypically feminine behaviour if they want to advance in their careers.
+Argument
+Gender stereotypes arbitrarily assign and limit people’s characteristics and roles based on gender, underpinning sexist behaviour and practices even when they are not hostile. Beliefs that men and women have complementary characteristics have shaped workplace realities, where stereotypically masculine traits are often valued more highly than stereotypically feminine traits. Professional development books and programmes frequently urge women to stop displaying stereotypically feminine behaviour to advance their careers, although there is evidence that the unequal valuation of these traits is changing.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.2 immutable gender differences and gender stereotypes – Asserting immutable, natural or otherwise essential differences between men and women. In some cases, this could be in the form of using women’s traits to attack men. Most sexist jokes will fall into this category.
+Argument
+Gender stereotypes arbitrarily assign and limit people’s characteristics and roles based on gender, underpinning sexist behaviour and practices even when they are not hostile. Beliefs that men and women have complementary characteristics have shaped workplace realities, where stereotypically masculine traits are often valued more highly than stereotypically feminine traits. Professional development books and programmes frequently urge women to stop displaying stereotypically feminine behaviour to advance their careers, although there is evidence that the unequal valuation of these traits is changing.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Subordination and trivialisation: How language can reinforce the subjugation of women
+
+Subordination and trivialisation are ways of using language that reinforce men’s traditional dominance over women or belittle or insult women.
+
+Trivialisation is any language which makes something seem unimportant and it is closely related to subordination. Often things related to women are trivialised through language that make something sound ‘small’ or ‘cute’. This may appear benign, but can have the effect of reinforcing women’s subordinate place in society.
+
+Take care that your language actively promotes gender equality by not trivialising or subordinating women.
+
+Some key aspects of language to watch out for are:
+
+Naming conventions, titles and how to refer to people.
+ Word or phrase hierarchy.
+ Diminutive affixes.
+ Terms for women.
+
+Don't call me baby.
+Chapter 4: Challenges
+Argument
+Language can trivialise women or things associated with women by making them sound ‘small’ or ‘cute’. Although such wording may appear benign, it can belittle women and reinforce their subordinate place in society and men’s traditional dominance over them.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.3 backhanded gendered compliments – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.
+Argument
+Language can trivialise women or things associated with women by making them sound ‘small’ or ‘cute’. Although such wording may appear benign, it can belittle women and reinforce their subordinate place in society and men’s traditional dominance over them.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Definition
+
+For the purpose of this Recommendation, sexism is:
+
+Any act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:
+
+i. violating the inherent dignity or rights of a person or a group of persons; or
+ii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or
+iii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or
+iv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or
+v. maintaining and reinforcing gender stereotypes.
+Argument
+Sexism is defined as any act, gesture, visual representation, spoken or written words, practice or behaviour based on the idea that a person or group is inferior because of their sex, occurring in public or private life, online or offline. It is sexist when it has the purpose or effect of violating inherent dignity or rights, causing physical, sexual, psychological or socio-economic harm or suffering, creating an intimidating, hostile, degrading, humiliating or offensive environment, constituting a barrier to autonomy and the full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.3 backhanded gendered compliments – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.
+Argument
+Sexism is defined as any act, gesture, visual representation, spoken or written words, practice or behaviour based on the idea that a person or group is inferior because of their sex, occurring in public or private life, online or offline. It is sexist when it has the purpose or effect of violating inherent dignity or rights, causing physical, sexual, psychological or socio-economic harm or suffering, creating an intimidating, hostile, degrading, humiliating or offensive environment, constituting a barrier to autonomy and the full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Impact of sexist hate speech on women and girls
+
+Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.
+Argument
+Sexist hate speech aims to humiliate or objectify women, undervalue their skills and opinions, and make them feel vulnerable and fearful. Although often dismissed as harmless or something women should tolerate, it has real and severe psychological, emotional and/or physical impacts. It undermines women’s and girls’ freedom of speech and silences women, obliging them to adapt their behaviour and limit their movements and participation.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.3 backhanded gendered compliments – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.
+Argument
+Sexist hate speech aims to humiliate or objectify women, undervalue their skills and opinions, and make them feel vulnerable and fearful. Although often dismissed as harmless or something women should tolerate, it has real and severe psychological, emotional and/or physical impacts. It undermines women’s and girls’ freedom of speech and silences women, obliging them to adapt their behaviour and limit their movements and participation.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Impact of sexist hate speech on women and girls
+
+Sexist hate speech is often treated as a harmless and non-serious issue and women are explicitly or implicitly told to bear with it. However, not only does sexist hate speech undermine freedom of speech for women and girls, but its psychological, emotional and/or physical impacts are real and severe. The aim of sexist hate speech is to humiliate or objectify women, to undervalue their skills and opinions, to destroy their reputation, to make them feel vulnerable and fearful, and to control and punish them for not following a certain behaviour. Sexist hate speech has the effect of silencing women, obliging them to adapt their behaviour and limit their movements and participation in diverse human activities.
+Argument
+Sexist hate speech is often treated as harmless and non-serious, with women explicitly or implicitly told to bear with it, even though its aims include humiliating or objectifying women, undervaluing their skills and opinions, and making them feel vulnerable and fearful. It has the effect of silencing women and obliging them to adapt their behavior and limit their movements and participation in diverse activities.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.3 backhanded gendered compliments – Ostensibly complimenting women, but actually belittling or implying their inferiority. This could include, but is not limited to: reduction of women’s value to their attractiveness or sexual desirability, or implication that women are innately frail, helpless or weak.
+Argument
+Sexist hate speech is often treated as harmless and non-serious, with women explicitly or implicitly told to bear with it, even though its aims include humiliating or objectifying women, undervaluing their skills and opinions, and making them feel vulnerable and fearful. It has the effect of silencing women and obliging them to adapt their behavior and limit their movements and participation in diverse activities.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Definition
+
+For the purpose of this Recommendation, sexism is:
+
+Any act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:
+
+i. violating the inherent dignity or rights of a person or a group of persons; or
+ii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or
+iii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or
+iv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or
+v. maintaining and reinforcing gender stereotypes.
+Argument
+Sexism includes any act, gesture, visual representation, spoken or written words, practice, or behaviour based on the idea that a person or group is inferior because of sex, whether online or offline and in public or private. Such conduct is sexist when it has the purpose or effect of violating dignity or rights, causing physical, sexual, psychological, or socio-economic harm, creating an intimidating, hostile, degrading, humiliating, or offensive environment, constituting a barrier to autonomy and full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.4 condescending explanations or unwelcome advice – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).
+Argument
+Sexism includes any act, gesture, visual representation, spoken or written words, practice, or behaviour based on the idea that a person or group is inferior because of sex, whether online or offline and in public or private. Such conduct is sexist when it has the purpose or effect of violating dignity or rights, causing physical, sexual, psychological, or socio-economic harm, creating an intimidating, hostile, degrading, humiliating, or offensive environment, constituting a barrier to autonomy and full realisation of human rights, or maintaining and reinforcing gender stereotypes.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+CM/Rec(2019)11
+
+Affirming that sexism is reinforced by gender stereotypes affecting women and men, girls and boys, and runs counter to achieving gender equality and inclusive societies;
+
+Noting that sexism constitutes a barrier to the empowerment of women and girls, who are disproportionately affected by sexist behaviour; and further noting that gender stereotypes and inherent biases shape the norms, behaviour and expectations of men and boys, and therefore lead to sexist acts;
+
+Concerned that sexism is linked to violence against women and girls, whereby acts of “everyday” sexism are part of a continuum of violence creating a climate of intimidation, fear, discrimination, exclusion and insecurity which limits opportunities and freedom;
+Argument
+Sexism is reinforced by gender stereotypes and inherent biases that shape the norms, behaviour and expectations of men and boys and lead to sexist acts. Acts of “everyday” sexism are part of a continuum of violence against women and girls that creates a climate of intimidation, fear, discrimination, exclusion and insecurity. This climate limits women’s and girls’ opportunities and freedom and acts as a barrier to their empowerment.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.4 condescending explanations or unwelcome advice – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).
+Argument
+Sexism is reinforced by gender stereotypes and inherent biases that shape the norms, behaviour and expectations of men and boys and lead to sexist acts. Acts of “everyday” sexism are part of a continuum of violence against women and girls that creates a climate of intimidation, fear, discrimination, exclusion and insecurity. This climate limits women’s and girls’ opportunities and freedom and acts as a barrier to their empowerment.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+CM/Rec(2019)11
+
+Affirming that sexism is reinforced by gender stereotypes affecting women and men, girls and boys, and runs counter to achieving gender equality and inclusive societies;
+
+Noting that sexism constitutes a barrier to the empowerment of women and girls, who are disproportionately affected by sexist behaviour; and further noting that gender stereotypes and inherent biases shape the norms, behaviour and expectations of men and boys, and therefore lead to sexist acts;
+
+Concerned that sexism is linked to violence against women and girls, whereby acts of “everyday” sexism are part of a continuum of violence creating a climate of intimidation, fear, discrimination, exclusion and insecurity which limits opportunities and freedom;
+Argument
+Gender stereotypes reinforce sexism, while stereotypes and inherent biases shape the norms, behaviour and expectations of men and boys and lead to sexist acts. Sexist behaviour disproportionately affects women and girls and creates barriers to their empowerment. Everyday sexism forms part of a continuum of violence that creates intimidation, fear, discrimination, exclusion and insecurity, limiting opportunities and freedom.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.4 condescending explanations or unwelcome advice – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).
+Argument
+Gender stereotypes reinforce sexism, while stereotypes and inherent biases shape the norms, behaviour and expectations of men and boys and lead to sexist acts. Sexist behaviour disproportionately affects women and girls and creates barriers to their empowerment. Everyday sexism forms part of a continuum of violence that creates intimidation, fear, discrimination, exclusion and insecurity, limiting opportunities and freedom.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+I.B. Awareness-raising measures
+
+I.B.3. Allocate resources to finance effective communication and awareness-raising campaigns on the links between sexism and violence against women and girls, and fund organisations that support victims.
+
+I.B.4. Design, implement and promote regular national awareness-raising initiatives at all levels and through diverse forms of media (for example the production of handbooks, guidelines, video clips available on the internet and in mainstream media, the introduction of a national day against sexism, the setting up of museums to celebrate gender equality and women’s rights). These initiatives should aim to increase awareness and understanding among the general population, especially parents, of different forms of sexism, including phenomena such as “mansplaining”, of how to prevent and respond to them, and of the harm they generate for individuals and society, including girls and boys.
+Argument
+Mansplaining is recognised as a form of sexism to be addressed through public awareness-raising initiatives. These initiatives should increase understanding of how to prevent and respond to such behaviour and of the harm that forms of sexism generate for individuals and society, including girls and boys. Recommended outreach targets the general population, especially parents, through diverse media.
+How relevant is the argument to the paragraph?";"EDOS Label
+3.4 condescending explanations or unwelcome advice – Offering unsolicited or patronising advice to women on topics and issues they know more about (known as ‘mansplaining’).
+Argument
+Mansplaining is recognised as a form of sexism to be addressed through public awareness-raising initiatives. These initiatives should increase understanding of how to prevent and respond to such behaviour and of the harm that forms of sexism generate for individuals and society, including girls and boys. Recommended outreach targets the general population, especially parents, through diverse media.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Causes and forms of sexist hate speech
+
+Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.
+
+Prevalence of sexual harassment among women (%, European Union, 2014)
+PeriodPrevalence (%)
+In the last 12 months21
+Since the age of 1555
+Sexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.
+Argument
+Sexist hate speech includes expressions that promote or justify hatred based on sex and takes forms such as victim blaming, re-victimisation, sexual and body shaming, non-consensual sharing of sexual images, and sexualised threats of violence. Supposed jokes and false compliments can be used to humiliate and ridicule the person targeted. The true extent of sexist hate speech is partly hidden because many targeted women do not report it.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.1 supporting mistreatment of individual women – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.
+Argument
+Sexist hate speech includes expressions that promote or justify hatred based on sex and takes forms such as victim blaming, re-victimisation, sexual and body shaming, non-consensual sharing of sexual images, and sexualised threats of violence. Supposed jokes and false compliments can be used to humiliate and ridicule the person targeted. The true extent of sexist hate speech is partly hidden because many targeted women do not report it.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Context
+
+Sexism and sexist behaviour occur across the full range of human activity, including in cyberspace (internet and social media). They can be experienced individually or collectively by a person or a group of persons, even if neither the individual nor the group has been directly targeted, for example through sexist advertising, or posting of pictures of naked women in the workplace. The three levels of perpetuating and experiencing sexism are: individual, institutional (for example family, work or education environment), and structural (for example through societal gender inequalities, social norms and behaviour). Sexism is silencing when individuals and groups fail to report or complain about sexist behaviour for fear of not being taken seriously, of being ostracised or even held responsible.
+Argument
+Sexism and sexist behaviour occur across all areas of activity, including cyberspace, and can be experienced individually or collectively even when a person or group is not directly targeted. Sexism is perpetuated and experienced at individual, institutional, and structural levels through societal gender inequalities, social norms, and behaviour. Sexism is silencing when individuals and groups do not report or complain about it because they fear not being taken seriously, being ostracised, or being held responsible.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.1 supporting mistreatment of individual women – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.
+Argument
+Sexism and sexist behaviour occur across all areas of activity, including cyberspace, and can be experienced individually or collectively even when a person or group is not directly targeted. Sexism is perpetuated and experienced at individual, institutional, and structural levels through societal gender inequalities, social norms, and behaviour. Sexism is silencing when individuals and groups do not report or complain about it because they fear not being taken seriously, being ostracised, or being held responsible.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+A framework to prevent violence against women
+
+1. The problem
+
+Violence and the threat of violence against women (VAW), including those women experiencing multiple and intersecting forms of discrimination. Such violence is a form of discrimination against women which impairs or nullifies the enjoyment by women of human rights and fundamental freedoms. It is also an obstacle to national development and poverty reduction goals. Its health, social and economic impacts extend to children, communities and society as whole.
+
+2. Conditions that need to be addressed to eliminate the problem
+
+1. Individual, relationship, community, organizational and societal/l structures, laws and policies, practices and social norms that:
+(a) Support gender inequality, as manifested in:
+ discrimination against women, and their unequal access to power and resources in public and private life;
+ harmful constructions of masculinity (e.g. entitled, aggressive, dominant) and femininity (e.g. subordinate, sexualized, objectified);
+ stereotyped gender roles; and
+ negative male peer associations and weak peer associations among women and girls
+(b) Condone, tolerate, perpetuate and/or positively portray the use of VAW.
+
+2. Exposure to violence in the family, the community, organizations and institutions
+
+3. Other circumstances and contexts that interact or intersect with gender inequality to increase the probability of violence being perpetrated against women (e.g. poverty, alcohol misuse).
+Argument
+Violence and threats of violence against women constitute discrimination that impairs or nullifies women's enjoyment of human rights and fundamental freedoms, with health, social, and economic impacts extending to children, communities, and society. Preventing this violence requires addressing structures, practices, and social norms that condone, tolerate, perpetuate, or positively portray it. Relevant conditions also include unequal access to power and resources and harmful gender constructions that position men as entitled or dominant and women as subordinate or objectified.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.1 supporting mistreatment of individual women – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.
+Argument
+Violence and threats of violence against women constitute discrimination that impairs or nullifies women's enjoyment of human rights and fundamental freedoms, with health, social, and economic impacts extending to children, communities, and society. Preventing this violence requires addressing structures, practices, and social norms that condone, tolerate, perpetuate, or positively portray it. Relevant conditions also include unequal access to power and resources and harmful gender constructions that position men as entitled or dominant and women as subordinate or objectified.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Causes and forms of sexist hate speech
+
+Sexist hate speech is one of the expressions of sexism, which can be defined as any supposition, belief, assertion, gesture or act that is aimed at expressing contempt towards a person, based on her or his sex or gender, or to consider that person as inferior or essentially reduced to her or his sexual dimension. Sexist hate speech includes expressions which spread, incite, promote or justify hatred based on sex. The true extent of sexist hate speech is partly hidden by the fact that many targeted women do not report it.
+
+Prevalence of sexual harassment among women (%, European Union, 2014)
+PeriodPrevalence (%)
+In the last 12 months21
+Since the age of 1555
+Sexist hate speech takes many forms both online and offline, notably victim blaming and re-victimisation; “slut-shaming”; body-shaming; “revenge porn” (the sharing of explicit or sexual images without consent); brutal and sexualised threats of death, rape and violence; offensive comments on appearance, sexuality, sexual orientation or gender roles; but also false compliments or supposed jokes, using humour to humiliate and ridicule the target.
+Argument
+Sexist hate speech includes expressions that spread, incite, promote, or justify hatred based on sex. It takes forms such as victim blaming and re-victimisation, slut-shaming, body-shaming, non-consensual sharing of sexual images, sexualised threats of death, rape, and violence, offensive comments, and false compliments or supposed jokes used to humiliate and ridicule the target. Many targeted women do not report sexist hate speech, which partly hides its true extent.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.1 supporting mistreatment of individual women – Expressing support for mistreatment of women as individuals. Support can be shown by denying, understating, or seeking to justify such mistreatment.
+Argument
+Sexist hate speech includes expressions that spread, incite, promote, or justify hatred based on sex. It takes forms such as victim blaming and re-victimisation, slut-shaming, body-shaming, non-consensual sharing of sexual images, sexualised threats of death, rape, and violence, offensive comments, and false compliments or supposed jokes used to humiliate and ridicule the target. Many targeted women do not report sexist hate speech, which partly hides its true extent.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Appendix to Recommendation CM/Rec(2019)1 > Guidelines for preventing and combating sexism: measures for implementation > Definition
+
+For the purpose of this Recommendation, sexism is:
+
+Any act, gesture, visual representation, spoken or written words, practice or behaviour based upon the idea that a person or a group of persons is inferior because of their sex, which occurs in the public or private sphere, whether online or offline, with the purpose or effect of:
+
+i. violating the inherent dignity or rights of a person or a group of persons; or
+ii. resulting in physical, sexual, psychological or socio-economic harm or suffering to a person or a group of persons; or
+iii. creating an intimidating, hostile, degrading, humiliating or offensive environment; or
+iv. constituting a barrier to the autonomy and full realisation of human rights by a person or a group of persons; or
+v. maintaining and reinforcing gender stereotypes.
+Argument
+Sexism encompasses any act, gesture, representation, words, practice, or behaviour based on the idea that a person or group is inferior because of sex. It includes acts whose purpose or effect is to create barriers to autonomy and full realisation of human rights or to maintain and reinforce gender stereotypes. Such acts can occur online or offline and in the public or private sphere, and they can violate dignity or rights, cause harm, or create a hostile environment.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.2 supporting systemic discrimination against women as a group – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.
+Argument
+Sexism encompasses any act, gesture, representation, words, practice, or behaviour based on the idea that a person or group is inferior because of sex. It includes acts whose purpose or effect is to create barriers to autonomy and full realisation of human rights or to maintain and reinforce gender stereotypes. Such acts can occur online or offline and in the public or private sphere, and they can violate dignity or rights, cause harm, or create a hostile environment.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+Hate Speech
+
+Hate speech can target women because of a combination of their identity factors or, more specifically, their gender. In Malawi, 46.3 percent of women surveyed had been subjected to hate speech online (Malanga 2020). Gendered hate speech made up 3.1 percent of reports to internet platforms in the European Union (Van der Wilk 2018). Online hate reinforces systemic inequalities, makes it difficult for certain groups to engage online, and can spill over into the physical world, causing violence and even death. In a case in Pakistan, a woman who had been the target of hate speech was shot at in public due to hate speech aimed at her online (Bukhari 2014).
+Argument
+Online hate speech can target women specifically because of their gender or combined identity factors. Such hate reinforces systemic inequalities, makes it harder for targeted groups to engage online, and can spill over into the physical world, causing violence and even death. Gendered hate speech is therefore presented as both a form of group-targeted hostility and a mechanism that sustains broader structural disadvantage for women.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.2 supporting systemic discrimination against women as a group – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.
+Argument
+Online hate speech can target women specifically because of their gender or combined identity factors. Such hate reinforces systemic inequalities, makes it harder for targeted groups to engage online, and can spill over into the physical world, causing violence and even death. Gendered hate speech is therefore presented as both a form of group-targeted hostility and a mechanism that sustains broader structural disadvantage for women.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+3. GUIDING PRINCIPLES > 3.4 Adopting an Intersectional Approach
+
+Interventions to address gender roles and stereotypes cannot occur without an understanding that although all women are in some way subject to gender discrimination, all women are not discriminated against in the same way, while particular groups of women (with different economic, social, political and cultural status) may face multiple forms of discrimination (Crenshaw 1991 and Wing 1997). Intersectional discrimination has been recognized as a serious obstacle to the achievement of gender equality and is at the core of the ‘leave no one behind’ principle of the Sustainable Development Goals. Factors including race, ethnicity, caste, class, age, religion, sexual orientation, marital status, geographic location, disability, HIV status or status as a migrant, refugee or internally displaced person, can all influence the forms and nature of violence women and girls may suffer (Fergus 2012). These factors can direct discrimination and violence towards, as well as create inequalities that are unique to particular groups of women, or that disproportionately affect some groups of women. A sound understanding of the multiple forms of discrimination faced by different groups of women in different contexts needs to be embedded in all interventions.
+Argument
+Women are subject to gender discrimination, but they do not all experience it in the same way; their economic, social, political and cultural circumstances can expose them to multiple forms of discrimination. Factors such as race, caste, class, disability, sexual orientation and migration status can shape the nature of violence women and girls suffer and direct discrimination and violence toward particular groups. These intersections can create inequalities unique to some groups or disproportionately affect them, making intersectional discrimination a serious obstacle to gender equality.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.2 supporting systemic discrimination against women as a group – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.
+Argument
+Women are subject to gender discrimination, but they do not all experience it in the same way; their economic, social, political and cultural circumstances can expose them to multiple forms of discrimination. Factors such as race, caste, class, disability, sexual orientation and migration status can shape the nature of violence women and girls suffer and direct discrimination and violence toward particular groups. These intersections can create inequalities unique to some groups or disproportionately affect them, making intersectional discrimination a serious obstacle to gender equality.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.;"Paragraph
+What is sexism?
+
+Sexism is linked to beliefs around the fundamental nature of women and men and the roles they should play in society. Sexist assumptions about women and men, which manifest themselves as gender stereotypes, can rank one gender as superior to another. Such hierarchical thinking can be conscious and hostile, or it can be unconscious, manifesting itself as unconscious bias. Sexism can touch everyone, but women are particularly affected.
+
+Despite legal frameworks set up across the EU to prevent discrimination and promote equality, women are still under-represented in decision-making roles, left out of certain sectors of the economy, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence. Sexist attitudes, practices and behaviour contribute to these inequalities.
+Argument
+Despite legal frameworks across the EU intended to prevent discrimination and promote equality, women remain under-represented in decision-making, excluded from certain economic sectors, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence. Sexist attitudes, practices and behaviour contribute to these inequalities. Gender stereotypes can rank one gender as superior to another, and this hierarchical thinking can operate through conscious hostility or unconscious bias.
+How relevant is the argument to the paragraph?";"EDOS Label
+4.2 supporting systemic discrimination against women as a group – Expressing support for systemic discrimination of women as a group. Support can be shown by denying, understating, or seeking to justify such discrimination.
+Argument
+Despite legal frameworks across the EU intended to prevent discrimination and promote equality, women remain under-represented in decision-making, excluded from certain economic sectors, primarily responsible for unpaid care work, paid less than men and disproportionately subject to gender-based violence. Sexist attitudes, practices and behaviour contribute to these inequalities. Gender stereotypes can rank one gender as superior to another, and this hierarchical thinking can operate through conscious hostility or unconscious bias.
+How relevant is the argument to the description of the EDOS label?";If you have any additional comments or reflections, please use this space to share them.
+"{""ImportId"":""startDate"",""timeZone"":""Europe/Berlin""}";"{""ImportId"":""endDate"",""timeZone"":""Europe/Berlin""}";"{""ImportId"":""status""}";"{""ImportId"":""ipAddress""}";"{""ImportId"":""progress""}";"{""ImportId"":""duration""}";"{""ImportId"":""finished""}";"{""ImportId"":""recordedDate"",""timeZone"":""Europe/Berlin""}";"{""ImportId"":""_recordId""}";"{""ImportId"":""recipientLastName""}";"{""ImportId"":""recipientFirstName""}";"{""ImportId"":""recipientEmail""}";"{""ImportId"":""externalDataReference""}";"{""ImportId"":""locationLatitude""}";"{""ImportId"":""locationLongitude""}";"{""ImportId"":""distributionChannel""}";"{""ImportId"":""userLanguage""}";"{""ImportId"":""LastSeenFlowID""}";"{""ImportId"":""LastSeenQuestions""}";"{""ImportId"":""QID33""}";"{""ImportId"":""QID35""}";"{""ImportId"":""QID36""}";"{""ImportId"":""QID37_TEXT""}";"{""ImportId"":""QID39""}";"{""ImportId"":""QID40""}";"{""ImportId"":""QID41_TEXT""}";"{""ImportId"":""QID43""}";"{""ImportId"":""QID44""}";"{""ImportId"":""QID45_TEXT""}";"{""ImportId"":""QID47""}";"{""ImportId"":""QID48""}";"{""ImportId"":""QID49_TEXT""}";"{""ImportId"":""QID51""}";"{""ImportId"":""QID52""}";"{""ImportId"":""QID53_TEXT""}";"{""ImportId"":""QID55""}";"{""ImportId"":""QID56""}";"{""ImportId"":""QID57_TEXT""}";"{""ImportId"":""QID59""}";"{""ImportId"":""QID60""}";"{""ImportId"":""QID61_TEXT""}";"{""ImportId"":""QID63""}";"{""ImportId"":""QID64""}";"{""ImportId"":""QID65_TEXT""}";"{""ImportId"":""QID67""}";"{""ImportId"":""QID68""}";"{""ImportId"":""QID69_TEXT""}";"{""ImportId"":""QID71""}";"{""ImportId"":""QID72""}";"{""ImportId"":""QID73_TEXT""}";"{""ImportId"":""QID75""}";"{""ImportId"":""QID76""}";"{""ImportId"":""QID77_TEXT""}";"{""ImportId"":""QID79""}";"{""ImportId"":""QID80""}";"{""ImportId"":""QID81_TEXT""}";"{""ImportId"":""QID83""}";"{""ImportId"":""QID84""}";"{""ImportId"":""QID85_TEXT""}";"{""ImportId"":""QID87""}";"{""ImportId"":""QID88""}";"{""ImportId"":""QID89_TEXT""}";"{""ImportId"":""QID91""}";"{""ImportId"":""QID92""}";"{""ImportId"":""QID93_TEXT""}";"{""ImportId"":""QID95""}";"{""ImportId"":""QID96""}";"{""ImportId"":""QID97_TEXT""}";"{""ImportId"":""QID99""}";"{""ImportId"":""QID100""}";"{""ImportId"":""QID101_TEXT""}";"{""ImportId"":""QID103""}";"{""ImportId"":""QID104""}";"{""ImportId"":""QID105_TEXT""}";"{""ImportId"":""QID107""}";"{""ImportId"":""QID108""}";"{""ImportId"":""QID109_TEXT""}";"{""ImportId"":""QID111""}";"{""ImportId"":""QID112""}";"{""ImportId"":""QID113_TEXT""}";"{""ImportId"":""QID115""}";"{""ImportId"":""QID116""}";"{""ImportId"":""QID117_TEXT""}";"{""ImportId"":""QID119""}";"{""ImportId"":""QID120""}";"{""ImportId"":""QID121_TEXT""}";"{""ImportId"":""QID123""}";"{""ImportId"":""QID124""}";"{""ImportId"":""QID125_TEXT""}";"{""ImportId"":""QID127""}";"{""ImportId"":""QID128""}";"{""ImportId"":""QID129_TEXT""}";"{""ImportId"":""QID131""}";"{""ImportId"":""QID132""}";"{""ImportId"":""QID133_TEXT""}";"{""ImportId"":""QID135""}";"{""ImportId"":""QID136""}";"{""ImportId"":""QID137_TEXT""}";"{""ImportId"":""QID139""}";"{""ImportId"":""QID140""}";"{""ImportId"":""QID141_TEXT""}";"{""ImportId"":""QID143""}";"{""ImportId"":""QID144""}";"{""ImportId"":""QID145_TEXT""}";"{""ImportId"":""QID147""}";"{""ImportId"":""QID148""}";"{""ImportId"":""QID149_TEXT""}";"{""ImportId"":""QID151""}";"{""ImportId"":""QID152""}";"{""ImportId"":""QID153_TEXT""}";"{""ImportId"":""QID155""}";"{""ImportId"":""QID156""}";"{""ImportId"":""QID157_TEXT""}";"{""ImportId"":""QID159""}";"{""ImportId"":""QID160""}";"{""ImportId"":""QID161_TEXT""}";"{""ImportId"":""QID163""}";"{""ImportId"":""QID164""}";"{""ImportId"":""QID165_TEXT""}";"{""ImportId"":""QID167""}";"{""ImportId"":""QID168""}";"{""ImportId"":""QID169_TEXT""}";"{""ImportId"":""QID171""}";"{""ImportId"":""QID172""}";"{""ImportId"":""QID173_TEXT""}";"{""ImportId"":""QID175""}";"{""ImportId"":""QID176""}";"{""ImportId"":""QID177_TEXT""}";"{""ImportId"":""QID179""}";"{""ImportId"":""QID180""}";"{""ImportId"":""QID181_TEXT""}";"{""ImportId"":""QID183""}";"{""ImportId"":""QID184""}";"{""ImportId"":""QID185_TEXT""}";"{""ImportId"":""QID187""}";"{""ImportId"":""QID188""}";"{""ImportId"":""QID189_TEXT""}";"{""ImportId"":""QID191""}";"{""ImportId"":""QID192""}";"{""ImportId"":""QID193_TEXT""}";"{""ImportId"":""QID195""}";"{""ImportId"":""QID196""}";"{""ImportId"":""QID197_TEXT""}";"{""ImportId"":""QID199""}";"{""ImportId"":""QID200""}";"{""ImportId"":""QID201_TEXT""}";"{""ImportId"":""QID203""}";"{""ImportId"":""QID204""}";"{""ImportId"":""QID205_TEXT""}";"{""ImportId"":""QID207""}";"{""ImportId"":""QID208""}";"{""ImportId"":""QID209_TEXT""}";"{""ImportId"":""QID211""}";"{""ImportId"":""QID212""}";"{""ImportId"":""QID213_TEXT""}"
+2026-11-16 09:52:46;2026-11-16 11:54:09;IP Address;130.192.98.149;100;7283;TRUE;2026-11-16 11:54:10;R_8oFRg2KB0foYy90;;;;;45.0729;7.689;anonymous;IT;FL_EOS_ID;;marta;2 - Relevant;2 - Relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;Mi piace più questa! ;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;I like this one more! ;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;0 - Not relevant;;1 - Partially relevant;0 - Not relevant;"""The information does not distinguish casual uses of gendered insults from intentional attacks.""";2 - Relevant;1 - Partially relevant;Molto implicito ;2 - Relevant;2 - Relevant;Magari non è super relevant, ma la voglio tenere perché informazione preziosa;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;C'è anche impacts, ma relevant ;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;PERFETTO;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;Qua sto iniziando a perdere le differenze tra gli argument, molto simili ;2 - Relevant;0 - Not relevant;;2 - Relevant;1 - Partially relevant;Mi piace il concetto di “everyday” sexism ;2 - Relevant;1 - Partially relevant;Same as before ;2 - Relevant;2 - Relevant;PERFETTO ;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;Mi piace per la parte di Preventing;2 - Relevant;1 - Partially relevant;Un'altra volta questo dannato paragrafo?! ;2 - Relevant;2 - Relevant;Implicito ;1 - Partially relevant;2 - Relevant;"""group-targeted hostility"" l'ha astratto il modello, ma correttamente; paradossalmente forse questo paragrafo andrebbe meglio per 4.1";2 - Relevant;2 - Relevant;PERFETTO ;2 - Relevant;2 - Relevant;
+2026-11-16 16:08:23;2026-11-17 10:06:29;IP Address;37.162.34.210;100;64685;TRUE;2026-11-17 10:06:29;R_8Lcho06v3bXMvjP;;;;;43.1479;12.1097;anonymous;IT;FL_EOS_ID;;arianna;2 - Relevant;1 - Partially relevant;substantial unnecessary information;1 - Partially relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;1 - Partially relevant;1 - Partially relevant;incomplete;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;1 - Partially relevant;1 - Partially relevant;"par-arg: non mi ha convinta la frase dell'arg ""Its forms include brutal and sexualised threats of death, rape, and violence, as well as victim blaming and re-victimisation, which can shift blame onto targeted women."". 
+EDOS-arg: non mi ha convinta la frase dell'arg ""It can also use humour, false compliments, or supposed jokes to humiliate and ridicule the target.""";2 - Relevant;1 - Partially relevant;derogatory manner non del tutto addressed;2 - Relevant;2 - Relevant;;1 - Partially relevant;1 - Partially relevant;edos-arg: arg troppo generico;1 - Partially relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;"edos-arg: lo strong negative sentiment (edos) non mi sembra coerente con ""despite being treated as harmless or something women should endure"" (arg)";2 - Relevant;2 - Relevant;;2 - Relevant;0 - Not relevant;"strong negative sentiment (edos) non mi pare compatibile con ""dismissed as harmless"" (arg)";2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;edos-arg: troppo generale;2 - Relevant;2 - Relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;1 - Partially relevant;arg-edos non mi sembrano del tutto allineatii ;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;"edos-arg: the arg does contain purpose (not ""complimenting"")";2 - Relevant;2 - Relevant;"arg ""Although often dismissed as harmless or something women should tolerate"" compatibile con (edos) ""Ostensibly complimenting women""";2 - Relevant;2 - Relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;0 - Not relevant;"solo ""behaviour and expectations of men and boys and lead to sexist acts."" (arg) mi sembra coerente con l'edos, ma neanche in modo così esplicito";2 - Relevant;0 - Not relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;0 - Not relevant;;1 - Partially relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;1 - Partially relevant;support non esplicito (edos-arg)
+2026-11-17 07:21:53;2026-11-17 10:25:17;IP Address;93.35.166.21;100;11003;TRUE;2026-11-17 10:25:18;R_2cCHEENs3XgwpEJ;;;;;45.0729;7.689;anonymous;IT;FL_EOS_ID;;marem;2 - Relevant;2 - Relevant;"Sono insicura su questo caso perché l'argument è rilevante rispetto alla label, però non apporta nulla, è solo una definizione più completa della label stessa. Gli avrei messo anche 1 perché ""overly generic""";2 - Relevant;0 - Not relevant;positivo che l'argument abbia sciolto la sigla presente nel paragrafo (TFGBV) correttamente. ;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;a parità di paragrafo, farei difficoltà a dire quale dei due modelli è migliore;2 - Relevant;2 - Relevant;sono combattuta perché l'argument è relevant rispetto alla label, ma lo trovo anche overly generic, quindi gli avrei dato anche 1.;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;molto generica;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;molto generico e include cose fuori dalla label;2 - Relevant;1 - Partially relevant;a parità di paragrafo, preferivo l'altra;2 - Relevant;2 - Relevant;;2 - Relevant;0 - Not relevant;;2 - Relevant;2 - Relevant;molto indecisa, potrebbe essere anche 1 perché la descrizione degli esempi è abbastanza diversa, però la definizione di flaming risponde alla label.;2 - Relevant;0 - Not relevant;;2 - Relevant;1 - Partially relevant;molto generico, e incompleto;2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;molto generico ;2 - Relevant;1 - Partially relevant;;2 - Relevant;0 - Not relevant;;1 - Partially relevant;1 - Partially relevant;il paragraph parla invece di intenzionalità;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;a parità di paragrafo preferisco questo argument, che è anche più centrato sulla label come focus;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;l'argument è identico al paragraph;2 - Relevant;2 - Relevant;;1 - Partially relevant;2 - Relevant;"""although there is evidence that the unequal valuation of these traits is changing."" è rfierito alla frase sbagliata";2 - Relevant;2 - Relevant;;2 - Relevant;1 - Partially relevant;molto generico;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;a parità di paragrafo preferisco questo;2 - Relevant;0 - Not relevant;;2 - Relevant;2 - Relevant;;1 - Partially relevant;1 - Partially relevant;"ho messo 1 a faithfulness per la presenza di ""while"". 
+Invece l'argument rispetto alla label è un po' meno centrato dell'altro modello, anche se ovviamente dicono la stessa cosa, ma l'argomentazione è un pooooochino più aderente con l'altro modello";2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;;1 - Partially relevant;1 - Partially relevant;"""through societal gender inequalities, social norms, and behaviour"" si riferisce solo all'ultima fonte, ma è presentato come se si riferisse a tutte. ";2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;1 - Partially relevant;;2 - Relevant;2 - Relevant;;2 - Relevant;2 - Relevant;caso specifico interessante?;2 - Relevant;2 - Relevant;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0 - Not relevant;;;;;;2 - Relevant;;;1 - Partially relevant;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1 - Partially relevant;;;;;;;;;;;;;;;;;;;;;;;;2 - Relevant;;;2 - Relevant;;;;

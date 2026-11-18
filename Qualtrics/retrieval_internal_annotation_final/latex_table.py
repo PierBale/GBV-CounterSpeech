@@ -29,23 +29,17 @@ def scores() -> pd.DataFrame:
 
 
 def latex(table: pd.DataFrame) -> str:
-    labels = int(table[(METRICS[0][0], "count")].iloc[0])
     best = {metric: table[(metric, "mean")].max() for metric, _ in METRICS}
     header = " & ".join(rf"\textbf{{{name}}} $\uparrow$" for _, name in METRICS)
     lines = [
         r"\begin{table}[t]", r"\centering", r"\small",
-        r"\caption{Context relevance of the paragraphs retrieved by each embedder (Emb.)--reranker (Rer.) "
-        r"configuration (top-4 paragraphs per EDOS label, human gold labels). Q3-Emb8B: Qwen3-Embedding-8B; "
-        r"BGE: BGE-M3; Q3-Rer8B: Qwen3-Reranker-8B; BGE-Rer: BGE-Reranker-v2-M3. "
-        r"Mean@4 is the mean graded relevance "
-        r"of the top-4 paragraphs, from 0 (none relevant) to 2 (all relevant; 0~=~not relevant, "
-        r"1~=~partially relevant, 2~=~relevant). nDCG@4 uses the same graded gains and ranges from 0 to 1 "
-        r"(1: the four most relevant judged paragraphs of the label, in the best order). "
-        rf"Mean $\pm$ standard deviation over the {labels} EDOS labels; $\uparrow$: higher is better; "
-        r"best mean in bold.}",
+        r"\caption{Context relevance of the paragraphs retrieved by each embedder--reranker configuration. "
+        r"Mean@4 is the mean relevance of the top-4 paragraphs, from 0 (none relevant) to 2 (all relevant). "
+        r"nDCG@4 uses the same gains and ranges from 0 to 1 (1: the four most relevant judged paragraphs of "
+        r"the label, in the best order). $\uparrow$: higher is better; best mean in bold.}",
         r"\label{tab:context-relevance}",
         r"\begin{tabular}{llcc}", r"\toprule",
-        rf"\textbf{{Emb.}} & \textbf{{Rer.}} & {header} \\", r"\midrule",
+        rf"\textbf{{Embedder}} & \textbf{{Reranker}} & {header} \\", r"\midrule",
     ]
     for configuration, row in table.iterrows():
         embedder, reranker = configuration.split("__")
@@ -72,9 +66,8 @@ def agreement_latex(agreement: dict) -> str:
     lines = [
         r"\begin{table}[t]", r"\centering", r"\small",
         rf"\caption{{Inter-annotator agreement on context relevance, on the {agreement['all_three']['n_items']} "
-        r"items annotated by all three annotators (A1--A3). $\alpha$: ordinal Krippendorff's alpha, from "
-        r"$-1$ to 1 (1: perfect agreement, 0: chance level); Exact: exact match, the share of annotator "
-        r"pairs giving the same score, from 0 to 1 (for all three annotators, the mean over the three pairs). "
+        r"items annotated by all three annotators (A1--A3). $\alpha$: ordinal Krippendorff's alpha; Exact: "
+        r"exact match, the share of annotator pairs giving the same score. "
         rf"After the discussion, the {agreement['n_discussed_items']} discussed items take the harmonized "
         r"score for every annotator. $\uparrow$: higher is better.}",
         r"\label{tab:context-relevance-agreement}",

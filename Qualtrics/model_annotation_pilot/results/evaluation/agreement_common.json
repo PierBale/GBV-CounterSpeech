@@ -1,0 +1,296 @@
+{
+  "faithfulness": {
+    "all_three": {
+      "n_items": 45,
+      "n_ratings": 135,
+      "n_items_ge2_raters": 45,
+      "alpha_ordinal": 0.0013550135501355642,
+      "alpha_ci_low": -0.11666666666666647,
+      "alpha_ci_high": 0.1728395061728395,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.0013550135501355642,
+      "pairwise_exact_agreement": 0.837037037037037,
+      "pairwise_extreme_disagreement": 0.0,
+      "all_raters_exact_agreement": 0.7555555555555555
+    },
+    "pairwise": {
+      "marem-arianna": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": -0.11250000000000004,
+        "alpha_ci_low": -0.20270270270270263,
+        "alpha_ci_high": -0.0470588235294116,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": -0.11249999999999982,
+        "pairwise_exact_agreement": 0.7777777777777778,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.7777777777777778
+      },
+      "marem-marta": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.2936507936507936,
+        "alpha_ci_low": -0.07228915662650603,
+        "alpha_ci_high": 0.7905882352941177,
+        "alpha_bootstrap_valid": 9958,
+        "alpha_nominal": 0.2936507936507936,
+        "pairwise_exact_agreement": 0.9111111111111111,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.9111111111111111
+      },
+      "arianna-marta": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": -0.08536585365853666,
+        "alpha_ci_low": -0.1558441558441559,
+        "alpha_ci_high": -0.02298850574712663,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": -0.08536585365853644,
+        "pairwise_exact_agreement": 0.8222222222222222,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.8222222222222222
+      }
+    },
+    "score_distribution": {
+      "marem": {
+        "0": 0,
+        "1": 4,
+        "2": 41
+      },
+      "arianna": {
+        "0": 0,
+        "1": 6,
+        "2": 39
+      },
+      "marta": {
+        "0": 0,
+        "1": 2,
+        "2": 43
+      }
+    },
+    "n_discussed_items": 0,
+    "after_discussion": {
+      "all_three": {
+        "n_items": 45,
+        "n_ratings": 135,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.0013550135501355642,
+        "alpha_ci_low": -0.11666666666666647,
+        "alpha_ci_high": 0.1728395061728395,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.0013550135501355642,
+        "pairwise_exact_agreement": 0.837037037037037,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.7555555555555555
+      },
+      "pairwise": {
+        "marem-arianna": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": -0.11250000000000004,
+          "alpha_ci_low": -0.20270270270270263,
+          "alpha_ci_high": -0.0470588235294116,
+          "alpha_bootstrap_valid": 10000,
+          "alpha_nominal": -0.11249999999999982,
+          "pairwise_exact_agreement": 0.7777777777777778,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.7777777777777778
+        },
+        "marem-marta": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": 0.2936507936507936,
+          "alpha_ci_low": -0.07228915662650603,
+          "alpha_ci_high": 0.7905882352941177,
+          "alpha_bootstrap_valid": 9939,
+          "alpha_nominal": 0.2936507936507936,
+          "pairwise_exact_agreement": 0.9111111111111111,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.9111111111111111
+        },
+        "arianna-marta": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": -0.08536585365853666,
+          "alpha_ci_low": -0.1558441558441559,
+          "alpha_ci_high": -0.02298850574712663,
+          "alpha_bootstrap_valid": 9998,
+          "alpha_nominal": -0.08536585365853644,
+          "pairwise_exact_agreement": 0.8222222222222222,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.8222222222222222
+        }
+      },
+      "score_distribution": {
+        "marem": {
+          "0": 0,
+          "1": 4,
+          "2": 41
+        },
+        "arianna": {
+          "0": 0,
+          "1": 6,
+          "2": 39
+        },
+        "marta": {
+          "0": 0,
+          "1": 2,
+          "2": 43
+        }
+      }
+    }
+  },
+  "answer_relevance": {
+    "all_three": {
+      "n_items": 45,
+      "n_ratings": 135,
+      "n_items_ge2_raters": 45,
+      "alpha_ordinal": 0.4188840959059187,
+      "alpha_ci_low": 0.21558908881638789,
+      "alpha_ci_high": 0.5911645688146051,
+      "alpha_bootstrap_valid": 10000,
+      "alpha_nominal": 0.29749422427581296,
+      "pairwise_exact_agreement": 0.562962962962963,
+      "pairwise_extreme_disagreement": 0.06666666666666667,
+      "all_raters_exact_agreement": 0.37777777777777777
+    },
+    "pairwise": {
+      "marem-arianna": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.24548394548394536,
+        "alpha_ci_low": -0.062203634064788266,
+        "alpha_ci_high": 0.5142878918545165,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.19788401253918486,
+        "pairwise_exact_agreement": 0.4888888888888889,
+        "pairwise_extreme_disagreement": 0.1111111111111111,
+        "all_raters_exact_agreement": 0.4888888888888889
+      },
+      "marem-marta": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.7042965367965368,
+        "alpha_ci_low": 0.4879199087042225,
+        "alpha_ci_high": 0.8588199079585921,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.548223350253807,
+        "pairwise_exact_agreement": 0.7333333333333333,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.7333333333333333
+      },
+      "arianna-marta": {
+        "n_items": 45,
+        "n_ratings": 90,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.30849353627131393,
+        "alpha_ci_low": 0.027962544270403573,
+        "alpha_ci_high": 0.5503177750066519,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.1630094043887147,
+        "pairwise_exact_agreement": 0.4666666666666667,
+        "pairwise_extreme_disagreement": 0.08888888888888889,
+        "all_raters_exact_agreement": 0.4666666666666667
+      }
+    },
+    "score_distribution": {
+      "marem": {
+        "0": 5,
+        "1": 17,
+        "2": 23
+      },
+      "arianna": {
+        "0": 11,
+        "1": 19,
+        "2": 15
+      },
+      "marta": {
+        "0": 5,
+        "1": 17,
+        "2": 23
+      }
+    },
+    "n_discussed_items": 6,
+    "after_discussion": {
+      "all_three": {
+        "n_items": 45,
+        "n_ratings": 135,
+        "n_items_ge2_raters": 45,
+        "alpha_ordinal": 0.6702285537728576,
+        "alpha_ci_low": 0.5134841940553393,
+        "alpha_ci_high": 0.7828264615504568,
+        "alpha_bootstrap_valid": 10000,
+        "alpha_nominal": 0.4661354581673307,
+        "pairwise_exact_agreement": 0.674074074074074,
+        "pairwise_extreme_disagreement": 0.0,
+        "all_raters_exact_agreement": 0.5111111111111111
+      },
+      "pairwise": {
+        "marem-arianna": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": 0.6212174535703947,
+          "alpha_ci_low": 0.41309666475290224,
+          "alpha_ci_high": 0.7776414529630832,
+          "alpha_bootstrap_valid": 10000,
+          "alpha_nominal": 0.3906564639548933,
+          "pairwise_exact_agreement": 0.6222222222222222,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.6222222222222222
+        },
+        "marem-marta": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": 0.7833221594036124,
+          "alpha_ci_low": 0.6013014597814434,
+          "alpha_ci_high": 0.9134618259975703,
+          "alpha_bootstrap_valid": 10000,
+          "alpha_nominal": 0.6674968866749689,
+          "pairwise_exact_agreement": 0.8,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.8
+        },
+        "arianna-marta": {
+          "n_items": 45,
+          "n_ratings": 90,
+          "n_items_ge2_raters": 45,
+          "alpha_ordinal": 0.6058097742713127,
+          "alpha_ci_low": 0.3949438528341481,
+          "alpha_ci_high": 0.7636312055566142,
+          "alpha_bootstrap_valid": 10000,
+          "alpha_nominal": 0.3477198697068403,
+          "pairwise_exact_agreement": 0.6,
+          "pairwise_extreme_disagreement": 0.0,
+          "all_raters_exact_agreement": 0.6
+        }
+      },
+      "score_distribution": {
+        "marem": {
+          "0": 6,
+          "1": 18,
+          "2": 21
+        },
+        "arianna": {
+          "0": 7,
+          "1": 21,
+          "2": 17
+        },
+        "marta": {
+          "0": 5,
+          "1": 17,
+          "2": 23
+        }
+      }
+    }
+  }
+}
