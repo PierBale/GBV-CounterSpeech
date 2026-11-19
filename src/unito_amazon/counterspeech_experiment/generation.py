@@ -1,4 +1,4 @@
-"""Counter-speech generation for the four strategies, resumable record by record."""
+"""Counter-speech generation for every strategy, resumable record by record."""
 
 import gc
 import platform
@@ -16,7 +16,7 @@ from unito_amazon.generation.prompts import (
 from unito_amazon.generation.schema import parse_counter_narrative
 from unito_amazon.llm.schema import LLMGenerationConfig
 
-from .config import PROJECT_ROOT, ExperimentConfig, strategies_for
+from .config import GOLD_LABEL_STRATEGIES, PROJECT_ROOT, ExperimentConfig, strategies_for
 from .data import attach_predicted_labels, label_code, load_or_create_subset
 from .retrieval import ExperimentRetrievers
 
@@ -26,14 +26,18 @@ def build_prompts(config: ExperimentConfig) -> dict:
     return {
         "zero_shot": CounterSpeechPrompt(**options),
         "rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
+        "rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
+        "rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
     }
 
 
-# EDOS label that each label-aware strategy uses for card filtering and in the prompt.
-LABEL_FIELD = {"card_rag_label": "predicted_edos_label", "card_rag_gold_label": "gold_edos_label"}
+# EDOS label that each label-aware strategy states in the prompt (and, with retrieval, uses
+# to restrict the evidence to the label's pool).
+LABEL_FIELD = {"rag_label": "predicted_edos_label", "rag_gold_label": "gold_edos_label", "card_rag_label": "predicted_edos_label",
+               "card_rag_gold_label": "gold_edos_label"}
 
 
 def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
@@ -46,21 +50,19 @@ def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
         requests = []
         for position, item in enumerate(items, start=1):
             strategies = strategies_for(item["source"], config.strategies)
-            gold = item["gold_edos_label"] if "card_rag_gold_label" in strategies else None
-            if "card_rag_gold_label" in strategies and not gold:
+            needs_gold = any(s in GOLD_LABEL_STRATEGIES for s in strategies)
+            gold = item["gold_edos_label"] if needs_gold else None
+            if needs_gold and not gold:
                 raise ValueError(f"{item['id']} has no gold EDOS label.")
             retrieved = retrievers.retrieve(item["hateful_message"], item["predicted_edos_label"], gold)
             for strategy in strategies:
                 results = retrieved.get(strategy, [])
                 prompt = prompts[strategy]
                 category = None
-                if strategy == "zero_shot":
-                    user_prompt = prompt.build(item["hateful_message"])
-                elif strategy in LABEL_FIELD:
+                if strategy in LABEL_FIELD:
                     category = retrievers.definitions[label_code(item[LABEL_FIELD[strategy]])]
-                    user_prompt = prompt.build(item["hateful_message"], results, category)
-                else:
-                    user_prompt = prompt.build(item["hateful_message"], results)
+                args = ([results] if prompt.uses_evidence else []) + ([category] if category else [])
+                user_prompt = prompt.build(item["hateful_message"], *args)
                 requests.append({
                     "item": item, "strategy": strategy, "system_prompt": prompt.system_prompt,
                     "prompt": user_prompt, "results": results,

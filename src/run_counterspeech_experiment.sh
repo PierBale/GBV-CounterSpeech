@@ -4,7 +4,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH -p gracehopper
 
-# Counter-speech experiment: zero-shot, RAG, card-RAG, card-RAG + predicted EDOS label.
+# Counter-speech experiment: zero-shot, RAG and card-RAG; RAG and card-RAG also with the
+# EDOS label (predicted, and gold on EDOS) in the prompt and as a retrieval filter.
 # Submit from the src folder:
 #   sbatch run_counterspeech_experiment.sh
 # Only some stages (default: all, in this order):

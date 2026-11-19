@@ -1,4 +1,4 @@
-"""Pairwise JudgeLM evaluation: every pair of strategies, both presentation orders.
+"""Pairwise JudgeLM evaluation: the pairs in config.JUDGED_PAIRS, both presentation orders.
 
 Each message and pair is judged twice (A first, then B first). Per message the two
 outcomes are combined from A's point of view (win 1, tie 0.5, loss 0): mean > 0.5 is
@@ -8,7 +8,6 @@ a win, < 0.5 a loss, 0.5 a tie. This removes JudgeLM's position bias from the re
 import gc
 from collections import defaultdict
 from datetime import datetime, timezone
-from itertools import combinations
 
 from scipy.stats import binomtest, wilcoxon
 
@@ -16,7 +15,7 @@ from unito_amazon.card_creation.io import append_jsonl, read_jsonl, write_json
 from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.evaluation.schema import JUDGE_PROTOCOL_VERSION
 
-from .config import ExperimentConfig, strategies_for
+from .config import JUDGED_PAIRS, ExperimentConfig, pairs_for, strategies_for
 
 
 def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> list[dict]:
@@ -32,7 +31,7 @@ def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> l
         missing = set(applicable) - set(group)
         if missing:
             raise ValueError(f"Missing generations for {source} {message_id}: {sorted(missing)}.")
-        for system_a, system_b in combinations(applicable, 2):
+        for system_a, system_b in pairs_for(source, strategies):
             for order, (first, second) in (("a_first", (system_a, system_b)), ("b_first", (system_b, system_a))):
                 comparisons.append({
                     "id": message_id, "source": source, "system_a": system_a, "system_b": system_b,
@@ -140,7 +139,7 @@ def order_agreement(by_item: dict, strategies: tuple[str, ...]) -> dict:
         for key in (f"{source}|{a}|{b}", f"all|{a}|{b}", f"{source}|all pairs", "all|all pairs"):
             for column, value in zip(groups[key], values):
                 column.append(value)
-    order = {f"{a}|{b}": index for index, (a, b) in enumerate(combinations(strategies, 2))}
+    order = {f"{a}|{b}": index for index, (a, b) in enumerate(JUDGED_PAIRS)}
     return {key: _agreement(*groups[key]) for key in sorted(
         groups, key=lambda k: (k.split("|", 1)[0] != "all", k.split("|", 1)[0], order.get(k.split("|", 1)[1], -1)))}
 
@@ -160,7 +159,9 @@ def summarize(config: ExperimentConfig) -> dict:
     tables = {}
     first_position_wins = defaultdict(lambda: [0, 0])
     for source in ("all", *sorted({record["source"] for record in records})):
-        for system_a, system_b in combinations(config.strategies, 2):
+        for system_a, system_b in JUDGED_PAIRS:
+            if system_a not in config.strategies or system_b not in config.strategies:
+                continue
             points, differences, agree, incomplete = [], [], 0, 0
             for (item_source, a, b, _), orders in by_item.items():
                 if (a, b) != (system_a, system_b) or source not in ("all", item_source):

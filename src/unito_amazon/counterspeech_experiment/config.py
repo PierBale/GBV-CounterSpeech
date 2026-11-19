@@ -1,22 +1,36 @@
-"""Settings of the zero-shot / RAG / card-RAG counter-speech comparison."""
+"""Settings of the zero-shot / RAG / card-RAG counter-speech comparison (with and without EDOS label)."""
 
 from dataclasses import asdict, dataclass, field
+from itertools import combinations
 from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 CARD_RUN_DIR = PROJECT_ROOT / "data" / "card_creation_comparison_edos_v2_words_clean_v4_20261104"
 
-# Fixed order: it defines the pairs and which system is shown first in the forward order.
-# card_rag_label uses the EDOS label predicted by the classifier; card_rag_gold_label the
-# gold EDOS annotation, which exists only for EDOS.
-STRATEGIES = ("zero_shot", "rag", "card_rag", "card_rag_label", "card_rag_gold_label")
-GOLD_LABEL_STRATEGIES = {"card_rag_gold_label"}
+# Fixed order of the systems in the tables. *_label strategies state the EDOS label predicted
+# by the classifier in the prompt and restrict retrieval to the label's pool; *_gold_label use
+# the gold EDOS annotation, which exists only for EDOS.
+STRATEGIES = ("zero_shot", "rag", "rag_label", "rag_gold_label", "card_rag", "card_rag_label",
+              "card_rag_gold_label")
+GOLD_LABEL_STRATEGIES = {"rag_gold_label", "card_rag_gold_label"}
+
+# Pairs judged by JudgeLM, (A, B) with A shown first in the a_first order: every pair of the
+# first five systems, plus RAG vs card-RAG with the same label (same pool of 15 chunks per
+# label, so the pair differs only in the evidence format: raw chunk vs card).
+JUDGED_PAIRS = (*combinations(("zero_shot", "rag", "card_rag", "card_rag_label", "card_rag_gold_label"), 2),
+                ("rag_label", "card_rag_label"), ("rag_gold_label", "card_rag_gold_label"))
 
 
 def strategies_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> tuple[str, ...]:
     """Strategies applicable to a dataset: gold-label ones need EDOS annotations."""
     return tuple(s for s in strategies if source == "edos" or s not in GOLD_LABEL_STRATEGIES)
+
+
+def pairs_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> list[tuple[str, str]]:
+    """Judged pairs whose two systems both apply to the dataset."""
+    applicable = set(strategies_for(source, strategies))
+    return [(a, b) for a, b in JUDGED_PAIRS if a in applicable and b in applicable]
 
 
 @dataclass(frozen=True)

@@ -13,19 +13,21 @@ Writes to data/counterspeech_v2/tables/:
 
 import json
 from collections import defaultdict
-from itertools import combinations
 
 from unito_amazon.card_creation.io import read_jsonl
-from unito_amazon.counterspeech_experiment.config import STRATEGIES, ExperimentConfig
+from unito_amazon.counterspeech_experiment.config import JUDGED_PAIRS, STRATEGIES, ExperimentConfig
 
 NAMES = {
     "zero_shot": "Zero-shot",
     "rag": "RAG (Qwen3-Emb-8B)",
+    "rag_label": "RAG + EDOS label (pred.)",
+    "rag_gold_label": "RAG + EDOS label (gold)",
     "card_rag": "Card-RAG (Qwen3-Emb-8B)",
     "card_rag_label": "Card-RAG + EDOS label (pred.)",
     "card_rag_gold_label": "Card-RAG + EDOS label (gold)",
 }
-SHORT_NAMES = {"zero_shot": "Zero-shot", "rag": "RAG", "card_rag": "Card-RAG",
+SHORT_NAMES = {"zero_shot": "Zero-shot", "rag": "RAG",
+               "rag_label": "RAG + pred. label", "rag_gold_label": "RAG + gold label", "card_rag": "Card-RAG",
                "card_rag_label": "Card-RAG + pred. label", "card_rag_gold_label": "Card-RAG + gold label"}
 CARD_SYSTEMS = ("card_rag", "card_rag_label", "card_rag_gold_label")
 DATASETS = (("edos", "EDOS"), ("multiconan", "MultiCONAN"))
@@ -68,7 +70,7 @@ def holm(pvalues: dict) -> dict:
 
 def pairwise_table(summary: dict) -> str:
     rows = {(key, baseline, system): summary["pairs"][f"{key}|{baseline}|{system}"]
-            for key, _ in DATASETS for baseline, system in combinations(STRATEGIES, 2)
+            for key, _ in DATASETS for baseline, system in JUDGED_PAIRS
             if summary["pairs"].get(f"{key}|{baseline}|{system}", {}).get("messages")}
     adjusted = holm({name: row["sign_test_p"] for name, row in rows.items()})
     sizes = {key: {row["messages"] for name, row in summary["pairs"].items() if name.startswith(key + "|")}
@@ -89,7 +91,7 @@ def pairwise_table(summary: dict) -> str:
     ]
     for key, title in DATASETS:
         lines += [r"\midrule", rf"\multicolumn{{5}}{{l}}{{\textit{{{title}}}}} \\"]
-        for baseline, system in combinations(STRATEGIES, 2):
+        for baseline, system in JUDGED_PAIRS:
             row = rows.get((key, baseline, system))
             if row is not None:
                 total = row["messages"]
@@ -192,7 +194,7 @@ def order_agreement_table(summary: dict) -> str:
     agreement = summary["order_agreement"]
     for key, title in DATASETS:
         lines += [r"\midrule", rf"\multicolumn{{8}}{{l}}{{\textit{{{title}}}}} \\"]
-        rows = [(a, b) for a, b in combinations(STRATEGIES, 2) if f"{key}|{a}|{b}" in agreement] + [("all", None)]
+        rows = [(a, b) for a, b in JUDGED_PAIRS if f"{key}|{a}|{b}" in agreement] + [("all", None)]
         for a, b in rows:
             row = agreement[f"{key}|all pairs" if b is None else f"{key}|{a}|{b}"]
             names = (r"\textit{All pairs}", "") if b is None else (NAMES[a], NAMES[b])

@@ -1,8 +1,10 @@
 """Dense retrieval over the v4 chunks (RAG) and over the card evidence (card-RAG).
 
 Both use Qwen3-Embedding-8B, exact cosine search (FAISS) and the hateful message as
-query; no reranking. card-RAG + label keeps only the cards of the predicted label
-and takes the top-k of the same ranking.
+query; no reranking. The label strategies keep only the label's pool and take the
+top-k of the same ranking: card-RAG + label the cards of the label, RAG + label the
+chunks those cards were made from (the same 15 chunks per label, so the two differ
+only in the evidence format: raw chunk vs card).
 """
 
 from unito_amazon.card_creation.card_schema import EvidenceCard
@@ -63,12 +65,21 @@ def label_definitions(cards: list[Document]) -> dict[str, tuple[str, str]]:
     return definitions
 
 
+def label_chunk_pools(cards: list[Document]) -> dict[str, set[str]]:
+    """EDOS code -> ids of the chunks the cards of that label were made from."""
+    pools = {}
+    for card in cards:
+        pools.setdefault(card.metadata["edos_label_code"], set()).add(card.metadata["chunk_id"])
+    return pools
+
+
 class ExperimentRetrievers:
     def __init__(self, config: ExperimentConfig):
         self.config = config
         self.chunks = chunk_documents(config)
         self.cards = card_documents(config, self.chunks)
         self.definitions = label_definitions(self.cards)
+        self.label_chunks = label_chunk_pools(self.cards)
         options = dict(model_name=config.embedding_model, instruction=CARD_INSTRUCTION,
                        batch_size=config.embedding_batch_size, max_tokens=config.embedding_max_tokens,
                        device=config.device)
@@ -86,22 +97,28 @@ class ExperimentRetrievers:
                  gold_label: str | None = None) -> dict[str, list[RetrievalResult]]:
         k = self.config.top_k
         ranked_cards = self.card_retriever.retrieve(message, top_k=len(self.cards))
+        ranked_chunks = self.chunk_retriever.retrieve(message, top_k=len(self.chunks))
 
-        def within(label: str) -> list[RetrievalResult]:
-            """Top-k of the same ranking among the cards of one label (same scores, ranks renumbered)."""
+        def within(ranked: list[RetrievalResult], label: str, kind: str) -> list[RetrievalResult]:
+            """Top-k of the same ranking within the label's pool (same scores, ranks renumbered)."""
             code = label_code(label)
-            filtered = [result for result in ranked_cards if result.document.metadata["edos_label_code"] == code]
+            if kind == "cards":
+                filtered = [result for result in ranked if result.document.metadata["edos_label_code"] == code]
+            else:
+                filtered = [result for result in ranked if result.document.id in self.label_chunks.get(code, set())]
             if len(filtered) < k:
-                raise ValueError(f"Only {len(filtered)} cards for label {label!r}; top_k={k}.")
+                raise ValueError(f"Only {len(filtered)} {kind} for label {label!r}; top_k={k}.")
             return [result.model_copy(update={"rank": rank}) for rank, result in enumerate(filtered[:k], start=1)]
 
         retrieved = {
-            "rag": self.chunk_retriever.retrieve(message, top_k=k),
+            "rag": ranked_chunks[:k],
+            "rag_label": within(ranked_chunks, predicted_label, "chunks"),
             "card_rag": ranked_cards[:k],
-            "card_rag_label": within(predicted_label),
+            "card_rag_label": within(ranked_cards, predicted_label, "cards"),
         }
         if gold_label is not None:
-            retrieved["card_rag_gold_label"] = within(gold_label)
+            retrieved["rag_gold_label"] = within(ranked_chunks, gold_label, "chunks")
+            retrieved["card_rag_gold_label"] = within(ranked_cards, gold_label, "cards")
         return retrieved
 
     def metadata(self) -> dict:
@@ -113,6 +130,9 @@ class ExperimentRetrievers:
             "chunk_count": len(self.chunks), "chunk_text": "section titles + body" if self.config.include_section_titles else "body",
             "cards_path": str(self.config.cards_path), "cards_sha256": file_sha256(self.config.cards_path),
             "card_count": len(self.cards), "card_text": "evidence only",
+            "label_pools": "label strategies: top-k within the cards of the label (card-RAG) or within "
+                           "the chunks those cards were made from (RAG)",
+            "label_chunk_pool_sizes": {code: len(pool) for code, pool in sorted(self.label_chunks.items())},
         }
 
     def close(self) -> None:
