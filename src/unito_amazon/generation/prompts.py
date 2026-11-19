@@ -81,7 +81,7 @@ Rules:
 
 Return valid JSON only:
 {{
-  "counter_narrative": "string"
+  "counter_speech": "string"
 }}"""
 
     @abstractmethod
