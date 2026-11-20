@@ -1,8 +1,8 @@
 """LaTeX tables of the counter-speech experiment (run from src after the judge stage).
 
-  python counterspeech_experiment_tables.py [--output-dir ../data/counterspeech_v2]
+  python counterspeech_experiment_tables.py [--output-dir ../data/counterspeech_v3]
 
-Writes to <output dir>/tables/ (default data/counterspeech_v2/tables/):
+Writes to <output dir>/tables/ (default data/counterspeech_v3/tables/):
   judgelm_pairwise.tex        wins/losses/ties per pair and dataset (both orders combined)
   examples_edos.tex           qualitative examples, EDOS (predicted and gold label)
   examples_multiconan.tex     qualitative examples, MultiCONAN (predicted label)
@@ -25,7 +25,7 @@ NAMES = {
     "card_rag": "Card-RAG (Qwen3-Emb-8B)",
     "card_rag_label": "Card-RAG + EDOS label (pred.)",
     "card_rag_gold_label": "Card-RAG + EDOS label (gold)",
-    "hybrid_rag": "Hybrid RAG (3 cards + 3 chunks)",
+    "hybrid_rag": "Hybrid RAG (cards + chunks)",
     "hybrid_rag_label": "Hybrid RAG + EDOS label (pred.)",
     "hybrid_rag_gold_label": "Hybrid RAG + EDOS label (gold)",
 }
@@ -38,8 +38,8 @@ CARD_SYSTEMS = ("card_rag", "card_rag_label", "card_rag_gold_label")
 DATASETS = (("edos", "EDOS"), ("multiconan", "MultiCONAN"))
 LABEL_NOTE = (r"pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation "
               r"(available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) "
-              r"or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top 3 "
-              r"cards and the top 3 chunks, retrieved independently (within the label's pools for the label "
+              r"or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top "
+              r"cards and the top chunks (half each), retrieved independently (within the label's pools for the label "
               r"variants) and alternated in the prompt.")
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
@@ -267,7 +267,7 @@ def main() -> None:
     from pathlib import Path
 
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v2)")
+    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v3)")
     args = parser.parse_args()
     config = ExperimentConfig()
     if args.output_dir:

@@ -174,6 +174,97 @@ class RAGCounterSpeechPrompt(BaseGenerationPrompt):
         )
 
 
+NUMBER_WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight"}
+
+SHORT_SYSTEM_PROMPT = """Return valid JSON only:
+{
+  "counter_speech": "string"
+}"""
+
+
+class ShortCounterSpeechPrompt(CounterSpeechPrompt):
+    """Counter-speech prompt of Damo et al. (2025, arXiv:2510.12316, Appendix B), CS generation
+    without RAG; the JSON output format is stated in the system prompt."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.language != "English" or self.cite_source:
+            raise ValueError("The short prompts are English-only and do not cite sources.")
+
+    @property
+    def system_prompt(self) -> str:
+        return SHORT_SYSTEM_PROMPT
+
+    def build(self, hateful_message: str) -> str:
+        hateful_message = self._checked_message(hateful_message)
+        return (f"Hateful message: {hateful_message}\n"
+                f"Generate a counter-speech that is concise, respectful, persuasive, self-contained, and "
+                f"suitable for social media. Keep it short (maximum {self._sentences()}). Do NOT truncate "
+                f"the last sentence.\nCounter-speech:")
+
+    def _sentences(self) -> str:
+        return f"{self.max_sentences} sentence" + ("s" if self.max_sentences > 1 else "")
+
+    @staticmethod
+    def _checked_message(hateful_message: str) -> str:
+        hateful_message = " ".join(hateful_message.split())
+        if not hateful_message:
+            raise ValueError("hateful_message cannot be empty.")
+        return hateful_message
+
+    @staticmethod
+    def _category_text(category: tuple[str, str]) -> str:
+        name, definition = (part.strip() for part in category)
+        if not name or not definition:
+            raise ValueError("category name and definition cannot be empty.")
+        return (f"The hateful message belongs to this category of gender-based violence: {name} "
+                f"(definition: {definition}). Address the harmful idea typical of that category.\n")
+
+
+class ShortRAGCounterSpeechPrompt(RAGCounterSpeechPrompt):
+    """Damo et al. (2025), CS generation WITH RAG; the evidence items are numbered and the
+    number of items is spelled out ("Here are four evidence summaries...")."""
+
+    _sentences = ShortCounterSpeechPrompt._sentences
+    _checked_message = staticmethod(ShortCounterSpeechPrompt._checked_message)
+    _category_text = staticmethod(ShortCounterSpeechPrompt._category_text)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.language != "English" or self.cite_source:
+            raise ValueError("The short prompts are English-only and do not cite sources.")
+
+    @property
+    def system_prompt(self) -> str:
+        return SHORT_SYSTEM_PROMPT
+
+    def build(self, hateful_message: str, retrieval_results: list[RetrievalResult]) -> str:
+        return self._build(hateful_message, retrieval_results, None)
+
+    def _build(self, hateful_message, retrieval_results, category) -> str:
+        context = self._checked_context(retrieval_results)
+        count = NUMBER_WORDS.get(self.required_evidence_count, str(self.required_evidence_count))
+        category_text = self._category_text(category) if category is not None else ""
+        return (f"Here are {count} evidence summaries you MUST use to inform your response:\n{context}\n"
+                f"{category_text}"
+                f"Task: Respond to the hateful message below by writing a short counter-speech that is "
+                f"respectful, persuasive, self-contained, and suitable for social media (maximum "
+                f"{self._sentences()}). Ground your response in the evidence above and do NOT truncate "
+                f"the last sentence.\nHateful message: {self._checked_message(hateful_message)}\nCounter-speech:")
+
+
+class ShortCategoryRAGCounterSpeechPrompt(ShortRAGCounterSpeechPrompt):
+    """Damo et al. (2025) RAG prompt that also states the EDOS category of the message."""
+
+    uses_category = True
+
+    def build(self, hateful_message: str, retrieval_results: list[RetrievalResult],
+              category: tuple[str, str] | None = None) -> str:
+        if category is None:
+            raise ValueError("A category (name, definition) is required.")
+        return self._build(hateful_message, retrieval_results, category)
+
+
 class CategoryRAGCounterSpeechPrompt(RAGCounterSpeechPrompt):
     """RAG prompt that also states the (predicted) category of the statement."""
 

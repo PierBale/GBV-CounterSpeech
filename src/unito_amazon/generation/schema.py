@@ -18,13 +18,22 @@ class GenerationResult(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
+class CounterSpeechResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    counter_speech: str = Field(min_length=1)
+
+
 class CounterNarrativeResponse(BaseModel):
+    """Key used by the earlier prompts (data/counterspeech_v2)."""
     model_config = ConfigDict(extra="forbid")
 
     counter_narrative: str = Field(min_length=1)
 
 
 def parse_counter_narrative(raw_response: str) -> tuple[str, bool]:
+    """Text of a {"counter_speech": ...} JSON response ({"counter_narrative": ...} for the
+    earlier prompts); (raw response, False) when it cannot be parsed."""
     raw_response = raw_response.strip()
     candidates = [raw_response]
 
@@ -44,9 +53,12 @@ def parse_counter_narrative(raw_response: str) -> tuple[str, bool]:
     for candidate in candidates:
         try:
             payload = json.loads(candidate)
-            parsed = CounterNarrativeResponse.model_validate(payload)
-            return parsed.counter_narrative.strip(), True
-        except (json.JSONDecodeError, ValueError):
+        except json.JSONDecodeError:
             continue
+        for model, key in ((CounterSpeechResponse, "counter_speech"), (CounterNarrativeResponse, "counter_narrative")):
+            try:
+                return getattr(model.model_validate(payload), key).strip(), True
+            except ValueError:
+                continue
 
     return raw_response, False

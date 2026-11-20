@@ -12,6 +12,9 @@ from unito_amazon.generation.prompts import (
     CategoryRAGCounterSpeechPrompt,
     CounterSpeechPrompt,
     RAGCounterSpeechPrompt,
+    ShortCategoryRAGCounterSpeechPrompt,
+    ShortCounterSpeechPrompt,
+    ShortRAGCounterSpeechPrompt,
 )
 from unito_amazon.generation.schema import parse_counter_narrative
 from unito_amazon.llm.schema import LLMGenerationConfig
@@ -21,20 +24,28 @@ from .data import attach_predicted_labels, label_code, load_or_create_subset
 from .retrieval import ExperimentRetrievers
 
 
+PROMPT_CLASSES = {  # prompt_style -> (no evidence, evidence, evidence + EDOS category)
+    "short": (ShortCounterSpeechPrompt, ShortRAGCounterSpeechPrompt, ShortCategoryRAGCounterSpeechPrompt),
+    "moderator": (CounterSpeechPrompt, RAGCounterSpeechPrompt, CategoryRAGCounterSpeechPrompt),
+}
+
+
 def build_prompts(config: ExperimentConfig) -> dict:
+    """RAG, card-RAG and hybrid RAG share the prompt; only the evidence differs."""
+    plain, evidence, category = PROMPT_CLASSES[config.prompt_style]
     options = {"language": config.language, "max_sentences": config.max_sentences, "cite_source": False}
     hybrid_k = config.hybrid_cards + config.hybrid_chunks
     return {
-        "zero_shot": CounterSpeechPrompt(**options),
-        "rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "card_rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "card_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "card_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
-        "hybrid_rag": RAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
-        "hybrid_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
-        "hybrid_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
+        "zero_shot": plain(**options),
+        "rag": evidence(**options, evidence_count=config.top_k),
+        "rag_label": category(**options, evidence_count=config.top_k),
+        "rag_gold_label": category(**options, evidence_count=config.top_k),
+        "card_rag": evidence(**options, evidence_count=config.top_k),
+        "card_rag_label": category(**options, evidence_count=config.top_k),
+        "card_rag_gold_label": category(**options, evidence_count=config.top_k),
+        "hybrid_rag": evidence(**options, evidence_count=hybrid_k),
+        "hybrid_rag_label": category(**options, evidence_count=hybrid_k),
+        "hybrid_rag_gold_label": category(**options, evidence_count=hybrid_k),
     }
 
 
@@ -71,6 +82,7 @@ def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
                 requests.append({
                     "item": item, "strategy": strategy, "system_prompt": prompt.system_prompt,
                     "prompt": user_prompt, "results": results,
+                    "context": prompt.format_retrieval_context(results) if prompt.uses_evidence else "",
                     "category_in_prompt": list(category) if category else None,
                     "edos_label_used": item[LABEL_FIELD[strategy]] if strategy in LABEL_FIELD else None,
                     "edos_label_used_kind": LABEL_FIELD.get(strategy, "").removesuffix("_edos_label") or None,
@@ -162,7 +174,7 @@ def run_generation(config: ExperimentConfig) -> None:
                         "edos_label_used_kind": request["edos_label_used_kind"],
                         "evidence": evidence_records(request["results"]),
                         "context_length": measure_context(request["prompt"], len(request["results"]),
-                                                          tokenizer, config.generator_model),
+                                                          tokenizer, config.generator_model, request["context"]),
                         "generation_config": generation_config,
                         "generated_at": datetime.now(timezone.utc).isoformat(),
                     })

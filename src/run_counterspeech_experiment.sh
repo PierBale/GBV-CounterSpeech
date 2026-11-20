@@ -29,8 +29,16 @@ else
   SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 PROJECT_DIR="$(cd "$SRC_DIR/.." && pwd)"
-OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_DIR/data/counterspeech_v2}"
-CLASSIFIER_OUTPUT="$OUTPUT_DIR/edos_classifier"
+OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_DIR/data/counterspeech_v3}"
+# The M7-FE labels cover every EDOS test / MultiCONAN message: computed once in counterspeech_v2
+# (ExperimentConfig.classifier_dir) and reused.
+CLASSIFIER_OUTPUT="${CLASSIFIER_OUTPUT:-$PROJECT_DIR/data/counterspeech_v2/edos_classifier}"
+# The embedding indexes do not depend on k or on the prompts: reuse those of counterspeech_v2.
+if [[ ! -d "$OUTPUT_DIR/indexes" && -d "$PROJECT_DIR/data/counterspeech_v2/indexes" ]]; then
+  mkdir -p "$OUTPUT_DIR"
+  cp -r "$PROJECT_DIR/data/counterspeech_v2/indexes" "$OUTPUT_DIR/indexes"
+  echo "Indexes copied from data/counterspeech_v2."
+fi
 STAGES="${STAGES:-classifier sample generate judge metrics}"
 
 python -c "import torch; print('Torch', torch.__version__, '| CUDA', torch.cuda.is_available())"

@@ -38,13 +38,16 @@ def pairs_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> list[tup
     return [(a, b) for a, b in JUDGED_PAIRS if a in applicable and b in applicable]
 
 
+# data/counterspeech_v2 (earlier run) used: output_dir counterspeech_v2, sample_size None, top_k 5,
+# hybrid_cards 3, hybrid_chunks 3, prompt_style "moderator", judge_criteria "facts".
 @dataclass(frozen=True)
 class ExperimentConfig:
-    output_dir: Path = PROJECT_ROOT / "data" / "counterspeech_v2"
+    output_dir: Path = PROJECT_ROOT / "data" / "counterspeech_v3"
 
-    # Data: unique hateful messages, sampled per dataset.
+    # Data: unique hateful messages, sampled per dataset (EDOS: sexist test messages;
+    # MultiCONAN: Multitarget-CONAN, Fanton et al. 2021, target WOMEN).
     datasets: tuple[str, ...] = ("edos", "multiconan")
-    sample_size: int | None = None  # None = every unique message (EDOS test: 970, MultiCONAN: 560)
+    sample_size: int | None = 200  # None = every unique message (EDOS test: 970, MultiCONAN: 560)
     sample_seed: int = 42
     edos_split: str = "test"
 
@@ -61,9 +64,9 @@ class ExperimentConfig:
     embedding_model: str = "Qwen/Qwen3-Embedding-8B"
     embedding_batch_size: int = 4
     embedding_max_tokens: int = 8192
-    top_k: int = 5
-    hybrid_cards: int = 3   # hybrid_rag*: top cards + top chunks, alternated in the prompt
-    hybrid_chunks: int = 3
+    top_k: int = 4
+    hybrid_cards: int = 2   # hybrid_rag*: top cards + top chunks, alternated in the prompt
+    hybrid_chunks: int = 2
 
     # Counter-speech generation.
     generator_model: str = "google/gemma-4-E4B-it"
@@ -72,6 +75,9 @@ class ExperimentConfig:
     max_new_tokens: int = 256
     language: str = "English"
     max_sentences: int = 2
+    # "short": the CS generation prompts of Damo et al. (2025, arXiv:2510.12316, Appendix B),
+    # JSON output {"counter_speech": ...}; "moderator": the earlier moderator prompt with rules.
+    prompt_style: str = "short"
 
     # Pairwise JudgeLM evaluation, every pair of strategies in both presentation orders.
     judge_model: str = "BAAI/JudgeLM-7B-v1.0"
@@ -79,6 +85,8 @@ class ExperimentConfig:
     judge_batch_size: int = 16
     judge_max_retries: int = 5
     judge_retry_temperature: float = 0.7
+    # JudgeLM criteria (evaluation/prompts.py): "social_media" or "facts" (the earlier run).
+    judge_criteria: str = "social_media"
 
     device: str | None = None
     strategies: tuple[str, ...] = field(default=STRATEGIES)

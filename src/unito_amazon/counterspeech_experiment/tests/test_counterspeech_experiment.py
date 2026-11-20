@@ -12,7 +12,9 @@ from unittest import mock
 from unito_amazon.counterspeech_experiment import generation, judging
 from unito_amazon.counterspeech_experiment.config import STRATEGIES, ExperimentConfig
 from unito_amazon.counterspeech_experiment.retrieval import ExperimentRetrievers, label_chunk_pools
+from unito_amazon.evaluation.prompts import CounterSpeechPairwisePrompt
 from unito_amazon.evaluation.schema import PairwiseJudgeResult
+from unito_amazon.generation.schema import parse_counter_narrative
 from unito_amazon.llm.schema import BatchLLMResponse
 from unito_amazon.retrieval.schema import Document, RetrievalResult
 
@@ -45,36 +47,49 @@ class FakeRetriever:
 class RetrievalTests(unittest.TestCase):
     def test_label_filter_keeps_the_card_ranking_within_the_label(self):
         retrievers = ExperimentRetrievers.__new__(ExperimentRetrievers)
-        retrievers.config = ExperimentConfig()
+        retrievers.config = ExperimentConfig()  # top_k 4, hybrid 2 cards + 2 chunks
         retrievers.cards = [card(i, "2.1" if i % 2 else "3.2") for i in range(20)]
         retrievers.card_retriever = FakeRetriever(retrievers.cards)
         retrievers.chunks = [Document(id=f"c{i}", text="chunk") for i in range(25)]
         retrievers.chunk_retriever = FakeRetriever(retrievers.chunks)
         retrievers.label_chunks = label_chunk_pools(retrievers.cards)
         retrieved = retrievers.retrieve("message", "2.1 descriptive attacks", "3.2 stereotypes")
-        self.assertEqual([r.document.id for r in retrieved["card_rag"]], [f"card{i}" for i in range(5)])
-        self.assertEqual([r.document.id for r in retrieved["card_rag_label"]], ["card1", "card3", "card5", "card7", "card9"])
-        self.assertEqual([r.rank for r in retrieved["card_rag_label"]], [1, 2, 3, 4, 5])
-        self.assertEqual([r.document.id for r in retrieved["card_rag_gold_label"]], ["card0", "card2", "card4", "card6", "card8"])
-        self.assertEqual([r.document.id for r in retrieved["rag"]], [f"c{i}" for i in range(5)])
+        ids = {name: [r.document.id for r in results] for name, results in retrieved.items()}
+        self.assertEqual(ids["card_rag"], [f"card{i}" for i in range(4)])
+        self.assertEqual(ids["card_rag_label"], ["card1", "card3", "card5", "card7"])
+        self.assertEqual([r.rank for r in retrieved["card_rag_label"]], [1, 2, 3, 4])
+        self.assertEqual(ids["card_rag_gold_label"], ["card0", "card2", "card4", "card6"])
+        self.assertEqual(ids["rag"], [f"c{i}" for i in range(4)])
         # RAG + label: the chunks the cards of the label come from, in the chunk ranking.
-        self.assertEqual([r.document.id for r in retrieved["rag_label"]], ["c1", "c3", "c5", "c7", "c9"])
-        self.assertEqual([r.rank for r in retrieved["rag_label"]], [1, 2, 3, 4, 5])
-        self.assertEqual([r.document.id for r in retrieved["rag_gold_label"]], ["c0", "c2", "c4", "c6", "c8"])
-        # Hybrid: top 3 cards and top 3 chunks, alternated card first, within the label's pools.
-        self.assertEqual([r.document.id for r in retrieved["hybrid_rag"]],
-                         ["card0", "c0", "card1", "c1", "card2", "c2"])
-        self.assertEqual([r.rank for r in retrieved["hybrid_rag"]], [1, 2, 3, 4, 5, 6])
-        self.assertEqual([r.document.id for r in retrieved["hybrid_rag_label"]],
-                         ["card1", "c1", "card3", "c3", "card5", "c5"])
-        self.assertEqual([r.document.id for r in retrieved["hybrid_rag_gold_label"]],
-                         ["card0", "c0", "card2", "c2", "card4", "c4"])
+        self.assertEqual(ids["rag_label"], ["c1", "c3", "c5", "c7"])
+        self.assertEqual([r.rank for r in retrieved["rag_label"]], [1, 2, 3, 4])
+        self.assertEqual(ids["rag_gold_label"], ["c0", "c2", "c4", "c6"])
+        # Hybrid: top 2 cards and top 2 chunks, alternated card first, within the label's pools.
+        self.assertEqual(ids["hybrid_rag"], ["card0", "c0", "card1", "c1"])
+        self.assertEqual([r.rank for r in retrieved["hybrid_rag"]], [1, 2, 3, 4])
+        self.assertEqual(ids["hybrid_rag_label"], ["card1", "c1", "card3", "c3"])
+        self.assertEqual(ids["hybrid_rag_gold_label"], ["card0", "c0", "card2", "c2"])
         without_gold = retrievers.retrieve("message", "2.1 descriptive attacks")
-        self.assertNotIn("card_rag_gold_label", without_gold)
-        self.assertNotIn("rag_gold_label", without_gold)
-        self.assertNotIn("hybrid_rag_gold_label", without_gold)
+        for name in ("card_rag_gold_label", "rag_gold_label", "hybrid_rag_gold_label"):
+            self.assertNotIn(name, without_gold)
         with self.assertRaises(ValueError):
             retrievers.retrieve("message", "1.1 threats of harm")
+
+
+class ParsingAndPromptTests(unittest.TestCase):
+    def test_counter_speech_key_and_legacy_key(self):
+        self.assertEqual(parse_counter_narrative('{"counter_speech": " Hi. "}'), ("Hi.", True))
+        self.assertEqual(parse_counter_narrative('```json\n{"counter_narrative": "Old."}\n```'), ("Old.", True))
+        self.assertFalse(parse_counter_narrative('{"answer": "x"}')[1])
+
+    def test_judge_criteria(self):
+        social = CounterSpeechPairwisePrompt("social_media").build("hs", "r1", "r2")
+        self.assertIn("Friendly and colloquial language is preferred.", social)
+        self.assertIn("based on the criteria above", social)
+        self.assertNotIn("Number of facts", social)
+        self.assertIn("Number of facts", CounterSpeechPairwisePrompt().build("hs", "r1", "r2"))
+        with self.assertRaises(ValueError):
+            CounterSpeechPairwisePrompt("other")
 
 
 class FakeLLM:
@@ -85,7 +100,7 @@ class FakeLLM:
 
     def generate_batch(self, prompts, config):
         self.calls += len(prompts)
-        return BatchLLMResponse(texts=[json.dumps({"counter_narrative": f"reply {i}"}) for i in range(len(prompts))],
+        return BatchLLMResponse(texts=[json.dumps({"counter_speech": f"reply {i}"}) for i in range(len(prompts))],
                                 model_name="fake", provider="fake")
 
     def destroy(self):
@@ -102,15 +117,17 @@ class GenerationAndJudgeTests(unittest.TestCase):
                   "gold_edos_label": "3.2 immutable gender differences" if i < 2 else None,
                   "predicted_edos_label": "2.1 descriptive attacks", "classifier": {}} for i in range(4)]
         cards = [card(i, "2.1") for i in range(6)] + [card(i, "3.2") for i in range(6, 11)]
-        retrieved = {"rag": [result(Document(id=f"c{i}", text=f"chunk {i}"), i) for i in range(1, 6)],
-                     "rag_label": [result(Document(id=f"c{i}", text=f"chunk {i}"), i - 5) for i in range(6, 11)],
-                     "rag_gold_label": [result(Document(id=f"c{i}", text=f"chunk {i}"), i - 10) for i in range(11, 16)],
-                     "card_rag": [result(c, i) for i, c in enumerate(cards[:5], start=1)],
-                     "card_rag_label": [result(c, i) for i, c in enumerate(cards[1:6], start=1)],
-                     "card_rag_gold_label": [result(c, i) for i, c in enumerate(cards[6:11], start=1)]}
-        for name, label_cards in (("hybrid_rag", cards[:3]), ("hybrid_rag_label", cards[1:4]),
-                                  ("hybrid_rag_gold_label", cards[6:9])):
-            mixed = [doc for pair in zip(label_cards, [Document(id=f"h{name}{i}", text=f"hchunk {i}") for i in range(3)])
+
+        def chunks(first):
+            return [result(Document(id=f"c{i}", text=f"chunk {i}"), i - first + 1) for i in range(first, first + 4)]
+
+        retrieved = {"rag": chunks(1), "rag_label": chunks(6), "rag_gold_label": chunks(11),
+                     "card_rag": [result(c, i) for i, c in enumerate(cards[:4], start=1)],
+                     "card_rag_label": [result(c, i) for i, c in enumerate(cards[1:5], start=1)],
+                     "card_rag_gold_label": [result(c, i) for i, c in enumerate(cards[6:10], start=1)]}
+        for name, label_cards in (("hybrid_rag", cards[:2]), ("hybrid_rag_label", cards[1:3]),
+                                  ("hybrid_rag_gold_label", cards[6:8])):
+            mixed = [doc for pair in zip(label_cards, [Document(id=f"h{name}{i}", text=f"hchunk {i}") for i in range(2)])
                      for doc in pair]
             retrieved[name] = [result(doc, i) for i, doc in enumerate(mixed, start=1)]
         fake = mock.MagicMock()
@@ -141,38 +158,40 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertEqual(len(records), 34)
         self.assertEqual({r["generation_strategy"] for r in records if r["source"] == "multiconan"},
                          set(STRATEGIES) - {"rag_gold_label", "card_rag_gold_label", "hybrid_rag_gold_label"})
+        self.assertTrue(all(r["response_format_valid"] for r in records))
+        self.assertEqual(records[0]["generated_counter_speech"], "reply 0")
         by_strategy = {r["generation_strategy"]: r for r in records if r["id"] == "m0"}
-        self.assertNotIn("<evidence>", by_strategy["zero_shot"]["prompt"])
-        self.assertIn("Evidence 5:", by_strategy["rag"]["prompt"])
-        self.assertNotIn("<category>", by_strategy["card_rag"]["prompt"])
-        self.assertNotIn("<category>", by_strategy["rag"]["prompt"])
+
+        # Short prompts (Damo et al. 2025): the same JSON-format system prompt for every system.
+        self.assertEqual(len({r["system_prompt"] for r in by_strategy.values()}), 1)
+        self.assertIn('"counter_speech"', by_strategy["rag"]["system_prompt"])
+        zero_shot = by_strategy["zero_shot"]["prompt"]
+        self.assertTrue(zero_shot.startswith("Hateful message: message 0\nGenerate a counter-speech"))
+        self.assertTrue(zero_shot.endswith("Counter-speech:"))
+        self.assertNotIn("Evidence", zero_shot)
+        for name in ("rag", "card_rag", "hybrid_rag"):
+            prompt = by_strategy[name]["prompt"]
+            self.assertTrue(prompt.startswith("Here are four evidence summaries you MUST use"))
+            self.assertIn("Evidence 4:", prompt)
+            self.assertNotIn("Evidence 5:", prompt)
+            self.assertNotIn("category of gender-based violence", prompt)
+            self.assertTrue(prompt.endswith("Hateful message: message 0\nCounter-speech:"))
         rag_label = by_strategy["rag_label"]
-        self.assertIn("Category of gender-based violence: descriptive attacks", rag_label["prompt"])
-        self.assertEqual([e["id"] for e in rag_label["evidence"]], [f"c{i}" for i in range(6, 11)])
-        # RAG and card-RAG share the system prompt, with and without the label.
-        self.assertEqual(by_strategy["rag"]["system_prompt"], by_strategy["card_rag"]["system_prompt"])
-        self.assertEqual(rag_label["system_prompt"], by_strategy["card_rag_label"]["system_prompt"])
-        self.assertNotEqual(rag_label["system_prompt"], by_strategy["rag"]["system_prompt"])
+        self.assertIn("category of gender-based violence: descriptive attacks (definition: definition 2.1)",
+                      rag_label["prompt"])
+        self.assertEqual([e["id"] for e in rag_label["evidence"]], [f"c{i}" for i in range(6, 10)])
         rag_gold = by_strategy["rag_gold_label"]
-        self.assertIn("Category of gender-based violence: immutable gender differences", rag_gold["prompt"])
+        self.assertIn("category of gender-based violence: immutable gender differences", rag_gold["prompt"])
         self.assertEqual(rag_gold["edos_label_used_kind"], "gold")
-        self.assertEqual([e["id"] for e in rag_gold["evidence"]], [f"c{i}" for i in range(11, 16)])
-        self.assertIn("Category of gender-based violence: descriptive attacks", by_strategy["card_rag_label"]["prompt"])
+        self.assertEqual([e["id"] for e in rag_gold["evidence"]], [f"c{i}" for i in range(11, 15)])
         gold = by_strategy["card_rag_gold_label"]
-        self.assertIn("Category of gender-based violence: immutable gender differences", gold["prompt"])
+        self.assertIn("category of gender-based violence: immutable gender differences", gold["prompt"])
         self.assertEqual((gold["edos_label_used_kind"], by_strategy["card_rag_label"]["edos_label_used_kind"]),
                          ("gold", "predicted"))
-        self.assertEqual([e["id"] for e in gold["evidence"]], [f"card{i}" for i in range(6, 11)])
-        hybrid = by_strategy["hybrid_rag"]
-        self.assertIn("Evidence 6:", hybrid["prompt"])
-        self.assertNotIn("Evidence 7:", hybrid["prompt"])
-        self.assertNotIn("<category>", hybrid["prompt"])
-        self.assertEqual(hybrid["system_prompt"], by_strategy["rag"]["system_prompt"])
+        self.assertEqual([e["id"] for e in gold["evidence"]], [f"card{i}" for i in range(6, 10)])
         hybrid_gold = by_strategy["hybrid_rag_gold_label"]
-        self.assertIn("Category of gender-based violence: immutable gender differences", hybrid_gold["prompt"])
-        self.assertEqual(hybrid_gold["system_prompt"], gold["system_prompt"])
-        self.assertEqual([e["id"] for e in by_strategy["hybrid_rag_label"]["evidence"]][::2], ["card1", "card2", "card3"])
-        self.assertTrue(all(r["response_format_valid"] for r in records))
+        self.assertIn("category of gender-based violence: immutable gender differences", hybrid_gold["prompt"])
+        self.assertEqual([e["id"] for e in by_strategy["hybrid_rag_label"]["evidence"]][::2], ["card1", "card2"])
 
         comparisons = judging.build_comparisons(records, STRATEGIES)
         self.assertEqual(len(comparisons), 2 * 19 * 2 + 2 * 12 * 2)  # judged pairs only
@@ -194,9 +213,13 @@ class GenerationAndJudgeTests(unittest.TestCase):
         judge = mock.MagicMock()
         judge.judge_batch.side_effect = fake_judgments
         with fake_factory(FakeLLM()), \
-                mock.patch.object(judging, "LLMJudge", return_value=judge):
+                mock.patch.object(judging, "LLMJudge", return_value=judge) as judge_class:
             judging.run_judge(self.config)
+        self.assertEqual(judge_class.call_args.kwargs["prompt"].criteria, "social_media")
+        judgments = [json.loads(line) for line in self.config.judgments_path.read_text(encoding="utf-8").splitlines()]
+        self.assertEqual({j["judge_criteria"] for j in judgments}, {"social_media"})
         summary = json.loads((self.config.output_dir / "judge_summary.json").read_text(encoding="utf-8"))
+        self.assertEqual(summary["judge_criteria"], "social_media")
         self.assertEqual(summary["valid_judgments"], 124)
         self.assertNotIn("multiconan|card_rag|card_rag_gold_label", summary["pairs"])
         self.assertEqual(summary["pairs"]["edos|card_rag_label|card_rag_gold_label"]["messages"], 2)
@@ -207,7 +230,7 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertEqual((label["a_wins"], label["b_wins"], label["a_score"]), (0, 4, 0))
         self.assertEqual(label["mean_judgelm_score_difference_a_minus_b"], -3)
         self.assertEqual(summary["pairs"]["edos|card_rag|card_rag_label"]["messages"], 2)
-        # The new label strategies are compared only with card-RAG using the same label.
+        # The label strategies are compared only with card-RAG / hybrid using the same label.
         self.assertEqual(summary["pairs"]["all|rag_label|card_rag_label"]["messages"], 4)
         self.assertEqual(summary["pairs"]["edos|rag_gold_label|card_rag_gold_label"]["messages"], 2)
         self.assertNotIn("multiconan|rag_gold_label|card_rag_gold_label", summary["pairs"])
@@ -215,9 +238,9 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertEqual(summary["pairs"]["multiconan|card_rag_label|hybrid_rag_label"]["messages"], 2)
         self.assertNotIn("multiconan|card_rag_gold_label|hybrid_rag_gold_label", summary["pairs"])
 
-
-if __name__ == "__main__":
-    unittest.main()
+        # Judgments made with other criteria are never mixed in the same folder.
+        with self.assertRaises(ValueError), fake_factory(FakeLLM()):
+            judging.run_judge(dataclasses.replace(self.config, judge_criteria="facts"))
 
 
 class SubsetExtensionTests(unittest.TestCase):
@@ -284,3 +307,7 @@ class MetricsTests(unittest.TestCase):
             table = tables.metrics_table(summary)
             self.assertIn(r"Card-RAG + EDOS label (gold) & -- & -- & -- & 3.000 \\", table)
             self.assertIn(r"\textbf{0.200} & \textbf{0.050} & \textbf{0.600} & 3.000 \\", table)
+
+
+if __name__ == "__main__":
+    unittest.main()

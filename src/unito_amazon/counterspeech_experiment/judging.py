@@ -13,6 +13,7 @@ from scipy.stats import binomtest, wilcoxon
 
 from unito_amazon.card_creation.io import append_jsonl, read_jsonl, write_json
 from unito_amazon.evaluation.judge import LLMJudge
+from unito_amazon.evaluation.prompts import CounterSpeechPairwisePrompt
 from unito_amazon.evaluation.schema import JUDGE_PROTOCOL_VERSION
 
 from .config import JUDGED_PAIRS, ExperimentConfig, pairs_for, strategies_for
@@ -51,8 +52,13 @@ def run_judge(config: ExperimentConfig) -> None:
     comparisons = build_comparisons(read_jsonl(config.generations_path), config.strategies)
     done = set()
     if config.judgments_path.exists():
-        done = {comparison_key(record) for record in read_jsonl(config.judgments_path)
-                if record["judgment"].get("winner") is not None}
+        previous = list(read_jsonl(config.judgments_path))
+        # Judgments without the field were made with the original "facts" criteria.
+        criteria = {record.get("judge_criteria", "facts") for record in previous}
+        if criteria - {config.judge_criteria}:
+            raise ValueError(f"{config.judgments_path} has judgments with criteria {sorted(criteria)}, "
+                             f"not {config.judge_criteria!r}; use another output_dir.")
+        done = {comparison_key(record) for record in previous if record["judgment"].get("winner") is not None}
     pending = [record for record in comparisons if comparison_key(record) not in done]
     print(f"{len(comparisons)} comparisons, {len(comparisons) - len(pending)} already judged.")
     if pending:
@@ -60,7 +66,8 @@ def run_judge(config: ExperimentConfig) -> None:
 
         llm = LLMFactory.create({"provider": "huggingface", "model_name": config.judge_model,
                                  "device": config.device, "dtype": config.judge_dtype})
-        judge = LLMJudge(llm=llm, max_retries=config.judge_max_retries,
+        judge = LLMJudge(llm=llm, prompt=CounterSpeechPairwisePrompt(config.judge_criteria),
+                         max_retries=config.judge_max_retries,
                          retry_temperature=config.judge_retry_temperature)
         try:
             for start in range(0, len(pending), config.judge_batch_size):
@@ -68,7 +75,8 @@ def run_judge(config: ExperimentConfig) -> None:
                 for record, result in zip(batch, judge.judge_batch(batch), strict=True):
                     append_jsonl(config.judgments_path, {
                         **record, "judge_model": config.judge_model,
-                        "judge_protocol": JUDGE_PROTOCOL_VERSION, "judgment": result.model_dump(),
+                        "judge_protocol": JUDGE_PROTOCOL_VERSION, "judge_criteria": config.judge_criteria,
+                        "judgment": result.model_dump(),
                         "judged_at": datetime.now(timezone.utc).isoformat(),
                     })
                 print(f"Judged {min(start + len(batch), len(pending))}/{len(pending)}")
@@ -194,6 +202,7 @@ def summarize(config: ExperimentConfig) -> dict:
             stats[1] += 1
     return {
         "judge_model": config.judge_model, "judge_protocol": JUDGE_PROTOCOL_VERSION,
+        "judge_criteria": config.judge_criteria,
         "valid_judgments": len(records), "expected_judgments": len(current),
         "method": ("per message, the outcomes of both presentation orders are averaged from A's "
                    "point of view (win 1, tie 0.5, loss 0); a_score is the mean of these values. "
