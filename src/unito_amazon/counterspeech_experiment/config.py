@@ -10,16 +10,21 @@ CARD_RUN_DIR = PROJECT_ROOT / "data" / "card_creation_comparison_edos_v2_words_c
 
 # Fixed order of the systems in the tables. *_label strategies state the EDOS label predicted
 # by the classifier in the prompt and restrict retrieval to the label's pool; *_gold_label use
-# the gold EDOS annotation, which exists only for EDOS.
+# the gold EDOS annotation, which exists only for EDOS. hybrid_rag* show half cards and half
+# chunks (ExperimentConfig.hybrid_cards + hybrid_chunks), retrieved independently.
 STRATEGIES = ("zero_shot", "rag", "rag_label", "rag_gold_label", "card_rag", "card_rag_label",
-              "card_rag_gold_label")
-GOLD_LABEL_STRATEGIES = {"rag_gold_label", "card_rag_gold_label"}
+              "card_rag_gold_label", "hybrid_rag", "hybrid_rag_label", "hybrid_rag_gold_label")
+GOLD_LABEL_STRATEGIES = {"rag_gold_label", "card_rag_gold_label", "hybrid_rag_gold_label"}
 
 # Pairs judged by JudgeLM, (A, B) with A shown first in the a_first order: every pair of the
 # first five systems, plus RAG vs card-RAG with the same label (same pool of 15 chunks per
-# label, so the pair differs only in the evidence format: raw chunk vs card).
+# label, so the pair differs only in the evidence format: raw chunk vs card), plus the hybrid
+# systems against zero-shot and against RAG and card-RAG with the same label (or none).
 JUDGED_PAIRS = (*combinations(("zero_shot", "rag", "card_rag", "card_rag_label", "card_rag_gold_label"), 2),
-                ("rag_label", "card_rag_label"), ("rag_gold_label", "card_rag_gold_label"))
+                ("rag_label", "card_rag_label"), ("rag_gold_label", "card_rag_gold_label"),
+                ("zero_shot", "hybrid_rag"), ("rag", "hybrid_rag"), ("card_rag", "hybrid_rag"),
+                ("rag_label", "hybrid_rag_label"), ("card_rag_label", "hybrid_rag_label"),
+                ("rag_gold_label", "hybrid_rag_gold_label"), ("card_rag_gold_label", "hybrid_rag_gold_label"))
 
 
 def strategies_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> tuple[str, ...]:
@@ -57,6 +62,8 @@ class ExperimentConfig:
     embedding_batch_size: int = 4
     embedding_max_tokens: int = 8192
     top_k: int = 5
+    hybrid_cards: int = 3   # hybrid_rag*: top cards + top chunks, alternated in the prompt
+    hybrid_chunks: int = 3
 
     # Counter-speech generation.
     generator_model: str = "google/gemma-4-E4B-it"

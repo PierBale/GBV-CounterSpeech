@@ -5,7 +5,12 @@ query; no reranking. The label strategies keep only the label's pool and take th
 top-k of the same ranking: card-RAG + label the cards of the label, RAG + label the
 chunks those cards were made from (the same 15 chunks per label, so the two differ
 only in the evidence format: raw chunk vs card).
+Hybrid RAG takes the top hybrid_cards cards and the top hybrid_chunks chunks of the two
+rankings (within the label's pools for the label variants) and alternates them, card first:
+card 1, chunk 1, card 2, chunk 2, ...
 """
+
+from itertools import zip_longest
 
 from unito_amazon.card_creation.card_schema import EvidenceCard
 from unito_amazon.card_creation.io import file_sha256, read_jsonl
@@ -99,7 +104,7 @@ class ExperimentRetrievers:
         ranked_cards = self.card_retriever.retrieve(message, top_k=len(self.cards))
         ranked_chunks = self.chunk_retriever.retrieve(message, top_k=len(self.chunks))
 
-        def within(ranked: list[RetrievalResult], label: str, kind: str) -> list[RetrievalResult]:
+        def within(ranked: list[RetrievalResult], label: str, kind: str, k: int = k) -> list[RetrievalResult]:
             """Top-k of the same ranking within the label's pool (same scores, ranks renumbered)."""
             code = label_code(label)
             if kind == "cards":
@@ -110,15 +115,27 @@ class ExperimentRetrievers:
                 raise ValueError(f"Only {len(filtered)} {kind} for label {label!r}; top_k={k}.")
             return [result.model_copy(update={"rank": rank}) for rank, result in enumerate(filtered[:k], start=1)]
 
+        def hybrid(label: str | None) -> list[RetrievalResult]:
+            """Top cards and top chunks (within the label's pools when a label is given),
+            alternated card first; ranks renumbered in prompt order, scores kept."""
+            n_cards, n_chunks = self.config.hybrid_cards, self.config.hybrid_chunks
+            cards = ranked_cards[:n_cards] if label is None else within(ranked_cards, label, "cards", n_cards)
+            chunks = ranked_chunks[:n_chunks] if label is None else within(ranked_chunks, label, "chunks", n_chunks)
+            mixed = [result for pair in zip_longest(cards, chunks) for result in pair if result is not None]
+            return [result.model_copy(update={"rank": rank}) for rank, result in enumerate(mixed, start=1)]
+
         retrieved = {
             "rag": ranked_chunks[:k],
             "rag_label": within(ranked_chunks, predicted_label, "chunks"),
             "card_rag": ranked_cards[:k],
             "card_rag_label": within(ranked_cards, predicted_label, "cards"),
+            "hybrid_rag": hybrid(None),
+            "hybrid_rag_label": hybrid(predicted_label),
         }
         if gold_label is not None:
             retrieved["rag_gold_label"] = within(ranked_chunks, gold_label, "chunks")
             retrieved["card_rag_gold_label"] = within(ranked_cards, gold_label, "cards")
+            retrieved["hybrid_rag_gold_label"] = hybrid(gold_label)
         return retrieved
 
     def metadata(self) -> dict:
@@ -126,6 +143,8 @@ class ExperimentRetrievers:
             "embedding_model": self.config.embedding_model, "query_instruction": CARD_INSTRUCTION,
             "similarity": "cosine (normalized embeddings, FAISS IndexFlatIP)", "reranking": False,
             "top_k": self.config.top_k,
+            "hybrid": {"cards": self.config.hybrid_cards, "chunks": self.config.hybrid_chunks,
+                       "order": "alternated, card first", "label_pools": "as the label strategies"},
             "chunks_path": str(self.config.chunks_path), "chunks_sha256": file_sha256(self.config.chunks_path),
             "chunk_count": len(self.chunks), "chunk_text": "section titles + body" if self.config.include_section_titles else "body",
             "cards_path": str(self.config.cards_path), "cards_sha256": file_sha256(self.config.cards_path),

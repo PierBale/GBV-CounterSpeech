@@ -1,8 +1,8 @@
 """LaTeX tables of the counter-speech experiment (run from src after the judge stage).
 
-  python counterspeech_experiment_tables.py
+  python counterspeech_experiment_tables.py [--output-dir ../data/counterspeech_v2]
 
-Writes to data/counterspeech_v2/tables/:
+Writes to <output dir>/tables/ (default data/counterspeech_v2/tables/):
   judgelm_pairwise.tex        wins/losses/ties per pair and dataset (both orders combined)
   examples_edos.tex           qualitative examples, EDOS (predicted and gold label)
   examples_multiconan.tex     qualitative examples, MultiCONAN (predicted label)
@@ -25,14 +25,22 @@ NAMES = {
     "card_rag": "Card-RAG (Qwen3-Emb-8B)",
     "card_rag_label": "Card-RAG + EDOS label (pred.)",
     "card_rag_gold_label": "Card-RAG + EDOS label (gold)",
+    "hybrid_rag": "Hybrid RAG (3 cards + 3 chunks)",
+    "hybrid_rag_label": "Hybrid RAG + EDOS label (pred.)",
+    "hybrid_rag_gold_label": "Hybrid RAG + EDOS label (gold)",
 }
 SHORT_NAMES = {"zero_shot": "Zero-shot", "rag": "RAG",
                "rag_label": "RAG + pred. label", "rag_gold_label": "RAG + gold label", "card_rag": "Card-RAG",
-               "card_rag_label": "Card-RAG + pred. label", "card_rag_gold_label": "Card-RAG + gold label"}
+               "card_rag_label": "Card-RAG + pred. label", "card_rag_gold_label": "Card-RAG + gold label",
+               "hybrid_rag": "Hybrid RAG", "hybrid_rag_label": "Hybrid + pred. label",
+               "hybrid_rag_gold_label": "Hybrid + gold label"}
 CARD_SYSTEMS = ("card_rag", "card_rag_label", "card_rag_gold_label")
 DATASETS = (("edos", "EDOS"), ("multiconan", "MultiCONAN"))
 LABEL_NOTE = (r"pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation "
-              r"(available only for EDOS). Both are used to filter the cards and are stated in the prompt.")
+              r"(available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) "
+              r"or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top 3 "
+              r"cards and the top 3 chunks, retrieved independently (within the label's pools for the label "
+              r"variants) and alternated in the prompt.")
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
 # both presentation orders. edos_label_mismatch: EDOS messages where the predicted label
@@ -132,9 +140,9 @@ def examples_table(key: str, generations: dict, points: dict) -> str:
     gold = key.startswith("edos")
     mismatch = key == "edos_label_mismatch"
     label_caption = (
-        "EDOS label: the label predicted by the EDOS classifier (used by Card-RAG + pred. label) and the "
-        "gold annotation (used by Card-RAG + gold label)." if gold else
-        "EDOS label: predicted by the EDOS classifier and used by Card-RAG + pred. label "
+        "EDOS label: the label predicted by the EDOS classifier (used by the + pred. label systems) and the "
+        "gold annotation (used by the + gold label systems)." if gold else
+        "EDOS label: predicted by the EDOS classifier and used by the + pred. label systems "
         "(MultiCONAN has no EDOS annotation)."
     )
     subject = ("EDOS messages where the label predicted by the EDOS classifier differs from the gold "
@@ -254,7 +262,16 @@ def metrics_table(summary: dict) -> str:
 
 
 def main() -> None:
+    import argparse
+    import dataclasses
+    from pathlib import Path
+
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v2)")
+    args = parser.parse_args()
     config = ExperimentConfig()
+    if args.output_dir:
+        config = dataclasses.replace(config, output_dir=args.output_dir.resolve())
     summary = json.loads((config.output_dir / "judge_summary.json").read_text(encoding="utf-8"))
     generations = defaultdict(dict)
     for record in read_jsonl(config.generations_path):

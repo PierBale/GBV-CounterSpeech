@@ -1,7 +1,7 @@
 \begin{table*}[t]
 \centering
 \small
-\caption{JudgeLM-7B pairwise evaluation of Gemma-4-E4B counter-speech, separated by dataset (EDOS: 970 messages, MultiCONAN: 560 messages). Every pair is judged in both presentation orders; per message the two outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. The larger of System Wins and Baseline Wins is in bold. $^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the 16 comparisons in the table. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). Both are used to filter the cards and are stated in the prompt.}
+\caption{JudgeLM-7B pairwise evaluation of Gemma-4-E4B counter-speech, separated by dataset (EDOS: 970 messages, MultiCONAN: 560 messages). Every pair is judged in both presentation orders; per message the two outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. The larger of System Wins and Baseline Wins is in bold. $^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the 19 comparisons in the table. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) or to the 15 chunks they were made from (RAG), and is stated in the prompt.}
 \label{tab:pairwise-gemma-4-e4b-judgelm-7b}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrr}
@@ -19,6 +19,8 @@ RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & $\mathbf{246\ (25.36\%)}$ & 
 Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{227\ (23.40\%)}$ & $187\ (19.28\%)$ & $556\ (57.32\%)$ \\
 Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & $\mathbf{221\ (22.78\%)}$ & $174\ (17.94\%)$ & $575\ (59.28\%)$ \\
 Card-RAG + EDOS label (pred.) & Card-RAG + EDOS label (gold) & $\mathbf{102\ (10.52\%)}$ & $91\ (9.38\%)$ & $777\ (80.10\%)$ \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & $144\ (14.85\%)$ & $\mathbf{227\ (23.40\%)}^*$ & $599\ (61.75\%)$ \\
+RAG + EDOS label (gold) & Card-RAG + EDOS label (gold) & $137\ (14.12\%)$ & $\mathbf{229\ (23.61\%)}^*$ & $604\ (62.27\%)$ \\
 \midrule
 \multicolumn{5}{l}{\textit{MultiCONAN}} \\
 Zero-shot & RAG (Qwen3-Emb-8B) & $\mathbf{276\ (49.29\%)}^*$ & $57\ (10.18\%)$ & $227\ (40.54\%)$ \\
@@ -27,6 +29,7 @@ Zero-shot & Card-RAG + EDOS label (pred.) & $\mathbf{269\ (48.04\%)}^*$ & $35\ (
 RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & $128\ (22.86\%)$ & $\mathbf{129\ (23.04\%)}$ & $303\ (54.11\%)$ \\
 RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{147\ (26.25\%)}$ & $103\ (18.39\%)$ & $310\ (55.36\%)$ \\
 Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{148\ (26.43\%)}$ & $106\ (18.93\%)$ & $306\ (54.64\%)$ \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & $91\ (16.25\%)$ & $\mathbf{111\ (19.82\%)}$ & $358\ (63.93\%)$ \\
 \bottomrule
 \end{tabular}%
 }

@@ -1,9 +1,9 @@
-"""Counter-speech experiment: zero-shot, RAG and card-RAG; RAG and card-RAG also with the EDOS label
-(predicted, and gold on EDOS) in the prompt and as a retrieval filter.
+"""Counter-speech experiment: zero-shot, RAG, card-RAG and hybrid RAG (3 cards + 3 chunks); the three
+retrieval systems also with the EDOS label (predicted, and gold on EDOS) in the prompt and as a retrieval filter.
 
 Run from src:
   python counterspeech_experiment.py sample     # all unique messages: EDOS test 970, MultiCONAN 560 (no GPU)
-  python counterspeech_experiment.py generate   # retrieval + Gemma 4 E4B (GPU); 7 systems on EDOS, 5 on MultiCONAN
+  python counterspeech_experiment.py generate   # retrieval + Gemma 4 E4B (GPU); 10 systems on EDOS, 7 on MultiCONAN
   python counterspeech_experiment.py judge      # JudgeLM, config.JUDGED_PAIRS, both orders (GPU)
   python counterspeech_experiment.py metrics    # MultiCONAN reference-based metrics (BERTScore: GPU)
   python counterspeech_experiment.py summary    # recompute judge_summary.json only

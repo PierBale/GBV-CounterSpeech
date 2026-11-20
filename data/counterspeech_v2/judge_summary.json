@@ -1,12 +1,12 @@
 {
   "judge_model": "BAAI/JudgeLM-7B-v1.0",
   "judge_protocol": "native-scores-v1",
-  "valid_judgments": 26120,
-  "expected_judgments": 26120,
+  "valid_judgments": 31120,
+  "expected_judgments": 31120,
   "method": "per message, the outcomes of both presentation orders are averaged from A's point of view (win 1, tie 0.5, loss 0); a_score is the mean of these values. Sign test on wins vs losses; Wilcoxon on the per-message mean JudgeLM score difference.",
   "first_position_win_rate": {
-    "edos": 0.4717494894486045,
-    "multiconan": 0.3558235383910853
+    "edos": 0.45408541639401473,
+    "multiconan": 0.3435958949753432
   },
   "pairs": {
     "all|zero_shot|rag": {
@@ -159,6 +159,36 @@
       "sign_test_p": 0.47173211176475355,
       "wilcoxon_p": 0.48440023046360137
     },
+    "all|rag_label|card_rag_label": {
+      "dataset": "all",
+      "system_a": "rag_label",
+      "system_b": "card_rag_label",
+      "messages": 1530,
+      "incomplete_messages": 0,
+      "a_wins": 338,
+      "ties": 957,
+      "b_wins": 235,
+      "a_score": 0.5339869281045752,
+      "order_agreement": 0.37973856209150325,
+      "mean_judgelm_score_difference_a_minus_b": 0.07009803921568628,
+      "sign_test_p": 1.9384305928480427e-05,
+      "wilcoxon_p": 4.508955957393553e-06
+    },
+    "all|rag_gold_label|card_rag_gold_label": {
+      "dataset": "all",
+      "system_a": "rag_gold_label",
+      "system_b": "card_rag_gold_label",
+      "messages": 970,
+      "incomplete_messages": 0,
+      "a_wins": 229,
+      "ties": 604,
+      "b_wins": 137,
+      "a_score": 0.5474226804123712,
+      "order_agreement": 0.3628865979381443,
+      "mean_judgelm_score_difference_a_minus_b": 0.10051546391752578,
+      "sign_test_p": 1.7476627037970274e-06,
+      "wilcoxon_p": 7.99534156986918e-07
+    },
     "edos|zero_shot|rag": {
       "dataset": "edos",
       "system_a": "zero_shot",
@@ -309,6 +339,36 @@
       "sign_test_p": 0.47173211176475355,
       "wilcoxon_p": 0.48440023046360137
     },
+    "edos|rag_label|card_rag_label": {
+      "dataset": "edos",
+      "system_a": "rag_label",
+      "system_b": "card_rag_label",
+      "messages": 970,
+      "incomplete_messages": 0,
+      "a_wins": 227,
+      "ties": 599,
+      "b_wins": 144,
+      "a_score": 0.5438144329896907,
+      "order_agreement": 0.38144329896907214,
+      "mean_judgelm_score_difference_a_minus_b": 0.09072164948453608,
+      "sign_test_p": 1.9208414407529722e-05,
+      "wilcoxon_p": 7.70061337558605e-06
+    },
+    "edos|rag_gold_label|card_rag_gold_label": {
+      "dataset": "edos",
+      "system_a": "rag_gold_label",
+      "system_b": "card_rag_gold_label",
+      "messages": 970,
+      "incomplete_messages": 0,
+      "a_wins": 229,
+      "ties": 604,
+      "b_wins": 137,
+      "a_score": 0.5474226804123712,
+      "order_agreement": 0.3628865979381443,
+      "mean_judgelm_score_difference_a_minus_b": 0.10051546391752578,
+      "sign_test_p": 1.7476627037970274e-06,
+      "wilcoxon_p": 7.99534156986918e-07
+    },
     "multiconan|zero_shot|rag": {
       "dataset": "multiconan",
       "system_a": "zero_shot",
@@ -398,18 +458,33 @@
       "mean_judgelm_score_difference_a_minus_b": -0.07857142857142857,
       "sign_test_p": 0.009956010616611907,
       "wilcoxon_p": 0.003105051298527983
+    },
+    "multiconan|rag_label|card_rag_label": {
+      "dataset": "multiconan",
+      "system_a": "rag_label",
+      "system_b": "card_rag_label",
+      "messages": 560,
+      "incomplete_messages": 0,
+      "a_wins": 111,
+      "ties": 358,
+      "b_wins": 91,
+      "a_score": 0.5169642857142858,
+      "order_agreement": 0.3767857142857143,
+      "mean_judgelm_score_difference_a_minus_b": 0.034375,
+      "sign_test_p": 0.18113533179871194,
+      "wilcoxon_p": 0.13785145690096295
     }
   },
   "order_agreement": {
     "all|all pairs": {
-      "messages": 13060,
-      "exact_agreement": 0.4811638591117917,
-      "cohen_kappa": -0.00824771122529988,
-      "cohen_kappa_linear": -0.037629424337087825,
-      "krippendorff_alpha_ordinal": -0.0662477800183372,
-      "spearman_score_difference": -0.05672229096978801,
-      "opposite_winner_rate": 0.5122511485451761,
-      "tie_in_one_order_rate": 0.0065849923430321596
+      "messages": 15560,
+      "exact_agreement": 0.46381748071979434,
+      "cohen_kappa": -0.018373352729146086,
+      "cohen_kappa_linear": -0.05192754080128981,
+      "krippendorff_alpha_ordinal": -0.09177247098943209,
+      "spearman_score_difference": -0.07398659913593782,
+      "opposite_winner_rate": 0.5256426735218509,
+      "tie_in_one_order_rate": 0.010539845758354757
     },
     "all|zero_shot|rag": {
       "messages": 1530,
@@ -511,15 +586,35 @@
       "opposite_winner_rate": 0.668041237113402,
       "tie_in_one_order_rate": 0.009278350515463918
     },
+    "all|rag_label|card_rag_label": {
+      "messages": 1530,
+      "exact_agreement": 0.37973856209150325,
+      "cohen_kappa": -0.019189517012112578,
+      "cohen_kappa_linear": -0.09484839518477584,
+      "krippendorff_alpha_ordinal": -0.2673253533893516,
+      "spearman_score_difference": -0.19843771441904567,
+      "opposite_winner_rate": 0.581045751633987,
+      "tie_in_one_order_rate": 0.0392156862745098
+    },
+    "all|rag_gold_label|card_rag_gold_label": {
+      "messages": 970,
+      "exact_agreement": 0.3628865979381443,
+      "cohen_kappa": -0.17924082904489902,
+      "cohen_kappa_linear": -0.1912232658872115,
+      "krippendorff_alpha_ordinal": -0.27391258229509563,
+      "spearman_score_difference": -0.22529834022259249,
+      "opposite_winner_rate": 0.6185567010309279,
+      "tie_in_one_order_rate": 0.018556701030927835
+    },
     "edos|all pairs": {
-      "messages": 9700,
-      "exact_agreement": 0.4706185567010309,
-      "cohen_kappa": -0.0360127986824097,
-      "cohen_kappa_linear": -0.06596780534966573,
-      "krippendorff_alpha_ordinal": -0.08446836185496065,
-      "spearman_score_difference": -0.08137978356883296,
-      "opposite_winner_rate": 0.5272164948453608,
-      "tie_in_one_order_rate": 0.0021649484536082476
+      "messages": 11640,
+      "exact_agreement": 0.45420962199312714,
+      "cohen_kappa": -0.0571589080576973,
+      "cohen_kappa_linear": -0.08481006515966816,
+      "krippendorff_alpha_ordinal": -0.1081626058439924,
+      "spearman_score_difference": -0.0990358732691895,
+      "opposite_winner_rate": 0.5415807560137457,
+      "tie_in_one_order_rate": 0.0042096219931271476
     },
     "edos|zero_shot|rag": {
       "messages": 970,
@@ -621,15 +716,35 @@
       "opposite_winner_rate": 0.668041237113402,
       "tie_in_one_order_rate": 0.009278350515463918
     },
+    "edos|rag_label|card_rag_label": {
+      "messages": 970,
+      "exact_agreement": 0.38144329896907214,
+      "cohen_kappa": -0.12724286466887724,
+      "cohen_kappa_linear": -0.1475980275192872,
+      "krippendorff_alpha_ordinal": -0.24789016588136992,
+      "spearman_score_difference": -0.19497413400141692,
+      "opposite_winner_rate": 0.6082474226804123,
+      "tie_in_one_order_rate": 0.010309278350515464
+    },
+    "edos|rag_gold_label|card_rag_gold_label": {
+      "messages": 970,
+      "exact_agreement": 0.3628865979381443,
+      "cohen_kappa": -0.17924082904489902,
+      "cohen_kappa_linear": -0.1912232658872115,
+      "krippendorff_alpha_ordinal": -0.27391258229509563,
+      "spearman_score_difference": -0.22529834022259249,
+      "opposite_winner_rate": 0.6185567010309279,
+      "tie_in_one_order_rate": 0.018556701030927835
+    },
     "multiconan|all pairs": {
-      "messages": 3360,
-      "exact_agreement": 0.5116071428571428,
-      "cohen_kappa": 0.09374106789036118,
-      "cohen_kappa_linear": 0.06933445883290701,
-      "krippendorff_alpha_ordinal": -0.021229112282804108,
-      "spearman_score_difference": 0.07331882287453266,
-      "opposite_winner_rate": 0.46904761904761905,
-      "tie_in_one_order_rate": 0.019345238095238096
+      "messages": 3920,
+      "exact_agreement": 0.4923469387755102,
+      "cohen_kappa": 0.10582363194156452,
+      "cohen_kappa_linear": 0.06379524658022162,
+      "krippendorff_alpha_ordinal": -0.048917227667323315,
+      "spearman_score_difference": 0.04808074199225331,
+      "opposite_winner_rate": 0.47831632653061223,
+      "tie_in_one_order_rate": 0.029336734693877552
     },
     "multiconan|zero_shot|rag": {
       "messages": 560,
@@ -690,6 +805,16 @@
       "spearman_score_difference": 0.007664823756685335,
       "opposite_winner_rate": 0.5071428571428571,
       "tie_in_one_order_rate": 0.039285714285714285
+    },
+    "multiconan|rag_label|card_rag_label": {
+      "messages": 560,
+      "exact_agreement": 0.3767857142857143,
+      "cohen_kappa": 0.10900387508547982,
+      "cohen_kappa_linear": -0.011766017955723962,
+      "krippendorff_alpha_ordinal": -0.3089638297626742,
+      "spearman_score_difference": -0.21875938883736806,
+      "opposite_winner_rate": 0.5339285714285714,
+      "tie_in_one_order_rate": 0.08928571428571429
     }
   }
 }

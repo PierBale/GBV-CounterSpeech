@@ -61,9 +61,18 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual([r.document.id for r in retrieved["rag_label"]], ["c1", "c3", "c5", "c7", "c9"])
         self.assertEqual([r.rank for r in retrieved["rag_label"]], [1, 2, 3, 4, 5])
         self.assertEqual([r.document.id for r in retrieved["rag_gold_label"]], ["c0", "c2", "c4", "c6", "c8"])
+        # Hybrid: top 3 cards and top 3 chunks, alternated card first, within the label's pools.
+        self.assertEqual([r.document.id for r in retrieved["hybrid_rag"]],
+                         ["card0", "c0", "card1", "c1", "card2", "c2"])
+        self.assertEqual([r.rank for r in retrieved["hybrid_rag"]], [1, 2, 3, 4, 5, 6])
+        self.assertEqual([r.document.id for r in retrieved["hybrid_rag_label"]],
+                         ["card1", "c1", "card3", "c3", "card5", "c5"])
+        self.assertEqual([r.document.id for r in retrieved["hybrid_rag_gold_label"]],
+                         ["card0", "c0", "card2", "c2", "card4", "c4"])
         without_gold = retrievers.retrieve("message", "2.1 descriptive attacks")
         self.assertNotIn("card_rag_gold_label", without_gold)
         self.assertNotIn("rag_gold_label", without_gold)
+        self.assertNotIn("hybrid_rag_gold_label", without_gold)
         with self.assertRaises(ValueError):
             retrievers.retrieve("message", "1.1 threats of harm")
 
@@ -99,6 +108,11 @@ class GenerationAndJudgeTests(unittest.TestCase):
                      "card_rag": [result(c, i) for i, c in enumerate(cards[:5], start=1)],
                      "card_rag_label": [result(c, i) for i, c in enumerate(cards[1:6], start=1)],
                      "card_rag_gold_label": [result(c, i) for i, c in enumerate(cards[6:11], start=1)]}
+        for name, label_cards in (("hybrid_rag", cards[:3]), ("hybrid_rag_label", cards[1:4]),
+                                  ("hybrid_rag_gold_label", cards[6:9])):
+            mixed = [doc for pair in zip(label_cards, [Document(id=f"h{name}{i}", text=f"hchunk {i}") for i in range(3)])
+                     for doc in pair]
+            retrieved[name] = [result(doc, i) for i, doc in enumerate(mixed, start=1)]
         fake = mock.MagicMock()
         fake.retrieve.return_value = retrieved
         fake.definitions = {"2.1": ("descriptive attacks", "definition 2.1"),
@@ -122,11 +136,11 @@ class GenerationAndJudgeTests(unittest.TestCase):
         with fake_factory(llm):
             generation.run_generation(self.config)
             generation.run_generation(self.config)  # nothing left to generate
-        self.assertEqual(llm.calls, 2 * 7 + 2 * 5)  # gold-label strategies only for EDOS
+        self.assertEqual(llm.calls, 2 * 10 + 2 * 7)  # gold-label strategies only for EDOS
         records = [json.loads(line) for line in self.config.generations_path.read_text(encoding="utf-8").splitlines()]
-        self.assertEqual(len(records), 24)
+        self.assertEqual(len(records), 34)
         self.assertEqual({r["generation_strategy"] for r in records if r["source"] == "multiconan"},
-                         set(STRATEGIES) - {"rag_gold_label", "card_rag_gold_label"})
+                         set(STRATEGIES) - {"rag_gold_label", "card_rag_gold_label", "hybrid_rag_gold_label"})
         by_strategy = {r["generation_strategy"]: r for r in records if r["id"] == "m0"}
         self.assertNotIn("<evidence>", by_strategy["zero_shot"]["prompt"])
         self.assertIn("Evidence 5:", by_strategy["rag"]["prompt"])
@@ -149,10 +163,19 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertEqual((gold["edos_label_used_kind"], by_strategy["card_rag_label"]["edos_label_used_kind"]),
                          ("gold", "predicted"))
         self.assertEqual([e["id"] for e in gold["evidence"]], [f"card{i}" for i in range(6, 11)])
+        hybrid = by_strategy["hybrid_rag"]
+        self.assertIn("Evidence 6:", hybrid["prompt"])
+        self.assertNotIn("Evidence 7:", hybrid["prompt"])
+        self.assertNotIn("<category>", hybrid["prompt"])
+        self.assertEqual(hybrid["system_prompt"], by_strategy["rag"]["system_prompt"])
+        hybrid_gold = by_strategy["hybrid_rag_gold_label"]
+        self.assertIn("Category of gender-based violence: immutable gender differences", hybrid_gold["prompt"])
+        self.assertEqual(hybrid_gold["system_prompt"], gold["system_prompt"])
+        self.assertEqual([e["id"] for e in by_strategy["hybrid_rag_label"]["evidence"]][::2], ["card1", "card2", "card3"])
         self.assertTrue(all(r["response_format_valid"] for r in records))
 
         comparisons = judging.build_comparisons(records, STRATEGIES)
-        self.assertEqual(len(comparisons), 2 * 12 * 2 + 2 * 7 * 2)  # judged pairs only
+        self.assertEqual(len(comparisons), 2 * 19 * 2 + 2 * 12 * 2)  # judged pairs only
 
         def fake_judgments(batch):
             # Always prefers the first-shown response, except card_rag_label which always wins.
@@ -174,7 +197,7 @@ class GenerationAndJudgeTests(unittest.TestCase):
                 mock.patch.object(judging, "LLMJudge", return_value=judge):
             judging.run_judge(self.config)
         summary = json.loads((self.config.output_dir / "judge_summary.json").read_text(encoding="utf-8"))
-        self.assertEqual(summary["valid_judgments"], 76)
+        self.assertEqual(summary["valid_judgments"], 124)
         self.assertNotIn("multiconan|card_rag|card_rag_gold_label", summary["pairs"])
         self.assertEqual(summary["pairs"]["edos|card_rag_label|card_rag_gold_label"]["messages"], 2)
         position_bias = summary["pairs"]["all|zero_shot|rag"]
@@ -189,6 +212,8 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertEqual(summary["pairs"]["edos|rag_gold_label|card_rag_gold_label"]["messages"], 2)
         self.assertNotIn("multiconan|rag_gold_label|card_rag_gold_label", summary["pairs"])
         self.assertFalse(any("|rag|rag_label" in key or "zero_shot|rag_label" in key for key in summary["pairs"]))
+        self.assertEqual(summary["pairs"]["multiconan|card_rag_label|hybrid_rag_label"]["messages"], 2)
+        self.assertNotIn("multiconan|card_rag_gold_label|hybrid_rag_gold_label", summary["pairs"])
 
 
 if __name__ == "__main__":
@@ -236,7 +261,7 @@ class MetricsTests(unittest.TestCase):
             with mock.patch.object(metrics, "multiconan_references", return_value=references), \
                     mock.patch.object(metrics, "load_metrics", return_value=fake_metrics):
                 metrics.run_metrics(config)
-            self.assertEqual(len(calls), 3 * 5)  # one call per metric and system, reference-based on MultiCONAN only
+            self.assertEqual(len(calls), 3 * 7)  # one call per metric and system, reference-based on MultiCONAN only
             name, predictions, refs, kwargs = calls[0]
             self.assertEqual((name, predictions), ("rouge", ["reply 0 zero_shot", "reply 1 zero_shot"]))
             self.assertIn(refs[0], ["ref a", "ref b"])  # one reference, drawn at random

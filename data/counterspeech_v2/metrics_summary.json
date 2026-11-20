@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T15:02:56.828929+00:00",
+  "generated_at": "2026-11-20T07:20:13.164249+00:00",
   "protocol": "COLING 2025 MCG shared task (hitz-zentroa/eval-MCG-COLING-2025, traditional_metrics.py), without novelty",
   "references": "MultiCONAN only: one reference per hateful message, drawn at random when there are several",
   "reference_seed": 42,
@@ -20,6 +20,20 @@
           "bleu": null,
           "bertscore": null,
           "gen_len": 42.734,
+          "n": 970
+        },
+        "rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 41.9546,
+          "n": 970
+        },
+        "rag_gold_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 41.8742,
           "n": 970
         },
         "card_rag": {
@@ -60,6 +74,13 @@
           "bleu": 0.0043,
           "bertscore": 0.6724,
           "gen_len": 44.4661,
+          "n": 560
+        },
+        "rag_label": {
+          "rougeL": 0.1115,
+          "bleu": 0.0032,
+          "bertscore": 0.6692,
+          "gen_len": 43.9464,
           "n": 560
         },
         "card_rag": {

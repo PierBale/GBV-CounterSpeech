@@ -23,6 +23,7 @@ from .retrieval import ExperimentRetrievers
 
 def build_prompts(config: ExperimentConfig) -> dict:
     options = {"language": config.language, "max_sentences": config.max_sentences, "cite_source": False}
+    hybrid_k = config.hybrid_cards + config.hybrid_chunks
     return {
         "zero_shot": CounterSpeechPrompt(**options),
         "rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
@@ -31,13 +32,17 @@ def build_prompts(config: ExperimentConfig) -> dict:
         "card_rag": RAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
         "card_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=config.top_k),
+        "hybrid_rag": RAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
+        "hybrid_rag_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
+        "hybrid_rag_gold_label": CategoryRAGCounterSpeechPrompt(**options, evidence_count=hybrid_k),
     }
 
 
 # EDOS label that each label-aware strategy states in the prompt (and, with retrieval, uses
 # to restrict the evidence to the label's pool).
 LABEL_FIELD = {"rag_label": "predicted_edos_label", "rag_gold_label": "gold_edos_label", "card_rag_label": "predicted_edos_label",
-               "card_rag_gold_label": "gold_edos_label"}
+               "card_rag_gold_label": "gold_edos_label", "hybrid_rag_label": "predicted_edos_label",
+               "hybrid_rag_gold_label": "gold_edos_label"}
 
 
 def plan_requests(config: ExperimentConfig) -> tuple[list[dict], dict]:
