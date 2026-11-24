@@ -81,6 +81,10 @@ class ParsingAndPromptTests(unittest.TestCase):
         self.assertEqual(parse_counter_narrative('{"counter_speech": " Hi. "}'), ("Hi.", True))
         self.assertEqual(parse_counter_narrative('```json\n{"counter_narrative": "Old."}\n```'), ("Old.", True))
         self.assertFalse(parse_counter_narrative('{"answer": "x"}')[1])
+        # Repeated closing braces after a complete object (seen in counterspeech_v3).
+        self.assertEqual(parse_counter_narrative('{\n  "counter_speech": "Hi there."\n}}}}}}}'), ("Hi there.", True))
+        self.assertEqual(parse_counter_narrative('{"counter_speech": "Hi."\n}>>}'), ("Hi.", True))
+        self.assertFalse(parse_counter_narrative('{"counter_speech": "unfinished')[1])
 
     def test_judge_criteria(self):
         social = CounterSpeechPairwisePrompt("social_media").build("hs", "r1", "r2")
@@ -163,7 +167,7 @@ class GenerationAndJudgeTests(unittest.TestCase):
 
         self.assertEqual(len({r["system_prompt"] for r in by_strategy.values()}), 1)
         system = by_strategy["rag"]["system_prompt"]
-        self.assertTrue(system.startswith("Given the hateful claim provided in HS, generate a two-sentence "
+        self.assertTrue(system.startswith("Given the hateful claim provided in HS, generate a two sentence-long "
                                           "counter-speech in English following the guidelines"))
         self.assertIn("divisive labels (e.g., sexist, misogynist)", system)
         self.assertIn('"counter_speech"', system)
@@ -174,7 +178,8 @@ class GenerationAndJudgeTests(unittest.TestCase):
         self.assertTrue(rag.startswith("EVIDENCE:\n[1] chunk 1\n\n[2] chunk 2"))
         self.assertIn("[4] chunk 4\nHS: message 0\nBased on the provided HS and EVIDENCE", rag)
         self.assertNotIn("[5]", rag)
-        self.assertIn("The EVIDENCE consists of paragraphs that address gender-based violence. You must use", rag)
+        self.assertIn("The EVIDENCE consists of paragraphs that address gender-based violence. You must necessarily "
+                      "use", rag)
         self.assertIn("The EVIDENCE consists of summaries that address gender-based violence.",
                       by_strategy["card_rag"]["prompt"])
         card_label = by_strategy["card_rag_label"]["prompt"]
@@ -185,7 +190,7 @@ class GenerationAndJudgeTests(unittest.TestCase):
                       card_label)
         self.assertIn("a category of gender-based violence and paragraphs that address that specific category",
                       by_strategy["rag_label"]["prompt"])
-        self.assertTrue(rag.endswith("Ground your response exclusively in the EVIDENCE.\n### Counter-speech:"))
+        self.assertTrue(rag.endswith("Ground your response exclusively in the evidence.\n### Counter-speech:"))
         for record in by_strategy.values():
             self.assertTrue(record["prompt"].endswith("\n### Counter-speech:"))
             self.assertEqual(record["generated_counter_speech"][:5], "reply")

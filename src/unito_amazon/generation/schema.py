@@ -50,11 +50,21 @@ def parse_counter_narrative(raw_response: str) -> tuple[str, bool]:
     if first_brace >= 0 and last_brace > first_brace:
         candidates.append(raw_response[first_brace : last_brace + 1])
 
+    payloads = []
     for candidate in candidates:
         try:
-            payload = json.loads(candidate)
+            payloads.append(json.loads(candidate))
         except json.JSONDecodeError:
             continue
+    if first_brace >= 0:
+        # A complete JSON object followed by other text, e.g. '{"counter_speech": "..."}}}}}' when
+        # greedy decoding keeps repeating the closing brace: the first object is the answer.
+        try:
+            payloads.append(json.JSONDecoder().raw_decode(raw_response[first_brace:])[0])
+        except json.JSONDecodeError:
+            pass
+
+    for payload in payloads:
         for model, key in ((CounterSpeechResponse, "counter_speech"), (CounterNarrativeResponse, "counter_narrative")):
             try:
                 return getattr(model.model_validate(payload), key).strip(), True

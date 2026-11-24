@@ -271,7 +271,8 @@ def _length(max_sentences: int) -> str:
 
 
 def guidelines_system_prompt(max_sentences: int) -> str:
-    return (f"Given the hateful claim provided in HS, generate a {_length(max_sentences)} counter-speech in "
+    count = NUMBER_WORDS.get(max_sentences, str(max_sentences))
+    return (f"Given the hateful claim provided in HS, generate a {count} sentence-long counter-speech in "
             f"English following the guidelines provided in GUIDELINES.\n"
             f"GUIDELINES: Avoid abusive language and divisive labels (e.g., sexist, misogynist). Challenge the "
             f"claim, not the person who wrote it. Express support for those under attack and respond with "
@@ -338,8 +339,8 @@ class GuidelinesRAGCounterSpeechPrompt(RAGCounterSpeechPrompt):
                 f"HS: {self._checked_message(hateful_message)}\n"
                 f"Based on the provided HS and EVIDENCE, generate a {_length(self.max_sentences)} counter-speech "
                 f"in English.\n"
-                f"{description} You must use the information contained in the EVIDENCE to contrast the HS. "
-                f"Ground your response exclusively in the EVIDENCE.\n"
+                f"{description} You must necessarily use the information contained in the EVIDENCE to contrast the HS. "
+                f"Ground your response exclusively in the evidence.\n"
                 f"### Counter-speech:")
 
 
