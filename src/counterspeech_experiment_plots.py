@@ -1,6 +1,6 @@
 """Matrix plot of the JudgeLM pairwise results (run from src after the judge stage).
 
-  python counterspeech_experiment_plots.py [--output-dir ../data/counterspeech_v3]
+  python counterspeech_experiment_plots.py [--output-dir ../data/counterspeech_v4]
 
 Writes <output dir>/figures/judgelm_pairwise_matrix.{pdf,png}: one panel per dataset; cell
 (row, column) = net win rate of the row system against the column system, (wins - losses) / messages,
@@ -10,8 +10,8 @@ only the lower triangle is drawn (row = the system later in STRATEGIES); blank c
 
 import json
 
-from counterspeech_experiment_tables import DATASETS, SHORT_NAMES, holm
-from unito_amazon.counterspeech_experiment.config import JUDGED_PAIRS, STRATEGIES, ExperimentConfig
+from counterspeech_experiment_tables import DATASETS, SHORT_NAMES, holm, summary_pairs
+from unito_amazon.counterspeech_experiment.config import STRATEGIES, ExperimentConfig
 
 # Diverging pair: red (row loses) <- neutral gray -> blue (row wins).
 LOSS, NEUTRAL, WIN = "#e34948", "#f0efec", "#256abf"
@@ -21,7 +21,7 @@ INK, MUTED, SURFACE = "#1f1f1d", "#6b6b66", "#ffffff"
 def net_matrix(summary: dict, key: str, adjusted: dict):
     """Systems present in the dataset, {(row, col): (net, significant, wins, losses, ties)}."""
     cells = {}
-    for a, b in JUDGED_PAIRS:
+    for a, b in summary_pairs(summary):
         row = summary["pairs"].get(f"{key}|{a}|{b}")
         if not row or not row.get("messages"):
             continue
@@ -41,7 +41,7 @@ def plot(summary: dict, out_stem) -> None:
     from matplotlib.patches import Rectangle
 
     adjusted = holm({(key, a, b): summary["pairs"][f"{key}|{a}|{b}"]["sign_test_p"]
-                     for key, _ in DATASETS for a, b in JUDGED_PAIRS
+                     for key, _ in DATASETS for a, b in summary_pairs(summary)
                      if summary["pairs"].get(f"{key}|{a}|{b}", {}).get("messages")})
     panels = [(title, *net_matrix(summary, key, adjusted)) for key, title in DATASETS]
     panels = [panel for panel in panels if panel[1]]
@@ -105,7 +105,7 @@ def main() -> None:
     from pathlib import Path
 
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v3)")
+    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v4)")
     args = parser.parse_args()
     config = ExperimentConfig()
     if args.output_dir:

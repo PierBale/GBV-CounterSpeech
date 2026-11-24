@@ -110,8 +110,10 @@ class FakeLLM:
 class GenerationAndJudgeTests(unittest.TestCase):
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
+        # counterspeech_v3 settings: short prompts, hybrid systems included.
         self.config = dataclasses.replace(ExperimentConfig(), output_dir=Path(self.directory.name),
-                                          generation_batch_size=3)
+                                          generation_batch_size=3, prompt_style="short", strategies=STRATEGIES,
+                                          judge_all_pairs=False)
         items = [{"id": f"m{i}", "source": "edos" if i < 2 else "multiconan", "split": None, "target": "WOMEN",
                   "hateful_message": f"message {i}", "reference_counter_speech": None,
                   "gold_edos_label": "3.2 immutable gender differences" if i < 2 else None,
@@ -147,6 +149,61 @@ class GenerationAndJudgeTests(unittest.TestCase):
         for patch in self.patches:
             patch.stop()
         self.directory.cleanup()
+
+    def test_v4_guidelines_prompts_without_hybrid(self):
+        config = dataclasses.replace(ExperimentConfig(), output_dir=Path(self.directory.name) / "v4",
+                                     generation_batch_size=3)  # defaults: counterspeech_v4
+        with fake_factory(FakeLLM()):
+            generation.run_generation(config)
+        records = [json.loads(line) for line in config.generations_path.read_text(encoding="utf-8").splitlines()]
+        self.assertEqual(len(records), 2 * 5 + 2 * 5)
+        self.assertFalse(any(r["generation_strategy"].startswith("hybrid_") or "gold" in r["generation_strategy"]
+                             for r in records))
+        by_strategy = {r["generation_strategy"]: r for r in records if r["id"] == "m0"}
+
+        self.assertEqual(len({r["system_prompt"] for r in by_strategy.values()}), 1)
+        system = by_strategy["rag"]["system_prompt"]
+        self.assertTrue(system.startswith("Given the hateful claim provided in HS, generate a two-sentence "
+                                          "counter-speech in English following the guidelines"))
+        self.assertIn("divisive labels (e.g., sexist, misogynist)", system)
+        self.assertIn('"counter_speech"', system)
+        self.assertEqual(by_strategy["zero_shot"]["prompt"],
+                         "HS: message 0\nBased on the provided HS, generate a two-sentence counter-speech in "
+                         "English.\n### Counter-speech:")
+        rag = by_strategy["rag"]["prompt"]
+        self.assertTrue(rag.startswith("EVIDENCE:\n[1] chunk 1\n\n[2] chunk 2"))
+        self.assertIn("[4] chunk 4\nHS: message 0\nBased on the provided HS and EVIDENCE", rag)
+        self.assertNotIn("[5]", rag)
+        self.assertIn("The EVIDENCE consists of paragraphs that address gender-based violence. You must use", rag)
+        self.assertIn("The EVIDENCE consists of summaries that address gender-based violence.",
+                      by_strategy["card_rag"]["prompt"])
+        card_label = by_strategy["card_rag_label"]["prompt"]
+        self.assertTrue(card_label.startswith("EVIDENCE:\nCategory of gender-based violence: descriptive attacks. "
+                                              "Definition: definition 2.1\n\n[1] evidence 1"))
+        self.assertEqual(card_label.count("Category of gender-based violence:"), 1)
+        self.assertIn("a category of gender-based violence and summaries that address that specific category",
+                      card_label)
+        self.assertIn("a category of gender-based violence and paragraphs that address that specific category",
+                      by_strategy["rag_label"]["prompt"])
+        self.assertTrue(rag.endswith("Ground your response exclusively in the EVIDENCE.\n### Counter-speech:"))
+        for record in by_strategy.values():
+            self.assertTrue(record["prompt"].endswith("\n### Counter-speech:"))
+            self.assertEqual(record["generated_counter_speech"][:5], "reply")
+        # Every pair of the 5 systems (10), both orders, 4 messages.
+        self.assertEqual(len(judging.build_comparisons(records, config.strategies, config.judge_all_pairs)), 4 * 10 * 2)
+        judge = mock.MagicMock()
+        judge.judge_batch.side_effect = lambda batch: [
+            PairwiseJudgeResult(winner="response_1", response_1_score=7, response_2_score=6, raw_response="x")
+            for _ in batch]
+        with fake_factory(FakeLLM()), mock.patch.object(judging, "LLMJudge", return_value=judge):
+            judging.run_judge(config)
+        summary = json.loads((config.output_dir / "judge_summary.json").read_text(encoding="utf-8"))
+        self.assertEqual(summary["valid_judgments"], 80)
+        self.assertTrue(summary["judge_all_pairs"])
+        for source in ("edos", "multiconan"):
+            self.assertEqual(sum(key.startswith(source + "|") for key in summary["pairs"]), 10)
+        for pair in ("zero_shot|rag_label", "rag|rag_label", "rag_label|card_rag"):
+            self.assertEqual(summary["pairs"][f"all|{pair}"]["messages"], 4)
 
     def test_generation_resumes_and_judge_covers_all_pairs_in_both_orders(self):
         llm = FakeLLM()
@@ -262,7 +319,7 @@ class MetricsTests(unittest.TestCase):
         from unito_amazon.counterspeech_experiment import metrics
 
         with tempfile.TemporaryDirectory() as directory:
-            config = dataclasses.replace(ExperimentConfig(), output_dir=Path(directory))
+            config = dataclasses.replace(ExperimentConfig(), output_dir=Path(directory), strategies=STRATEGIES)
             records = [{"id": f"m{i}", "source": source, "generation_strategy": strategy, "generation_model": "g",
                         "hateful_message": f" message {i} ", "generated_counter_speech": f"reply {i} {strategy}"}
                        for i, source in ((0, "multiconan"), (1, "multiconan"), (2, "edos"))

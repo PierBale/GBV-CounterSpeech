@@ -15,6 +15,8 @@ CARD_RUN_DIR = PROJECT_ROOT / "data" / "card_creation_comparison_edos_v2_words_c
 STRATEGIES = ("zero_shot", "rag", "rag_label", "rag_gold_label", "card_rag", "card_rag_label",
               "card_rag_gold_label", "hybrid_rag", "hybrid_rag_label", "hybrid_rag_gold_label")
 GOLD_LABEL_STRATEGIES = {"rag_gold_label", "card_rag_gold_label", "hybrid_rag_gold_label"}
+# counterspeech_v4: no hybrid systems and no gold-label systems (the same 5 systems on both datasets).
+V4_STRATEGIES = tuple(s for s in STRATEGIES if not s.startswith("hybrid_") and s not in GOLD_LABEL_STRATEGIES)
 
 # Pairs judged by JudgeLM, (A, B) with A shown first in the a_first order: every pair of the
 # first five systems, plus RAG vs card-RAG with the same label (same pool of 15 chunks per
@@ -32,24 +34,36 @@ def strategies_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> tup
     return tuple(s for s in strategies if source == "edos" or s not in GOLD_LABEL_STRATEGIES)
 
 
-def pairs_for(source: str, strategies: tuple[str, ...] = STRATEGIES) -> list[tuple[str, str]]:
+def judged_pairs(strategies: tuple[str, ...] = STRATEGIES, all_pairs: bool = False) -> list[tuple[str, str]]:
+    """The pairs JudgeLM compares: every pair of the strategies (all_pairs, in STRATEGIES order),
+    or those of JUDGED_PAIRS."""
+    if all_pairs:
+        return list(combinations([s for s in STRATEGIES if s in strategies], 2))
+    return [(a, b) for a, b in JUDGED_PAIRS if a in strategies and b in strategies]
+
+
+def pairs_for(source: str, strategies: tuple[str, ...] = STRATEGIES, all_pairs: bool = False) -> list[tuple[str, str]]:
     """Judged pairs whose two systems both apply to the dataset."""
     applicable = set(strategies_for(source, strategies))
-    return [(a, b) for a, b in JUDGED_PAIRS if a in applicable and b in applicable]
+    return [(a, b) for a, b in judged_pairs(strategies, all_pairs) if a in applicable and b in applicable]
 
 
-# data/counterspeech_v2 (earlier run) used: output_dir counterspeech_v2, sample_size None, top_k 5,
-# hybrid_cards 3, hybrid_chunks 3, prompt_style "moderator", judge_criteria "facts".
+# Earlier runs (to reproduce them, override these fields):
+#   data/counterspeech_v2: sample_size None, top_k 5, hybrid_cards 3, hybrid_chunks 3,
+#     prompt_style "moderator", judge_criteria "facts", strategies STRATEGIES, judge_all_pairs False.
+#   data/counterspeech_v3: sample_size 400, top_k 4, hybrid 2 + 2, prompt_style "short",
+#     judge_criteria "social_media", strategies STRATEGIES, judge_all_pairs False.
 @dataclass(frozen=True)
 class ExperimentConfig:
-    output_dir: Path = PROJECT_ROOT / "data" / "counterspeech_v3"
+    output_dir: Path = PROJECT_ROOT / "data" / "counterspeech_v4"
 
     # Data: unique hateful messages, sampled per dataset (EDOS: sexist test messages;
     # MultiCONAN: Multitarget-CONAN, Fanton et al. 2021, target WOMEN).
     datasets: tuple[str, ...] = ("edos", "multiconan")
-    # None = every unique message (EDOS test: 970, MultiCONAN: 560). 400 extends the first 200
-    # (same seed): only the new messages are generated and judged.
-    sample_size: int | None = 400
+    # None = every unique message (EDOS test: 970, MultiCONAN: 560). With the same seed a smaller
+    # sample is a prefix of a larger one (the 300 of v4 are the first 300 of the 400 of v3), and a
+    # larger sample extends the saved one: only the new messages are generated and judged.
+    sample_size: int | None = 300
     sample_seed: int = 42
     edos_split: str = "test"
 
@@ -77,9 +91,11 @@ class ExperimentConfig:
     max_new_tokens: int = 256
     language: str = "English"
     max_sentences: int = 2
-    # "short": the CS generation prompts of Damo et al. (2025, arXiv:2510.12316, Appendix B),
-    # JSON output {"counter_speech": ...}; "moderator": the earlier moderator prompt with rules.
-    prompt_style: str = "short"
+    # "guidelines" (v4): counter-speech guidelines in the system prompt, HS / EVIDENCE / category in
+    # the user prompt (generation/prompts.py, Guidelines*); "short" (v3): the CS generation prompts
+    # of Damo et al. (2025, arXiv:2510.12316, Appendix B); "moderator" (v2): moderator prompt with
+    # rules. All ask for JSON {"counter_speech": ...}.
+    prompt_style: str = "guidelines"
 
     # Pairwise JudgeLM evaluation, every pair of strategies in both presentation orders.
     judge_model: str = "BAAI/JudgeLM-7B-v1.0"
@@ -89,9 +105,11 @@ class ExperimentConfig:
     judge_retry_temperature: float = 0.7
     # JudgeLM criteria (evaluation/prompts.py): "social_media" or "facts" (the earlier run).
     judge_criteria: str = "social_media"
+    # True: every pair of the strategies (v4); False: only config.JUDGED_PAIRS (v2, v3).
+    judge_all_pairs: bool = True
 
     device: str | None = None
-    strategies: tuple[str, ...] = field(default=STRATEGIES)
+    strategies: tuple[str, ...] = field(default=V4_STRATEGIES)
 
     @property
     def subset_path(self) -> Path:

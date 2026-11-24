@@ -11,6 +11,9 @@ from unito_amazon.generation.context_stats import measure_context
 from unito_amazon.generation.prompts import (
     CategoryRAGCounterSpeechPrompt,
     CounterSpeechPrompt,
+    GuidelinesCategoryRAGCounterSpeechPrompt,
+    GuidelinesCounterSpeechPrompt,
+    GuidelinesRAGCounterSpeechPrompt,
     RAGCounterSpeechPrompt,
     ShortCategoryRAGCounterSpeechPrompt,
     ShortCounterSpeechPrompt,
@@ -27,25 +30,33 @@ from .retrieval import ExperimentRetrievers
 PROMPT_CLASSES = {  # prompt_style -> (no evidence, evidence, evidence + EDOS category)
     "short": (ShortCounterSpeechPrompt, ShortRAGCounterSpeechPrompt, ShortCategoryRAGCounterSpeechPrompt),
     "moderator": (CounterSpeechPrompt, RAGCounterSpeechPrompt, CategoryRAGCounterSpeechPrompt),
+    "guidelines": (GuidelinesCounterSpeechPrompt, GuidelinesRAGCounterSpeechPrompt,
+                   GuidelinesCategoryRAGCounterSpeechPrompt),
 }
 
 
 def build_prompts(config: ExperimentConfig) -> dict:
-    """RAG, card-RAG and hybrid RAG share the prompt; only the evidence differs."""
+    """RAG, card-RAG and hybrid RAG share the prompt; only the evidence differs (the "guidelines"
+    prompts also say whether it consists of paragraphs, i.e. chunks, or summaries, i.e. cards)."""
     plain, evidence, category = PROMPT_CLASSES[config.prompt_style]
     options = {"language": config.language, "max_sentences": config.max_sentences, "cite_source": False}
     hybrid_k = config.hybrid_cards + config.hybrid_chunks
+
+    def with_evidence(prompt_class, kind: str, count: int):
+        extra = {"evidence_kind": kind} if config.prompt_style == "guidelines" else {}
+        return prompt_class(**options, evidence_count=count, **extra)
+
     return {
         "zero_shot": plain(**options),
-        "rag": evidence(**options, evidence_count=config.top_k),
-        "rag_label": category(**options, evidence_count=config.top_k),
-        "rag_gold_label": category(**options, evidence_count=config.top_k),
-        "card_rag": evidence(**options, evidence_count=config.top_k),
-        "card_rag_label": category(**options, evidence_count=config.top_k),
-        "card_rag_gold_label": category(**options, evidence_count=config.top_k),
-        "hybrid_rag": evidence(**options, evidence_count=hybrid_k),
-        "hybrid_rag_label": category(**options, evidence_count=hybrid_k),
-        "hybrid_rag_gold_label": category(**options, evidence_count=hybrid_k),
+        "rag": with_evidence(evidence, "chunk", config.top_k),
+        "rag_label": with_evidence(category, "chunk", config.top_k),
+        "rag_gold_label": with_evidence(category, "chunk", config.top_k),
+        "card_rag": with_evidence(evidence, "card", config.top_k),
+        "card_rag_label": with_evidence(category, "card", config.top_k),
+        "card_rag_gold_label": with_evidence(category, "card", config.top_k),
+        "hybrid_rag": with_evidence(evidence, "mixed", hybrid_k),
+        "hybrid_rag_label": with_evidence(category, "mixed", hybrid_k),
+        "hybrid_rag_gold_label": with_evidence(category, "mixed", hybrid_k),
     }
 
 

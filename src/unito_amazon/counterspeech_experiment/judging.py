@@ -1,4 +1,5 @@
-"""Pairwise JudgeLM evaluation: the pairs in config.JUDGED_PAIRS, both presentation orders.
+"""Pairwise JudgeLM evaluation: every pair of systems (config.judge_all_pairs) or the pairs in
+config.JUDGED_PAIRS, both presentation orders.
 
 Each message and pair is judged twice (A first, then B first). Per message the two
 outcomes are combined from A's point of view (win 1, tie 0.5, loss 0): mean > 0.5 is
@@ -16,10 +17,10 @@ from unito_amazon.evaluation.judge import LLMJudge
 from unito_amazon.evaluation.prompts import CounterSpeechPairwisePrompt
 from unito_amazon.evaluation.schema import JUDGE_PROTOCOL_VERSION
 
-from .config import JUDGED_PAIRS, ExperimentConfig, pairs_for, strategies_for
+from .config import ExperimentConfig, judged_pairs, pairs_for, strategies_for
 
 
-def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> list[dict]:
+def build_comparisons(generations: list[dict], strategies: tuple[str, ...], all_pairs: bool = False) -> list[dict]:
     groups = defaultdict(dict)
     for record in generations:
         key = (record["source"], record["id"])
@@ -32,7 +33,7 @@ def build_comparisons(generations: list[dict], strategies: tuple[str, ...]) -> l
         missing = set(applicable) - set(group)
         if missing:
             raise ValueError(f"Missing generations for {source} {message_id}: {sorted(missing)}.")
-        for system_a, system_b in pairs_for(source, strategies):
+        for system_a, system_b in pairs_for(source, strategies, all_pairs):
             for order, (first, second) in (("a_first", (system_a, system_b)), ("b_first", (system_b, system_a))):
                 comparisons.append({
                     "id": message_id, "source": source, "system_a": system_a, "system_b": system_b,
@@ -49,7 +50,7 @@ def comparison_key(record: dict) -> tuple:
 
 
 def run_judge(config: ExperimentConfig) -> None:
-    comparisons = build_comparisons(read_jsonl(config.generations_path), config.strategies)
+    comparisons = build_comparisons(read_jsonl(config.generations_path), config.strategies, config.judge_all_pairs)
     done = set()
     if config.judgments_path.exists():
         previous = list(read_jsonl(config.judgments_path))
@@ -135,7 +136,7 @@ def _agreement(first: list[float], second: list[float], first_diff: list[float],
     }
 
 
-def order_agreement(by_item: dict, strategies: tuple[str, ...]) -> dict:
+def order_agreement(by_item: dict, pairs: list[tuple[str, str]]) -> dict:
     """Agreement between the a_first and b_first judgments, per dataset and pair and overall."""
     coded = {1.0: 1, 0.5: 0, 0.0: -1}
     groups = defaultdict(lambda: ([], [], [], []))
@@ -147,7 +148,7 @@ def order_agreement(by_item: dict, strategies: tuple[str, ...]) -> dict:
         for key in (f"{source}|{a}|{b}", f"all|{a}|{b}", f"{source}|all pairs", "all|all pairs"):
             for column, value in zip(groups[key], values):
                 column.append(value)
-    order = {f"{a}|{b}": index for index, (a, b) in enumerate(JUDGED_PAIRS)}
+    order = {f"{a}|{b}": index for index, (a, b) in enumerate(pairs)}
     return {key: _agreement(*groups[key]) for key in sorted(
         groups, key=lambda k: (k.split("|", 1)[0] != "all", k.split("|", 1)[0], order.get(k.split("|", 1)[1], -1)))}
 
@@ -158,7 +159,8 @@ def summarize(config: ExperimentConfig) -> dict:
         if record["judgment"].get("winner") is not None:
             latest[comparison_key(record)] = record
     current = {comparison_key(record) for record in build_comparisons(
-        read_jsonl(config.generations_path), config.strategies)}
+        read_jsonl(config.generations_path), config.strategies, config.judge_all_pairs)}
+    pairs = judged_pairs(config.strategies, config.judge_all_pairs)
     records = [record for key, record in latest.items() if key in current]
 
     by_item = defaultdict(dict)
@@ -167,9 +169,7 @@ def summarize(config: ExperimentConfig) -> dict:
     tables = {}
     first_position_wins = defaultdict(lambda: [0, 0])
     for source in ("all", *sorted({record["source"] for record in records})):
-        for system_a, system_b in JUDGED_PAIRS:
-            if system_a not in config.strategies or system_b not in config.strategies:
-                continue
+        for system_a, system_b in pairs:
             points, differences, agree, incomplete = [], [], 0, 0
             for (item_source, a, b, _), orders in by_item.items():
                 if (a, b) != (system_a, system_b) or source not in ("all", item_source):
@@ -202,12 +202,12 @@ def summarize(config: ExperimentConfig) -> dict:
             stats[1] += 1
     return {
         "judge_model": config.judge_model, "judge_protocol": JUDGE_PROTOCOL_VERSION,
-        "judge_criteria": config.judge_criteria,
+        "judge_criteria": config.judge_criteria, "judge_all_pairs": config.judge_all_pairs,
         "valid_judgments": len(records), "expected_judgments": len(current),
         "method": ("per message, the outcomes of both presentation orders are averaged from A's "
                    "point of view (win 1, tie 0.5, loss 0); a_score is the mean of these values. "
                    "Sign test on wins vs losses; Wilcoxon on the per-message mean JudgeLM score difference."),
         "first_position_win_rate": {source: wins / total for source, (wins, total) in first_position_wins.items()},
         "pairs": tables,
-        "order_agreement": order_agreement(by_item, config.strategies),
+        "order_agreement": order_agreement(by_item, pairs),
     }

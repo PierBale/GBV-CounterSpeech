@@ -4,8 +4,9 @@
 #SBATCH --gres=gpu:1
 #SBATCH -p gracehopper
 
-# Counter-speech experiment: zero-shot, RAG, card-RAG and hybrid RAG (3 cards + 3 chunks); the
-# retrieval systems also with the EDOS label (predicted, and gold on EDOS) in the prompt and as a retrieval filter.
+# Counter-speech experiment (settings: unito_amazon/counterspeech_experiment/config.py; default
+# data/counterspeech_v4): zero-shot, RAG and card-RAG, the retrieval systems also with the EDOS
+# label (predicted, and gold on EDOS) in the prompt and as a retrieval filter.
 # Submit from the src folder:
 #   sbatch run_counterspeech_experiment.sh
 # Only some stages (default: all, in this order):
@@ -29,7 +30,7 @@ else
   SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 PROJECT_DIR="$(cd "$SRC_DIR/.." && pwd)"
-OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_DIR/data/counterspeech_v3}"
+OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_DIR/data/counterspeech_v4}"
 # The M7-FE labels cover every EDOS test / MultiCONAN message: computed once in counterspeech_v2
 # (ExperimentConfig.classifier_dir) and reused.
 CLASSIFIER_OUTPUT="${CLASSIFIER_OUTPUT:-$PROJECT_DIR/data/counterspeech_v2/edos_classifier}"

@@ -1,8 +1,8 @@
 """LaTeX tables of the counter-speech experiment (run from src after the judge stage).
 
-  python counterspeech_experiment_tables.py [--output-dir ../data/counterspeech_v3]
+  python counterspeech_experiment_tables.py [--output-dir ../data/counterspeech_v4]
 
-Writes to <output dir>/tables/ (default data/counterspeech_v3/tables/):
+Writes to <output dir>/tables/ (default data/counterspeech_v4/tables/):
   judgelm_pairwise.tex        wins/losses/ties per pair and dataset (both orders combined)
   examples_edos.tex           qualitative examples, EDOS (predicted and gold label)
   examples_multiconan.tex     qualitative examples, MultiCONAN (predicted label)
@@ -15,7 +15,7 @@ import json
 from collections import defaultdict
 
 from unito_amazon.card_creation.io import read_jsonl
-from unito_amazon.counterspeech_experiment.config import JUDGED_PAIRS, STRATEGIES, ExperimentConfig
+from unito_amazon.counterspeech_experiment.config import STRATEGIES, ExperimentConfig
 
 NAMES = {
     "zero_shot": "Zero-shot",
@@ -38,9 +38,14 @@ CARD_SYSTEMS = ("card_rag", "card_rag_label", "card_rag_gold_label")
 DATASETS = (("edos", "EDOS"), ("multiconan", "MultiCONAN"))
 LABEL_NOTE = (r"pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation "
               r"(available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) "
-              r"or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top "
-              r"cards and the top chunks (half each), retrieved independently (within the label's pools for the label "
-              r"variants) and alternated in the prompt.")
+              r"or to the 15 chunks they were made from (RAG), and is stated in the prompt.")
+HYBRID_NOTE = (r" Hybrid RAG: the top cards and the top chunks (half each), retrieved independently (within "
+               r"the label's pools for the label variants) and alternated in the prompt.")
+
+
+def label_note(keys) -> str:
+    """LABEL_NOTE, plus the hybrid note if any of the keys (pair or system names) is a hybrid system."""
+    return LABEL_NOTE + (HYBRID_NOTE if any("hybrid_" in key for key in keys) else "")
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
 # both presentation orders, per experiment folder (the generations differ between runs).
@@ -83,9 +88,14 @@ def holm(pvalues: dict) -> dict:
     return dict(zip(keys, map(float, adjusted)))
 
 
+def summary_pairs(summary: dict) -> list[tuple[str, str]]:
+    """The judged pairs (A, B), in the order of judge_summary.json (that of the judge stage)."""
+    return list(dict.fromkeys(tuple(name.split("|")[1:]) for name in summary["pairs"]))
+
+
 def pairwise_table(summary: dict) -> str:
     rows = {(key, baseline, system): summary["pairs"][f"{key}|{baseline}|{system}"]
-            for key, _ in DATASETS for baseline, system in JUDGED_PAIRS
+            for key, _ in DATASETS for baseline, system in summary_pairs(summary)
             if summary["pairs"].get(f"{key}|{baseline}|{system}", {}).get("messages")}
     adjusted = holm({name: row["sign_test_p"] for name, row in rows.items()})
     sizes = {key: {row["messages"] for name, row in summary["pairs"].items() if name.startswith(key + "|")}
@@ -99,14 +109,14 @@ def pairwise_table(summary: dict) -> str:
         r"outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. "
         r"The larger of System Wins and Baseline Wins is in bold. "
         rf"$^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the {len(adjusted)} "
-        r"comparisons in the table. " + LABEL_NOTE + "}",
+        r"comparisons in the table. " + label_note(f"{b}|{s}" for _, b, s in rows) + "}",
         r"\label{tab:pairwise-gemma-4-e4b-judgelm-7b}",
         r"\resizebox{\textwidth}{!}{%", r"\begin{tabular}{llrrr}", r"\toprule",
         r"\textbf{Baseline} & \textbf{System} & \textbf{System Wins} & \textbf{Baseline Wins} & \textbf{Ties} \\",
     ]
     for key, title in DATASETS:
         lines += [r"\midrule", rf"\multicolumn{{5}}{{l}}{{\textit{{{title}}}}} \\"]
-        for baseline, system in JUDGED_PAIRS:
+        for baseline, system in summary_pairs(summary):
             row = rows.get((key, baseline, system))
             if row is not None:
                 total = row["messages"]
@@ -209,7 +219,7 @@ def order_agreement_table(summary: dict) -> str:
     agreement = summary["order_agreement"]
     for key, title in DATASETS:
         lines += [r"\midrule", rf"\multicolumn{{8}}{{l}}{{\textit{{{title}}}}} \\"]
-        rows = [(a, b) for a, b in JUDGED_PAIRS if f"{key}|{a}|{b}" in agreement] + [("all", None)]
+        rows = [(a, b) for a, b in summary_pairs(summary) if f"{key}|{a}|{b}" in agreement] + [("all", None)]
         for a, b in rows:
             row = agreement[f"{key}|all pairs" if b is None else f"{key}|{a}|{b}"]
             names = (r"\textit{All pairs}", "") if b is None else (NAMES[a], NAMES[b])
@@ -242,7 +252,8 @@ def metrics_table(summary: dict) -> str:
         r"reference per message"
         + (f", drawn at random for the {multiconan['messages_with_several_references']} messages with several"
            if multiconan.get("messages_with_several_references") else "")
-        + r". Best value per dataset in bold. " + LABEL_NOTE + "}",
+        + r". Best value per dataset in bold. "
+        + label_note(s for data in summary["datasets"].values() for s in data["strategies"]) + "}",
         r"\label{tab:automatic-metrics}",
         r"\begin{tabular}{l" + "c" * len(METRIC_COLUMNS) + "}", r"\toprule",
         rf"\textbf{{System}} & {header} \\",
@@ -274,7 +285,7 @@ def main() -> None:
     from pathlib import Path
 
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v3)")
+    parser.add_argument("--output-dir", type=Path, help="experiment folder (default: data/counterspeech_v4)")
     args = parser.parse_args()
     config = ExperimentConfig()
     if args.output_dir:

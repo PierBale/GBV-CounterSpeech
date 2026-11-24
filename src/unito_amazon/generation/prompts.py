@@ -265,6 +265,96 @@ class ShortCategoryRAGCounterSpeechPrompt(ShortRAGCounterSpeechPrompt):
         return self._build(hateful_message, retrieval_results, category)
 
 
+def _length(max_sentences: int) -> str:
+    """'two-sentence'."""
+    return f"{NUMBER_WORDS.get(max_sentences, str(max_sentences))}-sentence"
+
+
+def guidelines_system_prompt(max_sentences: int) -> str:
+    return (f"Given the hateful claim provided in HS, generate a {_length(max_sentences)} counter-speech in "
+            f"English following the guidelines provided in GUIDELINES.\n"
+            f"GUIDELINES: Avoid abusive language and divisive labels (e.g., sexist, misogynist). Challenge the "
+            f"claim, not the person who wrote it. Express support for those under attack and respond with "
+            f"kindness and respect.\n\n{SHORT_SYSTEM_PROMPT}")
+
+
+# What the EVIDENCE is said to consist of: raw chunks, cards, or both (hybrid).
+EVIDENCE_KINDS = {"chunk": "paragraphs", "card": "summaries", "mixed": "paragraphs and summaries"}
+
+
+class GuidelinesCounterSpeechPrompt(ShortCounterSpeechPrompt):
+    """counterspeech_v4 prompts: counter-speech guidelines in the system prompt, HS (and EVIDENCE)
+    in the user prompt; JSON output {"counter_speech": ...} as in the short prompts."""
+
+    @property
+    def system_prompt(self) -> str:
+        return guidelines_system_prompt(self.max_sentences)
+
+    def build(self, hateful_message: str) -> str:
+        return (f"HS: {self._checked_message(hateful_message)}\n"
+                f"Based on the provided HS, generate a {_length(self.max_sentences)} counter-speech in English.\n"
+                f"### Counter-speech:")
+
+
+class GuidelinesRAGCounterSpeechPrompt(RAGCounterSpeechPrompt):
+    """counterspeech_v4 prompt with evidence: numbered items ([1], [2], ...) described as
+    paragraphs (chunks) or summaries (cards); the category variant states the EDOS category and
+    its definition once, before the items."""
+
+    _checked_message = staticmethod(ShortCounterSpeechPrompt._checked_message)
+
+    def __init__(self, *args, evidence_kind: str = "card", **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.language != "English" or self.cite_source:
+            raise ValueError("The guidelines prompts are English-only and do not cite sources.")
+        if evidence_kind not in EVIDENCE_KINDS:
+            raise ValueError(f"evidence_kind must be one of {sorted(EVIDENCE_KINDS)}.")
+        self.evidence_kind = evidence_kind
+
+    @property
+    def system_prompt(self) -> str:
+        return guidelines_system_prompt(self.max_sentences)
+
+    def format_retrieval_context(self, retrieval_results: list[RetrievalResult]) -> str:
+        return "\n\n".join(f"[{index}] {result.document.text.strip()}"
+                           for index, result in enumerate(retrieval_results, start=1))
+
+    def build(self, hateful_message: str, retrieval_results: list[RetrievalResult]) -> str:
+        return self._build(hateful_message, retrieval_results, None)
+
+    def _build(self, hateful_message, retrieval_results, category) -> str:
+        evidence = self._checked_context(retrieval_results)
+        items = EVIDENCE_KINDS[self.evidence_kind]
+        if category is None:
+            description = f"The EVIDENCE consists of {items} that address gender-based violence."
+        else:
+            name, definition = (part.strip() for part in category)
+            if not name or not definition:
+                raise ValueError("category name and definition cannot be empty.")
+            description = (f"The EVIDENCE consists of a category of gender-based violence and {items} that "
+                           f"address that specific category of violence.")
+            evidence = f"Category of gender-based violence: {name}. Definition: {definition}\n\n{evidence}"
+        return (f"EVIDENCE:\n{evidence}\n"
+                f"HS: {self._checked_message(hateful_message)}\n"
+                f"Based on the provided HS and EVIDENCE, generate a {_length(self.max_sentences)} counter-speech "
+                f"in English.\n"
+                f"{description} You must use the information contained in the EVIDENCE to contrast the HS. "
+                f"Ground your response exclusively in the EVIDENCE.\n"
+                f"### Counter-speech:")
+
+
+class GuidelinesCategoryRAGCounterSpeechPrompt(GuidelinesRAGCounterSpeechPrompt):
+    """counterspeech_v4 prompt with evidence and the EDOS category of the message."""
+
+    uses_category = True
+
+    def build(self, hateful_message: str, retrieval_results: list[RetrievalResult],
+              category: tuple[str, str] | None = None) -> str:
+        if category is None:
+            raise ValueError("A category (name, definition) is required.")
+        return self._build(hateful_message, retrieval_results, category)
+
+
 class CategoryRAGCounterSpeechPrompt(RAGCounterSpeechPrompt):
     """RAG prompt that also states the (predicted) category of the statement."""
 
