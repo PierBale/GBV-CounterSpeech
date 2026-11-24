@@ -1,0 +1,48 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{JudgeLM-7B pairwise evaluation of Gemma-4-E4B counter-speech, separated by dataset (EDOS: 400 messages, MultiCONAN: 400 messages). Every pair is judged in both presentation orders; per message the two outcomes are combined (win 1, tie 0.5, loss 0) and a disagreement between orders counts as a tie. The larger of System Wins and Baseline Wins is in bold. $^*$: sign test on wins vs.\ losses, $p<0.05$ after Holm correction over the 31 comparisons in the table. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top cards and the top chunks (half each), retrieved independently (within the label's pools for the label variants) and alternated in the prompt.}
+\label{tab:pairwise-gemma-4-e4b-judgelm-7b}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Baseline} & \textbf{System} & \textbf{System Wins} & \textbf{Baseline Wins} & \textbf{Ties} \\
+\midrule
+\multicolumn{5}{l}{\textit{EDOS}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & $\mathbf{168\ (42.00\%)}^*$ & $71\ (17.75\%)$ & $161\ (40.25\%)$ \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & $\mathbf{171\ (42.75\%)}^*$ & $50\ (12.50\%)$ & $179\ (44.75\%)$ \\
+Zero-shot & Card-RAG + EDOS label (pred.) & $\mathbf{229\ (57.25\%)}^*$ & $41\ (10.25\%)$ & $130\ (32.50\%)$ \\
+Zero-shot & Card-RAG + EDOS label (gold) & $\mathbf{220\ (55.00\%)}^*$ & $46\ (11.50\%)$ & $134\ (33.50\%)$ \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & $\mathbf{74\ (18.50\%)}$ & $56\ (14.00\%)$ & $270\ (67.50\%)$ \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{109\ (27.25\%)}^*$ & $59\ (14.75\%)$ & $232\ (58.00\%)$ \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & $\mathbf{100\ (25.00\%)}^*$ & $57\ (14.25\%)$ & $243\ (60.75\%)$ \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{80\ (20.00\%)}$ & $59\ (14.75\%)$ & $261\ (65.25\%)$ \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & $\mathbf{77\ (19.25\%)}$ & $57\ (14.25\%)$ & $266\ (66.50\%)$ \\
+Card-RAG + EDOS label (pred.) & Card-RAG + EDOS label (gold) & $34\ (8.50\%)$ & $\mathbf{43\ (10.75\%)}$ & $323\ (80.75\%)$ \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & $42\ (10.50\%)$ & $\mathbf{65\ (16.25\%)}$ & $293\ (73.25\%)$ \\
+RAG + EDOS label (gold) & Card-RAG + EDOS label (gold) & $41\ (10.25\%)$ & $\mathbf{60\ (15.00\%)}$ & $299\ (74.75\%)$ \\
+Zero-shot & Hybrid RAG (cards + chunks) & $\mathbf{182\ (45.50\%)}^*$ & $53\ (13.25\%)$ & $165\ (41.25\%)$ \\
+RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & $\mathbf{70\ (17.50\%)}$ & $60\ (15.00\%)$ & $270\ (67.50\%)$ \\
+Card-RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & $\mathbf{62\ (15.50\%)}$ & $44\ (11.00\%)$ & $294\ (73.50\%)$ \\
+RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & $40\ (10.00\%)$ & $\mathbf{61\ (15.25\%)}$ & $299\ (74.75\%)$ \\
+Card-RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & $50\ (12.50\%)$ & $\mathbf{56\ (14.00\%)}$ & $294\ (73.50\%)$ \\
+RAG + EDOS label (gold) & Hybrid RAG + EDOS label (gold) & $45\ (11.25\%)$ & $\mathbf{63\ (15.75\%)}$ & $292\ (73.00\%)$ \\
+Card-RAG + EDOS label (gold) & Hybrid RAG + EDOS label (gold) & $\mathbf{62\ (15.50\%)}$ & $52\ (13.00\%)$ & $286\ (71.50\%)$ \\
+\midrule
+\multicolumn{5}{l}{\textit{MultiCONAN}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & $\mathbf{195\ (48.75\%)}^*$ & $37\ (9.25\%)$ & $168\ (42.00\%)$ \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & $\mathbf{203\ (50.75\%)}^*$ & $11\ (2.75\%)$ & $186\ (46.50\%)$ \\
+Zero-shot & Card-RAG + EDOS label (pred.) & $\mathbf{214\ (53.50\%)}^*$ & $14\ (3.50\%)$ & $172\ (43.00\%)$ \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & $\mathbf{69\ (17.25\%)}$ & $47\ (11.75\%)$ & $284\ (71.00\%)$ \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{97\ (24.25\%)}^*$ & $38\ (9.50\%)$ & $265\ (66.25\%)$ \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & $\mathbf{70\ (17.50\%)}$ & $51\ (12.75\%)$ & $279\ (69.75\%)$ \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & $67\ (16.75\%)$ & $\mathbf{71\ (17.75\%)}$ & $262\ (65.50\%)$ \\
+Zero-shot & Hybrid RAG (cards + chunks) & $\mathbf{212\ (53.00\%)}^*$ & $17\ (4.25\%)$ & $171\ (42.75\%)$ \\
+RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & $\mathbf{74\ (18.50\%)}$ & $53\ (13.25\%)$ & $273\ (68.25\%)$ \\
+Card-RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & $59\ (14.75\%)$ & $\mathbf{60\ (15.00\%)}$ & $281\ (70.25\%)$ \\
+RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & $\mathbf{74\ (18.50\%)}$ & $54\ (13.50\%)$ & $272\ (68.00\%)$ \\
+Card-RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & $66\ (16.50\%)$ & $\mathbf{75\ (18.75\%)}$ & $259\ (64.75\%)$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

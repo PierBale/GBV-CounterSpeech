@@ -1,0 +1,32 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Automatic metrics of Gemma-4-E4B counter-speech (EDOS: 400, MultiCONAN: 400 messages), computed as in the COLING 2025 Multilingual Counterspeech Generation shared task: ROUGE-L (with stemming), corpus BLEU-4, mean BERTScore F1 (bert-base-multilingual-cased) and mean length in words. Reference-based metrics only for MultiCONAN (--: EDOS has no reference counter-speech), with one reference per message, drawn at random for the 41 messages with several. Best value per dataset in bold. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) or to the 15 chunks they were made from (RAG), and is stated in the prompt. Hybrid RAG: the top cards and the top chunks (half each), retrieved independently (within the label's pools for the label variants) and alternated in the prompt.}
+\label{tab:automatic-metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{System} & \textbf{ROUGE-L} & \textbf{BLEU} & \textbf{BERTScore} & \textbf{Length} \\
+\midrule
+\multicolumn{5}{l}{\textit{EDOS}} \\
+Zero-shot & -- & -- & -- & 27.163 \\
+RAG (Qwen3-Emb-8B) & -- & -- & -- & 45.153 \\
+RAG + EDOS label (pred.) & -- & -- & -- & 42.278 \\
+RAG + EDOS label (gold) & -- & -- & -- & 42.263 \\
+Card-RAG (Qwen3-Emb-8B) & -- & -- & -- & 43.210 \\
+Card-RAG + EDOS label (pred.) & -- & -- & -- & 42.273 \\
+Card-RAG + EDOS label (gold) & -- & -- & -- & 42.123 \\
+Hybrid RAG (cards + chunks) & -- & -- & -- & 44.133 \\
+Hybrid RAG + EDOS label (pred.) & -- & -- & -- & 42.648 \\
+Hybrid RAG + EDOS label (gold) & -- & -- & -- & 42.805 \\
+\midrule
+\multicolumn{5}{l}{\textit{MultiCONAN}} \\
+Zero-shot & \textbf{0.128} & \textbf{0.011} & \textbf{0.687} & 28.547 \\
+RAG (Qwen3-Emb-8B) & 0.119 & 0.007 & 0.675 & 45.525 \\
+RAG + EDOS label (pred.) & 0.122 & 0.008 & 0.676 & 44.862 \\
+Card-RAG (Qwen3-Emb-8B) & 0.114 & 0.006 & 0.674 & 43.330 \\
+Card-RAG + EDOS label (pred.) & 0.120 & 0.006 & 0.672 & 44.288 \\
+Hybrid RAG (cards + chunks) & 0.113 & 0.006 & 0.673 & 45.340 \\
+Hybrid RAG + EDOS label (pred.) & 0.121 & 0.007 & 0.674 & 44.710 \\
+\bottomrule
+\end{tabular}
+\end{table*}

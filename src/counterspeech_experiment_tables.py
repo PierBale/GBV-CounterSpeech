@@ -43,12 +43,19 @@ LABEL_NOTE = (r"pred.: EDOS label predicted by the EDOS classifier; gold: EDOS a
               r"variants) and alternated in the prompt.")
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
-# both presentation orders. edos_label_mismatch: EDOS messages where the predicted label
-# differs from the gold one (gold better; both win; predicted better than gold).
+# both presentation orders, per experiment folder (the generations differ between runs).
+# edos_label_mismatch: EDOS messages where the predicted label differs from the gold one.
 EXAMPLES = {
-    "edos": ["sexism2022_english-10488", "sexism2022_english-15575", "sexism2022_english-17346"],
-    "multiconan": ["multiconan-1256", "multiconan-1567", "multiconan-2496"],
-    "edos_label_mismatch": ["sexism2022_english-11692", "sexism2022_english-18058", "sexism2022_english-3853"],
+    "counterspeech_v2": {
+        "edos": ["sexism2022_english-10488", "sexism2022_english-15575", "sexism2022_english-17346"],
+        "multiconan": ["multiconan-1256", "multiconan-1567", "multiconan-2496"],
+        "edos_label_mismatch": ["sexism2022_english-11692", "sexism2022_english-18058", "sexism2022_english-3853"],
+    },
+    "counterspeech_v3": {
+        "edos": ["sexism2022_english-3755", "sexism2022_english-6874", "sexism2022_english-11529"],
+        "multiconan": ["multiconan-1448", "multiconan-2068", "multiconan-4486"],
+        "edos_label_mismatch": ["sexism2022_english-14067", "sexism2022_english-14700", "sexism2022_english-7938"],
+    },
 }
 
 LATEX_SPECIAL = {"\\": r"\textbackslash{}", "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#",
@@ -136,7 +143,7 @@ def combined_outcomes(judgments: list[dict]) -> dict:
     return points
 
 
-def examples_table(key: str, generations: dict, points: dict) -> str:
+def examples_table(key: str, message_ids: list[str], generations: dict, points: dict) -> str:
     gold = key.startswith("edos")
     mismatch = key == "edos_label_mismatch"
     label_caption = (
@@ -155,7 +162,7 @@ def examples_table(key: str, generations: dict, points: dict) -> str:
         rf"\label{{tab:examples-{key.replace('_', '-')}}}",
         r"\begin{tabularx}{\textwidth}{@{}p{0.2\textwidth}X@{}}", r"\toprule",
     ]
-    for position, message_id in enumerate(EXAMPLES[key]):
+    for position, message_id in enumerate(message_ids):
         records = generations[message_id]
         first = records["zero_shot"]
         if mismatch and first["edos_label"].split()[0] == first["predicted_edos_label"].split()[0]:
@@ -282,8 +289,12 @@ def main() -> None:
     (out / "judgelm_pairwise.tex").write_text(pairwise_table(summary), encoding="utf-8")
     if "order_agreement" in summary:
         (out / "judgelm_order_agreement.tex").write_text(order_agreement_table(summary), encoding="utf-8")
-    for key in EXAMPLES:
-        (out / f"examples_{key}.tex").write_text(examples_table(key, generations, points), encoding="utf-8")
+    examples = EXAMPLES.get(config.output_dir.name)
+    if examples is None:
+        print(f"No examples chosen for {config.output_dir.name} (EXAMPLES): example tables skipped.")
+    for key, message_ids in (examples or {}).items():
+        (out / f"examples_{key}.tex").write_text(examples_table(key, message_ids, generations, points),
+                                                 encoding="utf-8")
     metrics_summary = config.output_dir / "metrics_summary.json"
     if metrics_summary.exists():
         (out / "metrics.tex").write_text(

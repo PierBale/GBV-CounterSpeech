@@ -2,7 +2,7 @@
 retrieval systems also with the EDOS label (predicted, and gold on EDOS) in the prompt and as a retrieval filter.
 
 Run from src:
-  python counterspeech_experiment.py sample     # 200 unique messages per dataset (--sample-size all: EDOS test 970, MultiCONAN 560)
+  python counterspeech_experiment.py sample     # 400 unique messages per dataset (--sample-size all: EDOS test 970, MultiCONAN 560)
   python counterspeech_experiment.py generate   # retrieval + Gemma 4 E4B (GPU); 10 systems on EDOS, 7 on MultiCONAN
   python counterspeech_experiment.py judge      # JudgeLM, config.JUDGED_PAIRS, both orders (GPU)
   python counterspeech_experiment.py metrics    # MultiCONAN reference-based metrics (BERTScore: GPU)
@@ -26,7 +26,7 @@ def main() -> None:
     parser.add_argument("--generation-batch-size", type=int)
     parser.add_argument("--judge-batch-size", type=int)
     parser.add_argument("--sample-size", default=None,
-                        help="messages per dataset, or 'all' (default: 200); a larger sample extends the saved one")
+                        help="messages per dataset, or 'all' (default: 400); a larger sample extends the saved one")
     args = parser.parse_args()
 
     overrides = {"device": args.device}

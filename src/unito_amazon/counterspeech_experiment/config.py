@@ -47,7 +47,9 @@ class ExperimentConfig:
     # Data: unique hateful messages, sampled per dataset (EDOS: sexist test messages;
     # MultiCONAN: Multitarget-CONAN, Fanton et al. 2021, target WOMEN).
     datasets: tuple[str, ...] = ("edos", "multiconan")
-    sample_size: int | None = 200  # None = every unique message (EDOS test: 970, MultiCONAN: 560)
+    # None = every unique message (EDOS test: 970, MultiCONAN: 560). 400 extends the first 200
+    # (same seed): only the new messages are generated and judged.
+    sample_size: int | None = 400
     sample_seed: int = 42
     edos_split: str = "test"
 

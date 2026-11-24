@@ -1,0 +1,140 @@
+{
+  "generated_at": "2026-11-23T15:33:13.352081+00:00",
+  "protocol": "COLING 2025 MCG shared task (hitz-zentroa/eval-MCG-COLING-2025, traditional_metrics.py), without novelty",
+  "references": "MultiCONAN only: one reference per hateful message, drawn at random when there are several",
+  "reference_seed": 42,
+  "bertscore_model": "bert-base-multilingual-cased",
+  "datasets": {
+    "edos": {
+      "messages": 400,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 27.1625,
+          "n": 400
+        },
+        "rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 45.1525,
+          "n": 400
+        },
+        "rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.2775,
+          "n": 400
+        },
+        "rag_gold_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.2625,
+          "n": 400
+        },
+        "card_rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 43.21,
+          "n": 400
+        },
+        "card_rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.2725,
+          "n": 400
+        },
+        "card_rag_gold_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.1225,
+          "n": 400
+        },
+        "hybrid_rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 44.1325,
+          "n": 400
+        },
+        "hybrid_rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.6475,
+          "n": 400
+        },
+        "hybrid_rag_gold_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.805,
+          "n": 400
+        }
+      }
+    },
+    "multiconan": {
+      "messages": 400,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": 0.1276,
+          "bleu": 0.0108,
+          "bertscore": 0.6871,
+          "gen_len": 28.5475,
+          "n": 400
+        },
+        "rag": {
+          "rougeL": 0.1187,
+          "bleu": 0.0071,
+          "bertscore": 0.6752,
+          "gen_len": 45.525,
+          "n": 400
+        },
+        "rag_label": {
+          "rougeL": 0.1224,
+          "bleu": 0.008,
+          "bertscore": 0.6761,
+          "gen_len": 44.8625,
+          "n": 400
+        },
+        "card_rag": {
+          "rougeL": 0.114,
+          "bleu": 0.0062,
+          "bertscore": 0.6743,
+          "gen_len": 43.33,
+          "n": 400
+        },
+        "card_rag_label": {
+          "rougeL": 0.1197,
+          "bleu": 0.0065,
+          "bertscore": 0.6724,
+          "gen_len": 44.2875,
+          "n": 400
+        },
+        "hybrid_rag": {
+          "rougeL": 0.1128,
+          "bleu": 0.0063,
+          "bertscore": 0.6732,
+          "gen_len": 45.34,
+          "n": 400
+        },
+        "hybrid_rag_label": {
+          "rougeL": 0.1206,
+          "bleu": 0.0066,
+          "bertscore": 0.6743,
+          "gen_len": 44.71,
+          "n": 400
+        }
+      },
+      "messages_with_several_references": 41,
+      "mean_available_reference_count": 1.23
+    }
+  }
+}

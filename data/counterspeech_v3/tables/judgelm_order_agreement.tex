@@ -1,0 +1,52 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Agreement of JudgeLM-7B with itself across the two presentation orders of each pair (outcome from the point of view of the first system: win, tie, loss). Exact: share of messages with the same outcome in both orders; $\kappa$: Cohen's kappa; $\alpha$: Krippendorff's ordinal alpha; $\rho$: Spearman correlation of the score differences; Flip: share of messages where each order gives a clear but different winner.}
+\label{tab:judgelm-order-agreement}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+\textbf{System A} & \textbf{System B} & \textbf{n} & \textbf{Exact} & $\kappa$ & $\alpha$ & $\rho$ & \textbf{Flip} \\
+\midrule
+\multicolumn{8}{l}{\textit{EDOS}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & 400 & 0.60 & 0.20 & 0.15 & 0.35 & 0.40 \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & 400 & 0.55 & 0.10 & 0.02 & 0.22 & 0.45 \\
+Zero-shot & Card-RAG + EDOS label (pred.) & 400 & 0.68 & 0.20 & 0.17 & 0.27 & 0.32 \\
+Zero-shot & Card-RAG + EDOS label (gold) & 400 & 0.67 & 0.20 & 0.18 & 0.26 & 0.33 \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & 400 & 0.33 & -0.34 & -0.35 & -0.29 & 0.67 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 400 & 0.41 & -0.16 & -0.19 & -0.08 & 0.57 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & 400 & 0.40 & -0.17 & -0.22 & -0.13 & 0.60 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 400 & 0.35 & -0.26 & -0.31 & -0.28 & 0.65 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (gold) & 400 & 0.34 & -0.27 & -0.33 & -0.32 & 0.66 \\
+Card-RAG + EDOS label (pred.) & Card-RAG + EDOS label (gold) & 400 & 0.25 & -0.32 & -0.60 & -0.75 & 0.74 \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & 400 & 0.25 & -0.18 & -0.50 & -0.36 & 0.71 \\
+RAG + EDOS label (gold) & Card-RAG + EDOS label (gold) & 400 & 0.25 & -0.20 & -0.51 & -0.36 & 0.73 \\
+Zero-shot & Hybrid RAG (cards + chunks) & 400 & 0.59 & 0.15 & 0.08 & 0.19 & 0.41 \\
+RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & 400 & 0.32 & -0.32 & -0.35 & -0.32 & 0.67 \\
+Card-RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & 400 & 0.27 & -0.41 & -0.47 & -0.46 & 0.72 \\
+RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & 400 & 0.24 & -0.19 & -0.52 & -0.40 & 0.73 \\
+Card-RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & 400 & 0.25 & -0.21 & -0.49 & -0.40 & 0.72 \\
+RAG + EDOS label (gold) & Hybrid RAG + EDOS label (gold) & 400 & 0.25 & -0.13 & -0.49 & -0.28 & 0.72 \\
+Card-RAG + EDOS label (gold) & Hybrid RAG + EDOS label (gold) & 400 & 0.27 & -0.15 & -0.45 & -0.32 & 0.70 \\
+\cmidrule(lr){1-8}
+\textit{All pairs} &  & 7600 & 0.38 & -0.19 & -0.25 & -0.20 & 0.61 \\
+\midrule
+\multicolumn{8}{l}{\textit{MultiCONAN}} \\
+Zero-shot & RAG (Qwen3-Emb-8B) & 400 & 0.58 & 0.05 & 0.01 & 0.09 & 0.42 \\
+Zero-shot & Card-RAG (Qwen3-Emb-8B) & 400 & 0.54 & -0.05 & -0.20 & -0.09 & 0.46 \\
+Zero-shot & Card-RAG + EDOS label (pred.) & 400 & 0.55 & -0.01 & -0.16 & -0.02 & 0.42 \\
+RAG (Qwen3-Emb-8B) & Card-RAG (Qwen3-Emb-8B) & 400 & 0.29 & -0.11 & -0.44 & -0.26 & 0.69 \\
+RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 400 & 0.33 & -0.05 & -0.37 & -0.20 & 0.63 \\
+Card-RAG (Qwen3-Emb-8B) & Card-RAG + EDOS label (pred.) & 400 & 0.29 & -0.00 & -0.45 & -0.33 & 0.63 \\
+RAG + EDOS label (pred.) & Card-RAG + EDOS label (pred.) & 400 & 0.36 & 0.10 & -0.38 & -0.34 & 0.50 \\
+Zero-shot & Hybrid RAG (cards + chunks) & 400 & 0.57 & -0.05 & -0.12 & -0.05 & 0.43 \\
+RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & 400 & 0.30 & -0.06 & -0.40 & -0.25 & 0.66 \\
+Card-RAG (Qwen3-Emb-8B) & Hybrid RAG (cards + chunks) & 400 & 0.26 & -0.10 & -0.47 & -0.35 & 0.67 \\
+RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & 400 & 0.32 & 0.05 & -0.45 & -0.40 & 0.54 \\
+Card-RAG + EDOS label (pred.) & Hybrid RAG + EDOS label (pred.) & 400 & 0.39 & 0.15 & -0.34 & -0.29 & 0.47 \\
+\cmidrule(lr){1-8}
+\textit{All pairs} &  & 4800 & 0.40 & 0.04 & -0.25 & -0.14 & 0.54 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

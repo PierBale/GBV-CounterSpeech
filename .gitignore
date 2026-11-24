@@ -20,3 +20,10 @@ data/cseval_luna/*
 src/cseval_luna.py
 data/counterspeech_v2/judgments.jsonl
 data/counterspeech_v2/generations.jsonl
+data/counterspeech_v2/generations.jsonl
+data/counterspeech_v2/judgments.jsonl
+data/counterspeech_v3/generations.jsonl
+data/counterspeech_v3/judgments.jsonl
+data/counterspeech_v3/indexes/*
+data/counterspeech_v2/generations_bak.jsonl
+data/counterspeech_v2/judgments_bak.jsonl
