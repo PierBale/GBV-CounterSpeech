@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Automatic metrics of Gemma-4-E4B counter-speech (EDOS: 300, MultiCONAN: 300 messages), computed as in the COLING 2025 Multilingual Counterspeech Generation shared task: ROUGE-L (with stemming), corpus BLEU-4, mean BERTScore F1 (bert-base-multilingual-cased) and mean length in words. Reference-based metrics only for MultiCONAN (--: EDOS has no reference counter-speech), with one reference per message, drawn at random for the 32 messages with several. Best value per dataset in bold. pred.: EDOS label predicted by the EDOS classifier; gold: EDOS annotation (available only for EDOS). The label restricts retrieval to the 15 cards of that label (Card-RAG) or to the 15 chunks they were made from (RAG), and is stated in the prompt.}
+\label{tab:automatic-metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{System} & \textbf{ROUGE-L} & \textbf{BLEU} & \textbf{BERTScore} & \textbf{Length} \\
+\midrule
+\multicolumn{5}{l}{\textit{EDOS}} \\
+Zero-shot & -- & -- & -- & 31.067 \\
+RAG (Qwen3-Emb-8B) & -- & -- & -- & 45.800 \\
+RAG + EDOS label (pred.) & -- & -- & -- & 42.487 \\
+Card-RAG (Qwen3-Emb-8B) & -- & -- & -- & 41.533 \\
+Card-RAG + EDOS label (pred.) & -- & -- & -- & 39.943 \\
+\midrule
+\multicolumn{5}{l}{\textit{MultiCONAN}} \\
+Zero-shot & \textbf{0.128} & \textbf{0.009} & \textbf{0.683} & 32.107 \\
+RAG (Qwen3-Emb-8B) & 0.119 & 0.004 & 0.677 & 45.203 \\
+RAG + EDOS label (pred.) & 0.123 & 0.006 & 0.678 & 44.043 \\
+Card-RAG (Qwen3-Emb-8B) & 0.114 & 0.005 & 0.676 & 41.107 \\
+Card-RAG + EDOS label (pred.) & 0.118 & 0.006 & 0.679 & 40.647 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-11-25T07:28:33.993298+00:00",
+  "protocol": "COLING 2025 MCG shared task (hitz-zentroa/eval-MCG-COLING-2025, traditional_metrics.py), without novelty",
+  "references": "MultiCONAN only: one reference per hateful message, drawn at random when there are several",
+  "reference_seed": 42,
+  "bertscore_model": "bert-base-multilingual-cased",
+  "datasets": {
+    "edos": {
+      "messages": 300,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 31.0667,
+          "n": 300
+        },
+        "rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 45.8,
+          "n": 300
+        },
+        "rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 42.4867,
+          "n": 300
+        },
+        "card_rag": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 41.5333,
+          "n": 300
+        },
+        "card_rag_label": {
+          "rougeL": null,
+          "bleu": null,
+          "bertscore": null,
+          "gen_len": 39.9433,
+          "n": 300
+        }
+      }
+    },
+    "multiconan": {
+      "messages": 300,
+      "strategies": {
+        "zero_shot": {
+          "rougeL": 0.1275,
+          "bleu": 0.0089,
+          "bertscore": 0.683,
+          "gen_len": 32.1067,
+          "n": 300
+        },
+        "rag": {
+          "rougeL": 0.1189,
+          "bleu": 0.0038,
+          "bertscore": 0.6773,
+          "gen_len": 45.2033,
+          "n": 300
+        },
+        "rag_label": {
+          "rougeL": 0.1231,
+          "bleu": 0.0063,
+          "bertscore": 0.6785,
+          "gen_len": 44.0433,
+          "n": 300
+        },
+        "card_rag": {
+          "rougeL": 0.1142,
+          "bleu": 0.0049,
+          "bertscore": 0.6763,
+          "gen_len": 41.1067,
+          "n": 300
+        },
+        "card_rag_label": {
+          "rougeL": 0.118,
+          "bleu": 0.0065,
+          "bertscore": 0.6786,
+          "gen_len": 40.6467,
+          "n": 300
+        }
+      },
+      "messages_with_several_references": 32,
+      "mean_available_reference_count": 1.2733333333333334
+    }
+  }
+}
