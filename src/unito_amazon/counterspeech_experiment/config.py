@@ -12,10 +12,14 @@ CARD_RUN_DIR = PROJECT_ROOT / "data" / "card_creation_comparison_edos_v2_words_c
 # by the classifier in the prompt and restrict retrieval to the label's pool; *_gold_label use
 # the gold EDOS annotation, which exists only for EDOS. hybrid_rag* show half cards and half
 # chunks (ExperimentConfig.hybrid_cards + hybrid_chunks), retrieved independently.
-STRATEGIES = ("zero_shot", "rag", "rag_label", "rag_gold_label", "card_rag", "card_rag_label",
+# rag_label_query: the predicted label (with its definition) is added to the retrieval query
+# instead of filtering the chunks, and stated in the prompt as in rag_label.
+STRATEGIES = ("zero_shot", "rag", "rag_label", "rag_label_query", "rag_gold_label", "card_rag", "card_rag_label",
               "card_rag_gold_label", "hybrid_rag", "hybrid_rag_label", "hybrid_rag_gold_label")
 GOLD_LABEL_STRATEGIES = {"rag_gold_label", "card_rag_gold_label", "hybrid_rag_gold_label"}
-# counterspeech_v4: no hybrid systems and no gold-label systems (the same 5 systems on both datasets).
+# counterspeech_v3 (and v2): every system except rag_label_query.
+V3_STRATEGIES = tuple(s for s in STRATEGIES if s != "rag_label_query")
+# counterspeech_v4: no hybrid systems and no gold-label systems (the same 6 systems on both datasets).
 V4_STRATEGIES = tuple(s for s in STRATEGIES if not s.startswith("hybrid_") and s not in GOLD_LABEL_STRATEGIES)
 
 # Pairs judged by JudgeLM, (A, B) with A shown first in the a_first order: every pair of the
@@ -50,9 +54,9 @@ def pairs_for(source: str, strategies: tuple[str, ...] = STRATEGIES, all_pairs: 
 
 # Earlier runs (to reproduce them, override these fields):
 #   data/counterspeech_v2: sample_size None, top_k 5, hybrid_cards 3, hybrid_chunks 3,
-#     prompt_style "moderator", judge_criteria "facts", strategies STRATEGIES, judge_all_pairs False.
+#     prompt_style "moderator", judge_criteria "facts", strategies V3_STRATEGIES, judge_all_pairs False.
 #   data/counterspeech_v3: sample_size 400, top_k 4, hybrid 2 + 2, prompt_style "short",
-#     judge_criteria "social_media", strategies STRATEGIES, judge_all_pairs False.
+#     judge_criteria "social_media", strategies V3_STRATEGIES, judge_all_pairs False.
 @dataclass(frozen=True)
 class ExperimentConfig:
     output_dir: Path = PROJECT_ROOT / "data" / "counterspeech_v4"

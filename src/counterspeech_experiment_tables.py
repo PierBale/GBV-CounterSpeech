@@ -21,6 +21,7 @@ NAMES = {
     "zero_shot": "Zero-shot",
     "rag": "RAG (Qwen3-Emb-8B)",
     "rag_label": "RAG + EDOS label (pred.)",
+    "rag_label_query": "RAG + EDOS label in query (pred.)",
     "rag_gold_label": "RAG + EDOS label (gold)",
     "card_rag": "Card-RAG (Qwen3-Emb-8B)",
     "card_rag_label": "Card-RAG + EDOS label (pred.)",
@@ -30,7 +31,7 @@ NAMES = {
     "hybrid_rag_gold_label": "Hybrid RAG + EDOS label (gold)",
 }
 SHORT_NAMES = {"zero_shot": "Zero-shot", "rag": "RAG",
-               "rag_label": "RAG + pred. label", "rag_gold_label": "RAG + gold label", "card_rag": "Card-RAG",
+               "rag_label": "RAG + pred. label", "rag_label_query": "RAG + label in query", "rag_gold_label": "RAG + gold label", "card_rag": "Card-RAG",
                "card_rag_label": "Card-RAG + pred. label", "card_rag_gold_label": "Card-RAG + gold label",
                "hybrid_rag": "Hybrid RAG", "hybrid_rag_label": "Hybrid + pred. label",
                "hybrid_rag_gold_label": "Hybrid + gold label"}
@@ -43,9 +44,17 @@ HYBRID_NOTE = (r" Hybrid RAG: the top cards and the top chunks (half each), retr
                r"the label's pools for the label variants) and alternated in the prompt.")
 
 
+QUERY_NOTE = (r" RAG + EDOS label in query: no filter; the predicted category and its definition are added to "
+              r"the hateful message in the retrieval query over all the chunks, and the category is stated in the "
+              r"prompt.")
+
+
 def label_note(keys) -> str:
-    """LABEL_NOTE, plus the hybrid note if any of the keys (pair or system names) is a hybrid system."""
-    return LABEL_NOTE + (HYBRID_NOTE if any("hybrid_" in key for key in keys) else "")
+    """LABEL_NOTE, plus the notes on the hybrid and label-in-query systems if any of the keys
+    (pair or system names) mentions them."""
+    keys = list(keys)
+    return (LABEL_NOTE + (QUERY_NOTE if any("rag_label_query" in key for key in keys) else "")
+            + (HYBRID_NOTE if any("hybrid_" in key for key in keys) else ""))
 
 # Hand-picked messages where a card-based system beats both Zero-shot and RAG in
 # both presentation orders, per experiment folder (the generations differ between runs).

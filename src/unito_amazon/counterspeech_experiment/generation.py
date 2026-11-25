@@ -50,6 +50,7 @@ def build_prompts(config: ExperimentConfig) -> dict:
         "zero_shot": plain(**options),
         "rag": with_evidence(evidence, "chunk", config.top_k),
         "rag_label": with_evidence(category, "chunk", config.top_k),
+        "rag_label_query": with_evidence(category, "chunk", config.top_k),
         "rag_gold_label": with_evidence(category, "chunk", config.top_k),
         "card_rag": with_evidence(evidence, "card", config.top_k),
         "card_rag_label": with_evidence(category, "card", config.top_k),
@@ -62,7 +63,8 @@ def build_prompts(config: ExperimentConfig) -> dict:
 
 # EDOS label that each label-aware strategy states in the prompt (and, with retrieval, uses
 # to restrict the evidence to the label's pool).
-LABEL_FIELD = {"rag_label": "predicted_edos_label", "rag_gold_label": "gold_edos_label", "card_rag_label": "predicted_edos_label",
+LABEL_FIELD = {"rag_label": "predicted_edos_label", "rag_label_query": "predicted_edos_label",
+               "rag_gold_label": "gold_edos_label", "card_rag_label": "predicted_edos_label",
                "card_rag_gold_label": "gold_edos_label", "hybrid_rag_label": "predicted_edos_label",
                "hybrid_rag_gold_label": "gold_edos_label"}
 

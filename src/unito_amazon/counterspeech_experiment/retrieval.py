@@ -5,6 +5,9 @@ query; no reranking. The label strategies keep only the label's pool and take th
 top-k of the same ranking: card-RAG + label the cards of the label, RAG + label the
 chunks those cards were made from (the same 15 chunks per label, so the two differ
 only in the evidence format: raw chunk vs card).
+RAG + label in the query (rag_label_query) uses the label differently: no filter, the query is
+the predicted EDOS category, its definition and the hateful message (label_query), searched
+over all the chunks.
 Hybrid RAG takes the top hybrid_cards cards and the top hybrid_chunks chunks of the two
 rankings (within the label's pools for the label variants) and alternates them, card first:
 card 1, chunk 1, card 2, chunk 2, ...
@@ -70,6 +73,12 @@ def label_definitions(cards: list[Document]) -> dict[str, tuple[str, str]]:
     return definitions
 
 
+def label_query(category: tuple[str, str], message: str) -> str:
+    """Retrieval query of rag_label_query: the EDOS category with its definition and the message."""
+    name, definition = category
+    return f"Category of gender-based violence: {name}. Definition: {definition}\nHate speech: {message}"
+
+
 def label_chunk_pools(cards: list[Document]) -> dict[str, set[str]]:
     """EDOS code -> ids of the chunks the cards of that label were made from."""
     pools = {}
@@ -132,6 +141,9 @@ class ExperimentRetrievers:
             "hybrid_rag": hybrid(None),
             "hybrid_rag_label": hybrid(predicted_label),
         }
+        if "rag_label_query" in self.config.strategies:
+            query = label_query(self.definitions[label_code(predicted_label)], message)
+            retrieved["rag_label_query"] = self.chunk_retriever.retrieve(query, top_k=k)
         if gold_label is not None:
             retrieved["rag_gold_label"] = within(ranked_chunks, gold_label, "chunks")
             retrieved["card_rag_gold_label"] = within(ranked_cards, gold_label, "cards")
@@ -152,6 +164,9 @@ class ExperimentRetrievers:
             "label_pools": "label strategies: top-k within the cards of the label (card-RAG) or within "
                            "the chunks those cards were made from (RAG)",
             "label_chunk_pool_sizes": {code: len(pool) for code, pool in sorted(self.label_chunks.items())},
+            "label_query": ("rag_label_query: top-k over all the chunks for the query "
+                            + repr(label_query(("<category>", "<definition>"), "<message>"))
+                            + " (predicted EDOS label; no filter)"),
         }
 
     def close(self) -> None:

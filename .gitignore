@@ -27,3 +27,9 @@ data/counterspeech_v3/judgments.jsonl
 data/counterspeech_v3/indexes/*
 data/counterspeech_v2/generations_bak.jsonl
 data/counterspeech_v2/judgments_bak.jsonl
+data/counterspeech_v4/indexes/cards_evidence_qwen3-embedding-8b.faiss
+data/counterspeech_v4/indexes/cards_evidence_qwen3-embedding-8b.faiss.json
+data/counterspeech_v4/indexes/chunks_qwen3-embedding-8b.faiss
+data/counterspeech_v4/indexes/chunks_qwen3-embedding-8b.faiss.json
+data/counterspeech_v4/generations.jsonl
+data/counterspeech_v4/judgments.jsonl
